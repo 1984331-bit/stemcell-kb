@@ -2000,25 +2000,25 @@ function escapeHtml(str) {
 // === Section data: Regulations ===
 const REGULATIONS = [
   // --- 法律法规 ---
-  {title:'人体细胞和基因治疗产品监督管理办法（818号令）', issuer:'国务院', date:'2026-05-01', type:'法律法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'共7章58条，确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。2026年5月1日起施行。', url:'https://www.gov.cn/'},
-  {title:'再生医疗等安全性确保法', issuer:'日本厚生劳动省/PMDA', date:'2014', type:'法律', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'日本再生医学三通道监管体系：第一类(认证)、第二类(通知)、第三类(计划)，推动干细胞产品快速临床转化。全球最早的再生医学专门立法。', url:'https://www.pmda.go.jp/'},
+  {title:'生物医学新技术临床研究和临床转化应用管理条例（国务院令第818号）', issuer:'国务院', date:'2026-05-01', type:'法律法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'共7章58条，确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。2026年5月1日起施行。', url:'https://www.gov.cn/gongbao/2025/issue_12346/202510/content_7044733.html'},
+  {title:'再生医疗等安全性确保法（Act on Safety of Regenerative Medicine）', issuer:'日本厚生劳动省/PMDA', date:'2014', type:'法律', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'日本再生医学三通道监管体系：第一类(认证)、第二类(通知)、第三类(计划)，推动干细胞产品快速临床转化。全球最早的再生医学专门立法。', url:'https://www.japaneselawtranslation.go.jp/en/laws/view/4980/en'},
   {title:'21 CFR Part 1271 - HCT/Ps', issuer:'美国FDA', date:'21 CFR 1271', type:'联邦法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'美国人体细胞、组织及细胞组织产品(HCT/Ps)监管框架，涵盖供体筛查、机构注册、良好组织规范(GTP)等。区分351产品(需BLA)与361产品(仅需登记)。', url:'https://www.ecfr.gov/current/title-21/chapter-I/subchapter-L/part-1271'},
-  {title:'Regulation (EC) No 1394/2007 - ATMP', issuer:'欧盟EMA', date:'2007', type:'法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'欧盟先进治疗医学产品(ATMP)法规，确立基因治疗、体细胞治疗、组织工程产品的统一监管框架。', url:'https://eur-lex.europa.eu/'},
-  {title:'干细胞临床研究管理办法（试行）', issuer:'国家卫健委', date:'2015', type:'规范性文件', typeColor:'#fff', typeBg:'#BA7517', category:'规范性文件', desc:'医疗机构开展干细胞临床研究须备案，明确伦理审查、知情同意、数据报告等要求。双轨制中的"医疗技术通路"核心文件。', url:'http://www.nhc.gov.cn/'},
+  {title:'Regulation (EC) No 1394/2007 - ATMP', issuer:'欧盟EMA', date:'2007', type:'法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'欧盟先进治疗医学产品(ATMP)法规，确立基因治疗、体细胞治疗、组织工程产品的统一监管框架。', url:'https://eur-lex.europa.eu/eli/reg/2007/1394/oj/eng'},
+  {title:'干细胞临床研究管理办法（试行）', issuer:'国家卫健委', date:'2015', type:'规范性文件', typeColor:'#fff', typeBg:'#BA7517', category:'规范性文件', desc:'医疗机构开展干细胞临床研究须备案，明确伦理审查、知情同意、数据报告等要求。双轨制中的"医疗技术通路"核心文件。', url:'https://www.nhc.gov.cn/qjjys/c100016/201508/cd1cb345d65d47dcadefb9c501ca5f2c.shtml'},
   // --- 技术指南 ---
-  {title:'细胞治疗产品研究与评价技术指导原则', issuer:'NMPA/CDE', date:'2017', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'确立细胞治疗产品药学研究、非临床研究、临床试验三大板块的技术要求，是中国细胞治疗产品注册申报的核心指导原则。', url:'https://www.cde.org.cn/'},
-  {title:'免疫细胞治疗产品临床试验指南', issuer:'NMPA/CDE', date:'2021', type:'临床指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'针对CAR-T等免疫细胞治疗产品的临床试验设计、受试者保护、疗效评价等提供指导。', url:'https://www.cde.org.cn/'},
-  {title:'干细胞制剂质量控制及临床前研究指导原则', issuer:'NMPA', date:'2015', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'规范干细胞制剂的质量控制标准、生物学特性研究、安全性评价等临床前研究要求。', url:'https://www.nmpa.gov.cn/'},
-  {title:'细胞和基因治疗产品注册审查要点', issuer:'NMPA/CDE', date:'2024', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'NMPA最新发布的CGT产品注册审查要点，涵盖CMC、非临床、临床各环节审查关注点。', url:'https://www.cde.org.cn/'},
-  {title:'Considerations for the Development of Cell and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2023', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA对CGT产品开发的综合考量，涵盖CMC、临床设计、长期随访等。', url:'https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products'},
-  {title:'Manufacturing Considerations for Human Cellular and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2008(更新)', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA关于细胞和基因治疗产品生产的指导原则，涵盖CMC、质量控制、无菌保证等。', url:'https://www.fda.gov/'},
+  {title:'细胞治疗产品研究与评价技术指导原则（试行）', issuer:'NMPA/CDE', date:'2017', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'确立细胞治疗产品药学研究、非临床研究、临床试验三大板块的技术要求，是中国细胞治疗产品注册申报的核心指导原则。', url:'https://www.cde.org.cn/zdyz/domesticinfopage?zdyzIdCODE=452c529b299638297210fe4a1294eb31'},
+  {title:'免疫细胞治疗产品临床试验技术指导原则（试行）', issuer:'NMPA/CDE', date:'2021', type:'临床指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'针对CAR-T等免疫细胞治疗产品的临床试验设计、受试者保护、疗效评价等提供指导。', url:'https://www.cde.org.cn/main/news/viewInfoCommon/1936d1c9006ccce2251702221f063b1c'},
+  {title:'干细胞制剂质量控制及临床前研究指导原则（试行）', issuer:'NMPA/卫健委', date:'2015', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'规范干细胞制剂的质量控制标准、生物学特性研究、安全性评价等临床前研究要求。', url:'https://www.nhc.gov.cn/qjjys/c100016/201508/f0381d0509e34e3db5f1ad52de0c2ea2.shtml'},
+  {title:'细胞和基因治疗产品注册审查要点', issuer:'NMPA/CDE', date:'2024', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'NMPA最新发布的CGT产品注册审查要点，涵盖CMC、非临床、临床各环节审查关注点。', url:'https://www.cde.org.cn/zdyz/index'},
+  {title:'Considerations for the Development of Cell and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2023', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA对CGT产品开发的综合考量，涵盖CMC、临床设计、长期随访等。', url:'https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances'},
+  {title:'Manufacturing Considerations for Human Cellular and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2008(更新)', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA关于细胞和基因治疗产品生产的指导原则，涵盖CMC、质量控制、无菌保证等。', url:'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/chemistry-manufacturing-and-controls-flexibilities-developing-human-cellular-and-gene-therapy'},
   {title:'Guideline on human cell-based medicinal products', issuer:'欧盟EMA', date:'2008', type:'指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'EMA人源细胞药品指南(EMEA/CHMP/410869/2006)，涵盖质量、非临床、临床要求。', url:'https://www.ema.europa.eu/en/human-cell-based-medicinal-products-scientific-guideline_en'},
-  {title:'Guideline on the risk-based approach for ATMPs', issuer:'欧盟EMA', date:'2019', type:'指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'EMA基于风险的ATMP管理指南，根据风险等级简化部分产品的监管要求。', url:'https://www.ema.europa.eu/'},
+  {title:'Guideline on the risk-based approach according to Annex I, part IV of Directive 2001/83/EC applied to ATMPs', issuer:'欧盟EMA', date:'2019', type:'指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'EMA基于风险的ATMP管理指南，根据风险等级简化部分产品的监管要求。', url:'https://www.ema.europa.eu/en/risk-based-approach-according-annex-i-part-iv-directive-2001-83-ec-applied-advanced-therapy-medicinal-products-scientific-guideline'},
   // --- 行业标准 ---
-  {title:'ISCT 2025 Position Statement: MSC Definition Update', issuer:'ISCT', date:'2025', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'MSC重新定义为"间充质基质细胞"(Mesenchymal Stromal Cells)，取消三系分化要求，新增效价检测标准。深刻影响全球MSC产品研发与注册。', url:'https://isctglobal.org/'},
-  {title:'ISCT Minimum Criteria for MSC (2006)', issuer:'ISCT', date:'2006', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ISCT提出的MSC最低鉴定标准：塑料贴壁、CD标志物表达谱、三系分化能力。2025年更新后取消三系分化要求。', url:'https://isctglobal.org/'},
-  {title:'FACT-JACIE International Standards for Cell Therapy', issuer:'FACT-JACIE', date:'2024(第8版)', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'细胞治疗采集、处理和输注的国际标准，涵盖造血干细胞和免疫细胞治疗。全球细胞治疗机构认证的核心标准。', url:'https://www.factwebsite.org/'},
-  {title:'ICH Q5D - Cell Substrates Quality', issuer:'ICH', date:'1997', type:'国际标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ICH关于人源细胞基质质量指南，涵盖细胞库建立、鉴定、稳定性等。细胞治疗产品CMC的国际协调标准。', url:'https://www.ich.org/'}
+  {title:'ISCT 2025 Position Statement: MSC Definition Update', issuer:'ISCT', date:'2025', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'MSC重新定义为"间充质基质细胞"(Mesenchymal Stromal Cells)，取消三系分化要求，新增效价检测标准。深刻影响全球MSC产品研发与注册。', url:'https://www.isctglobal.org/about/isct-committees/msc'},
+  {title:'ISCT Minimum Criteria for MSC (2006)', issuer:'ISCT', date:'2006', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ISCT提出的MSC最低鉴定标准：塑料贴壁、CD标志物表达谱、三系分化能力。2025年更新后取消三系分化要求。', url:'https://www.sciencedirect.com/science/article/pii/S1465324906708817'},
+  {title:'FACT-JACIE International Standards for Cell Therapy', issuer:'FACT-JACIE', date:'2024(第8版)', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'细胞治疗采集、处理和输注的国际标准，涵盖造血干细胞和免疫细胞治疗。全球细胞治疗机构认证的核心标准。', url:'https://factglobal.org/fact-standards/'},
+  {title:'ICH Q5D - Cell Substrates Quality', issuer:'ICH', date:'1997', type:'国际标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ICH关于人源细胞基质质量指南，涵盖细胞库建立、鉴定、稳定性等。细胞治疗产品CMC的国际协调标准。', url:'https://database.ich.org/sites/default/files/Q5D%20Guideline.pdf'}
 ];
 
 // === Section data: Approved Products ===
@@ -2059,6 +2059,29 @@ const PRODUCTS = [
 ];
 
 // === Section data: Editor Picks ===
+// === Editor picks archive (历史精选归档) ===
+const PICKS_ARCHIVE = [
+  {
+    issue: '第1期',
+    date: '2026-07-10',
+    title: '创刊号：MSC疗法破冰与基础研究根基',
+    picks: [
+      {category:'clinical', tag:'里程碑', title:'Ryoncil获批——MSC疗法的破冰时刻', meta:['FDA 2024-12-18','NEJM','血液系统','A级'], content:'<p>2024年12月18日，FDA批准Ryoncil(remestemcel-L)用于治疗儿童类固醇难治性急性移植物抗宿主病(SR-aGVHD)，成为<strong>首个获FDA批准的间充质基质细胞(MSC)疗法</strong>。</p><div class="pk-highlight">关键数据：III期试验中64%的患者在28天内达到总体反应(OR)，24%达到完全反应(CR)。50天生存率76%。</div><p>意义：结束了MSC疗法"有数据无产品"的尴尬局面，为整个MSC行业注入信心。但需注意：MSC的疗效机制以旁分泌/免疫调节为主，非"干细胞分化替代"，临床疗效取决于剂量、疗程、途径和细胞质量。</p>'},
+      {category:'clinical', tag:'功能性治愈', title:'VX-880——干细胞疗法功能性治愈1型糖尿病', meta:['NEJM 2025','内分泌系统','A级'], content:'<p>Vertex公司的VX-880(完全分化的异体干细胞来源胰岛细胞)在I/II期试验中展现出惊人疗效：</p><div class="pk-highlight">12/12患者HbA1c<7%，10/12脱离外源性胰岛素治疗，最长达2年以上。</div><p>这是首次通过干细胞衍生胰岛细胞实现T1DM"功能性治愈"。但仍需关注免疫抑制需求、长期安全性、规模化生产等挑战。</p>'},
+      {category:'clinical', tag:'III期阳性', title:'PREVENT-TAHA8——MSC治疗急性心梗III期阳性', meta:['BMJ 2025','心血管系统','A级','n=396'], content:'<p>PREVENT-TAHA8 III期随机对照试验(n=396)显示，MSC输注显著降低急性心梗后3年心力衰竭发生率：</p><div class="pk-highlight">3年心衰发生率：MSC组5.74% vs 对照组16.08%(P&lt;0.001)</div><p>这是MSC心血管领域首个大型III期阳性试验，为MSC在心血管保护中的应用提供了最高级别证据。</p>'},
+      {category:'clinical', tag:'基因编辑', title:'Casgevy扩展适应症——CRISPR疗法迈向更广人群', meta:['2026年7月','血液系统','A级'], content:'<p>2026年7月，Casgevy(exagamglogene autotemcel)扩展适应症至≥2岁患者。关键数据：</p><div class="pk-highlight">SCD: 100% VOC-free(血管闭塞危象消除)；TDT: 88.9% TI(脱离输血依赖)</div><p>扩展至低龄患者意味着更早期的干预窗口，有望改善长期预后。</p>'},
+      {category:'clinical', tag:'妇科再生', title:'CD133+干细胞治疗宫腔粘连——30%活产率', meta:['Nature Communications 2026','妇科','A级'], content:'<p>CD133+骨髓来源干细胞(BMDSCs)治疗难治性宫腔粘连(IUA)的随机对照试验：</p><div class="pk-highlight">干细胞组30%活产率 vs 对照组0%(P=0.01)</div><p>为难治性不孕症患者提供了新的再生医学选择，是干细胞在妇科领域的重大突破。</p>'},
+      {category:'basic', tag:'诺奖基石', title:'iPS细胞的诞生——四因子重编程开启新时代', meta:['Cell 2006','山中伸弥','诺奖2012'], content:'<p>2006年，山中伸弥团队发现仅用4个转录因子(Oct4, Sox2, Klf4, c-Myc)即可将成纤维细胞重编程为诱导多能干细胞(iPSC)。</p><div class="pk-highlight">核心突破：体细胞可被"回拨"至胚胎干细胞状态，规避了胚胎伦理问题</div><p>这一发现使山中伸弥于2012年获诺贝尔生理学或医学奖。iPSC技术催生了后续所有干细胞临床转化的基础——从Casgevy到VX-880，追溯源头皆始于这篇论文。</p>'},
+      {category:'basic', tag:'化学重编程', title:'化学重编程再突破——外周血18天生成临床级iPSC', meta:['Cell Discovery 2025','邓宏魁团队'], content:'<p>北京大学邓宏魁团队报道了一种快速化学重编程方法，将外周血单个核细胞在18天内转化为人化学诱导多能干细胞(hCiPS)。</p><div class="pk-highlight">突破点：无血清、无外源基因、18天（传统方法需30-50天）、可规模化</div><p>这是继2022年首次报道化学重编程后的重大改进，使临床级iPSC的快速、标准化生产成为可能。邓宏魁团队此前已用化学重编程成功治疗1型糖尿病患者。</p>'},
+      {category:'basic', tag:'全能性', title:'8细胞胚胎样细胞——体外回拨至生命起源', meta:['Nature 2022','中科院广州健康院'], content:'<p>中科院广州生物医药与健康研究院团队首次将人多能干细胞回拨至8细胞胚胎样状态(8C-like cells, 8CLCs)。</p><div class="pk-highlight">突破点：首次体外获得全能性干细胞，具有形成胚外组织的能力，发现人类特有转录因子TPRX1</div><p>这一成果填补了体外全能性干细胞培养的空白，为研究人类早期发育和全能性调控机制提供了全新工具。</p>'},
+      {category:'basic', tag:'衰老标志', title:'干细胞衰老五大功能标志——可逆转的衰老框架', meta:['Cell Stem Cell 2025','Rando/Brunet/Goodell'], content:'<p>斯坦福大学Rando、Brunet和Goodell团队在Cell Stem Cell发表综述，提出干细胞衰老的五大功能标志：</p><div class="pk-highlight">五大标志：①细胞耗竭 ②表观遗传重塑 ③代谢失调 ④DNA损伤累积 ⑤信号通路紊乱</div><p>关键洞见：与"衰老标志"(Hallmarks of Aging)不同，干细胞衰老标志强调<strong>可逆转性</strong>——通过小分子、基因编辑或微环境调控可"年轻化"衰老干细胞。这为抗衰老干预提供了理论框架。</p>'},
+      {category:'basic', tag:'细胞器转移', title:'MSC线粒体转移——超越旁分泌的第三种作用模式', meta:['Stem Cell Res Ther 2025'], content:'<p>研究发现MSC可通过隧道纳米管(TNT)和微囊泡将功能性线粒体转移至受损细胞。</p><div class="pk-highlight">机制：隧道纳米管(TNT)介导的直接细胞器转移，修复受损细胞的能量代谢</div><p>这超越了传统认知的"分化替代"和"旁分泌"，揭示了MSC的第三种作用模式——细胞器级直接功能支援。对理解MSC临床疗效机制和优化细胞治疗策略具有深远意义。</p>'},
+      {category:'basic', tag:'类器官', title:'脑类器官——从疾病模型到规模化生产', meta:['Nat Rev Neurosci 2024','Nat Biomed Eng 2025'], content:'<p>脑类器官技术综述与进展：从Lancaster(2013)的首次培养到当前可模拟皮层、海马、小脑等区域。</p><div class="pk-highlight">2025年进展：无Matrigel悬浮培养实现规模化生产，单批次可达10^6个类器官</div><p>应用前景：自闭症、阿尔茨海默病等神经退行性疾病的药物筛选平台，未来可能用于脑损伤修复的细胞替代治疗。</p>'},
+      {category:'basic', tag:'合成胚胎', title:'合成胚胎模型——干细胞自组装重塑早期发育', meta:['Trends Biotechnol 2025'], content:'<p>干细胞自组装形成胚胎样结构(Embryoid/Gastruloid)技术综述，可模拟从着床前到原肠胚形成的发育过程。</p><div class="pk-highlight">突破：无需精子卵子，仅用干细胞自组装即可重现早期胚胎发育</div><p>伦理优势：规避了使用天然胚胎的伦理限制。应用：着床失败机制研究、先天畸形原因分析、药物致畸性筛选。</p>'}
+    ]
+  }
+];
+
 const EDITOR_PICKS = [
   // === 临床转化 ===
   {category:'clinical', tag:'里程碑', title:'Ryoncil获批——MSC疗法的破冰时刻', meta:['FDA 2024-12-18','NEJM','血液系统','A级'], content:'<p>2024年12月18日，FDA批准Ryoncil(remestemcel-L)用于治疗儿童类固醇难治性急性移植物抗宿主病(SR-aGVHD)，成为<strong>首个获FDA批准的间充质基质细胞(MSC)疗法</strong>。</p><div class="pk-highlight">关键数据：III期试验中64%的患者在28天内达到总体反应(OR)，24%达到完全反应(CR)。50天生存率76%。</div><p>意义：结束了MSC疗法"有数据无产品"的尴尬局面，为整个MSC行业注入信心。但需注意：MSC的疗效机制以旁分泌/免疫调节为主，非"干细胞分化替代"，临床疗效取决于剂量、疗程、途径和细胞质量。</p>'},
@@ -2330,6 +2353,13 @@ function renderEditorPicks() {
   var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
   html += '<div class="content-header"><h2>编辑精选 · 前沿解读</h2><div class="desc">干细胞领域里程碑文献深度解读，涵盖临床转化与基础研究两大维度。每篇聚焦核心发现、关键数据与行业启示。</div></div>';
 
+  // Archive button
+  if (PICKS_ARCHIVE.length > 0) {
+    html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">';
+    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">📖 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
+    html += '</div>';
+  }
+
   var clinicalPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'clinical'; });
   var basicPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'basic'; });
 
@@ -2362,6 +2392,83 @@ function renderEditorPicks() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === Picks archive list ===
+function renderPicksArchive() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
+  html += '<div class="content-header"><h2>往期精选归档</h2><div class="desc">点击任一期查看完整内容。当前最新内容请返回编辑精选主页。</div></div>';
+
+  // Back to current button
+  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;margin-bottom:20px;">← 返回当前精选</button>';
+
+  PICKS_ARCHIVE.forEach(function(issue, idx) {
+    var clinicalCount = issue.picks.filter(function(p) { return p.category === 'clinical'; }).length;
+    var basicCount = issue.picks.filter(function(p) { return p.category === 'basic'; }).length;
+    html += '<div class="pick-card" style="cursor:pointer;" onclick="renderPicksIssue(' + idx + ')">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;">';
+    html += '<div><span class="pk-badge" style="background:#f0f0f5;color:#534AB7;">' + escapeHtml(issue.issue) + '</span> <span style="font-size:15px;font-weight:700;margin-left:8px;">' + escapeHtml(issue.title) + '</span></div>';
+    html += '<span style="font-size:12px;color:#999;">' + escapeHtml(issue.date) + '</span>';
+    html += '</div>';
+    html += '<div style="margin-top:8px;font-size:13px;color:#666;">临床转化 ' + clinicalCount + ' 篇 · 基础研究 ' + basicCount + ' 篇 · 共 ' + issue.picks.length + ' 篇</div>';
+    html += '</div>';
+  });
+
+  content.innerHTML = html;
+  updateFloatButtons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === View specific archived issue ===
+function renderPicksIssue(idx) {
+  var issue = PICKS_ARCHIVE[idx];
+  if (!issue) return;
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="renderPicksArchive()">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
+  html += '<div class="content-header"><h2>' + escapeHtml(issue.title) + '</h2><div class="desc">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div></div>';
+
+  // Back buttons
+  html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">';
+  html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">← 返回往期列表</button>';
+  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">查看当前精选 →</button>';
+  html += '</div>';
+
+  var clinicalPicks = issue.picks.filter(function(p) { return p.category === 'clinical'; });
+  var basicPicks = issue.picks.filter(function(p) { return p.category === 'basic'; });
+
+  if (clinicalPicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:20px 0 12px;font-size:16px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
+    clinicalPicks.forEach(function(p) {
+      html += '<div class="pick-card">';
+      html += '<div class="pk-badge">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
+
+  if (basicPicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:28px 0 12px;font-size:16px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
+    basicPicks.forEach(function(p) {
+      html += '<div class="pick-card">';
+      html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
+
+  content.innerHTML = html;
+  updateFloatButtons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Init
