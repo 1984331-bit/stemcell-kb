@@ -1542,8 +1542,8 @@ function renderPaperCard(d, idx) {
 
   card += '<div class="paper-meta">';
   if (d.evidence_level && d.evidence_level !== 'N/A') {
-    var evLabels = {'A': 'RCT', 'B': '试验', 'C': '病例', 'D': '其他'};
-    card += '<span class="ev-badge ev-' + d.evidence_level + '" title="' + (d.evidence_note || '') + '">' + d.evidence_level + ' ' + (evLabels[d.evidence_level] || '') + '</span>';
+    var evLabels = {'A': 'A级 (RCT)', 'B': 'B级 (临床试验)', 'C': 'C级 (病例报告)', 'D': 'D级 (其他)'};
+    card += '<span class="ev-badge ev-' + d.evidence_level + '" title="' + (d.evidence_note || '') + '">' + (evLabels[d.evidence_level] || '') + '</span>';
   }
   if (d.year) card += '<span class="tag">' + escapeHtml(d.year) + '</span>';
   if (d.journal) card += '<span class="tag journal">' + escapeHtml(d.journal) + '</span>';
