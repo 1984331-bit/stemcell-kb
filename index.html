@@ -1252,6 +1252,101 @@ let navHistory = [];
 let currentSection = 'hub';
 var totalSystemsGlobal = new Set(ALL_DATA.map(function(d){return d.system;})).size;
 
+// === Browser History API integration ===
+function getCurrentState() {
+  return {
+    section: currentSection,
+    filter: { system: currentFilter.system, indication: currentFilter.indication },
+    search: searchQuery,
+    page: currentPage,
+    sort: currentSort,
+    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
+    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null
+  };
+}
+
+function buildHash(state) {
+  var s = state.section || 'hub';
+  if (s === 'literature') {
+    if (state.search) return '#lit/q/' + encodeURIComponent(state.search);
+    if (state.filter && state.filter.system) {
+      if (state.filter.indication) return '#lit/s/' + encodeURIComponent(state.filter.system) + '/i/' + encodeURIComponent(state.filter.indication);
+      return '#lit/s/' + encodeURIComponent(state.filter.system);
+    }
+    return '#lit';
+  }
+  if (s === 'news' && state.newsTab && state.newsTab !== 'home') return '#news/' + state.newsTab;
+  if (s === 'regulations') return '#reg';
+  if (s === 'products') return '#prod';
+  if (s === 'picks') return '#picks';
+  return '#hub';
+}
+
+function pushHistory() {
+  var state = getCurrentState();
+  var hash = buildHash(state);
+  history.pushState(state, '', hash);
+}
+
+function restoreState(state) {
+  if (!state) {
+    currentSection = 'hub';
+    currentFilter = { system: null, indication: null };
+    searchQuery = '';
+    currentPage = 1;
+    currentSort = 'date';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
+    if (typeof currentPicksView !== 'undefined') currentPicksView = null;
+  } else {
+    currentSection = state.section || 'hub';
+    currentFilter = state.filter || { system: null, indication: null };
+    searchQuery = state.search || '';
+    currentPage = state.page || 1;
+    currentSort = state.sort || 'date';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
+    if (typeof currentPicksView !== 'undefined') currentPicksView = state.picksView || null;
+  }
+  var si = document.getElementById('searchInput');
+  if (si) si.value = searchQuery;
+  // Update sidebar tree
+  document.querySelectorAll('.ind-item').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.sys-header').forEach(function(el) { el.classList.remove('active', 'expanded'); });
+  document.querySelectorAll('.ind-list').forEach(function(el) { el.style.display = 'none'; });
+  if (currentFilter.system) {
+    document.querySelectorAll('.sys-block').forEach(function(block) {
+      if (block.dataset.system === currentFilter.system) {
+        var header = block.querySelector('.sys-header');
+        var list = block.querySelector('.ind-list');
+        list.style.display = 'block';
+        header.classList.add('expanded', 'active');
+        if (currentFilter.indication) {
+          block.querySelectorAll('.ind-item').forEach(function(el) {
+            if (el.dataset.indication === currentFilter.indication) el.classList.add('active');
+          });
+        }
+      }
+    });
+  }
+  updateBottomNav(currentSection);
+  updateLayout(currentSection);
+  // Handle picks sub-views
+  if (currentSection === 'picks' && typeof currentPicksView !== 'undefined') {
+    if (currentPicksView === 'archive') {
+      renderPicksArchive();
+    } else if (typeof currentPicksView === 'number') {
+      renderPicksIssue(currentPicksView);
+    } else {
+      renderContent();
+    }
+  } else {
+    renderContent();
+  }
+}
+
+window.addEventListener('popstate', function(event) {
+  restoreState(event.state);
+});
+
 function saveNavState() {
   navHistory.push({
     section: currentSection,
@@ -1265,28 +1360,22 @@ function saveNavState() {
 }
 
 function goBack() {
-  if (navHistory.length === 0) return;
-  var prev = navHistory.pop();
-  currentSection = prev.section || 'hub';
-  currentFilter = prev.filter;
-  searchQuery = prev.search;
-  currentPage = prev.page;
-  currentSort = prev.sort;
-  var si = document.getElementById('searchInput');
-  if (si) si.value = prev.search;
-  updateBottomNav(currentSection);
-  updateLayout(currentSection);
-  document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active'));
-  if (prev.filter.system && prev.filter.indication) {
-    document.querySelectorAll('.ind-item').forEach(el => {
-      if (el.dataset.system === prev.filter.system && el.dataset.indication === prev.filter.indication) {
-        el.classList.add('active');
-      }
-    });
+  if (history.length > 1) {
+    history.back();
+  } else if (navHistory.length > 0) {
+    var prev = navHistory.pop();
+    currentSection = prev.section || 'hub';
+    currentFilter = prev.filter;
+    searchQuery = prev.search;
+    currentPage = prev.page;
+    currentSort = prev.sort;
+    var si = document.getElementById('searchInput');
+    if (si) si.value = prev.search;
+    updateBottomNav(currentSection);
+    updateLayout(currentSection);
+    renderContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  renderContent();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function updateFloatButtons() {
@@ -1324,6 +1413,7 @@ function getSortedData(data) {
 function toggleSort(mode) {
   currentSort = mode;
   currentPage = 1;
+  pushHistory();
   renderContent();
 }
 
@@ -1347,6 +1437,7 @@ function goHome() {
   document.querySelectorAll('.ind-list').forEach(el => el.style.display = 'none');
   updateBottomNav('hub');
   updateLayout('hub');
+  pushHistory();
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeSidebar();
@@ -1373,6 +1464,7 @@ function selectIndication(sysName, indName) {
       });
     }
   });
+  pushHistory();
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeSidebar();
@@ -1391,6 +1483,7 @@ function handleSearch() {
     currentPage = 1;
     updateBottomNav('literature');
     updateLayout('literature');
+    pushHistory();
     renderContent();
   }
 }
@@ -2121,6 +2214,7 @@ function loadTrialData(idx, nct) {
 
 function goPage(p) {
   currentPage = p;
+  pushHistory();
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2142,6 +2236,7 @@ function quickSelect(sysName) {
       header.classList.remove('expanded', 'active');
     }
   });
+  pushHistory();
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeSidebar();
@@ -2334,11 +2429,13 @@ function switchSection(section) {
   currentPage = 1;
   prodFilter = 'all';
   regFilter = 'all';
+  if (typeof currentPicksView !== 'undefined') currentPicksView = null;
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active', 'expanded'));
   document.querySelectorAll('.ind-list').forEach(el => el.style.display = 'none');
   updateBottomNav(section);
   updateLayout(section);
+  pushHistory();
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeSidebar();
@@ -2415,9 +2512,11 @@ function renderHub() {
 
 // === News section (4 sub-tabs) ===
 var currentNewsTab = 'home';
+var currentPicksView = null; // null=main, 'archive'=list, number=issue index
 
 function switchNewsTab(tab) {
   currentNewsTab = tab;
+  pushHistory();
   renderNews();
 }
 
@@ -2749,6 +2848,7 @@ function renderEditorPicks() {
 
 // === Picks archive list ===
 function renderPicksArchive() {
+  currentPicksView = 'archive';
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
   html += '<div class="content-header"><h2>往期精选归档</h2><div class="desc">点击任一期查看完整内容。当前最新内容请返回编辑精选主页。</div></div>';
@@ -2770,6 +2870,7 @@ function renderPicksArchive() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  pushHistory();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2777,6 +2878,7 @@ function renderPicksArchive() {
 function renderPicksIssue(idx) {
   var issue = PICKS_ARCHIVE[idx];
   if (!issue) return;
+  currentPicksView = idx;
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="renderPicksArchive()">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
   html += '<div class="content-header"><h2>' + escapeHtml(issue.title) + '</h2><div class="desc">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div></div>';
@@ -2820,10 +2922,12 @@ function renderPicksIssue(idx) {
 
   content.innerHTML = html;
   updateFloatButtons();
+  pushHistory();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Init
+// Init — set initial browser history state
+history.replaceState(getCurrentState(), '', buildHash(getCurrentState()));
 updateLayout('hub');
 updateBottomNav('hub');
 renderContent();
