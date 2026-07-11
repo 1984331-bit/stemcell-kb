@@ -95,7 +95,8 @@ body {
   margin-top: 6px;
   flex-wrap: wrap;
 }
-.disclaimer-bar .db-audience {
+.disclaimer-bar .db-audience,
+.disclaimer-bar .db-contact {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -107,15 +108,7 @@ body {
   font-weight: 600;
   white-space: nowrap;
 }
-.disclaimer-bar .db-contact {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #00695C;
-  font-size: 11px;
-  font-weight: 600;
-}
-.disclaimer-bar .db-contact b { color: #004D40; }
+.disclaimer-bar .db-contact b { color: #B2DFDB; }
 @media (max-width: 768px) {
   .disclaimer-bar { padding: 8px 14px; font-size: 11px; }
   .disclaimer-bar .db-contact { font-size: 10px; }
@@ -949,6 +942,12 @@ body { padding-bottom: 56px; }
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
+.hub-card .hc-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
 .hub-card .hc-icon {
   width: 32px;
   height: 32px;
@@ -958,13 +957,12 @@ body { padding-bottom: 56px; }
   justify-content: center;
   font-size: 16px;
   color: #fff;
-  margin-bottom: 10px;
+  flex-shrink: 0;
   font-weight: 700;
 }
 .hub-card .hc-title {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 4px;
 }
 .hub-card .hc-desc {
   font-size: 11px;
@@ -1730,8 +1728,7 @@ body { padding-bottom: 56px; }
 <div class="disclaimer-bar">
   <div class="db-inner">
     <div class="db-row1">
-      <span class="db-icon">📢</span>
-      <span class="db-text">本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</span>
+      <span class="db-text"><b>平台声明：</b>本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</span>
     </div>
     <div class="db-row2">
       <span class="db-audience">👨‍⚕️ 适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
@@ -3482,10 +3479,10 @@ function renderHub() {
 
   html += '<div class="hub-section-title">板块入口</div>';
   html += '<div class="hub-cards">';
-  html += '<div class="hub-card teal" onclick="switchSection(\'news\')"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
-  html += '<div class="hub-card orange" onclick="switchSection(\'regulations\')"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
-  html += '<div class="hub-card green" onclick="switchSection(\'literature\')"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
-  html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
+  html += '<div class="hub-card teal" onclick="switchSection(\'news\')"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
+  html += '<div class="hub-card orange" onclick="switchSection(\'regulations\')"><div class="hc-head"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
+  html += '<div class="hub-card green" onclick="switchSection(\'literature\')"><div class="hc-head"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
   html += '<div class="hub-section-title">📊 MSC行业分析报告</div>';
