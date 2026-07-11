@@ -1927,7 +1927,9 @@ function getCurrentState() {
     page: currentPage,
     sort: currentSort,
     newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
-    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null
+    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null,
+    prodFilter: prodFilter,
+    regFilter: regFilter
   };
 }
 
@@ -1961,6 +1963,8 @@ function restoreState(state) {
     searchQuery = '';
     currentPage = 1;
     currentSort = 'date';
+    prodFilter = 'all';
+    regFilter = 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
     if (typeof currentPicksView !== 'undefined') currentPicksView = null;
   } else {
@@ -1969,6 +1973,8 @@ function restoreState(state) {
     searchQuery = state.search || '';
     currentPage = state.page || 1;
     currentSort = state.sort || 'date';
+    prodFilter = state.prodFilter || 'all';
+    regFilter = state.regFilter || 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
     if (typeof currentPicksView !== 'undefined') currentPicksView = state.picksView || null;
   }
@@ -2019,28 +2025,37 @@ function saveNavState() {
     filter: { system: currentFilter.system, indication: currentFilter.indication },
     search: searchQuery,
     page: currentPage,
-    sort: currentSort
+    sort: currentSort,
+    prodFilter: prodFilter,
+    regFilter: regFilter,
+    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
+    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null
   });
   if (navHistory.length > 30) navHistory.shift();
   updateFloatButtons();
 }
 
 function goBack() {
-  if (history.length > 1) {
-    history.back();
-  } else if (navHistory.length > 0) {
+  if (navHistory.length > 0) {
     var prev = navHistory.pop();
     currentSection = prev.section || 'hub';
-    currentFilter = prev.filter;
-    searchQuery = prev.search;
-    currentPage = prev.page;
-    currentSort = prev.sort;
+    currentFilter = prev.filter || { system: null, indication: null };
+    searchQuery = prev.search || '';
+    currentPage = prev.page || 1;
+    currentSort = prev.sort || 'date';
+    if (typeof prev.prodFilter !== 'undefined') prodFilter = prev.prodFilter;
+    if (typeof prev.regFilter !== 'undefined') regFilter = prev.regFilter;
+    if (typeof prev.newsTab !== 'undefined') currentNewsTab = prev.newsTab;
+    if (typeof prev.picksView !== 'undefined') currentPicksView = prev.picksView;
     var si = document.getElementById('searchInput');
-    if (si) si.value = prev.search;
+    if (si) si.value = searchQuery;
     updateBottomNav(currentSection);
     updateLayout(currentSection);
     renderContent();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateFloatButtons();
+  } else if (history.length > 1) {
+    history.back();
   }
 }
 
@@ -3693,9 +3708,12 @@ function renderRegulations() {
 }
 
 function filterRegs(cat) {
+  saveNavState();
   regFilter = cat;
+  pushHistory();
   renderRegulations();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateFloatButtons();
 }
 
 // === Products section ===
@@ -3793,9 +3811,12 @@ function renderProducts() {
 }
 
 function filterProducts(cat) {
+  saveNavState();
   prodFilter = cat;
+  pushHistory();
   renderProducts();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateFloatButtons();
 }
 
 // === Editor picks section ===
