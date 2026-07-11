@@ -3563,6 +3563,8 @@ function renderNews() {
 
   // === 主页：5 个分类入口卡片（与监管/产品板块风格一致） ===
   if (currentNewsTab === 'home') {
+    html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片查看详情。</div></div>';
+
     html += '<div class="overview" style="margin-bottom:16px;">';
     tabs.forEach(function(t) {
       html += '<div class="overview-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
@@ -3605,14 +3607,8 @@ function renderNews() {
     return;
   }
 
-  // === 子板块：动态标题 + 列表 ===
+  // === 子板块：直接渲染列表 ===
   var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
-
-  // 标题区：使用当前子分类名 + 对应描述
-  html += '<div class="content-header" style="border-left:4px solid ' + currentTab.color + ';">';
-  html += '<h2>' + escapeHtml(currentTab.label) + '</h2>';
-  html += '<div class="desc">' + escapeHtml(currentTab.subtitle) + '</div>';
-  html += '</div>';
 
   // 渲染当前子板块的列表
   var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
