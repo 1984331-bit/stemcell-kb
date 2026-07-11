@@ -909,6 +909,355 @@ body { padding-bottom: 56px; }
 .hn-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-bottom: 4px; }
 .hn-title { font-size: 14px; font-weight: 600; color: #263238; }
 .hn-desc { font-size: 12px; color: #607D8B; margin-top: 2px; }
+/* ===== PPT Carousel ===== */
+.ppt-carousel {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  margin-bottom: 16px;
+  background: #004D40;
+}
+.ppt-carousel-track {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  overflow: hidden;
+}
+.ppt-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+.ppt-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Carousel controls */
+.ppt-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+  opacity: 0;
+}
+.ppt-carousel:hover .ppt-nav-btn { opacity: 1; }
+.ppt-nav-btn:hover { background: rgba(0,0,0,0.6); }
+.ppt-nav-prev { left: 8px; }
+.ppt-nav-next { right: 8px; }
+.ppt-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+.ppt-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+.ppt-dot.active {
+  background: #fff;
+  width: 24px;
+  border-radius: 4px;
+}
+/* Slide content base */
+.ppt-slide-content {
+  width: 100%; height: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Microsoft YaHei', sans-serif;
+}
+/* Slide-specific styles */
+.s1-bg { background: linear-gradient(135deg, #004D40 0%, #00695C 60%, #00897B 100%); }
+.s13-bg { background: linear-gradient(135deg, #004D40 0%, #00695C 50%, #1A1A2E 100%); }
+.s-bg-light { background: #F5F7FA; }
+.s-bg-white { background: #fff; }
+/* Section title bar */
+.s-title-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px 4px;
+}
+.s-title-bar::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: #00695C;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.s-title-bar .s-title {
+  font-size: clamp(13px, 2.2vw, 18px);
+  font-weight: 700;
+  color: #004D40;
+}
+.s-title-bar .s-subtitle {
+  font-size: clamp(8px, 1.3vw, 11px);
+  color: #607D8B;
+  margin-left: 4px;
+}
+/* Stat cards row */
+.s-cards-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+}
+.s-stat-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+}
+.s-stat-card .s-bar { width: 100%; height: 3px; }
+.s-stat-card .s-num {
+  font-size: clamp(20px, 4vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+.s-stat-card .s-label {
+  font-size: clamp(9px, 1.5vw, 12px);
+  font-weight: 600;
+  color: #263238;
+  margin-top: 2px;
+}
+.s-stat-card .s-sub {
+  font-size: clamp(7px, 1.1vw, 9px);
+  color: #607D8B;
+  text-align: center;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+/* Highlight bar */
+.s-highlight {
+  margin: 6px 16px;
+  background: #E0F2F1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border-left: 3px solid #00695C;
+  font-size: clamp(8px, 1.3vw, 11px);
+  color: #263238;
+  line-height: 1.5;
+}
+.s-highlight b { color: #004D40; }
+.s-highlight .hot { color: #FF7043; font-weight: 700; }
+/* Two column layout */
+.s-two-col {
+  display: flex;
+  gap: 8px;
+  padding: 6px 16px;
+  flex: 1;
+  min-height: 0;
+}
+.s-col { flex: 1; display: flex; flex-direction: column; }
+.s-col-title {
+  font-size: clamp(9px, 1.5vw, 12px);
+  font-weight: 700;
+  color: #004D40;
+  margin-bottom: 4px;
+}
+/* Bar list */
+.s-bar-item {
+  display: flex; align-items: center; gap: 4px;
+  margin-bottom: 3px;
+  font-size: clamp(7px, 1.2vw, 10px);
+}
+.s-bar-item .s-bl-name { width: 35%; color: #263238; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.s-bar-item .s-bl-track { flex: 1; height: 10px; background: #E0F2F1; border-radius: 3px; overflow: hidden; }
+.s-bar-item .s-bl-fill { height: 100%; border-radius: 3px; }
+.s-bar-item .s-bl-val { width: 24px; text-align: right; font-weight: 700; color: #00695C; }
+/* Table */
+.s-table {
+  width: calc(100% - 32px);
+  margin: 4px 16px;
+  border-collapse: collapse;
+  font-size: clamp(7px, 1.1vw, 9px);
+}
+.s-table th {
+  background: #00695C;
+  color: #fff;
+  padding: 3px 4px;
+  font-weight: 600;
+  text-align: center;
+}
+.s-table td {
+  padding: 3px 4px;
+  text-align: center;
+  border-bottom: 1px solid #E0E0E0;
+  color: #263238;
+}
+.s-table tr:nth-child(even) td { background: #FAFAFA; }
+.s-table .s-table-highlight { color: #00695C; font-weight: 700; }
+/* Big number */
+.s-big-num-block {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px;
+}
+.s-big-num {
+  font-size: clamp(28px, 6vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+.s-big-num-label {
+  font-size: clamp(9px, 1.5vw, 13px);
+  color: #4DB6AC;
+}
+/* Trial columns */
+.s-trial-cols {
+  display: flex; gap: 8px;
+  padding: 6px 16px;
+  flex: 1;
+}
+.s-trial-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+}
+.s-trial-card .s-tc-bar { width: 100%; height: 3px; }
+.s-trial-card .s-tc-title { font-size: clamp(9px, 1.5vw, 12px); font-weight: 700; margin-top: 2px; }
+.s-trial-card .s-tc-num { font-size: clamp(22px, 4.5vw, 40px); font-weight: 900; line-height: 1.1; }
+.s-trial-card .s-tc-label { font-size: clamp(7px, 1.1vw, 9px); color: #607D8B; }
+.s-trial-card .s-tc-bar-split { display: flex; width: 80%; height: 12px; border-radius: 3px; overflow: hidden; margin-top: 4px; }
+.s-trial-card .s-tc-note { font-size: clamp(6px, 1vw, 8px); color: #607D8B; text-align: center; margin-top: 3px; line-height: 1.3; }
+/* Cover slide */
+.s-cover {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10%;
+  position: relative;
+}
+.s-cover-title {
+  font-size: clamp(18px, 4vw, 36px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+}
+.s-cover-title .accent { color: #4DB6AC; }
+.s-cover-sub {
+  font-size: clamp(10px, 2vw, 16px);
+  color: #fff;
+  margin-top: 8px;
+}
+.s-cover-en {
+  font-size: clamp(8px, 1.3vw, 12px);
+  color: #E0F2F1;
+  font-style: italic;
+  margin-top: 4px;
+}
+.s-cover-divider {
+  width: 60px; height: 3px;
+  background: #4DB6AC;
+  border-radius: 2px;
+  margin: 10px 0;
+}
+.s-cover-footer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(26,26,46,0.9);
+  padding: 6px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(7px, 1.1vw, 10px);
+  color: #fff;
+}
+/* End slide */
+.s-end-content {
+  padding: 20px 10% 0;
+  flex: 1;
+}
+.s-end-title {
+  font-size: clamp(14px, 3vw, 24px);
+  font-weight: 800;
+  color: #fff;
+}
+.s-end-points {
+  margin-top: 10px;
+  font-size: clamp(8px, 1.3vw, 11px);
+  color: #E0F2F1;
+  line-height: 1.8;
+}
+.s-end-points b { color: #fff; }
+.s-end-contact {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(26,26,46,0.95);
+  padding: 8px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s-end-contact .s-ec-name { font-size: clamp(10px, 1.8vw, 14px); color: #fff; font-weight: 700; }
+.s-end-contact .s-ec-info { font-size: clamp(7px, 1.1vw, 10px); color: #4DB6AC; }
+.s-end-contact .s-ec-contact { font-size: clamp(7px, 1.1vw, 10px); color: #607D8B; }
+/* Pie/donut placeholder */
+.s-donut-row {
+  display: flex; gap: 8px; padding: 4px 16px; flex: 1; align-items: center;
+}
+.s-donut-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.s-donut-card .s-dc-num { font-size: clamp(20px, 4vw, 32px); font-weight: 900; line-height: 1; }
+.s-donut-card .s-dc-label { font-size: clamp(8px, 1.3vw, 11px); font-weight: 600; color: #263238; }
+.s-donut-card .s-dc-sub { font-size: clamp(6px, 1vw, 8px); color: #607D8B; line-height: 1.3; }
+/* Funding startups */
+.s-startup-list { padding: 4px 16px; flex: 1; }
+.s-startup-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.s-startup-item .s-si-bar { width: 3px; height: 24px; border-radius: 2px; }
+.s-startup-item .s-si-name { font-size: clamp(8px, 1.3vw, 11px); font-weight: 600; color: #263238; flex: 1; }
+.s-startup-item .s-si-amount { font-size: clamp(10px, 2vw, 14px); font-weight: 800; }
+.s-startup-item .s-si-info { font-size: clamp(6px, 1vw, 8px); color: #607D8B; }
 /* Hub picks */
 .hub-picks { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 12px 16px; }
 .hp-item { padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
@@ -2462,6 +2811,7 @@ function switchSection(section) {
   updateBottomNav(section);
   updateLayout(section);
   pushHistory();
+  if (section !== 'hub' && pptCarouselTimer) { clearInterval(pptCarouselTimer); pptCarouselTimer = null; }
   renderContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   closeSidebar();
@@ -2486,6 +2836,335 @@ function updateLayout(section) {
   }
 }
 
+// === PPT Landscape Carousel ===
+function renderLandscapeCarousel() {
+  var slides = [
+    // Slide 1: Cover
+    '<div class="ppt-slide-content s1-bg">' +
+      '<div class="s-cover">' +
+        '<div class="s-cover-title">基因、细胞与RNA治疗<span class="accent"> 全景报告</span></div>' +
+        '<div class="s-cover-divider"></div>' +
+        '<div class="s-cover-sub">2026年第一季度数据报告</div>' +
+        '<div class="s-cover-en">Gene, Cell, & RNA Therapy Landscape Report — Q1 2026</div>' +
+        '<div class="s-cover-footer">' +
+          '<span>间充质干细胞信息库</span>' +
+          '<span>数据来源: ASGCT & Citeline | 2026年4月</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>',
+
+    // Slide 2: Key Takeaways
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">Q1 2026 核心要点</span><span class="s-subtitle">Key Takeaways</span></div>' +
+      '<div class="s-cards-row">' +
+        '<div class="s-stat-card"><div class="s-bar" style="background:#00695C"></div><div class="s-num" style="color:#00695C">2</div><div class="s-label">Q1新增获批</div><div class="s-sub">均为非基因修饰细胞疗法<br>日本批准2款（帕金森/心衰）</div></div>' +
+        '<div class="s-stat-card"><div class="s-bar" style="background:#FF7043"></div><div class="s-num" style="color:#FF7043">+13</div><div class="s-label">加速审评通道新增</div><div class="s-sub">Fast Track / RMAT / Breakthrough<br>孤儿药认定持续扩展</div></div>' +
+        '<div class="s-stat-card"><div class="s-bar" style="background:#5C6BC0"></div><div class="s-num" style="color:#5C6BC0">103</div><div class="s-label">Q1交易总数 (+3%)</div><div class="s-sub">融资与联盟增长<br>收购量保持稳定</div></div>' +
+      '</div>' +
+      '<div class="s-highlight"><b>重大收购事件</b><br>Gilead以<span class="hot">78亿美元</span>收购Arcellx（CAR-T多发性骨髓瘤）<br>Eli Lilly以<span class="hot">最高24亿美元</span>收购Orna Therapeutics（环状RNA技术）<br><span style="color:#607D8B">初创融资: 13轮种子/A轮，总额3.884亿美元（环比下降30%）</span></div>' +
+    '</div>',
+
+    // Slide 3: Approved Therapies Overview
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">全球获批治疗概览</span><span class="s-subtitle">Approved Therapies as of Q1 2026</span></div>' +
+      '<div class="s-donut-row">' +
+        '<div class="s-donut-card"><div style="width:40px;height:40px;border-radius:50%;background:conic-gradient(#00695C 0% 26%,#5C6BC0 26% 50%,#FF7043 50% 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:20px;height:20px;background:#fff;border-radius:50%;"></div></div><div><div class="s-dc-num" style="color:#00695C">152</div><div class="s-dc-label">全球获批总数</div></div></div>' +
+        '<div class="s-donut-card"><div class="s-dc-num" style="color:#00695C">40</div><div><div class="s-dc-label">基因疗法</div><div class="s-dc-sub">含CAR-T、TCR-T等<br>基因修饰细胞疗法</div></div></div>' +
+        '<div class="s-donut-card"><div class="s-dc-num" style="color:#5C6BC0">37</div><div><div class="s-dc-label">RNA疗法</div><div class="s-dc-sub">siRNA / mRNA / ASO<br>Q1无新增获批</div></div></div>' +
+        '<div class="s-donut-card"><div class="s-dc-num" style="color:#FF7043">75</div><div><div class="s-dc-label">细胞疗法</div><div class="s-dc-sub">非基因修饰细胞疗法<br>Q1新增2款（日本）</div></div></div>' +
+      '</div>' +
+      '<div class="s-highlight" style="text-align:center"><b>Q1 2026 新获批:</b> Sumitomo raguneprocel（帕金森病, 日本） · Cuorips ReHeart（心力衰竭, 日本）</div>' +
+    '</div>',
+
+    // Slide 4: Pipeline Overview
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">研发管线总览</span><span class="s-subtitle">4,233 Therapies in Development</span></div>' +
+      '<div class="s-big-num-block" style="background:#004D40;border-radius:10px;margin:8px 16px;">' +
+        '<div><div class="s-big-num">4,233</div><div class="s-big-num-label">在研疗法总数</div><div style="font-size:8px;color:#E0F2F1;font-style:italic">Preclinical → Pre-registration</div></div>' +
+        '<div style="display:flex;gap:6px;flex:1;">' +
+          '<div style="background:#fff;border-radius:8px;padding:6px 8px;flex:1;text-align:center;"><div style="font-size:20px;font-weight:800;color:#00695C">50%</div><div style="font-size:11px;font-weight:600">2,132 基因疗法</div><div style="font-size:8px;color:#607D8B">含CAR-T/TCR-T</div></div>' +
+          '<div style="background:#fff;border-radius:8px;padding:6px 8px;flex:1;text-align:center;"><div style="font-size:20px;font-weight:800;color:#5C6BC0">29%</div><div style="font-size:11px;font-weight:600">1,220 RNA疗法</div><div style="font-size:8px;color:#607D8B">RNAi/mRNA/ASO</div></div>' +
+          '<div style="background:#fff;border-radius:8px;padding:6px 8px;flex:1;text-align:center;"><div style="font-size:20px;font-weight:800;color:#FF7043">21%</div><div style="font-size:11px;font-weight:600">881 细胞疗法</div><div style="font-size:8px;color:#607D8B">非基因修饰</div></div>' +
+        '</div>' +
+      '</div>' +
+      '<table class="s-table" style="margin-top:8px">' +
+        '<tr><th>阶段</th><th>Q1 2025</th><th>Q2 2025</th><th>Q3 2025</th><th>Q4 2025</th><th style="background:#004D40">Q1 2026</th></tr>' +
+        '<tr><td>临床前</td><td>1,432</td><td>1,461</td><td>1,346</td><td>1,227</td><td class="s-table-highlight">1,269</td></tr>' +
+        '<tr><td>I期</td><td>350</td><td>361</td><td>377</td><td>397</td><td class="s-table-highlight">423</td></tr>' +
+        '<tr><td>II期</td><td>319</td><td>330</td><td>347</td><td>355</td><td class="s-table-highlight">368</td></tr>' +
+        '<tr><td>III期</td><td>41</td><td>45</td><td>47</td><td>49</td><td style="color:#FF7043;font-weight:700">57</td></tr>' +
+        '<tr><td>注册前</td><td>13</td><td>13</td><td>11</td><td>12</td><td class="s-table-highlight">15</td></tr>' +
+        '<tr style="background:#E0F2F1"><td style="font-weight:700;color:#004D40">总计</td><td style="font-weight:600">2,117</td><td style="font-weight:600">2,155</td><td style="font-weight:600">2,129</td><td style="font-weight:600">2,040</td><td style="font-weight:800;color:#004D40">2,132</td></tr>' +
+      '</table>' +
+    '</div>',
+
+    // Slide 5: Gene Therapy Technology
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">基因治疗技术分布</span><span class="s-subtitle">Technology Breakdown</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">基因修饰方式</div>' +
+          '<div style="display:flex;gap:6px;align-items:center;">' +
+            '<div style="width:50px;height:50px;border-radius:50%;background:conic-gradient(#4DB6AC 0% 42%,#00695C 42% 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:22px;height:22px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#00695C">58%</div></div>' +
+            '<div style="font-size:9px;line-height:1.5"><span style="color:#00695C;font-weight:700">■</span> Ex vivo 体外 58%<br><span style="color:#4DB6AC;font-weight:700">■</span> In vivo 体内 42%</div>' +
+          '</div>' +
+          '<div class="s-col-title" style="margin-top:8px">基因修饰细胞疗法构成</div>' +
+          '<div style="font-size:9px;line-height:1.8">' +
+            '<div><span style="color:#5C6BC0;font-weight:700">■</span> CAR-T <b>52%</b></div>' +
+            '<div><span style="color:#FF7043;font-weight:700">■</span> TCR-T <b>12%</b></div>' +
+            '<div><span style="color:#FFB74D;font-weight:700">■</span> CAR-NK <b>6%</b></div>' +
+            '<div><span style="color:#4DB6AC;font-weight:700">■</span> 其他 (CAR-M等) <b>30%</b></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">CAR-T 适应症分布</div>' +
+          '<div style="display:flex;flex-direction:column;gap:6px;">' +
+            '<div style="background:#FF7043;border-radius:6px;padding:8px;text-align:center;color:#fff;"><div style="font-size:22px;font-weight:900">81%</div><div style="font-size:10px">肿瘤</div></div>' +
+            '<div style="background:#5C6BC0;border-radius:6px;padding:4px;text-align:center;color:#fff;font-size:10px;font-weight:700">12% 非肿瘤</div>' +
+            '<div style="background:#E0F2F1;border-radius:6px;padding:4px 8px;font-size:8px;color:#263238;line-height:1.4">红斑狼疮、硬皮病、重症肌无力等自免领域CAR-T研发活跃</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="s-highlight"><b>要点:</b> 体外基因修饰占主导（58%）；CAR-T持续主导基因修饰细胞疗法管线（52%）；<span class="hot">81%的CAR-T针对肿瘤</span>，但自免领域CAR-T研发活跃</div>' +
+    '</div>',
+
+    // Slide 6: Top Targets & Indications
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">基因治疗: 热门靶点与适应症</span><span class="s-subtitle">Top Targets & Indications</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">最常靶向疾病 Top 5</div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">实体瘤(未指定)</span><span class="s-bl-track"><span class="s-bl-fill" style="width:100%;background:#00695C"></span></span><span class="s-bl-val">359</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">自身免疫病</span><span class="s-bl-track"><span class="s-bl-fill" style="width:29%;background:#4DB6AC"></span></span><span class="s-bl-val">104</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">癌症(未指定)</span><span class="s-bl-track"><span class="s-bl-fill" style="width:29%;background:#4DB6AC"></span></span><span class="s-bl-val">103</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">急性淋巴细胞白血病</span><span class="s-bl-track"><span class="s-bl-fill" style="width:24%;background:#4DB6AC"></span></span><span class="s-bl-val">86</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">血液肿瘤(未指定)</span><span class="s-bl-track"><span class="s-bl-fill" style="width:20%;background:#4DB6AC"></span></span><span class="s-bl-val">73</span></div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">最常靶向靶点 Top 5 (肿瘤)</div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">CD19</span><span class="s-bl-track"><span class="s-bl-fill" style="width:100%;background:#FF7043"></span></span><span class="s-bl-val">154</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">BCMA</span><span class="s-bl-track"><span class="s-bl-fill" style="width:44%;background:#4DB6AC"></span></span><span class="s-bl-val">68</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">MS4A1</span><span class="s-bl-track"><span class="s-bl-fill" style="width:19%;background:#4DB6AC"></span></span><span class="s-bl-val">29</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">CD22</span><span class="s-bl-track"><span class="s-bl-fill" style="width:18%;background:#4DB6AC"></span></span><span class="s-bl-val">27</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">HER2</span><span class="s-bl-track"><span class="s-bl-fill" style="width:16%;background:#4DB6AC"></span></span><span class="s-bl-val">25</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="s-highlight" style="text-align:center">CD19与BCMA持续领跑肿瘤靶点；非肿瘤领域CD19、BCMA、VEGFA为前三</div>' +
+    '</div>',
+
+    // Slide 7: Non-GM Cell Therapy Pipeline
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">非基因修饰细胞治疗管线</span><span class="s-subtitle">Cell Therapy Pipeline</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">最常靶向疾病 Top 5</div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">实体瘤(未指定)</span><span class="s-bl-track"><span class="s-bl-fill" style="width:100%;background:#FF7043"></span></span><span class="s-bl-val">82</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">骨关节炎</span><span class="s-bl-track"><span class="s-bl-fill" style="width:60%;background:#FFCCBC"></span></span><span class="s-bl-val">49</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">1型糖尿病</span><span class="s-bl-track"><span class="s-bl-fill" style="width:50%;background:#FFCCBC"></span></span><span class="s-bl-val">41</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">帕金森病</span><span class="s-bl-track"><span class="s-bl-fill" style="width:45%;background:#FFCCBC"></span></span><span class="s-bl-val">37</span></div>' +
+          '<div class="s-bar-item"><span class="s-bl-name">脑缺血</span><span class="s-bl-track"><span class="s-bl-fill" style="width:32%;background:#FFCCBC"></span></span><span class="s-bl-val">26</span></div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">罕见病领域 Top 5</div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:3px;border-left:3px solid #FF7043;font-size:9px;display:flex;justify-content:space-between"><span>移植物抗宿主病(GvHD)</span><b style="color:#FF7043">28</b></div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:3px;border-left:3px solid #FF7043;font-size:9px;display:flex;justify-content:space-between"><span>急性呼吸窘迫综合征</span><b style="color:#FF7043">27</b></div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:3px;border-left:3px solid #FF7043;font-size:9px;display:flex;justify-content:space-between"><span>急性髓系白血病</span><b style="color:#FF7043">24</b></div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:3px;border-left:3px solid #FF7043;font-size:9px;display:flex;justify-content:space-between"><span>胰腺癌</span><b style="color:#FF7043">20</b></div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;border-left:3px solid #FF7043;font-size:9px;display:flex;justify-content:space-between"><span>卵巢癌</span><b style="color:#FF7043">18</b></div>' +
+          '<div class="s-highlight" style="margin:6px 0 0;padding:6px 8px"><b>临床试验:</b> Q1新增 <span class="hot">14项</span> | 开放试验 <b style="color:#00695C">871项</b> | 57%非肿瘤<br>罕见病管线: 38%肿瘤 vs 62%非肿瘤</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>',
+
+    // Slide 8: RNA Therapy Pipeline
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">RNA治疗管线</span><span class="s-subtitle">1,220 Therapies</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">RNA疗法模态趋势 (2021-2026)</div>' +
+          '<div style="font-size:9px;line-height:2">' +
+            '<div><span style="color:#5C6BC0;font-weight:700">■</span> RNAi: 120 → <b style="color:#5C6BC0">480</b> <span style="color:#FF7043;font-size:8px">↑超越mRNA</span></div>' +
+            '<div><span style="color:#00695C;font-weight:700">■</span> mRNA: 180 → <b style="color:#00695C">455</b></div>' +
+            '<div><span style="color:#FF7043;font-weight:700">■</span> ASO: 200 → <b style="color:#FF7043">318</b></div>' +
+          '</div>' +
+          '<div style="margin-top:6px;font-size:8px;color:#607D8B;line-height:1.5">RNAi从2021年120项增长至480项，已成为最常见RNA模态</div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">临床前 vs 临床占比</div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:4px;border-left:3px solid #5C6BC0">' +
+            '<div style="font-size:11px;font-weight:700;color:#5C6BC0">RNAi</div>' +
+            '<div style="font-size:8px;color:#607D8B">临床前: <b style="color:#5C6BC0">67%</b> | 临床: 33%</div>' +
+            '<div style="height:8px;background:#E0F2F1;border-radius:3px;margin-top:2px;overflow:hidden"><div style="width:67%;height:100%;background:#5C6BC0"></div></div>' +
+          '</div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;margin-bottom:4px;border-left:3px solid #00695C">' +
+            '<div style="font-size:11px;font-weight:700;color:#00695C">mRNA</div>' +
+            '<div style="font-size:8px;color:#607D8B">临床前: <b style="color:#00695C">56%</b> | 临床: 44%</div>' +
+            '<div style="height:8px;background:#E0F2F1;border-radius:3px;margin-top:2px;overflow:hidden"><div style="width:56%;height:100%;background:#00695C"></div></div>' +
+          '</div>' +
+          '<div style="background:#fff;border-radius:6px;padding:4px 8px;border-left:3px solid #FF7043">' +
+            '<div style="font-size:11px;font-weight:700;color:#FF7043">ASO</div>' +
+            '<div style="font-size:8px;color:#607D8B">临床前: <b style="color:#FF7043">64%</b> | 临床: 36%</div>' +
+            '<div style="height:8px;background:#E0F2F1;border-radius:3px;margin-top:2px;overflow:hidden"><div style="width:64%;height:100%;background:#FF7043"></div></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="s-highlight">RNAi超越mRNA成为最常见RNA模态 | 当前<b style="color:#00695C">469项</b>开放RNA临床试验 | Q1新增<span class="hot">23项</span>试验（96%为非肿瘤）</div>' +
+    '</div>',
+
+    // Slide 9: Clinical Trial Activity
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">Q1 2026 临床试验活跃度</span><span class="s-subtitle">Clinical Trial Activity</span></div>' +
+      '<div class="s-trial-cols">' +
+        '<div class="s-trial-card"><div class="s-tc-bar" style="background:#00695C"></div><div class="s-tc-title" style="color:#00695C">基因治疗</div><div class="s-tc-num" style="color:#00695C">41</div><div class="s-tc-label">Q1新增试验</div><div class="s-tc-bar-split"><div style="width:39%;background:#00695C"></div><div style="width:61%;background:#4DB6AC"></div></div><div class="s-tc-note">开放: 1,915项<br>非肿瘤占比升至61%<br>(+20个百分点)</div></div>' +
+        '<div class="s-trial-card"><div class="s-tc-bar" style="background:#FF7043"></div><div class="s-tc-title" style="color:#FF7043">细胞治疗</div><div class="s-tc-num" style="color:#FF7043">14</div><div class="s-tc-label">Q1新增试验</div><div class="s-tc-bar-split"><div style="width:43%;background:#FF7043"></div><div style="width:57%;background:#FFCCBC"></div></div><div class="s-tc-note">开放: 871项<br>较上季度+3项<br>57%非肿瘤</div></div>' +
+        '<div class="s-trial-card"><div class="s-tc-bar" style="background:#5C6BC0"></div><div class="s-tc-title" style="color:#5C6BC0">RNA治疗</div><div class="s-tc-num" style="color:#5C6BC0">23</div><div class="s-tc-label">Q1新增试验</div><div class="s-tc-bar-split"><div style="width:4%;background:#5C6BC0"></div><div style="width:96%;background:#C5CAE9"></div></div><div class="s-tc-note">开放: 469项<br>96%为非肿瘤<br>较上季度+1项</div></div>' +
+      '</div>' +
+      '<div class="s-highlight" style="text-align:center">基因治疗非肿瘤试验占比创历史新高（61%），自身免疫病CAR-T试验持续增长</div>' +
+    '</div>',
+
+    // Slide 10: Major Deals
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">Q1 2026 重大交易</span><span class="s-subtitle">Acquisitions & Dealmaking</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">近5季度交易量趋势</div>' +
+          '<div style="font-size:9px;line-height:1.8">' +
+            '<div><span style="color:#00695C;font-weight:700">■</span> 融资: 56→51→65→70→<b style="color:#00695C">71</b></div>' +
+            '<div><span style="color:#5C6BC0;font-weight:700">■</span> 联盟: 31→25→24→26→<b style="color:#5C6BC0">28</b></div>' +
+            '<div><span style="color:#FF7043;font-weight:700">■</span> 收购: 3→6→6→6→<b style="color:#FF7043">6</b></div>' +
+          '</div>' +
+          '<div style="margin-top:8px;background:#004D40;border-radius:8px;padding:8px;text-align:center;color:#fff"><div style="font-size:18px;font-weight:800">103笔</div><div style="font-size:10px;color:#4DB6AC">Q1 2026总交易 (+3% QoQ)</div></div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">Q1 2026 收购一览</div>' +
+          '<table class="s-table" style="margin:0">' +
+            '<tr><th>日期</th><th>交易</th><th>金额</th></tr>' +
+            '<tr><td>2/23</td><td style="text-align:left;font-size:7px">Gilead收购Arcellx (CAR-T骨髓瘤)</td><td style="color:#FF7043;font-weight:700">$78亿</td></tr>' +
+            '<tr><td>2/9</td><td style="text-align:left;font-size:7px">Lilly收购Orna (环状RNA)</td><td style="color:#FF7043;font-weight:700">$24亿</td></tr>' +
+            '<tr><td>2/26</td><td style="text-align:left;font-size:7px">Veloxis收购Aicuris</td><td style="font-weight:700">$9.2亿</td></tr>' +
+            '<tr><td>1/13</td><td style="text-align:left;font-size:7px">正大天晴收购Hygieia</td><td style="font-weight:700">$1.7亿</td></tr>' +
+            '<tr><td>1/29</td><td style="text-align:left;font-size:7px">YD Bio收购Safe Save</td><td style="font-weight:700">$0.27亿</td></tr>' +
+            '<tr><td>3/3</td><td style="text-align:left;font-size:7px">Octane收购Lonza个性化医疗</td><td style="color:#607D8B;font-style:italic">未披露</td></tr>' +
+          '</table>' +
+        '</div>' +
+      '</div>' +
+    '</div>',
+
+    // Slide 11: Startup Funding
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">初创企业融资</span><span class="s-subtitle">Start-up Funding Q1 2026</span></div>' +
+      '<div class="s-two-col">' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">近5季度融资趋势 ($M)</div>' +
+          '<div style="display:flex;align-items:flex-end;gap:6px;height:60px;margin-top:4px">' +
+            '<div style="flex:1;text-align:center"><div style="height:46%;background:#4DB6AC;border-radius:3px 3px 0 0"></div><div style="font-size:7px;margin-top:2px">Q1 25<br><b>304</b></div></div>' +
+            '<div style="flex:1;text-align:center"><div style="height:30%;background:#4DB6AC;border-radius:3px 3px 0 0"></div><div style="font-size:7px;margin-top:2px">Q2 25<br><b>197</b></div></div>' +
+            '<div style="flex:1;text-align:center"><div style="height:35%;background:#4DB6AC;border-radius:3px 3px 0 0"></div><div style="font-size:7px;margin-top:2px">Q3 25<br><b>231</b></div></div>' +
+            '<div style="flex:1;text-align:center"><div style="height:84%;background:#00695C;border-radius:3px 3px 0 0"></div><div style="font-size:7px;margin-top:2px">Q4 25<br><b>557</b></div></div>' +
+            '<div style="flex:1;text-align:center"><div style="height:59%;background:#00695C;border-radius:3px 3px 0 0"></div><div style="font-size:7px;margin-top:2px">Q1 26<br><b>388</b></div></div>' +
+          '</div>' +
+          '<div class="s-highlight" style="margin-top:6px"><b>13轮</b>种子/A轮 | <span class="hot">$388.4M</span> 总额<br><span style="font-size:8px;color:#607D8B">较Q4下降30%，但仍高于其他近期季度</span></div>' +
+        '</div>' +
+        '<div class="s-col">' +
+          '<div class="s-col-title">值得关注初创企业</div>' +
+          '<div class="s-startup-item"><div class="s-si-bar" style="background:#FF7043"></div><div><div class="s-si-name">Corsera Health</div><div class="s-si-info">siRNA · 心血管(LDL-C/血压) · Maraganore创立</div></div><div class="s-si-amount" style="color:#FF7043">$80M</div></div>' +
+          '<div class="s-startup-item"><div class="s-si-bar" style="background:#00695C"></div><div><div class="s-si-name">AccurEdit</div><div class="s-si-info">基因编辑 · 心血管/肝病(MASH) · 苏州</div></div><div class="s-si-amount" style="color:#00695C">$75M</div></div>' +
+          '<div class="s-startup-item"><div class="s-si-bar" style="background:#5C6BC0"></div><div><div class="s-si-name">Cytotheryx</div><div class="s-si-info">细胞治疗 · 肝病(肝衰竭) · Mayo Clinic</div></div><div class="s-si-amount" style="color:#5C6BC0">$60M</div></div>' +
+          '<div class="s-startup-item"><div class="s-si-bar" style="background:#FFB74D"></div><div><div class="s-si-name">Aerska</div><div class="s-si-info">RNA · 未披露 · 前Alnylam科学家</div></div><div class="s-si-amount" style="color:#FFB74D">$39M</div></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>',
+
+    // Slide 12: Q2 Catalysts
+    '<div class="ppt-slide-content s-bg-light">' +
+      '<div class="s-title-bar"><span class="s-title">Q2 2026 关键催化剂</span><span class="s-subtitle">Upcoming Catalysts</span></div>' +
+      '<table class="s-table">' +
+        '<tr><th>疗法</th><th>适应症</th><th>事件类型</th><th>时间</th></tr>' +
+        '<tr><td>vusolimogene</td><td>黑色素瘤</td><td style="color:#FF7043;font-weight:700">FDA PDUFA决定</td><td>4/10/2026</td></tr>' +
+        '<tr><td>BBM-H901</td><td>B型血友病</td><td style="color:#FF7043;font-weight:700">PDUFA首次审评</td><td>4/10/2026</td></tr>' +
+        '<tr><td>Orca-T</td><td>急性髓系白血病</td><td style="color:#FF7043;font-weight:700">PDUFA首次审评</td><td>4/6/2026</td></tr>' +
+        '<tr><td>DB-OTO</td><td>耳铁蛋白相关耳聋</td><td style="color:#FF7043;font-weight:700">PDUFA首次审评</td><td>≤6/30/2026</td></tr>' +
+        '<tr><td>NEURONATA-R</td><td>肌萎缩侧索硬化(ALS)</td><td style="color:#FF7043;font-weight:700">PDUFA首次审评</td><td>≤9/30/2026</td></tr>' +
+        '<tr><td>Bepirovirsen</td><td>乙肝(HBV)</td><td style="color:#5C6BC0;font-weight:700">日本上市审批</td><td>≤8/31/2026</td></tr>' +
+        '<tr><td>INO-3107</td><td>复发性呼吸道乳头瘤</td><td style="color:#FF7043;font-weight:700">PDUFA首次审评</td><td>≤9/30/2026</td></tr>' +
+        '<tr><td>Cartistem</td><td>骨关节炎</td><td style="color:#5C6BC0;font-weight:700">日本上市审批</td><td>≤12/31/2027</td></tr>' +
+      '</table>' +
+      '<div class="s-highlight"><b>Q2重点:</b> vusolimogene(黑色素瘤)与BBM-H901(B型血友病)的FDA PDUFA决定 | NEURONATA-R(ALS)首次PDUFA审评</div>' +
+    '</div>',
+
+    // Slide 13: Summary
+    '<div class="ppt-slide-content s13-bg">' +
+      '<div class="s-end-content">' +
+        '<div class="s-end-title">总结与展望</div>' +
+        '<div style="width:60px;height:3px;background:#4DB6AC;border-radius:2px;margin:8px 0"></div>' +
+        '<div class="s-end-points">' +
+          '<b>1. 审批放缓但管线加速去风险化:</b> 仅2款获批，但加速审评通道新增13项<br>' +
+          '<b>2. CAR-T领域资本活跃:</b> Gilead $78亿收购Arcellx，Lilly $24亿收购Orna<br>' +
+          '<b>3. 非肿瘤适应症持续扩展:</b> 基因治疗非肿瘤试验占比61%，RNA疗法96%非肿瘤<br>' +
+          '<b>4. 4,233条在研管线:</b> 基因治疗50% / RNA 29% / 细胞治疗21%，I期与III期环比增长<br>' +
+          '<b>5. Q2催化剂密集:</b> vusolimogene、BBM-H901、DB-OTO等多款PDUFA决定待出' +
+        '</div>' +
+      '</div>' +
+      '<div class="s-end-contact">' +
+        '<div><div class="s-ec-name">间充质干细胞信息库</div><div class="s-ec-info">1984331-bit.github.io/stemcell-kb</div><div class="s-ec-contact">微信/QQ（同号）: 401848919</div></div>' +
+        '<div style="text-align:right"><div class="s-ec-name" style="font-size:10px">数据来源</div><div class="s-ec-info">ASGCT & Citeline</div><div class="s-ec-contact">Landscape Report Q1 2026</div></div>' +
+      '</div>' +
+    '</div>',
+  ];
+
+  var h = '<div class="ppt-carousel" id="pptCarousel">';
+  h += '<button class="ppt-nav-btn ppt-nav-prev" onclick="pptCarouselGo(-1)">‹</button>';
+  h += '<button class="ppt-nav-btn ppt-nav-next" onclick="pptCarouselGo(1)">›</button>';
+  h += '<div class="ppt-carousel-track">';
+  for (var i = 0; i < slides.length; i++) {
+    h += '<div class="ppt-slide' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' + slides[i] + '</div>';
+  }
+  h += '</div>';
+  h += '<div class="ppt-dots">';
+  for (var i = 0; i < slides.length; i++) {
+    h += '<button class="ppt-dot' + (i === 0 ? ' active' : '') + '" onclick="pptCarouselGoTo(' + i + ')"></button>';
+  }
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
+
+var pptCarouselIdx = 0;
+var pptCarouselTimer = null;
+var pptCarouselTotal = 13;
+
+function pptCarouselGo(dir) {
+  pptCarouselIdx = (pptCarouselIdx + dir + pptCarouselTotal) % pptCarouselTotal;
+  pptCarouselUpdate();
+  pptCarouselRestart();
+}
+function pptCarouselGoTo(idx) {
+  pptCarouselIdx = idx;
+  pptCarouselUpdate();
+  pptCarouselRestart();
+}
+function pptCarouselUpdate() {
+  var carousel = document.getElementById('pptCarousel');
+  if (!carousel) return;
+  var slides = carousel.querySelectorAll('.ppt-slide');
+  var dots = carousel.querySelectorAll('.ppt-dot');
+  slides.forEach(function(s, i) { s.classList.toggle('active', i === pptCarouselIdx); });
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === pptCarouselIdx); });
+}
+function pptCarouselStart() {
+  if (pptCarouselTimer) clearInterval(pptCarouselTimer);
+  pptCarouselTimer = setInterval(function() {
+    var carousel = document.getElementById('pptCarousel');
+    if (!carousel || !carousel.offsetParent) { clearInterval(pptCarouselTimer); return; }
+    pptCarouselIdx = (pptCarouselIdx + 1) % pptCarouselTotal;
+    pptCarouselUpdate();
+  }, 6000);
+}
+function pptCarouselRestart() {
+  if (pptCarouselTimer) clearInterval(pptCarouselTimer);
+  pptCarouselStart();
+}
+
 // === Hub homepage ===
 function renderHub() {
   var content = document.getElementById('content');
@@ -2499,41 +3178,14 @@ function renderHub() {
   html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
-  // Latest news (5 items, mix of all sub-tabs)
-  html += '<div class="hub-section-title">最新资讯</div>';
-  var newsItems = [];
-  NEWS_FLASH.forEach(function(n) { newsItems.push({tab:'flash',item:n,date:n.date}); });
-  INDUSTRY_REPORTS.forEach(function(n) { newsItems.push({tab:'report',item:n,date:n.date}); });
-  FRONTIER_RESEARCH.forEach(function(n) { newsItems.push({tab:'frontier',item:n,date:n.date}); });
-  LOCAL_POLICY.forEach(function(n) { newsItems.push({tab:'policy',item:n,date:n.date}); });
-  FUNDING_TRENDS.forEach(function(n) { newsItems.push({tab:'funding',item:n,date:n.date}); });
-  newsItems.sort(function(a,b){ return b.date.localeCompare(a.date); });
-
-  var tabLabels = { flash:'快讯', report:'报告', frontier:'前沿', policy:'政策', funding:'融资' };
-  var tabColors = { flash:'#2E7D32', report:'#1565C0', frontier:'#7B1FA2', policy:'#E65100', funding:'#00838F' };
-
-  html += '<div class="hub-news">';
-  var count = 0;
-  for (var i = 0; i < newsItems.length && count < 5; i++) {
-    var ni = newsItems[i];
-    var title = ni.item.title || '';
-    var desc = ni.item.desc || '';
-    var hasUrl = ni.item.url ? true : false;
-    html += '<div class="hn-item">';
-    html += '<div class="hn-date">' + ni.date + '</div>';
-    html += '<span class="hn-tag" style="background:' + tabColors[ni.tab] + '20;color:' + tabColors[ni.tab] + ';">' + tabLabels[ni.tab] + '</span>';
-    html += '<div class="hn-title" onclick="switchSection(\'news\');setTimeout(function(){ switchNewsTab(\'' + ni.tab + '\'); },100);">' + escapeHtml(title.slice(0,80)) + '</div>';
-    if (hasUrl) {
-      html += '<div style="margin-top:4px;"><a href="' + ni.item.url + '" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 10px;background:' + tabColors[ni.tab] + ';color:#fff;border-radius:4px;font-size:11px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
-    }
-    html += '</div>';
-    count++;
-  }
-  html += '</div>';
-  html += '<div style="text-align:center;margin-top:12px;"><button class="back-to-sys-btn" onclick="switchSection(\'news\')">查看全部资讯 →</button></div>';
+  // PPT Landscape Carousel
+  html += '<div class="hub-section-title">📊 CGT行业全景报告 Q1 2026</div>';
+  html += renderLandscapeCarousel();
 
   content.innerHTML = html;
   updateFloatButtons();
+  pptCarouselIdx = 0;
+  pptCarouselStart();
 }
 
 // === News section (4 sub-tabs) ===
