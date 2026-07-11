@@ -3561,20 +3561,27 @@ function renderNews() {
     {id:'funding',   label:'融资趋势',     count: FUNDING_TRENDS.length,      color:'#00838F', desc:'投融资事件 · 管线布局',         hint:'¥/$/最新轮次',             subtitle:'投融资事件 · MSC/CGT管线布局 · 美元/人民币轮次追踪'}
   ];
 
-  // === 主页：5 个分类入口卡片（与监管/产品板块风格一致） ===
-  if (currentNewsTab === 'home') {
-    html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片查看详情。</div></div>';
+  // content-header (always shown)
+  html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选。</div></div>';
 
-    html += '<div class="overview" style="margin-bottom:16px;">';
-    tabs.forEach(function(t) {
-      html += '<div class="overview-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
-      html += '<div class="oc-count" style="color:' + t.color + ';">' + t.count + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
-      html += '<div class="oc-name">' + t.label + '</div>';
-      html += '<div class="oc-stats">' + t.desc + ' · 点击查看</div>';
-      html += '</div>';
-    });
+  // Category cards (always visible, like Regulations)
+  var totalCount = NEWS_FLASH.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
+  html += '<div class="overview" style="margin-bottom:16px;">';
+  html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="switchNewsTab(\'home\')">';
+  html += '<div class="oc-count">' + totalCount + '</div>';
+  html += '<div class="oc-name">全部资讯</div>';
+  html += '<div class="oc-stats">最新5条 · 点击查看</div>';
+  html += '</div>';
+  tabs.forEach(function(t) {
+    html += '<div class="overview-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
+    html += '<div class="oc-count" style="color:' + t.color + ';">' + t.count + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
+    html += '<div class="oc-name">' + t.label + '</div>';
+    html += '<div class="oc-stats">' + t.desc + ' · 点击筛选</div>';
     html += '</div>';
+  });
+  html += '</div>';
 
+  if (currentNewsTab === 'home') {
     // 最新 5 条（按日期排序）
     var allNews = [];
     NEWS_FLASH.forEach(function(n){ allNews.push(Object.assign({_tab:'flash',_tabColor:'#2E7D32',_tabLabel:'快讯'},n)); });
@@ -3585,7 +3592,7 @@ function renderNews() {
     allNews.sort(function(a,b){ return b.date.localeCompare(a.date); });
     var latest5 = allNews.slice(0, 5);
 
-    html += '<div class="hub-section-title" style="margin-top:20px;">最新 5 条</div>';
+    html += '<div class="hub-section-title" style="margin-top:8px;">最新 5 条</div>';
     latest5.forEach(function(n) {
       var hasLink = n.url ? true : false;
       html += '<div class="news-card" style="border-left-color:' + n._tabColor + ';">';
@@ -3601,38 +3608,31 @@ function renderNews() {
       }
       html += '</div>';
     });
+  } else {
+    // === 子板块：渲染列表 ===
+    var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
+    var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
+    var items = dataMap[currentNewsTab] || [];
+    var tc = currentTab.color;
 
-    content.innerHTML = html;
-    updateFloatButtons();
-    return;
+    items.forEach(function(n) {
+      var hasLink = n.url ? true : false;
+      html += '<div class="news-card" style="border-left-color:' + tc + ';">';
+      html += '<div class="nc-date">' + n.date + '</div>';
+      html += '<span class="nc-tag" style="background:' + tc + '20;color:' + tc + ';">' + escapeHtml(n.tag||'') + '</span>';
+      if (n.source) {
+        html += '<span class="nc-tag" style="background:#F1EFE8;color:#5F5E5A;">' + escapeHtml(n.source) + '</span>';
+      }
+      html += '<div class="nc-title">' + escapeHtml(n.title) + '</div>';
+      html += '<div class="nc-desc">' + escapeHtml(n.desc) + '</div>';
+      if (hasLink) {
+        html += '<div style="margin-top:6px;"><a href="' + n.url + '" target="_blank" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:' + tc + ';color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
+      } else {
+        html += '<div style="margin-top:6px;font-size:11px;color:#999;">⚠ 暂无可验证原文链接（来源待补）</div>';
+      }
+      html += '</div>';
+    });
   }
-
-  // === 子板块：直接渲染列表 ===
-  var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
-
-  // 渲染当前子板块的列表
-  var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
-  var items = dataMap[currentNewsTab] || [];
-  var tc = currentTab.color;
-  html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条</p>';
-
-  items.forEach(function(n) {
-    var hasLink = n.url ? true : false;
-    html += '<div class="news-card" style="border-left-color:' + tc + ';">';
-    html += '<div class="nc-date">' + n.date + '</div>';
-    html += '<span class="nc-tag" style="background:' + tc + '20;color:' + tc + ';">' + escapeHtml(n.tag||'') + '</span>';
-    if (n.source) {
-      html += '<span class="nc-tag" style="background:#F1EFE8;color:#5F5E5A;">' + escapeHtml(n.source) + '</span>';
-    }
-    html += '<div class="nc-title">' + escapeHtml(n.title) + '</div>';
-    html += '<div class="nc-desc">' + escapeHtml(n.desc) + '</div>';
-    if (hasLink) {
-      html += '<div style="margin-top:6px;"><a href="' + n.url + '" target="_blank" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:' + tc + ';color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
-    } else {
-      html += '<div style="margin-top:6px;font-size:11px;color:#999;">⚠ 暂无可验证原文链接（来源待补）</div>';
-    }
-    html += '</div>';
-  });
 
   content.innerHTML = html;
   updateFloatButtons();
@@ -3749,6 +3749,25 @@ function renderProducts() {
     '其他细胞治疗': '#185FA5'
   };
 
+  html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
+
+  // Category cards (always visible, like Regulations)
+  html += '<div class="overview" style="margin-bottom:16px;">';
+  html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
+  html += '<div class="oc-count">' + PRODUCTS.length + '</div>';
+  html += '<div class="oc-name">全部产品</div>';
+  html += '<div class="oc-stats">点击查看全部</div>';
+  html += '</div>';
+  Object.keys(catCounts).forEach(function(cat) {
+    var color = catColors[cat] || '#666';
+    html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
+    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
+    html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
+    html += '<div class="oc-stats">款产品 · 点击筛选</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
   // Get filtered products
   var filtered = PRODUCTS;
   if (prodFilter !== 'all') {
@@ -3762,57 +3781,21 @@ function renderProducts() {
     });
   }
 
-  if (prodFilter === 'all') {
-    // === Category selection view ===
-    html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击分类卡片查看详情。</div></div>';
-
-    // Category cards
-    html += '<div class="overview" style="margin-bottom:20px;">';
-    Object.keys(catCounts).forEach(function(cat) {
-      var color = catColors[cat] || '#666';
-      html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
-      html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
-      html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-      html += '</div>';
-    });
+  // Filtered list (always shown)
+  filtered.forEach(function(p) {
+    html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||'#185FA5') + ';">';
+    html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
+    html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
+    html += '<div class="pc-meta">';
+    html += '<span class="pc-tag" style="background:' + (p.cellColor||'#185FA5') + '20;color:' + (p.cellColor||'#185FA5') + ';">' + escapeHtml(p.cellType) + '</span>';
+    html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
+    html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
+    html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
+    if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
     html += '</div>';
-
-    // All products list
-    html += '<div class="hub-section-title" style="margin-bottom:12px;">全部产品列表（' + PRODUCTS.length + '款）</div>';
-    filtered.forEach(function(p) {
-      html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||'#185FA5') + ';">';
-      html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
-      html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
-      html += '<div class="pc-meta">';
-      html += '<span class="pc-tag" style="background:' + (p.cellColor||'#185FA5') + '20;color:' + (p.cellColor||'#185FA5') + ';">' + escapeHtml(p.cellType) + '</span>';
-      html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
-      html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
-      html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
-      if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
-      html += '</div>';
-      if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
-      html += '</div>';
-    });
-  } else {
-    // === Filtered product list view ===
-    var color = catColors[prodFilter] || '#185FA5';
-    html += '<div class="content-header" style="border-left:4px solid ' + color + ';"><h2>' + escapeHtml(prodFilter) + '</h2><div class="desc">共 ' + filtered.length + ' 款获批产品</div></div>';
-
-    filtered.forEach(function(p) {
-      html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||color) + ';">';
-      html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
-      html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
-      html += '<div class="pc-meta">';
-      html += '<span class="pc-tag" style="background:' + (p.cellColor||color) + '20;color:' + (p.cellColor||color) + ';">' + escapeHtml(p.cellType) + '</span>';
-      html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
-      html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
-      html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
-      if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
-      html += '</div>';
-      if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
-      html += '</div>';
-    });
-  }
+    if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
+    html += '</div>';
+  });
 
   content.innerHTML = html;
   updateFloatButtons();
