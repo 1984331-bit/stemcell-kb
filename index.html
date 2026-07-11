@@ -3522,16 +3522,24 @@ var currentNewsTab = 'home';
 var currentPicksView = null; // null=main, 'archive'=list, number=issue index
 
 function switchNewsTab(tab) {
+  saveNavState();
   currentNewsTab = tab;
   pushHistory();
   renderNews();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateFloatButtons();
 }
 
 function renderNews() {
   var content = document.getElementById('content');
   var html = '';
 
-  html += '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>行业资讯精选</b></div>';
+  var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
+  html += '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'news\')">行业资讯精选</span>';
+  if (currentNewsTab !== 'home') {
+    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</b>';
+  }
+  html += '</div>';
   html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片查看详情。</div></div>';
 
   // 五个子板块的数据
@@ -3587,9 +3595,8 @@ function renderNews() {
     return;
   }
 
-  // === 子板块：返回 + 标题 + 列表 ===
+  // === 子板块：标题 + 列表 ===
   var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
-  html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="switchNewsTab(\'home\')">← 返回分类入口</button></div>';
 
   // 横向子板块切换条（保留，方便在子板块间快速跳转）
   html += '<div class="news-tabs">';
