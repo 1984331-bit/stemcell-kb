@@ -98,6 +98,67 @@ body {
 @media (max-width: 768px) {
   .disclaimer-bar { padding: 8px 14px; font-size: 11px; }
 }
+/* Copyright footer */
+.site-footer {
+  background: linear-gradient(135deg, #004D40 0%, #00695C 100%);
+  color: #E0F2F1;
+  padding: 20px 24px 16px;
+  margin-top: 24px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.site-footer .sf-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.site-footer .sf-left { flex: 1; min-width: 280px; }
+.site-footer .sf-right { min-width: 200px; text-align: right; }
+.site-footer .sf-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.site-footer .sf-copy {
+  color: #80CBC4;
+  font-size: 11px;
+  margin-top: 6px;
+}
+.site-footer .sf-notice {
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #B2DFDB;
+  line-height: 1.6;
+}
+.site-footer .sf-notice b { color: #fff; }
+.site-footer .sf-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+.site-footer .sf-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #E0F2F1;
+}
+.site-footer .sf-contact-item b { color: #fff; }
+.site-footer a { color: #4DB6AC; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+  .site-footer { padding: 16px 14px; }
+  .site-footer .sf-right { text-align: left; }
+  .site-footer .sf-contact { align-items: flex-start; }
+}
 /* Literature section search box */
 .lit-search-box {
   position: relative;
@@ -3850,6 +3911,66 @@ history.replaceState(getCurrentState(), '', buildHash(getCurrentState()));
 updateLayout('hub');
 updateBottomNav('hub');
 renderContent();
+
+// === Copyright protection ===
+// Disable right-click context menu
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  return false;
+});
+// Disable text selection (allow in input/textarea)
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  e.preventDefault();
+  return false;
+});
+// Disable copy
+document.addEventListener('copy', function(e) {
+  e.preventDefault();
+  return false;
+});
+// Disable common dev tools shortcuts (deters casual users)
+document.addEventListener('keydown', function(e) {
+  // F12
+  if (e.keyCode === 123) { e.preventDefault(); return false; }
+  // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+    e.preventDefault(); return false;
+  }
+  // Ctrl+U (view source)
+  if (e.ctrlKey && e.keyCode === 85) { e.preventDefault(); return false; }
+  // Ctrl+S (save page)
+  if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); return false; }
+});
+// Disable drag
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+    e.preventDefault(); return false;
+  }
+});
 </script>
+
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-left">
+      <div class="sf-title">🧬 间充质干细胞信息库 | MSC Knowledge Hub</div>
+      <div>基于 729 篇临床文献 · 19 个生理系统 · 138 类适应症 · 28 款全球获批MSC产品</div>
+      <div class="sf-notice">
+        <b>版权声明：</b>本网站所有内容（包括但不限于数据库结构、文献整理编排、行业分析报告、仪表盘图表设计、页面布局及源代码）均为原创，著作权归本平台所有。
+        未经书面授权，任何单位及个人不得以任何方式复制、转载、摘编、镜像、传播或用于商业目的。
+        经授权使用的内容应保留来源标注并链接至本站。如有侵权行为，将依法追究法律责任。
+      </div>
+      <div class="sf-copy">© 2025-2026 间充质干细胞信息库. All Rights Reserved. 保留所有权利.</div>
+    </div>
+    <div class="sf-right">
+      <div class="sf-contact">
+        <div class="sf-contact-item">💬 微信/QQ（同号）：<b>401848919</b></div>
+        <div class="sf-contact-item">📞 咨询电话：<b>15932929299</b>（杨博士）</div>
+        <div class="sf-contact-item">🌐 <a href="https://1984331-bit.github.io/stemcell-kb/" target="_blank">1984331-bit.github.io/stemcell-kb</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
