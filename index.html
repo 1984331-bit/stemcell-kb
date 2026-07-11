@@ -3695,13 +3695,11 @@ var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>获批产品名录</b></div>';
-  html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
 
   // Category counts
   var catCounts = {};
   PRODUCTS.forEach(function(p) {
     var cat = p.cellType || '其他';
-    // Group by main category
     if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
     else if (cat.indexOf('CRISPR') >= 0 || cat.indexOf('基因修饰') >= 0) cat = '基因修饰HSC';
     else if (cat.indexOf('iPSC') >= 0) cat = 'iPSC诱导多能干细胞';
@@ -3716,31 +3714,8 @@ function renderProducts() {
     'iPSC诱导多能干细胞': '#993C1D',
     '其他细胞治疗': '#185FA5'
   };
-  var catIcons = {
-    '间充质干细胞(MSC)': 'M',
-    '基因修饰HSC': 'G',
-    'iPSC诱导多能干细胞': 'i',
-    '其他细胞治疗': 'C'
-  };
 
-  // Category cards
-  html += '<div class="overview" style="margin-bottom:16px;">';
-  html += '<div class="overview-card' + (prodFilter==='all'?'':'') + '" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
-  html += '<div class="oc-count">' + PRODUCTS.length + '</div>';
-  html += '<div class="oc-name">全部产品</div>';
-  html += '<div class="oc-stats">点击查看全部</div>';
-  html += '</div>';
-  Object.keys(catCounts).forEach(function(cat) {
-    var color = catColors[cat] || '#666';
-    html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + '</div>';
-    html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-    html += '<div class="oc-stats">款产品 · 点击筛选</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  // Product list
+  // Get filtered products
   var filtered = PRODUCTS;
   if (prodFilter !== 'all') {
     filtered = PRODUCTS.filter(function(p) {
@@ -3753,24 +3728,62 @@ function renderProducts() {
     });
   }
 
-  if (prodFilter !== 'all') {
-    html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="filterProducts(\'all\')">← 返回全部产品</button></div>';
-  }
+  if (prodFilter === 'all') {
+    // === Category selection view ===
+    html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击分类卡片查看详情。</div></div>';
 
-  filtered.forEach(function(p) {
-    html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||'#185FA5') + ';">';
-    html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
-    html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
-    html += '<div class="pc-meta">';
-    html += '<span class="pc-tag" style="background:' + (p.cellColor||'#185FA5') + '20;color:' + (p.cellColor||'#185FA5') + ';">' + escapeHtml(p.cellType) + '</span>';
-    html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
-    html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
-    html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
-    if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
+    // Category cards
+    html += '<div class="overview" style="margin-bottom:20px;">';
+    html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
+    html += '<div class="oc-count">' + PRODUCTS.length + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
+    html += '<div class="oc-name">全部产品</div>';
     html += '</div>';
-    if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
+    Object.keys(catCounts).forEach(function(cat) {
+      var color = catColors[cat] || '#666';
+      html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
+      html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
+      html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
+      html += '</div>';
+    });
     html += '</div>';
-  });
+
+    // All products list
+    html += '<div class="hub-section-title" style="margin-bottom:12px;">全部产品列表</div>';
+    filtered.forEach(function(p) {
+      html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||'#185FA5') + ';">';
+      html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
+      html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
+      html += '<div class="pc-meta">';
+      html += '<span class="pc-tag" style="background:' + (p.cellColor||'#185FA5') + '20;color:' + (p.cellColor||'#185FA5') + ';">' + escapeHtml(p.cellType) + '</span>';
+      html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
+      html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
+      html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
+      if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
+      html += '</div>';
+      if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
+      html += '</div>';
+    });
+  } else {
+    // === Filtered product list view ===
+    var color = catColors[prodFilter] || '#185FA5';
+    html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="filterProducts(\'all\')">← 返回产品分类</button></div>';
+    html += '<div class="content-header" style="border-left:4px solid ' + color + ';"><h2>' + escapeHtml(prodFilter) + '</h2><div class="desc">共 ' + filtered.length + ' 款获批产品</div></div>';
+
+    filtered.forEach(function(p) {
+      html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||color) + ';">';
+      html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
+      html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
+      html += '<div class="pc-meta">';
+      html += '<span class="pc-tag" style="background:' + (p.cellColor||color) + '20;color:' + (p.cellColor||color) + ';">' + escapeHtml(p.cellType) + '</span>';
+      html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
+      html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
+      html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
+      if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
+      html += '</div>';
+      if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
+      html += '</div>';
+    });
+  }
 
   content.innerHTML = html;
   updateFloatButtons();
