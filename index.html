@@ -1418,10 +1418,36 @@ function toggleSort(mode) {
 }
 
 function toggleSystem(headerEl) {
-  const indList = headerEl.nextElementSibling;
-  const isOpen = indList.style.display !== 'none';
-  indList.style.display = isOpen ? 'none' : 'block';
-  headerEl.classList.toggle('expanded', !isOpen);
+  var indList = headerEl.nextElementSibling;
+  var isOpen = indList.style.display !== 'none' && headerEl.classList.contains('expanded');
+  var sysName = headerEl.querySelector('.sys-name') ? headerEl.querySelector('.sys-name').textContent : '';
+
+  if (isOpen) {
+    // Already open — collapse only
+    indList.style.display = 'none';
+    headerEl.classList.remove('expanded', 'active');
+  } else {
+    // Collapse all others first
+    document.querySelectorAll('.sys-header').forEach(function(el) {
+      el.classList.remove('expanded', 'active');
+      if (el.nextElementSibling) el.nextElementSibling.style.display = 'none';
+    });
+    // Expand this one
+    indList.style.display = 'block';
+    headerEl.classList.add('expanded', 'active');
+    // Also navigate to this system's papers for immediate visual feedback
+    if (sysName) {
+      saveNavState();
+      currentFilter = { system: sysName, indication: null };
+      searchQuery = '';
+      var si = document.getElementById('searchInput');
+      if (si) si.value = '';
+      currentPage = 1;
+      pushHistory();
+      renderContent();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 }
 
 function goHome() {
