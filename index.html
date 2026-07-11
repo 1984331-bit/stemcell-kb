@@ -3544,11 +3544,11 @@ function renderNews() {
 
   // 五个子板块的数据
   var tabs = [
-    {id:'flash',     label:'快讯',       count: NEWS_FLASH.length,         color:'#2E7D32', desc:'每日自动化摘要 · 临床突破',  hint:'最近更新于今日'},
-    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,  color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破', hint:'Cell/Nature 系列最新进展'},
-    {id:'report',    label:'行业报告',     count: INDUSTRY_REPORTS.length,    color:'#1565C0', desc:'市场研报 · 管线分析 · 白皮书', hint:'Frost & Sullivan / 动脉网'},
-    {id:'policy',    label:'地方政策',     count: LOCAL_POLICY.length,        color:'#E65100', desc:'省市细胞治疗产业政策',      hint:'点击查看原文'},
-    {id:'funding',   label:'融资趋势',     count: FUNDING_TRENDS.length,      color:'#00838F', desc:'投融资事件 · 管线布局',     hint:'¥/$/最新轮次'}
+    {id:'flash',     label:'快讯',       count: NEWS_FLASH.length,         color:'#2E7D32', desc:'每日自动化摘要 · 临床突破',       hint:'最近更新于今日', subtitle:'每日自动化摘要 · 临床突破 · 政策动态 · 来源：每日自动化PubMed检索'},
+    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,  color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破',     hint:'Cell/Nature 系列最新进展', subtitle:'MSC基础 · 化学重编程 · 类器官 · 基因编辑 · 来源：Cell/Nature/Science'},
+    {id:'report',    label:'行业报告',     count: INDUSTRY_REPORTS.length,    color:'#1565C0', desc:'市场研报 · 管线分析 · 白皮书', hint:'Frost & Sullivan / 动脉网',  subtitle:'市场研报 · 管线分析 · 产业白皮书 · 来源：Frost & Sullivan / 动脉网 / Citeline'},
+    {id:'policy',    label:'地方政策',     count: LOCAL_POLICY.length,        color:'#E65100', desc:'省市细胞治疗产业政策',         hint:'点击查看原文',             subtitle:'深圳 · 北京 · 上海 · 广州 · 江苏 · 海南等地细胞治疗产业扶持政策'},
+    {id:'funding',   label:'融资趋势',     count: FUNDING_TRENDS.length,      color:'#00838F', desc:'投融资事件 · 管线布局',         hint:'¥/$/最新轮次',             subtitle:'投融资事件 · MSC/CGT管线布局 · 美元/人民币轮次追踪'}
   ];
 
   // === 主页：5 个分类入口卡片（与监管/产品板块风格一致） ===
@@ -3595,32 +3595,20 @@ function renderNews() {
     return;
   }
 
-  // === 子板块：标题 + 列表 ===
+  // === 子板块：动态标题 + 列表 ===
   var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
 
-  // 横向子板块切换条（保留，方便在子板块间快速跳转）
-  html += '<div class="news-tabs">';
-  tabs.forEach(function(t) {
-    var active = t.id === currentNewsTab ? ' active' : '';
-    html += '<button class="news-tab' + active + '" onclick="switchNewsTab(\'' + t.id + '\')">';
-    html += '<span class="nt-label">' + t.label + '</span>';
-    html += '<span class="nt-desc">' + t.count + ' 条 · ' + t.desc + '</span>';
-    html += '</button>';
-  });
+  // 标题区：使用当前子分类名 + 对应描述
+  html += '<div class="content-header" style="border-left:4px solid ' + currentTab.color + ';">';
+  html += '<h2>' + escapeHtml(currentTab.label) + '</h2>';
+  html += '<div class="desc">' + escapeHtml(currentTab.subtitle) + '</div>';
   html += '</div>';
 
   // 渲染当前子板块的列表
   var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
   var items = dataMap[currentNewsTab] || [];
   var tc = currentTab.color;
-  var tabDescs = {
-    flash:'临床突破 · 政策动态 · 来源：每日自动化PubMed检索',
-    frontier:'MSC基础 · 化学重编程 · 类器官 · 基因编辑',
-    report:'市场研报 · 管线分析 · 产业白皮书',
-    policy:'深圳 · 北京 · 上海 · 广州 · 江苏 · 海南',
-    funding:'投融资事件 · 管线布局追踪'
-  };
-  html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条 · ' + (tabDescs[currentNewsTab]||'') + '</p>';
+  html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条</p>';
 
   items.forEach(function(n) {
     var hasLink = n.url ? true : false;
