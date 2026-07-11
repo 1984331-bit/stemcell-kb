@@ -3649,7 +3649,11 @@ function togglePickDetail(i) {
 var regFilter = 'all';
 function renderRegulations() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>监管政策汇编</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'regulations\')">监管政策汇编</span>';
+  if (regFilter !== 'all') {
+    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
+  }
+  html += '</div>';
   html += '<div class="content-header"><h2>监管政策汇编</h2><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。</div></div>';
 
   // Category counts
@@ -3687,7 +3691,6 @@ function renderRegulations() {
   var filtered = REGULATIONS;
   if (regFilter !== 'all') {
     filtered = REGULATIONS.filter(function(r) { return r.category === regFilter; });
-    html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="filterRegs(\'all\')">← 返回全部文件</button></div>';
   }
 
   filtered.forEach(function(r) {
@@ -3720,7 +3723,11 @@ function filterRegs(cat) {
 var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>获批产品名录</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'products\')">获批产品名录</span>';
+  if (prodFilter !== 'all') {
+    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(prodFilter) + '</b>';
+  }
+  html += '</div>';
 
   // Category counts
   var catCounts = {};
