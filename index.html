@@ -391,36 +391,11 @@ body {
   color: #fff;
   border-color: var(--primary);
 }
-/* Floating home button */
-.float-home {
-  position: fixed;
-  bottom: 80px;
-  left: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.float-home:hover {
-  background: var(--primary-dark);
-  transform: scale(1.08);
-}
-.float-home.show { display: flex; }
 /* Floating back button */
 .float-back {
   position: fixed;
   bottom: 20px;
-  right: 84px;
+  right: 20px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -915,14 +890,11 @@ body {
   .breadcrumb b { font-size: 14px; }
   /* Mobile: float-back always visible when there's history */
   .float-back {
-    bottom: 20px;
-    right: 84px;
+    bottom: 60px;
+    right: 20px;
   }
-  .float-home {
-    bottom: 20px;
+  .mobile-toggle {
     left: 20px;
-    width: 48px;
-    height: 48px;
   }
 }
 /* === Hub Homepage === */
@@ -1738,7 +1710,6 @@ body { padding-bottom: 56px; }
 @media (max-width: 768px) {
   .hub-stats { grid-template-columns: repeat(2, 1fr); }
   .float-back { bottom: 60px; }
-  .float-home { bottom: 60px; }
   .mobile-toggle { bottom: 60px; }
 }
 /* Scrollbar */
@@ -1921,7 +1892,6 @@ body { padding-bottom: 56px; }
 
 <button class="mobile-toggle" onclick="openSidebar()">☰</button>
 <button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
-<button class="float-home" id="floatHome" onclick="goHome()" title="返回首页">🏠</button>
 
 <nav class="bottom-nav">
   <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon">🏠</span>首页</button>
@@ -2069,13 +2039,8 @@ function goBack() {
 }
 
 function updateFloatButtons() {
-  var fh = document.getElementById('floatHome');
   var fb = document.getElementById('floatBack');
   var hasNav = searchQuery || currentFilter.system || currentSection !== 'hub';
-  if (fh) {
-    if (hasNav) fh.classList.add('show');
-    else fh.classList.remove('show');
-  }
   if (fb) {
     if (navHistory.length > 0) fb.classList.add('show');
     else fb.classList.remove('show');
