@@ -3140,6 +3140,7 @@ function switchSection(section) {
   currentPage = 1;
   prodFilter = 'all';
   regFilter = 'all';
+  if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
   if (typeof currentPicksView !== 'undefined') currentPicksView = null;
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active', 'expanded'));
@@ -3545,7 +3546,7 @@ function renderNews() {
   var html = '';
 
   var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  html += '<div class="breadcrumb"><span class="crumb-link" data-section="hub" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
   if (currentNewsTab !== 'home') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</b>';
   }
