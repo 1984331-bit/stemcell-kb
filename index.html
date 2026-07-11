@@ -384,33 +384,7 @@ body {
   color: #fff;
   border-color: var(--primary);
 }
-/* Floating back button */
-.float-back {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.float-back:hover {
-  background: var(--primary);
-  color: #fff;
-  transform: scale(1.08);
-}
-.float-back.show { display: flex; }
-.content-header {
+/* content-header */
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -432,6 +406,14 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
   margin-bottom: 16px;
+}
+.content-header {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--primary);
 }
 .overview-card {
   background: var(--card-bg);
@@ -881,11 +863,6 @@ body {
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
-  /* Mobile: float-back always visible when there's history */
-  .float-back {
-    bottom: 60px;
-    right: 20px;
-  }
   .mobile-toggle {
     left: 20px;
   }
@@ -1707,7 +1684,6 @@ body { padding-bottom: 56px; }
 /* Mobile adjustments for hub */
 @media (max-width: 768px) {
   .hub-stats { grid-template-columns: repeat(2, 1fr); }
-  .float-back { bottom: 60px; }
   .mobile-toggle { bottom: 60px; }
 }
 /* Scrollbar */
@@ -1888,7 +1864,6 @@ body { padding-bottom: 56px; }
 </div>
 
 <button class="mobile-toggle" onclick="openSidebar()">☰</button>
-<button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
 
 <nav class="bottom-nav">
   <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon">🏠</span>首页</button>
@@ -2036,12 +2011,6 @@ function goBack() {
 }
 
 function updateFloatButtons() {
-  var fb = document.getElementById('floatBack');
-  var hasNav = searchQuery || currentFilter.system || currentSection !== 'hub';
-  if (fb) {
-    if (navHistory.length > 0) fb.classList.add('show');
-    else fb.classList.remove('show');
-  }
 }
 
 function getSortedData(data) {
@@ -3734,10 +3703,6 @@ function renderProducts() {
 
     // Category cards
     html += '<div class="overview" style="margin-bottom:20px;">';
-    html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
-    html += '<div class="oc-count">' + PRODUCTS.length + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
-    html += '<div class="oc-name">全部产品</div>';
-    html += '</div>';
     Object.keys(catCounts).forEach(function(cat) {
       var color = catColors[cat] || '#666';
       html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
@@ -3748,7 +3713,7 @@ function renderProducts() {
     html += '</div>';
 
     // All products list
-    html += '<div class="hub-section-title" style="margin-bottom:12px;">全部产品列表</div>';
+    html += '<div class="hub-section-title" style="margin-bottom:12px;">全部产品列表（' + PRODUCTS.length + '款）</div>';
     filtered.forEach(function(p) {
       html += '<div class="prod-card" style="border-left-color:' + (p.cellColor||'#185FA5') + ';">';
       html += '<div class="pc-name">' + escapeHtml(p.name) + '</div>';
@@ -3766,7 +3731,6 @@ function renderProducts() {
   } else {
     // === Filtered product list view ===
     var color = catColors[prodFilter] || '#185FA5';
-    html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="filterProducts(\'all\')">← 返回产品分类</button></div>';
     html += '<div class="content-header" style="border-left:4px solid ' + color + ';"><h2>' + escapeHtml(prodFilter) + '</h2><div class="desc">共 ' + filtered.length + ' 款获批产品</div></div>';
 
     filtered.forEach(function(p) {
