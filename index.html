@@ -1039,32 +1039,273 @@ body { padding-bottom: 56px; }
 .dash-year-row {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
-  height: 120px;
+  gap: 6px;
+  height: 200px;
   padding-top: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #E0E0E0;
 }
 .dash-year-col {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   gap: 4px;
+  height: 100%;
+  position: relative;
+}
+.dash-year-col:hover .dash-year-bar {
+  opacity: 0.8;
+  transform: scaleX(1.08);
 }
 .dash-year-bar {
-  width: 100%;
-  max-width: 28px;
-  border-radius: 3px 3px 0 0;
-  transition: height 0.6s ease;
-  min-height: 4px;
+  width: 80%;
+  max-width: 36px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.6s ease, transform 0.2s, opacity 0.2s;
+  min-height: 6px;
+  position: relative;
+}
+.dash-year-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px 4px 0 0;
 }
 .dash-year-num {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: #00695C;
+  position: absolute;
+  top: -22px;
+  white-space: nowrap;
 }
 .dash-year-label {
+  font-size: 11px;
+  color: #78909C;
+  font-weight: 500;
+}
+.dash-year-note {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: #FFF3E0;
+  border-radius: 6px;
+  border-left: 3px solid #FF9800;
+  font-size: 11px;
+  color: #E65100;
+  line-height: 1.5;
+}
+/* Market growth chart */
+.dash-market-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 160px;
+  padding: 10px 0 4px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.dash-market-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+  position: relative;
+}
+.dash-market-bar {
+  width: 70%;
+  max-width: 48px;
+  border-radius: 4px 4px 0 0;
+  min-height: 8px;
+  position: relative;
+  transition: height 0.6s ease;
+}
+.dash-market-bar .dm-bar-val {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.dash-market-label {
+  font-size: 10px;
+  color: #78909C;
+  text-align: center;
+  line-height: 1.3;
+}
+.dash-market-cagr {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #E0F2F1;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #004D40;
+  line-height: 1.6;
+}
+/* Funding table */
+.dash-fund-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  margin-top: 8px;
+}
+.dash-fund-table th {
+  background: #00695C;
+  color: #fff;
+  padding: 6px 8px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 10px;
+}
+.dash-fund-table th:first-child { border-radius: 4px 0 0 0; }
+.dash-fund-table th:last-child { border-radius: 0 4px 0 0; text-align: right; }
+.dash-fund-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #ECEFF1;
+  color: #37474F;
+}
+.dash-fund-table td:last-child { text-align: right; font-weight: 700; color: #00695C; }
+.dash-fund-table tr:nth-child(even) td { background: #FAFAFA; }
+.dash-fund-table .dff-company { font-weight: 600; color: #263238; }
+.dash-fund-table .dff-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+/* Quarterly sales chart */
+.dash-sales-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 140px;
+  padding: 10px 0 4px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.dash-sales-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+  position: relative;
+}
+.dash-sales-bar {
+  width: 60%;
+  max-width: 40px;
+  border-radius: 4px 4px 0 0;
+  min-height: 6px;
+  transition: height 0.6s ease;
+}
+.dash-sales-bar .dsb-val {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  color: #00695C;
+  white-space: nowrap;
+}
+.dash-sales-label {
+  font-size: 10px;
+  color: #78909C;
+  text-align: center;
+  line-height: 1.3;
+}
+.dash-sales-growth {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+}
+/* Trial activity */
+.dash-trial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+.dash-trial-stat {
+  background: #F5F7FA;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  border-top: 3px solid #00695C;
+}
+.dash-trial-stat .dts-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #00695C;
+  line-height: 1.1;
+}
+.dash-trial-stat .dts-label {
+  font-size: 10px;
+  color: #607D8B;
+  margin-top: 2px;
+}
+.dash-trial-stat .dts-sub {
   font-size: 9px;
   color: #90A4AE;
+  margin-top: 2px;
+}
+/* Exosome cards */
+.dash-exo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+.dash-exo-card {
+  background: #F5F7FA;
+  border-radius: 8px;
+  padding: 8px 10px;
+  border-left: 3px solid #7B1FA2;
+}
+.dash-exo-card .dec-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4A148C;
+}
+.dash-exo-card .dec-amount {
+  font-size: 14px;
+  font-weight: 800;
+  color: #7B1FA2;
+  margin-top: 2px;
+}
+.dash-exo-card .dec-desc {
+  font-size: 10px;
+  color: #607D8B;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+/* Section divider */
+.dash-section-divider {
+  margin: 20px 0 12px;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, #004D40, #00695C);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+@media (max-width: 768px) {
+  .dash-exo-grid { grid-template-columns: 1fr; }
 }
 /* Donut chart */
 .dash-donut-wrap {
@@ -2888,7 +3129,7 @@ function renderMscDashboard() {
 
   // Year trend
   h += '<div class="dash-card">';
-  h += '<div class="dash-card-title">年度文献发表趋势 (2017-2026)</div>';
+  h += '<div class="dash-card-title">年度临床试验/案例报道趋势 <span style="font-size:11px;color:#FF9800;font-weight:400">(非基础研究文献)</span></div>';
   h += '<div class="dash-year-row">';
   years.forEach(function(y, i){
     var val = yearVals[i];
@@ -2896,12 +3137,12 @@ function renderMscDashboard() {
     var color = i >= 7 ? '#00695C' : (i >= 4 ? '#4DB6AC' : '#B2DFDB');
     h += '<div class="dash-year-col">';
     h += '<div class="dash-year-num">' + val + '</div>';
-    h += '<div class="dash-year-bar" style="height:' + Math.max(pct, 5) + '%;background:' + color + '"></div>';
+    h += '<div class="dash-year-bar" style="height:' + Math.max(pct, 4) + '%;background:' + color + '"></div>';
     h += '<div class="dash-year-label">\'' + y.slice(2) + '</div>';
     h += '</div>';
   });
   h += '</div>';
-  h += '<div style="margin-top:8px;font-size:11px;color:#607D8B;line-height:1.5">2025年发文量达<span style="color:#00695C;font-weight:700">123篇</span>创历史新高，2026年截至7月已有<span style="color:#00695C;font-weight:700">70篇</span>。MSC研究热度持续攀升。</div>';
+  h += '<div class="dash-year-note">⚠️ 以上数据仅统计<b>临床试验</b>与<b>案例报道</b>类文献，不含基础研究类文献（基础研究文献数量为临床文献的数十倍）。2025年发文量达<span style="color:#00695C;font-weight:700">123篇</span>创历史新高，2026年截至7月已有<span style="color:#00695C;font-weight:700">70篇</span>。</div>';
   h += '</div>';
 
   h += '</div>'; // end dash-grid
@@ -2981,6 +3222,144 @@ function renderMscDashboard() {
   h += '随着ISCT 2025新标准将MSC重新定义为"间充质基质细胞"，行业正从干细胞分化范式转向<b style="color:#00695C">药物信号细胞</b>的旁分泌/免疫调节范式。';
   h += '</div>';
   h += '</div>';
+
+  // ===== Section 2: Industry Market & Financing =====
+  h += '<div class="dash-section-divider">📈 市场规模与产业资本</div>';
+
+  h += '<div class="dash-grid">';
+
+  // Market size forecast
+  h += '<div class="dash-card">';
+  h += '<div class="dash-card-title">全球MSC市场规模预测 (亿美元)</div>';
+  var marketData = [
+    {year:'2025', val:'38.1', pct:28},
+    {year:'2026', val:'42.9', pct:32},
+    {year:'2028', val:'54.8', pct:42},
+    {year:'2030', val:'82.3', pct:63},
+    {year:'2032', val:'123.6', pct:95},
+    {year:'2035', val:'154.2', pct:100}
+  ];
+  h += '<div class="dash-market-chart">';
+  marketData.forEach(function(m, i){
+    var colors = ['#B2DFDB','#4DB6AC','#26A69A','#00897B','#00695C','#004D40'];
+    h += '<div class="dash-market-col">';
+    h += '<div class="dash-market-bar" style="height:' + m.pct + '%;background:' + colors[i] + '"><span class="dm-bar-val">$' + m.val + 'B</span></div>';
+    h += '<div class="dash-market-label">' + m.year + '</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  h += '<div class="dash-market-cagr">CAGR <b>12.6%</b>（2025-2026）| 预计2035年达 <b>$154.2亿</b><br>北美占43.4%，亚太增速最快（CAGR 15.63%）<br>来源：The Business Research Company / Market Research Future</div>';
+  h += '</div>';
+
+  // CGT sector financing
+  h += '<div class="dash-card">';
+  h += '<div class="dash-card-title">CGT行业资本动向 (2025年度)</div>';
+  h += '<div style="display:flex;gap:12px;align-items:center;margin-top:8px">';
+  h += '<div style="text-align:center;flex-shrink:0"><div style="font-size:32px;font-weight:900;color:#00695C">$111<span style="font-size:16px">亿</span></div><div style="font-size:10px;color:#607D8B">CGT行业总融资</div></div>';
+  h += '<div style="flex:1;font-size:11px;color:#37474F;line-height:1.6">';
+  h += '• <b>216轮</b>融资事件，占生物科技风投总额<b>18%</b><br>';
+  h += '• 亚太临床试验数首次超越北美（<b>990</b> vs <b>916</b>）<br>';
+  h += '• 中国试验数增长<b>20%</b>（596→716）<br>';
+  h += '• 来源：<a href="https://alliancerm.org/" target="_blank" style="color:#00695C;text-decoration:none">Alliance for Regenerative Medicine</a> 2026年报';
+  h += '</div>';
+  h += '</div>';
+  h += '</div>';
+
+  h += '</div>'; // end dash-grid
+
+  // Key company funding table
+  h += '<div class="dash-grid">';
+  h += '<div class="dash-card" style="grid-column:1/-1">';
+  h += '<div class="dash-card-title">MSC重点企业融资动态 (2025-2026)</div>';
+  h += '<div style="overflow-x:auto"><table class="dash-fund-table">';
+  h += '<tr><th>企业</th><th>时间</th><th>轮次</th><th>金额</th><th>核心方向</th><th>来源</th></tr>';
+  var fundings = [
+    {company:'MEDIPOST (韩国)', date:'2026.01', round:'战略融资', amount:'$1.4亿', desc:'脐带血MSC·膝关节OA美国III期', tag:'海外', tagColor:'#1565C0', url:'https://www.businesswire.com/news/home/20260109323917/en/'},
+    {company:'Mesoblast (美国)', date:'2025.12', round:'非稀释性融资', amount:'$1.25亿', desc:'Ryoncil商业化·战略灵活度', tag:'海外', tagColor:'#1565C0', url:'https://investorsmedia.mesoblast.com/'},
+    {company:'赛隽生物 (广州)', date:'2026.03', round:'Pre-C轮', amount:'>¥1亿', desc:'BM-MSC·肝衰竭/脑卒中/肌少症', tag:'国内', tagColor:'#2E7D32', url:'https://new.qq.com/rain/a/20260324A02ZFN00'},
+    {company:'华龛生物 (北京)', date:'2025.09', round:'B+轮', amount:'数亿元', desc:'3D细胞智造平台·微载体', tag:'国内', tagColor:'#2E7D32', url:'https://finance.sina.cn/2025-09-15/detail-infqpxhk9787970.d.html'},
+    {company:'Cellcolabs (瑞典)', date:'2025', round:'累计融资', amount:'$3700万', desc:'MSC工业化生产·成本降低90%', tag:'海外', tagColor:'#1565C0', url:'https://www.cellcolabs.com/press-room/global-leading-stem-cell-producer-cellcolabs-secures-usd-12m-to-drive-technical-development'},
+    {company:'StemInov (法国)', date:'2025.09', round:'融资轮', amount:'€1060万', desc:'WJ-MSC·重症肺炎/脓毒症I/II期', tag:'海外', tagColor:'#1565C0', url:'https://www.steminov.com/copie-de-investors'},
+    {company:'先博生物 (深圳)', date:'2026.06', round:'B轮', amount:'未披露', desc:'NK/CAR-T·免疫细胞治疗', tag:'国内', tagColor:'#2E7D32', url:'https://www.qcc.com/cproductinfo/52d9e8f7ffb3f3843f07b2dce7bad576'},
+    {company:'恩泽康泰 (北京)', date:'2025.11', round:'B轮', amount:'~¥1亿', desc:'MSC外泌体·再生疗法', tag:'国内', tagColor:'#2E7D32', url:'https://bydrug.pharmcube.com/news/detail/650d371e0449d97961ebfb8d1e1a27a5'}
+  ];
+  fundings.forEach(function(f){
+    h += '<tr>';
+    h += '<td class="dff-company">' + f.company + '<span class="dff-tag" style="background:' + f.tagColor + '15;color:' + f.tagColor + '">' + f.tag + '</span></td>';
+    h += '<td>' + f.date + '</td>';
+    h += '<td>' + f.round + '</td>';
+    h += '<td>' + f.amount + '</td>';
+    h += '<td style="font-size:10px">' + f.desc + '</td>';
+    h += '<td style="text-align:right"><a href="' + f.url + '" target="_blank" style="color:#00695C;text-decoration:none;font-size:10px">链接↗</a></td>';
+    h += '</tr>';
+  });
+  h += '</table></div>';
+  h += '<div style="margin-top:8px;font-size:11px;color:#607D8B;line-height:1.5">818号令施行前后，中国MSC企业融资明显加速。华龛生物3D微载体技术助力睿铂生获批，标志着上下游产业链协同成熟。</div>';
+  h += '</div>';
+  h += '</div>'; // end dash-grid
+
+  // ===== Section 3: Commercial & Clinical =====
+  h += '<div class="dash-section-divider">💊 商业化进展与临床活跃度</div>';
+
+  h += '<div class="dash-grid">';
+
+  // Ryoncil quarterly sales
+  h += '<div class="dash-card">';
+  h += '<div class="dash-card-title">Ryoncil® (remestemcel-L) 季度销售额</div>';
+  var ryoncilData = [
+    {q:'Q2 FY25\n(3-6月)', val:13.2, pct:38, growth:'', growthColor:''},
+    {q:'Q3 FY25\n(7-9月)', val:22.0, pct:63, growth:'+67%', growthColor:'#2E7D32'},
+    {q:'Q4 FY25\n(10-12月)', val:35.1, pct:100, growth:'+60%', growthColor:'#2E7D32'}
+  ];
+  h += '<div class="dash-sales-row">';
+  ryoncilData.forEach(function(r, i){
+    var c = ['#4DB6AC','#00897B','#00695C'];
+    h += '<div class="dash-sales-col">';
+    if (r.growth) { h += '<span class="dash-sales-growth" style="background:' + r.growthColor + '15;color:' + r.growthColor + '">' + r.growth + '</span>'; }
+    h += '<div class="dash-sales-bar" style="height:' + r.pct + '%;background:' + c[i] + '"><span class="dsb-val">$' + r.val + 'M</span></div>';
+    h += '<div class="dash-sales-label">' + r.q + '</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  h += '<div style="margin-top:10px;font-size:11px;color:#607D8B;line-height:1.5">';
+  h += 'FDA首个获批MSC产品，Q4单季<b style="color:#00695C">$3510万</b>，环比增长60%。<br>';
+  h += '已覆盖45家优先移植中心（占美国儿科移植80%），成人SR-aGVHD试验推进中（市场扩大3倍）。<br>';
+  h += '来源：<a href="https://investorsmedia.mesoblast.com/static-files/07c28731-dbe2-49ef-b9da-3319b9554c00" target="_blank" style="color:#00695C;text-decoration:none">Mesoblast 2026.01.08公告</a>';
+  h += '</div>';
+  h += '</div>';
+
+  // Global clinical trial activity
+  h += '<div class="dash-card">';
+  h += '<div class="dash-card-title">全球MSC临床试验活跃度</div>';
+  h += '<div class="dash-trial-grid">';
+  h += '<div class="dash-trial-stat"><div class="dts-num">1,100+</div><div class="dts-label">ClinicalTrials.gov</div><div class="dts-sub">活跃MSC试验</div></div>';
+  h += '<div class="dash-trial-stat" style="border-top-color:#FF7043"><div class="dts-num" style="color:#FF7043">89</div><div class="dts-label">2025上半年</div><div class="dts-sub">新增MSC注册</div></div>';
+  h += '<div class="dash-trial-stat" style="border-top-color:#5C6BC0"><div class="dts-num" style="color:#5C6BC0">990</div><div class="dts-label">亚太试验数</div><div class="dts-sub">首次超越北美</div></div>';
+  h += '<div class="dash-trial-stat" style="border-top-color:#2E7D32"><div class="dts-num" style="color:#2E7D32">716</div><div class="dts-label">中国试验</div><div class="dts-sub">同比+20%</div></div>';
+  h += '</div>';
+  h += '<div style="margin-top:8px;font-size:11px;color:#607D8B;line-height:1.5">2025年亚太MSC临床试验数首次超越北美，中国以20%增速领跑全球。来源：ARM 2026年报 / ClinicalTrials.gov</div>';
+  h += '</div>';
+
+  h += '</div>'; // end dash-grid
+
+  // ===== Section 4: Emerging Tracks =====
+  h += '<div class="dash-section-divider">🧬 新兴赛道：MSC外泌体/EV疗法</div>';
+
+  h += '<div class="dash-grid">';
+  h += '<div class="dash-card" style="grid-column:1/-1">';
+  h += '<div class="dash-card-title">MSC外泌体企业融资动态</div>';
+  h += '<div class="dash-exo-grid">';
+  h += '<div class="dash-exo-card"><div class="dec-name">EVerZom (法国)</div><div class="dec-amount">€1000万</div><div class="dec-desc">MSC外泌体+水凝胶(EVerGel™)，治疗克罗恩病肛瘘，2026年进入临床试验。Alofisel退市后的市场填补者。</div></div>';
+  h += '<div class="dash-exo-card"><div class="dec-name">PranaX (美国)</div><div class="dec-amount">$1700万 A轮</div><div class="dec-desc">干细胞来源外泌体再生生物制剂，2026.01超额认购完成。</div></div>';
+  h += '<div class="dash-exo-card"><div class="dec-name">恩泽康泰 (北京)</div><div class="dec-amount">~¥1亿 B轮</div><div class="dec-desc">国内外泌体领军企业，首个获FDA DMF II型原料药备案+国际INCI备案，GMP车间单批次500L。</div></div>';
+  h += '<div class="dash-exo-card"><div class="dec-name">艾思曼生物 (张江)</div><div class="dec-amount">数百万美元种子轮</div><div class="dec-desc">MSC外泌体抗衰/再生，2026年计划提交IND，布局韩国/东南亚/中东出海。</div></div>';
+  h += '</div>';
+  h += '<div style="margin-top:10px;font-size:11px;color:#607D8B;line-height:1.6">';
+  h += 'MSC外泌体/EV疗法正成为行业新风口——无需细胞存活即可发挥旁分泌效应，规避了活细胞疗法的冷冻储存和运输难题。2025年CDE首次明确"外泌体作为生物创新药审批"路径。';
+  h += '<br>来源：<a href="https://www.chateic.com/articles/everzom-raises-10-million-to-advance-exosome-biotherapies-and-scale-gmp-production" target="_blank" style="color:#00695C;text-decoration:none">Chateic</a> · <a href="https://www.cphi.cn/news/show-365759.html" target="_blank" style="color:#00695C;text-decoration:none">CPHI</a> · <a href="https://bydrug.pharmcube.com/news/detail/650d371e0449d97961ebfb8d1e1a27a5" target="_blank" style="color:#00695C;text-decoration:none">药立方</a>';
+  h += '</div>';
+  h += '</div>';
+  h += '</div>'; // end dash-grid
 
   h += '</div>'; // end dash-body
   h += '</div>'; // end dash-board
