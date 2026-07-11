@@ -3568,7 +3568,7 @@ function renderNews() {
     html += '<div class="overview" style="margin-bottom:16px;">';
     tabs.forEach(function(t) {
       html += '<div class="overview-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
-      html += '<div class="oc-count" style="color:' + t.color + ';">' + t.count + '</div>';
+      html += '<div class="oc-count" style="color:' + t.color + ';">' + t.count + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
       html += '<div class="oc-name">' + t.label + '</div>';
       html += '<div class="oc-stats">' + t.desc + ' · 点击查看</div>';
       html += '</div>';
