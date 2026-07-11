@@ -384,7 +384,34 @@ body {
   color: #fff;
   border-color: var(--primary);
 }
+/* Floating back button */
+.float-back {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.float-back:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.08);
+}
+.float-back.show { display: flex; }
 /* content-header */
+.content-header {
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -863,6 +890,11 @@ body {
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
+  /* Mobile: float-back above bottom nav */
+  .float-back {
+    bottom: 60px;
+    right: 20px;
+  }
   .mobile-toggle {
     left: 20px;
   }
@@ -1684,6 +1716,7 @@ body { padding-bottom: 56px; }
 /* Mobile adjustments for hub */
 @media (max-width: 768px) {
   .hub-stats { grid-template-columns: repeat(2, 1fr); }
+  .float-back { bottom: 60px; }
   .mobile-toggle { bottom: 60px; }
 }
 /* Scrollbar */
@@ -1864,6 +1897,7 @@ body { padding-bottom: 56px; }
 </div>
 
 <button class="mobile-toggle" onclick="openSidebar()">☰</button>
+<button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
 
 <nav class="bottom-nav">
   <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon">🏠</span>首页</button>
@@ -2011,6 +2045,11 @@ function goBack() {
 }
 
 function updateFloatButtons() {
+  var fb = document.getElementById('floatBack');
+  if (fb) {
+    if (navHistory.length > 0) fb.classList.add('show');
+    else fb.classList.remove('show');
+  }
 }
 
 function getSortedData(data) {
