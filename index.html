@@ -3129,6 +3129,7 @@ function updateBottomNav(section) {
 function updateLayout(section) {
   var container = document.querySelector('.container');
   var mobileToggle = document.querySelector('.mobile-toggle');
+  var disclaimer = document.querySelector('.disclaimer-bar');
   if (section === 'literature') {
     if (container) container.classList.remove('no-sidebar');
     if (mobileToggle) mobileToggle.style.display = '';
@@ -3136,6 +3137,7 @@ function updateLayout(section) {
     if (container) container.classList.add('no-sidebar');
     if (mobileToggle) mobileToggle.style.display = 'none';
   }
+  if (disclaimer) disclaimer.style.display = (section === 'hub') ? '' : 'none';
 }
 
 // === MSC Industry Dashboard ===
