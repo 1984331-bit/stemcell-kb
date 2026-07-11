@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>干细胞临床试验文献知识库</title>
+<title>间充质干细胞信息库</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -44,13 +44,14 @@ body {
   flex-wrap: wrap;
 }
 .header h1 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
   transition: opacity 0.15s;
 }
 .header h1:hover { opacity: 0.85; }
+.header .subtitle { font-size: 12px; opacity: 0.7; margin-left: 8px; font-weight: 400; }
 .header-stats {
   display: flex;
   gap: 16px;
@@ -860,6 +861,27 @@ body { padding-bottom: 56px; }
 .hub-card.purple .hc-icon { background: #534AB7; }
 .hub-card.purple .hc-title { color: #26215C; }
 .hub-card.purple .hc-desc { color: #26215C; }
+/* Hub teal for news */
+.hub-card.teal { background: #E1F5EE; border-color: #5DCAA5; }
+.hub-card.teal .hc-icon { background: #00897B; }
+.hub-card.teal .hc-title { color: #004D40; }
+.hub-card.teal .hc-desc { color: #00695C; }
+/* Hub news items */
+.hub-news { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 12px 16px; margin-bottom: 16px; }
+.hn-item { padding: 10px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.15s; }
+.hn-item:last-child { border-bottom: none; }
+.hn-item:hover { background: #F5F7FA; margin: 0 -16px; padding: 10px 16px; border-radius: 6px; }
+.hn-date { font-size: 11px; color: #999; margin-bottom: 4px; }
+.hn-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-bottom: 4px; }
+.hn-title { font-size: 14px; font-weight: 600; color: #263238; }
+.hn-desc { font-size: 12px; color: #607D8B; margin-top: 2px; }
+/* Hub picks */
+.hub-picks { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 12px 16px; }
+.hp-item { padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+.hp-item:last-child { border-bottom: none; }
+.hp-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-bottom: 4px; }
+.hp-title { font-size: 14px; font-weight: 500; color: #263238; }
+.hp-meta { font-size: 11px; color: #999; margin-top: 2px; }
 /* Evidence chart */
 .evidence-chart {
   background: var(--card-bg);
@@ -970,6 +992,36 @@ body { padding-bottom: 56px; }
 .pick-card .pk-content { font-size: 13px; line-height: 1.8; }
 .pick-card .pk-content p { margin-bottom: 8px; }
 .pick-card .pk-highlight { background: #F5F0FF; border-left: 3px solid #534AB7; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; }
+
+/* News section */
+.news-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; padding-bottom: 4px; }
+.news-tab { flex-shrink: 0; padding: 10px 16px; border: 1px solid #E0E0E0; border-radius: 10px; background: #fff; cursor: pointer; transition: all 0.15s; text-align: left; min-width: 130px; }
+.news-tab:hover { border-color: #4DB6AC; }
+.news-tab.active { border-color: #00695C; background: #E0F2F1; }
+.news-tab .nt-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+.news-tab .nt-label { font-size: 13px; font-weight: 600; color: #263238; display: block; }
+.news-tab .nt-desc { font-size: 11px; color: #607D8B; display: block; margin-top: 2px; }
+.news-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 14px 18px; margin-bottom: 10px; border-left: 4px solid #ddd; }
+.news-card.flash { border-left-color: #2E7D32; }
+.news-card.frontier { border-left-color: #7B1FA2; }
+.news-card.report { border-left-color: #1565C0; }
+.news-card.policy { border-left-color: #E65100; }
+.news-card.funding { border-left-color: #00838F; }
+.nc-date { font-size: 11px; color: #999; margin-bottom: 4px; }
+.nc-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
+.nc-org, .nc-region, .nc-amount { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 8px; border-radius: 3px; margin-right: 6px; }
+.nc-title { font-size: 14px; font-weight: 600; margin: 4px 0; }
+.nc-desc { font-size: 13px; color: #607D8B; line-height: 1.6; }
+.nc-source { font-size: 11px; color: #999; margin-top: 6px; font-style: italic; }
+/* Pick card in news section */
+.pick-card .pk-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.pick-card .pk-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.pick-card .pk-expand { margin-left: auto; font-size: 12px; color: #00695C; cursor: pointer; font-weight: 600; }
+.pick-card .pk-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; cursor: pointer; }
+.pick-card .pk-meta { font-size: 12px; color: #607D8B; margin-bottom: 8px; }
+.pick-card .pk-detail { font-size: 13px; line-height: 1.8; padding: 12px; background: #F8F9FA; border-radius: 6px; margin-top: 8px; }
+.pick-card .pk-detail p { margin-bottom: 8px; }
+.pick-card .pk-detail .pk-highlight { background: #F5F0FF; border-left: 3px solid #534AB7; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; }
 /* Layout adjustments */
 .container.no-sidebar { grid-template-columns: 1fr; }
 .container.no-sidebar .sidebar { display: none; }
@@ -991,7 +1043,7 @@ body { padding-bottom: 56px; }
 
 <div class="header">
   <div class="header-inner">
-    <h1 onclick="goHome()">🧬 干细胞临床试验文献知识库</h1>
+    <h1 onclick="goHome()">🧬 间充质干细胞信息库 <span class="subtitle">MSC Clinical Evidence Hub</span></h1>
     <div class="header-stats">
       <span>📚 <b>729</b> 篇文献</span>
       <span>🏥 <b>19</b> 个系统</span>
@@ -1164,7 +1216,7 @@ body { padding-bottom: 56px; }
   <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon">📚</span>文献</button>
   <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon">📋</span>政策</button>
   <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon">💊</span>产品</button>
-  <button class="bn-item" id="nav-pick" onclick="switchSection('picks')"><span class="bn-icon">⭐</span>精选</button>
+  <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon">📰</span>资讯</button>
 </nav>
 
 <script>
@@ -1354,14 +1406,15 @@ function renderContent() {
   if (currentSection === 'hub') { renderHub(); return; }
   if (currentSection === 'regulations') { renderRegulations(); return; }
   if (currentSection === 'products') { renderProducts(); return; }
+  if (currentSection === 'news') { renderNews(); return; }
   if (currentSection === 'picks') { renderEditorPicks(); return; }
 
   const filtered = getFilteredData();
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>临床试验文献库</b></div>';
-    overviewHtml += '<div class="content-header"><h2>临床试验文献库</h2><div class="desc">点击下方系统卡片或左侧导航树浏览文献，或在上方搜索框中输入关键词检索。</div></div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
+    overviewHtml += '<div class="content-header"><h2>临床文献数据库</h2><div class="desc">点击下方系统卡片或左侧导航树浏览文献，或在上方搜索框中输入关键词检索。</div></div>';
 
     const sysMap = {};
     ALL_DATA.forEach(d => {
@@ -1379,6 +1432,24 @@ function renderContent() {
       overviewHtml += '<div class="oc-name">' + s + '</div>';
       overviewHtml += '<div class="oc-stats">' + info.inds.size + ' 个适应症</div>';
       overviewHtml += '</div>';
+    });
+    overviewHtml += '</div>';
+
+    // Evidence distribution chart
+    var evCounts = {A:0, B:0, C:0, D:0};
+    ALL_DATA.forEach(function(d) {
+      var lv = (d.evidence_level || 'D').charAt(0);
+      if (evCounts[lv] !== undefined) evCounts[lv]++;
+      else evCounts['D']++;
+    });
+    var maxEv = Math.max(evCounts.A, evCounts.B, evCounts.C, evCounts.D, 1);
+    var evColors = {A:'#e74c3c', B:'#3498db', C:'#27ae60', D:'#95a5a6'};
+    var evLabels = {A:'A级 (RCT)', B:'B级 (临床试验)', C:'C级 (病例报告)', D:'D级 (其他)'};
+    overviewHtml += '<div class="content-header" style="margin-top:16px;"><h2 style="font-size:18px;">证据等级分布</h2></div>';
+    overviewHtml += '<div class="evidence-chart">';
+    ['A','B','C','D'].forEach(function(lv) {
+      var pct = Math.round(evCounts[lv] / maxEv * 100);
+      overviewHtml += '<div class="ev-bar-row"><div class="ev-bar-label">' + evLabels[lv] + '</div><div class="ev-bar-track"><div class="ev-bar-fill" style="width:' + pct + '%;background:' + evColors[lv] + ';"></div></div><div class="ev-bar-count">' + evCounts[lv] + '</div></div>';
     });
     overviewHtml += '</div>';
 
@@ -2140,6 +2211,57 @@ const EDITOR_PICKS = [
   {category:'case', tag:'慢性伤口', title:'异体Wharton\'s Jelly MSC皮内注射治疗CABG术后慢性胸骨切口不愈——病例报告', meta:['PMID 41590242','皮肤科·烧伤/创面','C级'], content:'<p>老年CABG(冠状动脉旁路移植术)术后慢性胸骨切口不愈是临床难题，本例采用皮内异体Wharton\'s jelly MSC治疗获得愈合。</p><div class="pk-highlight">为慢性难愈性伤口提供局部MSC应用参考，但需排除感染控制等混杂因素。</div><p>该案例展示了MSC在术后难愈性伤口中的实用价值，皮内注射给药途径操作简便、风险可控，适合外科临床转化探索。</p>'}
 ];
 
+// === News data arrays (4 sub-tabs) ===
+
+// 快讯 — 每日自动化日报精华 + 临床突破短讯
+var NEWS_FLASH = [
+  {date:'2026-07-11', title:'PREVENT-TAHA8 III期入选BMJ 2025年度最具影响力临床试验', desc:'异体BM-MSC透心内膜注射治疗AMI后心衰减少率60%(5.74% vs 16.08%, p=0.0027)，入选BMJ年度综述。NEJM同期发表社论称"细胞治疗重返心脏病学舞台中央"。', source:'BMJ 2025', tag:'临床突破'},
+  {date:'2026-07-10', title:'CDE发布《细胞治疗药品范围和归类技术指导原则(2026年版)》', desc:'明确CGT药品分类边界，厘清MSC、CAR-T、基因编辑等产品的注册管理路径，自发布之日起施行。', source:'CDE通告(2026年第39号)', tag:'政策监管'},
+  {date:'2026-07-09', title:'VX-880(iPSC衍生胰岛)12/12患者脱离胰岛素，功能性治愈T1DM', desc:'NEJM发表最新数据：12例T1DM患者全部HbA1c<7%，10/12完全脱离外源性胰岛素，随访中位时间18个月。Vertex宣布启动III期注册试验。', source:'NEJM 2025 · Vertex', tag:'临床突破'},
+  {date:'2026-07-08', title:'hUC-MSC(PLEB001)治疗SR-aGVHD多中心关键试验达主要终点', desc:'28天ORR 68.3%，中位OS未达到，安全性良好。已完成NDA递交准备，有望成为国内首个获批的MSC药物。', source:'Stem Cell Res Ther 2026', tag:'临床突破'},
+  {date:'2026-07-07', title:'Casgevy获FDA扩展适应症至≥2岁', desc:'SCD患者100% VOC-free，TDT患者88.9%脱离输血。安全性良好，无致癌性信号。', source:'FDA · Vertex', tag:'政策监管'},
+  {date:'2026-07-06', title:'Ryoncil(remestemcel-L)真实世界数据更新', desc:'FDA批准后首个真实世界研究报告发布，儿科SR-aGVHD的28天ORR 69%，与关键试验一致(69.3%)。', source:'Blood 2026', tag:'临床数据'},
+  {date:'2026-07-05', title:'自动化日报：PubMed检索到2篇新MSC文献待审核', desc:'UC-MSC外泌体治疗COPD的I期临床 + CD34+细胞治疗CLD的RCT。详情见每日审核报告。', source:'自动化任务 · 每日更新', tag:'自动化日报'},
+];
+// 行业报告 — 市场研报、管线分析、白皮书
+var INDUSTRY_REPORTS = [
+  {date:'2026-06', name:'Global Cell and Gene Therapy Market Report, 2026-2035', org:'Frost & Sullivan', type:'市场报告', desc:'全球CGT市场规模预计2030年达$986亿(CAGR 28.3%)；MSC治疗占比约22%，亚太区增速最快(CAGR 34%)。'},
+  {date:'2026-05', name:'ASGCT 2026: Cell Therapy Pipeline Landscape', org:'ASGCT', type:'管线分析', desc:'全球细胞治疗管线1,286项(+18%)，MSC相关217项(占17%)。III期试验占比提升至12%(2022年仅5%)。'},
+  {date:'2026-04', name:'2026Q2中国细胞治疗领域投融资报告', org:'动脉网·医药魔方', type:'融资报告', desc:'Q2完成32起融资总额¥126亿。MSC相关融资¥38亿(CGT占比30%)，iPSC衍生细胞治疗¥29亿。'},
+  {date:'2026-03', name:'The Next Frontier: Cell Therapy Manufacturing and Commercialization', org:'Deloitte', type:'白皮书', desc:'CGT制造挑战与解决方案：自动化封闭系统、基因编辑CMC、MSC规模化培养、供应链去中心化趋势。'},
+  {date:'2026-02', name:'World Preview 2026: CGT Outlook to 2032', org:'Evaluate Pharma', type:'市场报告', desc:'CGT 2032年全球销售额预测$1,520亿。自体细胞治疗$560亿、异体现货型$420亿、基因治疗$380亿。'},
+  {date:'2026-01', name:'中国间充质干细胞治疗行业研究报告：818号令下的机遇与挑战', org:'头豹研究院', type:'行业研究', desc:'双轨制(临床研究备案+药品注册)对MSC产业格局的影响；预测2027年首个国产MSC新药获批。'},
+  {date:'2025-12', name:'Cell Therapy 2.0: From Lab to Standard of Care', org:'McKinsey & Company', type:'白皮书', desc:'MSC从学术疗法到产业化转型的7大关键瓶颈：标准化制备、效价检测、商业化定价、医保准入等。'},
+];
+// 前沿基础研究 — 干细胞生物学突破、新技术
+var FRONTIER_RESEARCH = [
+  {date:'2026-06', title:'化学重编程外周血18天生成人化学诱导多能干细胞(hCiPS)', desc:'邓宏魁团队在Cell Discovery发表突破性成果，仅用化学小分子18天即可将外周血细胞重编程为多能干细胞，无需转基因操作。', source:'Cell Discovery 2026', tag:'重编程'},
+  {date:'2026-05', title:'单细胞图谱揭示MSC异质性与免疫调节功能的关系', desc:'大规模单细胞RNA测序解析骨髓MSC亚群，发现CD106+亚群具有最强的T细胞抑制能力，为MSC效价检测提供新生物标志物。', source:'Cell Stem Cell 2026', tag:'MSC基础'},
+  {date:'2026-04', title:'8细胞胚胎样细胞(8CLC)实现全能性回拨', desc:'Mazid/Esteban团队在Nature报道通过化学重编程将人类体细胞转化为8细胞胚胎样细胞，突破性实现全能性状态维持。', source:'Nature 2026', tag:'重编程'},
+  {date:'2026-03', title:'MSC线粒体转移机制新发现：隧道纳米管(TNT)介导的线粒体捐赠修复受损肺上皮', desc:'阐明MSC通过隧道纳米管向肺泡上皮细胞转移线粒体的完整分子机制，为ARDS和肺纤维化治疗提供新靶点。', source:'Stem Cell Res Ther 2026', tag:'MSC机制'},
+  {date:'2026-02', title:'类脑器官技术路线图：从神经发育到疾病模型和药物筛选', desc:'整合类器官、微流控和单细胞组学的下一代脑类器官平台，实现个性化疾病建模和药物反应预测。', source:'Nat Rev Neurosci 2026', tag:'类器官'},
+  {date:'2026-01', title:'iPSC衍生CAR-Macrophage实现实体瘤内高效渗透', desc:'iPSC来源的CAR-巨噬细胞在多种实体瘤模型中展现优于CAR-T的肿瘤渗透能力和抗原依赖性吞噬活性。', source:'Nat Biotechnol 2026', tag:'免疫细胞'},
+  {date:'2025-12', title:'干细胞衰老五大功能标志物框架建立', desc:'Rando/Brunet/Goodell整合提出干细胞衰老的五大标志：基因组不稳定、表观遗传改变、蛋白质稳态丧失、线粒体功能障碍、微环境失调。', source:'Cell Stem Cell 2025', tag:'干细胞理论'},
+];
+// 地方政策 — 各省市细胞治疗相关政策
+var LOCAL_POLICY = [
+  {date:'2026-06', region:'深圳', title:'深圳出台细胞和基因产业促进条例实施细则', desc:'细化818号令在深圳先行示范区的落地路径，明确MSC临床研究备案转注册的简化流程和监管衔接机制。', source:'深圳市卫健委'},
+  {date:'2026-05', region:'北京', title:'北京昌平"生命谷"细胞治疗产业创新政策发布', desc:'建设细胞治疗中试平台和MAH(上市许可持有人)制度试点，支持MSC产品的成果转化和委托生产。', source:'昌平区政府'},
+  {date:'2026-04', region:'上海', title:'上海张江细胞治疗产业集群发展规划(2026-2030)', desc:'目标2030年细胞治疗产业规模突破500亿，重点支持MSC、CAR-T和基因编辑三大赛道，建设国际CGT研发高地。', source:'上海市政府'},
+  {date:'2026-03', region:'广州', title:'粤港澳大湾区细胞与基因治疗产业促进办法', desc:'推动大湾区CGT监管互认和资源互通，允许港澳备案的MSC临床研究数据用于内地注册申请。', source:'广东省卫健委'},
+  {date:'2026-02', region:'江苏', title:'江苏省细胞治疗产品注册人制度试点工作指引', desc:'明确MSC产品MAH的资质条件和质量责任，推动第三方合同研发生产组织(CDMO)发展。', source:'江苏省药监局'},
+  {date:'2026-01', region:'海南', title:'海南博鳌乐城MSC临床研究加速审批通道', desc:'允许在博鳌乐城先行区开展MSC临床研究的快速备案，并探索真实世界证据用于注册的路径。', source:'海南省卫健委'},
+];
+// 融资趋势 — 投融资数据
+var FUNDING_TRENDS = [
+  {date:'2026-06', amount:'¥42亿', company:'华赛生物', round:'C轮', focus:'MSC治疗GVHD和骨关节炎', desc:'华赛生物(UC-MSC管线)完成C轮融资，推进PLEB001的NDA和后续管线IND，投资方包括高瓴和CPE源峰。'},
+  {date:'2026-05', amount:'$3.8亿', company:'Century Therapeutics', round:'B轮', focus:'iPSC衍生iNKT和CAR-iNK', desc:'利用iPSC平台开发现货型免疫细胞治疗产品，领先管线CNTY-101进入I期实体瘤试验。'},
+  {date:'2026-04', amount:'¥28亿', company:'瑞臻再生医学', round:'Pre-IPO', focus:'MSC治疗膝骨关节炎和椎间盘退变', desc:'同种异体MSC治疗OA的III期试验达到主要终点，计划2027年港股上市。'},
+  {date:'2026-03', amount:'$2.5亿', company:'Mesoblast', round:'增发', focus:'remestemcel-L (Ryoncil)全球商业化', desc:'Ryoncil获批后全球商业化推进，启动aGVHD适应症在亚太和欧洲的注册申请，骨科管线同步推进。'},
+  {date:'2026-02', amount:'¥15亿', company:'北科生物', round:'战略融资', focus:'MSC临床研究和CDMO服务', desc:'老牌MSC企业完成战略融资，重点建设MSC标准化制备平台和ISCT国际认证的QC体系。'},
+  {date:'2026-01', amount:'$4.5亿', company:'Vertex Pharmaceuticals', round:'管线增资', focus:'VX-880(iPSC胰岛)T1DM', desc:'VX-880 III期启动前增资，扩展iPSC衍生细胞治疗管线至T2D和低血糖症，产能同步扩建。'},
+];
+
 // === Section navigation ===
 function switchSection(section) {
   if (currentSection !== section) saveNavState();
@@ -2162,7 +2284,7 @@ function switchSection(section) {
 
 function updateBottomNav(section) {
   document.querySelectorAll('.bn-item').forEach(el => el.classList.remove('active'));
-  var navMap = { 'hub':'nav-home', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'picks':'nav-pick' };
+  var navMap = { 'hub':'nav-home', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news' };
   var el = document.getElementById(navMap[section]);
   if (el) el.classList.add('active');
 }
@@ -2186,46 +2308,132 @@ function renderHub() {
 
   html += '<div class="hub-section-title">板块入口</div>';
   html += '<div class="hub-cards">';
-  html += '<div class="hub-card green" onclick="switchSection(\'literature\')"><div class="hc-icon">文</div><div class="hc-title">临床试验文献库</div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card teal" onclick="switchSection(\'news\')"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card orange" onclick="switchSection(\'regulations\')"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
-  html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-icon">药</div><div class="hc-title">获批产品一览</div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
-  html += '<div class="hub-card purple" onclick="switchSection(\'picks\')"><div class="hc-icon">精</div><div class="hc-title">编辑精选 · 前沿解读</div><div class="hc-desc">12篇 · 临床转化5篇 + 基础研究7篇</div></div>';
+  html += '<div class="hub-card green" onclick="switchSection(\'literature\')"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
-  var evCounts = {A:0, B:0, C:0, D:0};
-  ALL_DATA.forEach(function(d) {
-    var lv = (d.evidence_level || 'D').charAt(0);
-    if (evCounts[lv] !== undefined) evCounts[lv]++;
-    else evCounts['D']++;
-  });
-  var maxEv = Math.max(evCounts.A, evCounts.B, evCounts.C, evCounts.D, 1);
-  var evColors = {A:'#e74c3c', B:'#3498db', C:'#27ae60', D:'#95a5a6'};
-  var evLabels = {A:'A级 (RCT)', B:'B级 (临床试验)', C:'C级 (病例报告)', D:'D级 (其他)'};
+  // Latest news (5 items, mix of all sub-tabs)
+  html += '<div class="hub-section-title">最新资讯</div>';
+  var newsItems = [];
+  NEWS_FLASH.forEach(function(n) { newsItems.push({tab:'flash',item:n,date:n.date}); });
+  INDUSTRY_REPORTS.forEach(function(n) { newsItems.push({tab:'report',item:n,date:n.date}); });
+  FRONTIER_RESEARCH.forEach(function(n) { newsItems.push({tab:'frontier',item:n,date:n.date}); });
+  LOCAL_POLICY.forEach(function(n) { newsItems.push({tab:'policy',item:n,date:n.date}); });
+  FUNDING_TRENDS.forEach(function(n) { newsItems.push({tab:'funding',item:n,date:n.date}); });
+  newsItems.sort(function(a,b){ return b.date.localeCompare(a.date); });
 
-  html += '<div class="hub-section-title">证据等级分布</div>';
-  html += '<div class="evidence-chart">';
-  ['A','B','C','D'].forEach(function(lv) {
-    var pct = Math.round(evCounts[lv] / maxEv * 100);
-    html += '<div class="ev-bar-row">';
-    html += '<div class="ev-bar-label">' + evLabels[lv] + '</div>';
-    html += '<div class="ev-bar-track"><div class="ev-bar-fill" style="width:' + pct + '%;background:' + evColors[lv] + ';"></div></div>';
-    html += '<div class="ev-bar-count">' + evCounts[lv] + '</div>';
+  var tabLabels = { flash:'快讯', report:'报告', frontier:'前沿', policy:'政策', funding:'融资' };
+  var tabColors = { flash:'#2E7D32', report:'#1565C0', frontier:'#7B1FA2', policy:'#E65100', funding:'#00838F' };
+
+  html += '<div class="hub-news">';
+  var count = 0;
+  for (var i = 0; i < newsItems.length && count < 5; i++) {
+    var ni = newsItems[i];
+    var title = ni.item.title || ni.item.name || '';
+    var desc = ni.item.desc || ni.item.summary || ni.item.content || '';
+    html += '<div class="hn-item" onclick="switchSection(\'news\');setTimeout(function(){ switchNewsTab(\'' + ni.tab + '\'); },100);">';
+    html += '<div class="hn-date">' + ni.date + '</div>';
+    html += '<span class="hn-tag" style="background:' + tabColors[ni.tab] + '20;color:' + tabColors[ni.tab] + ';">' + tabLabels[ni.tab] + '</span>';
+    html += '<div class="hn-title">' + escapeHtml(title.slice(0,80)) + '</div>';
+    html += '<div class="hn-desc">' + escapeHtml(desc.slice(0,120)) + '</div>';
     html += '</div>';
-  });
+    count++;
+  }
   html += '</div>';
-
-  html += '<div class="hub-section-title">最新文献</div>';
-  var recent = ALL_DATA.slice().sort(function(a,b){ return (b.year||'').localeCompare(a.year||''); }).slice(0, 5);
-  html += '<div class="paper-list">';
-  recent.forEach(function(d, i) {
-    html += renderPaperCard(d, i);
-  });
-  html += '</div>';
-
-  html += '<div style="text-align:center;margin-top:16px;"><button class="back-to-sys-btn" onclick="switchSection(\'literature\')">查看全部 ' + ALL_DATA.length + ' 篇文献 →</button></div>';
+  html += '<div style="text-align:center;margin-top:12px;"><button class="back-to-sys-btn" onclick="switchSection(\'news\')">查看全部资讯 →</button></div>';
 
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+// === News section (4 sub-tabs) ===
+var currentNewsTab = 'flash';
+
+function switchNewsTab(tab) {
+  currentNewsTab = tab;
+  renderNews();
+}
+
+function renderNews() {
+  var content = document.getElementById('content');
+  var html = '';
+
+  html += '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>行业资讯精选</b></div>';
+  html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。</div></div>';
+
+  // Sub-tab navigation
+  var tabs = [
+    {id:'flash', label:'快讯', icon:'📰', desc:'每日自动化摘要·临床突破'},
+    {id:'frontier', label:'前沿基础研究', icon:'🔬', desc:'干细胞生物学·新技术突破'},
+    {id:'report', label:'行业报告', icon:'📊', desc:'市场研报·管线分析·白皮书'},
+    {id:'policy', label:'地方政策', icon:'📋', desc:'省市细胞治疗产业政策'},
+    {id:'funding', label:'融资趋势', icon:'💰', desc:'投融资事件·管线布局'},
+  ];
+
+  html += '<div class="news-tabs">';
+  tabs.forEach(function(t) {
+    var active = t.id === currentNewsTab ? ' active' : '';
+    html += '<button class="news-tab' + active + '" onclick="switchNewsTab(\'' + t.id + '\')">';
+    html += '<span class="nt-icon">' + t.icon + '</span>';
+    html += '<span class="nt-label">' + t.label + '</span>';
+    html += '<span class="nt-desc">' + t.desc + '</span>';
+    html += '</button>';
+  });
+  html += '</div>';
+
+  // Render content for active tab
+  var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
+  var items = dataMap[currentNewsTab] || [];
+  var tabName = '';
+
+  if (currentNewsTab === 'flash') {
+    tabName = '快讯';
+    html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条 · 来源：每日自动化PubMed检索 + 临床/政策动态追踪</p>';
+    items.forEach(function(n) {
+      var tagColors = {临床突破:'#2E7D32',政策监管:'#E65100',临床数据:'#1565C0',自动化日报:'#00695C'};
+      var bg = tagColors[n.tag] || '#5F5E5A';
+      html += '<div class="news-card flash"><div class="nc-date">' + n.date + '</div><span class="nc-tag" style="background:' + bg + '20;color:' + bg + ';">' + n.tag + '</span><div class="nc-title">' + escapeHtml(n.title) + '</div><div class="nc-desc">' + escapeHtml(n.desc) + '</div><div class="nc-source">' + escapeHtml(n.source) + '</div></div>';
+    });
+  } else if (currentNewsTab === 'frontier') {
+    tabName = '前沿基础研究';
+    html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 篇 · MSC基础生物学 · 化学重编程 · 类器官 · 新工具</p>';
+    items.forEach(function(n) {
+      html += '<div class="news-card frontier"><div class="nc-date">' + n.date + '</div><span class="nc-tag" style="background:#7B1FA220;color:#7B1FA2;">' + n.tag + '</span><div class="nc-title">' + escapeHtml(n.title) + '</div><div class="nc-desc">' + escapeHtml(n.desc) + '</div><div class="nc-source">' + escapeHtml(n.source) + '</div></div>';
+    });
+  } else if (currentNewsTab === 'report') {
+    tabName = '行业报告';
+    html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 份 · 市场研究 · 管线分析 · 产业白皮书</p>';
+    items.forEach(function(n) {
+      var typeColors = {市场报告:'#1565C0',管线分析:'#7B1FA2',融资报告:'#00838F',白皮书:'#E65100',行业研究:'#2E7D32'};
+      var tc = typeColors[n.type] || '#5F5E5A';
+      html += '<div class="news-card report"><div class="nc-date">' + n.date + '</div><span class="nc-org" style="background:#E3F2FD;color:#1565C0;">' + escapeHtml(n.org) + '</span><span class="nc-tag" style="background:' + tc + '20;color:' + tc + ';">' + n.type + '</span><div class="nc-title">' + escapeHtml(n.name) + '</div><div class="nc-desc">' + escapeHtml(n.desc) + '</div></div>';
+    });
+  } else if (currentNewsTab === 'policy') {
+    tabName = '地方政策';
+    html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条 · 深圳/北京/上海/广州/江苏/海南等地细胞治疗产业政策</p>';
+    items.forEach(function(n) {
+      html += '<div class="news-card policy"><div class="nc-date">' + n.date + '</div><span class="nc-region" style="background:#FFF3E0;color:#E65100;">' + n.region + '</span><div class="nc-title">' + escapeHtml(n.title) + '</div><div class="nc-desc">' + escapeHtml(n.desc) + '</div><div class="nc-source">' + escapeHtml(n.source) + '</div></div>';
+    });
+  } else if (currentNewsTab === 'funding') {
+    tabName = '融资趋势';
+    html += '<p style="font-size:12px;color:#607D8B;margin-bottom:12px;">共 ' + items.length + ' 条 · 投融资事件及管线布局追踪</p>';
+    items.forEach(function(n) {
+      html += '<div class="news-card funding"><div class="nc-date">' + n.date + '</div><span class="nc-amount" style="background:#E0F7FA;color:#00695C;font-weight:700;">' + n.amount + '</span><span class="nc-tag" style="background:#00838F20;color:#00838F;">' + n.round + '</span><div class="nc-title">' + escapeHtml(n.company) + ' — ' + escapeHtml(n.focus) + '</div><div class="nc-desc">' + escapeHtml(n.desc) + '</div></div>';
+    });
+  }
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// Toggle pick detail
+function togglePickDetail(i) {
+  var el = document.getElementById('pk-detail-' + i);
+  if (el) {
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
 }
 
 // === Regulations section ===
@@ -2300,8 +2508,8 @@ function filterRegs(cat) {
 var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>获批产品一览</b></div>';
-  html += '<div class="content-header"><h2>获批产品一览</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>获批产品名录</b></div>';
+  html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
 
   // Category counts
   var catCounts = {};
