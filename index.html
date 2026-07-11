@@ -1730,7 +1730,7 @@ body { padding-bottom: 56px; }
 
 <div class="header">
   <div class="header-inner">
-    <h1 onclick="goHome()"><svg viewBox="0 0 32 32" width="24" height="24" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#4DB6AC" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00695C" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#4DB6AC"/><circle cx="8" cy="20" r="1.5" fill="#4DB6AC"/></svg> 间充质干细胞信息库 <span class="subtitle">MSC Knowledge Hub</span></h1>
+    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="24" height="24" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#4DB6AC" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00695C" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#4DB6AC"/><circle cx="8" cy="20" r="1.5" fill="#4DB6AC"/></svg> 间充质干细胞信息库 <span class="subtitle">MSC Knowledge Hub</span></h1>
   </div>
 </div>
 
@@ -2125,6 +2125,16 @@ function toggleSystem(headerEl) {
   }
 }
 
+function navTo(el) {
+  var action = el.dataset.action;
+  var section = el.dataset.section;
+  var system = el.dataset.system;
+  if (action === 'home') { goHome(); return; }
+  if (action === 'archive') { renderPicksArchive(); return; }
+  if (action === 'sys') { quickSelect(system); return; }
+  if (section) { switchSection(section); }
+}
+
 function goHome() {
   if (searchQuery || currentFilter.system || currentSection !== 'hub') saveNavState();
   currentSection = 'hub';
@@ -2233,7 +2243,7 @@ function renderContent() {
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
     overviewHtml += '<div class="content-header"><h2>临床文献数据库</h2><div class="desc">点击下方系统卡片或左侧导航树浏览文献，或在搜索框中输入关键词检索。</div></div>';
 
     // Stats bar
@@ -2314,7 +2324,7 @@ function renderContent() {
     const filtered = getSortedData(getFilteredData());
     const inds = [...new Set(filtered.map(d => d.indication))].sort();
 
-    let html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
+    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
     html += '<div class="content-header"><h2>' + escapeHtml(sysName) + '</h2><div class="desc">共 ' + filtered.length + ' 篇文献，' + inds.length + ' 个适应症。点击下方适应症卡片可筛选特定疾病，或向下滚动浏览全部文献。</div></div>';
 
     // Indication cards
@@ -2387,9 +2397,9 @@ function renderContent() {
     headerDesc = '共 ' + filtered.length + ' 篇文献';
   }
 
-  let html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span>';
+  let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span>';
   if (currentFilter.system) {
-    html += '<span class="crumb-sep">›</span> <span class="crumb-link" onclick="quickSelect(\'' + currentFilter.system.replace(/'/g, "\\'") + '\')">' + escapeHtml(currentFilter.system) + '</span>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-action="sys" data-system="' + escapeHtml(currentFilter.system) + '" onclick="navTo(this)">' + escapeHtml(currentFilter.system) + '</span>';
   } else {
     html += '<span class="crumb-sep">›</span> <b>搜索结果</b>';
   }
@@ -3504,10 +3514,10 @@ function renderHub() {
 
   html += '<div class="hub-section-title">板块入口</div>';
   html += '<div class="hub-cards">';
-  html += '<div class="hub-card teal" onclick="switchSection(\'news\')"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
-  html += '<div class="hub-card orange" onclick="switchSection(\'regulations\')"><div class="hc-head"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
-  html += '<div class="hub-card green" onclick="switchSection(\'literature\')"><div class="hc-head"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
-  html += '<div class="hub-card blue" onclick="switchSection(\'products\')"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
+  html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
+  html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
+  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
   html += '<div class="hub-section-title">📊 MSC行业分析报告</div>';
@@ -3535,7 +3545,7 @@ function renderNews() {
   var html = '';
 
   var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  html += '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'news\')">行业资讯精选</span>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-section="hub" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
   if (currentNewsTab !== 'home') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</b>';
   }
@@ -3643,7 +3653,7 @@ function togglePickDetail(i) {
 var regFilter = 'all';
 function renderRegulations() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'regulations\')">监管政策汇编</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="regulations" onclick="navTo(this)">监管政策汇编</span>';
   if (regFilter !== 'all') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
   }
@@ -3717,7 +3727,7 @@ function filterRegs(cat) {
 var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'products\')">获批产品名录</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="products" onclick="navTo(this)">获批产品名录</span>';
   if (prodFilter !== 'all') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(prodFilter) + '</b>';
   }
@@ -3823,7 +3833,7 @@ function filterProducts(cat) {
 // === Editor picks section ===
 function renderEditorPicks() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
   html += '<div class="content-header"><h2>编辑精选 · 前沿解读</h2><div class="desc">干细胞领域里程碑文献深度解读，涵盖临床转化与基础研究两大维度。每篇聚焦核心发现、关键数据与行业启示。</div></div>';
 
   // Archive button
@@ -3872,7 +3882,7 @@ function renderEditorPicks() {
 function renderPicksArchive() {
   currentPicksView = 'archive';
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
   html += '<div class="content-header"><h2>往期精选归档</h2><div class="desc">点击任一期查看完整内容。当前最新内容请返回编辑精选主页。</div></div>';
 
   // Back to current button
@@ -3902,7 +3912,7 @@ function renderPicksIssue(idx) {
   if (!issue) return;
   currentPicksView = idx;
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" onclick="goHome()">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="switchSection(\'picks\')">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="renderPicksArchive()">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" data-action="archive" onclick="navTo(this)">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
   html += '<div class="content-header"><h2>' + escapeHtml(issue.title) + '</h2><div class="desc">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div></div>';
 
   // Back buttons
