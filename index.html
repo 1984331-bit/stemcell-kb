@@ -1001,18 +1001,12 @@ body { padding-bottom: 56px; }
 .news-tab .nt-icon { font-size: 20px; display: block; margin-bottom: 4px; }
 .news-tab .nt-label { font-size: 13px; font-weight: 600; color: #263238; display: block; }
 .news-tab .nt-desc { font-size: 11px; color: #607D8B; display: block; margin-top: 2px; }
-.news-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 14px 18px; margin-bottom: 10px; border-left: 4px solid #ddd; }
-.news-card.flash { border-left-color: #2E7D32; }
-.news-card.frontier { border-left-color: #7B1FA2; }
-.news-card.report { border-left-color: #1565C0; }
-.news-card.policy { border-left-color: #E65100; }
-.news-card.funding { border-left-color: #00838F; }
-.nc-date { font-size: 11px; color: #999; margin-bottom: 4px; }
-.nc-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
-.nc-org, .nc-region, .nc-amount { display: inline-block; font-size: 10px; font-weight: 600; padding: 1px 8px; border-radius: 3px; margin-right: 6px; }
-.nc-title { font-size: 14px; font-weight: 600; margin: 4px 0; }
-.nc-desc { font-size: 13px; color: #607D8B; line-height: 1.6; }
-.nc-source { font-size: 11px; color: #999; margin-top: 6px; font-style: italic; }
+.news-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 16px 20px; margin-bottom: 12px; border-left: 4px solid #ddd; }
+.news-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+.nc-date { font-size: 11px; color: #999; margin-bottom: 6px; }
+.nc-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
+.nc-title { font-size: 15px; font-weight: 600; margin: 6px 0; line-height: 1.4; }
+.nc-desc { font-size: 13px; color: #607D8B; line-height: 1.7; }
 /* Pick card in news section */
 .pick-card .pk-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
 .pick-card .pk-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
@@ -2214,54 +2208,54 @@ const EDITOR_PICKS = [
 // === News data arrays (4 sub-tabs) ===
 
 // 快讯 — 每日自动化日报精华 + 临床突破短讯
-// === News data arrays (unified fields: date, title, desc, source, tag, url) ===
+// === News data arrays (unified fields) ===
 
-// 快讯 — 每日自动化日报精华 + 临床突破短讯
+// 快讯 — 只保留有确切来源的链接
 var NEWS_FLASH = [
   {date:'2026-07-11', title:'PREVENT-TAHA8 III期入选BMJ 2025年度最具影响力临床试验', tag:'临床突破', source:'BMJ 2025', url:'https://pubmed.ncbi.nlm.nih.gov/40036897/', desc:'异体BM-MSC透心内膜注射治疗AMI后心衰减少率60%(5.74% vs 16.08%, p=0.0027)，入选BMJ年度综述。NEJM同期发表社论称"细胞治疗重返心脏病学舞台中央"。'},
-  {date:'2026-07-10', title:'CDE发布《细胞治疗药品范围和归类技术指导原则(2026年版)》', tag:'政策监管', source:'CDE通告(2026年第39号)', url:'https://www.cde.org.cn/main/news/viewInfoCommon/5a8f7c9c6e3d4b5f8a2b1c3d4e5f6a7b', desc:'明确CGT药品分类边界，厘清MSC、CAR-T、基因编辑等产品的注册管理路径，自发布之日起施行。'},
-  {date:'2026-07-09', title:'VX-880(iPSC衍生胰岛)12/12患者脱离胰岛素，功能性治愈T1DM', tag:'临床突破', source:'NEJM 2025 · Vertex', url:'https://pubmed.ncbi.nlm.nih.gov/39677780/', desc:'NEJM发表最新数据：12例T1DM患者全部HbA1c<7%，10/12完全脱离外源性胰岛素，随访中位时间18个月。Vertex宣布启动III期注册试验。'},
+  {date:'2026-07-10', title:'CDE发布《细胞治疗药品范围和归类技术指导原则(2026年版)》', tag:'政策监管', source:'CDE通告(2026年第39号)', url:'', desc:'明确CGT药品分类边界，厘清MSC、CAR-T、基因编辑等产品的注册管理路径，自发布之日起施行。'},
+  {date:'2026-07-09', title:'VX-880(iPSC衍生胰岛)12/12患者脱离胰岛素，功能性治愈T1DM', tag:'临床突破', source:'NEJM 2025', url:'https://pubmed.ncbi.nlm.nih.gov/39677780/', desc:'NEJM发表最新数据：12例T1DM患者全部HbA1c<7%，10/12完全脱离外源性胰岛素，随访中位时间18个月。Vertex宣布启动III期注册试验。'},
   {date:'2026-07-08', title:'hUC-MSC(PLEB001)治疗SR-aGVHD多中心关键试验达主要终点', tag:'临床突破', source:'Stem Cell Res Ther 2026', url:'https://pubmed.ncbi.nlm.nih.gov/41877188/', desc:'28天ORR 68.3%，中位OS未达到，安全性良好。已完成NDA递交准备，有望成为国内首个获批的MSC药物。'},
-  {date:'2026-07-07', title:'Casgevy获FDA扩展适应症至≥2岁', tag:'政策监管', source:'FDA · Vertex', url:'https://www.fda.gov/vaccines-blood-biologics/casgevy', desc:'SCD患者100% VOC-free，TDT患者88.9%脱离输血。安全性良好，无致癌性信号。'},
-  {date:'2026-07-06', title:'Ryoncil(remestemcel-L)真实世界数据更新', tag:'临床数据', source:'Blood 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'FDA批准后首个真实世界研究报告发布，儿科SR-aGVHD的28天ORR 69%，与关键试验一致(69.3%)。'},
-  {date:'2026-07-05', title:'自动化日报：PubMed检索到2篇新MSC文献待审核', tag:'自动化日报', source:'自动化任务 · 每日更新', url:'', desc:'UC-MSC外泌体治疗COPD的I期临床 + CD34+细胞治疗CLD的RCT。详情见每日审核报告。'},
+  {date:'2026-07-07', title:'Casgevy获FDA扩展适应症至≥2岁', tag:'政策监管', source:'FDA公告', url:'https://www.fda.gov/vaccines-blood-biologics/casgevy', desc:'SCD患者100% VOC-free，TDT患者88.9%脱离输血。安全性良好，无致癌性信号。'},
+  {date:'2026-07-06', title:'Ryoncil(remestemcel-L)真实世界数据更新', tag:'临床数据', source:'Blood 2026', url:'', desc:'FDA批准后首个真实世界研究报告发布，儿科SR-aGVHD的28天ORR 69%，与关键试验一致(69.3%)。'},
+  {date:'2026-07-05', title:'自动化日报：PubMed检索到2篇新MSC文献待审核', tag:'自动化日报', source:'自动化任务', url:'', desc:'UC-MSC外泌体治疗COPD的I期临床 + CD34+细胞治疗CLD的RCT。详情见每日审核报告。'},
 ];
-// 行业报告 — 市场研报、管线分析、白皮书
+// 行业报告 — 链接指向报告来源机构
 var INDUSTRY_REPORTS = [
-  {date:'2026-06', title:'Global Cell and Gene Therapy Market Report, 2026-2035', tag:'市场报告', source:'Frost & Sullivan', url:'https://www.frost.com/', desc:'全球CGT市场规模预计2030年达$986亿(CAGR 28.3%)；MSC治疗占比约22%，亚太区增速最快(CAGR 34%)。'},
-  {date:'2026-05', title:'ASGCT 2026: Cell Therapy Pipeline Landscape', tag:'管线分析', source:'ASGCT', url:'https://asgct.org/', desc:'全球细胞治疗管线1,286项(+18%)，MSC相关217项(占17%)。III期试验占比提升至12%(2022年仅5%)。'},
-  {date:'2026-04', title:'2026Q2中国细胞治疗领域投融资报告', tag:'融资报告', source:'动脉网·医药魔方', url:'https://www.vbdata.cn/', desc:'Q2完成32起融资总额¥126亿。MSC相关融资¥38亿(CGT占比30%)，iPSC衍生细胞治疗¥29亿。'},
-  {date:'2026-03', title:'The Next Frontier: Cell Therapy Manufacturing and Commercialization', tag:'白皮书', source:'Deloitte', url:'https://www.deloitte.com/global/en/Industries/lifesciences.html', desc:'CGT制造挑战与解决方案：自动化封闭系统、基因编辑CMC、MSC规模化培养、供应链去中心化趋势。'},
-  {date:'2026-02', title:'World Preview 2026: CGT Outlook to 2032', tag:'市场报告', source:'Evaluate Pharma', url:'https://www.evaluate.com/', desc:'CGT 2032年全球销售额预测$1,520亿。自体细胞治疗$560亿、异体现货型$420亿、基因治疗$380亿。'},
-  {date:'2026-01', title:'中国间充质干细胞治疗行业研究报告：818号令下的机遇与挑战', tag:'行业研究', source:'头豹研究院', url:'https://www.leadleo.com/', desc:'双轨制(临床研究备案+药品注册)对MSC产业格局的影响；预测2027年首个国产MSC新药获批。'},
-  {date:'2025-12', title:'Cell Therapy 2.0: From Lab to Standard of Care', tag:'白皮书', source:'McKinsey & Company', url:'https://www.mckinsey.com/industries/life-sciences/our-insights', desc:'MSC从学术疗法到产业化转型的7大关键瓶颈：标准化制备、效价检测、商业化定价、医保准入等。'},
+  {date:'2026-06', title:'Global Cell and Gene Therapy Market Report, 2026-2035', tag:'市场报告', source:'Frost & Sullivan', url:'', desc:'全球CGT市场规模预计2030年达$986亿(CAGR 28.3%)；MSC治疗占比约22%，亚太区增速最快(CAGR 34%)。'},
+  {date:'2026-05', title:'ASGCT 2026: Cell Therapy Pipeline Landscape', tag:'管线分析', source:'ASGCT', url:'', desc:'全球细胞治疗管线1,286项(+18%)，MSC相关217项(占17%)。III期试验占比提升至12%(2022年仅5%)。'},
+  {date:'2026-04', title:'2026Q2中国细胞治疗领域投融资报告', tag:'融资报告', source:'动脉网·医药魔方', url:'', desc:'Q2完成32起融资总额¥126亿。MSC相关融资¥38亿(CGT占比30%)，iPSC衍生细胞治疗¥29亿。'},
+  {date:'2026-03', title:'The Next Frontier: Cell Therapy Manufacturing and Commercialization', tag:'白皮书', source:'Deloitte', url:'', desc:'CGT制造挑战与解决方案：自动化封闭系统、基因编辑CMC、MSC规模化培养、供应链去中心化趋势。'},
+  {date:'2026-02', title:'World Preview 2026: CGT Outlook to 2032', tag:'市场报告', source:'Evaluate Pharma', url:'', desc:'CGT 2032年全球销售额预测$1,520亿。自体细胞治疗$560亿、异体现货型$420亿、基因治疗$380亿。'},
+  {date:'2026-01', title:'中国间充质干细胞治疗行业研究报告：818号令下的机遇与挑战', tag:'行业研究', source:'头豹研究院', url:'', desc:'双轨制(临床研究备案+药品注册)对MSC产业格局的影响；预测2027年首个国产MSC新药获批。'},
+  {date:'2025-12', title:'Cell Therapy 2.0: From Lab to Standard of Care', tag:'白皮书', source:'McKinsey', url:'', desc:'MSC从学术疗法到产业化转型的7大关键瓶颈：标准化制备、效价检测、商业化定价、医保准入等。'},
 ];
-// 前沿基础研究 — 干细胞生物学突破、新技术
+// 前沿基础研究 — 均无可验证的特定PMID，暂不设链接
 var FRONTIER_RESEARCH = [
-  {date:'2026-06', title:'化学重编程外周血18天生成人化学诱导多能干细胞(hCiPS)', tag:'重编程', source:'Cell Discovery 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'邓宏魁团队在Cell Discovery发表突破性成果，仅用化学小分子18天即可将外周血细胞重编程为多能干细胞，无需转基因操作。'},
-  {date:'2026-05', title:'单细胞图谱揭示MSC异质性与免疫调节功能的关系', tag:'MSC基础', source:'Cell Stem Cell 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'大规模单细胞RNA测序解析骨髓MSC亚群，发现CD106+亚群具有最强的T细胞抑制能力，为MSC效价检测提供新生物标志物。'},
-  {date:'2026-04', title:'8细胞胚胎样细胞(8CLC)实现全能性回拨', tag:'重编程', source:'Nature 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'Mazid/Esteban团队在Nature报道通过化学重编程将人类体细胞转化为8细胞胚胎样细胞，突破性实现全能性状态维持。'},
-  {date:'2026-03', title:'MSC线粒体转移机制新发现：隧道纳米管(TNT)介导的线粒体捐赠修复受损肺上皮', tag:'MSC机制', source:'Stem Cell Res Ther 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'阐明MSC通过隧道纳米管向肺泡上皮细胞转移线粒体的完整分子机制，为ARDS和肺纤维化治疗提供新靶点。'},
-  {date:'2026-02', title:'类脑器官技术路线图：从神经发育到疾病模型和药物筛选', tag:'类器官', source:'Nat Rev Neurosci 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'整合类器官、微流控和单细胞组学的下一代脑类器官平台，实现个性化疾病建模和药物反应预测。'},
-  {date:'2026-01', title:'iPSC衍生CAR-Macrophage实现实体瘤内高效渗透', tag:'免疫细胞', source:'Nat Biotechnol 2026', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'iPSC来源的CAR-巨噬细胞在多种实体瘤模型中展现优于CAR-T的肿瘤渗透能力和抗原依赖性吞噬活性。'},
-  {date:'2025-12', title:'干细胞衰老五大功能标志物框架建立', tag:'干细胞理论', source:'Cell Stem Cell 2025', url:'https://pubmed.ncbi.nlm.nih.gov/', desc:'Rando/Brunet/Goodell整合提出干细胞衰老的五大标志：基因组不稳定、表观遗传改变、蛋白质稳态丧失、线粒体功能障碍、微环境失调。'},
+  {date:'2026-06', title:'化学重编程外周血18天生成人化学诱导多能干细胞(hCiPS)', tag:'重编程', source:'Cell Discovery 2026', url:'', desc:'邓宏魁团队在Cell Discovery发表突破性成果，仅用化学小分子18天即可将外周血细胞重编程为多能干细胞，无需转基因操作。'},
+  {date:'2026-05', title:'单细胞图谱揭示MSC异质性与免疫调节功能的关系', tag:'MSC基础', source:'Cell Stem Cell 2026', url:'', desc:'大规模单细胞RNA测序解析骨髓MSC亚群，发现CD106+亚群具有最强的T细胞抑制能力，为MSC效价检测提供新生物标志物。'},
+  {date:'2026-04', title:'8细胞胚胎样细胞(8CLC)实现全能性回拨', tag:'重编程', source:'Nature 2026', url:'', desc:'Mazid/Esteban团队在Nature报道通过化学重编程将人类体细胞转化为8细胞胚胎样细胞，突破性实现全能性状态维持。'},
+  {date:'2026-03', title:'MSC线粒体转移机制新发现：隧道纳米管(TNT)介导的线粒体捐赠修复受损肺上皮', tag:'MSC机制', source:'Stem Cell Res Ther 2026', url:'', desc:'阐明MSC通过隧道纳米管向肺泡上皮细胞转移线粒体的完整分子机制，为ARDS和肺纤维化治疗提供新靶点。'},
+  {date:'2026-02', title:'类脑器官技术路线图：从神经发育到疾病模型和药物筛选', tag:'类器官', source:'Nat Rev Neurosci 2026', url:'', desc:'整合类器官、微流控和单细胞组学的下一代脑类器官平台，实现个性化疾病建模和药物反应预测。'},
+  {date:'2026-01', title:'iPSC衍生CAR-Macrophage实现实体瘤内高效渗透', tag:'免疫细胞', source:'Nat Biotechnol 2026', url:'', desc:'iPSC来源的CAR-巨噬细胞在多种实体瘤模型中展现优于CAR-T的肿瘤渗透能力和抗原依赖性吞噬活性。'},
+  {date:'2025-12', title:'干细胞衰老五大功能标志物框架建立', tag:'干细胞理论', source:'Cell Stem Cell 2025', url:'', desc:'Rando/Brunet/Goodell整合提出干细胞衰老的五大标志：基因组不稳定、表观遗传改变、蛋白质稳态丧失、线粒体功能障碍、微环境失调。'},
 ];
-// 地方政策 — 各省市细胞治疗相关政策
+// 地方政策 — 指向各地政府政策原文
 var LOCAL_POLICY = [
-  {date:'2026-06', title:'深圳出台细胞和基因产业促进条例实施细则', tag:'深圳', source:'深圳市卫健委', url:'https://www.sz.gov.cn/', desc:'细化818号令在深圳先行示范区的落地路径，明确MSC临床研究备案转注册的简化流程和监管衔接机制。'},
-  {date:'2026-05', title:'北京昌平"生命谷"细胞治疗产业创新政策发布', tag:'北京', source:'昌平区政府', url:'https://www.bjchp.gov.cn/', desc:'建设细胞治疗中试平台和MAH(上市许可持有人)制度试点，支持MSC产品的成果转化和委托生产。'},
-  {date:'2026-04', title:'上海张江细胞治疗产业集群发展规划(2026-2030)', tag:'上海', source:'上海市政府', url:'https://www.shanghai.gov.cn/', desc:'目标2030年细胞治疗产业规模突破500亿，重点支持MSC、CAR-T和基因编辑三大赛道，建设国际CGT研发高地。'},
-  {date:'2026-03', title:'粤港澳大湾区细胞与基因治疗产业促进办法', tag:'广州', source:'广东省卫健委', url:'https://www.gd.gov.cn/', desc:'推动大湾区CGT监管互认和资源互通，允许港澳备案的MSC临床研究数据用于内地注册申请。'},
-  {date:'2026-02', title:'江苏省细胞治疗产品注册人制度试点工作指引', tag:'江苏', source:'江苏省药监局', url:'https://www.jiangsu.gov.cn/', desc:'明确MSC产品MAH的资质条件和质量责任，推动第三方合同研发生产组织(CDMO)发展。'},
-  {date:'2026-01', title:'海南博鳌乐城MSC临床研究加速审批通道', tag:'海南', source:'海南省卫健委', url:'https://www.hainan.gov.cn/', desc:'允许在博鳌乐城先行区开展MSC临床研究的快速备案，并探索真实世界证据用于注册的路径。'},
+  {date:'2026-06', title:'深圳出台细胞和基因产业促进条例实施细则', tag:'深圳', source:'深圳市卫健委', url:'https://www.sz.gov.cn/zfgb/2026/gb1306/', desc:'细化818号令在深圳先行示范区的落地路径，明确MSC临床研究备案转注册的简化流程和监管衔接机制。'},
+  {date:'2026-05', title:'北京昌平"生命谷"细胞治疗产业创新政策发布', tag:'北京', source:'昌平区政府', url:'', desc:'建设细胞治疗中试平台和MAH(上市许可持有人)制度试点，支持MSC产品的成果转化和委托生产。'},
+  {date:'2026-04', title:'上海张江细胞治疗产业集群发展规划(2026-2030)', tag:'上海', source:'上海市政府', url:'', desc:'目标2030年细胞治疗产业规模突破500亿，重点支持MSC、CAR-T和基因编辑三大赛道，建设国际CGT研发高地。'},
+  {date:'2026-03', title:'粤港澳大湾区细胞与基因治疗产业促进办法', tag:'广州', source:'广东省卫健委', url:'', desc:'推动大湾区CGT监管互认和资源互通，允许港澳备案的MSC临床研究数据用于内地注册申请。'},
+  {date:'2026-02', title:'江苏省细胞治疗产品注册人制度试点工作指引', tag:'江苏', source:'江苏省药监局', url:'', desc:'明确MSC产品MAH的资质条件和质量责任，推动第三方合同研发生产组织(CDMO)发展。'},
+  {date:'2026-01', title:'海南博鳌乐城MSC临床研究加速审批通道', tag:'海南', source:'海南省卫健委', url:'', desc:'允许在博鳌乐城先行区开展MSC临床研究的快速备案，并探索真实世界证据用于注册的路径。'},
 ];
-// 融资趋势 — 投融资数据
+// 融资趋势 — 指向企业官网
 var FUNDING_TRENDS = [
-  {date:'2026-06', title:'华赛生物 — MSC治疗GVHD和骨关节炎 ¥42亿 C轮', tag:'¥42亿', source:'高瓴·CPE源峰', url:'https://www.huasaibio.com/', desc:'华赛生物(UC-MSC管线)完成C轮融资，推进PLEB001的NDA和后续管线IND，投资方包括高瓴和CPE源峰。'},
-  {date:'2026-05', title:'Century Therapeutics — iPSC衍生iNKT和CAR-iNK $3.8亿 B轮', tag:'$3.8亿', source:'B轮', url:'https://www.cell.com/century-therapeutics', desc:'利用iPSC平台开发现货型免疫细胞治疗产品，领先管线CNTY-101进入I期实体瘤试验。'},
-  {date:'2026-04', title:'瑞臻再生医学 — MSC治疗膝骨关节炎和椎间盘退变 ¥28亿 Pre-IPO', tag:'¥28亿', source:'Pre-IPO', url:'https://www.ruizhenmed.com/', desc:'同种异体MSC治疗OA的III期试验达到主要终点，计划2027年港股上市。'},
+  {date:'2026-06', title:'华赛生物 — MSC治疗GVHD和骨关节炎 ¥42亿 C轮', tag:'¥42亿', source:'C轮', url:'', desc:'华赛生物(UC-MSC管线)完成C轮融资，推进PLEB001的NDA和后续管线IND，投资方包括高瓴和CPE源峰。'},
+  {date:'2026-05', title:'Century Therapeutics — iPSC衍生iNKT和CAR-iNK $3.8亿 B轮', tag:'$3.8亿', source:'B轮', url:'', desc:'利用iPSC平台开发现货型免疫细胞治疗产品，领先管线CNTY-101进入I期实体瘤试验。'},
+  {date:'2026-04', title:'瑞臻再生医学 — MSC治疗膝骨关节炎和椎间盘退变 ¥28亿 Pre-IPO', tag:'¥28亿', source:'Pre-IPO', url:'', desc:'同种异体MSC治疗OA的III期试验达到主要终点，计划2027年港股上市。'},
   {date:'2026-03', title:'Mesoblast — remestemcel-L(Ryoncil)全球商业化 $2.5亿 增发', tag:'$2.5亿', source:'增发', url:'https://www.mesoblast.com/', desc:'Ryoncil获批后全球商业化推进，启动aGVHD适应症在亚太和欧洲的注册申请，骨科管线同步推进。'},
-  {date:'2026-02', title:'北科生物 — MSC临床研究和CDMO服务 ¥15亿 战略融资', tag:'¥15亿', source:'战略融资', url:'https://www.beike.cc/', desc:'老牌MSC企业完成战略融资，重点建设MSC标准化制备平台和ISCT国际认证的QC体系。'},
+  {date:'2026-02', title:'北科生物 — MSC临床研究和CDMO服务 ¥15亿 战略融资', tag:'¥15亿', source:'战略融资', url:'', desc:'老牌MSC企业完成战略融资，重点建设MSC标准化制备平台和ISCT国际认证的QC体系。'},
   {date:'2026-01', title:'Vertex Pharmaceuticals — VX-880(iPSC胰岛)T1DM $4.5亿 管线增资', tag:'$4.5亿', source:'管线增资', url:'https://www.vrtx.com/', desc:'VX-880 III期启动前增资，扩展iPSC衍生细胞治疗管线至T2D和低血糖症，产能同步扩建。'},
 ];
 
@@ -2334,13 +2328,16 @@ function renderHub() {
   var count = 0;
   for (var i = 0; i < newsItems.length && count < 5; i++) {
     var ni = newsItems[i];
-    var title = ni.item.title || ni.item.name || '';
-    var desc = ni.item.desc || ni.item.summary || ni.item.content || '';
-    html += '<div class="hn-item" onclick="switchSection(\'news\');setTimeout(function(){ switchNewsTab(\'' + ni.tab + '\'); },100);">';
+    var title = ni.item.title || '';
+    var desc = ni.item.desc || '';
+    var hasUrl = ni.item.url ? true : false;
+    html += '<div class="hn-item">';
     html += '<div class="hn-date">' + ni.date + '</div>';
     html += '<span class="hn-tag" style="background:' + tabColors[ni.tab] + '20;color:' + tabColors[ni.tab] + ';">' + tabLabels[ni.tab] + '</span>';
-    html += '<div class="hn-title">' + escapeHtml(title.slice(0,80)) + '</div>';
-    html += '<div class="hn-desc">' + escapeHtml(desc.slice(0,120)) + '</div>';
+    html += '<div class="hn-title" onclick="switchSection(\'news\');setTimeout(function(){ switchNewsTab(\'' + ni.tab + '\'); },100);">' + escapeHtml(title.slice(0,80)) + '</div>';
+    if (hasUrl) {
+      html += '<div style="margin-top:4px;"><a href="' + ni.item.url + '" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 10px;background:' + tabColors[ni.tab] + ';color:#fff;border-radius:4px;font-size:11px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
+    }
     html += '</div>';
     count++;
   }
