@@ -75,14 +75,22 @@ body {
   font-size: 12px;
   color: #455A64;
   line-height: 1.6;
+}
+.disclaimer-bar .db-row1 {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.disclaimer-bar .db-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.disclaimer-bar .db-text { flex: 1; }
+.disclaimer-bar .db-text b { color: #00695C; }
+.disclaimer-bar .db-row2 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 6px;
   flex-wrap: wrap;
 }
-.disclaimer-bar .db-icon { font-size: 14px; flex-shrink: 0; }
-.disclaimer-bar .db-text { flex: 1; min-width: 200px; }
-.disclaimer-bar .db-text b { color: #00695C; }
 .disclaimer-bar .db-audience {
   display: inline-flex;
   align-items: center;
@@ -95,8 +103,18 @@ body {
   font-weight: 600;
   white-space: nowrap;
 }
+.disclaimer-bar .db-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #00695C;
+  font-size: 11px;
+  font-weight: 600;
+}
+.disclaimer-bar .db-contact b { color: #004D40; }
 @media (max-width: 768px) {
   .disclaimer-bar { padding: 8px 14px; font-size: 11px; }
+  .disclaimer-bar .db-contact { font-size: 10px; }
 }
 /* Copyright footer */
 .site-footer {
@@ -1195,6 +1213,14 @@ body { padding-bottom: 56px; }
   color: #E65100;
   line-height: 1.5;
 }
+.dash-source {
+  margin-top: 6px;
+  font-size: 10px;
+  color: #90A4AE;
+  line-height: 1.4;
+}
+.dash-source a { color: #00695C; text-decoration: none; }
+.dash-source a:hover { text-decoration: underline; }
 /* Market growth chart */
 .dash-market-chart {
   display: flex;
@@ -1723,18 +1749,18 @@ body { padding-bottom: 56px; }
 <div class="header">
   <div class="header-inner">
     <h1 onclick="goHome()">🧬 间充质干细胞信息库 <span class="subtitle">MSC Knowledge Hub</span></h1>
-    <div class="header-contact">
-      <span class="hc-item"><span class="hc-icon">💬</span> 微信/QQ（同号）：<b>401848919</b></span>
-      <span class="hc-sep"></span>
-      <span class="hc-item"><span class="hc-icon">📞</span> 咨询电话：<b>15932929299</b>（杨博士）</span>
-    </div>
   </div>
 </div>
 
 <div class="disclaimer-bar">
-  <span class="db-icon">📢</span>
-  <span class="db-text">本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。</span>
-  <span class="db-audience">👨‍⚕️ 适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
+  <div class="db-row1">
+    <span class="db-icon">📢</span>
+    <span class="db-text">本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</span>
+  </div>
+  <div class="db-row2">
+    <span class="db-audience">👨‍⚕️ 适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
+    <span class="db-contact">📋 内容建议及合作咨询：手机/微信 <b>15932929299</b> / <b>401848919</b></span>
+  </div>
 </div>
 
 <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -3214,6 +3240,7 @@ function renderMscDashboard() {
   h += '<div class="dash-metric"><div class="dm-num" style="color:#FF7043">' + totalInd + '</div><div class="dm-label">适应症数量</div><div class="dm-sub">含罕见病</div></div>';
   h += '<div class="dash-metric"><div class="dm-num" style="color:#5C6BC0">' + totalMscProducts + '</div><div class="dm-label">全球获批MSC产品</div><div class="dm-sub">8个国家/地区</div></div>';
   h += '</div>';
+  h += '<div class="dash-source">来源：本平台数据库（PubMed / ClinicalTrials.gov 检索 + 人工筛选整理）· 获批产品数据汇总自各国家/地区监管机构公开信息</div>';
 
   // Row 1: System distribution + Year trend
   h += '<div class="dash-grid">';
@@ -3229,6 +3256,7 @@ function renderMscDashboard() {
     h += '<span class="dh-val">' + s.count + '</span>';
     h += '</div>';
   });
+  h += '<div class="dash-source">来源：本平台数据库（按人体生理系统分类整理）</div>';
   h += '</div>';
 
   // Year trend
@@ -3247,6 +3275,7 @@ function renderMscDashboard() {
   });
   h += '</div>';
   h += '<div class="dash-year-note">⚠️ 以上数据仅统计<b>临床试验</b>与<b>案例报道</b>类文献，不含基础研究类文献（基础研究文献数量为临床文献的数十倍）。2025年发文量达<span style="color:#00695C;font-weight:700">123篇</span>创历史新高，2026年截至7月已有<span style="color:#00695C;font-weight:700">70篇</span>。</div>';
+  h += '<div class="dash-source">来源：本平台数据库（PubMed检索，按发表年份统计）</div>';
   h += '</div>';
 
   h += '</div>'; // end dash-grid
@@ -3268,6 +3297,7 @@ function renderMscDashboard() {
   h += '</div>';
   h += '</div>';
   h += '</div>';
+  h += '<div class="dash-source">来源：本平台数据库（按文献发表类型分类：临床试验 / 案例报道）</div>';
 
   // MSC products by region
   h += '<div class="dash-card">';
@@ -3278,6 +3308,7 @@ function renderMscDashboard() {
   });
   h += '</div>';
   h += '<div style="margin-top:10px;font-size:11px;color:#607D8B;line-height:1.5">日本与韩国各' + (regionCounts['日本']||0) + '款领跑，中国首款MSC药物(睿铂生)于2025年获批。</div>';
+  h += '<div class="dash-source">来源：各国家/地区监管机构（FDA / EMA / NMPA / PMDA / MFDS等）公开批准信息</div>';
   h += '</div>';
 
   h += '</div>'; // end dash-grid
@@ -3299,6 +3330,7 @@ function renderMscDashboard() {
     h += '</div>';
   });
   h += '<div style="margin-top:8px;font-size:11px;color:#607D8B;line-height:1.5">脐带MSC因免疫原性低、增殖能力强成为主流来源；脂肪MSC在肛瘘/克罗恩病领域表现突出。</div>';
+  h += '<div class="dash-source">来源：本平台获批产品数据库（按产品标注的细胞来源分类）</div>';
   h += '</div>';
 
   // Key milestones timeline
@@ -3312,6 +3344,7 @@ function renderMscDashboard() {
   h += '<div class="dash-tl-item"><div class="dash-tl-date">2025年1月</div><div class="dash-tl-text">NMPA批准<b>睿铂生</b>（艾米迈托赛注射液），中国首款获批干细胞药物</div></div>';
   h += '<div class="dash-tl-item"><div class="dash-tl-date">2026年5月</div><div class="dash-tl-text"><b>818号令</b>正式施行，中国细胞治疗双轨制监管落地</div></div>';
   h += '</div>';
+  h += '<div class="dash-source">来源：<a href="https://www.fda.gov/" target="_blank">FDA</a> · <a href="https://www.ema.europa.eu/" target="_blank">EMA</a> · <a href="https://www.nmpa.gov.cn/" target="_blank">NMPA</a> · <a href="https://www.mfds.go.kr/" target="_blank">MFDS</a> · <a href="https://isct.global/" target="_blank">ISCT</a> 各机构官方公告</div>';
   h += '</div>';
 
   h += '</div>'; // end dash-grid
@@ -3325,6 +3358,7 @@ function renderMscDashboard() {
   h += '2025年是中国MSC产业的里程碑年份——NMPA批准首款干细胞药物，818号令构建完整监管框架。';
   h += '随着ISCT 2025新标准将MSC重新定义为"间充质基质细胞"，行业正从干细胞分化范式转向<b style="color:#00695C">药物信号细胞</b>的旁分泌/免疫调节范式。';
   h += '</div>';
+  h += '<div class="dash-source">来源：<a href="https://isct.global/isct-2025-position-statement" target="_blank">ISCT 2025 Position Statement</a> · <a href="https://www.nmpa.gov.cn/" target="_blank">NMPA 818号令</a> · 本平台数据库统计</div>';
   h += '</div>';
 
   // ===== Section 2: Industry Market & Financing =====
@@ -3954,20 +3988,12 @@ document.addEventListener('dragstart', function(e) {
   <div class="sf-inner">
     <div class="sf-left">
       <div class="sf-title">🧬 间充质干细胞信息库 | MSC Knowledge Hub</div>
-      <div>基于 729 篇临床文献 · 19 个生理系统 · 138 类适应症 · 28 款全球获批MSC产品</div>
       <div class="sf-notice">
         <b>版权声明：</b>本网站所有内容（包括但不限于数据库结构、文献整理编排、行业分析报告、仪表盘图表设计、页面布局及源代码）均为原创，著作权归本平台所有。
         未经书面授权，任何单位及个人不得以任何方式复制、转载、摘编、镜像、传播或用于商业目的。
         经授权使用的内容应保留来源标注并链接至本站。如有侵权行为，将依法追究法律责任。
       </div>
       <div class="sf-copy">© 2025-2026 间充质干细胞信息库. All Rights Reserved. 保留所有权利.</div>
-    </div>
-    <div class="sf-right">
-      <div class="sf-contact">
-        <div class="sf-contact-item">💬 微信/QQ（同号）：<b>401848919</b></div>
-        <div class="sf-contact-item">📞 咨询电话：<b>15932929299</b>（杨博士）</div>
-        <div class="sf-contact-item">🌐 <a href="https://1984331-bit.github.io/stemcell-kb/" target="_blank">1984331-bit.github.io/stemcell-kb</a></div>
-      </div>
     </div>
   </div>
 </footer>
