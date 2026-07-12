@@ -447,6 +447,10 @@ body {
   font-size: 13px;
   color: var(--text-light);
 }
+.content-header .desc b {
+  color: var(--primary);
+  font-weight: 700;
+}
 /* Overview cards */
 .overview {
   display: grid;
@@ -2294,23 +2298,15 @@ function renderContent() {
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
-    overviewHtml += '<div class="content-header"><h2>临床文献数据库</h2><div class="desc">点击下方系统卡片或左侧导航树浏览文献，或在搜索框中输入关键词检索。</div></div>';
-
-    // Stats bar
-    overviewHtml += '<div class="lit-stats">';
-    overviewHtml += '<div class="ls-item">' + svgIcon('doc', 14) + ' <b>' + ALL_DATA.length + '</b> 篇文献</div>';
-    overviewHtml += '<div class="ls-item">' + svgIcon('hospital', 14) + ' <b>' + totalSystemsGlobal + '</b> 个系统</div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>临床文献数据</b></div>';
     var totalInds = 0;
     var indSet = new Set();
     ALL_DATA.forEach(function(d) { indSet.add(d.indication || '未分类'); });
     totalInds = indSet.size;
-    overviewHtml += '<div class="ls-item">' + svgIcon('clipboard', 14) + ' <b>' + totalInds + '</b> 个适应症</div>';
     var yrs = ALL_DATA.map(function(d){return d.year;}).filter(function(y){return y;});
     var yMin = yrs.length ? Math.min.apply(null, yrs) : '';
     var yMax = yrs.length ? Math.max.apply(null, yrs) : '';
-    overviewHtml += '<div class="ls-item">' + svgIcon('calendar', 14) + ' <b>' + yMin + '–' + yMax + '</b></div>';
-    overviewHtml += '</div>';
+    overviewHtml += '<div class="content-header"><h2>临床文献数据</h2><div class="desc">' + svgIcon('doc', 14) + ' <b>' + ALL_DATA.length + '</b> 篇文献 · <b>' + totalSystemsGlobal + '</b> 个系统 · <b>' + totalInds + '</b> 个适应症 · <b>' + yMin + '–' + yMax + '</b><br>点击下方系统卡片或左侧导航树浏览文献，或在搜索框中输入关键词检索。</div></div>';
 
     // Search box
     overviewHtml += '<div class="lit-search-box">';
@@ -2330,9 +2326,8 @@ function renderContent() {
     overviewHtml += '<div class="overview">';
     sysArr.forEach(([s, info]) => {
       overviewHtml += '<div class="overview-card" onclick="quickSelect(\'' + s.replace(/'/g, "\\'") + '\')">';
-      overviewHtml += '<div class="oc-count">' + info.count + '</div>';
-      overviewHtml += '<div class="oc-name">' + s + '</div>';
-      overviewHtml += '<div class="oc-stats">' + info.inds.size + ' 个适应症</div>';
+      overviewHtml += '<div class="oc-count" style="font-size:16px;line-height:1.3;">' + info.count + ' <span style="font-size:13px;font-weight:600;color:#666;">篇</span> · ' + info.inds.size + ' 个适应症</div>';
+      overviewHtml += '<div class="oc-name" style="font-size:15px;">' + s + '</div>';
       overviewHtml += '</div>';
     });
     overviewHtml += '</div>';
@@ -3598,9 +3593,9 @@ function renderHub() {
 
   html += '<div class="hub-section-title">板块入口</div>';
   html += '<div class="hub-cards">';
-  html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
+  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">库</div><div class="hc-title">临床文献数据</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
-  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">文</div><div class="hc-title">临床文献数据库</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
