@@ -634,7 +634,16 @@ body {
   margin-bottom: 4px;
   padding-bottom: 2px;
   border-bottom: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
+.detail-section-title svg { flex-shrink: 0; }
+.lit-stats .ls-item svg { flex-shrink: 0; }
+.dash-section-divider svg { flex-shrink: 0; vertical-align: -3px; margin-right: 2px; }
+.hub-section-title svg { flex-shrink: 0; vertical-align: -3px; margin-right: 2px; }
+.dash-year-note svg { flex-shrink: 0; vertical-align: -2px; margin-right: 2px; }
+.sort-stats svg { flex-shrink: 0; }
 .detail-row {
   display: flex;
   gap: 8px;
@@ -1711,6 +1720,8 @@ body { padding-bottom: 60px; }
 .prod-card .pc-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .prod-card .pc-generic { font-size: 13px; color: var(--text-light); margin-bottom: 8px; }
 .prod-card .pc-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; }
+.pc-meta span, .rc-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.pc-meta span svg, .rc-meta span svg { flex-shrink: 0; }
 .prod-card .pc-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
 /* Pick cards */
 .pick-card {
@@ -1788,8 +1799,8 @@ body { padding-bottom: 60px; }
       <span class="db-text"><b>平台声明：</b>本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</span>
     </div>
     <div class="db-row2">
-      <span class="db-audience">👨‍⚕️ 适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
-      <span class="db-contact">📋 内容建议及合作咨询：手机/微信 <b>15932929299</b> / <b>401848919</b></span>
+      <span class="db-audience"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M16 6c1.5 1 2 2 2 3M15 20c0-2 1-4 3-5"/></svg>适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
+      <span class="db-contact"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/></svg>内容建议及合作咨询：手机/微信 <b>15932929299</b> / <b>401848919</b></span>
     </div>
   </div>
 </div>
@@ -1944,7 +1955,7 @@ body { padding-bottom: 60px; }
   </main>
 </div>
 
-<button class="mobile-toggle" onclick="openSidebar()">☰</button>
+<button class="mobile-toggle" onclick="openSidebar()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
 
 <script>
@@ -2283,27 +2294,27 @@ function renderContent() {
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>临床文献数据库</b></div>';
     overviewHtml += '<div class="content-header"><h2>临床文献数据库</h2><div class="desc">点击下方系统卡片或左侧导航树浏览文献，或在搜索框中输入关键词检索。</div></div>';
 
     // Stats bar
     overviewHtml += '<div class="lit-stats">';
-    overviewHtml += '<div class="ls-item">📚 <b>' + ALL_DATA.length + '</b> 篇文献</div>';
-    overviewHtml += '<div class="ls-item">🏥 <b>' + totalSystemsGlobal + '</b> 个系统</div>';
+    overviewHtml += '<div class="ls-item">' + svgIcon('doc', 14) + ' <b>' + ALL_DATA.length + '</b> 篇文献</div>';
+    overviewHtml += '<div class="ls-item">' + svgIcon('hospital', 14) + ' <b>' + totalSystemsGlobal + '</b> 个系统</div>';
     var totalInds = 0;
     var indSet = new Set();
     ALL_DATA.forEach(function(d) { indSet.add(d.indication || '未分类'); });
     totalInds = indSet.size;
-    overviewHtml += '<div class="ls-item">📋 <b>' + totalInds + '</b> 个适应症</div>';
+    overviewHtml += '<div class="ls-item">' + svgIcon('clipboard', 14) + ' <b>' + totalInds + '</b> 个适应症</div>';
     var yrs = ALL_DATA.map(function(d){return d.year;}).filter(function(y){return y;});
     var yMin = yrs.length ? Math.min.apply(null, yrs) : '';
     var yMax = yrs.length ? Math.max.apply(null, yrs) : '';
-    overviewHtml += '<div class="ls-item">📅 <b>' + yMin + '–' + yMax + '</b></div>';
+    overviewHtml += '<div class="ls-item">' + svgIcon('calendar', 14) + ' <b>' + yMin + '–' + yMax + '</b></div>';
     overviewHtml += '</div>';
 
     // Search box
     overviewHtml += '<div class="lit-search-box">';
-    overviewHtml += '<span class="search-icon">🔍</span>';
+    overviewHtml += '<span class="search-icon">' + svgIcon('search', 16) + '</span>';
     overviewHtml += '<input type="text" id="searchInput" placeholder="搜索标题、作者、期刊、PMID、适应症…" oninput="debouncedSearch()">';
     overviewHtml += '</div>';
 
@@ -2364,7 +2375,7 @@ function renderContent() {
     const filtered = getSortedData(getFilteredData());
     const inds = [...new Set(filtered.map(d => d.indication))].sort();
 
-    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
+    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
     html += '<div class="content-header"><h2>' + escapeHtml(sysName) + '</h2><div class="desc">共 ' + filtered.length + ' 篇文献，' + inds.length + ' 个适应症。点击下方适应症卡片可筛选特定疾病，或向下滚动浏览全部文献。</div></div>';
 
     // Indication cards
@@ -2443,7 +2454,7 @@ function renderContent() {
     headerDesc = '共 ' + filtered.length + ' 篇文献';
   }
 
-  let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span>';
+  let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span>';
   if (currentFilter.system) {
     html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-action="sys" data-system="' + escapeHtml(currentFilter.system) + '" onclick="navTo(this)">' + escapeHtml(currentFilter.system) + '</span>';
   } else {
@@ -2455,13 +2466,13 @@ function renderContent() {
   // Search box in results view (so user can modify query)
   if (searchQuery) {
     html += '<div class="lit-search-box">';
-    html += '<span class="search-icon">🔍</span>';
+    html += '<span class="search-icon">' + svgIcon('search', 16) + '</span>';
     html += '<input type="text" id="searchInput" placeholder="搜索标题、作者、期刊、PMID、适应症…" oninput="debouncedSearch()">';
     html += '</div>';
   }
 
   if (filtered.length === 0) {
-    html += '<div class="no-results"><div class="icon">🔍</div><p>未找到匹配的文献</p></div>';
+    html += '<div class="no-results"><div class="icon">' + svgIcon('search', 32) + '</div><p>未找到匹配的文献</p></div>';
     content.innerHTML = html;
     updateFloatButtons();
     return;
@@ -2535,7 +2546,7 @@ function renderPaperCard(d, idx) {
 
   // Section 1: 临床信息
   card += '<div class="detail-section">';
-  card += '<div class="detail-section-title">🏥 临床信息</div>';
+  card += '<div class="detail-section-title">' + svgIcon('hospital', 16) + ' 临床信息</div>';
   if (d.indication) card += '<div class="detail-row"><span class="detail-label">适应症</span><span>' + escapeHtml(d.indication) + '</span></div>';
   if (d.system) card += '<div class="detail-row"><span class="detail-label">系统分类</span><span>' + escapeHtml(d.system) + '</span></div>';
   if (d.nct) card += '<div class="detail-row"><span class="detail-label">临床试验号</span><span><a href="https://clinicaltrials.gov/search?term=' + encodeURIComponent(d.nct) + '" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">' + escapeHtml(d.nct) + ' ↗</a></span></div>';
@@ -2544,7 +2555,7 @@ function renderPaperCard(d, idx) {
 
   // Section 1.5: 临床试验数据 (ClinicalTrials.gov + Abstract extraction)
   card += '<div class="detail-section">';
-  card += '<div class="detail-section-title">🧪 临床试验数据</div>';
+  card += '<div class="detail-section-title">' + svgIcon('flask', 16) + ' 临床试验数据</div>';
   // NCT trial data from ClinicalTrials.gov
   if (d.nct && d.nct.indexOf('NCT') === 0) {
     card += '<div class="trial-data-card" id="trial_' + idx + '"></div>';
@@ -2557,7 +2568,7 @@ function renderPaperCard(d, idx) {
 
   // Section 2: 出版信息
   card += '<div class="detail-section">';
-  card += '<div class="detail-section-title">📚 出版信息</div>';
+  card += '<div class="detail-section-title">' + svgIcon('doc', 16) + ' 出版信息</div>';
   if (d.journal) card += '<div class="detail-row"><span class="detail-label">期刊</span><span>' + escapeHtml(d.journal) + '</span></div>';
   if (d.year) card += '<div class="detail-row"><span class="detail-label">发表年份</span><span>' + escapeHtml(d.year) + '</span></div>';
   if (d.doi) card += '<div class="detail-row"><span class="detail-label">DOI</span><span><a href="https://doi.org/' + encodeURIComponent(d.doi) + '" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">' + escapeHtml(d.doi) + ' ↗</a></span></div>';
@@ -2567,7 +2578,7 @@ function renderPaperCard(d, idx) {
   // Section 3: 研究团队
   if (d.authors || d.institution) {
     card += '<div class="detail-section">';
-    card += '<div class="detail-section-title">👥 研究团队</div>';
+    card += '<div class="detail-section-title">' + svgIcon('users', 16) + ' 研究团队</div>';
     if (d.authors) card += '<div class="detail-row"><span class="detail-label">作者</span><span>' + escapeHtml(d.authors) + '</span></div>';
     if (d.institution) card += '<div class="detail-row"><span class="detail-label">发起单位</span><span>' + escapeHtml(d.institution) + '</span></div>';
     card += '</div>';
@@ -2576,14 +2587,14 @@ function renderPaperCard(d, idx) {
   // Section 4: PubMed摘要 (on-demand)
   if (d.pmid) {
     card += '<div class="detail-section">';
-    card += '<div class="detail-section-title">📄 论文摘要</div>';
+    card += '<div class="detail-section-title">' + svgIcon('file', 16) + ' 论文摘要</div>';
     card += '<div class="abstract-box" id="abstract_' + idx + '"></div>';
     card += '</div>';
   }
 
   // Section 5: 快捷链接
   card += '<div class="detail-section">';
-  card += '<div class="detail-section-title">🔗 快捷检索</div>';
+  card += '<div class="detail-section-title">' + svgIcon('search', 16) + ' 快捷检索</div>';
   card += '<div class="detail-quick-links">';
   if (d.pmid) {
     card += '<a class="ql-pubmed" href="https://pubmed.ncbi.nlm.nih.gov/' + encodeURIComponent(d.pmid) + '/" target="_blank">PubMed全文</a>';
@@ -3014,6 +3025,33 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// === Unified SVG line icons (matching nav bar style) ===
+function svgIcon(name, sz) {
+  sz = sz || 16;
+  var s = 'width="' + sz + '" height="' + sz + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+  var paths = {
+    home: '<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',
+    doc: '<path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    flask: '<path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/>',
+    news: '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+    file: '<path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 12h6M9 16h6"/>',
+    hospital: '<path d="M4 8h16v12H4z"/><path d="M10 8V4h4v4M9 14h6M12 11v6"/>',
+    calendar: '<path d="M4 5h16v15H4z"/><path d="M4 9h16M8 3v4M16 3v4"/>',
+    chart: '<path d="M3 17l5-5 4 3 8-8"/><path d="M16 7h4v4"/>',
+    pill: '<path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/>',
+    dna: '<path d="M6 3c0 6 12 6 12 12M18 3c0 6-12 6-12 12M6 3c0 3 12 3 12 0M18 21c0-3-12-3-12 0M8 6h8M8 18h8M7 9h10M7 15h10"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/>',
+    building: '<path d="M5 21V5l7-3v19M12 21V8l7 3v10M5 21h14M8 7v2M8 11v2M8 15v2M15 12v2M15 16v2"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+    warn: '<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/>',
+    users: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M16 6c1.5 1 2 2 2 3M15 20c0-2 1-4 3-5"/>',
+    clipboard: '<path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>'
+  };
+  return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
+}
+
 // === Section data: Regulations ===
 const REGULATIONS = [
   // --- 法律法规 ---
@@ -3323,7 +3361,7 @@ function renderMscDashboard() {
     h += '</div>';
   });
   h += '</div>';
-  h += '<div class="dash-year-note">⚠️ 以上数据仅统计<b>临床试验</b>与<b>案例报道</b>类文献，不含基础研究类文献（基础研究文献数量为临床文献的数十倍）。2025年发文量达<span style="color:#00695C;font-weight:700">123篇</span>创历史新高，2026年截至7月已有<span style="color:#00695C;font-weight:700">70篇</span>。</div>';
+  h += '<div class="dash-year-note">' + svgIcon('warn', 14) + ' 以上数据仅统计<b>临床试验</b>与<b>案例报道</b>类文献，不含基础研究类文献（基础研究文献数量为临床文献的数十倍）。2025年发文量达<span style="color:#00695C;font-weight:700">123篇</span>创历史新高，2026年截至7月已有<span style="color:#00695C;font-weight:700">70篇</span>。</div>';
   h += '<div class="dash-source">来源：本平台数据库（PubMed检索，按发表年份统计）</div>';
   h += '</div>';
 
@@ -3411,7 +3449,7 @@ function renderMscDashboard() {
   h += '</div>';
 
   // ===== Section 2: Industry Market & Financing =====
-  h += '<div class="dash-section-divider">📈 市场规模与产业资本</div>';
+  h += '<div class="dash-section-divider">' + svgIcon('chart', 18) + ' 市场规模与产业资本</div>';
 
   h += '<div class="dash-grid">';
 
@@ -3486,7 +3524,7 @@ function renderMscDashboard() {
   h += '</div>'; // end dash-grid
 
   // ===== Section 3: Commercial & Clinical =====
-  h += '<div class="dash-section-divider">💊 商业化进展与临床活跃度</div>';
+  h += '<div class="dash-section-divider">' + svgIcon('pill', 18) + ' 商业化进展与临床活跃度</div>';
 
   h += '<div class="dash-grid">';
 
@@ -3530,7 +3568,7 @@ function renderMscDashboard() {
   h += '</div>'; // end dash-grid
 
   // ===== Section 4: Emerging Tracks =====
-  h += '<div class="dash-section-divider">🧬 新兴赛道：MSC外泌体/EV疗法</div>';
+  h += '<div class="dash-section-divider">' + svgIcon('dna', 18) + ' 新兴赛道：MSC外泌体/EV疗法</div>';
 
   h += '<div class="dash-grid">';
   h += '<div class="dash-card" style="grid-column:1/-1">';
@@ -3566,7 +3604,7 @@ function renderHub() {
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '</div>';
 
-  html += '<div class="hub-section-title">📊 MSC行业分析报告</div>';
+  html += '<div class="hub-section-title">' + svgIcon('chart', 18) + ' MSC行业分析报告</div>';
   html += renderMscDashboard();
 
   content.innerHTML = html;
@@ -3591,7 +3629,7 @@ function renderNews() {
   var html = '';
 
   var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
   if (currentNewsTab !== 'home') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</b>';
   }
@@ -3673,7 +3711,7 @@ function renderNews() {
       if (hasLink) {
         html += '<div style="margin-top:6px;"><a href="' + n.url + '" target="_blank" style="display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:' + tc + ';color:#fff;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
       } else {
-        html += '<div style="margin-top:6px;font-size:11px;color:#999;">⚠ 暂无可验证原文链接（来源待补）</div>';
+        html += '<div style="margin-top:6px;font-size:11px;color:#999;">' + svgIcon('warn', 12) + ' 暂无可验证原文链接（来源待补）</div>';
       }
       html += '</div>';
     });
@@ -3695,7 +3733,7 @@ function togglePickDetail(i) {
 var regFilter = 'all';
 function renderRegulations() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="regulations" onclick="navTo(this)">监管政策汇编</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="regulations" onclick="navTo(this)">监管政策汇编</span>';
   if (regFilter !== 'all') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
   }
@@ -3744,8 +3782,8 @@ function renderRegulations() {
     html += '<div class="rc-title">' + escapeHtml(r.title) + '</div>';
     html += '<div class="rc-meta">';
     html += '<span class="rc-tag" style="background:' + r.typeBg + ';color:' + r.typeColor + ';">' + escapeHtml(r.type) + '</span>';
-    html += '<span>📅 ' + escapeHtml(r.date) + '</span>';
-    html += '<span>🏛️ ' + escapeHtml(r.issuer) + '</span>';
+    html += '<span>' + svgIcon('calendar', 12) + ' ' + escapeHtml(r.date) + '</span>';
+    html += '<span>' + svgIcon('building', 12) + ' ' + escapeHtml(r.issuer) + '</span>';
     if (r.url) html += '<span><a href="' + r.url + '" target="_blank" style="color:#185FA5;text-decoration:none;font-weight:600;">来源机构 ↗</a></span>';
     html += '</div>';
     html += '<div class="rc-desc">' + escapeHtml(r.desc) + '</div>';
@@ -3769,7 +3807,7 @@ function filterRegs(cat) {
 var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="products" onclick="navTo(this)">获批产品名录</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="products" onclick="navTo(this)">获批产品名录</span>';
   if (prodFilter !== 'all') {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(prodFilter) + '</b>';
   }
@@ -3833,10 +3871,10 @@ function renderProducts() {
     html += '<div class="pc-generic">' + escapeHtml(p.generic) + '</div>';
     html += '<div class="pc-meta">';
     html += '<span class="pc-tag" style="background:' + (p.cellColor||'#185FA5') + '20;color:' + (p.cellColor||'#185FA5') + ';">' + escapeHtml(p.cellType) + '</span>';
-    html += '<span>📅 ' + escapeHtml(p.approved) + '</span>';
-    html += '<span>🏥 ' + escapeHtml(p.indication) + '</span>';
-    html += '<span>🏢 ' + escapeHtml(p.company) + '</span>';
-    if (p.region) html += '<span>🌍 ' + escapeHtml(p.region) + '</span>';
+    html += '<span>' + svgIcon('calendar', 12) + ' ' + escapeHtml(p.approved) + '</span>';
+    html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(p.indication) + '</span>';
+    html += '<span>' + svgIcon('building', 12) + ' ' + escapeHtml(p.company) + '</span>';
+    if (p.region) html += '<span>' + svgIcon('globe', 12) + ' ' + escapeHtml(p.region) + '</span>';
     html += '</div>';
     if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
     html += '</div>';
@@ -3858,13 +3896,13 @@ function filterProducts(cat) {
 // === Editor picks section ===
 function renderEditorPicks() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
   html += '<div class="content-header"><h2>编辑精选 · 前沿解读</h2><div class="desc">干细胞领域里程碑文献深度解读，涵盖临床转化与基础研究两大维度。每篇聚焦核心发现、关键数据与行业启示。</div></div>';
 
   // Archive button
   if (PICKS_ARCHIVE.length > 0) {
     html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">';
-    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">📖 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
+    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">' + svgIcon('news', 14) + ' 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
     html += '</div>';
   }
 
@@ -3907,7 +3945,7 @@ function renderEditorPicks() {
 function renderPicksArchive() {
   currentPicksView = 'archive';
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
   html += '<div class="content-header"><h2>往期精选归档</h2><div class="desc">点击任一期查看完整内容。当前最新内容请返回编辑精选主页。</div></div>';
 
   // Back to current button
@@ -3937,7 +3975,7 @@ function renderPicksIssue(idx) {
   if (!issue) return;
   currentPicksView = idx;
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">🏠 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" data-action="archive" onclick="navTo(this)">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" data-action="archive" onclick="navTo(this)">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
   html += '<div class="content-header"><h2>' + escapeHtml(issue.title) + '</h2><div class="desc">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div></div>';
 
   // Back buttons
