@@ -402,26 +402,6 @@ body {
 .breadcrumb .crumb-sep { color: #BBB; }
 .breadcrumb b { color: var(--primary); }
 /* Back to system button */
-.back-to-sys-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 8px 16px;
-  border: 1.5px solid var(--primary-light);
-  border-radius: 8px;
-  background: var(--accent);
-  color: var(--primary-dark);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.back-to-sys-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
 /* Floating back button — dark glassmorphism */
 .float-back {
   position: fixed;
@@ -2441,11 +2421,6 @@ function renderContent() {
   }
   if (currentFilter.indication) html += ' <span class="crumb-sep">›</span> <b>' + escapeHtml(currentFilter.indication) + '</b>';
   html += '</div>';
-
-  // Back to system button (when in indication view)
-  if (currentFilter.system && currentFilter.indication) {
-    html += '<div style="margin-bottom:12px;"><button class="back-to-sys-btn" onclick="quickSelect(\'' + currentFilter.system.replace(/'/g, "\\'") + '\')">← 返回 ' + escapeHtml(currentFilter.system) + ' 全部适应症</button></div>';
-  }
 
   html += '<div class="content-header"><h2>' + headerTitle + '</h2><div class="desc">' + headerDesc + '</div></div>';
 
