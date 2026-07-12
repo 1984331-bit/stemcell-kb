@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>间充质干细胞信息库 | MSC Knowledge Hub</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -387,17 +387,17 @@ body {
 /* Floating back button */
 .float-back {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   right: 20px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--card-bg);
   color: var(--primary);
-  border: 2px solid var(--primary);
+  border: 1px solid var(--border);
   font-size: 22px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   z-index: 200;
   display: none;
   align-items: center;
@@ -407,6 +407,7 @@ body {
 .float-back:hover {
   background: var(--primary);
   color: #fff;
+  border-color: var(--primary);
   transform: scale(1.08);
 }
 .float-back.show { display: flex; }
@@ -823,20 +824,26 @@ body {
 .mobile-toggle {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   right: 20px;
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  font-size: 24px;
+  background: var(--card-bg);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  font-size: 22px;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   z-index: 200;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s;
+}
+.mobile-toggle:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 .sidebar-overlay {
   display: none;
@@ -890,15 +897,19 @@ body {
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
-  /* Mobile: float-back and toggle don't need to clear full-width nav */
+  /* Mobile: raise above system nav bar using safe-area */
   .float-back {
-    bottom: 20px;
+    bottom: max(40px, env(safe-area-inset-bottom));
     right: 20px;
   }
   .mobile-toggle {
     right: 20px;
-    bottom: 80px;
+    bottom: calc(max(40px, env(safe-area-inset-bottom)) + 60px);
     left: auto;
+  }
+  .bottom-nav {
+    bottom: max(40px, env(safe-area-inset-bottom));
+    left: 20px;
   }
 }
 /* === Hub Homepage === */
@@ -1618,7 +1629,7 @@ body { padding-bottom: 80px; }
 /* Bottom nav */
 .bottom-nav {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 20px;
   right: auto;
   background: var(--card-bg);
@@ -1642,7 +1653,7 @@ body { padding-bottom: 80px; }
   color: var(--text-light);
 }
 .bn-item:hover { background: var(--accent); }
-.bn-item.active { color: var(--primary); font-weight: 600; }
+.bn-item.active { color: var(--primary); font-weight: 600; background: var(--accent); }
 .bn-item .bn-icon { display: block; font-size: 18px; margin-bottom: 1px; }
 /* Regulation cards */
 .reg-card {
@@ -1721,8 +1732,6 @@ body { padding-bottom: 80px; }
 /* Mobile adjustments for hub */
 @media (max-width: 768px) {
   .hub-stats { grid-template-columns: repeat(2, 1fr); }
-  .float-back { bottom: 60px; }
-  .mobile-toggle { bottom: 60px; }
 }
 /* Scrollbar */
 .sidebar::-webkit-scrollbar { width: 5px; }
