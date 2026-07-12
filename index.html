@@ -561,11 +561,35 @@ body {
 .sort-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px 10px;
   margin-bottom: 12px;
   font-size: 13px;
   color: var(--text-light);
 }
+.sort-stats {
+  margin-left: auto;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sort-stats .stat-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.sort-stats .stat-dot::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.sort-stats .dot-a::before { background: #e74c3c; }
+.sort-stats .dot-b::before { background: #3498db; }
+.sort-stats .dot-c::before { background: #27ae60; }
 .sort-btn {
   padding: 4px 12px;
   border: 1.5px solid var(--border);
@@ -2365,10 +2389,16 @@ function renderContent() {
 
     // Sort bar
     html += '<div class="sort-bar">';
-    html += '<span>排序：</span>';
-    html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据等级优先</button>';
+    html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据优先</button>';
     html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新优先</button>';
-    html += '<span style="margin-left:auto;font-size:12px;">🔴RCT ' + filtered.filter(d=>d.evidence_level==='A').length + ' | 🔵试验 ' + filtered.filter(d=>d.evidence_level==='B').length + ' | 🟢病例 ' + filtered.filter(d=>d.evidence_level==='C').length + '</span>';
+    var nA = filtered.filter(function(d){return d.evidence_level==='A';}).length;
+    var nB = filtered.filter(function(d){return d.evidence_level==='B';}).length;
+    var nC = filtered.filter(function(d){return d.evidence_level==='C';}).length;
+    html += '<span class="sort-stats"><b style="color:var(--text);">' + filtered.length + '篇</b>';
+    html += '<span class="stat-dot dot-a">RCT ' + nA + '</span>';
+    html += '<span class="stat-dot dot-b">试验 ' + nB + '</span>';
+    html += '<span class="stat-dot dot-c">病例 ' + nC + '</span>';
+    html += '</span>';
     html += '</div>';
 
     const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
@@ -2442,10 +2472,16 @@ function renderContent() {
 
   // Sort bar
   html += '<div class="sort-bar">';
-  html += '<span>排序：</span>';
-  html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据等级优先</button>';
+  html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据优先</button>';
   html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新优先</button>';
-  html += '<span style="margin-left:auto;font-size:12px;">共 ' + sortedFiltered.length + ' 篇 | 🔴RCT ' + sortedFiltered.filter(d=>d.evidence_level==='A').length + ' | 🔵试验 ' + sortedFiltered.filter(d=>d.evidence_level==='B').length + ' | 🟢病例 ' + sortedFiltered.filter(d=>d.evidence_level==='C').length + '</span>';
+  var nA = sortedFiltered.filter(function(d){return d.evidence_level==='A';}).length;
+  var nB = sortedFiltered.filter(function(d){return d.evidence_level==='B';}).length;
+  var nC = sortedFiltered.filter(function(d){return d.evidence_level==='C';}).length;
+  html += '<span class="sort-stats"><b style="color:var(--text);">' + sortedFiltered.length + '篇</b>';
+  html += '<span class="stat-dot dot-a">RCT ' + nA + '</span>';
+  html += '<span class="stat-dot dot-b">试验 ' + nB + '</span>';
+  html += '<span class="stat-dot dot-c">病例 ' + nC + '</span>';
+  html += '</span>';
   html += '</div>';
 
   const totalPages = Math.ceil(sortedFiltered.length / PAGE_SIZE);
