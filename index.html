@@ -274,7 +274,7 @@ body {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 12px;
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 16px;
@@ -435,8 +435,8 @@ body {
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px 24px;
-  margin-bottom: 16px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
 }
 .content-header h2 {
   font-size: 22px;
@@ -456,14 +456,14 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .content-header {
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 20px 24px;
-  margin-bottom: 20px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
   border-left: 4px solid var(--primary);
 }
 .overview-card {
@@ -999,7 +999,7 @@ body { padding-bottom: 60px; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .hub-stat {
   background: var(--card-bg);
@@ -1022,7 +1022,7 @@ body { padding-bottom: 60px; }
   font-size: 15px;
   font-weight: 600;
   color: var(--text);
-  margin: 20px 0 10px;
+  margin: 8px 0 6px;
   padding-left: 4px;
   display: flex;
   align-items: center;
@@ -1032,11 +1032,11 @@ body { padding-bottom: 60px; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .hub-card {
   border-radius: 12px;
-  padding: 18px;
+  padding: 14px 16px;
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s;
   border: 1px solid transparent;
@@ -1107,11 +1107,11 @@ body { padding-bottom: 60px; }
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .dash-header {
   background: linear-gradient(135deg, #004D40, #00695C);
-  padding: 20px 24px;
+  padding: 16px 20px;
   color: #fff;
 }
 .dash-header h3 {
@@ -1124,13 +1124,13 @@ body { padding-bottom: 60px; }
   font-size: 12px;
   color: #B2DFDB;
 }
-.dash-body { padding: 20px; }
+.dash-body { padding: 16px; }
 /* Metric cards */
 .dash-metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .dash-metric {
   background: #F5F7FA;
@@ -1792,7 +1792,7 @@ body { padding-bottom: 60px; }
 .pick-card .pk-detail p { margin-bottom: 8px; }
 .pick-card .pk-detail .pk-highlight { background: #F5F0FF; border-left: 3px solid #534AB7; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; }
 /* Layout adjustments */
-.container.no-sidebar { grid-template-columns: 1fr; }
+.container.no-sidebar { grid-template-columns: 1fr; max-width: 1100px; }
 .container.no-sidebar .sidebar { display: none; }
 /* Mobile adjustments for hub */
 @media (max-width: 768px) {
