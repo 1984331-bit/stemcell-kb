@@ -890,17 +890,19 @@ body {
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
-  /* Mobile: float-back above bottom nav */
+  /* Mobile: float-back and toggle don't need to clear full-width nav */
   .float-back {
-    bottom: 60px;
+    bottom: 20px;
     right: 20px;
   }
   .mobile-toggle {
-    left: 20px;
+    right: 20px;
+    bottom: 80px;
+    left: auto;
   }
 }
 /* === Hub Homepage === */
-body { padding-bottom: 56px; }
+body { padding-bottom: 80px; }
 .hub-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1616,14 +1618,17 @@ body { padding-bottom: 56px; }
 /* Bottom nav */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 20px;
+  left: 20px;
+  right: auto;
   background: var(--card-bg);
-  border-top: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   display: flex;
   z-index: 180;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  max-width: calc(100vw - 100px);
+  overflow: hidden;
 }
 .bn-item {
   flex: 1;
