@@ -2326,8 +2326,8 @@ function renderContent() {
     overviewHtml += '<div class="overview">';
     sysArr.forEach(([s, info]) => {
       overviewHtml += '<div class="overview-card" onclick="quickSelect(\'' + s.replace(/'/g, "\\'") + '\')">';
-      overviewHtml += '<div class="oc-count" style="font-size:16px;line-height:1.3;">' + info.count + ' <span style="font-size:13px;font-weight:600;color:#666;">篇</span> · ' + info.inds.size + ' 个适应症</div>';
-      overviewHtml += '<div class="oc-name" style="font-size:15px;">' + s + '</div>';
+      overviewHtml += '<div class="oc-count">' + info.count + '</div>';
+      overviewHtml += '<div class="oc-name">' + s + ' <span style="font-size:12px;font-weight:400;color:var(--text-light);">· ' + info.inds.size + '适应症</span></div>';
       overviewHtml += '</div>';
     });
     overviewHtml += '</div>';
@@ -2386,9 +2386,9 @@ function renderContent() {
       var indName = item[0];
       var cnt = item[1];
       html += '<div class="overview-card ind-card" onclick="selectIndication(\'' + sysName.replace(/'/g, "\\'") + '\',\'' + indName.replace(/'/g, "\\'") + '\')">';
-      html += '<div class="oc-count">' + cnt + '</div>';
+      html += '<div class="oc-count">' + cnt + ' <span style="font-size:14px;font-weight:600;color:#666;">篇</span></div>';
       html += '<div class="oc-name">' + escapeHtml(indName) + '</div>';
-      html += '<div class="oc-stats">篇文献 · 点击筛选</div>';
+      html += '<div class="oc-stats">点击筛选</div>';
       html += '</div>';
     });
     html += '</div>';
@@ -3646,7 +3646,7 @@ function renderNews() {
   var totalCount = NEWS_FLASH.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
   html += '<div class="overview" style="margin-bottom:16px;">';
   html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="switchNewsTab(\'home\')">';
-  html += '<div class="oc-count">' + totalCount + '</div>';
+  html += '<div class="oc-count">' + totalCount + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
   html += '<div class="oc-name">全部资讯</div>';
   html += '<div class="oc-stats">最新5条 · 点击查看</div>';
   html += '</div>';
@@ -3752,16 +3752,16 @@ function renderRegulations() {
   // Category cards
   html += '<div class="overview" style="margin-bottom:16px;">';
   html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterRegs(\'all\')">';
-  html += '<div class="oc-count">' + REGULATIONS.length + '</div>';
+  html += '<div class="oc-count">' + REGULATIONS.length + ' <span style="font-size:14px;font-weight:600;color:#666;">份</span></div>';
   html += '<div class="oc-name">全部文件</div>';
   html += '<div class="oc-stats">点击查看全部</div>';
   html += '</div>';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
     html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterRegs(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + '</div>';
+    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;color:#666;">份</span></div>';
     html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-    html += '<div class="oc-stats">份文件 · 点击筛选</div>';
+    html += '<div class="oc-stats">点击筛选</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -3832,7 +3832,7 @@ function renderProducts() {
   // Category cards (always visible, like Regulations)
   html += '<div class="overview" style="margin-bottom:16px;">';
   html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
-  html += '<div class="oc-count">' + PRODUCTS.length + '</div>';
+  html += '<div class="oc-count">' + PRODUCTS.length + ' <span style="font-size:14px;font-weight:600;color:#666;">款</span></div>';
   html += '<div class="oc-name">全部产品</div>';
   html += '<div class="oc-stats">点击查看全部</div>';
   html += '</div>';
@@ -3841,7 +3841,7 @@ function renderProducts() {
     html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
     html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
     html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-    html += '<div class="oc-stats">款产品 · 点击筛选</div>';
+    html += '<div class="oc-stats">点击筛选</div>';
     html += '</div>';
   });
   html += '</div>';
