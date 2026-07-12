@@ -1662,7 +1662,7 @@ body { padding-bottom: 80px; }
   font-weight: 600;
   box-shadow: inset 0 -2px 0 #4DB6AC;
 }
-.bn-item .bn-icon { display: block; font-size: 17px; margin-bottom: 1px; }
+.bn-item .bn-icon { display: flex; justify-content: center; margin-bottom: 2px; }
 /* Regulation cards */
 .reg-card {
   background: var(--card-bg);
@@ -1922,11 +1922,11 @@ body { padding-bottom: 80px; }
 <button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
 
 <nav class="bottom-nav">
-  <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon">🏠</span>首页</button>
-  <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon">📚</span>文献</button>
-  <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon">📋</span>政策</button>
-  <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon">💊</span>产品</button>
-  <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon">📰</span>资讯</button>
+  <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>首页</button>
+  <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/></svg></span>文献</button>
+  <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>政策</button>
+  <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg></span>产品</button>
+  <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span>资讯</button>
 </nav>
 
 <script>
