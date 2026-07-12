@@ -565,19 +565,31 @@ body {
 .sort-bar {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px 10px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+  gap: 6px;
   margin-bottom: 12px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-light);
+}
+.sort-bar .sort-label {
+  font-size: 12px;
+  color: var(--text-light);
+  flex-shrink: 0;
 }
 .sort-stats {
   margin-left: auto;
   font-size: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 5px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.sort-stats .stat-sep {
+  color: var(--border);
+  font-size: 11px;
 }
 .sort-stats .stat-dot {
   display: inline-flex;
@@ -595,14 +607,15 @@ body {
 .sort-stats .dot-b::before { background: #3498db; }
 .sort-stats .dot-c::before { background: #27ae60; }
 .sort-btn {
-  padding: 4px 12px;
+  padding: 3px 10px;
   border: 1.5px solid var(--border);
   background: #fff;
   color: var(--text);
-  border-radius: 16px;
+  border-radius: 14px;
   cursor: pointer;
   font-size: 12px;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 .sort-btn.active {
   background: var(--primary);
@@ -2395,14 +2408,18 @@ function renderContent() {
 
     // Sort bar
     html += '<div class="sort-bar">';
-    html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据优先</button>';
-    html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新优先</button>';
+    html += '<span class="sort-label">排序：</span>';
+    html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据</button>';
+    html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新</button>';
     var nA = filtered.filter(function(d){return d.evidence_level==='A';}).length;
     var nB = filtered.filter(function(d){return d.evidence_level==='B';}).length;
     var nC = filtered.filter(function(d){return d.evidence_level==='C';}).length;
     html += '<span class="sort-stats"><b style="color:var(--text);">' + filtered.length + '篇</b>';
+    html += '<span class="stat-sep">|</span>';
     html += '<span class="stat-dot dot-a">RCT ' + nA + '</span>';
+    html += '<span class="stat-sep">|</span>';
     html += '<span class="stat-dot dot-b">试验 ' + nB + '</span>';
+    html += '<span class="stat-sep">|</span>';
     html += '<span class="stat-dot dot-c">病例 ' + nC + '</span>';
     html += '</span>';
     html += '</div>';
@@ -2478,14 +2495,18 @@ function renderContent() {
 
   // Sort bar
   html += '<div class="sort-bar">';
-  html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据优先</button>';
-  html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新优先</button>';
+  html += '<span class="sort-label">排序：</span>';
+  html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据</button>';
+  html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新</button>';
   var nA = sortedFiltered.filter(function(d){return d.evidence_level==='A';}).length;
   var nB = sortedFiltered.filter(function(d){return d.evidence_level==='B';}).length;
   var nC = sortedFiltered.filter(function(d){return d.evidence_level==='C';}).length;
   html += '<span class="sort-stats"><b style="color:var(--text);">' + sortedFiltered.length + '篇</b>';
+  html += '<span class="stat-sep">|</span>';
   html += '<span class="stat-dot dot-a">RCT ' + nA + '</span>';
+  html += '<span class="stat-sep">|</span>';
   html += '<span class="stat-dot dot-b">试验 ' + nB + '</span>';
+  html += '<span class="stat-sep">|</span>';
   html += '<span class="stat-dot dot-c">病例 ' + nC + '</span>';
   html += '</span>';
   html += '</div>';
