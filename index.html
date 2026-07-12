@@ -2422,8 +2422,6 @@ function renderContent() {
   if (currentFilter.indication) html += ' <span class="crumb-sep">›</span> <b>' + escapeHtml(currentFilter.indication) + '</b>';
   html += '</div>';
 
-  html += '<div class="content-header"><h2>' + headerTitle + '</h2><div class="desc">' + headerDesc + '</div></div>';
-
   // Search box in results view (so user can modify query)
   if (searchQuery) {
     html += '<div class="lit-search-box">';
@@ -2447,7 +2445,7 @@ function renderContent() {
   html += '<span>排序：</span>';
   html += '<button class="sort-btn ' + (currentSort==='evidence'?'active':'') + '" onclick="toggleSort(\'evidence\')">证据等级优先</button>';
   html += '<button class="sort-btn ' + (currentSort==='date'?'active':'') + '" onclick="toggleSort(\'date\')">最新优先</button>';
-  html += '<span style="margin-left:auto;font-size:12px;">🔴RCT ' + sortedFiltered.filter(d=>d.evidence_level==='A').length + ' | 🔵试验 ' + sortedFiltered.filter(d=>d.evidence_level==='B').length + ' | 🟢病例 ' + sortedFiltered.filter(d=>d.evidence_level==='C').length + '</span>';
+  html += '<span style="margin-left:auto;font-size:12px;">共 ' + sortedFiltered.length + ' 篇 | 🔴RCT ' + sortedFiltered.filter(d=>d.evidence_level==='A').length + ' | 🔵试验 ' + sortedFiltered.filter(d=>d.evidence_level==='B').length + ' | 🟢病例 ' + sortedFiltered.filter(d=>d.evidence_level==='C').length + '</span>';
   html += '</div>';
 
   const totalPages = Math.ceil(sortedFiltered.length / PAGE_SIZE);
