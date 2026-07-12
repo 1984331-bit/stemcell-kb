@@ -2342,8 +2342,8 @@ function renderContent() {
     var maxEv = Math.max(evCounts.A, evCounts.B, evCounts.C, evCounts.D, 1);
     var evColors = {A:'#e74c3c', B:'#3498db', C:'#27ae60', D:'#95a5a6'};
     var evLabels = {A:'A级 (RCT)', B:'B级 (临床试验)', C:'C级 (病例报告)', D:'D级 (其他)'};
-    overviewHtml += '<div class="content-header" style="margin-top:16px;"><h2 style="font-size:18px;">证据等级分布</h2></div>';
-    overviewHtml += '<div class="evidence-chart">';
+    overviewHtml += '<div class="evidence-chart" style="margin-top:16px;">';
+    overviewHtml += '<div style="font-size:18px;font-weight:700;color:var(--primary-dark);margin-bottom:12px;">证据等级分布</div>';
     ['A','B','C','D'].forEach(function(lv) {
       var pct = Math.round(evCounts[lv] / maxEv * 100);
       overviewHtml += '<div class="ev-bar-row"><div class="ev-bar-label">' + evLabels[lv] + '</div><div class="ev-bar-track"><div class="ev-bar-fill" style="width:' + pct + '%;background:' + evColors[lv] + ';"></div></div><div class="ev-bar-count">' + evCounts[lv] + '</div></div>';
@@ -2351,9 +2351,9 @@ function renderContent() {
     overviewHtml += '</div>';
 
     // Recent papers
-    const recent = [...ALL_DATA].sort((a,b) => (b.year||'').localeCompare(a.year||'')).slice(0, 10);
+    const recent = [...ALL_DATA].sort((a,b) => (b.year||'').localeCompare(a.year||'')).slice(0, 5);
     overviewHtml += '<div class="content-header" style="margin-top:16px;"><h2 style="font-size:18px;">最新文献</h2></div>';
-    overviewHtml += '<div class="paper-list">';
+    overviewHtml += '<div class="paper-list" style="max-width:860px;">';
     recent.forEach((d, i) => {
       overviewHtml += renderPaperCard(d, i);
     });
