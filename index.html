@@ -124,8 +124,8 @@ body {
 }
 .info-bar-tabs {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 4px;
   padding: 0 20px;
 }
 .info-tab {
@@ -142,8 +142,8 @@ body {
   transition: background 0.15s;
 }
 .info-tab.left { color: #00695C; }
-.info-tab.center { color: #6A1B9A; }
-.info-tab.right { color: #1565C0; }
+.info-tab.center { color: #00695C; }
+.info-tab.right { color: #1565C0; margin-left: auto; }
 .info-tab:hover { background: rgba(0,0,0,0.04); }
 .info-tab .it-arrow {
   transition: transform 0.2s;
@@ -195,15 +195,14 @@ body {
 .info-panel.team .ip-row { justify-content: center; }
 .team-grid {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
   padding-top: 6px;
 }
 .team-member {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
 }
 .team-dot {
@@ -2162,12 +2161,12 @@ body { padding-bottom: 60px; }
   <div class="info-panel team" id="panel-team">
     <div class="ip-inner">
     <div class="team-grid">
-      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">小虾</span><span class="team-role">总编辑</span></div>
-      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">觅证</span><span class="team-role">文献猎手</span></div>
-      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">闻风</span><span class="team-role">政策哨兵</span></div>
-      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">追光</span><span class="team-role">产品探针</span></div>
-      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">织卷</span><span class="team-role">数据管家</span></div>
-      <div class="team-member"><span class="team-dot human"></span><span class="team-name">杨老师</span><span class="team-role">审核员</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">小虾</span><span class="team-role">· 总编辑 — 统筹内容、整合发布、最终编排</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">觅证</span><span class="team-role">· 文献猎手 — 每日扫描PubMed，筛选高价值MSC临床文献</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">闻风</span><span class="team-role">· 政策哨兵 — 监控NMPA/FDA/EMA/ISCT监管动态</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">追光</span><span class="team-role">· 产品探针 — 追踪全球细胞治疗产品获批进展</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">织卷</span><span class="team-role">· 数据管家 — 数据库维护、去重分类、质量清洗</span></div>
+      <div class="team-member"><span class="team-dot human"></span><span class="team-name">杨老师</span><span class="team-role">· 审核员 — 最终审核、内容把关、方向决策</span></div>
     </div>
     </div>
   </div>
