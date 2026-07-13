@@ -2244,17 +2244,13 @@ body { padding-bottom: 60px; }
 .pick-dropdown-item.active { background: #FFF8E1; color: #E65100; font-weight: 600; }
 .pick-dropdown-item .pdi-title { font-size: 12px; color: #999; margin-top: 2px; }
 
-/* Picks accordion */
+/* Picks cards (always expanded) */
 .pk-acc { background: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 8px; border-left: 4px solid #E65100; overflow: hidden; transition: box-shadow 0.15s; }
 .pk-acc:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
-.pk-acc-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; cursor: pointer; user-select: none; }
+.pk-acc-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; }
 .pk-acc-badge { flex-shrink: 0; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
 .pk-acc-title { font-size: 14px; font-weight: 600; line-height: 1.4; flex: 1; min-width: 0; }
-.pk-acc-toggle { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-.pk-acc-toggle svg { color: #999; }
-.pk-acc.open .pk-acc-toggle { transform: rotate(180deg); }
-.pk-acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.pk-acc.open .pk-acc-body { max-height: 3000px; }
+.pk-acc-body { overflow: hidden; }
 .pk-acc-body-inner { padding: 0 16px 12px 16px; }
 .pk-acc-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
 .pk-acc-content { font-size: 13px; line-height: 1.8; }
@@ -4682,7 +4678,7 @@ function renderHub() {
   html += '<div class="report-entry amber" onclick="switchSection(\'picks\')">';
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('star', 18) + '<span>编辑精选 · 前沿解读</span></div>';
-  html += '<div class="report-entry-desc">里程碑文献深度解读 · ' + ALL_PICKS_ISSUES.length + '期 · 按期筛选</div>';
+  html += '<div class="report-entry-desc">重要文献深度解读 · 按期筛选</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -5772,25 +5768,14 @@ function filterProducts(cat) {
 function renderEditorPicks() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选</b></div>';
-  html += '<div class="content-desc">干细胞领域里程碑文献深度解读，涵盖临床转化、案例报道与基础研究三大维度，每篇聚焦核心发现、关键数据与行业启示。</div>';
+  html += '<div class="content-desc">干细胞领域重要文献深度解读，涵盖临床转化、案例报道与基础研究三大维度，每篇聚焦核心发现、关键数据与行业启示。</div>';
 
   // Default to latest issue
   if (currentPicksIssue === null || currentPicksIssue >= ALL_PICKS_ISSUES.length) {
     currentPicksIssue = ALL_PICKS_ISSUES.length - 1;
   }
 
-  // Issue selector row
-  html += '<div class="pick-issue-row">';
-  ALL_PICKS_ISSUES.forEach(function(issue, idx) {
-    var active = (idx === currentPicksIssue) ? ' active' : '';
-    html += '<div class="pick-issue-card' + active + '" onclick="switchPicksIssue(' + idx + ')">';
-    html += '<div class="pic-num">' + escapeHtml(issue.issue) + '</div>';
-    html += '<div class="pic-date">' + escapeHtml(issue.date) + '</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  // Dropdown selector for quick jump (especially when many issues)
+  // Dropdown selector for quick jump
   html += '<div class="pick-dropdown-wrap">';
   html += '<div class="pick-dropdown-btn" onclick="togglePicksDropdown(this)">';
   html += svgIcon('list', 14) + '<span>选择期数</span>' + svgIcon('chevron-down', 14);
@@ -5826,11 +5811,10 @@ function renderEditorPicks() {
     var cc = catColors[cat];
     html += '<div class="pick-section-header" style="border-left:4px solid ' + cc.color + ';padding:6px 0 6px 12px;margin:' + (cat === 'clinical' ? '12px' : '16px') + ' 0 8px;font-size:14px;font-weight:700;color:' + cc.color + ';">' + cc.name + '（' + picks.length + '篇）</div>';
     picks.forEach(function(p) {
-      html += '<div class="pk-acc" style="border-left-color:' + cc.color + ';" onclick="togglePickAcc(this)">';
+      html += '<div class="pk-acc" style="border-left-color:' + cc.color + ';">';
       html += '<div class="pk-acc-header">';
       html += '<span class="pk-acc-badge" style="background:' + cc.bg + ';color:' + cc.color + ';">' + escapeHtml(p.tag) + '</span>';
       html += '<span class="pk-acc-title">' + escapeHtml(p.title) + '</span>';
-      html += '<span class="pk-acc-toggle">' + svgIcon('chevron-down', 14) + '</span>';
       html += '</div>';
       html += '<div class="pk-acc-body"><div class="pk-acc-body-inner">';
       html += '<div class="pk-acc-meta">';
@@ -5852,10 +5836,6 @@ function switchPicksIssue(idx) {
   currentPicksIssue = idx;
   closePicksDropdown();
   renderEditorPicks();
-}
-
-function togglePickAcc(el) {
-  el.classList.toggle('open');
 }
 
 function togglePicksDropdown(btn) {
