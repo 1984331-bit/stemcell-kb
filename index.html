@@ -24,6 +24,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 /* Header */
 .header {
@@ -1112,6 +1113,10 @@ body { padding-bottom: 60px; }
 .hub-card.purple .hc-icon { background: #534AB7; }
 .hub-card.purple .hc-title { color: #26215C; }
 .hub-card.purple .hc-desc { color: #26215C; }
+.hub-card.rose { background: #FCE4EC; border-color: #EC8090; }
+.hub-card.rose .hc-icon { background: #C62852; }
+.hub-card.rose .hc-title { color: #880E35; }
+.hub-card.rose .hc-desc { color: #880E35; }
 /* Hub teal for news */
 .hub-card.teal { background: #E1F5EE; border-color: #5DCAA5; }
 .hub-card.teal .hc-icon { background: #00897B; }
@@ -1532,6 +1537,115 @@ body { padding-bottom: 60px; }
 @media (max-width: 768px) {
   .dash-exo-grid { grid-template-columns: 1fr; }
 }
+/* === Homepage Carousel === */
+.carousel-wrap {
+  position: relative;
+  margin-top: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 100%;
+}
+.carousel-track {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.carousel-slide.s1 { background: linear-gradient(135deg, #004D40 0%, #00695C 60%, #00897B 100%); color: #fff; }
+.carousel-slide.s2 { background: linear-gradient(135deg, #1A237E 0%, #283593 50%, #3949AB 100%); color: #fff; }
+.carousel-slide.s3 { background: linear-gradient(135deg, #BF360C 0%, #D84315 50%, #FF7043 100%); color: #fff; }
+.carousel-slide.s4 { background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #43A047 100%); color: #fff; }
+.carousel-slide.s5 { background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 50%, #8E24AA 100%); color: #fff; }
+.cs-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.cs-subtitle { font-size: 11px; opacity: 0.7; margin-bottom: 16px; }
+.cs-metrics { display: flex; gap: 24px; flex-wrap: wrap; }
+.cs-metric { text-align: center; }
+.cs-metric .csm-num { font-size: 36px; font-weight: 900; line-height: 1.1; }
+.cs-metric .csm-label { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+.cs-bars { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.cs-bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.cs-bar-name { width: 80px; text-align: right; opacity: 0.85; }
+.cs-bar-track { flex: 1; height: 20px; background: rgba(255,255,255,0.15); border-radius: 10px; overflow: hidden; }
+.cs-bar-fill { height: 100%; border-radius: 10px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; }
+.cs-bar-val { width: 32px; text-align: left; font-weight: 700; }
+.cs-donut-wrap { display: flex; align-items: center; gap: 24px; }
+.cs-donut {
+  width: 130px; height: 130px; border-radius: 50%;
+  position: relative; flex-shrink: 0;
+}
+.cs-donut-inner {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 80px; height: 80px;
+  background: rgba(0,0,0,0.3); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.cs-donut-num { font-size: 28px; font-weight: 900; }
+.cs-donut-label { font-size: 10px; opacity: 0.7; }
+.cs-legend { display: flex; flex-direction: column; gap: 8px; }
+.cs-legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.cs-legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+.cs-timeline { display: flex; flex-direction: column; gap: 8px; }
+.cs-tl-item { display: flex; gap: 10px; align-items: flex-start; }
+.cs-tl-date { font-size: 11px; font-weight: 700; white-space: nowrap; min-width: 60px; opacity: 0.8; padding-top: 1px; }
+.cs-tl-text { font-size: 12px; line-height: 1.5; opacity: 0.9; }
+.cs-yr-chart { display: flex; align-items: flex-end; gap: 6px; height: 120px; margin-top: 8px; }
+.cs-yr-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.cs-yr-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 4px; }
+.cs-yr-num { font-size: 10px; font-weight: 700; margin-bottom: 2px; }
+.cs-yr-label { font-size: 9px; opacity: 0.6; margin-top: 3px; }
+.cs-source { font-size: 10px; opacity: 0.5; margin-top: 12px; }
+/* Carousel controls */
+.carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.3); border: none; color: #fff;
+  font-size: 18px; cursor: pointer; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.carousel-btn:hover { background: rgba(0,0,0,0.5); }
+.carousel-btn.prev { left: 8px; }
+.carousel-btn.next { right: 8px; }
+.carousel-dots {
+  display: flex; justify-content: center; gap: 6px;
+  padding: 8px 0; background: #f5f5f5;
+}
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ccc; cursor: pointer; transition: background 0.2s;
+}
+.carousel-dot.active { background: #00695C; width: 24px; border-radius: 4px; }
+@media (max-width: 768px) {
+  .carousel-slide { padding: 16px 14px; }
+  .cs-metrics { gap: 12px; }
+  .cs-metric .csm-num { font-size: 24px; }
+  .cs-metric .csm-label { font-size: 10px; }
+  .carousel-btn { width: 30px; height: 30px; font-size: 14px; }
+  .cs-donut { width: 100px; height: 100px; }
+  .cs-donut-inner { width: 64px; height: 64px; }
+  .cs-donut-num { font-size: 22px; }
+  .cs-donut-wrap { gap: 14px; }
+  .cs-bar-name { width: 56px; font-size: 11px; }
+  .cs-bar-track { height: 16px; }
+  .cs-yr-chart { height: 80px; gap: 3px; }
+  .cs-yr-num { font-size: 8px; }
+  .cs-yr-label { font-size: 8px; }
+  .cs-tl-date { font-size: 10px; min-width: 48px; }
+  .cs-tl-text { font-size: 11px; }
+  .cs-title { font-size: 15px; }
+  .cs-subtitle { font-size: 10px; margin-bottom: 10px; }
+}
 /* Donut chart */
 .dash-donut-wrap {
   display: flex;
@@ -1822,6 +1936,10 @@ body { padding-bottom: 60px; }
 /* Mobile adjustments for hub */
 @media (max-width: 768px) {
   .hub-stats { grid-template-columns: repeat(2, 1fr); }
+  .hub-card { padding: 12px 14px; }
+  .hub-card .hc-icon { width: 28px; height: 28px; font-size: 13px; }
+  .hub-card .hc-title { font-size: 15px; }
+  .hub-card .hc-desc { font-size: 12px; }
 }
 /* Scrollbar */
 .sidebar::-webkit-scrollbar { width: 5px; }
@@ -2346,6 +2464,8 @@ function renderContent() {
   if (currentSection === 'products') { renderProducts(); return; }
   if (currentSection === 'news') { renderNews(); return; }
   if (currentSection === 'picks') { renderEditorPicks(); return; }
+  if (currentSection === 'intro') { renderIntro(); return; }
+  if (currentSection === 'institutions') { renderInstitutions(); return; }
 
   const filtered = getFilteredData();
 
@@ -3653,10 +3773,12 @@ function renderHub() {
   var html = '';
 
   html += '<div class="hub-cards">';
+  html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">识</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 科普导览</div></div>';
   html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">库</div><div class="hc-title">临床文献数据</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">策</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
+  html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">查</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
   html += '<div class="hub-section-title">' + svgIcon('chart', 18) + ' MSC行业分析报告</div>';
@@ -3666,7 +3788,204 @@ function renderHub() {
   updateFloatButtons();
 }
 
-// === News section (4 sub-tabs) ===
+// === Homepage Carousel ===
+var carouselIndex = 0;
+var carouselTimer = null;
+
+function renderHubCarousel() {
+  var totalRecords = ALL_DATA.length;
+  var totalSys = totalSystemsGlobal;
+  var totalInd = new Set(ALL_DATA.map(function(d){return d.indication;})).size;
+  var mscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';});
+  var totalMscProducts = mscProducts.length;
+
+  // System distribution top 6
+  var sysCounts = {};
+  ALL_DATA.forEach(function(d){ var s = d.system; sysCounts[s] = (sysCounts[s]||0)+1; });
+  var sysSorted = Object.keys(sysCounts).map(function(k){return {name:k,count:sysCounts[k]};}).sort(function(a,b){return b.count-a.count;});
+  var topSys = sysSorted.slice(0,6);
+  var maxSys = topSys[0].count;
+  var sysColors = ['#80CBC4','#4DB6AC','#26A69A','#00897B','#FF8A65','#FFAB91'];
+
+  // Type distribution
+  var trialCount = ALL_DATA.filter(function(d){return d.type==='临床试验';}).length;
+  var caseCount = ALL_DATA.filter(function(d){return d.type==='案例报道';}).length;
+  var trialPct = Math.round(trialCount/totalRecords*100);
+  var donutDeg = Math.round(trialPct*3.6);
+
+  // Year trend
+  var yearData = {};
+  ALL_DATA.forEach(function(d){ var y=d.year; if(y) yearData[y]=(yearData[y]||0)+1; });
+  var years = ['2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+  var yearVals = years.map(function(y){return yearData[y]||0;});
+  var maxYear = Math.max.apply(null, yearVals);
+
+  var h = '';
+  h += '<div class="carousel-wrap" id="hubCarousel">';
+  h += '<div class="carousel-track" id="carouselTrack">';
+
+  // Slide 1: Core metrics
+  h += '<div class="carousel-slide s1">';
+  h += '<div class="cs-title">MSC行业分析报告</div>';
+  h += '<div class="cs-subtitle">MSC Knowledge Hub | 基于' + totalRecords + '篇临床文献与' + totalMscProducts + '款获批产品 | 2026年7月</div>';
+  h += '<div class="cs-metrics">';
+  h += '<div class="cs-metric"><div class="csm-num">' + totalRecords + '</div><div class="csm-label">临床文献</div></div>';
+  h += '<div class="cs-metric"><div class="csm-num">' + totalSys + '</div><div class="csm-label">生理系统</div></div>';
+  h += '<div class="cs-metric"><div class="csm-num">' + totalInd + '</div><div class="csm-label">适应症</div></div>';
+  h += '<div class="cs-metric"><div class="csm-num">' + totalMscProducts + '</div><div class="csm-label">获批产品</div></div>';
+  h += '</div>';
+  h += '<div class="cs-source">来源：本平台数据库（PubMed检索+人工筛选整理）· 各监管机构公开信息</div>';
+  h += '</div>';
+
+  // Slide 2: Research type donut
+  h += '<div class="carousel-slide s2">';
+  h += '<div class="cs-title">研究类型分布</div>';
+  h += '<div class="cs-subtitle">临床试验 vs 案例报道</div>';
+  h += '<div class="cs-donut-wrap">';
+  h += '<div class="cs-donut" style="background:conic-gradient(#fff 0deg ' + donutDeg + 'deg, rgba(255,255,255,0.25) ' + donutDeg + 'deg 360deg);">';
+  h += '<div class="cs-donut-inner"><div class="cs-donut-num">' + trialPct + '%</div><div class="cs-donut-label">临床试验</div></div>';
+  h += '</div>';
+  h += '<div class="cs-legend">';
+  h += '<div class="cs-legend-item"><span class="cs-legend-dot" style="background:#fff"></span>临床试验 <b>' + trialCount + '篇</b></div>';
+  h += '<div class="cs-legend-item"><span class="cs-legend-dot" style="background:rgba(255,255,255,0.4)"></span>案例报道 <b>' + caseCount + '篇</b></div>';
+  h += '</div>';
+  h += '</div>';
+  h += '<div class="cs-source">来源：本平台数据库（按文献发表类型分类）</div>';
+  h += '</div>';
+
+  // Slide 3: System distribution
+  h += '<div class="carousel-slide s3">';
+  h += '<div class="cs-title">临床试验系统分布 Top 6</div>';
+  h += '<div class="cs-subtitle">按人体生理系统分类</div>';
+  h += '<div class="cs-bars">';
+  topSys.forEach(function(s,i){
+    var pct = Math.round(s.count/maxSys*100);
+    h += '<div class="cs-bar-row">';
+    h += '<span class="cs-bar-name">' + s.name + '</span>';
+    h += '<div class="cs-bar-track"><div class="cs-bar-fill" style="width:' + pct + '%;background:' + sysColors[i] + '">' + (pct>25?s.count:'') + '</div></div>';
+    h += '<span class="cs-bar-val">' + s.count + '</span>';
+    h += '</div>';
+  });
+  h += '</div>';
+  h += '<div class="cs-source">来源：本平台数据库（按人体生理系统分类整理）</div>';
+  h += '</div>';
+
+  // Slide 4: Year trend
+  h += '<div class="carousel-slide s4">';
+  h += '<div class="cs-title">年度文献趋势</div>';
+  h += '<div class="cs-subtitle">临床试验与案例报道（非基础研究）</div>';
+  h += '<div class="cs-yr-chart">';
+  years.forEach(function(y,i){
+    var val = yearVals[i];
+    var pct = Math.round(val/maxYear*100);
+    var c = i>=7?'#A5D6A7':(i>=4?'#66BB6A':'#388E3C');
+    h += '<div class="cs-yr-col">';
+    h += '<div class="cs-yr-num">' + val + '</div>';
+    h += '<div class="cs-yr-bar" style="height:' + Math.max(pct,4) + '%;background:' + c + '"></div>';
+    h += '<div class="cs-yr-label">\'' + y.slice(2) + '</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+  h += '<div class="cs-source">2025年' + yearVals[8] + '篇创历史新高 · 来源：PubMed检索按发表年份统计</div>';
+  h += '</div>';
+
+  // Slide 5: Key milestones
+  h += '<div class="carousel-slide s5">';
+  h += '<div class="cs-title">MSC行业关键里程碑</div>';
+  h += '<div class="cs-subtitle">2011-2026 全球监管进展</div>';
+  h += '<div class="cs-timeline">';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2011</span><span class="cs-tl-text">韩国KFDA批准CellGram，全球首个获批MSC药物（急性心肌梗死）</span></div>';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2012</span><span class="cs-tl-text">加拿大批准Prochymal（儿童GVHD）；韩国批准Cartistem（骨关节炎）</span></div>';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2018</span><span class="cs-tl-text">EMA批准Alofisel（克罗恩病肛瘘），首个EMA批准异体MSC疗法</span></div>';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2024.12</span><span class="cs-tl-text">FDA批准Ryoncil，首个FDA批准MSC疗法（儿科GVHD）</span></div>';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2025.01</span><span class="cs-tl-text">NMPA批准睿铂生，中国首款获批干细胞药物</span></div>';
+  h += '<div class="cs-tl-item"><span class="cs-tl-date">2026.05</span><span class="cs-tl-text">818号令正式施行，中国细胞治疗双轨制监管落地</span></div>';
+  h += '</div>';
+  h += '<div class="cs-source">来源：FDA · EMA · NMPA · MFDS · ISCT 各机构官方公告</div>';
+  h += '</div>';
+
+  h += '</div>'; // end track
+
+  // Controls
+  h += '<button class="carousel-btn prev" onclick="carouselSlide(-1)">&#8249;</button>';
+  h += '<button class="carousel-btn next" onclick="carouselSlide(1)">&#8250;</button>';
+  h += '<div class="carousel-dots" id="carouselDots">';
+  for (var i=0; i<5; i++) {
+    h += '<div class="carousel-dot' + (i===0?' active':'') + '" onclick="carouselGoTo(' + i + ')"></div>';
+  }
+  h += '</div>';
+  h += '</div>'; // end wrap
+
+  return h;
+}
+
+function initCarousel() {
+  carouselIndex = 0;
+  if (carouselTimer) clearInterval(carouselTimer);
+  carouselTimer = setInterval(function(){ carouselSlide(1); }, 5000);
+}
+
+function carouselSlide(dir) {
+  var track = document.getElementById('carouselTrack');
+  if (!track) return;
+  var slides = track.children.length;
+  carouselIndex = (carouselIndex + dir + slides) % slides;
+  track.style.transform = 'translateX(-' + (carouselIndex * 100) + '%)';
+  // Update dots
+  var dots = document.getElementById('carouselDots');
+  if (dots) {
+    Array.from(dots.children).forEach(function(d,i){
+      d.classList.toggle('active', i===carouselIndex);
+    });
+  }
+  // Reset timer
+  if (carouselTimer) clearInterval(carouselTimer);
+  carouselTimer = setInterval(function(){ carouselSlide(1); }, 5000);
+}
+
+function carouselGoTo(idx) {
+  var track = document.getElementById('carouselTrack');
+  if (!track) return;
+  carouselIndex = idx;
+  track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  var dots = document.getElementById('carouselDots');
+  if (dots) {
+    Array.from(dots.children).forEach(function(d,i){
+      d.classList.toggle('active', i===idx);
+    });
+  }
+  if (carouselTimer) clearInterval(carouselTimer);
+  carouselTimer = setInterval(function(){ carouselSlide(1); }, 5000);
+}
+
+// === Intro section (placeholder) ===
+function renderIntro() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>认识细胞治疗</b></div>';
+  html += '<div class="content-header"><h2>认识细胞治疗</h2><div class="desc">面向患者及公众的细胞治疗科普导览<br>本板块正在建设中，敬请期待。</div></div>';
+  html += '<div style="text-align:center;padding:60px 20px;color:var(--text-light);">';
+  html += '<div style="font-size:48px;margin-bottom:12px;">' + svgIcon('dna', 48) + '</div>';
+  html += '<div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">内容筹备中</div>';
+  html += '<div style="font-size:13px;">计划包含：什么是MSC · 能治哪些病 · 如何看待临床试验 · 患者常见问题FAQ</div>';
+  html += '</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// === Institutions section (placeholder) ===
+function renderInstitutions() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>备案机构查询</b></div>';
+  html += '<div class="content-header"><h2>备案机构查询</h2><div class="desc">818号令备案 · 全国细胞治疗中心<br>本板块正在建设中，敬请期待。</div></div>';
+  html += '<div style="text-align:center;padding:60px 20px;color:var(--text-light);">';
+  html += '<div style="font-size:48px;margin-bottom:12px;">' + svgIcon('hospital', 48) + '</div>';
+  html += '<div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">内容筹备中</div>';
+  html += '<div style="font-size:13px;">计划包含：全国备案细胞治疗机构名录 · 按地区/机构类型筛选 · 818令合规查询</div>';
+  html += '</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
 var currentNewsTab = 'home';
 var currentPicksView = null; // null=main, 'archive'=list, number=issue index
 
