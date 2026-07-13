@@ -4833,46 +4833,64 @@ function renderIntro() {
 
   html += '</div></div></div>';
 
-  // 3. MSC详解
+  // 3. 间充质干细胞与干细胞的区别
   html += '<div class="edu-panel" id="edu-p3">';
-  html += '<div class="edu-panel-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')">' + svgIcon('dna', 18) + '<span class="epq-text">间充质干细胞（MSC）详解</span>' + svgIcon('chevron-right', 18) + '</div>';
+  html += '<div class="edu-panel-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')">' + svgIcon('dna', 18) + '<span class="epq-text">间充质干细胞与干细胞的区别？</span>' + svgIcon('chevron-right', 18) + '</div>';
   html += '<div class="edu-panel-a"><div class="edu-panel-a-inner">';
-  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>本网站专注于MSC领域。</b>间充质干细胞（Mesenchymal Stromal Cells，MSC）是目前全球临床研究最多的成体干细胞类型，本平台收录了 <b>' + ALL_DATA.length + ' 篇</b>相关临床文献，覆盖 <b>' + totalSystemsGlobal + ' 个</b>生理系统、<b>136 个</b>适应症。以下从来源、机制和认知三个维度展开。</div></div>';
 
-  // 3a. MSC的来源 (sub-accordion)
-  html += '<div class="edu-sub" id="edu-p3-source">';
-  html += '<div class="edu-sub-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')">';
-  html += '<div class="esq-icon" style="background:#534AB7">' + svgIcon('flask', 18).replace('width=\"18\"', 'width=\"18\" height=\"18\"') + '</div>';
-  html += '<div class="esq-info"><div class="esq-name">MSC的四大来源</div><div class="esq-brief">脐带 · 骨髓 · 脂肪 · 脐带血</div></div>';
-  html += svgIcon('chevron-right', 18).replace('class=\"', 'class=\"esq-chevron ');
-  html += '</div>';
-  html += '<div class="edu-sub-a"><div class="edu-sub-a-inner">';
+  html += '<p>很多人听到"间充质干细胞"就以为它和其他干细胞一样能"分化再生"，其实不然。以下是MSC与常见干细胞的 key 区别：</p>';
+
+  html += '<h5>一、"干细胞"到底指什么？</h5>';
+  html += '<p>干细胞（Stem Cells）是一个<b>大类概念</b>，指具有自我更新和多向分化能力的细胞。按分化潜能分为：</p>';
+  html += '<ul>';
+  html += '<li><b>全能干细胞（Totipotent）：</b>受精卵，可发育为完整个体</li>';
+  html += '<li><b>多能干细胞（Pluripotent）：</b>胚胎干细胞（ESC）和诱导多能干细胞（iPSC），可分化为人体任何细胞类型</li>';
+  html += '<li><b>成体干细胞（Adult Stem Cells）：</b>存在于成体组织中的干细胞，分化潜能有限</li>';
+  html += '</ul>';
+  html += '<p>MSC属于<b>成体干细胞</b>类别，但它的分化能力远不如ESC和iPSC。</p>';
+
+  html += '<h5>二、MSC vs 胚胎干细胞（ESC）</h5>';
   html += '<div class="edu-source-grid">';
-  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脐带</div><div class="es-desc">最常用 · 免疫原性低 · 增殖力强</div></div>';
-  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">骨髓</div><div class="es-desc">最早发现 · 经典来源 · 采集有创</div></div>';
-  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脂肪</div><div class="es-desc">储量丰富 · 取材方便 · 脂肪组织提取</div></div>';
-  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脐带血</div><div class="es-desc">可冻存 · 含量较低 · 多与骨髓配用</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">来自脐带/骨髓等成体组织 · 无伦理争议 · 分化范围有限（骨/软骨/脂肪）</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#993C1D">ESC</div><div class="es-desc">来自早期胚胎 · 有伦理争议 · 可分化为人体任何细胞</div></div>';
   html += '</div>';
-  html += '<p style="margin-top:8px;">不同来源的MSC在表面标志物上相似，但在<b>增殖能力、分泌因子谱和免疫调节能力</b>上存在差异。脐带来源（UC-MSC）因采集无创、免疫原性低、增殖力强，已成为近年临床研究的主流选择。</p>';
-  html += '</div></div></div>';
 
-  // 3b. MSC的三大机制 (sub-accordion)
-  html += '<div class="edu-sub" id="edu-p3-mech">';
-  html += '<div class="edu-sub-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')">';
-  html += '<div class="esq-icon" style="background:#534AB7">' + svgIcon('chart', 18).replace('width=\"18\"', 'width=\"18\" height=\"18\"') + '</div>';
-  html += '<div class="esq-info"><div class="esq-name">MSC发挥作用的三大机制</div><div class="esq-brief">免疫调节 · 旁分泌修复 · 归巢效应</div></div>';
-  html += svgIcon('chevron-right', 18).replace('class=\"', 'class=\"esq-chevron ');
+  html += '<h5>三、MSC vs 造血干细胞（HSC）</h5>';
+  html += '<div class="edu-source-grid">';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">免疫调节+旁分泌修复 · 不需清髓 · 安全性高 · 疗效以改善症状为主</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#D32F2F">HSC</div><div class="es-desc">重建造血系统 · 需清髓预处理 · 风险较高 · 可治愈血液系统疾病</div></div>';
   html += '</div>';
-  html += '<div class="edu-sub-a"><div class="edu-sub-a-inner">';
-  html += '<div class="edu-mech-grid">';
-  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('shield', 22) + '</div><div class="em-title">免疫调节</div><div class="em-desc">通过分泌PGE2、IDO等因子，抑制过度活跃的免疫反应，用于GVHD、自身免疫病</div></div>';
-  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('pill', 22) + '</div><div class="em-title">旁分泌修复</div><div class="em-desc">分泌VEGF、HGF、FGF等生长因子，促进血管新生和组织修复，而非直接分化替代</div></div>';
-  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('search', 22) + '</div><div class="em-title">归巢效应</div><div class="em-desc">静脉输注后向损伤部位"归巢"，在缺血、炎症区域富集发挥作用</div></div>';
-  html += '</div>';
-  html += '</div></div></div>';
+  html += '<p>这是患者最容易混淆的一点：<b>骨髓移植移植的是HSC，不是MSC</b>。MSC在造血干细胞移植中仅作为辅助，帮助预防GVHD。</p>';
 
-  // 3c. ISCT 2025 认知 (always visible, short callout)
-  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>重要认知：</b>MSC不是"万能干细胞"。根据ISCT 2025最新立场文件，MSC应称为"间充质<strong>基质</strong>细胞"（Stromal Cells），其核心作用是<b>药物信号细胞</b>——通过旁分泌和免疫调节发挥短期效果，而非分化替代受损组织。临床疗效取决于<b>剂量、疗程、给药途径和细胞质量</b>。</div></div>';
+  html += '<h5>四、MSC vs 诱导多能干细胞（iPSC）</h5>';
+  html += '<div class="edu-source-grid">';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">原代细胞 · 直接使用 · 无致瘤风险 · 但增殖代数有限</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:#185FA5">iPSC</div><div class="es-desc">重编程细胞 · 需定向分化 · 有致瘤风险 · 理论上可无限增殖</div></div>';
+  html += '</div>';
+
+  html += '<h5>五、最关键的区别：MSC其实是"基质细胞"</h5>';
+  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>名称更正：</b>MSC原称"间充质<b>干</b>细胞"（Mesenchymal Stem Cells），但国际细胞治疗协会（ISCT）2025年立场文件正式将其更名为"间充质<b>基质</b>细胞"（Mesenchymal <b>Stromal</b> Cells），取消了三系分化要求。</div></div>';
+  html += '<p>更名的核心原因：大量临床研究表明，MSC在体内<b>并不通过分化替代受损组织</b>来发挥作用，而是通过以下方式：</p>';
+  html += '<ul>';
+  html += '<li><b>免疫调节：</b>分泌PGE2、IDO等因子，抑制过度免疫反应</li>';
+  html += '<li><b>旁分泌修复：</b>分泌VEGF、HGF、FGF等生长因子，促进自身组织修复</li>';
+  html += '<li><b>归巢效应：</b>向损伤和炎症部位迁移，在局部发挥作用</li>';
+  html += '</ul>';
+  html += '<p>因此，MSC的核心定位是<b>"药物信号细胞"</b>（Medicine Signaling Cells）——它更像一个"临时急救员"，到现场释放信号分子调动机体自身修复，而非永久替代受损细胞。这也是为什么MSC疗效通常是<b>短期的</b>，可能需要<b>多次给药</b>。</p>';
+
+  html += '<h5>六、一表看懂区别</h5>';
+  html += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<thead><tr style="background:#EEEDFE;color:#26215C;"><th style="padding:8px;text-align:left;border:1px solid #DDD;">特性</th><th style="padding:8px;text-align:center;border:1px solid #DDD;">MSC</th><th style="padding:8px;text-align:center;border:1px solid #DDD;">ESC/iPSC</th><th style="padding:8px;text-align:center;border:1px solid #DDD;">HSC</th></tr></thead>';
+  html += '<tbody>';
+  html += '<tr><td style="padding:8px;border:1px solid #DDD;">分化潜能</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">有限（骨/软骨/脂肪）</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">全能（任何细胞）</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">仅血液系统</td></tr>';
+  html += '<tr style="background:#FAFAFC;"><td style="padding:8px;border:1px solid #DDD;">主要作用</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">免疫调节+旁分泌</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">分化替代</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">重建造血</td></tr>';
+  html += '<tr><td style="padding:8px;border:1px solid #DDD;">伦理争议</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">无</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">ESC有 / iPSC无</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">无</td></tr>';
+  html += '<tr style="background:#FAFAFC;"><td style="padding:8px;border:1px solid #DDD;">致瘤风险</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">极低</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">有（畸胎瘤）</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">无</td></tr>';
+  html += '<tr><td style="padding:8px;border:1px solid #DDD;">免疫排斥</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">低（可异体使用）</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">需自体或配型</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">需严格配型</td></tr>';
+  html += '<tr style="background:#FAFAFC;"><td style="padding:8px;border:1px solid #DDD;">清髓预处理</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">不需要</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">视情况</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">必需</td></tr>';
+  html += '<tr><td style="padding:8px;border:1px solid #DDD;">疗效特点</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">短期·可能需多次</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">长期/永久</td><td style="padding:8px;text-align:center;border:1px solid #DDD;">永久重建</td></tr>';
+  html += '</tbody></table></div>';
+
   html += '</div></div></div>';
 
   // 4. MSC能治哪些病
