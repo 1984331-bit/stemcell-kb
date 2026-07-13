@@ -1117,53 +1117,72 @@ body { padding-bottom: 60px; }
 
 .hub-tags {
   margin: 6px 0 4px;
-  padding: 10px 14px;
+  padding: 12px 14px 10px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(135deg, rgba(0,105,92,0.06), rgba(0,151,167,0.05));
+  border: 1px solid rgba(0,137,123,0.12);
 }
 .hub-tags-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-left: 2px;
 }
+.hub-tags-label svg { color: #FF7043; }
 .hub-tags-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
 }
 .hub-tag {
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
+  align-items: baseline;
+  gap: 5px;
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 12px;
-  color: var(--text);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
   white-space: nowrap;
+  font-weight: 500;
+  line-height: 1.3;
 }
-.hub-tag:hover {
-  background: rgba(0,137,123,0.15);
-  border-color: #00897B;
-  color: #00897B;
-}
-.hub-tag:active { transform: scale(0.96); }
-.hub-tag-count {
+.hub-tag .ht-count {
   font-size: 10px;
-  color: var(--text-light);
-  background: rgba(255,255,255,0.08);
-  padding: 1px 5px;
-  border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
+  opacity: 0.7;
 }
+/* Heat tiers */
+.hub-tag.t1 {
+  background: #00695C; color: #fff;
+  font-size: 13px;
+}
+.hub-tag.t1 .ht-count { color: #B2DFDB; }
+.hub-tag.t2 {
+  background: #00897B; color: #fff;
+  font-size: 13px;
+}
+.hub-tag.t2 .ht-count { color: #B2DFDB; }
+.hub-tag.t3 {
+  background: #4DB6AC; color: #004D40;
+  font-size: 12px;
+}
+.hub-tag.t3 .ht-count { color: #00695C; }
+.hub-tag.t4 {
+  background: #E0F2F1; color: #00695C;
+  border: 1px solid #B2DFDB;
+  font-size: 12px;
+}
+.hub-tag.t4 .ht-count { color: #00897B; }
+.hub-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,105,92,0.2);
+  filter: brightness(1.08);
+}
+.hub-tag:active { transform: translateY(0) scale(0.97); }
 @media (max-width: 768px) {
   .hub-cards { gap: 8px; min-width: 0; }
   .hub-card { padding: 10px 12px; min-width: 0; overflow: hidden; }
@@ -3357,7 +3376,8 @@ function svgIcon(name, sz) {
     users: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M16 6c1.5 1 2 2 2 3M15 20c0-2 1-4 3-5"/>',
     clipboard: '<path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
-    'chevron-right': '<path d="M9 6l6 6-6 6"/>'
+    'chevron-right': '<path d="M9 6l6 6-6 6"/>',
+    'flame': '<path d="M12 3c0 4-6 5-6 11a6 6 0 0012 0c0-2-1-3-2-4 0 1-1 2-2 2 0-3-2-6-2-9z"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -3940,15 +3960,17 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  // Hot search tags
+  // Hot search tags with heat tiers
   var indCounts = {};
   ALL_DATA.forEach(function(d){ var ind = d.indication; if (ind) indCounts[ind] = (indCounts[ind]||0)+1; });
   var topInds = Object.keys(indCounts).map(function(k){return {name:k,count:indCounts[k]};}).sort(function(a,b){return b.count-a.count;}).slice(0,14);
+  var maxC = topInds[0].count;
   html += '<div class="hub-tags">';
-  html += '<div class="hub-tags-label">' + svgIcon('search', 13) + ' 热门搜索</div>';
+  html += '<div class="hub-tags-label">' + svgIcon('flame', 14) + ' 热门搜索</div>';
   html += '<div class="hub-tags-cloud">';
   topInds.forEach(function(t){
-    html += '<span class="hub-tag" onclick="searchTag(\'' + t.name.replace(/'/g,"\\'") + '\')">' + t.name + '<span class="hub-tag-count">' + t.count + '</span></span>';
+    var tier = t.count >= maxC * 0.6 ? 't1' : (t.count >= maxC * 0.3 ? 't2' : (t.count >= maxC * 0.12 ? 't3' : 't4'));
+    html += '<span class="hub-tag ' + tier + '" onclick="searchTag(\'' + t.name.replace(/'/g,"\\'") + '\')">' + t.name + '<span class="ht-count">' + t.count + '</span></span>';
   });
   html += '</div></div>';
 
