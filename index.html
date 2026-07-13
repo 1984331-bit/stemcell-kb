@@ -1114,6 +1114,56 @@ body { padding-bottom: 60px; }
   flex-shrink: 0;
 }
 .report-entry-right svg { color: #00897B; }
+
+.hub-tags {
+  margin: 6px 0 4px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.hub-tags-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.hub-tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hub-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.hub-tag:hover {
+  background: rgba(0,137,123,0.15);
+  border-color: #00897B;
+  color: #00897B;
+}
+.hub-tag:active { transform: scale(0.96); }
+.hub-tag-count {
+  font-size: 10px;
+  color: var(--text-light);
+  background: rgba(255,255,255,0.08);
+  padding: 1px 5px;
+  border-radius: 8px;
+  font-weight: 600;
+}
 @media (max-width: 768px) {
   .hub-cards { gap: 8px; min-width: 0; }
   .hub-card { padding: 10px 12px; min-width: 0; overflow: hidden; }
@@ -3890,8 +3940,34 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
+  // Hot search tags
+  var indCounts = {};
+  ALL_DATA.forEach(function(d){ var ind = d.indication; if (ind) indCounts[ind] = (indCounts[ind]||0)+1; });
+  var topInds = Object.keys(indCounts).map(function(k){return {name:k,count:indCounts[k]};}).sort(function(a,b){return b.count-a.count;}).slice(0,14);
+  html += '<div class="hub-tags">';
+  html += '<div class="hub-tags-label">' + svgIcon('search', 13) + ' 热门搜索</div>';
+  html += '<div class="hub-tags-cloud">';
+  topInds.forEach(function(t){
+    html += '<span class="hub-tag" onclick="searchTag(\'' + t.name.replace(/'/g,"\\'") + '\')">' + t.name + '<span class="hub-tag-count">' + t.count + '</span></span>';
+  });
+  html += '</div></div>';
+
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+function searchTag(query) {
+  saveNavState();
+  currentSection = 'literature';
+  searchQuery = query.toLowerCase();
+  currentFilter = { system: null, indication: null };
+  currentPage = 1;
+  updateBottomNav('literature');
+  updateLayout('literature');
+  pushHistory();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
 }
 
 // === Report page (full dashboard) ===
