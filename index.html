@@ -5346,21 +5346,26 @@ function renderProducts() {
     '其他细胞治疗': '#185FA5'
   };
 
-  html += '<div class="content-header"><h2>获批产品名录</h2><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
 
-  // Category cards (always visible, like Regulations)
-  html += '<div class="overview" style="margin-bottom:16px;">';
-  html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
-  html += '<div class="oc-count">' + PRODUCTS.length + ' <span style="font-size:14px;font-weight:600;color:#666;">款</span></div>';
-  html += '<div class="oc-name">全部产品</div>';
-  html += '<div class="oc-stats">点击查看全部</div>';
+  // Category cards — 5 in one row
+  var catShortNames = {
+    '间充质干细胞(MSC)': 'MSC',
+    '基因修饰HSC': '基因修饰HSC',
+    'iPSC诱导多能干细胞': 'iPSC',
+    '其他细胞治疗': '其他'
+  };
+  html += '<div class="reg-cat-row">';
+  html += '<div class="reg-cat-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterProducts(\'all\')">';
+  html += '<div class="rcc-countline"><span class="rcc-count">' + PRODUCTS.length + '</span><span class="rcc-unit"> 款</span></div>';
+  html += '<div class="rcc-name">全部产品</div>';
   html += '</div>';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
-    html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;">款</span></div>';
-    html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-    html += '<div class="oc-stats">点击筛选</div>';
+    var shortName = catShortNames[cat] || cat;
+    html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</span><span class="rcc-unit"> 款</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(shortName) + '</div>';
     html += '</div>';
   });
   html += '</div>';
