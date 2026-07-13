@@ -69,9 +69,9 @@ body {
 }
 .header-nav .bn-item {
   flex: none;
-  height: 34px;
-  min-width: 48px;
-  padding: 0 8px;
+  height: 40px;
+  min-width: 56px;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +80,7 @@ body {
   transition: all 0.15s;
   border: none;
   background: transparent;
-  font-size: 10px;
+  font-size: 13px;
   color: rgba(255,255,255,0.6);
   border-radius: 6px;
 }
@@ -233,9 +233,9 @@ body {
 }
 .contact-bar .cb-item b { color: #BBDEFB; }
 @media (max-width: 768px) {
-  .top-bar-wrapper { flex-direction: column; }
-  .disclaimer-bar { padding: 0 14px; font-size: 11px; }
-  .contact-bar { padding: 0 14px; font-size: 11px; border-left: none; border-top: 1px solid #BBDEFB; }
+  .top-bar-wrapper { flex-direction: row; }
+  .disclaimer-bar { padding: 0 10px; font-size: 11px; }
+  .contact-bar { padding: 0 10px; font-size: 11px; }
   .contact-bar .cb-item { font-size: 10px; }
 }
 /* Copyright footer */
@@ -1036,9 +1036,9 @@ body {
   .header .subtitle { font-size: 8px; }
   .header-title-block { line-height: 1.1; }
   .header-nav { padding: 2px; gap: 0; }
-  .header-nav .bn-item { height: 32px; min-width: 38px; padding: 0 5px; font-size: 9px; }
-  .header-nav .bn-item .bn-icon svg { width: 15px; height: 15px; }
-  .header-nav .bn-item .bn-label { display: block; font-size: 9px; }
+  .header-nav .bn-item { height: 38px; min-width: 48px; padding: 0 6px; font-size: 12px; }
+  .header-nav .bn-item .bn-icon svg { width: 18px; height: 18px; }
+  .header-nav .bn-item .bn-label { display: block; font-size: 12px; }
   .content-header { padding: 14px 16px; }
   .content-header h2 { font-size: 18px; }
   .paper-card { padding: 12px 14px; }
@@ -2015,11 +2015,11 @@ body { padding-bottom: 60px; }
   <div class="header-inner">
     <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="24" height="24" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#4DB6AC" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00695C" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#4DB6AC"/><circle cx="8" cy="20" r="1.5" fill="#4DB6AC"/></svg><div class="header-title-block"><span>间充质干细胞信息库</span><span class="subtitle">MSC Knowledge Hub</span></div></h1>
     <nav class="header-nav">
-      <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="bn-label">首页</span></button>
-      <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/></svg></span><span class="bn-label">文献</span></button>
-      <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="bn-label">政策</span></button>
-      <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg></span><span class="bn-label">产品</span></button>
-      <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
+      <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="bn-label">首页</span></button>
+      <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/></svg></span><span class="bn-label">文献</span></button>
+      <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="bn-label">政策</span></button>
+      <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg></span><span class="bn-label">产品</span></button>
+      <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
     </nav>
   </div>
 </div>
