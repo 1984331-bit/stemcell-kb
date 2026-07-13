@@ -142,6 +142,7 @@ body {
   transition: background 0.15s;
 }
 .info-tab.left { color: #00695C; }
+.info-tab.center { color: #6A1B9A; }
 .info-tab.right { color: #1565C0; }
 .info-tab:hover { background: rgba(0,0,0,0.04); }
 .info-tab .it-arrow {
@@ -191,6 +192,30 @@ body {
 .info-panel.contact .ip-tag { background: #1565C0; }
 .info-panel.contact .ip-tag b { color: #BBDEFB; }
 .info-panel.contact .ip-row { justify-content: flex-end; }
+.info-panel.team .ip-row { justify-content: center; }
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: center;
+  padding-top: 6px;
+}
+.team-member {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.team-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.team-dot.ai { background: #00897B; }
+.team-dot.human { background: #FFB300; box-shadow: 0 0 0 2px rgba(255,179,0,0.25); }
+.team-name { font-weight: 600; color: #37474F; }
+.team-role { color: #78909C; font-size: 11px; }
 @media (max-width: 768px) {
   .info-bar-tabs { padding: 0 12px; }
   .info-tab { font-size: 12px; padding: 7px 8px; }
@@ -2107,6 +2132,11 @@ body { padding-bottom: 60px; }
       平台声明
       <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
+    <div class="info-tab center" id="tab-team" onclick="toggleInfoBar('team')">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      维护团队
+      <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
     <div class="info-tab right" id="tab-contact" onclick="toggleInfoBar('contact')">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       联系方式
@@ -2129,9 +2159,19 @@ body { padding-bottom: 60px; }
     </div>
     </div>
   </div>
+  <div class="info-panel team" id="panel-team">
+    <div class="ip-inner">
+    <div class="team-grid">
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">小虾</span><span class="team-role">总编辑</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">觅证</span><span class="team-role">文献猎手</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">闻风</span><span class="team-role">政策哨兵</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">追光</span><span class="team-role">产品探针</span></div>
+      <div class="team-member"><span class="team-dot ai"></span><span class="team-name">织卷</span><span class="team-role">数据管家</span></div>
+      <div class="team-member"><span class="team-dot human"></span><span class="team-name">杨老师</span><span class="team-role">审核员</span></div>
+    </div>
+    </div>
+  </div>
 </div>
-
-<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 
 <div class="container">
   <aside class="sidebar" id="sidebar">
