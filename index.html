@@ -2234,6 +2234,8 @@ body { padding-bottom: 60px; }
 
 /* Picks dropdown selector */
 .pick-dropdown-wrap { position: relative; margin-bottom: 12px; }
+.picks-cover-wrap { text-align: center; margin: 16px 0 8px; }
+.picks-cover-img { max-width: 100%; max-width: 460px; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.15); display: inline-block; }
 .pick-dropdown-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid #FFB74D; border-radius: 8px; background: #FFF8E1; cursor: pointer; font-size: 13px; font-weight: 600; color: #E65100; }
 .pick-dropdown-btn:hover { background: #FFF3E0; }
 .pick-dropdown-list { display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px; background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 100; max-height: 240px; overflow-y: auto; }
@@ -5796,6 +5798,11 @@ function renderEditorPicks() {
   var clinicalPicks = issue.picks.filter(function(p) { return p.category === 'clinical'; });
   var casePicks = issue.picks.filter(function(p) { return p.category === 'case'; });
   var basicPicks = issue.picks.filter(function(p) { return p.category === 'basic'; });
+
+  // Cover image for Issue 01 (创刊号)
+  if (currentPicksIssue === 0) {
+    html += '<div class="picks-cover-wrap"><img src="cover_issue01.png" alt="创刊号封面" class="picks-cover-img" /></div>';
+  }
 
   // Category summary
   var catColors = {
