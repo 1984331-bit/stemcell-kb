@@ -1145,6 +1145,8 @@ body { padding-bottom: 60px; }
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(230,81,0,0.05), rgba(255,143,0,0.04));
   border: 1px solid rgba(230,81,0,0.1);
+  overflow: hidden;
+  min-width: 0;
 }
 .wh-header {
   display: flex;
@@ -1197,10 +1199,9 @@ body { padding-bottom: 60px; }
   color: var(--text);
   line-height: 1.4;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   min-width: 0;
   flex: 1;
+  word-break: break-word;
 }
 
 .hub-tags {
@@ -1209,6 +1210,8 @@ body { padding-bottom: 60px; }
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(0,105,92,0.06), rgba(0,151,167,0.05));
   border: 1px solid rgba(0,137,123,0.12);
+  overflow: hidden;
+  min-width: 0;
 }
 .hub-tags-label {
   font-size: 13px;
