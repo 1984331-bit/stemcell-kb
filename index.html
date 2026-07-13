@@ -109,19 +109,44 @@ body {
 .disclaimer-bar {
   background: linear-gradient(90deg, #E0F2F1 0%, #F1F8E9 100%);
   border-bottom: 1px solid #B2DFDB;
-  padding: 8px 24px;
+  padding: 0 24px;
   font-size: 12px;
   color: #455A64;
   line-height: 1.6;
 }
+.disclaimer-bar .db-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #00695C;
+  font-size: 12px;
+}
+.disclaimer-bar .db-toggle .db-arrow {
+  transition: transform 0.2s;
+  margin-left: 2px;
+}
 .disclaimer-bar .db-inner {
   max-width: 1400px;
   margin: 0 auto;
+  overflow: hidden;
+  max-height: 200px;
+  transition: max-height 0.25s ease-out;
+}
+.disclaimer-bar.collapsed .db-inner {
+  max-height: 0;
+}
+.disclaimer-bar.collapsed .db-toggle .db-arrow {
+  transform: rotate(-90deg);
 }
 .disclaimer-bar .db-row1 {
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  padding-bottom: 4px;
 }
 .disclaimer-bar .db-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
 .disclaimer-bar .db-text { flex: 1; }
@@ -130,7 +155,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 6px;
+  padding-bottom: 6px;
   flex-wrap: wrap;
 }
 .disclaimer-bar .db-audience,
@@ -148,7 +173,7 @@ body {
 }
 .disclaimer-bar .db-contact b { color: #B2DFDB; }
 @media (max-width: 768px) {
-  .disclaimer-bar { padding: 8px 14px; font-size: 11px; }
+  .disclaimer-bar { padding: 0 14px; font-size: 11px; }
   .disclaimer-bar .db-contact { font-size: 10px; }
 }
 /* Copyright footer */
@@ -1820,7 +1845,12 @@ body { padding-bottom: 60px; }
   </div>
 </div>
 
-<div class="disclaimer-bar">
+<div class="disclaimer-bar collapsed" id="disclaimerBar">
+  <div class="db-toggle" onclick="(function(el){var b=el.parentElement;b.classList.toggle('collapsed');})(this)">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    平台声明
+    <svg class="db-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
   <div class="db-inner">
     <div class="db-row1">
       <span class="db-text"><b>平台声明：</b>本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</span>
