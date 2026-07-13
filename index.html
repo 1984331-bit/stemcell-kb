@@ -2349,8 +2349,8 @@ function renderContent() {
     overviewHtml += '<div class="overview">';
     sysArr.forEach(([s, info]) => {
       overviewHtml += '<div class="overview-card" onclick="quickSelect(\'' + s.replace(/'/g, "\\'") + '\')">';
-      overviewHtml += '<div class="oc-count">' + info.count + '</div>';
-      overviewHtml += '<div class="oc-name">' + s + ' <span style="font-size:12px;font-weight:400;color:var(--text-light);">· ' + info.inds.size + '适应症</span></div>';
+      overviewHtml += '<div class="oc-count">' + info.count + ' <span style="font-size:14px;font-weight:600;color:#666;">篇</span></div>';
+      overviewHtml += '<div class="oc-name">' + s + ' <span style="font-size:12px;font-weight:400;color:var(--text-light);">· ' + info.inds.size + '个适应症</span></div>';
       overviewHtml += '</div>';
     });
     overviewHtml += '</div>';
