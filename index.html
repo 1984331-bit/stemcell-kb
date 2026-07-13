@@ -521,6 +521,16 @@ body {
   color: var(--primary);
   font-weight: 700;
 }
+.content-desc {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 600;
+}
 /* Overview cards */
 .overview {
   display: grid;
@@ -1414,6 +1424,10 @@ body { padding-bottom: 60px; }
 .hub-card.teal .hc-icon { background: #00838F; }
 .hub-card.teal .hc-title { color: #004D5C; }
 .hub-card.teal .hc-desc { color: #006073; }
+.hub-card.amber { background: #FFF8E1; border-color: #FFB74D; }
+.hub-card.amber .hc-icon { background: #E65100; }
+.hub-card.amber .hc-title { color: #BF360C; }
+.hub-card.amber .hc-desc { color: #BF360C; }
 /* Hub news items */
 .hub-news { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 12px 16px; margin-bottom: 16px; }
 .hn-item { padding: 10px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.15s; }
@@ -4572,6 +4586,7 @@ function renderHub() {
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">查</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
+  html += '<div class="hub-card amber" data-section="picks" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">精</div><div class="hc-title">编辑精选</div></div><div class="hc-desc">里程碑文献 · 深度解读 · 前沿追踪</div></div>';
   html += '</div>';
 
   var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
@@ -5658,45 +5673,64 @@ function filterProducts(cat) {
 // === Editor picks section ===
 function renderEditorPicks() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选 · 前沿解读</b></div>';
-  html += '<div class="content-header"><h2>编辑精选 · 前沿解读</h2><div class="desc">干细胞领域里程碑文献深度解读，涵盖临床转化与基础研究两大维度。每篇聚焦核心发现、关键数据与行业启示。</div></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选</b></div>';
+  html += '<div class="content-desc">干细胞领域里程碑文献深度解读，涵盖临床转化、案例报道与基础研究三大维度，每篇聚焦核心发现、关键数据与行业启示。</div>';
 
   // Archive button
   if (PICKS_ARCHIVE.length > 0) {
-    html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">';
-    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">' + svgIcon('news', 14) + ' 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
+    html += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">';
+    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">' + svgIcon('news', 14) + ' 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
     html += '</div>';
   }
 
   var clinicalPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'clinical'; });
+  var casePicks = EDITOR_PICKS.filter(function(p) { return p.category === 'case'; });
   var basicPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'basic'; });
 
   // Clinical section
-  html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:20px 0 12px;font-size:16px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
-  clinicalPicks.forEach(function(p) {
-    html += '<div class="pick-card">';
-    html += '<div class="pk-badge">' + escapeHtml(p.tag) + '</div>';
-    html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-    html += '<div class="pk-meta">';
-    p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
-    html += '</div>';
-    html += '<div class="pk-content">' + p.content + '</div>';
-    html += '</div>';
-  });
+  if (clinicalPicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:16px 0 10px;font-size:15px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
+    clinicalPicks.forEach(function(p) {
+      html += '<div class="pick-card" style="border-left-color:#0F6E56;">';
+      html += '<div class="pk-badge" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
+
+  // Case reports section
+  if (casePicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #E65100;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#E65100;">案例报道（' + casePicks.length + '篇）</div>';
+    casePicks.forEach(function(p) {
+      html += '<div class="pick-card" style="border-left-color:#E65100;">';
+      html += '<div class="pk-badge" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
 
   // Basic research section
-  html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:28px 0 12px;font-size:16px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
-  html += '<div style="font-size:13px;color:#888;line-height:1.7;margin-bottom:16px;padding:0 0 0 16px;">基础研究是临床转化的根基。以下文献虽非临床试验，但深刻改变了我们对干细胞生物学本质的理解，其长远影响不亚于任何一项临床突破。</div>';
-  basicPicks.forEach(function(p) {
-    html += '<div class="pick-card">';
-    html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
-    html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-    html += '<div class="pk-meta">';
-    p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(m) + '</span>'; });
-    html += '</div>';
-    html += '<div class="pk-content">' + p.content + '</div>';
-    html += '</div>';
-  });
+  if (basicPicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
+    basicPicks.forEach(function(p) {
+      html += '<div class="pick-card" style="border-left-color:#534AB7;">';
+      html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
 
   content.innerHTML = html;
   updateFloatButtons();
@@ -5708,10 +5742,10 @@ function renderPicksArchive() {
   currentPicksView = 'archive';
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
-  html += '<div class="content-header"><h2>往期精选归档</h2><div class="desc">点击任一期查看完整内容。当前最新内容请返回编辑精选主页。</div></div>';
+  html += '<div class="content-desc">点击任一期查看完整内容，当前最新内容请返回编辑精选主页。</div>';
 
   // Back to current button
-  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;margin-bottom:20px;">← 返回当前精选</button>';
+  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;margin-bottom:16px;">← 返回当前精选</button>';
 
   PICKS_ARCHIVE.forEach(function(issue, idx) {
     var clinicalCount = issue.picks.filter(function(p) { return p.category === 'clinical'; }).length;
@@ -5738,22 +5772,23 @@ function renderPicksIssue(idx) {
   currentPicksView = idx;
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" data-action="archive" onclick="navTo(this)">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
-  html += '<div class="content-header"><h2>' + escapeHtml(issue.title) + '</h2><div class="desc">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div></div>';
+  html += '<div class="content-desc">' + escapeHtml(issue.title) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div>';
 
   // Back buttons
-  html += '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">';
-  html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">← 返回往期列表</button>';
-  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#f0f0f5;border:1px solid #d0d0e0;border-radius:8px;cursor:pointer;font-size:13px;color:#534AB7;font-weight:600;">查看当前精选 →</button>';
+  html += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">';
+  html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">← 返回往期列表</button>';
+  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">查看当前精选 →</button>';
   html += '</div>';
 
   var clinicalPicks = issue.picks.filter(function(p) { return p.category === 'clinical'; });
+  var casePicks = issue.picks.filter(function(p) { return p.category === 'case'; });
   var basicPicks = issue.picks.filter(function(p) { return p.category === 'basic'; });
 
   if (clinicalPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:20px 0 12px;font-size:16px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
+    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:16px 0 10px;font-size:15px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
     clinicalPicks.forEach(function(p) {
-      html += '<div class="pick-card">';
-      html += '<div class="pk-badge">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pick-card" style="border-left-color:#0F6E56;">';
+      html += '<div class="pk-badge" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(p.tag) + '</div>';
       html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
       html += '<div class="pk-meta">';
       p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
@@ -5763,10 +5798,24 @@ function renderPicksIssue(idx) {
     });
   }
 
+  if (casePicks.length > 0) {
+    html += '<div class="pick-section-header" style="border-left:4px solid #E65100;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#E65100;">案例报道（' + casePicks.length + '篇）</div>';
+    casePicks.forEach(function(p) {
+      html += '<div class="pick-card" style="border-left-color:#E65100;">';
+      html += '<div class="pk-badge" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(p.tag) + '</div>';
+      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+      html += '<div class="pk-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '</div>';
+    });
+  }
+
   if (basicPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:28px 0 12px;font-size:16px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
+    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
     basicPicks.forEach(function(p) {
-      html += '<div class="pick-card">';
+      html += '<div class="pick-card" style="border-left-color:#534AB7;">';
       html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
       html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
       html += '<div class="pk-meta">';
