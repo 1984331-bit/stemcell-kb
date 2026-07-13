@@ -600,6 +600,12 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
+.reg-cat-card .rcc-countline {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+}
 .reg-cat-card .rcc-count {
   font-size: 22px;
   font-weight: 800;
@@ -610,7 +616,6 @@ body {
   font-size: 11px;
   font-weight: 600;
   color: #888;
-  margin-top: 1px;
 }
 .reg-cat-card .rcc-name {
   font-size: 12px;
@@ -3988,16 +3993,16 @@ const REGULATIONS = [
   {title:'Regulation (EC) No 1394/2007 - ATMP', issuer:'欧盟EMA', date:'2007', type:'法规', typeColor:'#fff', typeBg:'#993C1D', category:'法律法规', desc:'欧盟先进治疗医学产品(ATMP)法规，确立基因治疗、体细胞治疗、组织工程产品的统一监管框架。', url:'https://eur-lex.europa.eu/eli/reg/2007/1394/oj/eng'},
   {title:'干细胞临床研究管理办法（试行）', issuer:'国家卫健委', date:'2015', type:'规范性文件', typeColor:'#fff', typeBg:'#BA7517', category:'规范性文件', desc:'医疗机构开展干细胞临床研究须备案，明确伦理审查、知情同意、数据报告等要求。双轨制中的"医疗技术通路"核心文件。', url:'https://www.nhc.gov.cn/qjjys/c100016/201508/cd1cb345d65d47dcadefb9c501ca5f2c.shtml'},
   // --- 技术指南 ---
-  {title:'细胞治疗产品研究与评价技术指导原则（试行）', issuer:'NMPA/CDE', date:'2017', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'确立细胞治疗产品药学研究、非临床研究、临床试验三大板块的技术要求，是中国细胞治疗产品注册申报的核心指导原则。', url:'https://www.cde.org.cn/zdyz/domesticinfopage?zdyzIdCODE=452c529b299638297210fe4a1294eb31'},
-  {title:'免疫细胞治疗产品临床试验技术指导原则（试行）', issuer:'NMPA/CDE', date:'2021', type:'临床指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'针对CAR-T等免疫细胞治疗产品的临床试验设计、受试者保护、疗效评价等提供指导。', url:'https://www.cde.org.cn/main/news/viewInfoCommon/1936d1c9006ccce2251702221f063b1c'},
-  {title:'干细胞制剂质量控制及临床前研究指导原则（试行）', issuer:'NMPA/卫健委', date:'2015', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'规范干细胞制剂的质量控制标准、生物学特性研究、安全性评价等临床前研究要求。', url:'https://www.nhc.gov.cn/qjjys/c100016/201508/f0381d0509e34e3db5f1ad52de0c2ea2.shtml'},
-  {title:'细胞和基因治疗产品注册审查要点', issuer:'NMPA/CDE', date:'2024', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'NMPA最新发布的CGT产品注册审查要点，涵盖CMC、非临床、临床各环节审查关注点。', url:'https://www.cde.org.cn/zdyz/index'},
+  {title:'细胞治疗产品研究与评价技术指导原则（试行）', issuer:'NMPA/CDE', date:'2017', type:'技术指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'确立细胞治疗产品药学研究、非临床研究、临床试验三大板块的技术要求，是中国细胞治疗产品注册申报的核心指导原则。', url:'https://www.cde.org.cn/zdyz/domesticinfopage?zdyzIdCODE=452c529b299638297210fe4a1294eb31'},
+  {title:'免疫细胞治疗产品临床试验技术指导原则（试行）', issuer:'NMPA/CDE', date:'2021', type:'临床指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'针对CAR-T等免疫细胞治疗产品的临床试验设计、受试者保护、疗效评价等提供指导。', url:'https://www.cde.org.cn/main/news/viewInfoCommon/1936d1c9006ccce2251702221f063b1c'},
+  {title:'干细胞制剂质量控制及临床前研究指导原则（试行）', issuer:'NMPA/卫健委', date:'2015', type:'技术指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'规范干细胞制剂的质量控制标准、生物学特性研究、安全性评价等临床前研究要求。', url:'https://www.nhc.gov.cn/qjjys/c100016/201508/f0381d0509e34e3db5f1ad52de0c2ea2.shtml'},
+  {title:'细胞和基因治疗产品注册审查要点', issuer:'NMPA/CDE', date:'2024', type:'技术指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'NMPA最新发布的CGT产品注册审查要点，涵盖CMC、非临床、临床各环节审查关注点。', url:'https://www.cde.org.cn/zdyz/index'},
   {title:'Considerations for the Development of Cell and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2023', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA对CGT产品开发的综合考量，涵盖CMC、临床设计、长期随访等。', url:'https://www.fda.gov/vaccines-blood-biologics/biologics-guidances/cellular-gene-therapy-guidances'},
   {title:'Manufacturing Considerations for Human Cellular and Gene Therapy Products', issuer:'美国FDA/CBER', date:'2008(更新)', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA关于细胞和基因治疗产品生产的指导原则，涵盖CMC、质量控制、无菌保证等。', url:'https://www.fda.gov/regulatory-information/search-fda-guidance-documents/chemistry-manufacturing-and-controls-flexibilities-developing-human-cellular-and-gene-therapy'},
   {title:'Guideline on human cell-based medicinal products', issuer:'欧盟EMA', date:'2008', type:'指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'EMA人源细胞药品指南(EMEA/CHMP/410869/2006)，涵盖质量、非临床、临床要求。', url:'https://www.ema.europa.eu/en/human-cell-based-medicinal-products-scientific-guideline_en'},
   {title:'Guideline on the risk-based approach according to Annex I, part IV of Directive 2001/83/EC applied to ATMPs', issuer:'欧盟EMA', date:'2019', type:'指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'EMA基于风险的ATMP管理指南，根据风险等级简化部分产品的监管要求。', url:'https://www.ema.europa.eu/en/risk-based-approach-according-annex-i-part-iv-directive-2001-83-ec-applied-advanced-therapy-medicinal-products-scientific-guideline'},
-  {title:'细胞治疗药品范围和归类技术指导原则（2026年版）', issuer:'NMPA/CDE', date:'2026-07-03', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'CDE通告(2026年第39号)。明确细胞治疗药品(CTMPs)范围与归类，分为非基因修饰和体外基因修饰两大类，以"活性成分优先"为核心判定逻辑。体外CAR-T归CTMPs，in vivo CAR-T归GTMPs。', url:'https://www.cde.org.cn/zdyz/index'},
-  {title:'基因治疗药品范围和归类技术指导原则（2026年版）', issuer:'NMPA/CDE', date:'2026-07-03', type:'技术指南', typeColor:'#fff', typeBg:'#BA7517', category:'技术指南', desc:'CDE通告(2026年第40号)。明确基因治疗药品(GTMPs)范围与归类，分为非微生物载体类和微生物载体类，排除预防用疫苗和化学合成寡核苷酸药物。与细胞治疗药品指导原则同步发布。', url:'https://www.cde.org.cn/zdyz/index'},
+  {title:'细胞治疗药品范围和归类技术指导原则（2026年版）', issuer:'NMPA/CDE', date:'2026-07-03', type:'技术指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'CDE通告(2026年第39号)。明确细胞治疗药品(CTMPs)范围与归类，分为非基因修饰和体外基因修饰两大类，以"活性成分优先"为核心判定逻辑。体外CAR-T归CTMPs，in vivo CAR-T归GTMPs。', url:'https://www.cde.org.cn/zdyz/index'},
+  {title:'基因治疗药品范围和归类技术指导原则（2026年版）', issuer:'NMPA/CDE', date:'2026-07-03', type:'技术指南', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'CDE通告(2026年第40号)。明确基因治疗药品(GTMPs)范围与归类，分为非微生物载体类和微生物载体类，排除预防用疫苗和化学合成寡核苷酸药物。与细胞治疗药品指导原则同步发布。', url:'https://www.cde.org.cn/zdyz/index'},
   {title:'关于优化细胞与基因治疗药品审评审批有关事项的公告（征求意见稿）', issuer:'NMPA', date:'2026-07-03', type:'规范性文件', typeColor:'#fff', typeBg:'#BA7517', category:'规范性文件', desc:'将符合条件的CGT药品纳入创新药临床试验30日通道，对重点品种实施"提前介入、一企一策、全程指导、研审联动"，重大变更补充申请审评时限由200个工作日缩短为130个工作日。征求意见至2026年8月3日。', url:'https://www.nmpa.gov.cn/xxgk/zhqyj/zhqyjyp/20260703163821159.html'},
   {title:'Flexible Requirements for Cell and Gene Therapies to Advance Innovation', issuer:'美国FDA/CBER', date:'2026-05-05', type:'Guidance', typeColor:'#fff', typeBg:'#185FA5', category:'技术指南', desc:'FDA最终指南，明确CGT产品BLA申报中CMC灵活性策略：分阶段CGMP要求、不强制3批PPQ、基于风险的可比性研究、小批量留样豁免、替代分析方法等。共计4类13条灵活性政策。', url:'https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products/flexible-requirements-cell-and-gene-therapies-advance-innovation'},
   // --- 行业标准 ---
@@ -5249,7 +5254,7 @@ function renderRegulations() {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
   }
   html += '</div>';
-  html += '<div class="content-header"><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<br>网站暂不提供原文下载，了解具体内容点击来源链接。</div></div>';
+  html += '<div class="content-header"><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。</b></div></div>';
 
   // Category counts
   var catCounts = {};
@@ -5268,15 +5273,13 @@ function renderRegulations() {
   // Category cards — 5 in one row
   html += '<div class="reg-cat-row">';
   html += '<div class="reg-cat-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterRegs(\'all\')">';
-  html += '<div class="rcc-count">' + REGULATIONS.length + '</div>';
-  html += '<div class="rcc-unit">份</div>';
+  html += '<div class="rcc-countline"><span class="rcc-count">' + REGULATIONS.length + '</span><span class="rcc-unit"> 份</span></div>';
   html += '<div class="rcc-name">全部文件</div>';
   html += '</div>';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
     html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterRegs(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</div>';
-    html += '<div class="rcc-unit">份</div>';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</span><span class="rcc-unit"> 份</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(cat) + '</div>';
     html += '</div>';
   });
