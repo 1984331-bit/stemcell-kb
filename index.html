@@ -4689,11 +4689,12 @@ function renderIntro() {
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>认识细胞治疗</b></div>';
   html += '<div class="content-header"><h2>认识细胞治疗</h2><div class="desc">面向患者及公众的细胞治疗科普导览<br>用通俗易懂的语言，了解细胞治疗的原理、类型与应用</div></div>';
 
-  // 1. Hero (always open)
-  html += '<div class="edu-hero">';
-  html += '<h3>' + svgIcon('dna', 22) + ' 什么是细胞治疗？</h3>';
-  html += '<p>细胞治疗（Cell Therapy）是指将活细胞引入患者体内，用于治疗疾病的一种新型医学手段。与传统药物（化学分子）不同，细胞治疗使用的是"活的细胞"——它们可以是患者自身的（自体），也可以来自他人（异体）。细胞进入体内后，通过<strong>替代受损细胞</strong>、<strong>调节免疫系统</strong>、<strong>分泌修复因子</strong>等方式发挥作用。</p>';
-  html += '</div>';
+  // 1. 什么是细胞治疗 (foldable)
+  html += '<div class="edu-panel" id="edu-p1">';
+  html += '<div class="edu-panel-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')">' + svgIcon('dna', 18) + '<span class="epq-text">什么是细胞治疗？</span>' + svgIcon('chevron-right', 18) + '</div>';
+  html += '<div class="edu-panel-a"><div class="edu-panel-a-inner">';
+  html += '<p style="font-size:14px;line-height:1.8;color:var(--text);">细胞治疗（Cell Therapy）是指将活细胞引入患者体内，用于治疗疾病的一种新型医学手段。与传统药物（化学分子）不同，细胞治疗使用的是"活的细胞"——它们可以是患者自身的（自体），也可以来自他人（异体）。细胞进入体内后，通过<strong>替代受损细胞</strong>、<strong>调节免疫系统</strong>、<strong>分泌修复因子</strong>等方式发挥作用。</p>';
+  html += '</div></div></div>';
 
   // 2. 细胞治疗的主要类型
   html += '<div class="edu-panel" id="edu-p2">';
