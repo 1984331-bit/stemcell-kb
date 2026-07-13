@@ -575,6 +575,50 @@ body {
   line-height: 1;
   margin-bottom: 4px;
 }
+/* Regulation category row — 5 cards in one line */
+.reg-cat-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.reg-cat-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 12px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border-left: 4px solid var(--primary-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.reg-cat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.reg-cat-card .rcc-count {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+.reg-cat-card .rcc-unit {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  margin-top: 1px;
+}
+.reg-cat-card .rcc-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 4px;
+  white-space: nowrap;
+}
 /* Paper cards */
 .paper-list { display: flex; flex-direction: column; gap: 12px; }
 .paper-card {
@@ -1026,6 +1070,11 @@ body {
   .header-nav .bn-item .bn-label { display: block; font-size: 10px; overflow: hidden; text-overflow: ellipsis; }
   .content-header { padding: 14px 16px; }
   .content-header h2 { font-size: 18px; }
+  .reg-cat-row { gap: 5px; }
+  .reg-cat-card { padding: 8px 3px; border-radius: 6px; border-left-width: 3px; }
+  .reg-cat-card .rcc-count { font-size: 16px; }
+  .reg-cat-card .rcc-unit { font-size: 9px; }
+  .reg-cat-card .rcc-name { font-size: 10px; }
   .paper-card { padding: 12px 14px; }
   .paper-title { font-size: 14px; }
   .overview { grid-template-columns: repeat(2, 1fr); }
@@ -5200,7 +5249,7 @@ function renderRegulations() {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
   }
   html += '</div>';
-  html += '<div class="content-header"><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<br>网站暂不提供原文下载，了解具体内容点击来源链接。</div></div>';
 
   // Category counts
   var catCounts = {};
@@ -5216,19 +5265,19 @@ function renderRegulations() {
     catCounts[cat]++;
   });
 
-  // Category cards
-  html += '<div class="overview" style="margin-bottom:16px;">';
-  html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterRegs(\'all\')">';
-  html += '<div class="oc-count">' + REGULATIONS.length + ' <span style="font-size:14px;font-weight:600;color:#666;">份</span></div>';
-  html += '<div class="oc-name">全部文件</div>';
-  html += '<div class="oc-stats">点击查看全部</div>';
+  // Category cards — 5 in one row
+  html += '<div class="reg-cat-row">';
+  html += '<div class="reg-cat-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterRegs(\'all\')">';
+  html += '<div class="rcc-count">' + REGULATIONS.length + '</div>';
+  html += '<div class="rcc-unit">份</div>';
+  html += '<div class="rcc-name">全部文件</div>';
   html += '</div>';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
-    html += '<div class="overview-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterRegs(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="oc-count" style="color:' + color + ';">' + catCounts[cat] + ' <span style="font-size:14px;font-weight:600;color:#666;">份</span></div>';
-    html += '<div class="oc-name">' + escapeHtml(cat) + '</div>';
-    html += '<div class="oc-stats">点击筛选</div>';
+    html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterRegs(\'' + cat.replace(/'/g, "\\'") + '\')">';
+    html += '<div class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</div>';
+    html += '<div class="rcc-unit">份</div>';
+    html += '<div class="rcc-name">' + escapeHtml(cat) + '</div>';
     html += '</div>';
   });
   html += '</div>';
