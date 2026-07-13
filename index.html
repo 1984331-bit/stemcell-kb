@@ -1157,8 +1157,8 @@ body { padding-bottom: 60px; }
 .wh-title {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: 8px;
+  font-size: 15px;
   font-weight: 600;
   color: #BF360C;
 }
@@ -1214,16 +1214,16 @@ body { padding-bottom: 60px; }
   min-width: 0;
 }
 .hub-tags-label {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   margin-bottom: 10px;
   padding-left: 2px;
 }
-.hub-tags-label svg { color: #FF7043; }
+.hub-tags-label svg { color: #00897B; }
 .hub-tags-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -4084,7 +4084,7 @@ function renderHub() {
   });
   var maxC = Math.max.apply(null, tagData.map(function(t){return t.count;}));
   html += '<div class="hub-tags">';
-  html += '<div class="hub-tags-label">' + svgIcon('flame', 14) + ' 热门搜索</div>';
+  html += '<div class="hub-tags-label">' + svgIcon('search', 18) + ' 热门搜索</div>';
   html += '<div class="hub-tags-cloud">';
   tagData.forEach(function(t){
     var tier = t.count >= maxC * 0.6 ? 't1' : (t.count >= maxC * 0.3 ? 't2' : (t.count >= maxC * 0.12 ? 't3' : 't4'));
@@ -4104,7 +4104,7 @@ function renderHub() {
     {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"}
   ];
   html += '<div class="weekly-highlights">';
-  html += '<div class="wh-header"><div class="wh-title">' + svgIcon('star', 14) + ' 本周重点</div><div class="wh-date">' + dateStr + '</div></div>';
+  html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 18) + ' 本周重点</div><div class="wh-date">' + dateStr + '</div></div>';
   highlights.forEach(function(h){
     html += '<div class="wh-item" onclick="' + h.action + '"><span class="wh-tag ' + h.type + '">' + h.tag + '</span><span class="wh-text">' + h.text + '</span></div>';
   });
