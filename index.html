@@ -1064,6 +1064,60 @@ body { padding-bottom: 60px; }
   align-items: center;
   gap: 8px;
 }
+/* Collapsible report */
+.report-collapse {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--card-bg);
+  margin-bottom: 12px;
+  border: 1px solid #E0E0E0;
+}
+.report-collapse-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.report-collapse-header:hover { background: rgba(0,105,92,0.03); }
+.report-collapse-header .rch-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #00695C, #00897B);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.report-collapse-header .rch-info { flex: 1; min-width: 0; }
+.report-collapse-header .rch-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.report-collapse-header .rch-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+.report-collapse-header .rch-arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  color: #80CBC4;
+}
+.report-collapse.open .rch-arrow { transform: rotate(180deg); }
+.report-collapse-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.report-collapse.open .report-collapse-body { grid-template-rows: 1fr; }
+.report-collapse-body .rcb-inner { overflow: hidden; min-height: 0; }
 .hub-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -3820,8 +3874,17 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">查</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
-  html += '<div class="hub-section-title">' + svgIcon('chart', 18) + ' MSC行业分析报告</div>';
+  var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
+  html += '<div class="report-collapse" id="reportCollapse">';
+  html += '<div class="report-collapse-header" onclick="(function(el){el.parentElement.classList.toggle(\'open\');})(this)">';
+  html += '<div class="rch-icon">' + svgIcon('chart', 22) + '</div>';
+  html += '<div class="rch-info"><div class="rch-title">MSC行业分析报告</div><div class="rch-desc">基于' + ALL_DATA.length + '篇文献 · ' + totalMscProducts + '款获批产品 · 市场规模 · 融资动态 · 里程碑</div></div>';
+  html += '<svg class="rch-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+  html += '</div>';
+  html += '<div class="report-collapse-body"><div class="rcb-inner">';
   html += renderMscDashboard();
+  html += '</div></div>';
+  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
