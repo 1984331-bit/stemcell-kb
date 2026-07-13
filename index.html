@@ -3960,17 +3960,28 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  // Hot search tags with heat tiers
-  var indCounts = {};
-  ALL_DATA.forEach(function(d){ var ind = d.indication; if (ind) indCounts[ind] = (indCounts[ind]||0)+1; });
-  var topInds = Object.keys(indCounts).map(function(k){return {name:k,count:indCounts[k]};}).sort(function(a,b){return b.count-a.count;}).slice(0,14);
-  var maxC = topInds[0].count;
+  // Hot search tags - curated list with heat tiers
+  var hotTags = [
+    {label: '糖尿病', query: '糖尿病'},
+    {label: '脊髓损伤', query: '脊髓损伤'},
+    {label: '骨关节炎', query: '骨关节炎'},
+    {label: '自闭症', query: '自闭症'},
+    {label: '心肌梗死', query: '心肌梗死'},
+    {label: '阿尔兹海默', query: '阿尔'},
+    {label: '帕金森', query: '帕金森'},
+    {label: '抗衰', query: '衰'}
+  ];
+  var tagData = hotTags.map(function(t){
+    var c = ALL_DATA.filter(function(d){ return d.indication && d.indication.indexOf(t.query) >= 0; }).length;
+    return {label: t.label, query: t.query, count: c};
+  });
+  var maxC = Math.max.apply(null, tagData.map(function(t){return t.count;}));
   html += '<div class="hub-tags">';
   html += '<div class="hub-tags-label">' + svgIcon('flame', 14) + ' 热门搜索</div>';
   html += '<div class="hub-tags-cloud">';
-  topInds.forEach(function(t){
+  tagData.forEach(function(t){
     var tier = t.count >= maxC * 0.6 ? 't1' : (t.count >= maxC * 0.3 ? 't2' : (t.count >= maxC * 0.12 ? 't3' : 't4'));
-    html += '<span class="hub-tag ' + tier + '" onclick="searchTag(\'' + t.name.replace(/'/g,"\\'") + '\')">' + t.name + '<span class="ht-count">' + t.count + '</span></span>';
+    html += '<span class="hub-tag ' + tier + '" onclick="searchTag(\'' + t.query.replace(/'/g,"\\'") + '\')">' + t.label + '<span class="ht-count">' + t.count + '</span></span>';
   });
   html += '</div></div>';
 
