@@ -2297,7 +2297,7 @@ body { padding-bottom: 60px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 12px 16px;
   cursor: pointer;
   user-select: none;
   transition: background 0.15s;
@@ -2324,7 +2324,7 @@ body { padding-bottom: 60px; }
 .edu-sub.open .edu-sub-a { grid-template-rows: 1fr; }
 .edu-sub-a-inner {
   overflow: hidden;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 .edu-sub.open .edu-sub-a-inner { padding: 12px 14px 14px; }
 .edu-sub-a-inner p { font-size: 13px; color: var(--text); line-height: 1.7; margin-bottom: 8px; }
@@ -2387,8 +2387,8 @@ body { padding-bottom: 60px; }
 .edu-evidence-card.d { background: #FCE4EC; border-color: #EC407A; color: #880E4F; }
 .edu-faq-item {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border: 1px solid #E8E6FE;
+  border-radius: 10px;
   margin-bottom: 8px;
   overflow: hidden;
 }
@@ -2398,11 +2398,12 @@ body { padding-bottom: 60px; }
   justify-content: space-between;
   padding: 12px 16px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #26215C;
   user-select: none;
   transition: background 0.15s;
+  background: #FAF9FF;
 }
 .edu-faq-q:hover { background: #FAF9FF; }
 .edu-faq-q .efq-icon { flex-shrink: 0; transition: transform 0.2s; color: #534AB7; }
@@ -2427,14 +2428,14 @@ body { padding-bottom: 60px; }
   background: var(--card-bg);
   border: 1px solid #E8E6FE;
   border-radius: 10px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   overflow: hidden;
 }
 .edu-panel-q {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   cursor: pointer;
   font-size: 15px;
   font-weight: 700;
@@ -2523,8 +2524,13 @@ body { padding-bottom: 60px; }
   .edu-hero h3 { font-size: 17px; }
   .edu-hero p { font-size: 13px; }
   .edu-section-title { font-size: 15px; }
-  .edu-panel { margin-bottom: 5px; }
-  .edu-panel-q { padding: 9px 14px; font-size: 14.5px; }
+  .edu-panel { margin-bottom: 7px; }
+  .edu-panel-q { padding: 11px 14px; font-size: 14.5px; }
+  .edu-sub { margin-bottom: 7px; }
+  .edu-sub-q { padding: 11px 14px; }
+  .edu-sub-q .esq-name { font-size: 14.5px; }
+  .edu-faq-item { margin-bottom: 7px; }
+  .edu-faq-q { padding: 11px 14px; font-size: 14.5px; }
 }
 
 /* === Chinese typography for edu panels === */
