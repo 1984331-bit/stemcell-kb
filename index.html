@@ -114,6 +114,8 @@ body {
   font-size: 12px;
   color: #455A64;
   line-height: 1.6;
+  flex: 1;
+  min-width: 0;
 }
 .disclaimer-bar .db-toggle {
   display: flex;
@@ -131,8 +133,6 @@ body {
   margin-left: 2px;
 }
 .disclaimer-bar .db-inner {
-  max-width: 1400px;
-  margin: 0 auto;
   overflow: hidden;
   max-height: 200px;
   transition: max-height 0.25s ease-out;
@@ -159,8 +159,7 @@ body {
   padding-bottom: 6px;
   flex-wrap: wrap;
 }
-.disclaimer-bar .db-audience,
-.disclaimer-bar .db-contact {
+.disclaimer-bar .db-audience {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -172,10 +171,72 @@ body {
   font-weight: 600;
   white-space: nowrap;
 }
-.disclaimer-bar .db-contact b { color: #B2DFDB; }
+/* Contact bar — symmetric with disclaimer */
+.top-bar-wrapper {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #E0E0E0;
+}
+.contact-bar {
+  background: linear-gradient(90deg, #E3F2FD 0%, #F3E5F5 100%);
+  border-left: 1px solid #BBDEFB;
+  padding: 0 24px;
+  font-size: 12px;
+  color: #455A64;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+.contact-bar .cb-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #1565C0;
+  font-size: 12px;
+}
+.contact-bar .cb-toggle .cb-arrow {
+  transition: transform 0.2s;
+  margin-left: 2px;
+}
+.contact-bar .cb-inner {
+  overflow: hidden;
+  max-height: 200px;
+  transition: max-height 0.25s ease-out;
+}
+.contact-bar.collapsed .cb-inner {
+  max-height: 0;
+}
+.contact-bar.collapsed .cb-toggle .cb-arrow {
+  transform: rotate(-90deg);
+}
+.contact-bar .cb-content {
+  padding-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.contact-bar .cb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #1565C0;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.contact-bar .cb-item b { color: #BBDEFB; }
 @media (max-width: 768px) {
+  .top-bar-wrapper { flex-direction: column; }
   .disclaimer-bar { padding: 0 14px; font-size: 11px; }
-  .disclaimer-bar .db-contact { font-size: 10px; }
+  .contact-bar { padding: 0 14px; font-size: 11px; border-left: none; border-top: 1px solid #BBDEFB; }
+  .contact-bar .cb-item { font-size: 10px; }
 }
 /* Copyright footer */
 .site-footer {
@@ -1963,6 +2024,7 @@ body { padding-bottom: 60px; }
   </div>
 </div>
 
+<div class="top-bar-wrapper">
 <div class="disclaimer-bar collapsed" id="disclaimerBar">
   <div class="db-toggle" onclick="(function(el){var b=el.parentElement;b.classList.toggle('collapsed');})(this)">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
@@ -1975,9 +2037,22 @@ body { padding-bottom: 60px; }
     </div>
     <div class="db-row2">
       <span class="db-audience"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M16 6c1.5 1 2 2 2 3M15 20c0-2 1-4 3-5"/></svg>适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
-      <span class="db-contact"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/></svg>内容建议及合作咨询：手机/微信 <b>15932929299</b> / <b>401848919</b></span>
     </div>
   </div>
+</div>
+<div class="contact-bar collapsed" id="contactBar">
+  <div class="cb-toggle" onclick="(function(el){var b=el.parentElement;b.classList.toggle('collapsed');})(this)">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    联系方式
+    <svg class="cb-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="cb-inner">
+    <div class="cb-content">
+      <span class="cb-item"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/></svg>手机/微信 <b>15932929299</b></span>
+      <span class="cb-item"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>微信 <b>401848919</b></span>
+    </div>
+  </div>
+</div>
 </div>
 
 <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -3431,6 +3506,8 @@ function updateLayout(section) {
     if (mobileToggle) mobileToggle.style.display = 'none';
   }
   if (disclaimer) disclaimer.style.display = (section === 'hub') ? '' : 'none';
+  var contact = document.querySelector('.contact-bar');
+  if (contact) contact.style.display = (section === 'hub') ? '' : 'none';
 }
 
 // === MSC Industry Dashboard ===
