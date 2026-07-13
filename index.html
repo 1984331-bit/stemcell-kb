@@ -1066,73 +1066,13 @@ body { padding-bottom: 60px; }
   align-items: center;
   gap: 8px;
 }
-/* Fixed-height scrollable report */
-.report-box {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  background: var(--card-bg);
-  margin-bottom: 12px;
-  border: 1px solid #E0E0E0;
-}
-.report-box-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #00695C, #00897B);
-  color: #fff;
-}
-.report-box-header .rbh-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.report-box-header .rbh-info { flex: 1; min-width: 0; }
-.report-box-header .rbh-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-.report-box-header .rbh-tag {
-  font-size: 11px;
-  font-weight: 400;
-  opacity: 0.7;
-  margin-left: 8px;
-}
-.report-box-header .rbh-desc {
-  font-size: 11px;
-  opacity: 0.8;
-  margin-top: 1px;
-}
-.report-box-scroll {
-  max-height: 500px;
-  overflow-y: auto;
-  padding: 16px;
-}
-.report-box-scroll::-webkit-scrollbar { width: 6px; }
-.report-box-scroll::-webkit-scrollbar-track { background: transparent; }
-.report-box-scroll::-webkit-scrollbar-thumb { background: #B2DFDB; border-radius: 3px; }
-.report-box-scroll::-webkit-scrollbar-thumb:hover { background: #80CBC4; }
 @media (max-width: 768px) {
-  .report-box-scroll { max-height: 400px; padding: 12px; }
-  .report-box-header { padding: 8px 12px; }
-  .report-box-header .rbh-icon { width: 32px; height: 32px; }
-  .report-box-header .rbh-title { font-size: 14px; }
-  .report-box-header .rbh-tag { font-size: 10px; }
-  .report-box-header .rbh-desc { font-size: 10px; }
   .hub-cards { gap: 8px; min-width: 0; }
   .hub-card { padding: 10px 12px; min-width: 0; overflow: hidden; }
   .hub-card .hc-head { gap: 6px; min-width: 0; }
   .hub-card .hc-icon { width: 28px; height: 28px; font-size: 14px; }
   .hub-card .hc-title { font-size: 13px; }
   .hub-card .hc-desc { font-size: 10px; }
-  .report-box { min-width: 0; overflow: hidden; }
-  .report-box-header { min-width: 0; }
 }
 .hub-cards {
   display: grid;
@@ -3891,15 +3831,8 @@ function renderHub() {
   html += '</div>';
 
   var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
-  html += '<div class="report-box">';
-  html += '<div class="report-box-header">';
-  html += '<div class="rbh-icon">' + svgIcon('chart', 20) + '</div>';
-  html += '<div class="rbh-info"><div class="rbh-title">MSC行业分析报告<span class="rbh-tag">信息库AI团队打造 · 定时更新</span></div><div class="rbh-desc">基于' + ALL_DATA.length + '篇文献 · ' + totalMscProducts + '款获批产品 · 市场规模 · 融资动态 · 里程碑</div></div>';
-  html += '</div>';
-  html += '<div class="report-box-scroll">';
+  html += '<div class="hub-section-title">' + svgIcon('chart', 18) + ' MSC行业分析报告</div>';
   html += renderMscDashboard();
-  html += '</div>';
-  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
