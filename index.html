@@ -1088,24 +1088,30 @@ body { padding-bottom: 60px; }
 .report-entry:active { transform: translateY(0); }
 .report-entry-left {
   display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.report-entry-title {
+  display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
   font-weight: 600;
   color: #004D40;
-  min-width: 0;
 }
-.report-entry-left svg { color: #00695C; flex-shrink: 0; }
+.report-entry-title svg { color: #00695C; flex-shrink: 0; }
+.report-entry-desc {
+  font-size: 11px;
+  color: #00897B;
+  font-weight: 400;
+  line-height: 1.4;
+  padding-left: 26px;
+}
 .report-entry-right {
   display: flex;
   align-items: center;
-  gap: 4px;
   flex-shrink: 0;
-}
-.report-entry-hint {
-  font-size: 12px;
-  color: #00897B;
-  font-weight: 400;
 }
 .report-entry-right svg { color: #00897B; }
 @media (max-width: 768px) {
@@ -3877,8 +3883,11 @@ function renderHub() {
 
   var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
   html += '<div class="report-entry" onclick="switchSection(\'report\')">';
-  html += '<div class="report-entry-left">' + svgIcon('chart', 18) + '<span>MSC行业分析报告</span></div>';
-  html += '<div class="report-entry-right"><span class="report-entry-hint">点击查看全文</span>' + svgIcon('chevron-right', 16) + '</div>';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title">' + svgIcon('chart', 18) + '<span>MSC行业分析报告</span></div>';
+  html += '<div class="report-entry-desc">基于' + ALL_DATA.length + '篇临床文献与' + totalMscProducts + '款获批产品 · 信息库AI团队打造 · 定时更新</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
   content.innerHTML = html;
