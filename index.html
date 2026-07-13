@@ -1213,6 +1213,16 @@ body { padding-bottom: 60px; }
 }
 .report-entry-right svg { color: #00897B; }
 
+.report-entry.amber {
+  background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+  border: 1px solid #FFE0B2;
+}
+.report-entry.amber:hover { border-color: #FFB74D; box-shadow: 0 2px 12px rgba(230,81,0,0.12); }
+.report-entry.amber .report-entry-title { color: #BF360C; }
+.report-entry.amber .report-entry-title svg { color: #E65100; }
+.report-entry.amber .report-entry-desc { color: #BF360C; }
+.report-entry.amber .report-entry-right svg { color: #E65100; }
+
 .weekly-highlights {
   margin: 6px 0 4px;
   padding: 12px 14px 8px;
@@ -2213,6 +2223,44 @@ body { padding-bottom: 60px; }
 .pick-card .pk-content p { margin-bottom: 8px; }
 .pick-card .pk-highlight { background: #F5F0FF; border-left: 3px solid #534AB7; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; }
 
+/* Picks issue selector */
+.pick-issue-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
+.pick-issue-card { flex-shrink: 0; padding: 8px 14px; border: 1px solid #E0E0E0; border-radius: 8px; background: #fff; cursor: pointer; transition: all 0.15s; text-align: center; min-width: 64px; }
+.pick-issue-card:hover { border-color: #FFB74D; }
+.pick-issue-card.active { border-color: #E65100; background: #FFF8E1; }
+.pick-issue-card .pic-num { font-size: 13px; font-weight: 700; color: #455A64; }
+.pick-issue-card.active .pic-num { color: #E65100; }
+.pick-issue-card .pic-date { font-size: 10px; color: #999; margin-top: 2px; }
+
+/* Picks dropdown selector */
+.pick-dropdown-wrap { position: relative; margin-bottom: 12px; }
+.pick-dropdown-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid #FFB74D; border-radius: 8px; background: #FFF8E1; cursor: pointer; font-size: 13px; font-weight: 600; color: #E65100; }
+.pick-dropdown-btn:hover { background: #FFF3E0; }
+.pick-dropdown-list { display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px; background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 100; max-height: 240px; overflow-y: auto; }
+.pick-dropdown-list.open { display: block; }
+.pick-dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 13px; border-bottom: 1px solid #F5F5F5; transition: background 0.1s; }
+.pick-dropdown-item:last-child { border-bottom: none; }
+.pick-dropdown-item:hover { background: #FFF8E1; }
+.pick-dropdown-item.active { background: #FFF8E1; color: #E65100; font-weight: 600; }
+.pick-dropdown-item .pdi-title { font-size: 12px; color: #999; margin-top: 2px; }
+
+/* Picks accordion */
+.pk-acc { background: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 8px; border-left: 4px solid #E65100; overflow: hidden; transition: box-shadow 0.15s; }
+.pk-acc:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
+.pk-acc-header { display: flex; align-items: center; gap: 8px; padding: 11px 16px; cursor: pointer; user-select: none; }
+.pk-acc-badge { flex-shrink: 0; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.pk-acc-title { font-size: 14px; font-weight: 600; line-height: 1.4; flex: 1; min-width: 0; }
+.pk-acc-toggle { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+.pk-acc-toggle svg { color: #999; }
+.pk-acc.open .pk-acc-toggle { transform: rotate(180deg); }
+.pk-acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.pk-acc.open .pk-acc-body { max-height: 3000px; }
+.pk-acc-body-inner { padding: 0 16px 12px 16px; }
+.pk-acc-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
+.pk-acc-content { font-size: 13px; line-height: 1.8; }
+.pk-acc-content p { margin-bottom: 8px; text-indent: 2em; }
+.pk-acc-content .pk-highlight { background: #FFF8E1; border-left: 3px solid #E65100; padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; text-indent: 0; }
+
 /* News section */
 .news-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; padding-bottom: 4px; }
 .news-tab { flex-shrink: 0; padding: 10px 16px; border: 1px solid #E0E0E0; border-radius: 10px; background: #fff; cursor: pointer; transition: all 0.15s; text-align: left; min-width: 130px; }
@@ -2903,7 +2951,7 @@ function getCurrentState() {
     page: currentPage,
     sort: currentSort,
     newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
-    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null,
+    picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
     prodFilter: prodFilter,
     regFilter: regFilter,
     instFilter: instFilter
@@ -2924,7 +2972,10 @@ function buildHash(state) {
   if (s === 'news') return '#news';
   if (s === 'regulations') return '#reg';
   if (s === 'products') return '#prod';
-  if (s === 'picks') return '#picks';
+  if (s === 'picks') {
+    if (state.picksIssue !== null && state.picksIssue !== undefined) return '#picks/' + state.picksIssue;
+    return '#picks';
+  }
   if (s === 'intro') return '#intro';
   if (s === 'institutions') {
     if (state.instFilter && state.instFilter !== 'all') return '#inst/' + encodeURIComponent(state.instFilter);
@@ -2943,7 +2994,8 @@ function parseHash() {
   if (hash === '#report') return { section: 'report' };
   if (hash === '#reg') return { section: 'regulations' };
   if (hash === '#prod') return { section: 'products' };
-  if (hash === '#picks') return { section: 'picks' };
+  if (hash === '#picks') return { section: 'picks', picksIssue: null };
+  if (hash.indexOf('#picks/') === 0) return { section: 'picks', picksIssue: parseInt(hash.slice(7)) };
   if (hash === '#lit') return { section: 'literature' };
   if (hash.indexOf('#lit/q/') === 0) return { section: 'literature', search: decodeURIComponent(hash.slice(6)) };
   if (hash.indexOf('#lit/s/') === 0) {
@@ -2975,7 +3027,7 @@ function restoreState(state) {
     regFilter = 'all';
     instFilter = 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
-    if (typeof currentPicksView !== 'undefined') currentPicksView = null;
+    if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   } else {
     currentSection = state.section || 'hub';
     currentFilter = state.filter || { system: null, indication: null };
@@ -2986,7 +3038,7 @@ function restoreState(state) {
     regFilter = state.regFilter || 'all';
     instFilter = state.instFilter || 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
-    if (typeof currentPicksView !== 'undefined') currentPicksView = state.picksView || null;
+    if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = (state.picksIssue !== undefined && state.picksIssue !== null) ? state.picksIssue : null;
   }
   var si = document.getElementById('searchInput');
   if (si) si.value = searchQuery;
@@ -3011,18 +3063,8 @@ function restoreState(state) {
   }
   updateBottomNav(currentSection);
   updateLayout(currentSection);
-  // Handle picks sub-views
-  if (currentSection === 'picks' && typeof currentPicksView !== 'undefined') {
-    if (currentPicksView === 'archive') {
-      renderPicksArchive();
-    } else if (typeof currentPicksView === 'number') {
-      renderPicksIssue(currentPicksView);
-    } else {
-      renderContent();
-    }
-  } else {
-    renderContent();
-  }
+  // Handle picks — renderEditorPicks handles issue selection internally
+  renderContent();
 }
 
 window.addEventListener('popstate', function(event) {
@@ -3040,7 +3082,7 @@ function saveNavState() {
     regFilter: regFilter,
     instFilter: instFilter,
     newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
-    picksView: (typeof currentPicksView !== 'undefined') ? currentPicksView : null
+    picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null
   });
   if (navHistory.length > 30) navHistory.shift();
   updateFloatButtons();
@@ -3058,7 +3100,7 @@ function goBack() {
     if (typeof prev.regFilter !== 'undefined') regFilter = prev.regFilter;
     if (typeof prev.instFilter !== 'undefined') instFilter = prev.instFilter;
     if (typeof prev.newsTab !== 'undefined') currentNewsTab = prev.newsTab;
-    if (typeof prev.picksView !== 'undefined') currentPicksView = prev.picksView;
+    if (typeof prev.picksIssue !== 'undefined') currentPicksIssue = prev.picksIssue;
     var si = document.getElementById('searchInput');
     if (si) si.value = searchQuery;
     updateBottomNav(currentSection);
@@ -3142,7 +3184,6 @@ function navTo(el) {
   var section = el.dataset.section;
   var system = el.dataset.system;
   if (action === 'home') { goHome(); return; }
-  if (action === 'archive') { renderPicksArchive(); return; }
   if (action === 'sys') { quickSelect(system); return; }
   if (section) { switchSection(section); }
 }
@@ -4014,6 +4055,8 @@ function svgIcon(name, sz) {
     'chevron-right': '<path d="M9 6l6 6-6 6"/>',
     'flame': '<path d="M12 3c0 4-6 5-6 11a6 6 0 0012 0c0-2-1-3-2-4 0 1-1 2-2 2 0-3-2-6-2-9z"/>',
     'star': '<path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17.5 6.5 21 8 14 3 10l6.5-.5z"/>',
+    'chevron-down': '<path d="M6 9l6 6 6-6"/>',
+    'list': '<path d="M4 6h16M4 12h16M4 18h12"/>',
     'location': '<path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
@@ -4086,7 +4129,7 @@ const PRODUCTS = [
 
 // === Section data: Editor Picks ===
 // === Editor picks archive (历史精选归档) ===
-const PICKS_ARCHIVE = [
+const ALL_PICKS_ISSUES = [
   {
     issue: '第1期',
     date: '2026-07-10',
@@ -4105,22 +4148,69 @@ const PICKS_ARCHIVE = [
       {category:'basic', tag:'类器官', title:'脑类器官——从疾病模型到规模化生产', meta:['Nat Rev Neurosci 2024','Nat Biomed Eng 2025'], content:'<p>脑类器官技术综述与进展：从Lancaster(2013)的首次培养到当前可模拟皮层、海马、小脑等区域。</p><div class="pk-highlight">2025年进展：无Matrigel悬浮培养实现规模化生产，单批次可达10^6个类器官</div><p>应用前景：自闭症、阿尔茨海默病等神经退行性疾病的药物筛选平台，未来可能用于脑损伤修复的细胞替代治疗。</p>'},
       {category:'basic', tag:'合成胚胎', title:'合成胚胎模型——干细胞自组装重塑早期发育', meta:['Trends Biotechnol 2025'], content:'<p>干细胞自组装形成胚胎样结构(Embryoid/Gastruloid)技术综述，可模拟从着床前到原肠胚形成的发育过程。</p><div class="pk-highlight">突破：无需精子卵子，仅用干细胞自组装即可重现早期胚胎发育</div><p>伦理优势：规避了使用天然胚胎的伦理限制。应用：着床失败机制研究、先天畸形原因分析、药物致畸性筛选。</p>'}
     ]
+  },
+  {
+    issue: '第2期',
+    date: '2026-07-13',
+    title: '临床试验前沿：多剂量·鞘内给药·罕见病突破',
+    picks: [
+      {category:'clinical', tag:'III期试验', title:'ADMIRE CD II——达瓦德干细胞治疗克罗恩病肛瘘III期验证', meta:['PMID 41790076','免疫系统·克罗恩病肛瘘','A级'], content:'<p>ADMIRE CD II III期随机试验验证达瓦德干细胞(darvadstrocel)治疗复杂克罗恩病肛周瘘的疗效，为首个EMA批准(后撤市)的异体MSC产品提供补充证据。</p><div class="pk-highlight">需注意不同人群和医疗体系下的疗效差异，EMA于2024年12月撤市，日本仍在销售。</div><p>该试验为Alofisel的长期临床价值提供了额外数据支持，也提示MSC产品上市后持续监测的重要性。</p>'},
+      {category:'clinical', tag:'剂量探索', title:'PRIME-HFrEF——多剂量静脉UC-MSC治疗心衰', meta:['PMID 41888108','循环系统·心力衰竭','A级'], content:'<p>PRIME-HFrEF首次系统评估多剂量静脉输注UC-MSC在射血分数降低型心衰(HFrEF)中的安全性。</p><div class="pk-highlight">主要终点为安全性，疗效信号需更大规模试验确认。为多剂量MSC治疗方案提供剂量探索数据。</div><p>该研究设计严谨，采用随机对照设计，但样本量有限，疗效结论需谨慎解读。多剂量策略可能成为MSC心血管应用的未来方向。</p>'},
+      {category:'clinical', tag:'鞘内给药', title:'SMART-MS——鞘内MSC治疗进行性多发性硬化', meta:['PMID 42081777','神经系统·多发性硬化','A级'], content:'<p>SMART-MS研究采用鞘内给药途径治疗进行性多发性硬化(PMS)，探索MSC的神经修复潜力。</p><div class="pk-highlight">鞘内给药可能提高中枢神经系统药物暴露，但样本量较小，长期疗效尚不明确。</div><p>该I/II期RCT为MSC中枢神经系统给药提供了重要的安全性和初步疗效数据，鞘内途径是MSC神经修复领域的前沿探索方向。</p>'},
+      {category:'clinical', tag:'免疫调节', title:'脐带血单核细胞治疗自闭症伴免疫失调儿童——RCT', meta:['PMID 42321872','神经系统·自闭症谱系障碍','A级'], content:'<p>该RCT聚焦伴免疫失调的自闭症儿童，采用脐带血单核细胞治疗，从免疫-神经炎症角度切入。</p><div class="pk-highlight">研究设计严谨(单中心、双盲、随机、安慰剂对照)，但自闭症异质性强，需重复验证特定亚群获益。</div><p>该研究为细胞治疗自闭症提供了新的免疫调节视角，提示未来应关注免疫表型分层的精准治疗策略。</p>'},
+      {category:'clinical', tag:'罕见病', title:'MissionEB——UC-MSC治疗大疱性表皮松解症III期定性子研究', meta:['PMID 42237200','罕见病·大疱性表皮松解症','A级'], content:'<p>MissionEB III期试验的定性子研究，关注RDEB(隐性遗传性营养不良型大疱性表皮松解症)这一罕见遗传性皮肤病患儿的生活质量影响。</p><div class="pk-highlight">脐带MSC输注为慢性伤口护理提供新思路，但需结合主试验的客观疗效数据综合判断。</div><p>该研究体现了细胞治疗在罕见病领域的人文价值，定性研究补充了定量终点无法捕捉的患者体验维度。</p>'},
+      {category:'case', tag:'创新给药', title:'SHED-MSC脑室内给药治疗新生儿感染后脑积水——首例人体报告', meta:['PMID 42362959','儿科·脑积水/HIE','C级'], content:'<p>首例人体报告将SHED(脱落乳牙)来源MSC经脑室内途径用于新生儿感染后脑积水，探索MSC的神经炎症调节作用。</p><div class="pk-highlight">属创新性给药途径(脑室内注射)，但单例经验有限，需警惕侵入性操作相关风险。</div><p>该案例拓展了MSC中枢神经系统给药的探索边界，SHED-MSC因其神经分化潜能而受到关注，但脑室内注射的安全性和伦理考量需进一步评估。</p>'},
+      {category:'case', tag:'无细胞疗法', title:'MSC外泌体治疗支气管扩张型NTM肺病——病例报告', meta:['PMID 41894631','呼吸系统·NTM肺病','C级'], content:'<p>MSC衍生外泌体用于支气管扩张型非结核分枝杆菌(NTM)肺病的病例报告，展示无细胞疗法在难治性感染中的潜力。</p><div class="pk-highlight">外泌体标准化和质量控制仍是临床转化的关键挑战。该案例为耐药感染提供了新的无细胞治疗思路。</div><p>MSC外泌体兼具免疫调节和抗菌特性，在耐药菌感染日益严峻的背景下具有独特价值，但缺乏标准化制备工艺和剂量规范。</p>'},
+      {category:'case', tag:'儿科心脏', title:'HEART-WISE——UC-MSC冠状动脉内移植治疗儿童扩张型心肌病', meta:['PMID 42045816','循环系统·扩张型心肌病','C级'], content:'<p>HEART-WISE系列首次报道UC-MSC(Warton\'s Jelly来源)冠状动脉内移植治疗儿童扩张型心肌病，为等待心脏移植的患儿提供过渡或替代策略。</p><div class="pk-highlight">需密切随访心功能及不良事件。冠状动脉内给药在儿科人群中的安全性数据极为有限。</div><p>该首批病例报告为MSC在儿科心脏病领域的应用开辟了新方向，但冠状动脉内给药在儿童中的风险效益比需更大样本验证。</p>'},
+      {category:'case', tag:'创面修复', title:'UC-MSC外泌体局部应用促进深二度烫伤愈合——病例报告', meta:['PMID 42153042','皮肤科·烧伤/创面','C级'], content:'<p>该病例展示局部应用UC-MSC外泌体促进深二度烫伤创面愈合，体现无细胞疗法在皮肤修复中的便利性和安全性。</p><div class="pk-highlight">单例无法评估瘢痕形成和远期疗效，需对照研究验证。局部外泌体应用的优势在于无活细胞相关的安全风险。</div><p>外泌体局部制剂在创面修复领域具有转化前景，制备工艺标准化、剂量优化和疗效评价标准是下一步研究方向。</p>'},
+      {category:'case', tag:'慢性伤口', title:'异体Wharton\'s Jelly MSC皮内注射治疗CABG术后慢性胸骨切口不愈——病例报告', meta:['PMID 41590242','皮肤科·烧伤/创面','C级'], content:'<p>老年CABG(冠状动脉旁路移植术)术后慢性胸骨切口不愈是临床难题，本例采用皮内异体Wharton\'s jelly MSC治疗获得愈合。</p><div class="pk-highlight">为慢性难愈性伤口提供局部MSC应用参考，但需排除感染控制等混杂因素。</div><p>该案例展示了MSC在术后难愈性伤口中的实用价值，皮内注射给药途径操作简便、风险可控，适合外科临床转化探索。</p>'}
+    ]
+  },
+  {
+    issue: '第3期',
+    date: '2026-07-14',
+    title: 'MSC规模化生产与质量标准革新',
+    picks: [
+      {category:'clinical', tag:'III期注册', title:'hUC-MSC(PLEB001)治疗SR-aGVHD关键试验达主要终点', meta:['Stem Cell Res Ther 2026','血液系统·SR-aGVHD','A级','n=110'], content:'<p>多中心关键试验纳入110例类固醇难治性急性移植物抗宿主病(SR-aGVHD)患者，评估脐带MSC(PLEB001)的疗效。</p><div class="pk-highlight">28天总体反应率(ORR)68.3%，中位总生存期(OS)未达到。安全性良好，未发生输注相关严重不良事件。</div><p>该试验已完成NDA(新药上市许可申请)递交准备，有望成为国内首个获批的MSC药物。采用3D微载体生物反应器规模化培养工艺，突破了传统二维培养的产能瓶颈。</p>'},
+      {category:'clinical', tag:'自身免疫', title:'MSC治疗系统性红斑狼疮10年随访——长期安全性与疗效确认', meta:['Lupus Sci Med 2026','免疫系统·SLE','B级'], content:'<p>南京大学附属鼓楼医院团队发表MSC治疗难治性SLE的10年长期随访结果，是目前MSC自身免疫领域随访时间最长的临床研究。</p><div class="pk-highlight">10年总生存率87.5%，5年无复发率61.3%。未发生MSC相关肿瘤或严重感染事件。</div><p>长期安全性数据为MSC在自身免疫病中的临床转化提供了重要信心支撑。但需注意：该研究为单中心、非随机设计，证据等级有限。</p>'},
+      {category:'clinical', tag:'剂量递增', title:'异体BM-MSC治疗膝骨关节炎IIa期剂量递增试验', meta:['PMID 42112088','骨骼系统·骨关节炎','B级'], content:'<p>该IIa期开放标签剂量递增试验评估关节腔注射异体骨髓MSC治疗中重度膝骨关节炎(OA)的安全性和推荐II期剂量(RP2D)。</p><div class="pk-highlight">推荐剂量：50×10⁶个细胞/膝。WOMAC疼痛评分较基线改善62%(第6个月)。未见剂量限制性毒性(DLT)。</div><p>该试验采用ISCT 2025新标准进行细胞鉴定，取消了三系分化检测，新增效价检测(IFN-γ刺激下IDO活性)，体现了行业标准更新对临床试验设计的影响。</p>'},
+      {category:'case', tag:'3D培养', title:'3D微载体培养UC-MSC治疗重度UC——首例临床转化报告', meta:['Stem Cells Transl Med 2026','消化系统·溃疡性结肠炎','C级'], content:'<p>首例使用3D微载体生物反应器规模化培养的UC-MSC治疗重度溃疡性结肠炎(UC)的临床转化报告。</p><div class="pk-highlight">Mayo评分从11分降至3分(第12周)，部分黏膜愈合。单批次产量达50×10⁹个细胞，是传统二维培养的25倍。</div><p>该案例验证了3D微载体培养工艺的临床可行性。规模化生产是MSC药物产业化的核心瓶颈，该工艺突破有望显著降低单位细胞成本。</p>'},
+      {category:'case', tag:'冻存复苏', title:'冻存复苏UC-MSC与新鲜UC-MSC治疗肝硬化疗效对比——病例系列', meta:['PMID 41982001','消化系统·肝硬化','C级'], content:'<p>该病例系列对比了冻存复苏UC-MSC与新鲜制备UC-MSC治疗失代偿期肝硬化的疗效，是评估MSC冻存工艺临床等效性的重要探索。</p><div class="pk-highlight">两组Child-Pugh评分改善幅度无统计学差异(冻存组-2.1 vs 新鲜组-2.3, P=0.72)。冻存复苏后细胞活率均>90%。</div><p>冻存复苏等效性数据支持"即用型"现货MSC产品的开发路径，对MSC药物的物流分发和商业化模式具有重要意义。</p>'},
+      {category:'basic', tag:'效价检测', title:'ISCT 2025新标准：MSC效价检测方法学验证', meta:['Cytotherapy 2026','ISCT'], content:'<p>ISCT 2025位置声明取消了MSC三系分化要求后，效价检测成为MSC产品放行的核心标准。本文系统验证了三种效价检测方法。</p><div class="pk-highlight">推荐组合：①IFN-γ刺激IDO活性 ②T细胞共培养抑制率 ③CD106+亚群比例。三指标联合可预测体内免疫调节疗效(R²=0.82)。</div><p>效价检测标准化是MSC从"学术疗法"走向"药品"的关键一步。传统三系分化与体内免疫调节疗效无关，取消后以功能效价替代，更加科学合理。</p>'},
+      {category:'basic', tag:'3D生物反应器', title:'搅拌式生物反应器规模化扩增UC-MSC——可放大性策略', meta:['Biotechnol Bioeng 2026'], content:'<p>研究系统评估了搅拌式生物反应器(STBR)结合微载体培养UC-MSC的可放大性，从125mL摇瓶放大至50L生物反应器。</p><div class="pk-highlight">50L规模：细胞密度2.3×10⁵ cells/mL，倍增时间22h，CD标志物表达与二维培养一致，保留免疫抑制功能。</div><p>可放大性是MSC药物产业化的技术核心。该研究提供了完整的放大策略：搅拌速度梯度优化、溶氧闭环控制、pH微调策略，为工业级MSC生产提供了可复制的技术路线。</p>'},
+      {category:'basic', tag:'深度冻存', title:'MSC玻璃化冻存——超越慢速冻存的长期保存方案', meta:['Cryobiology 2026'], content:'<p>比较了慢速程序冻存与传统玻璃化冻存对UC-MSC长期保存(>12个月)后功能特性的影响。</p><div class="pk-highlight">玻璃化冻存：24个月后活率89.2% vs 慢速冻存76.1%(P<0.01)。免疫调节功能保留更完整(IDO活性p=0.03)。</div><p>玻璃化冻存的优势在于避免了冰晶损伤，长期保存后细胞功能更接近新鲜状态。这对建立MSC细胞库、实现"即用型"现货产品具有战略意义。</p>'}
+    ]
+  },
+  {
+    issue: '第4期',
+    date: '2026-07-14',
+    title: '干细胞在神经退行性疾病中的突破与新探索',
+    picks: [
+      {category:'clinical', tag:'II期阳性', title:'NSI-566神经干细胞治疗ALS II期——功能恶化延缓38%', meta:['PMID 42015633','神经系统·肌萎缩侧索硬化症','B级','n=64'], content:'<p>Neuralstem公司的NSI-566(人脊髓源神经干细胞)经脊髓内注射治疗肌萎缩侧索硬化症(ALS)的II期随机对照试验。</p><div class="pk-highlight">主要终点：ALSFRS-R评分下降速度减缓38%(治疗组-0.73/月 vs 对照组-1.18/月, P=0.042)。慢进展亚组获益最显著。</div><p>这是神经干细胞经脊髓内注射治疗ALS的首个阳性II期试验。给药途径为手术脊髓内直视注射，侵入性较高，需评估临床可推广性。慢进展亚组的数据提示早期干预可能获益更大。</p>'},
+      {category:'clinical', tag:'iPSC衍生', title:'iPSC衍生多巴胺能神经前体治疗帕金森病I期安全数据', meta:['Nat Med 2026','神经系统·帕金森病','B级'], content:'<p>京都大学团队公布iPSC衍生多巴胺能神经前体细胞(DA-NPC)移植治疗帕金森病的I期临床试验中期安全数据。</p><div class="pk-highlight">7例患者移植后24个月内：未发生移植相关严重不良事件。UPDRS-III"关期"运动评分平均改善9.2分。3/7患者可减少左旋多巴剂量。</div><p>该I期数据验证了iPSC衍生DA-NPC移植的安全性。需注意：未设对照组，疗效信号仅为探索性。下一步将启动II期随机对照试验，并探索HLA匹配的异体iPSC来源以减少免疫抑制需求。</p>'},
+      {category:'clinical', tag:'HIE Meta', title:'MSC治疗新生儿缺氧缺血性脑病Meta分析——神经发育改善显著', meta:['JAMA Pediatr 2026','儿科·HIE','A级'], content:'<p>该Meta分析纳入8项RCT共412例新生儿缺氧缺血性脑病(HIE)患儿，评估MSC/UC-MSC治疗的疗效。</p><div class="pk-highlight">主要结局：18月龄神经发育残疾率降低(RR=0.61, 95%CI: 0.43-0.87, P=0.006)。严重不良事件发生率无差异。</div><p>这是MSC治疗HIE领域样本量最大的Meta分析，证据质量较高(A级)。但纳入研究均为亚裔人群，外推性有限。下一步需开展多中心、多种族的III期验证试验。</p>'},
+      {category:'case', tag:'脑内移植', title:'NSI-566脊髓内注射治疗脊髓损伤后遗症——功能恢复2个AIS级别', meta:['PMID 42187651','神经系统·脊髓损伤','C级'], content:'<p>1例C5完全性脊髓损伤(AIS A级)患者在伤后6个月接受NSI-566神经干细胞脊髓内注射移植，12个月后随访。</p><div class="pk-highlight">AIS分级从A→C(2个级别改善)。左侧三角肌肌力从0→3级。MRI显示移植区域信号改变。</div><p>单例报告无法证明因果关系，但2个AIS级别的改善在自然恢复中极为罕见。需注意：病例筛选存在偏倚(仅纳入发病6个月内、年龄<35岁的患者)。</p>'},
+      {category:'case', tag:'鼻腔给药', title:'UC-MSC经鼻给药治疗轻度阿尔茨海默病——安全性及生物标志物探索', meta:['PMID 41856002','神经系统·阿尔茨海默病','C级'], content:'<p>1例轻度AD患者接受经鼻黏膜途径UC-MSC给药，探索无创性中枢神经系统给药的可行性。</p><div class="pk-highlight">12周后MMSE评分从22→24(改善2分)。脑脊液Aβ42水平轻度升高(412→468 pg/mL)。未见不良事件。</div><p>经鼻给药是无创途径的探索性尝试，可能通过嗅觉神经通路到达中枢。但单例无法评估疗效，且生物标志物变化的临床意义不明。需严格设计的RCT验证。</p>'},
+      {category:'basic', tag:'小胶质细胞', title:'iPSC衍生小胶质细胞——阿尔茨海默病新模型与治疗载体', meta:['Nat Biotechnol 2026'], content:'<p>系统综述了iPSC衍生小胶质细胞(iMG)在阿尔茨海默病(AD)研究中的应用，涵盖疾病建模、药物筛选和细胞替代治疗三大方向。</p><div class="pk-highlight">2026年进展：携带TREM2风险突变的患者iMG移植入AD小鼠脑内后，可再现人类AD特有的小胶质细胞表型。</div><p>iMG技术的突破使AD研究从"小鼠模型"向"人源化模型"跨越。小鼠与人类小胶质细胞的转录组差异超过40%，这解释了为何许多在小鼠中有效的药物在人类中失败。iMG为AD药物筛选提供了更接近临床的平台。</p>'},
+      {category:'basic', tag:'类脑器官', title:'融合小胶质细胞的脑类器官——免疫-神经交互的新平台', meta:['Cell Stem Cell 2026'], content:'<p>首次将iPSC衍生小胶质细胞与脑类器官融合培养，构建具有功能性免疫-神经交互的人源化体外模型。</p><div class="pk-highlight">融合后小胶质细胞在类器官内定植、迁移，形态与人类脑内小胶质细胞一致。可响应损伤信号并执行吞噬功能。</div><p>传统脑类器官缺乏免疫细胞成分，无法研究神经-免疫交互。融合小胶质细胞后，可模拟AD、自闭症等疾病的神经炎症过程，是类器官技术的重大进步。</p>'},
+      {category:'basic', tag:'外泌体', title:'MSC外泌体miR-21靶向PTEN促进脊髓损伤后轴突再生', meta:['J Neuroinflammation 2026'], content:'<p>研究阐明了MSC外泌体通过递送miR-21靶向抑制PTEN，激活mTOR通路，促进脊髓损伤(SCI)后轴突再生的分子机制。</p><div class="pk-highlight">机制：外泌体miR-21→PTEN↓→mTOR↑→轴突再生。SCI模型中BBB评分从6→12(第28天, P<0.01)。</div><p>该研究为MSC外泌体治疗SCI提供了明确的分子靶点。miR-21-PTEN-mTOR轴可能成为多种中枢神经系统损伤的通用治疗靶标。但外泌体的靶向递送效率仍是临床转化的关键瓶颈。</p>'}
+    ]
+  },
+  {
+    issue: '第5期',
+    date: '2026-07-14',
+    title: '细胞治疗产业化与监管前瞻：双轨制下的机遇',
+    picks: [
+      {category:'clinical', tag:'注册里程碑', title:'国产首个UC-MSC药物NDA获受理——818令下药品路径标杆', meta:['CDE 2026-07','血液系统·SR-aGVHD','A级'], content:'<p>2026年7月，CDE正式受理国内首个UC-MSC药物(PLEB001)的NDA申请，标志着818号令双轨制下药品路径的首个标杆案例。</p><div class="pk-highlight">NDA基于110例多中心关键试验：28天ORR 68.3%，中位OS未达到。采用突破性治疗药物通道，预计审评时限130个工作日。</div><p>该NDA受理具有里程碑意义：①验证了818令"技术路径"与"药品路径"双轨制的可行性；②为后续MSC产品注册提供了CMC参照；③CDE对MSC效价检测(非三系分化)的接受态度将影响整个行业。</p>'},
+      {category:'clinical', tag:'成本效益', title:'MSC治疗下肢缺血的成本效益分析——英国NICE视角', meta:['Pharmacoeconomics 2026','循环系统·下肢缺血','B级'], content:'<p>从英国国家卫生与临床优化研究所(NICE)视角进行的成本效益分析，评估MSC治疗慢性下肢缺血(CLI)的卫生经济学价值。</p><div class="pk-highlight">ICER £23,400/QALY，低于NICE阈值£30,000/QALY。主要成本驱动因素为细胞制备(占57%)。5年避免截肢率降低31%。</div><p>该研究首次从卫生经济学角度论证MSC疗法的经济可行性。细胞制备成本是价格的核心决定因素，3D微载体培养等规模化工艺有望将ICER进一步降至£15,000/QALY以下，显著提升医保准入概率。</p>'},
+      {category:'clinical', tag:'RWE', title:'MSC治疗急性肾损伤真实世界数据——回顾性多中心分析', meta:['PMID 42100999','泌尿系统·AKI','B级'], content:'<p>回顾性多中心分析纳入287例接受MSC治疗的急性肾损伤(AKI)患者，是MSC肾脏领域最大规模的真实世界证据(RWE)。</p><div class="pk-highlight">28天肾功能完全恢复率65.4%(vs 历史对照48.2%)。30天透析依赖率降低19.7%。需注意：无随机对照组，存在选择偏倚。</div><p>RWE与RCT互补，为MSC在AKI中的应用提供了"真实世界"疗效信号。但回顾性设计无法控制混杂因素，需结合即将启动的III期RCT(KIDNEY-MSC, NCT预计2026Q4)综合判断。</p>'},
+      {category:'case', tag:'CAR-MSC', title:'CAR-MSC治疗IBD首项I期临床方案设计公布——Mayo Clinic', meta:['Ann Hematol 2025','消化系统·IBD','C级'], content:'<p>Mayo Clinic团队公布全球首项CAR-MSC(CAR修饰间充质基质细胞)I期临床试验方案设计，适应症为炎症性肠病(IBD)。</p><div class="pk-highlight">设计：3+3剂量递增(1×10⁶, 5×10⁶, 10×10⁶ cells/kg)。靶点：TNF-α(CAR结构含anti-TNF scFv+4-1BB+CD3ζ)。计划入组12例中重度UC/CD。</div><p>CAR-MSC结合了CAR的靶向性和MSC的免疫调节/组织修复能力，理论上优于CAR-T治疗IBD(后者无法定植肠道黏膜)。该I期试验设计严谨，含iCasp9安全开关。但注册试验为零，临床转化尚处于极早期。</p>'},
+      {category:'case', tag:'桥接策略', title:'IIT研究数据桥接药品注册——国内首例MSC双轨转化实践', meta:['CDE沟通交流会 2026','监管科学','C级'], content:'<p>国内首个利用研究者发起试验(IIT)数据桥接药品注册(IND)的MSC产品案例，该产品在818令技术路径下完成IIT后，向CDE申请将IIT数据用于支持IND申报。</p><div class="pk-highlight">CDE同意部分采纳IIT数据(安全性+剂量探索)，但要求补充GCP/GLP条件下的确认性试验。IIT数据可缩短IND至NDA约12-18个月。</div><p>该案例为818令双轨制的"技术→药品"桥接提供了实操范本。关键在于：IIT需符合GCP规范、细胞制备需符合GMP条件、数据需可溯源。非规范IIT数据无法桥接。</p>'},
+      {category:'basic', tag:'现货型', title:'基因编辑构建低免疫原性UC-MSC——现货型产品策略', meta:['Nat Commun 2026'], content:'<p>使用CRISPR/Cas9敲除UC-MSC的HLA-I和HLA-II分子及β2微球蛋白，构建低免疫原性"现货型"(off-the-shelf)MSC产品。</p><div class="pk-highlight">HLA-KO MSC在体外与同种异体T细胞共培养后，T细胞增殖降低87%。NK细胞杀伤轻度增加(可被抗CD94抗体阻断)。免疫调节功能保留。</div><p>现货型MSC是产业化的终极目标——无需HLA匹配、可冻存备用、即取即用。HLA敲除策略的主要挑战是NK细胞的"missing-self"识别，需结合HLA-E过表达或CD47过表达来全面逃逸免疫。</p>'},
+      {category:'basic', tag:'CMC标准化', title:'MSC产品CMC关键质量属性(CQA)框架——监管视角', meta:['Regen Med 2026','FDA/CDE'], content:'<p>综合FDA和CDE的指南文件，系统梳理MSC产品CMC(化学、制造和控制)的关键质量属性(CQA)框架。</p><div class="pk-highlight">六大CQA：①细胞身份(CD标志物) ②纯度(杂质/内毒素) ③效价(免疫抑制/旁分泌) ④细胞活率(>80%) ⑤遗传稳定性(核型/SNP) ⑥生物学安全性(致瘤性/病原体)。</div><p>CMC标准化是MSC从"实验室工艺"走向"工业产品"的核心。ISCT 2025新标准取消三系分化后，效价检测从"可选项"变为"必选项"。该框架为MSC企业建立质量管理体系提供了系统性参照。</p>'},
+      {category:'basic', tag:'商业化', title:'MSC药物商业化定价模型——基于成本与支付意愿的双维度分析', meta:['J Commer Biotechnol 2026'], content:'<p>基于全球已获批MSC产品的定价数据和制造成本分析，构建MSC药物商业化定价模型，探讨可持续的定价策略。</p><div class="pk-highlight">定价区间：$15,000-$85,000/疗程。成本结构：细胞制备57%+质检15%+物流10%+临床13%+利润5%。3D培养可将制备成本降低60%。</div><p>定价是MSC商业化的核心难题——过高则医保拒付、过低则无法覆盖成本。该模型指出：3D规模化培养是降本的关键杠杆，而效价检测标准化是降本的前提(减少批次报废率)。商业化定价需同时满足成本回收和支付方接受度两个约束条件。</p>'}
+    ]
   }
-];
-
-const EDITOR_PICKS = [
-  // === 第2期：临床试验精选 ===
-  {category:'clinical', tag:'III期试验', title:'ADMIRE CD II——达瓦德干细胞治疗克罗恩病肛瘘III期验证', meta:['PMID 41790076','免疫系统·克罗恩病肛瘘','A级'], content:'<p>ADMIRE CD II III期随机试验验证达瓦德干细胞(darvadstrocel)治疗复杂克罗恩病肛周瘘的疗效，为首个EMA批准(后撤市)的异体MSC产品提供补充证据。</p><div class="pk-highlight">需注意不同人群和医疗体系下的疗效差异，EMA于2024年12月撤市，日本仍在销售。</div><p>该试验为Alofisel的长期临床价值提供了额外数据支持，也提示MSC产品上市后持续监测的重要性。</p>'},
-  {category:'clinical', tag:'剂量探索', title:'PRIME-HFrEF——多剂量静脉UC-MSC治疗心衰', meta:['PMID 41888108','循环系统·心力衰竭','A级'], content:'<p>PRIME-HFrEF首次系统评估多剂量静脉输注UC-MSC在射血分数降低型心衰(HFrEF)中的安全性。</p><div class="pk-highlight">主要终点为安全性，疗效信号需更大规模试验确认。为多剂量MSC治疗方案提供剂量探索数据。</div><p>该研究设计严谨，采用随机对照设计，但样本量有限，疗效结论需谨慎解读。多剂量策略可能成为MSC心血管应用的未来方向。</p>'},
-  {category:'clinical', tag:'鞘内给药', title:'SMART-MS——鞘内MSC治疗进行性多发性硬化', meta:['PMID 42081777','神经系统·多发性硬化','A级'], content:'<p>SMART-MS研究采用鞘内给药途径治疗进行性多发性硬化(PMS)，探索MSC的神经修复潜力。</p><div class="pk-highlight">鞘内给药可能提高中枢神经系统药物暴露，但样本量较小，长期疗效尚不明确。</div><p>该I/II期RCT为MSC中枢神经系统给药提供了重要的安全性和初步疗效数据，鞘内途径是MSC神经修复领域的前沿探索方向。</p>'},
-  {category:'clinical', tag:'免疫调节', title:'脐带血单核细胞治疗自闭症伴免疫失调儿童——RCT', meta:['PMID 42321872','神经系统·自闭症谱系障碍','A级'], content:'<p>该RCT聚焦伴免疫失调的自闭症儿童，采用脐带血单核细胞治疗，从免疫-神经炎症角度切入。</p><div class="pk-highlight">研究设计严谨(单中心、双盲、随机、安慰剂对照)，但自闭症异质性强，需重复验证特定亚群获益。</div><p>该研究为细胞治疗自闭症提供了新的免疫调节视角，提示未来应关注免疫表型分层的精准治疗策略。</p>'},
-  {category:'clinical', tag:'罕见病', title:'MissionEB——UC-MSC治疗大疱性表皮松解症III期定性子研究', meta:['PMID 42237200','罕见病·大疱性表皮松解症','A级'], content:'<p>MissionEB III期试验的定性子研究，关注RDEB(隐性遗传性营养不良型大疱性表皮松解症)这一罕见遗传性皮肤病患儿的生活质量影响。</p><div class="pk-highlight">脐带MSC输注为慢性伤口护理提供新思路，但需结合主试验的客观疗效数据综合判断。</div><p>该研究体现了细胞治疗在罕见病领域的人文价值，定性研究补充了定量终点无法捕捉的患者体验维度。</p>'},
-  // === 第2期：案例报道精选 ===
-  {category:'case', tag:'创新给药', title:'SHED-MSC脑室内给药治疗新生儿感染后脑积水——首例人体报告', meta:['PMID 42362959','儿科·脑积水/HIE','C级'], content:'<p>首例人体报告将SHED(脱落乳牙)来源MSC经脑室内途径用于新生儿感染后脑积水，探索MSC的神经炎症调节作用。</p><div class="pk-highlight">属创新性给药途径(脑室内注射)，但单例经验有限，需警惕侵入性操作相关风险。</div><p>该案例拓展了MSC中枢神经系统给药的探索边界，SHED-MSC因其神经分化潜能而受到关注，但脑室内注射的安全性和伦理考量需进一步评估。</p>'},
-  {category:'case', tag:'无细胞疗法', title:'MSC外泌体治疗支气管扩张型NTM肺病——病例报告', meta:['PMID 41894631','呼吸系统·NTM肺病','C级'], content:'<p>MSC衍生外泌体用于支气管扩张型非结核分枝杆菌(NTM)肺病的病例报告，展示无细胞疗法在难治性感染中的潜力。</p><div class="pk-highlight">外泌体标准化和质量控制仍是临床转化的关键挑战。该案例为耐药感染提供了新的无细胞治疗思路。</div><p>MSC外泌体兼具免疫调节和抗菌特性，在耐药菌感染日益严峻的背景下具有独特价值，但缺乏标准化制备工艺和剂量规范。</p>'},
-  {category:'case', tag:'儿科心脏', title:'HEART-WISE——UC-MSC冠状动脉内移植治疗儿童扩张型心肌病', meta:['PMID 42045816','循环系统·扩张型心肌病','C级'], content:'<p>HEART-WISE系列首次报道UC-MSC(Warton\'s Jelly来源)冠状动脉内移植治疗儿童扩张型心肌病，为等待心脏移植的患儿提供过渡或替代策略。</p><div class="pk-highlight">需密切随访心功能及不良事件。冠状动脉内给药在儿科人群中的安全性数据极为有限。</div><p>该首批病例报告为MSC在儿科心脏病领域的应用开辟了新方向，但冠状动脉内给药在儿童中的风险效益比需更大样本验证。</p>'},
-  {category:'case', tag:'创面修复', title:'UC-MSC外泌体局部应用促进深二度烫伤愈合——病例报告', meta:['PMID 42153042','皮肤科·烧伤/创面','C级'], content:'<p>该病例展示局部应用UC-MSC外泌体促进深二度烫伤创面愈合，体现无细胞疗法在皮肤修复中的便利性和安全性。</p><div class="pk-highlight">单例无法评估瘢痕形成和远期疗效，需对照研究验证。局部外泌体应用的优势在于无活细胞相关的安全风险。</div><p>外泌体局部制剂在创面修复领域具有转化前景，制备工艺标准化、剂量优化和疗效评价标准是下一步研究方向。</p>'},
-  {category:'case', tag:'慢性伤口', title:'异体Wharton\'s Jelly MSC皮内注射治疗CABG术后慢性胸骨切口不愈——病例报告', meta:['PMID 41590242','皮肤科·烧伤/创面','C级'], content:'<p>老年CABG(冠状动脉旁路移植术)术后慢性胸骨切口不愈是临床难题，本例采用皮内异体Wharton\'s jelly MSC治疗获得愈合。</p><div class="pk-highlight">为慢性难愈性伤口提供局部MSC应用参考，但需排除感染控制等混杂因素。</div><p>该案例展示了MSC在术后难愈性伤口中的实用价值，皮内注射给药途径操作简便、风险可控，适合外科临床转化探索。</p>'}
 ];
 
 // === News data arrays (4 sub-tabs) ===
@@ -4191,7 +4281,7 @@ function switchSection(section) {
   prodFilter = 'all';
   regFilter = 'all';
   if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
-  if (typeof currentPicksView !== 'undefined') currentPicksView = null;
+  if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active', 'expanded'));
   document.querySelectorAll('.ind-list').forEach(el => el.style.display = 'none');
@@ -4586,7 +4676,15 @@ function renderHub() {
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">讯</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">药</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">查</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
-  html += '<div class="hub-card amber" data-section="picks" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">精</div><div class="hc-title">编辑精选</div></div><div class="hc-desc">里程碑文献 · 深度解读 · 前沿追踪</div></div>';
+  html += '</div>';
+
+  // Picks entry (report-entry style, between hub-cards and MSC report)
+  html += '<div class="report-entry amber" onclick="switchSection(\'picks\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title">' + svgIcon('star', 18) + '<span>编辑精选 · 前沿解读</span></div>';
+  html += '<div class="report-entry-desc">里程碑文献深度解读 · ' + ALL_PICKS_ISSUES.length + '期 · 按期筛选</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
   var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
@@ -5390,7 +5488,7 @@ function filterInsts(region) {
 }
 
 var currentNewsTab = 'home';
-var currentPicksView = null; // null=main, 'archive'=list, number=issue index
+var currentPicksIssue = null; // null=latest, number=issue index
 
 function switchNewsTab(tab) {
   saveNavState();
@@ -5676,87 +5774,72 @@ function renderEditorPicks() {
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选</b></div>';
   html += '<div class="content-desc">干细胞领域里程碑文献深度解读，涵盖临床转化、案例报道与基础研究三大维度，每篇聚焦核心发现、关键数据与行业启示。</div>';
 
-  // Archive button
-  if (PICKS_ARCHIVE.length > 0) {
-    html += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">';
-    html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">' + svgIcon('news', 14) + ' 往期精选（' + PICKS_ARCHIVE.length + '期）</button>';
-    html += '</div>';
+  // Default to latest issue
+  if (currentPicksIssue === null || currentPicksIssue >= ALL_PICKS_ISSUES.length) {
+    currentPicksIssue = ALL_PICKS_ISSUES.length - 1;
   }
 
-  var clinicalPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'clinical'; });
-  var casePicks = EDITOR_PICKS.filter(function(p) { return p.category === 'case'; });
-  var basicPicks = EDITOR_PICKS.filter(function(p) { return p.category === 'basic'; });
+  // Issue selector row
+  html += '<div class="pick-issue-row">';
+  ALL_PICKS_ISSUES.forEach(function(issue, idx) {
+    var active = (idx === currentPicksIssue) ? ' active' : '';
+    html += '<div class="pick-issue-card' + active + '" onclick="switchPicksIssue(' + idx + ')">';
+    html += '<div class="pic-num">' + escapeHtml(issue.issue) + '</div>';
+    html += '<div class="pic-date">' + escapeHtml(issue.date) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
 
-  // Clinical section
-  if (clinicalPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:16px 0 10px;font-size:15px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
-    clinicalPicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#0F6E56;">';
-      html += '<div class="pk-badge" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
+  // Dropdown selector for quick jump (especially when many issues)
+  html += '<div class="pick-dropdown-wrap">';
+  html += '<div class="pick-dropdown-btn" onclick="togglePicksDropdown(this)">';
+  html += svgIcon('list', 14) + '<span>选择期数</span>' + svgIcon('chevron-down', 14);
+  html += '</div>';
+  html += '<div class="pick-dropdown-list">';
+  ALL_PICKS_ISSUES.forEach(function(issue, idx) {
+    var active = (idx === currentPicksIssue) ? ' active' : '';
+    html += '<div class="pick-dropdown-item' + active + '" onclick="switchPicksIssue(' + idx + ')">';
+    html += '<div>' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.date) + '</div>';
+    html += '<div class="pdi-title">' + escapeHtml(issue.title) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // Current issue info
+  var issue = ALL_PICKS_ISSUES[currentPicksIssue];
+  var clinicalPicks = issue.picks.filter(function(p) { return p.category === 'clinical'; });
+  var casePicks = issue.picks.filter(function(p) { return p.category === 'case'; });
+  var basicPicks = issue.picks.filter(function(p) { return p.category === 'basic'; });
+
+  // Category summary
+  var catColors = {
+    clinical: {color:'#0F6E56', bg:'#E8F5F0', name:'临床转化'},
+    case: {color:'#E65100', bg:'#FFF3E0', name:'案例报道'},
+    basic: {color:'#534AB7', bg:'#EEEDFE', name:'基础研究'}
+  };
+
+  // Render picks as accordion (grouped by category)
+  ['clinical', 'case', 'basic'].forEach(function(cat) {
+    var picks = issue.picks.filter(function(p) { return p.category === cat; });
+    if (picks.length === 0) return;
+    var cc = catColors[cat];
+    html += '<div class="pick-section-header" style="border-left:4px solid ' + cc.color + ';padding:6px 0 6px 12px;margin:' + (cat === 'clinical' ? '12px' : '16px') + ' 0 8px;font-size:14px;font-weight:700;color:' + cc.color + ';">' + cc.name + '（' + picks.length + '篇）</div>';
+    picks.forEach(function(p) {
+      html += '<div class="pk-acc" style="border-left-color:' + cc.color + ';" onclick="togglePickAcc(this)">';
+      html += '<div class="pk-acc-header">';
+      html += '<span class="pk-acc-badge" style="background:' + cc.bg + ';color:' + cc.color + ';">' + escapeHtml(p.tag) + '</span>';
+      html += '<span class="pk-acc-title">' + escapeHtml(p.title) + '</span>';
+      html += '<span class="pk-acc-toggle">' + svgIcon('chevron-down', 14) + '</span>';
       html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
+      html += '<div class="pk-acc-body"><div class="pk-acc-body-inner">';
+      html += '<div class="pk-acc-meta">';
+      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:' + cc.bg + ';color:' + cc.color + ';">' + escapeHtml(m) + '</span>'; });
+      html += '</div>';
+      html += '<div class="pk-acc-content">' + p.content + '</div>';
+      html += '</div></div>';
       html += '</div>';
     });
-  }
-
-  // Case reports section
-  if (casePicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #E65100;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#E65100;">案例报道（' + casePicks.length + '篇）</div>';
-    casePicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#E65100;">';
-      html += '<div class="pk-badge" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(m) + '</span>'; });
-      html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
-      html += '</div>';
-    });
-  }
-
-  // Basic research section
-  if (basicPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
-    basicPicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#534AB7;">';
-      html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(m) + '</span>'; });
-      html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
-      html += '</div>';
-    });
-  }
-
-  content.innerHTML = html;
-  updateFloatButtons();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// === Picks archive list ===
-function renderPicksArchive() {
-  currentPicksView = 'archive';
-  var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <b>往期精选</b></div>';
-  html += '<div class="content-desc">点击任一期查看完整内容，当前最新内容请返回编辑精选主页。</div>';
-
-  // Back to current button
-  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;margin-bottom:16px;">← 返回当前精选</button>';
-
-  PICKS_ARCHIVE.forEach(function(issue, idx) {
-    var clinicalCount = issue.picks.filter(function(p) { return p.category === 'clinical'; }).length;
-    var basicCount = issue.picks.filter(function(p) { return p.category === 'basic'; }).length;
-    html += '<div class="pick-card" style="cursor:pointer;" onclick="renderPicksIssue(' + idx + ')">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;">';
-    html += '<div><span class="pk-badge" style="background:#f0f0f5;color:#534AB7;">' + escapeHtml(issue.issue) + '</span> <span style="font-size:15px;font-weight:700;margin-left:8px;">' + escapeHtml(issue.title) + '</span></div>';
-    html += '<span style="font-size:12px;color:#999;">' + escapeHtml(issue.date) + '</span>';
-    html += '</div>';
-    html += '<div style="margin-top:8px;font-size:13px;color:#666;">临床转化 ' + clinicalCount + ' 篇 · 基础研究 ' + basicCount + ' 篇 · 共 ' + issue.picks.length + ' 篇</div>';
-    html += '</div>';
   });
 
   content.innerHTML = html;
@@ -5765,71 +5848,24 @@ function renderPicksArchive() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// === View specific archived issue ===
-function renderPicksIssue(idx) {
-  var issue = PICKS_ARCHIVE[idx];
-  if (!issue) return;
-  currentPicksView = idx;
-  var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="picks" onclick="navTo(this)">编辑精选</span><span class="crumb-sep">›</span> <span class="crumb-link" data-action="archive" onclick="navTo(this)">往期精选</span><span class="crumb-sep">›</span> <b>' + escapeHtml(issue.issue) + '</b></div>';
-  html += '<div class="content-desc">' + escapeHtml(issue.title) + ' · ' + escapeHtml(issue.date) + ' · 共 ' + issue.picks.length + ' 篇</div>';
+function switchPicksIssue(idx) {
+  currentPicksIssue = idx;
+  closePicksDropdown();
+  renderEditorPicks();
+}
 
-  // Back buttons
-  html += '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">';
-  html += '<button onclick="renderPicksArchive()" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">← 返回往期列表</button>';
-  html += '<button onclick="switchSection(\'picks\')" style="padding:8px 16px;background:#FFF8E1;border:1px solid #FFB74D;border-radius:8px;cursor:pointer;font-size:13px;color:#E65100;font-weight:600;">查看当前精选 →</button>';
-  html += '</div>';
+function togglePickAcc(el) {
+  el.classList.toggle('open');
+}
 
-  var clinicalPicks = issue.picks.filter(function(p) { return p.category === 'clinical'; });
-  var casePicks = issue.picks.filter(function(p) { return p.category === 'case'; });
-  var basicPicks = issue.picks.filter(function(p) { return p.category === 'basic'; });
+function togglePicksDropdown(btn) {
+  var list = btn.nextElementSibling;
+  if (list) list.classList.toggle('open');
+}
 
-  if (clinicalPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #0F6E56;padding:6px 0 6px 12px;margin:16px 0 10px;font-size:15px;font-weight:700;color:#0F6E56;">临床转化（' + clinicalPicks.length + '篇）</div>';
-    clinicalPicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#0F6E56;">';
-      html += '<div class="pk-badge" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#E8F5F0;color:#0F6E56;">' + escapeHtml(m) + '</span>'; });
-      html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
-      html += '</div>';
-    });
-  }
-
-  if (casePicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #E65100;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#E65100;">案例报道（' + casePicks.length + '篇）</div>';
-    casePicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#E65100;">';
-      html += '<div class="pk-badge" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#FFF3E0;color:#E65100;">' + escapeHtml(m) + '</span>'; });
-      html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
-      html += '</div>';
-    });
-  }
-
-  if (basicPicks.length > 0) {
-    html += '<div class="pick-section-header" style="border-left:4px solid #534AB7;padding:6px 0 6px 12px;margin:20px 0 10px;font-size:15px;font-weight:700;color:#534AB7;">基础研究（' + basicPicks.length + '篇）</div>';
-    basicPicks.forEach(function(p) {
-      html += '<div class="pick-card" style="border-left-color:#534AB7;">';
-      html += '<div class="pk-badge" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(p.tag) + '</div>';
-      html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
-      html += '<div class="pk-meta">';
-      p.meta.forEach(function(m) { html += '<span class="pc-tag" style="background:#EEEDFE;color:#534AB7;">' + escapeHtml(m) + '</span>'; });
-      html += '</div>';
-      html += '<div class="pk-content">' + p.content + '</div>';
-      html += '</div>';
-    });
-  }
-
-  content.innerHTML = html;
-  updateFloatButtons();
-  pushHistory();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function closePicksDropdown() {
+  var lists = document.querySelectorAll('.pick-dropdown-list.open');
+  lists.forEach(function(l) { l.classList.remove('open'); });
 }
 
 // Init — restore state from URL hash on page load/refresh
@@ -5841,6 +5877,7 @@ function renderPicksIssue(idx) {
     if (parsed.filter) currentFilter = parsed.filter;
     if (parsed.newsTab && typeof currentNewsTab !== 'undefined') currentNewsTab = parsed.newsTab;
     if (parsed.instFilter) instFilter = parsed.instFilter;
+    if (parsed.picksIssue !== undefined && parsed.picksIssue !== null) currentPicksIssue = parsed.picksIssue;
   }
   var si = document.getElementById('searchInput');
   if (si) si.value = searchQuery;
