@@ -2896,6 +2896,7 @@ function buildHash(state) {
     return '#lit';
   }
   if (s === 'news' && state.newsTab && state.newsTab !== 'home') return '#news/' + state.newsTab;
+  if (s === 'news') return '#news';
   if (s === 'regulations') return '#reg';
   if (s === 'products') return '#prod';
   if (s === 'picks') return '#picks';
@@ -5180,7 +5181,7 @@ function renderNews() {
   html += '</div>';
 
   if (currentNewsTab === 'home') {
-    // 最新 5 条（按日期排序）
+    // 全部资讯（按日期排序）
     var allNews = [];
     NEWS_FLASH.forEach(function(n){ allNews.push(Object.assign({_tab:'flash',_tabColor:'#2E7D32',_tabLabel:'快讯'},n)); });
     FRONTIER_RESEARCH.forEach(function(n){ allNews.push(Object.assign({_tab:'frontier',_tabColor:'#7B1FA2',_tabLabel:'前沿'},n)); });
@@ -5188,10 +5189,8 @@ function renderNews() {
     LOCAL_POLICY.forEach(function(n){ allNews.push(Object.assign({_tab:'policy',_tabColor:'#E65100',_tabLabel:'政策'},n)); });
     FUNDING_TRENDS.forEach(function(n){ allNews.push(Object.assign({_tab:'funding',_tabColor:'#00838F',_tabLabel:'融资'},n)); });
     allNews.sort(function(a,b){ return b.date.localeCompare(a.date); });
-    var latest5 = allNews.slice(0, 5);
 
-    html += '<div class="hub-section-title" style="margin-top:8px;">最新 5 条</div>';
-    latest5.forEach(function(n) {
+    allNews.forEach(function(n) {
       var hasLink = n.url ? true : false;
       html += '<div class="news-card" style="border-left-color:' + n._tabColor + ';">';
       html += '<div class="nc-date">' + n.date + ' · ' + n._tabLabel + '</div>';
