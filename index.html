@@ -2174,6 +2174,262 @@ body { padding-bottom: 60px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 .sidebar::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
+
+/* === Intro / 认识细胞治疗 === */
+.edu-hero {
+  background: linear-gradient(135deg, #534AB7 0%, #7B1FA2 100%);
+  border-radius: 14px;
+  padding: 28px 24px;
+  color: #fff;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.edu-hero::after {
+  content: '';
+  position: absolute;
+  right: -30px; top: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.edu-hero::before {
+  content: '';
+  position: absolute;
+  right: 40px; bottom: -40px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.edu-hero h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 1; }
+.edu-hero p { font-size: 14px; opacity: 0.9; line-height: 1.7; position: relative; z-index: 1; }
+.edu-hero .edu-hero-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+.edu-hero .edu-hero-tag {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 12px;
+}
+.edu-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #26215C;
+  margin: 18px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #E8E6FE;
+}
+.edu-section-title svg { color: #534AB7; flex-shrink: 0; }
+.edu-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.edu-type-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: box-shadow 0.2s, transform 0.15s;
+  cursor: default;
+}
+.edu-type-card:hover { box-shadow: 0 3px 12px rgba(83,74,183,0.12); transform: translateY(-1px); }
+.edu-type-card .et-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.edu-type-card .et-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  color: #fff; flex-shrink: 0;
+}
+.edu-type-card .et-name { font-size: 15px; font-weight: 600; color: var(--text); }
+.edu-type-card .et-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+.edu-type-card .et-examples { font-size: 12px; color: #534AB7; margin-top: 6px; font-weight: 500; }
+.edu-mech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.edu-mech-card {
+  background: #FAF9FF;
+  border: 1px solid #E8E6FE;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+.edu-mech-card .em-icon {
+  width: 40px; height: 40px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: #EEEDFE;
+  display: flex; align-items: center; justify-content: center;
+}
+.edu-mech-card .em-icon svg { color: #534AB7; }
+.edu-mech-card .em-title { font-size: 14px; font-weight: 600; color: #26215C; margin-bottom: 4px; }
+.edu-mech-card .em-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.edu-source-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.edu-source-card {
+  background: #FAF9FF;
+  border: 1px solid #E8E6FE;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.edu-source-card .es-icon { font-size: 24px; margin-bottom: 4px; }
+.edu-source-card .es-name { font-size: 13px; font-weight: 600; color: #26215C; }
+.edu-source-card .es-desc { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.edu-disease-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.edu-disease-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.edu-disease-item:hover { border-color: #534AB7; background: #FAF9FF; }
+.edu-disease-item .ed-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.edu-disease-item .ed-count {
+  font-size: 12px;
+  color: #534AB7;
+  font-weight: 600;
+  background: #EEEDFE;
+  border-radius: 10px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+.edu-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.edu-evidence-card {
+  border-radius: 8px;
+  padding: 12px 10px;
+  text-align: center;
+  border: 1px solid;
+}
+.edu-evidence-card .ee-grade { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+.edu-evidence-card .ee-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.edu-evidence-card .ee-desc { font-size: 11px; line-height: 1.4; opacity: 0.85; }
+.edu-evidence-card.a { background: #E8F5E9; border-color: #66BB6A; color: #1B5E20; }
+.edu-evidence-card.b { background: #E3F2FD; border-color: #42A5F5; color: #0D47A1; }
+.edu-evidence-card.c { background: #FFF3E0; border-color: #FFA726; color: #E65100; }
+.edu-evidence-card.d { background: #FCE4EC; border-color: #EC407A; color: #880E4F; }
+.edu-faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.edu-faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #26215C;
+  user-select: none;
+  transition: background 0.15s;
+}
+.edu-faq-q:hover { background: #FAF9FF; }
+.edu-faq-q .efq-icon { flex-shrink: 0; transition: transform 0.2s; color: #534AB7; }
+.edu-faq-item.open .edu-faq-q .efq-icon { transform: rotate(90deg); }
+.edu-faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+.edu-faq-item.open .edu-faq-a { grid-template-rows: 1fr; }
+.edu-faq-a-inner {
+  overflow: hidden;
+  padding: 0 16px;
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+.edu-faq-item.open .edu-faq-a-inner { padding: 0 16px 14px; }
+.edu-faq-a-inner b { color: var(--text); }
+.edu-safety-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.edu-safety-card {
+  background: #FFF8F0;
+  border: 1px solid #FFCC80;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.edu-safety-card .es-head { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #E65100; margin-bottom: 6px; }
+.edu-safety-card .es-head svg { color: #E65100; flex-shrink: 0; }
+.edu-safety-card ul { list-style: none; padding: 0; }
+.edu-safety-card li { font-size: 12px; color: var(--text); line-height: 1.7; padding-left: 14px; position: relative; }
+.edu-safety-card li::before { content: '•'; position: absolute; left: 2px; color: #FF9800; }
+.edu-timeline {
+  position: relative;
+  padding-left: 24px;
+}
+.edu-timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 4px; bottom: 4px;
+  width: 2px;
+  background: linear-gradient(180deg, #534AB7, #7B1FA2);
+  border-radius: 1px;
+}
+.edu-tl-item { position: relative; margin-bottom: 14px; }
+.edu-tl-item::before {
+  content: '';
+  position: absolute;
+  left: -20px; top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #534AB7;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #534AB7;
+}
+.edu-tl-item .etl-year { font-size: 12px; font-weight: 700; color: #534AB7; }
+.edu-tl-item .etl-text { font-size: 13px; color: var(--text); line-height: 1.6; margin-top: 2px; }
+.edu-callout {
+  background: linear-gradient(135deg, #EEEDFE, #F3E5F5);
+  border: 1px solid #D1C4E9;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.edu-callout svg { color: #7B1FA2; flex-shrink: 0; margin-top: 2px; }
+.edu-callout .ec-text { font-size: 13px; color: #4A148C; line-height: 1.7; }
+.edu-callout .ec-text b { color: #311B92; }
+@media (max-width: 768px) {
+  .edu-type-grid, .edu-disease-list, .edu-safety-grid { grid-template-columns: 1fr; }
+  .edu-mech-grid, .edu-evidence-grid { grid-template-columns: repeat(2, 1fr); }
+  .edu-source-grid { grid-template-columns: repeat(2, 1fr); }
+  .edu-hero { padding: 20px 16px; }
+  .edu-hero h3 { font-size: 17px; }
+  .edu-hero p { font-size: 13px; }
+  .edu-section-title { font-size: 15px; }
+}
 </style>
 </head>
 <body>
@@ -4308,16 +4564,143 @@ function carouselGoTo(idx) {
   carouselTimer = setInterval(function(){ carouselSlide(1); }, 5000);
 }
 
-// === Intro section (placeholder) ===
+// === Intro section (认识细胞治疗) ===
 function renderIntro() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>认识细胞治疗</b></div>';
-  html += '<div class="content-header"><h2>认识细胞治疗</h2><div class="desc">面向患者及公众的细胞治疗科普导览<br>本板块正在建设中，敬请期待。</div></div>';
-  html += '<div style="text-align:center;padding:60px 20px;color:var(--text-light);">';
-  html += '<div style="font-size:48px;margin-bottom:12px;">' + svgIcon('dna', 48) + '</div>';
-  html += '<div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px;">内容筹备中</div>';
-  html += '<div style="font-size:13px;">计划包含：什么是MSC · 能治哪些病 · 如何看待临床试验 · 患者常见问题FAQ</div>';
+  html += '<div class="content-header"><h2>认识细胞治疗</h2><div class="desc">面向患者及公众的细胞治疗科普导览<br>用通俗易懂的语言，了解细胞治疗的原理、类型与应用</div></div>';
+
+  // 1. Hero
+  html += '<div class="edu-hero">';
+  html += '<h3>' + svgIcon('dna', 22) + ' 什么是细胞治疗？</h3>';
+  html += '<p>细胞治疗（Cell Therapy）是指将活细胞引入患者体内，用于治疗疾病的一种新型医学手段。与传统药物（化学分子）不同，细胞治疗使用的是"活的细胞"——它们可以是患者自身的（自体），也可以来自他人（异体）。细胞进入体内后，通过<strong>替代受损细胞</strong>、<strong>调节免疫系统</strong>、<strong>分泌修复因子</strong>等方式发挥作用。</p>';
+  html += '<div class="edu-hero-tags"><span class="edu-hero-tag">活细胞药物</span><span class="edu-hero-tag">再生医学</span><span class="edu-hero-tag">免疫治疗</span><span class="edu-hero-tag">基因编辑</span></div>';
   html += '</div>';
+
+  // 2. 细胞治疗的主要类型
+  html += '<div class="edu-section-title">' + svgIcon('users', 18) + ' 细胞治疗的主要类型</div>';
+  html += '<div class="edu-type-grid">';
+  // MSC
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#0F6E56">MSC</div><div class="et-name">间充质干细胞</div></div><div class="et-desc">来自脐带、骨髓、脂肪等组织，具有免疫调节和组织修复功能，是当前临床研究最广泛的细胞类型。</div><div class="et-examples">代表产品：Ryoncil · 睿铂生 · Stemirac</div></div>';
+  // CAR-T
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#D32F2F">CAR-T</div><div class="et-name">CAR-T细胞疗法</div></div><div class="et-desc">改造患者自身T细胞，使其精准识别并杀伤癌细胞，在血液肿瘤领域取得突破性疗效。</div><div class="et-examples">代表产品：Kymriah · Yescarta · Carvykti</div></div>';
+  // iPSC
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#993C1D">iPSC</div><div class="et-name">诱导多能干细胞</div></div><div class="et-desc">将成体细胞"重编程"为类似胚胎干细胞的状态，可分化为任何细胞类型，规避伦理争议。</div><div class="et-examples">代表产品：ReHeart · Amchepri（2026日本获批）</div></div>';
+  // CRISPR-HSC
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#534AB7">编辑</div><div class="et-name">基因编辑干细胞</div></div><div class="et-desc">用CRISPR等基因编辑工具改造造血干细胞，从基因层面治愈遗传性疾病。</div><div class="et-examples">代表产品：Casgevy · Lyfgenia · Zynteglo</div></div>';
+  // TIL
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#185FA5">TIL</div><div class="et-name">肿瘤浸润淋巴细胞</div></div><div class="et-desc">从肿瘤组织中提取已识别癌细胞的T细胞，体外扩增后回输，2024年首个TIL疗法获FDA批准。</div><div class="et-examples">代表产品：Amtagvi（晚期黑色素瘤）</div></div>';
+  // 其他
+  html += '<div class="edu-type-card"><div class="et-head"><div class="et-icon" style="background:#888780">其他</div><div class="et-name">其他细胞疗法</div></div><div class="et-desc">包括自体软骨细胞（MACI）、角膜缘干细胞（Holoclar）、成纤维细胞（Laviv）等已获批的成熟细胞疗法。</div><div class="et-examples">代表产品：MACI · Holoclar · Stratagraft</div></div>';
+  html += '</div>';
+
+  // 3. MSC详解 - 为什么选择MSC
+  html += '<div class="edu-section-title">' + svgIcon('dna', 18) + ' 间充质干细胞（MSC）详解</div>';
+  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>本网站专注于MSC领域。</b>间充质干细胞（Mesenchymal Stromal Cells，MSC）是目前全球临床研究最多的成体干细胞类型，本平台收录了 <b>' + ALL_DATA.length + ' 篇</b>相关临床文献，覆盖 <b>' + totalSystemsGlobal + ' 个</b>生理系统、<b>136 个</b>适应症。以下从三个维度认识MSC。</div></div>';
+
+  // 3a. MSC的来源
+  html += '<div style="font-size:14px;font-weight:600;color:#26215C;margin:14px 0 8px;">' + svgIcon('flask', 16) + ' MSC的四大来源</div>';
+  html += '<div class="edu-source-grid">';
+  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脐带</div><div class="es-desc">最常用 · 免疫原性低 · 增殖力强</div></div>';
+  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">骨髓</div><div class="es-desc">最早发现 · 经典来源 · 采集有创</div></div>';
+  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脂肪</div><div class="es-desc">储量丰富 · 取材方便 · 脂肪组织提取</div></div>';
+  html += '<div class="edu-source-card"><div class="es-icon">' + svgIcon('pill', 24) + '</div><div class="es-name">脐带血</div><div class="es-desc">可冻存 · 含量较低 · 多与骨髓配用</div></div>';
+  html += '</div>';
+
+  // 3b. MSC的三大机制
+  html += '<div style="font-size:14px;font-weight:600;color:#26215C;margin:14px 0 8px;">' + svgIcon('chart', 16) + ' MSC发挥作用的三大机制</div>';
+  html += '<div class="edu-mech-grid">';
+  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('shield', 22) + '</div><div class="em-title">免疫调节</div><div class="em-desc">通过分泌PGE2、IDO等因子，抑制过度活跃的免疫反应，用于GVHD、自身免疫病</div></div>';
+  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('pill', 22) + '</div><div class="em-title">旁分泌修复</div><div class="em-desc">分泌VEGF、HGF、FGF等生长因子，促进血管新生和组织修复，而非直接分化替代</div></div>';
+  html += '<div class="edu-mech-card"><div class="em-icon">' + svgIcon('search', 22) + '</div><div class="em-title">归巢效应</div><div class="em-desc">静脉输注后向损伤部位"归巢"，在缺血、炎症区域富集发挥作用</div></div>';
+  html += '</div>';
+
+  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>重要认知：</b>MSC不是"万能干细胞"。根据ISCT 2025最新立场文件，MSC应称为"间充质<strong>基质</strong>细胞"（Stromal Cells），其核心作用是<b>药物信号细胞</b>——通过旁分泌和免疫调节发挥短期效果，而非分化替代受损组织。临床疗效取决于<b>剂量、疗程、给药途径和细胞质量</b>。</div></div>';
+
+  // 4. MSC能治哪些病
+  html += '<div class="edu-section-title">' + svgIcon('hospital', 18) + ' MSC能治哪些病？</div>';
+  html += '<p style="font-size:13px;color:var(--text-light);margin-bottom:10px;">基于本平台 ' + ALL_DATA.length + ' 篇临床文献，MSC研究覆盖以下主要疾病领域。点击任一疾病可查看相关文献证据。</p>';
+  // 动态计算Top适应症
+  var indCounts = {};
+  ALL_DATA.forEach(function(d){
+    if (d.indication) {
+      indCounts[d.indication] = (indCounts[d.indication] || 0) + 1;
+    }
+  });
+  var topInds = Object.keys(indCounts).map(function(k){return {name:k, count:indCounts[k]};});
+  topInds.sort(function(a,b){return b.count - a.count;});
+  topInds = topInds.slice(0, 12);
+  html += '<div class="edu-disease-list">';
+  topInds.forEach(function(d){
+    html += '<div class="edu-disease-item" onclick="searchTag(\'' + d.name.replace(/'/g,"\\'") + '\')">';
+    html += '<span class="ed-name">' + escapeHtml(d.name) + '</span>';
+    html += '<span class="ed-count">' + d.count + ' 篇</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<div style="text-align:center;margin-top:10px;"><button class="edu-type-card" style="display:inline-block;cursor:pointer;border:1px solid #534AB7;background:#EEEDFE;padding:8px 24px;border-radius:8px;color:#534AB7;font-size:13px;font-weight:600;" onclick="switchSection(\'literature\')">' + svgIcon('doc', 16) + ' 查看全部 ' + ALL_DATA.length + ' 篇文献</button></div>';
+
+  // 5. 如何看待临床试验证据
+  html += '<div class="edu-section-title">' + svgIcon('clipboard', 18) + ' 如何看待临床试验证据？</div>';
+  html += '<p style="font-size:13px;color:var(--text-light);margin-bottom:10px;">并非所有研究都具有同等说服力。本平台对每篇文献标注证据等级，帮助您判断研究质量：</p>';
+  html += '<div class="edu-evidence-grid">';
+  html += '<div class="edu-evidence-card a"><div class="ee-grade">A</div><div class="ee-name">随机对照试验</div><div class="ee-desc">RCT / Meta分析，最高级别证据，设有对照组和随机分组</div></div>';
+  html += '<div class="edu-evidence-card b"><div class="ee-grade">B</div><div class="ee-name">非随机对照</div><div class="ee-desc">有对照组但未随机分配，或大样本队列研究</div></div>';
+  html += '<div class="edu-evidence-card c"><div class="ee-grade">C</div><div class="ee-name">单臂试验</div><div class="ee-desc">无对照组，仅观察干预效果，证据中等</div></div>';
+  html += '<div class="edu-evidence-card d"><div class="ee-grade">D</div><div class="ee-name">案例报道</div><div class="ee-desc">个案或小系列病例，证据最弱，仅供参考</div></div>';
+  html += '</div>';
+  html += '<div class="edu-callout"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>如何看待"有效率"？</b>单臂试验中"80%有效"并不等于RCT中的80%——因为没有对照组，无法排除安慰剂效应和自然病程改善。看到"100%有效"的报道时尤其需要警惕，应查看是否有对照组、样本量多大、随访多长。</div></div>';
+
+  // 6. 细胞治疗发展时间线
+  html += '<div class="edu-section-title">' + svgIcon('calendar', 18) + ' 细胞治疗发展里程碑</div>';
+  html += '<div class="edu-timeline">';
+  html += '<div class="edu-tl-item"><div class="etl-year">1997</div><div class="etl-text">Carticel获FDA批准，成为全球首个细胞治疗产品（自体软骨细胞）</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2006</div><div class="etl-text">山中伸弥发现iPS细胞，开启重编程时代（2012年获诺贝尔奖）</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2011-2012</div><div class="etl-text">韩国连续批准CellGram（心梗）、Cartistem（关节炎）、Cupistem（肛瘘），MSC药物时代开启</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2017</div><div class="etl-text">Kymriah获FDA批准，全球首个CAR-T细胞疗法上市</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2023</div><div class="etl-text">Casgevy获FDA批准，全球首个CRISPR基因编辑疗法，用于镰刀型贫血</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2024.12</div><div class="etl-text">Ryoncil获FDA批准，首个FDA批准的MSC疗法，打破MSC"有数据无产品"困境</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2025.01</div><div class="etl-text">中国NMPA批准睿铂生，中国首款干细胞治疗药物上市</div></div>';
+  html += '<div class="edu-tl-item"><div class="etl-year">2026.02</div><div class="etl-text">日本PMDA批准ReHeart和Amchepri，全球首批iPSC来源细胞疗法</div></div>';
+  html += '</div>';
+
+  // 7. 患者常见问题FAQ
+  html += '<div class="edu-section-title">' + svgIcon('doc', 18) + ' 患者常见问题FAQ</div>';
+  var faqs = [
+    {q:'MSC治疗安全吗？', a:'根据现有 ' + ALL_DATA.length + ' 篇临床文献，MSC治疗总体安全性良好，严重不良事件发生率较低。常见副作用包括低热、输液反应等，多为轻度和一过性。但安全性取决于<b>细胞来源、制备工艺、剂量和给药途径</b>，不同试验结果可能有差异。请务必在正规医疗机构、经伦理委员会批准的临床试验框架下接受治疗。'},
+    {q:'MSC治疗和造血干细胞移植（骨髓移植）一样吗？', a:'不一样。造血干细胞移植（HSCT）用于替换患者的整个造血系统，需要清髓预处理，风险较高。MSC治疗则是通过输注间充质基质细胞，发挥免疫调节和旁分泌修复作用，<b>不需要清髓</b>，安全性更高，但作用机制完全不同。MSC在造血干细胞移植中可作为辅助治疗，帮助预防GVHD。'},
+    {q:'"干细胞治疗"和"干细胞美容抗衰"是一回事吗？', a:'<b>不是。</b>本平台讨论的是经过严格临床试验验证的<b>治疗性</b>细胞治疗，针对特定疾病。市面上很多"干细胞美容抗衰"产品缺乏临床试验证据，未获监管批准，存在严重安全隐患。2026年5月施行的818号令明确规定，未经备案的细胞治疗属于违法行为。'},
+    {q:'MSC治疗能治愈我的病吗？', a:'目前MSC疗法在大多数适应症中仍处于<b>临床试验阶段</b>，获批产品有限（全球约18款MSC产品获批，且多数为条件性批准）。少数疾病（如GVHD、脊髓损伤）已有获批产品，多数适应症的疗效仍需更多高级别证据验证。请理性看待，不要相信"包治百病"的宣传。'},
+    {q:'如何参加MSC临床试验？', a:'1) 在本平台文献板块搜索您的疾病，查看是否有相关临床试验；2) 登录ClinicalTrials.gov或中国临床试验注册中心（ChiCTR）搜索正在招募的试验；3) 咨询主治医生是否符合入组条件；4) <b>切勿通过非正规渠道参加"干细胞治疗"</b>，必须在经批准的三甲医院和备案机构进行。'},
+    {q:'MSC治疗费用如何？', a:'目前获批的MSC产品价格差异巨大：印度Stempeucel约2200美元，韩国CellGram约1.5万美元，日本Stemirac约9.5万美元，美国Ryoncil完整疗程约155万美元，中国睿铂生单次1.98万元/完整疗程约15.8万元。临床试验阶段通常免费。具体费用请咨询治疗机构。'},
+    {q:'自体和异体MSC有什么区别？', a:'<b>自体</b>MSC来自患者自身组织（如骨髓、脂肪），无免疫排斥风险，但需要体外培养2-4周，且细胞质量受患者年龄和健康状况影响。<b>异体</b>MSC来自健康供者，可"现货"使用，但由于MSC免疫原性低，通常不需要配型。目前获批产品中异体来源居多。'}
+  ];
+  faqs.forEach(function(f, i){
+    html += '<div class="edu-faq-item" id="faq-' + i + '">';
+    html += '<div class="edu-faq-q" onclick="var el=this.parentElement;el.classList.toggle(\'open\')"><span>' + f.q + '</span>' + svgIcon('chevron-right', 16) + '</div>';
+    html += '<div class="edu-faq-a"><div class="edu-faq-a-inner">' + f.a + '</div></div>';
+    html += '</div>';
+  });
+
+  // 8. 安全与监管须知
+  html += '<div class="edu-section-title">' + svgIcon('shield', 18) + ' 安全与监管须知</div>';
+  html += '<div class="edu-safety-grid">';
+  html += '<div class="edu-safety-card"><div class="es-head">' + svgIcon('shield', 16) + ' 中国监管</div><ul>';
+  html += '<li>2026年5月1日施行的818号令（《细胞和基因治疗产品监督管理办法》）实行双轨制管理</li>';
+  html += '<li>医疗机构开展细胞治疗需向省级药监部门备案</li>';
+  html += '<li>未经备案开展细胞治疗，最高可处20倍罚款</li>';
+  html += '<li>目前仅1款MSC产品（睿铂生）获NMPA批准上市</li>';
+  html += '</ul></div>';
+  html += '<div class="edu-safety-card"><div class="es-head">' + svgIcon('warn', 16) + ' 风险警示</div><ul>';
+  html += '<li>警惕"包治百病""根治""再生"等绝对化宣传用语</li>';
+  html += '<li>正规细胞治疗必须在经批准的医疗机构、由执业医师实施</li>';
+  html += '<li>临床试验不会收取高额费用，收费"治疗"需谨慎</li>';
+  html += '<li>境外"干细胞旅游"存在严重安全风险，多国已发出警告</li>';
+  html += '</ul></div>';
+  html += '</div>';
+
+  html += '<div class="edu-callout" style="margin-top:14px;"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>免责声明：</b>本页面内容仅供科普参考，不构成医疗建议。具体治疗方案请咨询主治医生。如有细胞治疗相关问题，可致电咨询：<b>15932929299（杨博士）</b>，或点击下方"备案机构查询"了解正规治疗渠道。</div></div>';
+
   content.innerHTML = html;
   updateFloatButtons();
 }
