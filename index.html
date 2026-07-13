@@ -2779,7 +2779,33 @@ function buildHash(state) {
   if (s === 'regulations') return '#reg';
   if (s === 'products') return '#prod';
   if (s === 'picks') return '#picks';
+  if (s === 'intro') return '#intro';
+  if (s === 'institutions') return '#inst';
+  if (s === 'report') return '#report';
   return '#hub';
+}
+
+function parseHash() {
+  var hash = window.location.hash;
+  if (!hash || hash === '#hub') return { section: 'hub' };
+  if (hash === '#intro') return { section: 'intro' };
+  if (hash === '#inst') return { section: 'institutions' };
+  if (hash === '#report') return { section: 'report' };
+  if (hash === '#reg') return { section: 'regulations' };
+  if (hash === '#prod') return { section: 'products' };
+  if (hash === '#picks') return { section: 'picks' };
+  if (hash === '#lit') return { section: 'literature' };
+  if (hash.indexOf('#lit/q/') === 0) return { section: 'literature', search: decodeURIComponent(hash.slice(6)) };
+  if (hash.indexOf('#lit/s/') === 0) {
+    var rest = hash.slice(6);
+    var parts = rest.split('/i/');
+    var sys = decodeURIComponent(parts[0]);
+    if (parts[1]) return { section: 'literature', filter: { system: sys, indication: decodeURIComponent(parts[1]) } };
+    return { section: 'literature', filter: { system: sys, indication: null } };
+  }
+  if (hash.indexOf('#news/') === 0) return { section: 'news', newsTab: hash.slice(6) };
+  if (hash === '#news') return { section: 'news', newsTab: 'home' };
+  return { section: 'hub' };
 }
 
 function pushHistory() {
@@ -5379,11 +5405,32 @@ function renderPicksIssue(idx) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Init — set initial browser history state
-history.replaceState(getCurrentState(), '', buildHash(getCurrentState()));
-updateLayout('hub');
-updateBottomNav('hub');
-renderContent();
+// Init — restore state from URL hash on page load/refresh
+(function() {
+  var parsed = parseHash();
+  if (parsed.section && parsed.section !== 'hub') {
+    currentSection = parsed.section;
+    if (parsed.search) searchQuery = parsed.search;
+    if (parsed.filter) currentFilter = parsed.filter;
+    if (parsed.newsTab && typeof currentNewsTab !== 'undefined') currentNewsTab = parsed.newsTab;
+  }
+  var si = document.getElementById('searchInput');
+  if (si) si.value = searchQuery;
+  history.replaceState(getCurrentState(), '', buildHash(getCurrentState()));
+  updateLayout(currentSection);
+  updateBottomNav(currentSection);
+  renderContent();
+  // Restore scroll position after content renders
+  if (sessionStorage.getItem('scrollPos_' + window.location.hash)) {
+    var savedScroll = parseInt(sessionStorage.getItem('scrollPos_' + window.location.hash));
+    setTimeout(function() { window.scrollTo(0, savedScroll); }, 100);
+  }
+})();
+
+// Save scroll position before page unload
+window.addEventListener('beforeunload', function() {
+  sessionStorage.setItem('scrollPos_' + window.location.hash, String(window.scrollY));
+});
 
 // === Copyright protection ===
 // Disable right-click context menu
