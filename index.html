@@ -5161,21 +5161,20 @@ function renderNews() {
   ];
 
   // content-header (always shown)
-  html += '<div class="content-header"><h2>行业资讯精选</h2><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选。</div></div>';
 
-  // Category cards (always visible, like Regulations)
+  // Category cards — 6 in two rows (3 per row)
   var totalCount = NEWS_FLASH.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
-  html += '<div class="overview" style="margin-bottom:16px;">';
-  html += '<div class="overview-card" style="border-left-color:#00695C;cursor:pointer;" onclick="switchNewsTab(\'home\')">';
-  html += '<div class="oc-count">' + totalCount + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
-  html += '<div class="oc-name">全部资讯</div>';
-  html += '<div class="oc-stats">最新5条 · 点击查看</div>';
+  var tabShortLabels = { flash:'最新资讯', frontier:'前沿研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);">';
+  html += '<div class="reg-cat-card" style="border-left-color:#00695C;cursor:pointer;" onclick="switchNewsTab(\'home\')">';
+  html += '<div class="rcc-countline"><span class="rcc-count">' + totalCount + '</span><span class="rcc-unit"> 条</span></div>';
+  html += '<div class="rcc-name">全部资讯</div>';
   html += '</div>';
   tabs.forEach(function(t) {
-    html += '<div class="overview-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
-    html += '<div class="oc-count" style="color:' + t.color + ';">' + t.count + ' <span style="font-size:14px;font-weight:600;color:#666;">条</span></div>';
-    html += '<div class="oc-name">' + t.label + '</div>';
-    html += '<div class="oc-stats">' + t.desc + ' · 点击筛选</div>';
+    html += '<div class="reg-cat-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + t.color + ';">' + t.count + '</span><span class="rcc-unit"> 条</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(tabShortLabels[t.id] || t.label) + '</div>';
     html += '</div>';
   });
   html += '</div>';
