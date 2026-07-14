@@ -3016,7 +3016,8 @@ function getCurrentState() {
     picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
     prodFilter: prodFilter,
     regFilter: regFilter,
-    instFilter: instFilter
+    instFilter: instFilter,
+    companyFilter: companyFilter
   };
 }
 
@@ -3044,6 +3045,10 @@ function buildHash(state) {
     return '#inst';
   }
   if (s === 'report') return '#report';
+  if (s === 'companies') {
+    if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
+    return '#companies';
+  }
   return '#hub';
 }
 
@@ -3054,6 +3059,8 @@ function parseHash() {
   if (hash === '#inst') return { section: 'institutions', instFilter: 'all' };
   if (hash.indexOf('#inst/') === 0) return { section: 'institutions', instFilter: decodeURIComponent(hash.slice(6)) };
   if (hash === '#report') return { section: 'report' };
+  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
+  if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
   if (hash === '#prod') return { section: 'products' };
   if (hash === '#picks') return { section: 'picks', picksIssue: null };
@@ -3088,6 +3095,7 @@ function restoreState(state) {
     prodFilter = 'all';
     regFilter = 'all';
     instFilter = 'all';
+    companyFilter = 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   } else {
@@ -3099,6 +3107,7 @@ function restoreState(state) {
     prodFilter = state.prodFilter || 'all';
     regFilter = state.regFilter || 'all';
     instFilter = state.instFilter || 'all';
+    companyFilter = state.companyFilter || 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = (state.picksIssue !== undefined && state.picksIssue !== null) ? state.picksIssue : null;
   }
@@ -3353,6 +3362,7 @@ function renderContent() {
   if (currentSection === 'products') { renderProducts(); return; }
   if (currentSection === 'news') { renderNews(); return; }
   if (currentSection === 'picks') { renderEditorPicks(); return; }
+  if (currentSection === 'companies') { renderCompanies(); return; }
   if (currentSection === 'intro') { renderIntro(); return; }
   if (currentSection === 'institutions') { renderInstitutions(); return; }
   if (currentSection === 'report') { renderReport(); return; }
@@ -4120,7 +4130,8 @@ function svgIcon(name, sz) {
     'star': '<path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17.5 6.5 21 8 14 3 10l6.5-.5z"/>',
     'chevron-down': '<path d="M6 9l6 6 6-6"/>',
     'list': '<path d="M4 6h16M4 12h16M4 18h12"/>',
-    'location': '<path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>'
+    'location': '<path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>',
+    'plus': '<path d="M12 5v14M5 12h14"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -4351,6 +4362,7 @@ function switchSection(section) {
   currentPage = 1;
   prodFilter = 'all';
   regFilter = 'all';
+  companyFilter = 'all';
   if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
   if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
@@ -4384,6 +4396,8 @@ function updateLayout(section) {
   }
   if (infoBar) infoBar.style.display = (section === 'hub') ? '' : 'none';
   if (section === 'report' && container) container.classList.add('no-sidebar');
+  if (section === 'companies' && container) container.classList.add('no-sidebar');
+  if (section === 'picks' && container) container.classList.add('no-sidebar');
 }
 
 function toggleInfoBar(panel) {
@@ -4752,8 +4766,17 @@ function renderHub() {
   // Picks entry (report-entry style, between hub-cards and MSC report)
   html += '<div class="report-entry amber" onclick="switchSection(\'picks\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title">' + svgIcon('star', 18) + '<span>编辑精选 · 前沿解读</span></div>';
-  html += '<div class="report-entry-desc">重要文献深度解读 · 按期筛选</div>';
+  html += '<div class="report-entry-title">' + svgIcon('star', 18) + '<span>编辑精选·前沿解读</span></div>';
+  html += '<div class="report-entry-desc">重要文献深度解读·按期筛选</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
+  // Companies entry
+  html += '<div class="report-entry" style="border-color:#E0E0E0;" onclick="switchSection(\'companies\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title">' + svgIcon('building', 18) + '<span>企业巡览·产业相关</span></div>';
+  html += '<div class="report-entry-desc">产业相关企业介绍·点击查看</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -4762,7 +4785,7 @@ function renderHub() {
   html += '<div class="report-entry" onclick="switchSection(\'report\')">';
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('chart', 18) + '<span>分析报告·MSC行业</span></div>';
-  html += '<div class="report-entry-desc">信息库AI团队打造 · 定时更新</div>';
+  html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -5447,6 +5470,42 @@ var INST_REGION_COLORS = {
   '东北': '#BF360C'
 };
 
+// === Companies data ===
+var companyFilter = 'all';
+var COMPANY_CATS = {
+  rnd:       { color: '#00695C', bg: '#E8F5F0', name: '研发企业' },
+  reagent:   { color: '#1565C0', bg: '#E3F2FD', name: '试剂供应商' },
+  equipment: { color: '#2E7D32', bg: '#E8F5E9', name: '设备供应商' },
+  cro:       { color: '#6A1B9A', bg: '#F3E5F5', name: 'CRO/CDMO' }
+};
+var COMPANIES = [
+  // 研发企业
+  { name: '汉氏联合', cat: 'rnd', city: '北京', desc: '胎盘干细胞技术研发与产业化，国内最早从事胎盘干细胞库建设的企业之一', tags: ['干细胞存储', '胎盘MSC', '细胞药物'] },
+  { name: '博雅干细胞', cat: 'rnd', city: '无锡', desc: '自动化干细胞处理平台，全球干细胞库网络，AABB认证', tags: ['干细胞库', '自动化', '临床转化'] },
+  { name: '中源协和', cat: 'rnd', city: '天津', desc: 'A股上市细胞企业，干细胞存储、基因检测与细胞治疗研发', tags: ['上市公司', '干细胞存储', '基因检测'] },
+  { name: '科济药业', cat: 'rnd', city: '上海', desc: 'CAR-T与实体瘤细胞治疗研发，港股上市', tags: ['CAR-T', '实体瘤', '港股上市'] },
+  { name: '传奇生物', cat: 'rnd', city: '南京', desc: 'CAR-T产品cilta-cel获FDA批准，中国首个全球化细胞治疗产品', tags: ['CAR-T', 'BCMA', 'FDA获批'] },
+  { name: '药明巨诺', cat: 'rnd', city: '上海', desc: 'CAR-T产品瑞基奥仑赛获批上市，血液瘤细胞治疗', tags: ['CAR-T', 'CD19', 'NMPA获批'] },
+  { name: '合源生物', cat: 'rnd', city: '天津', desc: 'CAR-T细胞药物研发，CNCT19临床推进中', tags: ['CAR-T', 'CD19', '临床推进'] },
+  { name: '邦耀生物', cat: 'rnd', city: '上海', desc: '基因编辑与细胞治疗，MODIT基因编辑平台', tags: ['基因编辑', 'CAR-T', '平台技术'] },
+  { name: '西比曼生物', cat: 'rnd', city: '上海', desc: '干细胞与免疫细胞治疗研发，纳斯达克上市', tags: ['MSC', '免疫细胞', '美股上市'] },
+  // 试剂供应商
+  { name: '美天旎 (Miltenyi Biotec)', cat: 'reagent', city: '德国/上海', desc: '磁珠分选试剂与细胞培养领域标杆，MACS技术全球领先', tags: ['磁珠分选', 'MACS', '细胞培养'] },
+  { name: 'STEMCELL Technologies', cat: 'reagent', city: '加拿大/上海', desc: '干细胞培养基与试剂专家，MesenCult系列广受认可', tags: ['培养基', 'MSC', '分化试剂'] },
+  { name: '赛默飞 (Thermo Fisher)', cat: 'reagent', city: '美国/上海', desc: '细胞培养、分析仪器与耗材综合供应商，Gibco培养基', tags: ['Gibco', '培养基', '分析仪器'] },
+  { name: '康宁 (Corning)', cat: 'reagent', city: '美国/上海', desc: '细胞培养耗材全球领导者，CellBIND表面技术', tags: ['培养瓶', '耗材', 'CellBIND'] },
+  { name: '诺禾致源', cat: 'reagent', city: '北京', desc: '基因测序与生物信息服务，单细胞测序平台', tags: ['基因测序', '单细胞', '生信分析'] },
+  // 设备供应商
+  { name: '楚天科技', cat: 'equipment', city: '长沙', desc: '生物反应器与一次性系统，制药装备整体解决方案', tags: ['生物反应器', '一次性系统', '制药装备'] },
+  { name: '东富龙', cat: 'equipment', city: '上海', desc: '冻干机与细胞制备系统，CGT装备国产化先锋', tags: ['冻干机', '细胞制备', 'CGT装备'] },
+  { name: '多宁生物', cat: 'equipment', city: '上海', desc: '层析纯化设备与生物反应器，一次性耗材解决方案', tags: ['层析', '生物反应器', '一次性耗材'] },
+  { name: '乐纯生物', cat: 'equipment', city: '上海', desc: '一次性使用系统与过滤耗材，国产替代领先者', tags: ['SUS', '过滤', '国产替代'] },
+  // CRO/CDMO
+  { name: '药明康德', cat: 'cro', city: '上海', desc: '全球领先CRO/CDMO，细胞基因治疗一体化服务', tags: ['CRO', 'CDMO', '一体化'] },
+  { name: '金斯瑞', cat: 'cro', city: '南京', desc: '基因合成与细胞系开发，CAR-T CMC服务', tags: ['基因合成', '细胞系', 'CMC'] },
+  { name: '昭衍新药', cat: 'cro', city: '北京', desc: '临床前安全性评价CRO，细胞治疗药物非临床研究', tags: ['临床前CRO', '安全性评价', '毒理'] }
+];
+
 function renderInstitutions() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="institutions" onclick="navTo(this)">备案机构查询</span>';
@@ -5556,6 +5615,77 @@ function filterInsts(region) {
   renderInstitutions();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   updateFloatButtons();
+}
+
+function renderCompanies() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="companies" onclick="navTo(this)">企业巡览·产业相关</span>';
+  if (companyFilter !== 'all') {
+    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(COMPANY_CATS[companyFilter].name) + '</b>';
+  }
+  html += '</div>';
+
+  // Category cards
+  var catCounts = {};
+  Object.keys(COMPANY_CATS).forEach(function(k) { catCounts[k] = 0; });
+  COMPANIES.forEach(function(c) { if (catCounts[c.cat] !== undefined) catCounts[c.cat]++; });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(5,1fr);">';
+  html += '<div class="reg-cat-card" style="border-left-color:#00695C;cursor:pointer;" onclick="filterCompanies(\'all\')">';
+  html += '<div class="rcc-countline"><span class="rcc-count">' + COMPANIES.length + '</span><span class="rcc-unit"> 家</span></div>';
+  html += '<div class="rcc-name">全部企业</div>';
+  html += '</div>';
+  Object.keys(COMPANY_CATS).forEach(function(k) {
+    var cc = COMPANY_CATS[k];
+    html += '<div class="reg-cat-card" style="border-left-color:' + cc.color + ';cursor:pointer;" onclick="filterCompanies(\'' + k + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + cc.color + ';">' + catCounts[k] + '</span><span class="rcc-unit"> 家</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(cc.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Company cards
+  var filtered = (companyFilter === 'all') ? COMPANIES : COMPANIES.filter(function(c) { return c.cat === companyFilter; });
+  filtered.forEach(function(c) {
+    var cc = COMPANY_CATS[c.cat];
+    html += '<div class="reg-card" style="border-left-color:' + cc.color + ';">';
+    html += '<div class="rc-title">' + escapeHtml(c.name) + '</div>';
+    html += '<div class="rc-meta">';
+    html += '<span class="rc-tag" style="background:' + cc.bg + ';color:' + cc.color + ';">' + escapeHtml(cc.name) + '</span>';
+    html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(c.city) + '</span>';
+    html += '</div>';
+    html += '<div style="font-size:12px;color:#555;line-height:1.6;margin:4px 0 6px;">' + escapeHtml(c.desc) + '</div>';
+    html += '<div style="display:flex;gap:4px;flex-wrap:wrap;">';
+    c.tags.forEach(function(t) {
+      html += '<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#F5F5F5;color:#666;">' + escapeHtml(t) + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+
+  // Enterprise onboarding CTA card
+  html += '<div class="reg-card" style="border:2px dashed #FFB74D;border-left:4px solid #FFB74D;background:#FFF8E1;cursor:pointer;" onclick="showOnboarding()">';
+  html += '<div class="rc-title" style="color:#E65100;">' + svgIcon('plus', 16) + ' 企业入驻</div>';
+  html += '<div style="font-size:12px;color:#BF360C;line-height:1.6;margin:4px 0;">您的企业也可在此展示，面向细胞治疗领域专业人士。点击联系入驻 →</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+  pushHistory();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterCompanies(cat) {
+  saveNavState();
+  companyFilter = cat;
+  pushHistory();
+  renderCompanies();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateFloatButtons();
+}
+
+function showOnboarding() {
+  alert('企业入驻请联系：\\n邮箱：contact@msckb.com\\n微信：MSC-KnowledgeHub\\n\\n请提供企业名称、所属分类、简介及核心产品信息，我们将在审核后上线展示。');
 }
 
 var currentNewsTab = 'home';
