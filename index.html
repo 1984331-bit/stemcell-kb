@@ -2255,10 +2255,12 @@ body { padding-bottom: 60px; }
 }
 .picks-carousel-slide img {
   width: 100%;
-  max-width: 520px;
+  max-width: 680px;
   height: auto;
   display: block;
+  border: 2px solid #FFB74D;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 .picks-carousel-counter {
   text-align: center;
@@ -5816,8 +5818,6 @@ function filterProducts(cat) {
 function renderEditorPicks() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选</b></div>';
-  html += '<div class="content-desc">干细胞领域重要文献深度解读，涵盖临床转化、案例报道与基础研究三大维度，每篇聚焦核心发现、关键数据与行业启示。</div>';
-
   // Default to latest issue
   if (currentPicksIssue === null || currentPicksIssue >= ALL_PICKS_ISSUES.length) {
     currentPicksIssue = ALL_PICKS_ISSUES.length - 1;
