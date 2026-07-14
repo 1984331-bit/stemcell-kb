@@ -1,0 +1,90 @@
+{
+  "issues": [
+    {
+      "issue": "第1期",
+      "date": "2026-07-10",
+      "title": "创刊号：MSC疗法破冰与基础研究根基",
+      "cover": "picks/cover_01.png",
+      "cards": [
+        "picks/issue01_01.png",
+        "picks/issue01_02.png",
+        "picks/issue01_03.png",
+        "picks/issue01_04.png",
+        "picks/issue01_05.png",
+        "picks/issue01_06.png",
+        "picks/issue01_07.png",
+        "picks/issue01_08.png",
+        "picks/issue01_09.png",
+        "picks/issue01_10.png",
+        "picks/issue01_11.png",
+        "picks/issue01_12.png"
+      ]
+    },
+    {
+      "issue": "第2期",
+      "date": "2026-07-13",
+      "title": "临床试验前沿：多剂量·鞘内给药·罕见病突破",
+      "cover": "picks/cover_02.png",
+      "cards": [
+        "picks/issue02_01.png",
+        "picks/issue02_02.png",
+        "picks/issue02_03.png",
+        "picks/issue02_04.png",
+        "picks/issue02_05.png",
+        "picks/issue02_06.png",
+        "picks/issue02_07.png",
+        "picks/issue02_08.png",
+        "picks/issue02_09.png",
+        "picks/issue02_10.png"
+      ]
+    },
+    {
+      "issue": "第3期",
+      "date": "2026-07-14",
+      "title": "MSC规模化生产与质量标准革新",
+      "cover": "picks/cover_03.png",
+      "cards": [
+        "picks/issue03_01.png",
+        "picks/issue03_02.png",
+        "picks/issue03_03.png",
+        "picks/issue03_04.png",
+        "picks/issue03_05.png",
+        "picks/issue03_06.png",
+        "picks/issue03_07.png",
+        "picks/issue03_08.png"
+      ]
+    },
+    {
+      "issue": "第4期",
+      "date": "2026-07-14",
+      "title": "干细胞在神经退行性疾病中的突破与新探索",
+      "cover": "picks/cover_04.png",
+      "cards": [
+        "picks/issue04_01.png",
+        "picks/issue04_02.png",
+        "picks/issue04_03.png",
+        "picks/issue04_04.png",
+        "picks/issue04_05.png",
+        "picks/issue04_06.png",
+        "picks/issue04_07.png",
+        "picks/issue04_08.png"
+      ]
+    },
+    {
+      "issue": "第5期",
+      "date": "2026-07-14",
+      "title": "细胞治疗产业化与监管前瞻：双轨制下的机遇",
+      "cover": "picks/cover_05.png",
+      "cards": [
+        "picks/issue05_01.png",
+        "picks/issue05_02.png",
+        "picks/issue05_03.png",
+        "picks/issue05_04.png",
+        "picks/issue05_05.png",
+        "picks/issue05_06.png",
+        "picks/issue05_07.png",
+        "picks/issue05_08.png"
+      ]
+    }
+  ]
+}
