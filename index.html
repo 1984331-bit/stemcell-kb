@@ -4851,6 +4851,28 @@ function renderHub() {
   var content = document.getElementById('content');
   var html = '';
 
+  // Weekly updates & highlights (scrolling) - moved to top
+  var now = new Date();
+  var dow = now.getDay() || 7;
+  var mon = new Date(now); mon.setDate(now.getDate() - dow + 1);
+  var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+  var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
+  var highlights = [
+    {type:'update', tag:'新文献', text:'BM-MSC鞘内注射治疗遗传性小脑共济失调 I/IIa期首次证据 (PMID:42432710)', action:"searchTag('共济失调')"},
+    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')"},
+    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗AMI 3年心衰率5.74% vs 16.08%', action:"searchTag('心肌梗死')"},
+    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容', action:"switchSection('regulations')"},
+    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"}
+  ];
+  html += '<div class="weekly-highlights">';
+  html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 18) + ' 本周更新·重点关注</div><div class="wh-date">' + dateStr + '</div></div>';
+  html += '<div class="wh-scroll-wrap"><div class="wh-scroll-track" id="whScrollTrack">';
+  highlights.forEach(function(h){
+    html += '<div class="wh-item" onclick="' + h.action + '"><span class="wh-tag ' + h.type + '">' + h.tag + '</span><span class="wh-text">' + h.text + '</span></div>';
+  });
+  html += '</div></div>';
+  html += '</div>';
+
   html += '<div class="hub-cards">';
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 科普导览</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
@@ -4914,28 +4936,6 @@ function renderHub() {
     html += '<span class="hub-tag ' + tier + '" style="animation-delay:' + fadeDelay + 's,' + floatDelay + 's" onclick="clickHubTag(this,\'' + q + '\')">' + t.label + '<span class="ht-count">' + t.count + '</span></span>';
   });
   html += '</div></div>';
-
-  // Weekly updates & highlights (scrolling)
-  var now = new Date();
-  var dow = now.getDay() || 7;
-  var mon = new Date(now); mon.setDate(now.getDate() - dow + 1);
-  var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
-  var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
-  var highlights = [
-    {type:'update', tag:'新文献', text:'BM-MSC鞘内注射治疗遗传性小脑共济失调 I/IIa期首次证据 (PMID:42432710)', action:"searchTag('共济失调')"},
-    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')"},
-    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗AMI 3年心衰率5.74% vs 16.08%', action:"searchTag('心肌梗死')"},
-    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容', action:"switchSection('regulations')"},
-    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"}
-  ];
-  html += '<div class="weekly-highlights">';
-  html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 18) + ' 本周更新·重点关注</div><div class="wh-date">' + dateStr + '</div></div>';
-  html += '<div class="wh-scroll-wrap"><div class="wh-scroll-track" id="whScrollTrack">';
-  highlights.forEach(function(h){
-    html += '<div class="wh-item" onclick="' + h.action + '"><span class="wh-tag ' + h.type + '">' + h.tag + '</span><span class="wh-text">' + h.text + '</span></div>';
-  });
-  html += '</div></div>';
-  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
