@@ -454,9 +454,9 @@ body {
   gap: 8px;
   font-size: 13px;
   color: var(--text-light);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   flex-wrap: wrap;
-  padding: 8px 0;
+  padding: 4px 0;
 }
 .breadcrumb a, .breadcrumb .crumb-link {
   color: var(--primary);
@@ -1064,7 +1064,7 @@ body {
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
-    padding: 10px;
+    padding: 6px;
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -1108,11 +1108,11 @@ body {
   /* Mobile: bigger breadcrumb tap targets */
   .breadcrumb {
     font-size: 14px;
-    padding: 10px 0;
+    padding: 2px 0;
     gap: 6px;
   }
   .breadcrumb .crumb-link {
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: 6px;
     background: var(--accent);
   }
@@ -2253,14 +2253,20 @@ body { padding-bottom: 60px; }
   justify-content: center;
   align-items: flex-start;
 }
-.picks-carousel-slide img {
+.picks-frame {
   width: 100%;
   max-width: 680px;
+  border: 2px solid #FFB74D;
+  border-radius: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+  background: #fff;
+}
+.picks-frame img {
+  width: 100%;
   height: auto;
   display: block;
-  border: 2px solid #FFB74D;
-  border-radius: 8px;
-  box-sizing: border-box;
+  border-radius: 6px;
 }
 .picks-carousel-counter {
   text-align: center;
@@ -5847,7 +5853,7 @@ function renderEditorPicks() {
     var total = allSlides.length;
     html += '<div class="picks-carousel" id="picksCarousel">';
     allSlides.forEach(function(src) {
-      html += '<div class="picks-carousel-slide"><img src="' + src + '" alt="编辑精选" loading="lazy" /></div>';
+      html += '<div class="picks-carousel-slide"><div class="picks-frame"><img src="' + src + '" alt="编辑精选" loading="lazy" /></div></div>';
     });
     html += '</div>';
     html += '<div class="picks-carousel-counter" id="picksCounter">1 / ' + total + '</div>';
