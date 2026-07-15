@@ -1293,33 +1293,24 @@ body { padding-bottom: 60px; }
 .wh-text {
   font-size: 12px;
   color: var(--text);
-  line-height: 1.4;
-  overflow: hidden;
+  line-height: 1.5;
   min-width: 0;
   flex: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  word-break: break-word;
 }
 .wh-scroll-wrap {
-  overflow: hidden;
-  height: 38px;
-  position: relative;
   min-width: 0;
   max-width: 100%;
 }
 .wh-scroll-track {
   display: flex;
   flex-direction: column;
-  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   min-width: 0;
-  will-change: transform;
 }
 .wh-scroll-track .wh-item {
-  height: 38px;
   box-sizing: border-box;
   flex-shrink: 0;
   width: 100%;
-  overflow: hidden;
 }
 .wh-tag.update { background: #6A1B9A; }
 .wh-tag.newproduct { background: #00695C; }
@@ -2197,6 +2188,131 @@ body { padding-bottom: 60px; }
   .dash-donut-center { width: 65px; height: 65px; }
   .dash-donut-center .ddc-num { font-size: 22px; }
 }
+/* Originals & Books sections */
+.orig-section, .books-section { margin-bottom: 24px; }
+.orig-section-title, .books-section-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 16px; font-weight: 600; color: var(--text);
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.orig-section-title svg, .books-section-title svg { color: var(--primary); flex-shrink: 0; }
+
+/* Original article card */
+.orig-article {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.orig-article:hover { border-color: rgba(171,71,188,0.3); box-shadow: 0 2px 16px rgba(171,71,188,0.08); }
+.orig-article-tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+  background: rgba(171,71,188,0.15); color: #CE93D8;
+  margin-bottom: 6px;
+}
+.orig-article-title {
+  font-size: 14px; font-weight: 600; color: var(--text);
+  line-height: 1.5; margin-bottom: 4px;
+}
+.orig-article-desc {
+  font-size: 12px; color: var(--text-light); line-height: 1.5;
+}
+.orig-article-meta {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 6px; font-size: 11px; color: var(--text-light);
+}
+.orig-article-meta span { display: flex; align-items: center; gap: 3px; }
+
+/* Expert view card */
+.expert-view {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s ease;
+}
+.expert-view:hover { border-left-color: var(--primary-light); }
+.expert-quote {
+  font-size: 13px; color: var(--text); line-height: 1.6;
+  margin-bottom: 8px; font-style: italic;
+}
+.expert-quote::before { content: '\201C'; font-size: 20px; color: var(--primary); margin-right: 2px; }
+.expert-quote::after { content: '\201D'; font-size: 20px; color: var(--primary); margin-left: 2px; }
+.expert-info {
+  display: flex; align-items: center; gap: 8px;
+}
+.expert-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--card-solid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 600; color: var(--primary);
+  flex-shrink: 0; border: 1px solid var(--border);
+}
+.expert-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.expert-title { font-size: 11px; color: var(--text-light); }
+.expert-source { font-size: 10px; color: var(--text-light); margin-left: auto; }
+
+/* Book card */
+.book-card {
+  display: flex; gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.book-card:hover { border-color: rgba(0,150,136,0.3); box-shadow: 0 2px 16px rgba(0,150,136,0.08); }
+.book-cover {
+  width: 60px; height: 80px; border-radius: 6px;
+  background: linear-gradient(135deg, rgba(0,150,136,0.2), rgba(0,229,255,0.1));
+  border: 1px solid rgba(0,150,136,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.book-cover svg { color: rgba(77,182,172,0.6); }
+.book-info { flex: 1; min-width: 0; }
+.book-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.book-author { font-size: 12px; color: var(--text-light); margin-bottom: 4px; }
+.book-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.book-meta { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 11px; color: var(--text-light); }
+
+/* Course card */
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.course-card:hover { border-color: rgba(0,150,136,0.3); box-shadow: 0 2px 16px rgba(0,150,136,0.08); }
+.course-card-header { display: flex; align-items: flex-start; gap: 10px; }
+.course-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(0,150,136,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.course-icon svg { color: #4DB6AC; }
+.course-info { flex: 1; min-width: 0; }
+.course-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.course-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.course-meta { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 11px; color: var(--text-light); }
+.course-tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+  background: rgba(0,150,136,0.12); color: #4DB6AC;
+}
+
 /* Hub picks */
 .hub-picks { background: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); padding: 12px 16px; }
 .hp-item { padding: 10px 0; border-bottom: 1px solid var(--divider); }
@@ -3155,6 +3271,8 @@ function buildHash(state) {
     return '#inst';
   }
   if (s === 'report') return '#report';
+  if (s === 'originals') return '#originals';
+  if (s === 'books') return '#books';
   if (s === 'companies') {
     if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
     return '#companies';
@@ -3169,6 +3287,8 @@ function parseHash() {
   if (hash === '#inst') return { section: 'institutions', instFilter: 'all' };
   if (hash.indexOf('#inst/') === 0) return { section: 'institutions', instFilter: decodeURIComponent(hash.slice(6)) };
   if (hash === '#report') return { section: 'report' };
+  if (hash === '#originals') return { section: 'originals' };
+  if (hash === '#books') return { section: 'books' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -3488,7 +3608,6 @@ function getFilteredData() {
 
 function renderContent() {
   const content = document.getElementById('content');
-  stopWhScroll();
 
   if (currentSection === 'hub') { renderHub(); return; }
   if (currentSection === 'regulations') { renderRegulations(); return; }
@@ -3499,6 +3618,8 @@ function renderContent() {
   if (currentSection === 'intro') { renderIntro(); return; }
   if (currentSection === 'institutions') { renderInstitutions(); return; }
   if (currentSection === 'report') { renderReport(); return; }
+  if (currentSection === 'originals') { renderOriginals(); return; }
+  if (currentSection === 'books') { renderBooks(); return; }
 
   const filtered = getFilteredData();
 
@@ -4264,7 +4385,11 @@ function svgIcon(name, sz) {
     'chevron-down': '<path d="M6 9l6 6 6-6"/>',
     'list': '<path d="M4 6h16M4 12h16M4 18h12"/>',
     'location': '<path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>',
-    'plus': '<path d="M12 5v14M5 12h14"/>'
+    'plus': '<path d="M12 5v14M5 12h14"/>',
+    'quote': '<path d="M7 7h4v6c0 2-1 3-3 3M13 7h4v6c0 2-1 3-3 3"/>',
+    'book': '<path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6 8h3M6 12h3M15 8h3M15 12h3"/>',
+    'pen': '<path d="M14 3l7 7-11 11H3v-7z"/><path d="M14 3l7 7M3 21l7-7"/>',
+    'mic': '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -4538,6 +4663,8 @@ function updateLayout(section) {
   if (section === 'report' && container) container.classList.add('no-sidebar');
   if (section === 'companies' && container) container.classList.add('no-sidebar');
   if (section === 'picks' && container) container.classList.add('no-sidebar');
+  if (section === 'originals' && container) container.classList.add('no-sidebar');
+  if (section === 'books' && container) container.classList.add('no-sidebar');
 }
 
 function toggleInfoBar(panel) {
@@ -4889,47 +5016,7 @@ function renderMscDashboard() {
   return h;
 }
 
-// === Weekly highlights scrolling ===
-var whScrollIndex = 0;
-var whScrollTimer = null;
-
-function startWhScroll() {
-  stopWhScroll();
-  var track = document.getElementById('whScrollTrack');
-  if (!track) return;
-  var wrap = track.parentElement;
-  var items = track.querySelectorAll('.wh-item');
-  if (items.length <= 1) return;
-  whScrollIndex = 0;
-  track.style.transform = 'translateY(0px)';
-  whScrollTimer = setInterval(function() {
-    whScrollIndex++;
-    if (whScrollIndex >= items.length) {
-      whScrollIndex = 0;
-    }
-    track.style.transform = 'translateY(-' + (whScrollIndex * 38) + 'px)';
-  }, 3500);
-  if (wrap) {
-    wrap.onmouseenter = function() { if (whScrollTimer) { clearInterval(whScrollTimer); whScrollTimer = null; } };
-    wrap.onmouseleave = function() {
-      if (whScrollTimer) clearInterval(whScrollTimer);
-      whScrollTimer = setInterval(function() {
-        whScrollIndex++;
-        if (whScrollIndex >= items.length) {
-          whScrollIndex = 0;
-        }
-        track.style.transform = 'translateY(-' + (whScrollIndex * 38) + 'px)';
-      }, 3500);
-    };
-  }
-}
-
-function stopWhScroll() {
-  if (whScrollTimer) {
-    clearInterval(whScrollTimer);
-    whScrollTimer = null;
-  }
-}
+// === Weekly highlights (static list, no scroll) ===
 
 // === Hub homepage ===
 function renderHub() {
@@ -4947,7 +5034,12 @@ function renderHub() {
     {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')"},
     {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗AMI 3年心衰率5.74% vs 16.08%', action:"searchTag('心肌梗死')"},
     {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容', action:"switchSection('regulations')"},
-    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"}
+    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"},
+    {type:'clinical', tag:'临床', text:'CAR-T继发外周T细胞淋巴瘤：FDA安全性警示及多中心回顾分析 (PMID:42419880)', action:"searchTag('CAR-T')"},
+    {type:'update', tag:'新文献', text:'HSCT治疗Friedreich共济失调：基因修饰自体CD34+细胞 I/II期 (PMID:42439571)', action:"searchTag('共济失调')"},
+    {type:'newpolicy', tag:'新政策', text:'NMPA发布细胞治疗与基因治疗药品分类指导原则（2026年版）', action:"switchSection('regulations')"},
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈T1DM：12/12患者HbA1c<7%，10/12脱离胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')"},
+    {type:'update', tag:'新文献', text:'异体HSCT治疗NMOSD：CD34+细胞输注4年无复发 (PMID:42296969)', action:"searchTag('脊髓损伤')"}
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 16) + ' 本周更新·重点关注</div><div class="wh-date">' + dateStr + '</div></div>';
@@ -4976,6 +5068,15 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
+  // Originals entry
+  html += '<div class="report-entry" style="border-color:rgba(171,71,188,0.25);" onclick="switchSection(\'originals\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#CE93D8;">' + svgIcon('quote', 16) + '<span>原创文章·大咖观点</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(206,147,216,0.7);">平台原创·行业大咖评论·院士专家观点</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
   // Companies entry
   html += '<div class="report-entry" style="border-color:#E0E0E0;" onclick="switchSection(\'companies\')">';
   html += '<div class="report-entry-left">';
@@ -4990,6 +5091,15 @@ function renderHub() {
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>分析报告·MSC行业</span></div>';
   html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
+  // Books & courses entry
+  html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·学习课程</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">专业书籍推荐·在线课程·培训资源</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -5023,7 +5133,6 @@ function renderHub() {
 
   content.innerHTML = html;
   updateFloatButtons();
-  startWhScroll();
 }
 
 function clickHubTag(el, query) {
@@ -5056,6 +5165,128 @@ function renderReport() {
   var html = '';
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>分析报告·MSC行业</b></div>';
   html += renderMscDashboard();
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// === Original articles & Expert views section ===
+const ORIGINAL_ARTICLES = [
+  {tag:'专著', title:'《干细胞临床应用手册》——24章系统综述', desc:'涵盖11大生理系统145+适应症，2058篇临床文献底稿，从基础生物学到临床转化全链条覆盖。包括ISCT 2025新标准、818号令全文解读、PREVENT-TAHA8 III期数据等最新进展。', date:'2026-07', words:'约38.9万字'},
+  {tag:'产业分析', title:'CAR-MSC治疗炎症性肠病：从机制到临床转化', desc:'靶向MUC1的CAR-MSC治疗IBD创业项目深度分析。涵盖靶点选择、CAR结构设计（anti-MUC1 scFv + 4-1BB + CD3ζ + iCasp9安全开关）、3D微载体培养、肠系膜上动脉灌注给药策略及四层级联安全控制体系。', date:'2026-06', words:'约1.2万字'},
+  {tag:'政策解读', title:'818号令深度解读：中国细胞治疗双轨制新时代', desc:'国务院令第818号，共7章58条，2026年5月1日施行。确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。逐条解读核心条款及产业影响。', date:'2026-05', words:'约8000字'},
+  {tag:'学术评论', title:'MSC作为"药物信号细胞"：ISCT 2025新标准下的重新定位', desc:'ISCT 2025将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测标准。本文论述MSC通过旁分泌/免疫调节发挥短期作用的"药物信号细胞"定位，临床疗效取决于剂量、疗程、途径、细胞质量。', date:'2026-04', words:'约6000字'},
+  {tag:'文献综述', title:'iPSC临床研究全景分析：10项研究115例患者零死亡', desc:'基于Cytotherapy 2026最新数据，系统梳理全球iPSC临床研究进展：10项研究、115例患者、0例死亡、1例畸胎瘤。涵盖视网膜黄斑变性、脊髓损伤、帕金森病等适应症。', date:'2026-04', words:'约5000字'},
+  {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约1.5万字'}
+];
+
+const EXPERT_VIEWS = [
+  {name:'周琪', title:'中国科学院院士·干细胞与生殖生物学', avatar:'周', quote:'干细胞研究正从实验室走向临床，但我们必须坚持科学严谨的态度，避免过度宣传。监管体系的完善是推动行业健康发展的基石。', source:'公开演讲', date:'2025'},
+  {name:'王福生', title:'中国科学院院士·肝病与传染病专家', avatar:'王', quote:'间充质干细胞在肝病治疗中展现了免疫调节和组织修复的双重潜力，但需要更多高质量随机对照试验来验证其长期疗效和安全性。', source:'学术会议', date:'2025'},
+  {name:'裴钢', title:'中国科学院院士·细胞生物学', avatar:'裴', quote:'细胞治疗是未来医学的重要方向，但基础研究到临床转化之间还有很长的路要走，需要产学研医深度协同。', source:'行业论坛', date:'2024'},
+  {name:'陈竺', title:'中国科学院院士·血液学', avatar:'陈', quote:'中国在细胞治疗领域取得了举世瞩目的成就，CAR-T治疗白血病的成功证明了细胞治疗的力量。下一步要推动更多细胞治疗产品可及可负担。', source:'公开报道', date:'2024'},
+  {name:'行业投资视角', title:'资深生物医药投资人', avatar:'资', quote:'细胞治疗赛道投资逻辑已从概念驱动转向数据驱动。关注具有清晰临床终点、可规模化生产、有差异化壁垒的项目。MSC领域需要更多III期阳性数据来吸引资本。', source:'投资论坛', date:'2025'},
+  {name:'监管视角', title:'药监部门资深审评专家', avatar:'监', quote:'818号令的实施标志着中国细胞治疗监管进入新阶段。双轨制不是降低标准，而是为不同路径提供差异化的监管框架，确保安全有效。', source:'政策解读', date:'2026'}
+];
+
+function renderOriginals() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>原创文章·大咖观点</b></div>';
+  html += '<div class="content-header"><h2>原创文章·大咖观点</h2><div class="desc">' + svgIcon('quote', 14) + ' 平台原创深度文章 · 行业院士专家领导投资人观点精选</div></div>';
+
+  // Section 1: Original Articles
+  html += '<div class="orig-section">';
+  html += '<div class="orig-section-title">' + svgIcon('pen', 18) + ' 原创文章</div>';
+  ORIGINAL_ARTICLES.forEach(function(a) {
+    html += '<div class="orig-article">';
+    html += '<span class="orig-article-tag">' + a.tag + '</span>';
+    html += '<div class="orig-article-title">' + escapeHtml(a.title) + '</div>';
+    html += '<div class="orig-article-desc">' + escapeHtml(a.desc) + '</div>';
+    html += '<div class="orig-article-meta">';
+    html += '<span>' + svgIcon('calendar', 12) + ' ' + a.date + '</span>';
+    html += '<span>' + svgIcon('doc', 12) + ' ' + a.words + '</span>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Section 2: Expert Views
+  html += '<div class="orig-section">';
+  html += '<div class="orig-section-title">' + svgIcon('mic', 18) + ' 大咖观点</div>';
+  EXPERT_VIEWS.forEach(function(e) {
+    html += '<div class="expert-view">';
+    html += '<div class="expert-quote">' + escapeHtml(e.quote) + '</div>';
+    html += '<div class="expert-info">';
+    html += '<div class="expert-avatar">' + e.avatar + '</div>';
+    html += '<div><div class="expert-name">' + escapeHtml(e.name) + '</div><div class="expert-title">' + escapeHtml(e.title) + '</div></div>';
+    html += '<div class="expert-source">' + svgIcon('clock', 10) + ' ' + e.source + ' · ' + e.date + '</div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// === Books & Courses section ===
+const INDUSTRY_BOOKS = [
+  {title:'《干细胞临床应用手册》', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', tag:'原创专著'},
+  {title:'《细胞生物学》（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', tag:'教材'},
+  {title:'《间充质干细胞：生物学特性与临床应用》', author:'Robert Marx 等', desc:'MSC领域权威专著，涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据。', publisher:'Academic Press', year:'2024', pages:'约600页', tag:'学术专著'},
+  {title:'《细胞治疗：从实验室到临床》', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', tag:'产业参考'},
+  {title:'《基因治疗原理与实践》', author:'表面含有AAV、慢病毒等载体', desc:'基因治疗领域经典教材，涵盖载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', tag:'学术专著'},
+  {title:'《再生医学与组织工程》', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press', year:'2023', pages:'约800页', tag:'产业参考'}
+];
+
+const LEARNING_COURSES = [
+  {title:'CGT细胞基因治疗产业化培训课程', desc:'面向CGT产业从业者的系统培训，涵盖细胞治疗产品工艺开发、GMP生产、质量控制、注册申报、临床试验设计全链条。', provider:'行业培训机构', duration:'40课时', level:'中级', tag:'推荐'},
+  {title:'干细胞临床研究法规与伦理培训', desc:'深入解读818号令、干细胞临床研究管理办法、ISCT标准等法规体系，涵盖伦理审查、知情同意、数据管理等实务操作。', provider:'国家卫健委继续教育', duration:'16课时', level:'入门', tag:'法规'},
+  {title:'CAR-T细胞治疗技术专题课程', desc:'从CAR结构设计、病毒载体生产、T细胞分选培养到临床输注全流程技术培训，含国内外获批CAR-T产品案例分析。', provider:'高校/企业联合', duration:'24课时', level:'高级', tag:'技术'},
+  {title:'GMP细胞治疗产品生产质量管理', desc:'基于FACT-JACIE、GMP规范的细胞治疗产品生产质量管理培训，涵盖洁净室管理、批记录、偏差处理、验证确认等。', provider:'行业认证机构', duration:'32课时', level:'中级', tag:'质量'},
+  {title:'细胞治疗临床试验设计与统计学', desc:'针对细胞治疗产品特殊性（小样本、剂量探索、长期随访）的临床试验设计方法学培训，含 Adaptive Design、Bayesian 等方法。', provider:'CRO/学术机构', duration:'20课时', level:'高级', tag:'临床'},
+  {title:'MSC间充质干细胞基础与临床专题', desc:'系统讲解MSC的生物学特性、分离鉴定标准（ISCT 2006/2025）、作用机制（旁分泌/免疫调节）、各系统临床应用进展。', provider:'本平台原创', duration:'30课时', level:'入门-中级', tag:'原创'}
+];
+
+function renderBooks() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍·学习课程</b></div>';
+  html += '<div class="content-header"><h2>行业书籍·学习课程</h2><div class="desc">' + svgIcon('book', 14) + ' 专业书籍推荐 · 在线课程 · 培训资源</div></div>';
+
+  // Section 1: Books
+  html += '<div class="books-section">';
+  html += '<div class="books-section-title">' + svgIcon('book', 18) + ' 行业书籍</div>';
+  INDUSTRY_BOOKS.forEach(function(b) {
+    html += '<div class="book-card">';
+    html += '<div class="book-cover">' + svgIcon('book', 28) + '</div>';
+    html += '<div class="book-info">';
+    html += '<div class="book-title">' + escapeHtml(b.title) + '</div>';
+    html += '<div class="book-author">' + escapeHtml(b.author) + ' · ' + escapeHtml(b.publisher) + ' · ' + b.year + '</div>';
+    html += '<div class="book-desc">' + escapeHtml(b.desc) + '</div>';
+    html += '<div class="book-meta"><span class="course-tag">' + b.tag + '</span><span>' + svgIcon('doc', 10) + ' ' + b.pages + '</span></div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Section 2: Courses
+  html += '<div class="books-section">';
+  html += '<div class="books-section-title">' + svgIcon('users', 18) + ' 学习课程</div>';
+  LEARNING_COURSES.forEach(function(c) {
+    html += '<div class="course-card">';
+    html += '<div class="course-card-header">';
+    html += '<div class="course-icon">' + svgIcon('flask', 20) + '</div>';
+    html += '<div class="course-info">';
+    html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
+    html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
+    html += '<div class="course-meta"><span class="course-tag">' + c.tag + '</span><span>' + svgIcon('clock', 10) + ' ' + c.duration + '</span><span>' + svgIcon('users', 10) + ' ' + c.level + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
   content.innerHTML = html;
   updateFloatButtons();
 }
