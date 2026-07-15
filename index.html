@@ -479,7 +479,7 @@ body {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 12px;
+  padding: 10px;
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 16px;
@@ -1244,7 +1244,7 @@ body { padding-bottom: 60px; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 4px;
+  margin: 0 0 10px;
   padding: 12px 16px;
   border-radius: 12px;
   background: var(--card-bg);
@@ -1300,8 +1300,8 @@ body { padding-bottom: 60px; }
 .report-entry.amber .report-entry-right svg { color: #FF8A65; }
 
 .weekly-highlights {
-  margin: 6px 0 4px;
-  padding: 12px 14px 8px;
+  margin: 0 0 10px;
+  padding: 12px 14px 10px;
   border-radius: 12px;
   background: rgba(230,81,0,0.06);
   border: 1px solid rgba(230,81,0,0.15);
@@ -1366,7 +1366,7 @@ body { padding-bottom: 60px; }
 .wh-scroll-wrap {
   min-width: 0;
   max-width: 100%;
-  height: 36px;
+  height: 220px;
   overflow: hidden;
   position: relative;
 }
@@ -1392,9 +1392,12 @@ body { padding-bottom: 60px; }
 .wh-tag.update { background: #6A1B9A; }
 .wh-tag.newproduct { background: #00695C; }
 .wh-tag.newpolicy { background: #5E35B1; }
+@media (max-width: 768px) {
+  .wh-scroll-wrap { height: 180px; }
+}
 
 .hub-tags {
-  margin: 6px 0 4px;
+  margin: 0 0 10px;
   padding: 12px 14px 10px;
   border-radius: 12px;
   background: rgba(0,229,255,0.04);
@@ -1502,7 +1505,7 @@ body { padding-bottom: 60px; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   min-width: 0;
 }
 .hub-card {
@@ -5169,8 +5172,17 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
+  // Health products entry (after books)
+  html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
   // Companies entry
-  html += '<div class="report-entry" style="border-color:#E0E0E0;" onclick="switchSection(\'companies\')">';
+  html += '<div class="report-entry" onclick="switchSection(\'companies\')">';
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('building', 16) + '<span>企业巡览·产业相关</span></div>';
   html += '<div class="report-entry-desc">产业相关企业介绍·点击查看</div>';
@@ -5213,15 +5225,6 @@ function renderHub() {
     html += '<span class="hub-tag ' + tier + '" style="animation-delay:' + fadeDelay + 's" onclick="clickHubTag(this,\'' + q + '\')">' + t.label + '<span class="ht-count">' + t.count + '</span></span>';
   });
   html += '</div></div>';
-
-  // Health products entry
-  html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
-  html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
-  html += '</div>';
-  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
-  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
