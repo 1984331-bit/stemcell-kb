@@ -140,44 +140,61 @@ body {
   text-shadow: none;
 }
 .header-nav .bn-item .bn-icon { display: flex; justify-content: center; margin-bottom: 0; }
-/* Theme toggle */
-.theme-toggle {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,229,255,0.2);
-  background: rgba(0,229,255,0.08);
+/* Floating controls group — dark glassmorphism */
+.float-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 200;
+  align-items: center;
+}
+.float-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(13, 27, 42, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #00E5FF;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  font-size: 20px;
   cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,229,255,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 101;
+  transition: all 0.2s;
 }
-.theme-toggle:hover {
-  background: rgba(0,229,255,0.15);
-  box-shadow: 0 0 12px rgba(0,229,255,0.3);
-  transform: scale(1.08);
+.float-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: rgba(0, 229, 255, 0.5);
+  box-shadow: 0 2px 20px rgba(0,229,255,0.3);
 }
-.theme-toggle:active { transform: scale(0.95); }
-[data-theme="light"] .theme-toggle {
-  border-color: rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
+.float-btn:active { transform: scale(0.93); }
+.float-btn.hidden { display: none; }
+[data-theme="light"] .float-btn {
+  background: rgba(255,255,255,0.9);
+  color: #00695C;
+  border-color: rgba(0,105,92,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-[data-theme="light"] .theme-toggle:hover {
-  background: rgba(255,255,255,0.2);
-  box-shadow: 0 0 8px rgba(255,255,255,0.2);
+[data-theme="light"] .float-btn:hover {
+  background: rgba(0,105,92,0.1);
+  border-color: rgba(0,105,92,0.4);
+  box-shadow: 0 2px 12px rgba(0,105,92,0.2);
 }
 [data-theme="light"] .icon-moon { display: none; }
 [data-theme="light"] .icon-sun { display: block !important; }
 @media (max-width: 768px) {
-  .theme-toggle { width: 32px; height: 32px; top: 6px; right: 8px; }
-  .theme-toggle svg { width: 16px; height: 16px; }
+  .float-controls {
+    bottom: max(60px, calc(env(safe-area-inset-bottom) + 24px));
+    right: 16px;
+  }
+  .float-btn { width: 40px; height: 40px; font-size: 18px; }
+  .float-btn svg { width: 16px; height: 16px; }
 }
 .header-contact {
   margin-left: auto;
@@ -563,35 +580,6 @@ body {
 .breadcrumb .crumb-sep { color: #BBB; }
 .breadcrumb b { color: var(--primary); }
 /* Back to system button */
-/* Floating back button — dark glassmorphism */
-.float-back {
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(13, 27, 42, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #00E5FF;
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 12px rgba(0,229,255,0.15);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.float-back:hover {
-  background: rgba(0, 229, 255, 0.15);
-  color: #00E5FF;
-  border-color: rgba(0, 229, 255, 0.5);
-  box-shadow: 0 2px 20px rgba(0,229,255,0.3);
-}
-.float-back.show { display: flex; }
 /* content-header */
 .content-header {
   background: var(--card-bg);
@@ -1150,32 +1138,9 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
 }
-/* Mobile toggle — dark glassmorphism */
+/* Mobile sidebar toggle */
 .mobile-toggle {
   display: none;
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: rgba(13, 27, 42, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #00E5FF;
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 12px rgba(0,229,255,0.15);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.mobile-toggle:hover {
-  background: rgba(0, 229, 255, 0.15);
-  color: #00E5FF;
-  box-shadow: 0 2px 20px rgba(0,229,255,0.3);
 }
 .sidebar-overlay {
   display: none;
@@ -1241,16 +1206,7 @@ body {
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
-  /* Mobile: raise floating controls above system nav bar */
-  .float-back {
-    bottom: max(60px, calc(env(safe-area-inset-bottom) + 24px));
-    right: 16px;
-  }
-  .mobile-toggle {
-    right: 16px;
-    bottom: calc(max(60px, env(safe-area-inset-bottom) + 24px) + 54px);
-    left: auto;
-  }
+  /* Mobile: floating controls handle their own positioning via .float-controls */
 }
 /* === Hub Homepage === */
 body { padding-bottom: 60px; }
@@ -3010,10 +2966,6 @@ body { padding-bottom: 60px; }
       <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/></svg></span><span class="bn-label">文献</span></button>
       <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg></span><span class="bn-label">产品</span></button>
     </nav>
-    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换深浅主题">
-      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-    </button>
   </div>
 </div>
 
@@ -3214,8 +3166,21 @@ body { padding-bottom: 60px; }
   </main>
 </div>
 
-<button class="mobile-toggle" onclick="openSidebar()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-<button class="float-back" id="floatBack" onclick="goBack()" title="返回上一页">←</button>
+<div class="float-controls">
+  <button class="float-btn hidden" id="floatTop" onclick="scrollToTop()" title="回到顶部">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <button class="float-btn hidden" id="floatBack" onclick="goBack()" title="返回上一页">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="float-btn mobile-toggle" onclick="openSidebar()" title="打开菜单">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <button class="float-btn" id="floatTheme" onclick="toggleTheme()" title="切换深浅主题">
+    <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  </button>
+</div>
 
 <script>
 // === Theme Toggle ===
@@ -3432,10 +3397,32 @@ function goBack() {
 function updateFloatButtons() {
   var fb = document.getElementById('floatBack');
   if (fb) {
-    if (navHistory.length > 0) fb.classList.add('show');
-    else fb.classList.remove('show');
+    // Show back button if there's nav history OR we're not on the hub page
+    if (navHistory.length > 0 || currentSection !== 'hub') {
+      fb.classList.remove('hidden');
+    } else {
+      fb.classList.add('hidden');
+    }
+  }
+  updateFloatTop();
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateFloatTop() {
+  var ft = document.getElementById('floatTop');
+  if (ft) {
+    if (window.scrollY > 300) {
+      ft.classList.remove('hidden');
+    } else {
+      ft.classList.add('hidden');
+    }
   }
 }
+
+window.addEventListener('scroll', updateFloatTop, { passive: true });
 
 function getSortedData(data) {
   var arr = [...data];
@@ -4642,10 +4629,10 @@ function updateLayout(section) {
   var infoBar = document.querySelector('.info-bar');
   if (section === 'literature') {
     if (container) container.classList.remove('no-sidebar');
-    if (mobileToggle) mobileToggle.style.display = '';
+    if (mobileToggle) mobileToggle.classList.remove('hidden');
   } else {
     if (container) container.classList.add('no-sidebar');
-    if (mobileToggle) mobileToggle.style.display = 'none';
+    if (mobileToggle) mobileToggle.classList.add('hidden');
   }
   if (infoBar) infoBar.style.display = (section === 'hub') ? '' : 'none';
   if (section === 'report' && container) container.classList.add('no-sidebar');
