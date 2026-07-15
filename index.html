@@ -278,11 +278,12 @@ body {
 .team-dot.ai { background: #00897B; }
 .team-dot.human { background: #FFB300; box-shadow: 0 0 0 2px rgba(255,179,0,0.25); }
 .team-name { font-weight: 600; color: var(--text); }
-.team-role { color: #78909C; font-size: 11px; }
+.team-role { color: var(--text-light); font-size: 11px; }
 @media (max-width: 768px) {
-  .info-bar-tabs { padding: 0 12px; }
-  .info-tab { font-size: 12px; padding: 7px 8px; }
-  .info-panel { padding: 0 12px; font-size: 11px; }
+  .info-bar-tabs { padding: 0 8px; justify-content: space-around; gap: 2px; }
+  .info-tab { font-size: 10px; padding: 6px 4px; gap: 3px; }
+  .info-tab svg[width="15"] { width: 12px; height: 12px; }
+  .info-panel { padding: 0 10px; font-size: 11px; }
   .info-panel .ip-tag { font-size: 10px; }
 }
 /* Copyright footer */
@@ -880,14 +881,6 @@ body {
   text-decoration: none;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-.ql-pubmed { background: #E3F2FD; color: #1565C0; }
-.ql-pubmed:hover { background: #1565C0; color: #fff; }
-.ql-scholar { background: #FFF3E0; color: #E65100; }
-.ql-scholar:hover { background: #E65100; color: #fff; }
-.ql-doi { background: #E8F5E9; color: #2E7D32; }
-.ql-doi:hover { background: #2E7D32; color: #fff; }
-.ql-nct { background: #F3E5F5; color: #7B1FA2; }
-.ql-nct:hover { background: #7B1FA2; color: #fff; }
 .abstract-box {
   margin-top: 10px;
   padding: 12px 14px;
@@ -974,13 +967,6 @@ body {
   font-weight: 700;
   margin-right: 4px;
 }
-.trial-phase-1 { background: #E8F5E9; color: #2E7D32; }
-.trial-phase-2 { background: #FFF3E0; color: #E65100; }
-.trial-phase-3 { background: #E3F2FD; color: #1565C0; }
-.trial-phase-4 { background: #F3E5F5; color: #7B1FA2; }
-.trial-phase-na { background: #ECEFF1; color: #546E7A; }
-.trial-randomized { background: #E8F5E9; color: #2E7D32; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-.trial-nonrand { background: #ECEFF1; color: #546E7A; padding: 1px 6px; border-radius: 4px; font-size: 11px; font-weight: 600; }
 .load-trial-btn {
   margin-top: 8px;
   display: inline-flex;
@@ -1013,11 +999,6 @@ body {
   font-size: 12px;
   text-align: center;
 }
-.key-data-item.sample { background: #E3F2FD; color: #1565C0; }
-.key-data-item.pvalue { background: #E8F5E9; color: #2E7D32; }
-.key-data-item.safety-ok { background: #E8F5E9; color: #2E7D32; }
-.key-data-item.safety-warn { background: #FFF3E0; color: #E65100; }
-.key-data-item.efficacy { background: #F3E5F5; color: #7B1FA2; }
 .key-data-item .kd-num {
   font-size: 16px;
   font-weight: 700;
@@ -1423,13 +1404,13 @@ body { padding-bottom: 60px; }
 }
 .hub-tag.t2 .ht-count { color: #B2DFDB; }
 .hub-tag.t3 {
-  background: #4DB6AC; color: #004D40;
+  background: rgba(77,182,172,0.2); color: #80CBC4;
   font-size: 10px;
 }
-.hub-tag.t3 .ht-count { color: #00695C; }
+.hub-tag.t3 .ht-count { color: #4DB6AC; }
 .hub-tag.t4 {
-  background: #E0F2F1; color: #00695C;
-  border: 1px solid #B2DFDB;
+  background: rgba(0,229,255,0.06); color: var(--text-light);
+  border: 1px solid var(--border);
   font-size: 10px;
 }
 .hub-tag.t4 .ht-count { color: #00897B; }
@@ -1547,7 +1528,6 @@ body { padding-bottom: 60px; }
   padding: 16px 20px;
   color: var(--primary);
 }
-}
 .dash-header h3 {
   margin: 0;
   font-size: 18px;
@@ -1556,7 +1536,7 @@ body { padding-bottom: 60px; }
 .dash-header p {
   margin: 4px 0 0;
   font-size: 12px;
-  color: #B2DFDB;
+  color: var(--primary-light);
 }
 .dash-body { padding: 16px; }
 /* Metric cards */
@@ -1586,7 +1566,7 @@ body { padding-bottom: 60px; }
 }
 .dash-metric .dm-sub {
   font-size: 10px;
-  color: #90A4AE;
+  color: var(--text-light);
   margin-top: 2px;
 }
 /* Dashboard grid */
@@ -1659,7 +1639,7 @@ body { padding-bottom: 60px; }
   text-align: right;
   font-size: 12px;
   font-weight: 700;
-  color: #00695C;
+  color: var(--primary);
   flex-shrink: 0;
 }
 /* Year trend bars */
@@ -1670,7 +1650,7 @@ body { padding-bottom: 60px; }
   height: 200px;
   padding-top: 10px;
   padding-bottom: 4px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--divider);
 }
 .dash-year-col {
   flex: 1;
@@ -1705,24 +1685,24 @@ body { padding-bottom: 60px; }
 .dash-year-num {
   font-size: 13px;
   font-weight: 700;
-  color: #00695C;
+  color: var(--primary);
   position: absolute;
   top: -22px;
   white-space: nowrap;
 }
 .dash-year-label {
   font-size: 11px;
-  color: #78909C;
+  color: var(--text-light);
   font-weight: 500;
 }
 .dash-year-note {
   margin-top: 10px;
   padding: 6px 10px;
-  background: #FFF3E0;
+  background: var(--warn-bg);
   border-radius: 6px;
-  border-left: 3px solid #FF9800;
+  border-left: 3px solid var(--warn-text);
   font-size: 11px;
-  color: #E65100;
+  color: var(--warn-text);
   line-height: 1.5;
 }
 .dash-source {
@@ -1740,7 +1720,7 @@ body { padding-bottom: 60px; }
   gap: 12px;
   height: 160px;
   padding: 10px 0 4px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--divider);
 }
 .dash-market-col {
   flex: 1;
@@ -1771,17 +1751,17 @@ body { padding-bottom: 60px; }
 }
 .dash-market-label {
   font-size: 10px;
-  color: #78909C;
+  color: var(--text-light);
   text-align: center;
   line-height: 1.3;
 }
 .dash-market-cagr {
   margin-top: 10px;
   padding: 8px 12px;
-  background: #E0F2F1;
+  background: var(--surface-1);
   border-radius: 8px;
   font-size: 12px;
-  color: #004D40;
+  color: var(--primary-light);
   line-height: 1.6;
 }
 /* Funding table */
@@ -1792,7 +1772,7 @@ body { padding-bottom: 60px; }
   margin-top: 8px;
 }
 .dash-fund-table th {
-  background: #00695C;
+  background: var(--primary-dark);
   color: #fff;
   padding: 6px 8px;
   font-weight: 600;
@@ -1806,8 +1786,8 @@ body { padding-bottom: 60px; }
   border-bottom: 1px solid var(--divider);
   color: var(--text);
 }
-.dash-fund-table td:last-child { text-align: right; font-weight: 700; color: #00695C; }
-.dash-fund-table tr:nth-child(even) td { background: #FAFAFA; }
+.dash-fund-table td:last-child { text-align: right; font-weight: 700; color: var(--primary); }
+.dash-fund-table tr:nth-child(even) td { background: var(--surface-2); }
 .dash-fund-table .dff-company { font-weight: 600; color: var(--text); }
 .dash-fund-table .dff-tag {
   display: inline-block;
@@ -1824,7 +1804,7 @@ body { padding-bottom: 60px; }
   gap: 16px;
   height: 140px;
   padding: 10px 0 4px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid var(--divider);
 }
 .dash-sales-col {
   flex: 1;
@@ -1850,12 +1830,12 @@ body { padding-bottom: 60px; }
   transform: translateX(-50%);
   font-size: 11px;
   font-weight: 700;
-  color: #00695C;
+  color: var(--primary);
   white-space: nowrap;
 }
 .dash-sales-label {
   font-size: 10px;
-  color: #78909C;
+  color: var(--text-light);
   text-align: center;
   line-height: 1.3;
 }
@@ -1878,12 +1858,12 @@ body { padding-bottom: 60px; }
   border-radius: 8px;
   padding: 10px 8px;
   text-align: center;
-  border-top: 3px solid #00695C;
+  border-top: 3px solid var(--primary);
 }
 .dash-trial-stat .dts-num {
   font-size: 22px;
   font-weight: 800;
-  color: #00695C;
+  color: var(--primary);
   line-height: 1.1;
 }
 .dash-trial-stat .dts-label {
@@ -1893,7 +1873,7 @@ body { padding-bottom: 60px; }
 }
 .dash-trial-stat .dts-sub {
   font-size: 9px;
-  color: #90A4AE;
+  color: var(--text-light);
   margin-top: 2px;
 }
 /* Exosome cards */
@@ -1907,17 +1887,17 @@ body { padding-bottom: 60px; }
   background: var(--surface-1);
   border-radius: 8px;
   padding: 8px 10px;
-  border-left: 3px solid #7B1FA2;
+  border-left: 3px solid #CE93D8;
 }
 .dash-exo-card .dec-name {
   font-size: 12px;
   font-weight: 700;
-  color: #4A148C;
+  color: #CE93D8;
 }
 .dash-exo-card .dec-amount {
   font-size: 14px;
   font-weight: 800;
-  color: #7B1FA2;
+  color: #E1BEE7;
   margin-top: 2px;
 }
 .dash-exo-card .dec-desc {
@@ -1930,7 +1910,7 @@ body { padding-bottom: 60px; }
 .dash-section-divider {
   margin: 20px 0 12px;
   padding: 8px 14px;
-  background: linear-gradient(90deg, #004D40, #00695C);
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
   border-radius: 8px;
   font-size: 13px;
   font-weight: 700;
@@ -2030,7 +2010,7 @@ body { padding-bottom: 60px; }
   width: 8px; height: 8px; border-radius: 50%;
   background: #ccc; cursor: pointer; transition: background 0.2s;
 }
-.carousel-dot.active { background: #00695C; width: 24px; border-radius: 4px; }
+.carousel-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
 @media (max-width: 768px) {
   .carousel-slide { padding: 16px 14px; }
   .cs-metrics { gap: 12px; }
@@ -2659,10 +2639,6 @@ body { padding-bottom: 60px; }
 .edu-evidence-card .ee-grade { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
 .edu-evidence-card .ee-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
 .edu-evidence-card .ee-desc { font-size: 11px; line-height: 1.4; opacity: 0.85; }
-.edu-evidence-card.a { background: #E8F5E9; border-color: #66BB6A; color: #1B5E20; }
-.edu-evidence-card.b { background: #E3F2FD; border-color: #42A5F5; color: #0D47A1; }
-.edu-evidence-card.c { background: #FFF3E0; border-color: #FFA726; color: #E65100; }
-.edu-evidence-card.d { background: #FCE4EC; border-color: #EC407A; color: #880E4F; }
 .edu-faq-item {
   background: var(--card-bg);
   border: 1px solid var(--edu-border);
@@ -4208,7 +4184,7 @@ function loadTrialData(idx, nct) {
       trialBox.classList.add('loaded');
     })
     .catch(function(err) {
-      trialBox.innerHTML = '<div style="padding:8px;color:#E65100;font-size:12px;">获取失败：' + escapeHtml(err.message) + '</div>';
+      trialBox.innerHTML = '<div style="padding:8px;color:var(--warn-text);font-size:12px;">获取失败：' + escapeHtml(err.message) + '</div>';
     });
 }
 
@@ -4597,7 +4573,7 @@ function renderMscDashboard() {
   sysSorted.sort(function(a,b){return b.count - a.count;});
   var topSys = sysSorted.slice(0, 8);
   var maxSys = topSys[0].count;
-  var sysColors = ['#00695C','#00897B','#26A69A','#4DB6AC','#80CBC4','#FF7043','#FF8A65','#FFAB91'];
+  var sysColors = ['#00E5FF','#00B8D4','#4DB6AC','#26A69A','#80CBC4','#FF8A65','#FFAB91','#FFCC80'];
 
   // Year trend (2017-2026)
   var yearData = {};
@@ -4670,12 +4646,12 @@ function renderMscDashboard() {
 
   // Year trend
   h += '<div class="dash-card">';
-  h += '<div class="dash-card-title">年度临床试验/案例报道趋势 <span style="font-size:11px;color:#FF9800;font-weight:400">(非基础研究文献)</span></div>';
+  h += '<div class="dash-card-title">年度临床试验/案例报道趋势 <span style="font-size:11px;color:var(--warn-text);font-weight:400">(非基础研究文献)</span></div>';
   h += '<div class="dash-year-row">';
   years.forEach(function(y, i){
     var val = yearVals[i];
     var pct = Math.round(val / maxYear * 100);
-    var color = i >= 7 ? '#00695C' : (i >= 4 ? '#4DB6AC' : '#B2DFDB');
+    var color = i >= 7 ? '#00E5FF' : (i >= 4 ? '#4DB6AC' : '#80CBC4');
     h += '<div class="dash-year-col">';
     h += '<div class="dash-year-num">' + val + '</div>';
     h += '<div class="dash-year-bar" style="height:' + Math.max(pct, 4) + '%;background:' + color + '"></div>';
@@ -4697,12 +4673,12 @@ function renderMscDashboard() {
   h += '<div class="dash-card-title">研究类型分布</div>';
   var donutDeg = Math.round(trialPct * 3.6);
   h += '<div class="dash-donut-wrap">';
-  h += '<div class="dash-donut" style="background:conic-gradient(#00695C 0deg ' + donutDeg + 'deg, #FFCCBC ' + donutDeg + 'deg 360deg);">';
+  h += '<div class="dash-donut" style="background:conic-gradient(var(--primary) 0deg ' + donutDeg + 'deg, rgba(255,138,101,0.3) ' + donutDeg + 'deg 360deg);">';
   h += '<div class="dash-donut-center"><div class="ddc-num">' + trialPct + '%</div><div class="ddc-label">临床试验</div></div>';
   h += '</div>';
   h += '<div class="dash-legend">';
-  h += '<div class="dash-legend-item"><span class="dash-legend-dot" style="background:#00695C"></span>临床试验<span class="dash-legend-val" style="color:var(--primary)">' + trialCount + '篇</span></div>';
-  h += '<div class="dash-legend-item"><span class="dash-legend-dot" style="background:#FFCCBC"></span>案例报道<span class="dash-legend-val" style="color:#FF7043">' + caseCount + '篇</span></div>';
+  h += '<div class="dash-legend-item"><span class="dash-legend-dot" style="background:var(--primary)"></span>临床试验<span class="dash-legend-val" style="color:var(--primary)">' + trialCount + '篇</span></div>';
+  h += '<div class="dash-legend-item"><span class="dash-legend-dot" style="background:rgba(255,138,101,0.5)"></span>案例报道<span class="dash-legend-val" style="color:#FF8A65">' + caseCount + '篇</span></div>';
   h += '</div>';
   h += '</div>';
   h += '</div>';
@@ -4728,7 +4704,7 @@ function renderMscDashboard() {
   // Cell source distribution
   h += '<div class="dash-card">';
   h += '<div class="dash-card-title">MSC细胞来源分布 (获批产品)</div>';
-  var srcColors = {'脐带':'#00695C','骨髓':'#00897B','脂肪':'#FF7043','脐带血':'#5C6BC0','其他':'#90A4AE'};
+  var srcColors = {'脐带':'#00E5FF','骨髓':'#4DB6AC','脂肪':'#FF8A65','脐带血':'#7986CB','其他':'#B0BEC5'};
   sourceSorted.forEach(function(s){
     var pct = Math.round(s.count / maxSrc * 100);
     var c = srcColors[s.name] || '#90A4AE';
@@ -4759,8 +4735,8 @@ function renderMscDashboard() {
   h += '</div>'; // end dash-grid
 
   // Summary insight
-  h += '<div style="background:#E0F2F1;border-radius:10px;padding:14px 18px;margin-top:4px;border-left:4px solid #00695C;">';
-  h += '<div style="font-size:13px;font-weight:600;color:#004D40;margin-bottom:6px">行业洞察</div>';
+  h += '<div style="background:var(--surface-1);border-radius:10px;padding:14px 18px;margin-top:4px;border-left:4px solid var(--primary);">';
+  h += '<div style="font-size:13px;font-weight:600;color:var(--primary);margin-bottom:6px">行业洞察</div>';
   h += '<div style="font-size:12px;color:var(--text);line-height:1.7">';
   h += 'MSC临床研究覆盖<b style="color:var(--primary)">' + totalSys + '个生理系统</b>、<b style="color:var(--primary)">' + totalInd + '种适应症</b>，从神经系统（' + (sysCounts['神经系统']||0) + '篇）到免疫系统（' + (sysCounts['免疫系统']||0) + '篇）均有深入探索。';
   h += '全球已有<b style="color:var(--primary)">' + totalMscProducts + '款</b>MSC产品获批上市，覆盖8个国家/地区。';
@@ -4788,7 +4764,7 @@ function renderMscDashboard() {
   ];
   h += '<div class="dash-market-chart">';
   marketData.forEach(function(m, i){
-    var colors = ['#B2DFDB','#4DB6AC','#26A69A','#00897B','#00695C','#004D40'];
+    var colors = ['#4DB6AC','#26A69A','#00897B','#00B8D4','#00E5FF','#64FFDA'];
     h += '<div class="dash-market-col">';
     h += '<div class="dash-market-bar" style="height:' + m.pct + '%;background:' + colors[i] + '"><span class="dm-bar-val">$' + m.val + 'B</span></div>';
     h += '<div class="dash-market-label">' + m.year + '</div>';
@@ -4821,14 +4797,14 @@ function renderMscDashboard() {
   h += '<div style="overflow-x:auto"><table class="dash-fund-table">';
   h += '<tr><th>企业</th><th>时间</th><th>轮次</th><th>金额</th><th>核心方向</th><th>来源</th></tr>';
   var fundings = [
-    {company:'MEDIPOST (韩国)', date:'2026.01', round:'战略融资', amount:'$1.4亿', desc:'脐带血MSC·膝关节OA美国III期', tag:'海外', tagColor:'#1565C0', url:'https://www.businesswire.com/news/home/20260109323917/en/'},
-    {company:'Mesoblast (美国)', date:'2025.12', round:'非稀释性融资', amount:'$1.25亿', desc:'Ryoncil商业化·战略灵活度', tag:'海外', tagColor:'#1565C0', url:'https://investorsmedia.mesoblast.com/'},
-    {company:'赛隽生物 (广州)', date:'2026.03', round:'Pre-C轮', amount:'>¥1亿', desc:'BM-MSC·肝衰竭/脑卒中/肌少症', tag:'国内', tagColor:'#2E7D32', url:'https://new.qq.com/rain/a/20260324A02ZFN00'},
-    {company:'华龛生物 (北京)', date:'2025.09', round:'B+轮', amount:'数亿元', desc:'3D细胞智造平台·微载体', tag:'国内', tagColor:'#2E7D32', url:'https://finance.sina.cn/2025-09-15/detail-infqpxhk9787970.d.html'},
-    {company:'Cellcolabs (瑞典)', date:'2025', round:'累计融资', amount:'$3700万', desc:'MSC工业化生产·成本降低90%', tag:'海外', tagColor:'#1565C0', url:'https://www.cellcolabs.com/press-room/global-leading-stem-cell-producer-cellcolabs-secures-usd-12m-to-drive-technical-development'},
-    {company:'StemInov (法国)', date:'2025.09', round:'融资轮', amount:'€1060万', desc:'WJ-MSC·重症肺炎/脓毒症I/II期', tag:'海外', tagColor:'#1565C0', url:'https://www.steminov.com/copie-de-investors'},
-    {company:'先博生物 (深圳)', date:'2026.06', round:'B轮', amount:'未披露', desc:'NK/CAR-T·免疫细胞治疗', tag:'国内', tagColor:'#2E7D32', url:'https://www.qcc.com/cproductinfo/52d9e8f7ffb3f3843f07b2dce7bad576'},
-    {company:'恩泽康泰 (北京)', date:'2025.11', round:'B轮', amount:'~¥1亿', desc:'MSC外泌体·再生疗法', tag:'国内', tagColor:'#2E7D32', url:'https://bydrug.pharmcube.com/news/detail/650d371e0449d97961ebfb8d1e1a27a5'}
+    {company:'MEDIPOST (韩国)', date:'2026.01', round:'战略融资', amount:'$1.4亿', desc:'脐带血MSC·膝关节OA美国III期', tag:'海外', tagColor:'#64B5F6', url:'https://www.businesswire.com/news/home/20260109323917/en/'},
+    {company:'Mesoblast (美国)', date:'2025.12', round:'非稀释性融资', amount:'$1.25亿', desc:'Ryoncil商业化·战略灵活度', tag:'海外', tagColor:'#64B5F6', url:'https://investorsmedia.mesoblast.com/'},
+    {company:'赛隽生物 (广州)', date:'2026.03', round:'Pre-C轮', amount:'>¥1亿', desc:'BM-MSC·肝衰竭/脑卒中/肌少症', tag:'国内', tagColor:'#81C784', url:'https://new.qq.com/rain/a/20260324A02ZFN00'},
+    {company:'华龛生物 (北京)', date:'2025.09', round:'B+轮', amount:'数亿元', desc:'3D细胞智造平台·微载体', tag:'国内', tagColor:'#81C784', url:'https://finance.sina.cn/2025-09-15/detail-infqpxhk9787970.d.html'},
+    {company:'Cellcolabs (瑞典)', date:'2025', round:'累计融资', amount:'$3700万', desc:'MSC工业化生产·成本降低90%', tag:'海外', tagColor:'#64B5F6', url:'https://www.cellcolabs.com/press-room/global-leading-stem-cell-producer-cellcolabs-secures-usd-12m-to-drive-technical-development'},
+    {company:'StemInov (法国)', date:'2025.09', round:'融资轮', amount:'€1060万', desc:'WJ-MSC·重症肺炎/脓毒症I/II期', tag:'海外', tagColor:'#64B5F6', url:'https://www.steminov.com/copie-de-investors'},
+    {company:'先博生物 (深圳)', date:'2026.06', round:'B轮', amount:'未披露', desc:'NK/CAR-T·免疫细胞治疗', tag:'国内', tagColor:'#81C784', url:'https://www.qcc.com/cproductinfo/52d9e8f7ffb3f3843f07b2dce7bad576'},
+    {company:'恩泽康泰 (北京)', date:'2025.11', round:'B轮', amount:'~¥1亿', desc:'MSC外泌体·再生疗法', tag:'国内', tagColor:'#81C784', url:'https://bydrug.pharmcube.com/news/detail/650d371e0449d97961ebfb8d1e1a27a5'}
   ];
   fundings.forEach(function(f){
     h += '<tr>';
@@ -4860,7 +4836,7 @@ function renderMscDashboard() {
   ];
   h += '<div class="dash-sales-row">';
   ryoncilData.forEach(function(r, i){
-    var c = ['#4DB6AC','#00897B','#00695C'];
+    var c = ['#4DB6AC','#00B8D4','#00E5FF'];
     h += '<div class="dash-sales-col">';
     if (r.growth) { h += '<span class="dash-sales-growth" style="background:' + r.growthColor + '15;color:' + r.growthColor + '">' + r.growth + '</span>'; }
     h += '<div class="dash-sales-bar" style="height:' + r.pct + '%;background:' + c[i] + '"><span class="dsb-val">$' + r.val + 'M</span></div>';
@@ -5696,10 +5672,10 @@ var INST_REGION_COLORS = {
 // === Companies data ===
 var companyFilter = 'all';
 var COMPANY_CATS = {
-  rnd:       { color: '#00695C', bg: '#E8F5F0', name: '研发企业' },
-  reagent:   { color: '#1565C0', bg: '#E3F2FD', name: '试剂供应商' },
-  equipment: { color: '#2E7D32', bg: '#E8F5E9', name: '设备供应商' },
-  cro:       { color: '#6A1B9A', bg: '#F3E5F5', name: 'CRO/CDMO' }
+  rnd:       { color: '#00E5FF', bg: 'rgba(0,229,255,0.1)', name: '研发企业' },
+  reagent:   { color: '#64B5F6', bg: 'rgba(21,101,192,0.1)', name: '试剂供应商' },
+  equipment: { color: '#81C784', bg: 'rgba(46,125,50,0.1)', name: '设备供应商' },
+  cro:       { color: '#CE93D8', bg: 'rgba(123,31,162,0.1)', name: 'CRO/CDMO' }
 };
 var COMPANIES = [
   // 研发企业
@@ -5774,7 +5750,7 @@ function renderInstitutions() {
     html += '<span class="rc-tag" style="background:' + color + '22;color:' + color + ';">' + escapeHtml(inst.region) + '</span>';
     html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
     html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
-    if (inst.note) html += '<span style="color:#E65100;font-weight:600;">' + escapeHtml(inst.note) + '</span>';
+    if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;">' + escapeHtml(inst.note) + '</span>';
     html += '</div>';
     html += '</div>';
   });
@@ -5788,9 +5764,9 @@ function renderInstitutions() {
   html += '<div class="dual-track-grid">';
 
   // Pathway 1: Technology
-  html += '<div style="background:#E8F5E9;border-radius:8px;padding:14px;">';
-  html += '<div style="font-size:14px;font-weight:700;color:#2E7D32;margin-bottom:8px;">技术路径（818号令）</div>';
-  html += '<div style="font-size:12px;color:#1B5E20;line-height:1.8;">';
+  html += '<div style="background:rgba(46,125,50,0.1);border-radius:8px;padding:14px;">';
+  html += '<div style="font-size:14px;font-weight:700;color:#81C784;margin-bottom:8px;">技术路径（818号令）</div>';
+  html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
   html += '<b>监管部门：</b>国家卫健委<br>';
   html += '<b>法律依据：</b>《生物医学新技术临床研究和临床转化应用管理条例》（2026.5.1施行）<br>';
   html += '<b>适用场景：</b>高度个性化、难以标准化的生物医学新技术<br>';
@@ -5799,9 +5775,9 @@ function renderInstitutions() {
   html += '</div></div>';
 
   // Pathway 2: Drug
-  html += '<div style="background:#E3F2FD;border-radius:8px;padding:14px;">';
-  html += '<div style="font-size:14px;font-weight:700;color:#1565C0;margin-bottom:8px;">药品路径（828号令）</div>';
-  html += '<div style="font-size:12px;color:#0D47A1;line-height:1.8;">';
+  html += '<div style="background:rgba(21,101,192,0.1);border-radius:8px;padding:14px;">';
+  html += '<div style="font-size:14px;font-weight:700;color:#64B5F6;margin-bottom:8px;">药品路径（828号令）</div>';
+  html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
   html += '<b>监管部门：</b>国家药监局（NMPA）<br>';
   html += '<b>法律依据：</b>《药品管理法实施条例》（2026.5.15施行）<br>';
   html += '<b>适用场景：</b>可标准化、规模化生产的细胞治疗产品<br>';
