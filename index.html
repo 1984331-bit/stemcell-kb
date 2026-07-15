@@ -199,7 +199,7 @@ body {
   cursor: pointer;
   user-select: none;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   border-radius: 6px;
   transition: background 0.15s;
@@ -220,7 +220,7 @@ body {
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0 20px;
-  font-size: 12px;
+  font-size: 13px;
   color: #8B9DAF;
   line-height: 1.6;
 }
@@ -249,7 +249,7 @@ body {
   border: 1px solid rgba(0,229,255,0.2);
   padding: 3px 12px;
   border-radius: 12px;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -267,7 +267,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .team-dot {
   width: 8px;
@@ -278,14 +278,79 @@ body {
 .team-dot.ai { background: #00897B; }
 .team-dot.human { background: #FFB300; box-shadow: 0 0 0 2px rgba(255,179,0,0.25); }
 .team-name { font-weight: 600; color: var(--text); }
-.team-role { color: var(--text-light); font-size: 11px; }
+.team-role { color: var(--text-light); font-size: 12px; }
 @media (max-width: 768px) {
   .info-bar-tabs { padding: 0 8px; justify-content: space-around; gap: 2px; }
-  .info-tab { font-size: 10px; padding: 6px 4px; gap: 3px; }
-  .info-tab svg[width="15"] { width: 12px; height: 12px; }
-  .info-panel { padding: 0 10px; font-size: 11px; }
-  .info-panel .ip-tag { font-size: 10px; }
+  .info-tab { font-size: 12px; padding: 6px 4px; gap: 3px; }
+  .info-tab svg[width="15"] { width: 13px; height: 13px; }
+  .info-panel { padding: 0 10px; font-size: 12px; }
+  .info-panel .ip-tag { font-size: 12px; }
 }
+/* Health Products */
+.health-disclaimer {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(229,57,53,0.06);
+  border: 1px solid rgba(229,57,53,0.15);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+.health-disclaimer .hd-icon { color: #EF5350; flex-shrink: 0; padding-top: 2px; }
+.health-disclaimer .hd-text { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+.health-disclaimer .hd-text b { color: #EF5350; }
+
+.health-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+}
+.health-placeholder .hp-icon-large { color: #EF5350; opacity: 0.3; margin-bottom: 16px; }
+.health-placeholder .hp-icon-large svg { width: 48px; height: 48px; }
+.health-placeholder .hp-title { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.health-placeholder .hp-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+.health-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.health-product-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.health-product-card:hover { border-color: rgba(229,57,53,0.25); box-shadow: 0 2px 16px rgba(229,57,53,0.06); }
+.health-product-card.featured { border-color: rgba(229,57,53,0.2); }
+.hp-badge {
+  position: absolute; top: -8px; right: 12px;
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 600;
+  padding: 3px 10px; border-radius: 10px;
+  background: #EF5350; color: #fff;
+}
+.hp-card-body { display: flex; flex-direction: column; gap: 6px; }
+.hp-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.hp-brand { font-size: 11px; color: var(--text-light); }
+.hp-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.hp-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.hp-tag {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 8px;
+  background: rgba(229,57,53,0.08); color: #EF5350;
+}
+.hp-price { font-size: 14px; font-weight: 600; color: #E53935; margin-top: 4px; }
+.hp-link {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 12px; color: var(--primary);
+  text-decoration: none; margin-top: 6px;
+}
+.hp-link:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+  .health-products-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+
 /* Copyright footer */
 .site-footer {
   background: linear-gradient(135deg, #0D1B2A 0%, #162535 100%);
@@ -1301,16 +1366,28 @@ body { padding-bottom: 60px; }
 .wh-scroll-wrap {
   min-width: 0;
   max-width: 100%;
+  height: 36px;
+  overflow: hidden;
+  position: relative;
 }
 .wh-scroll-track {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  animation: whScrollUp 28s linear infinite;
+}
+.wh-scroll-wrap:hover .wh-scroll-track {
+  animation-play-state: paused;
 }
 .wh-scroll-track .wh-item {
   box-sizing: border-box;
   flex-shrink: 0;
   width: 100%;
+  height: 36px;
+}
+@keyframes whScrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
 .wh-tag.update { background: #6A1B9A; }
 .wh-tag.newproduct { background: #00695C; }
@@ -3273,6 +3350,7 @@ function buildHash(state) {
   if (s === 'report') return '#report';
   if (s === 'originals') return '#originals';
   if (s === 'books') return '#books';
+  if (s === 'health') return '#health';
   if (s === 'companies') {
     if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
     return '#companies';
@@ -3289,6 +3367,7 @@ function parseHash() {
   if (hash === '#report') return { section: 'report' };
   if (hash === '#originals') return { section: 'originals' };
   if (hash === '#books') return { section: 'books' };
+  if (hash === '#health') return { section: 'health' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -3620,6 +3699,7 @@ function renderContent() {
   if (currentSection === 'report') { renderReport(); return; }
   if (currentSection === 'originals') { renderOriginals(); return; }
   if (currentSection === 'books') { renderBooks(); return; }
+  if (currentSection === 'health') { renderHealthProducts(); return; }
 
   const filtered = getFilteredData();
 
@@ -4389,7 +4469,8 @@ function svgIcon(name, sz) {
     'quote': '<path d="M7 7h4v6c0 2-1 3-3 3M13 7h4v6c0 2-1 3-3 3"/>',
     'book': '<path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6 8h3M6 12h3M15 8h3M15 12h3"/>',
     'pen': '<path d="M14 3l7 7-11 11H3v-7z"/><path d="M14 3l7 7M3 21l7-7"/>',
-    'mic': '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/>'
+    'mic': '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/>',
+    'heart': '<path d="M12 21s-7-5-9-10a5 5 0 019-3 5 5 0 019 3c-2 5-9 10-9 10z"/><path d="M9 11l2 2 4-4"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -4665,6 +4746,7 @@ function updateLayout(section) {
   if (section === 'picks' && container) container.classList.add('no-sidebar');
   if (section === 'originals' && container) container.classList.add('no-sidebar');
   if (section === 'books' && container) container.classList.add('no-sidebar');
+  if (section === 'health' && container) container.classList.add('no-sidebar');
 }
 
 function toggleInfoBar(panel) {
@@ -5044,7 +5126,8 @@ function renderHub() {
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 16) + ' 本周更新·重点关注</div><div class="wh-date">' + dateStr + '</div></div>';
   html += '<div class="wh-scroll-wrap"><div class="wh-scroll-track" id="whScrollTrack">';
-  highlights.forEach(function(h){
+  var hlLoop = highlights.concat(highlights);
+  hlLoop.forEach(function(h){
     html += '<div class="wh-item" onclick="' + h.action + '"><span class="wh-tag ' + h.type + '">' + h.tag + '</span><span class="wh-text">' + h.text + '</span></div>';
   });
   html += '</div></div>';
@@ -5077,6 +5160,15 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
+  // Books & courses entry (moved after originals)
+  html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·学习课程</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">专业书籍推荐·在线课程·培训资源</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
   // Companies entry
   html += '<div class="report-entry" style="border-color:#E0E0E0;" onclick="switchSection(\'companies\')">';
   html += '<div class="report-entry-left">';
@@ -5091,15 +5183,6 @@ function renderHub() {
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>分析报告·MSC行业</span></div>';
   html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
-  html += '</div>';
-  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
-  html += '</div>';
-
-  // Books & courses entry
-  html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
-  html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·学习课程</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">专业书籍推荐·在线课程·培训资源</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -5130,6 +5213,15 @@ function renderHub() {
     html += '<span class="hub-tag ' + tier + '" style="animation-delay:' + fadeDelay + 's" onclick="clickHubTag(this,\'' + q + '\')">' + t.label + '<span class="ht-count">' + t.count + '</span></span>';
   });
   html += '</div></div>';
+
+  // Health products entry
+  html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
@@ -5286,6 +5378,64 @@ function renderBooks() {
     html += '</div>';
   });
   html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// === Health Products (Editor's Choice) ===
+var HEALTH_PRODUCTS = [
+  // Placeholder data structure — to be filled with actual product info
+  // Fields: name, brand, category, desc, tags, price, url, featured
+];
+
+function renderHealthProducts() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>健康产品·编辑严选</b></div>';
+  html += '<div class="content-header"><h2>健康产品·编辑严选</h2><div class="desc">' + svgIcon('heart', 14) + ' 编辑团队亲测推荐 · 健康好物 · 品质保障</div></div>';
+
+  // Disclaimer banner
+  html += '<div class="health-disclaimer">';
+  html += '<div class="hd-icon">' + svgIcon('shield', 20) + '</div>';
+  html += '<div class="hd-text"><b>编辑严选声明：</b>本栏目所推荐产品均经编辑团队调研筛选，基于公开信息与成分分析进行推荐，不构成医疗建议。产品信息以品牌官方为准，购买前请仔细阅读产品说明。如有健康问题请咨询专业医疗机构。</div>';
+  html += '</div>';
+
+  if (HEALTH_PRODUCTS.length === 0) {
+    // Placeholder state
+    html += '<div class="health-placeholder">';
+    html += '<div class="hp-icon-large">' + svgIcon('heart', 48) + '</div>';
+    html += '<div class="hp-title">栏目建设中</div>';
+    html += '<div class="hp-desc">编辑团队正在精心筛选健康好物，敬请期待。<br>如需推荐产品或合作，请联系编辑团队。</div>';
+    html += '</div>';
+  } else {
+    // Product grid
+    html += '<div class="health-products-grid">';
+    HEALTH_PRODUCTS.forEach(function(p) {
+      html += '<div class="health-product-card' + (p.featured ? ' featured' : '') + '">';
+      if (p.featured) {
+        html += '<div class="hp-badge">' + svgIcon('star', 10) + ' 编辑推荐</div>';
+      }
+      html += '<div class="hp-card-body">';
+      html += '<div class="hp-name">' + escapeHtml(p.name) + '</div>';
+      html += '<div class="hp-brand">' + escapeHtml(p.brand) + ' · ' + escapeHtml(p.category) + '</div>';
+      html += '<div class="hp-desc">' + escapeHtml(p.desc) + '</div>';
+      html += '<div class="hp-tags">';
+      (p.tags || []).forEach(function(t) {
+        html += '<span class="hp-tag">' + escapeHtml(t) + '</span>';
+      });
+      html += '</div>';
+      if (p.price) {
+        html += '<div class="hp-price">' + escapeHtml(p.price) + '</div>';
+      }
+      if (p.url) {
+        html += '<a href="' + p.url + '" target="_blank" rel="noopener" class="hp-link">' + svgIcon('chevron-right', 12) + ' 了解详情</a>';
+      }
+      html += '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
 
   content.innerHTML = html;
   updateFloatButtons();
