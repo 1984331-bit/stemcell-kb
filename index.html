@@ -3204,6 +3204,141 @@ body { padding-bottom: 60px; }
   .wc-footer { padding: 12px 16px 20px; }
   .wc-enter-btn { padding: 11px 36px; font-size: 14px; }
 }
+
+/* === Report intro & tabs === */
+.report-intro {
+  background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(100,255,218,0.03));
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+}
+.report-intro-title {
+  font-size: 16px; font-weight: 700; color: var(--primary);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.report-intro-text {
+  font-size: 13px; color: var(--text); line-height: 1.8;
+}
+.report-intro-text b { color: var(--primary); }
+.report-intro-contact {
+  margin-top: 10px; padding: 8px 14px;
+  background: rgba(0,229,255,0.08); border-radius: 8px;
+  font-size: 12px; color: var(--primary-light); line-height: 1.6;
+}
+.report-tabs {
+  display: flex; gap: 0; margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.report-tab {
+  padding: 10px 24px; cursor: pointer;
+  font-size: 14px; font-weight: 600; color: var(--text-light);
+  border: none; background: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative; bottom: -1px;
+  white-space: nowrap;
+}
+.report-tab:hover { color: var(--text); }
+.report-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+.report-tab-content { display: none; }
+.report-tab-content.active { display: block; }
+.report-placeholder {
+  text-align: center; padding: 60px 20px;
+  color: var(--text-light);
+}
+.report-placeholder-icon { margin-bottom: 16px; opacity: 0.4; }
+.report-placeholder-title {
+  font-size: 18px; font-weight: 600; color: var(--text);
+  margin-bottom: 8px;
+}
+.report-placeholder-desc {
+  font-size: 13px; line-height: 1.6; max-width: 400px; margin: 0 auto;
+}
+.report-placeholder-badge {
+  display: inline-block; margin-top: 16px;
+  padding: 4px 14px; border-radius: 20px;
+  background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2);
+  font-size: 12px; color: var(--primary);
+}
+
+/* === Chart scroll animations === */
+.dash-card { opacity: 0; transform: translateY(30px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.dash-card.in-view { opacity: 1; transform: translateY(0); }
+.dash-metric { opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+.dash-metric.in-view { opacity: 1; transform: translateY(0); }
+.dash-section-divider { opacity: 0; transform: translateX(-20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.dash-section-divider.in-view { opacity: 1; transform: translateX(0); }
+
+/* Animate horizontal bars */
+.dh-fill { width: 0 !important; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+.dash-card.in-view .dh-fill { width: var(--target-width, 0) !important; }
+
+/* Animate vertical bars */
+.dash-year-bar { height: 0 !important; transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+.dash-card.in-view .dash-year-bar { height: var(--target-height, 0) !important; }
+.dash-market-bar { height: 0 !important; transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+.dash-card.in-view .dash-market-bar { height: var(--target-height, 0) !important; }
+.dash-sales-bar { height: 0 !important; transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+.dash-card.in-view .dash-sales-bar { height: var(--target-height, 0) !important; }
+
+/* Animate source fill bars */
+.ds-fill { width: 0 !important; transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+.dash-card.in-view .ds-fill { width: var(--target-width, 0) !important; }
+
+/* Animate numbers */
+.dm-num { opacity: 0; transition: opacity 0.4s ease; }
+.dash-metric.in-view .dm-num { opacity: 1; }
+.dts-num { opacity: 0; transition: opacity 0.4s ease 0.2s; }
+.dash-card.in-view .dts-num { opacity: 1; }
+
+/* Stagger delays */
+.dash-hbar:nth-child(1) .dh-fill { transition-delay: 0.05s !important; }
+.dash-hbar:nth-child(2) .dh-fill { transition-delay: 0.1s !important; }
+.dash-hbar:nth-child(3) .dh-fill { transition-delay: 0.15s !important; }
+.dash-hbar:nth-child(4) .dh-fill { transition-delay: 0.2s !important; }
+.dash-hbar:nth-child(5) .dh-fill { transition-delay: 0.25s !important; }
+.dash-hbar:nth-child(6) .dh-fill { transition-delay: 0.3s !important; }
+.dash-hbar:nth-child(7) .dh-fill { transition-delay: 0.35s !important; }
+.dash-hbar:nth-child(8) .dh-fill { transition-delay: 0.4s !important; }
+.dash-year-col:nth-child(1) .dash-year-bar { transition-delay: 0.05s !important; }
+.dash-year-col:nth-child(2) .dash-year-bar { transition-delay: 0.1s !important; }
+.dash-year-col:nth-child(3) .dash-year-bar { transition-delay: 0.15s !important; }
+.dash-year-col:nth-child(4) .dash-year-bar { transition-delay: 0.2s !important; }
+.dash-year-col:nth-child(5) .dash-year-bar { transition-delay: 0.25s !important; }
+.dash-year-col:nth-child(6) .dash-year-bar { transition-delay: 0.3s !important; }
+.dash-year-col:nth-child(7) .dash-year-bar { transition-delay: 0.35s !important; }
+.dash-year-col:nth-child(8) .dash-year-bar { transition-delay: 0.4s !important; }
+.dash-year-col:nth-child(9) .dash-year-bar { transition-delay: 0.45s !important; }
+.dash-market-col:nth-child(1) .dash-market-bar { transition-delay: 0.05s !important; }
+.dash-market-col:nth-child(2) .dash-market-bar { transition-delay: 0.15s !important; }
+.dash-market-col:nth-child(3) .dash-market-bar { transition-delay: 0.25s !important; }
+.dash-market-col:nth-child(4) .dash-market-bar { transition-delay: 0.35s !important; }
+.dash-market-col:nth-child(5) .dash-market-bar { transition-delay: 0.45s !important; }
+.dash-market-col:nth-child(6) .dash-market-bar { transition-delay: 0.55s !important; }
+.dash-sales-col:nth-child(1) .dash-sales-bar { transition-delay: 0.05s !important; }
+.dash-sales-col:nth-child(2) .dash-sales-bar { transition-delay: 0.2s !important; }
+.dash-sales-col:nth-child(3) .dash-sales-bar { transition-delay: 0.35s !important; }
+.dash-source-row:nth-child(1) .ds-fill { transition-delay: 0.05s !important; }
+.dash-source-row:nth-child(2) .ds-fill { transition-delay: 0.15s !important; }
+.dash-source-row:nth-child(3) .ds-fill { transition-delay: 0.25s !important; }
+.dash-source-row:nth-child(4) .ds-fill { transition-delay: 0.35s !important; }
+.dash-source-row:nth-child(5) .ds-fill { transition-delay: 0.45s !important; }
+.dash-metric:nth-child(1) { transition-delay: 0s; }
+.dash-metric:nth-child(2) { transition-delay: 0.1s; }
+.dash-metric:nth-child(3) { transition-delay: 0.2s; }
+.dash-metric:nth-child(4) { transition-delay: 0.3s; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dash-card, .dash-metric, .dash-section-divider { opacity: 1 !important; transform: none !important; }
+  .dh-fill, .dash-year-bar, .dash-market-bar, .dash-sales-bar, .ds-fill { transition: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -3241,7 +3376,7 @@ body { padding-bottom: 60px; }
             <div class="wc-user-name">研究人员</div>
           </div>
           <div class="wc-user-desc">检索MSC临床试验文献，按疾病系统/适应症精准筛选</div>
-          <div class="wc-user-features">文献库 / 编辑精选 / 分析报告</div>
+          <div class="wc-user-features">文献库 / 编辑精选 / 数据分析·行业报告</div>
         </div>
         <div class="wc-user-card">
           <div class="wc-user-head">
@@ -3271,7 +3406,7 @@ body { padding-bottom: 60px; }
             <div class="wc-user-name">投资者</div>
           </div>
           <div class="wc-user-desc">把握行业趋势、企业动态与投融资信息</div>
-          <div class="wc-user-features">分析报告 / 企业巡览 / 行业资讯</div>
+          <div class="wc-user-features">数据分析·行业报告 / 企业巡览 / 行业资讯</div>
         </div>
       </div>
 
@@ -5068,8 +5203,8 @@ function renderMscDashboard() {
   var h = '';
   h += '<div class="dash-board">';
   h += '<div class="dash-header">';
-  h += '<h3>间充质干细胞行业分析报告</h3>';
-  h += '<p>MSC Knowledge Hub | 基于' + totalRecords + '篇临床文献与' + totalMscProducts + '款获批产品 | 2026年7月</p>';
+  h += '<h3 style="text-align:center">间充质基质细胞行业分析报告</h3>';
+  h += '<p style="text-align:center">团队自研，转载注明出处</p>';
   h += '</div>';
   h += '<div class="dash-body">';
 
@@ -5092,7 +5227,7 @@ function renderMscDashboard() {
     var pct = Math.round(s.count / maxSys * 100);
     h += '<div class="dash-hbar">';
     h += '<span class="dh-name">' + s.name + '</span>';
-    h += '<div class="dh-track"><div class="dh-fill" style="width:' + pct + '%;background:' + sysColors[i] + '">' + (pct > 20 ? s.count : '') + '</div></div>';
+    h += '<div class="dh-track"><div class="dh-fill" style="--target-width:' + pct + '%;background:' + sysColors[i] + '">' + (pct > 20 ? s.count : '') + '</div></div>';
     h += '<span class="dh-val">' + s.count + '</span>';
     h += '</div>';
   });
@@ -5109,7 +5244,7 @@ function renderMscDashboard() {
     var color = i >= 7 ? '#00E5FF' : (i >= 4 ? '#4DB6AC' : '#80CBC4');
     h += '<div class="dash-year-col">';
     h += '<div class="dash-year-num">' + val + '</div>';
-    h += '<div class="dash-year-bar" style="height:' + Math.max(pct, 4) + '%;background:' + color + '"></div>';
+    h += '<div class="dash-year-bar" style="--target-height:' + Math.max(pct, 4) + '%;background:' + color + '"></div>';
     h += '<div class="dash-year-label">\'' + y.slice(2) + '</div>';
     h += '</div>';
   });
@@ -5165,7 +5300,7 @@ function renderMscDashboard() {
     var c = srcColors[s.name] || '#90A4AE';
     h += '<div class="dash-source-row">';
     h += '<span class="ds-name">' + s.name + '</span>';
-    h += '<div class="ds-track"><div class="ds-fill" style="width:' + pct + '%;background:' + c + '"></div></div>';
+    h += '<div class="ds-track"><div class="ds-fill" style="--target-width:' + pct + '%;background:' + c + '"></div></div>';
     h += '<span class="ds-val">' + s.count + '</span>';
     h += '</div>';
   });
@@ -5221,7 +5356,7 @@ function renderMscDashboard() {
   marketData.forEach(function(m, i){
     var colors = ['#4DB6AC','#26A69A','#00897B','#00B8D4','#00E5FF','#64FFDA'];
     h += '<div class="dash-market-col">';
-    h += '<div class="dash-market-bar" style="height:' + m.pct + '%;background:' + colors[i] + '"><span class="dm-bar-val">$' + m.val + 'B</span></div>';
+    h += '<div class="dash-market-bar" style="--target-height:' + m.pct + '%;background:' + colors[i] + '"><span class="dm-bar-val">$' + m.val + 'B</span></div>';
     h += '<div class="dash-market-label">' + m.year + '</div>';
     h += '</div>';
   });
@@ -5294,7 +5429,7 @@ function renderMscDashboard() {
     var c = ['#4DB6AC','#00B8D4','#00E5FF'];
     h += '<div class="dash-sales-col">';
     if (r.growth) { h += '<span class="dash-sales-growth" style="background:' + r.growthColor + '15;color:' + r.growthColor + '">' + r.growth + '</span>'; }
-    h += '<div class="dash-sales-bar" style="height:' + r.pct + '%;background:' + c[i] + '"><span class="dsb-val">$' + r.val + 'M</span></div>';
+    h += '<div class="dash-sales-bar" style="--target-height:' + r.pct + '%;background:' + c[i] + '"><span class="dsb-val">$' + r.val + 'M</span></div>';
     h += '<div class="dash-sales-label">' + r.q + '</div>';
     h += '</div>';
   });
@@ -5436,7 +5571,7 @@ function renderHub() {
   var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
   html += '<div class="report-entry" onclick="switchSection(\'report\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>分析报告·MSC行业</span></div>';
+  html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>数据分析·行业报告</span></div>';
   html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
@@ -5498,13 +5633,91 @@ function searchTag(query) {
 }
 
 // === Report page (full dashboard) ===
+var currentReportTab = 'msc';
 function renderReport() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>分析报告·MSC行业</b></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>数据分析·行业报告</b></div>';
+  
+  // Intro section
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-title">' + svgIcon('chart', 18) + ' 关于本栏目</div>';
+  html += '<div class="report-intro-text">本栏目基于<b>MSC Knowledge Hub</b>数据库，提供间充质基质细胞（MSC）及相关CGT领域的行业分析报告。数据<b>实时更新</b>，以<b>可视化图表</b>形式直观展示行业全貌——从临床试验分布、年度趋势到市场规模、融资动态、商业化进展，一站式洞察行业脉搏。';
+  html += ' 索取<b>完整报告</b>可联系网站作者。团队同时提供<b>CGT行业专属报告定制服务</b>，可根据需求定制特定赛道、区域或主题的深度分析报告，有需求可联系网站作者。</div>';
+  html += '<div class="report-intro-contact">联系方式：手机/微信 <b>15932929299</b> | 微信 <b>401848919</b></div>';
+  html += '</div>';
+  
+  // Report tabs
+  html += '<div class="report-tabs">';
+  html += '<button class="report-tab' + (currentReportTab === 'msc' ? ' active' : '') + '" onclick="switchReportTab(\'msc\')">MSC</button>';
+  html += '<button class="report-tab' + (currentReportTab === 'car-t' ? ' active' : '') + '" onclick="switchReportTab(\'car-t\')">CAR-T</button>';
+  html += '<button class="report-tab' + (currentReportTab === 'gene' ? ' active' : '') + '" onclick="switchReportTab(\'gene\')">基因治疗</button>';
+  html += '<button class="report-tab' + (currentReportTab === 'vcell' ? ' active' : '') + '" onclick="switchReportTab(\'vcell\')">虚拟细胞</button>';
+  html += '</div>';
+  
+  // Tab contents
+  html += '<div class="report-tab-content' + (currentReportTab === 'msc' ? ' active' : '') + '" id="report-tab-msc">';
   html += renderMscDashboard();
+  html += '</div>';
+  
+  html += '<div class="report-tab-content' + (currentReportTab === 'car-t' ? ' active' : '') + '" id="report-tab-car-t">';
+  html += renderReportPlaceholder('CAR-T行业分析报告', 'CAR-T细胞免疫治疗领域行业分析报告正在筹备中，敬请期待。将涵盖全球获批产品、临床试验分布、靶点趋势、融资动态等核心维度。');
+  html += '</div>';
+  
+  html += '<div class="report-tab-content' + (currentReportTab === 'gene' ? ' active' : '') + '" id="report-tab-gene">';
+  html += renderReportPlaceholder('基因治疗行业分析报告', '基因治疗领域行业分析报告正在筹备中，敬请期待。将涵盖AAV载体递送、体内/体外基因编辑、罕见病基因治疗等前沿赛道的全面分析。');
+  html += '</div>';
+  
+  html += '<div class="report-tab-content' + (currentReportTab === 'vcell' ? ' active' : '') + '" id="report-tab-vcell">';
+  html += renderReportPlaceholder('虚拟细胞行业分析报告', '虚拟细胞（Virtual Cell）领域行业分析报告正在筹备中，敬请期待。将涵盖AI驱动的细胞建模、数字孪生、全细胞仿真等前沿方向的技术与产业分析。');
+  html += '</div>';
+  
   content.innerHTML = html;
   updateFloatButtons();
+  initChartAnimations();
+}
+
+function switchReportTab(tab) {
+  currentReportTab = tab;
+  var tabs = document.querySelectorAll('.report-tab');
+  var contents = document.querySelectorAll('.report-tab-content');
+  tabs.forEach(function(t, i) {
+    var tabNames = ['msc','car-t','gene','vcell'];
+    t.classList.toggle('active', tabNames[i] === tab);
+  });
+  contents.forEach(function(c) { c.classList.remove('active'); });
+  var panel = document.getElementById('report-tab-' + tab);
+  if (panel) panel.classList.add('active');
+  if (tab === 'msc') initChartAnimations();
+}
+
+function renderReportPlaceholder(title, desc) {
+  var h = '';
+  h += '<div class="report-placeholder">';
+  h += '<div class="report-placeholder-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div>';
+  h += '<div class="report-placeholder-title">' + title + '</div>';
+  h += '<div class="report-placeholder-desc">' + desc + '</div>';
+  h += '<div class="report-placeholder-badge">筹备中 · 敬请期待</div>';
+  h += '</div>';
+  return h;
+}
+
+// === Chart scroll animations ===
+function initChartAnimations() {
+  var elements = document.querySelectorAll('.dash-card, .dash-metric, .dash-section-divider');
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(function(el) { el.classList.add('in-view'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  elements.forEach(function(el) { observer.observe(el); });
 }
 
 // === Original articles & Expert views section ===
@@ -5725,8 +5938,8 @@ function renderHubCarousel() {
 
   // Slide 1: Core metrics
   h += '<div class="carousel-slide s1">';
-  h += '<div class="cs-title">分析报告·MSC行业</div>';
-  h += '<div class="cs-subtitle">MSC Knowledge Hub | 基于' + totalRecords + '篇临床文献与' + totalMscProducts + '款获批产品 | 2026年7月</div>';
+  h += '<div class="cs-title">数据分析·行业报告</div>';
+  h += '<div class="cs-subtitle">间充质基质细胞行业分析报告 | 基于' + totalRecords + '篇临床文献与' + totalMscProducts + '款获批产品 | 2026年7月</div>';
   h += '<div class="cs-metrics">';
   h += '<div class="cs-metric"><div class="csm-num">' + totalRecords + '</div><div class="csm-label">临床文献</div></div>';
   h += '<div class="cs-metric"><div class="csm-num">' + totalSys + '</div><div class="csm-label">生理系统</div></div>';
