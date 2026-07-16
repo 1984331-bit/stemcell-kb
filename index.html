@@ -1713,6 +1713,22 @@ body { padding-bottom: 60px; }
   color: var(--primary);
   flex-shrink: 0;
 }
+/* Multi-line label variant for new dashboards */
+.dash-hbars { display: flex; flex-direction: column; gap: 6px; }
+.dash-hbar .dh-label {
+  width: 105px;
+  font-size: 11px;
+  color: var(--text);
+  text-align: right;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.dash-card-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
 /* Year trend bars */
 .dash-year-row {
   display: flex;
@@ -2263,6 +2279,7 @@ body { padding-bottom: 60px; }
   .dash-header h3 { font-size: 16px; }
   .dash-body { padding: 14px; }
   .dash-hbar .dh-name { width: 60px; font-size: 11px; }
+  .dash-hbar .dh-label { width: 80px; font-size: 10px; }
   .dash-donut-wrap { flex-direction: column; }
   .dash-donut { width: 100px; height: 100px; }
   .dash-donut-center { width: 65px; height: 65px; }
@@ -3220,6 +3237,7 @@ body { padding-bottom: 60px; }
 }
 .report-intro-text {
   font-size: 13px; color: var(--text); line-height: 1.8;
+  text-indent: 2em;
 }
 .report-intro-text b { color: var(--primary); }
 .report-intro-contact {
@@ -5730,17 +5748,20 @@ function renderReport() {
   
   html += '<div class="report-tab-content' + (currentReportTab === 'car-t' ? ' active' : '') + '" id="report-tab-car-t">';
   html += renderCartDashboard();
-  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 8px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">CAR-T细胞免疫治疗领域行业分析报告正在筹备中，敬请期待。将涵盖全球获批产品、临床试验分布、靶点趋势、融资动态等核心维度。</div>';
+  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 4px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">CAR-T细胞免疫治疗领域行业分析报告正在完善中，将涵盖全球获批产品、临床试验分布、靶点趋势、融资动态等核心维度。完整版数据持续更新中。</div>';
+  html += '<div style="text-align:center;padding:0 16px 20px"><span class="report-placeholder-badge">完善中 · 敬请期待</span></div>';
   html += '</div>';
   
   html += '<div class="report-tab-content' + (currentReportTab === 'gene' ? ' active' : '') + '" id="report-tab-gene">';
   html += renderGeneDashboard();
-  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 8px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">基因治疗领域行业分析报告正在筹备中，敬请期待。将涵盖AAV载体递送、体内/体外基因编辑、罕见病基因治疗等前沿赛道的全面分析。</div>';
+  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 4px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">基因治疗领域行业分析报告正在完善中，将涵盖AAV载体递送、体内/体外基因编辑、罕见病基因治疗等前沿赛道的全面分析。完整版数据持续更新中。</div>';
+  html += '<div style="text-align:center;padding:0 16px 20px"><span class="report-placeholder-badge">完善中 · 敬请期待</span></div>';
   html += '</div>';
   
   html += '<div class="report-tab-content' + (currentReportTab === 'vcell' ? ' active' : '') + '" id="report-tab-vcell">';
   html += renderVcellDashboard();
-  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 8px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">虚拟细胞（Virtual Cell）领域行业分析报告正在筹备中，敬请期待。将涵盖AI驱动的细胞建模、数字孪生、全细胞仿真等前沿方向的技术与产业分析。</div>';
+  html += '<div class="report-placeholder-desc" style="text-align:center;padding:20px 16px 4px;max-width:720px;margin:0 auto;color:var(--text-light);line-height:1.7;font-size:13px">虚拟细胞（Virtual Cell）领域行业分析报告正在完善中，将涵盖AI驱动的细胞建模、数字孪生、全细胞仿真等前沿方向的技术与产业分析。完整版数据持续更新中。</div>';
+  html += '<div style="text-align:center;padding:0 16px 20px"><span class="report-placeholder-badge">完善中 · 敬请期待</span></div>';
   html += '</div>';
   
   content.innerHTML = html;
@@ -5768,7 +5789,7 @@ function renderReportPlaceholder(title, desc) {
   h += '<div class="report-placeholder-icon"><svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div>';
   h += '<div class="report-placeholder-title">' + title + '</div>';
   h += '<div class="report-placeholder-desc">' + desc + '</div>';
-  h += '<div class="report-placeholder-badge">筹备中 · 敬请期待</div>';
+  h += '<div class="report-placeholder-badge">完善中 · 敬请期待</div>';
   h += '</div>';
   return h;
 }
@@ -5824,7 +5845,7 @@ function renderCartDashboard() {
   h += '<div class="dash-donut" style="--donut-target:' + cd19Deg + '">';
   h += '<div class="dash-donut-center"><div class="ddc-num count-anim" data-count="67" data-suffix="%" style="color:var(--primary)">0</div><div class="ddc-label">CD19靶点</div></div>';
   h += '</div>';
-  h += '<div style="font-size:13px;line-height:2">';
+  h += '<div style="font-size:13px;line-height:1.7">';
   h += '<div><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--primary);margin-right:6px"></span>CD19 — ' + cd19Count + '款（血液瘤主力）</div>';
   h += '<div><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:rgba(255,138,101,0.5);margin-right:6px"></span>BCMA — ' + bcmaCount + '款（多发性骨髓瘤）</div>';
   h += '<div style="color:var(--text-light);font-size:11px;margin-top:4px">新靶点探索：CD7 · CD22 · GPRC5D · CLL-1</div>';
@@ -6027,7 +6048,7 @@ function renderVcellDashboard() {
   h += '<div class="dash-donut" style="--donut-target:130">';
   h += '<div class="dash-donut-center"><div class="ddc-num count-anim" data-count="4" style="color:var(--primary)">0</div><div class="ddc-label">核心企业</div></div>';
   h += '</div>';
-  h += '<div style="font-size:12px;line-height:2">';
+  h += '<div style="font-size:12px;line-height:1.7">';
   h += '<div><b style="color:var(--primary)">百曜科技</b> — Pre-A轮国家队领投<br><span style="color:var(--text-light);font-size:10px">中科院动物所 · 全球虚拟细胞赛预赛第一</span></div>';
   h += '<div><b style="color:#00897B">无界进化</b> — 天使轮红杉/顺为<br><span style="color:var(--text-light);font-size:10px">晶泰孵化 · OCOO大模型 · 干湿闭环</span></div>';
   h += '<div><b style="color:#FF7043">瑞普晨创</b> — 5亿元A+轮<br><span style="color:var(--text-light);font-size:10px">AI虚拟细胞胰岛分化平台</span></div>';
