@@ -1346,7 +1346,7 @@ body { padding-bottom: 60px; }
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 22px;
+  margin-bottom: 34px;
 }
 .wh-slide-text {
   font-size: 15px;
@@ -1361,16 +1361,12 @@ body { padding-bottom: 60px; }
   position: absolute;
   top: 12px;
   left: 16px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--primary);
+  color: rgba(255,255,255,0.5);
   z-index: 5;
   text-shadow: 0 1px 6px rgba(0,0,0,0.8);
 }
-.wh-title-overlay svg { color: var(--primary); flex-shrink: 0; }
 .wh-slide-date {
   position: absolute;
   top: 12px;
@@ -1438,7 +1434,7 @@ body { padding-bottom: 60px; }
   .wh-slide { padding: 30px 40px 32px; }
   .wh-slide-text { font-size: 12px; }
   .wh-arrow { width: 28px; height: 28px; }
-  .wh-title-overlay { font-size: 11px; top: 8px; left: 10px; }
+  .wh-title-overlay { font-size: 10px; top: 8px; left: 10px; }
   .wh-slide-date { font-size: 10px; top: 8px; right: 10px; }
   .wh-slide-num { font-size: 10px; bottom: 8px; right: 10px; }
 }
@@ -2459,6 +2455,86 @@ body { padding-bottom: 60px; }
   padding: 2px 8px; border-radius: 10px;
   background: rgba(0,150,136,0.12); color: #4DB6AC;
 }
+
+/* Book cover grid */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.book-cover-item {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.book-cover-item:hover { transform: translateY(-3px); }
+.book-cover-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(0,150,136,0.2), rgba(0,229,255,0.08));
+  border: 1px solid rgba(0,150,136,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.book-cover-img svg { color: rgba(77,182,172,0.5); }
+.book-cover-img img { width: 100%; height: 100%; object-fit: cover; }
+.book-cover-item:hover .book-cover-img { border-color: rgba(0,229,255,0.4); box-shadow: 0 4px 16px rgba(0,229,255,0.12); }
+.book-cover-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.book-cover-author { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+/* Book detail modal */
+.book-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.book-modal-overlay.show { opacity: 1; visibility: visible; }
+.book-modal {
+  background: var(--card-bg, #122030);
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 14px;
+  max-width: 560px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  padding: 24px 28px;
+  transform: scale(0.92);
+  transition: transform 0.25s ease;
+}
+.book-modal-overlay.show .book-modal { transform: scale(1); }
+.book-modal-close {
+  position: absolute; top: 12px; right: 16px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: none;
+  color: var(--text-light, #aaa); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; transition: background 0.2s;
+}
+.book-modal-close:hover { background: rgba(255,255,255,0.15); }
+.book-modal-title { font-size: 16px; font-weight: 700; color: var(--text, #e0e0e0); margin-bottom: 6px; padding-right: 30px; line-height: 1.4; }
+.book-modal-author { font-size: 12px; color: var(--text-light, #888); margin-bottom: 12px; }
+.book-modal-desc { font-size: 13px; color: var(--text, #ccc); line-height: 1.7; margin-bottom: 12px; text-indent: 2em; }
+.book-modal-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.book-modal-meta span { font-size: 11px; color: var(--text-light, #888); }
+.book-modal-note { font-size: 11px; color: var(--warn-text, #FFA726); background: var(--warn-bg, rgba(255,167,38,0.08)); border-radius: 6px; padding: 8px 12px; line-height: 1.6; }
 
 /* Hub picks */
 .hub-picks { background: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); padding: 12px 16px; }
@@ -5685,7 +5761,7 @@ function renderHub() {
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
-  html += '<div class="wh-title-overlay">' + svgIcon('calendar', 14) + ' 本周更新 · 重点关注</div>';
+  html += '<div class="wh-title-overlay">本周热点</div>';
   highlights.forEach(function(h, i) {
     html += '<div class="wh-slide' + (i === 0 ? ' active' : '') + '" data-index="' + i + '" onclick="' + h.action + '" style="background-image:' + h.bg + '">';
     html += '<div class="wh-slide-date">' + dateStr + '</div>';
@@ -5735,8 +5811,8 @@ function renderHub() {
   // Books & courses entry (moved after originals)
   html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·学习课程</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">专业书籍推荐·在线课程·培训资源</div>';
+  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">学术专著·产业参考·原创专著</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -6318,64 +6394,99 @@ function renderOriginals() {
 
 // === Books & Courses section ===
 const INDUSTRY_BOOKS = [
-  {title:'《干细胞临床应用手册》', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', tag:'原创专著'},
-  {title:'《细胞生物学》（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', tag:'教材'},
-  {title:'《间充质干细胞：生物学特性与临床应用》', author:'Robert Marx 等', desc:'MSC领域权威专著，涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据。', publisher:'Academic Press', year:'2024', pages:'约600页', tag:'学术专著'},
-  {title:'《细胞治疗：从实验室到临床》', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', tag:'产业参考'},
-  {title:'《基因治疗原理与实践》', author:'表面含有AAV、慢病毒等载体', desc:'基因治疗领域经典教材，涵盖载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', tag:'学术专著'},
-  {title:'《再生医学与组织工程》', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press', year:'2023', pages:'约800页', tag:'产业参考'}
+  {title:'《干细胞临床应用手册》', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著'},
+  {title:'《细胞生物学》（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著'},
+  {title:'《间充质干细胞：生物学特性与临床应用》', author:'Robert Marx 等', desc:'MSC领域权威专著，涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据。', publisher:'Academic Press', year:'2024', pages:'约600页', cat:'学术专著'},
+  {title:'《细胞治疗：从实验室到临床》', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', cat:'产业参考'},
+  {title:'《基因治疗原理与实践》', author:'表面含有AAV、慢病毒等载体', desc:'基因治疗领域经典教材，涵盖载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', cat:'学术专著'},
+  {title:'《再生医学与组织工程》', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press', year:'2023', pages:'约800页', cat:'产业参考'}
 ];
 
-const LEARNING_COURSES = [
-  {title:'CGT细胞基因治疗产业化培训课程', desc:'面向CGT产业从业者的系统培训，涵盖细胞治疗产品工艺开发、GMP生产、质量控制、注册申报、临床试验设计全链条。', provider:'行业培训机构', duration:'40课时', level:'中级', tag:'推荐'},
-  {title:'干细胞临床研究法规与伦理培训', desc:'深入解读818号令、干细胞临床研究管理办法、ISCT标准等法规体系，涵盖伦理审查、知情同意、数据管理等实务操作。', provider:'国家卫健委继续教育', duration:'16课时', level:'入门', tag:'法规'},
-  {title:'CAR-T细胞治疗技术专题课程', desc:'从CAR结构设计、病毒载体生产、T细胞分选培养到临床输注全流程技术培训，含国内外获批CAR-T产品案例分析。', provider:'高校/企业联合', duration:'24课时', level:'高级', tag:'技术'},
-  {title:'GMP细胞治疗产品生产质量管理', desc:'基于FACT-JACIE、GMP规范的细胞治疗产品生产质量管理培训，涵盖洁净室管理、批记录、偏差处理、验证确认等。', provider:'行业认证机构', duration:'32课时', level:'中级', tag:'质量'},
-  {title:'细胞治疗临床试验设计与统计学', desc:'针对细胞治疗产品特殊性（小样本、剂量探索、长期随访）的临床试验设计方法学培训，含 Adaptive Design、Bayesian 等方法。', provider:'CRO/学术机构', duration:'20课时', level:'高级', tag:'临床'},
-  {title:'MSC间充质干细胞基础与临床专题', desc:'系统讲解MSC的生物学特性、分离鉴定标准（ISCT 2006/2025）、作用机制（旁分泌/免疫调节）、各系统临床应用进展。', provider:'本平台原创', duration:'30课时', level:'入门-中级', tag:'原创'}
-];
+var currentBookCat = 'all';
 
 function renderBooks() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍·学习课程</b></div>';
-  html += '<div class="content-header"><h2>行业书籍·学习课程</h2><div class="desc">' + svgIcon('book', 14) + ' 专业书籍推荐 · 在线课程 · 培训资源</div></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍</b></div>';
+  html += '<div class="content-header"><h2>行业书籍</h2></div>';
 
-  // Section 1: Books
-  html += '<div class="books-section">';
-  html += '<div class="books-section-title">' + svgIcon('book', 18) + ' 行业书籍</div>';
+  // Description text
+  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。';
+  html += '<div class="report-intro-contact" style="margin-top:10px;"><b>声明：</b>本平台不提供电子版下载，请通过正规渠道购买正版书籍。平台编者有需求可联系编辑团队免费获赠。</div>';
+  html += '</div>';
+
+  // Category cards
+  var bookCats = [
+    {id:'all', name:'全部书籍', color:'var(--primary)'},
+    {id:'学术专著', name:'学术专著', color:'#42A5F5'},
+    {id:'产业参考', name:'产业参考', color:'#66BB6A'},
+    {id:'原创专著', name:'原创专著', color:'#FFB74D'}
+  ];
+  var catCounts = {};
   INDUSTRY_BOOKS.forEach(function(b) {
-    html += '<div class="book-card">';
-    html += '<div class="book-cover">' + svgIcon('book', 28) + '</div>';
-    html += '<div class="book-info">';
-    html += '<div class="book-title">' + escapeHtml(b.title) + '</div>';
-    html += '<div class="book-author">' + escapeHtml(b.author) + ' · ' + escapeHtml(b.publisher) + ' · ' + b.year + '</div>';
-    html += '<div class="book-desc">' + escapeHtml(b.desc) + '</div>';
-    html += '<div class="book-meta"><span class="course-tag">' + b.tag + '</span><span>' + svgIcon('doc', 10) + ' ' + b.pages + '</span></div>';
-    html += '</div>';
+    if (!catCounts[b.cat]) catCounts[b.cat] = 0;
+    catCounts[b.cat]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-top:16px;">';
+  bookCats.forEach(function(c) {
+    var count = c.id === 'all' ? INDUSTRY_BOOKS.length : (catCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentBookCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchBookCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 本</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
     html += '</div>';
   });
   html += '</div>';
 
-  // Section 2: Courses
-  html += '<div class="books-section">';
-  html += '<div class="books-section-title">' + svgIcon('users', 18) + ' 学习课程</div>';
-  LEARNING_COURSES.forEach(function(c) {
-    html += '<div class="course-card">';
-    html += '<div class="course-card-header">';
-    html += '<div class="course-icon">' + svgIcon('flask', 20) + '</div>';
-    html += '<div class="course-info">';
-    html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
-    html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
-    html += '<div class="course-meta"><span class="course-tag">' + c.tag + '</span><span>' + svgIcon('clock', 10) + ' ' + c.duration + '</span><span>' + svgIcon('users', 10) + ' ' + c.level + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
-    html += '</div>';
-    html += '</div>';
+  // Book cover grid
+  var filtered = currentBookCat === 'all' ? INDUSTRY_BOOKS : INDUSTRY_BOOKS.filter(function(b) { return b.cat === currentBookCat; });
+  html += '<div class="book-grid">';
+  filtered.forEach(function(b, i) {
+    var idx = INDUSTRY_BOOKS.indexOf(b);
+    html += '<div class="book-cover-item" onclick="showBookDetail(' + idx + ')">';
+    html += '<div class="book-cover-img">' + svgIcon('book', 32) + '</div>';
+    html += '<div class="book-cover-name">' + escapeHtml(b.title) + '</div>';
+    html += '<div class="book-cover-author">' + escapeHtml(b.author) + '</div>';
     html += '</div>';
   });
+  html += '</div>';
+
+  // Modal placeholder
+  html += '<div class="book-modal-overlay" id="bookModalOverlay" onclick="closeBookModal(event)">';
+  html += '<div class="book-modal" id="bookModalContent">';
+  html += '</div>';
   html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+function switchBookCat(cat) {
+  currentBookCat = cat;
+  renderBooks();
+}
+
+function showBookDetail(idx) {
+  var b = INDUSTRY_BOOKS[idx];
+  if (!b) return;
+  var modal = document.getElementById('bookModalContent');
+  var html = '';
+  html += '<button class="book-modal-close" onclick="closeBookModal()">&times;</button>';
+  html += '<div class="book-modal-title">' + escapeHtml(b.title) + '</div>';
+  html += '<div class="book-modal-author">' + escapeHtml(b.author) + ' · ' + escapeHtml(b.publisher) + ' · ' + b.year + '</div>';
+  html += '<div class="book-modal-meta">';
+  html += '<span class="course-tag">' + escapeHtml(b.cat) + '</span>';
+  html += '<span>' + svgIcon('doc', 10) + ' ' + escapeHtml(b.pages) + '</span>';
+  html += '</div>';
+  html += '<div class="book-modal-desc">' + escapeHtml(b.desc) + '</div>';
+  html += '<div class="book-modal-note">本平台不提供电子版下载，请通过正规渠道购买正版书籍。平台编者有需求可联系编辑团队免费获赠。</div>';
+  modal.innerHTML = html;
+  document.getElementById('bookModalOverlay').classList.add('show');
+}
+
+function closeBookModal(e) {
+  if (e && e.target.id !== 'bookModalOverlay') return;
+  document.getElementById('bookModalOverlay').classList.remove('show');
 }
 
 // === Health Products (Editor's Choice) ===
