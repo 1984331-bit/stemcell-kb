@@ -256,7 +256,7 @@ body {
 .info-panel.contact .ip-tag { background: #1565C0; }
 .info-panel.contact .ip-tag b { color: #BBDEFB; }
 .info-panel.contact .ip-row { justify-content: flex-end; }
-.info-panel.team .ip-row { justify-content: center; }
+.info-panel.team .ip-row { justify-content: flex-end; }
 .team-grid {
   display: flex;
   flex-direction: column;
@@ -1311,7 +1311,8 @@ body { padding-bottom: 60px; }
 .wh-carousel {
   position: relative;
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
+  max-height: 380px;
   overflow: hidden;
   border-radius: 14px;
 }
@@ -1321,8 +1322,8 @@ body { padding-bottom: 60px; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 36px 50px 44px;
+  justify-content: flex-end;
+  padding: 40px 50px 36px;
   opacity: 0;
   transition: opacity 0.6s ease;
   cursor: pointer;
@@ -1335,7 +1336,7 @@ body { padding-bottom: 60px; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(8,12,20,0.78), rgba(8,12,20,0.55));
+  background: linear-gradient(180deg, rgba(8,12,20,0.55) 0%, rgba(8,12,20,0.35) 40%, rgba(8,12,20,0.75) 100%);
   z-index: 0;
 }
 .wh-slide-content {
@@ -1345,46 +1346,47 @@ body { padding-bottom: 60px; }
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-bottom: 22px;
 }
 .wh-slide-text {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #fff;
   line-height: 1.5;
   text-align: center;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
-  max-width: 520px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+  max-width: 560px;
 }
 .wh-title-overlay {
   position: absolute;
-  top: 10px;
-  left: 14px;
+  top: 12px;
+  left: 16px;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--primary);
   z-index: 5;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
 }
 .wh-title-overlay svg { color: var(--primary); flex-shrink: 0; }
 .wh-slide-date {
   position: absolute;
-  top: 10px;
-  right: 14px;
-  font-size: 11px;
+  top: 12px;
+  right: 16px;
+  font-size: 12px;
   color: rgba(255,255,255,0.7);
   z-index: 5;
   font-weight: 500;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
 }
 .wh-slide-num {
   position: absolute;
-  top: 26px;
-  right: 14px;
-  font-size: 10px;
-  color: rgba(255,255,255,0.4);
+  bottom: 10px;
+  right: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
   z-index: 5;
   font-weight: 600;
 }
@@ -1395,18 +1397,18 @@ body { padding-bottom: 60px; }
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 5;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.4);
   transition: background 0.2s, color 0.2s;
   user-select: none;
 }
-.wh-arrow:hover { background: rgba(255,255,255,0.22); color: #fff; }
+.wh-arrow:hover { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
 .wh-arrow.prev { left: 8px; }
 .wh-arrow.next { right: 8px; }
 .wh-dots {
@@ -1432,10 +1434,13 @@ body { padding-bottom: 60px; }
   background: var(--primary);
 }
 @media (max-width: 768px) {
-  .wh-carousel { height: 170px; }
-  .wh-slide { padding: 30px 40px 38px; }
+  .wh-carousel { max-height: 240px; }
+  .wh-slide { padding: 30px 40px 32px; }
   .wh-slide-text { font-size: 12px; }
   .wh-arrow { width: 28px; height: 28px; }
+  .wh-title-overlay { font-size: 11px; top: 8px; left: 10px; }
+  .wh-slide-date { font-size: 10px; top: 8px; right: 10px; }
+  .wh-slide-num { font-size: 10px; bottom: 8px; right: 10px; }
 }
 
 .hub-tags {
@@ -3560,11 +3565,12 @@ body { padding-bottom: 60px; }
   <div class="header-inner">
     <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>间充质基质细胞知识库</span><span class="subtitle">MSC Knowledge Hub</span></div></h1>
     <nav class="header-nav">
-      <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="bn-label">首页</span></button>
+      <button class="bn-item" id="nav-intro" onclick="switchSection('intro')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="bn-label">科普</span></button>
       <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
       <button class="bn-item" id="nav-reg" onclick="switchSection('regulations')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="bn-label">政策</span></button>
       <button class="bn-item" id="nav-lit" onclick="switchSection('literature')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3"/></svg></span><span class="bn-label">文献</span></button>
       <button class="bn-item" id="nav-prod" onclick="switchSection('products')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg></span><span class="bn-label">产品</span></button>
+      <button class="bn-item" id="nav-inst" onclick="switchSection('institutions')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></span><span class="bn-label">机构</span></button>
     </nav>
   </div>
 </div>
@@ -3576,14 +3582,9 @@ body { padding-bottom: 60px; }
       平台声明
       <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
-    <div class="info-tab center" id="tab-team" onclick="toggleInfoBar('team')">
+    <div class="info-tab right" id="tab-team" onclick="toggleInfoBar('team')">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       维护团队
-      <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </div>
-    <div class="info-tab right" id="tab-contact" onclick="toggleInfoBar('contact')">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      联系方式
       <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
   </div>
@@ -3592,14 +3593,6 @@ body { padding-bottom: 60px; }
     <div class="ip-text"><b>平台声明：</b>本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供<b>科研与行业交流参考，不构成任何医疗建议或诊疗方案</b>。如有健康问题请咨询专业医疗机构。平台数据每日精心维护更新，搬运不易，如需转载或引用数据内容，请注明出处并附本站链接。</div>
     <div class="ip-row">
       <span class="ip-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M16 6c1.5 1 2 2 2 3M15 20c0-2 1-4 3-5"/></svg>适用人群：研究人员 · 临床医生 · 产业从业者 · 投资者</span>
-    </div>
-    </div>
-  </div>
-  <div class="info-panel contact" id="panel-contact">
-    <div class="ip-inner">
-    <div class="ip-row">
-      <span class="ip-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><path d="M9 4h6v3H9z"/><path d="M9 6H6v15h12V6h-3"/></svg>手机/微信 <b>15932929299</b></span>
-      <span class="ip-tag"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>QQ <b>401848919</b></span>
     </div>
     </div>
   </div>
@@ -5296,7 +5289,7 @@ function switchSection(section) {
 
 function updateBottomNav(section) {
   document.querySelectorAll('.bn-item').forEach(el => el.classList.remove('active'));
-  var navMap = { 'hub':'nav-home', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news' };
+  var navMap = { 'hub':'nav-home', 'intro':'nav-intro', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news', 'institutions':'nav-inst' };
   var el = document.getElementById(navMap[section]);
   if (el) el.classList.add('active');
 }
@@ -5684,11 +5677,11 @@ function renderHub() {
   var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
   var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
   var highlights = [
-    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'url(https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&q=80)'},
+    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=1200&q=80)'},
+    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80)'},
     {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进', action:"switchSection('regulations')", bg:'url(https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)'},
-    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1530210124550-912dc1381cb8?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=1200&q=80)'}
+    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=80)'},
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'}
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
