@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>间充质干细胞信息库 | MSC Knowledge Hub</title>
+<title>间充质基质细胞行业知识库 | MSC Knowledge Hub</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -45,7 +45,7 @@ body {
 }
 /* Header */
 .header {
-  background: linear-gradient(135deg, #0D1B2A, #1B2A3E);
+  background: linear-gradient(135deg, #081119, #0C1E2E, #0A1A28);
   color: #fff;
   padding: 8px 16px;
   position: sticky;
@@ -1299,101 +1299,164 @@ body { padding-bottom: 60px; }
 .report-entry.amber .report-entry-desc { color: rgba(255,138,101,0.7); }
 .report-entry.amber .report-entry-right svg { color: #FF8A65; }
 
+/* === PPT-style carousel for weekly highlights === */
 .weekly-highlights {
   margin: 0 0 10px;
-  padding: 12px 14px 10px;
-  border-radius: 12px;
-  background: rgba(230,81,0,0.06);
-  border: 1px solid rgba(230,81,0,0.15);
+  border-radius: 14px;
   overflow: hidden;
   min-width: 0;
   max-width: 100%;
+  position: relative;
 }
-.wh-header {
+.wh-carousel {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+.wh-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+}
+.wh-slide.active { opacity: 1; z-index: 2; }
+.wh-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,15,26,0.82), rgba(10,15,26,0.6));
+  z-index: 0;
+}
+.wh-slide-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+.wh-slide-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,229,255,0.15);
+  border: 1px solid rgba(0,229,255,0.3);
+}
+.wh-slide-text-wrap { flex: 1; min-width: 0; }
+.wh-slide-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #fff;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+.wh-slide-tag.clinical { background: #1565C0; }
+.wh-slide-tag.policy { background: #E65100; }
+.wh-slide-tag.product { background: #2E7D32; }
+.wh-slide-tag.update { background: #6A1B9A; }
+.wh-slide-tag.newproduct { background: #00695C; }
+.wh-slide-tag.newpolicy { background: #5E35B1; }
+.wh-slide-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.wh-slide-num {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  z-index: 3;
+  font-weight: 600;
+}
+.wh-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(13,27,42,0.7);
+  border: 1px solid rgba(0,229,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  color: var(--primary);
+  transition: background 0.2s;
+  user-select: none;
+}
+.wh-arrow:hover { background: rgba(0,229,255,0.2); }
+.wh-arrow.prev { left: 8px; }
+.wh-arrow.next { right: 8px; }
+.wh-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 5;
+}
+.wh-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: width 0.3s, background 0.3s;
+}
+.wh-dot.active {
+  width: 18px;
+  border-radius: 3px;
+  background: var(--primary);
+}
+.wh-header-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  padding: 8px 14px 6px;
 }
-.wh-title {
+.wh-bar-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #FF8A65;
+  color: var(--primary);
 }
-.wh-title svg { color: #FF8A65; flex-shrink: 0; }
-.wh-date {
+.wh-bar-title svg { color: var(--primary); flex-shrink: 0; }
+.wh-bar-date {
   font-size: 11px;
-  color: #FF8A65;
+  color: var(--text-light);
   opacity: 0.6;
   flex-shrink: 0;
 }
-.wh-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 6px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
-  min-width: 0;
-}
-.wh-item:hover { background: rgba(230,81,0,0.08); }
-.wh-item:active { transform: scale(0.99); }
-.wh-tag {
-  flex-shrink: 0;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 10px;
-  color: #fff;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.wh-tag.clinical { background: #1565C0; }
-.wh-tag.policy { background: #E65100; }
-.wh-tag.product { background: #2E7D32; }
-.wh-text {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.5;
-  min-width: 0;
-  flex: 1;
-  word-break: break-word;
-}
-.wh-scroll-wrap {
-  min-width: 0;
-  max-width: 100%;
-  height: 220px;
-  overflow: hidden;
-  position: relative;
-}
-.wh-scroll-track {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  animation: whScrollUp 28s linear infinite;
-}
-.wh-scroll-wrap:hover .wh-scroll-track {
-  animation-play-state: paused;
-}
-.wh-scroll-track .wh-item {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-  height: 36px;
-}
-@keyframes whScrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-.wh-tag.update { background: #6A1B9A; }
-.wh-tag.newproduct { background: #00695C; }
-.wh-tag.newpolicy { background: #5E35B1; }
 @media (max-width: 768px) {
-  .wh-scroll-wrap { height: 180px; }
+  .wh-carousel { height: 170px; }
+  .wh-slide { padding: 0 44px; }
+  .wh-slide-icon { width: 44px; height: 44px; }
+  .wh-slide-text { font-size: 12px; }
+  .wh-arrow { width: 28px; height: 28px; }
 }
 
 .hub-tags {
@@ -1546,35 +1609,38 @@ body { padding-bottom: 60px; }
   font-size: 11px;
   opacity: 0.65;
 }
-.hub-card.green { background: rgba(15,110,86,0.12); border-color: rgba(93,202,165,0.25); }
-.hub-card.green .hc-icon { background: #0F6E56; box-shadow: 0 0 12px rgba(15,110,86,0.4); }
-.hub-card.green .hc-title { color: #5DCAA5; }
-.hub-card.green .hc-desc { color: #5DCAA5; }
-.hub-card.orange { background: rgba(186,117,23,0.12); border-color: rgba(239,159,39,0.25); }
-.hub-card.orange .hc-icon { background: #BA7517; box-shadow: 0 0 12px rgba(186,117,23,0.4); }
-.hub-card.orange .hc-title { color: #EF9F27; }
-.hub-card.orange .hc-desc { color: #EF9F27; }
-.hub-card.blue { background: rgba(24,95,165,0.12); border-color: rgba(133,183,235,0.25); }
-.hub-card.blue .hc-icon { background: #185FA5; box-shadow: 0 0 12px rgba(24,95,165,0.4); }
-.hub-card.blue .hc-title { color: #85B7EB; }
-.hub-card.blue .hc-desc { color: #85B7EB; }
-.hub-card.purple { background: rgba(83,74,183,0.12); border-color: rgba(175,169,236,0.25); }
-.hub-card.purple .hc-icon { background: #534AB7; box-shadow: 0 0 12px rgba(83,74,183,0.4); }
-.hub-card.purple .hc-title { color: #AFA9EC; }
-.hub-card.purple .hc-desc { color: #AFA9EC; }
-.hub-card.rose { background: rgba(198,40,82,0.12); border-color: rgba(236,128,144,0.25); }
-.hub-card.rose .hc-icon { background: #C62852; box-shadow: 0 0 12px rgba(198,40,82,0.4); }
-.hub-card.rose .hc-title { color: #EC8090; }
-.hub-card.rose .hc-desc { color: #EC8090; }
+/* Row 1 - Deep cyan (purple, teal) */
+.hub-card.green { background: rgba(0,131,143,0.14); border-color: rgba(0,229,255,0.2); }
+.hub-card.green .hc-icon { background: #00838F; box-shadow: 0 0 12px rgba(0,131,143,0.4); }
+.hub-card.green .hc-title { color: #4DD0E1; }
+.hub-card.green .hc-desc { color: #4DD0E1; }
+.hub-card.orange { background: rgba(0,188,212,0.08); border-color: rgba(0,229,255,0.14); }
+.hub-card.orange .hc-icon { background: #00ACC1; box-shadow: 0 0 10px rgba(0,172,193,0.35); }
+.hub-card.orange .hc-title { color: #80DEEA; }
+.hub-card.orange .hc-desc { color: #80DEEA; }
+/* Row 2 - Medium cyan (green, blue) */
+.hub-card.blue { background: rgba(0,131,143,0.14); border-color: rgba(0,229,255,0.2); }
+.hub-card.blue .hc-icon { background: #00838F; box-shadow: 0 0 12px rgba(0,131,143,0.4); }
+.hub-card.blue .hc-title { color: #4DD0E1; }
+.hub-card.blue .hc-desc { color: #4DD0E1; }
+.hub-card.purple { background: rgba(0,105,92,0.22); border-color: rgba(0,229,255,0.28); }
+.hub-card.purple .hc-icon { background: #00695C; box-shadow: 0 0 12px rgba(0,105,92,0.5); }
+.hub-card.purple .hc-title { color: #4DB6AC; }
+.hub-card.purple .hc-desc { color: #4DB6AC; }
+/* Row 3 - Light cyan (orange, rose) */
+.hub-card.rose { background: rgba(0,188,212,0.08); border-color: rgba(0,229,255,0.14); }
+.hub-card.rose .hc-icon { background: #00ACC1; box-shadow: 0 0 10px rgba(0,172,193,0.35); }
+.hub-card.rose .hc-title { color: #80DEEA; }
+.hub-card.rose .hc-desc { color: #80DEEA; }
 /* Hub teal for news */
-.hub-card.teal { background: rgba(0,131,143,0.12); border-color: rgba(77,208,225,0.25); }
-.hub-card.teal .hc-icon { background: #00838F; box-shadow: 0 0 12px rgba(0,131,143,0.4); }
-.hub-card.teal .hc-title { color: #4DD0E1; }
-.hub-card.teal .hc-desc { color: #4DD0E1; }
-.hub-card.amber { background: rgba(230,81,0,0.12); border-color: rgba(255,183,77,0.25); }
-.hub-card.amber .hc-icon { background: #E65100; box-shadow: 0 0 12px rgba(230,81,0,0.4); }
-.hub-card.amber .hc-title { color: #BF360C; }
-.hub-card.amber .hc-desc { color: #BF360C; }
+.hub-card.teal { background: rgba(0,105,92,0.22); border-color: rgba(0,229,255,0.28); }
+.hub-card.teal .hc-icon { background: #00695C; box-shadow: 0 0 12px rgba(0,105,92,0.5); }
+.hub-card.teal .hc-title { color: #4DB6AC; }
+.hub-card.teal .hc-desc { color: #4DB6AC; }
+.hub-card.amber { background: rgba(0,131,143,0.14); border-color: rgba(0,229,255,0.2); }
+.hub-card.amber .hc-icon { background: #00838F; box-shadow: 0 0 12px rgba(0,131,143,0.4); }
+.hub-card.amber .hc-title { color: #4DD0E1; }
+.hub-card.amber .hc-desc { color: #4DD0E1; }
 /* Hub news items */
 .hub-news { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); padding: 12px 16px; margin-bottom: 16px; }
 .hn-item { padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
@@ -3440,7 +3506,7 @@ body { padding-bottom: 60px; }
         <circle cx="42" cy="18" r="3" fill="#64FFDA"/>
         <circle cx="16" cy="40" r="3" fill="#64FFDA"/>
       </svg>
-      <div class="wc-title">间充质干细胞信息库</div>
+      <div class="wc-title">间充质基质细胞行业知识库</div>
       <div class="wc-subtitle">MSC Knowledge Hub</div>
       <div class="wc-stats">
         <div class="wc-stat"><div class="wc-stat-num">730+</div><div class="wc-stat-label">临床文献</div></div>
@@ -3513,7 +3579,7 @@ body { padding-bottom: 60px; }
 
 <div class="header">
   <div class="header-inner">
-    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>间充质干细胞信息库</span><span class="subtitle">MSC Knowledge Hub</span></div></h1>
+    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>间充质基质细胞行业知识库</span><span class="subtitle">MSC Knowledge Hub</span></div></h1>
     <nav class="header-nav">
       <button class="bn-item active" id="nav-home" onclick="switchSection('hub')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="bn-label">首页</span></button>
       <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
@@ -3734,6 +3800,66 @@ body { padding-bottom: 60px; }
 </div>
 
 <script>
+// === Weekly Highlights Carousel ===
+var whCurrentIndex = 0;
+var whTotalSlides = 10;
+var whAutoPlayTimer = null;
+
+function whGoTo(index) {
+  var carousel = document.getElementById('whCarousel');
+  if (!carousel) return;
+  var slides = carousel.querySelectorAll('.wh-slide');
+  var dots = carousel.querySelectorAll('.wh-dot');
+  if (slides.length === 0) return;
+  whTotalSlides = slides.length;
+  whCurrentIndex = (index + whTotalSlides) % whTotalSlides;
+  slides.forEach(function(s, i) {
+    s.classList.toggle('active', i === whCurrentIndex);
+  });
+  dots.forEach(function(d, i) {
+    d.classList.toggle('active', i === whCurrentIndex);
+  });
+}
+
+function whSlide(dir) {
+  whGoTo(whCurrentIndex + dir);
+  whRestartAutoPlay();
+}
+
+function whRestartAutoPlay() {
+  if (whAutoPlayTimer) clearInterval(whAutoPlayTimer);
+  whAutoPlayTimer = setInterval(function() {
+    whGoTo(whCurrentIndex + 1);
+  }, 4500);
+}
+
+function initCarousel() {
+  var carousel = document.getElementById('whCarousel');
+  if (!carousel) return;
+  var slides = carousel.querySelectorAll('.wh-slide');
+  whTotalSlides = slides.length;
+  whCurrentIndex = 0;
+  // Pause on hover
+  carousel.addEventListener('mouseenter', function() {
+    if (whAutoPlayTimer) clearInterval(whAutoPlayTimer);
+  });
+  carousel.addEventListener('mouseleave', function() {
+    whRestartAutoPlay();
+  });
+  // Touch swipe
+  var touchStartX = 0;
+  carousel.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  carousel.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) {
+      whSlide(dx > 0 ? -1 : 1);
+    }
+  }, { passive: true });
+  whRestartAutoPlay();
+}
+
 // === Welcome Modal ===
 function closeWelcome(e) {
   if (e && e.target !== document.getElementById('welcomeOverlay')) return;
@@ -5579,25 +5705,48 @@ function renderHub() {
   var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
   var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
   var highlights = [
-    {type:'update', tag:'新文献', text:'BM-MSC鞘内注射治疗遗传性小脑共济失调 I/IIa期首次证据 (PMID:42432710)', action:"searchTag('共济失调')"},
-    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')"},
-    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗AMI 3年心衰率5.74% vs 16.08%', action:"searchTag('心肌梗死')"},
-    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容', action:"switchSection('regulations')"},
-    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')"},
-    {type:'clinical', tag:'临床', text:'CAR-T继发外周T细胞淋巴瘤：FDA安全性警示及多中心回顾分析 (PMID:42419880)', action:"searchTag('CAR-T')"},
-    {type:'update', tag:'新文献', text:'HSCT治疗Friedreich共济失调：基因修饰自体CD34+细胞 I/II期 (PMID:42439571)', action:"searchTag('共济失调')"},
-    {type:'newpolicy', tag:'新政策', text:'NMPA发布细胞治疗与基因治疗药品分类指导原则（2026年版）', action:"switchSection('regulations')"},
-    {type:'clinical', tag:'临床', text:'VX-880功能性治愈T1DM：12/12患者HbA1c<7%，10/12脱离胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')"},
-    {type:'update', tag:'新文献', text:'异体HSCT治疗NMOSD：CD34+细胞输注4年无复发 (PMID:42296969)', action:"searchTag('脊髓损伤')"}
+    {type:'update', tag:'新文献', text:'BM-MSC鞘内注射治疗遗传性小脑共济失调 I/IIa期首次证据 (PMID:42432710)', action:"searchTag('共济失调')", bg:'linear-gradient(135deg,#1A237E,#0D47A1,#01579B)', icon:'flask'},
+    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')", bg:'linear-gradient(135deg,#004D40,#00695C,#00897B)', icon:'pill'},
+    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗AMI 3年心衰率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'linear-gradient(135deg,#0D47A1,#1565C0,#1976D2)', icon:'heart'},
+    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容', action:"switchSection('regulations')", bg:'linear-gradient(135deg,#BF360C,#D84315,#E65100)', icon:'shield'},
+    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁，SCD患者100%无血管闭塞危象', action:"switchSection('products')", bg:'linear-gradient(135deg,#1B5E20,#2E7D32,#388E3C)', icon:'dna'},
+    {type:'clinical', tag:'临床', text:'CAR-T继发外周T细胞淋巴瘤：FDA安全性警示及多中心回顾分析 (PMID:42419880)', action:"searchTag('CAR-T')", bg:'linear-gradient(135deg,#4A148C,#6A1B9A,#7B1FA2)', icon:'alert'},
+    {type:'update', tag:'新文献', text:'HSCT治疗Friedreich共济失调：基因修饰自体CD34+细胞 I/II期 (PMID:42439571)', action:"searchTag('共济失调')", bg:'linear-gradient(135deg,#311B92,#4527A0,#512DA8)', icon:'flask'},
+    {type:'newpolicy', tag:'新政策', text:'NMPA发布细胞治疗与基因治疗药品分类指导原则（2026年版）', action:"switchSection('regulations')", bg:'linear-gradient(135deg,#827717,#9E9D24,#AFB42B)', icon:'shield'},
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈T1DM：12/12患者HbA1c<7%，10/12脱离胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'linear-gradient(135deg,#006064,#00838F,#0097A7)', icon:'heart'},
+    {type:'update', tag:'新文献', text:'异体HSCT治疗NMOSD：CD34+细胞输注4年无复发 (PMID:42296969)', action:"searchTag('脊髓损伤')", bg:'linear-gradient(135deg,#263238,#37474F,#455A64)', icon:'flask'}
   ];
+  var slideIcons = {
+    flask: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-10V3"/><path d="M7.5 14h9"/></svg>',
+    pill: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a7 7 0 0 1-9.9-9.9l9.9-9.9a7 7 0 0 1 9.9 9.9z"/><path d="M8.5 8.5l7 7"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    shield: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    dna: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3c0 5 16 11 16 18M20 3c0 5-16 11-16 18M4 3h3M17 3h3M4 21h3M17 21h3M7 7h10M7 17h10M9 12h6"/></svg>',
+    alert: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>'
+  };
   html += '<div class="weekly-highlights">';
-  html += '<div class="wh-header"><div class="wh-title">' + svgIcon('calendar', 16) + ' 本周更新·重点关注</div><div class="wh-date">' + dateStr + '</div></div>';
-  html += '<div class="wh-scroll-wrap"><div class="wh-scroll-track" id="whScrollTrack">';
-  var hlLoop = highlights.concat(highlights);
-  hlLoop.forEach(function(h){
-    html += '<div class="wh-item" onclick="' + h.action + '"><span class="wh-tag ' + h.type + '">' + h.tag + '</span><span class="wh-text">' + h.text + '</span></div>';
+  html += '<div class="wh-header-bar"><div class="wh-bar-title">' + svgIcon('calendar', 16) + ' 本周更新 · 重点关注</div><div class="wh-bar-date">' + dateStr + '</div></div>';
+  html += '<div class="wh-carousel" id="whCarousel">';
+  highlights.forEach(function(h, i) {
+    html += '<div class="wh-slide' + (i === 0 ? ' active' : '') + '" data-index="' + i + '" onclick="' + h.action + '" style="background:' + h.bg + '">';
+    html += '<div class="wh-slide-num">' + (i+1) + ' / ' + highlights.length + '</div>';
+    html += '<div class="wh-slide-content">';
+    html += '<div class="wh-slide-icon" style="color:var(--primary)">' + (slideIcons[h.icon] || slideIcons.flask) + '</div>';
+    html += '<div class="wh-slide-text-wrap">';
+    html += '<span class="wh-slide-tag ' + h.type + '">' + h.tag + '</span>';
+    html += '<div class="wh-slide-text">' + h.text + '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
   });
-  html += '</div></div>';
+  html += '<div class="wh-arrow prev" onclick="whSlide(-1)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div>';
+  html += '<div class="wh-arrow next" onclick="whSlide(1)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></div>';
+  html += '<div class="wh-dots" id="whDots">';
+  highlights.forEach(function(h, i) {
+    html += '<div class="wh-dot' + (i === 0 ? ' active' : '') + '" data-index="' + i + '" onclick="whGoTo(' + i + ')"></div>';
+  });
+  html += '</div>';
+  html += '</div>';
   html += '</div>';
 
   html += '<div class="hub-cards">';
@@ -5692,6 +5841,7 @@ function renderHub() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  initCarousel();
 }
 
 function clickHubTag(el, query) {
@@ -7594,13 +7744,13 @@ document.addEventListener('dragstart', function(e) {
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-left">
-      <div class="sf-title"><svg viewBox="0 0 32 32" width="20" height="20" style="vertical-align:middle;margin-right:6px"><circle cx="16" cy="16" r="14" fill="none" stroke="#80CBC4" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#4DB6AC" opacity="0.8"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.7"/><circle cx="21" cy="9" r="1.5" fill="#80CBC4"/><circle cx="8" cy="20" r="1.5" fill="#80CBC4"/></svg> 间充质干细胞信息库 | MSC Knowledge Hub</div>
+      <div class="sf-title"><svg viewBox="0 0 32 32" width="20" height="20" style="vertical-align:middle;margin-right:6px"><circle cx="16" cy="16" r="14" fill="none" stroke="#80CBC4" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#4DB6AC" opacity="0.8"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.7"/><circle cx="21" cy="9" r="1.5" fill="#80CBC4"/><circle cx="8" cy="20" r="1.5" fill="#80CBC4"/></svg> 间充质基质细胞行业知识库 | MSC Knowledge Hub</div>
       <div class="sf-notice">
         <b>版权声明：</b>本网站所有内容（包括但不限于数据库结构、文献整理编排、行业分析报告、仪表盘图表设计、页面布局及源代码）均为原创，著作权归本平台所有。
         未经书面授权，任何单位及个人不得以任何方式复制、转载、摘编、镜像、传播或用于商业目的。
         经授权使用的内容应保留来源标注并链接至本站。如有侵权行为，将依法追究法律责任。
       </div>
-      <div class="sf-copy">© 2025-2026 间充质干细胞信息库. All Rights Reserved. 保留所有权利.</div>
+      <div class="sf-copy">© 2025-2026 间充质基质细胞行业知识库. All Rights Reserved. 保留所有权利.</div>
     </div>
   </div>
 </footer>
