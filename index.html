@@ -182,32 +182,42 @@ body {
 /* Disclaimer banner */
 /* === Info bar: single full-width bar with two toggle tabs === */
 .info-bar {
-  background: rgba(13,27,42,0.9);
+  background: rgba(10,15,26,0.95);
   border-bottom: 1px solid rgba(0,229,255,0.1);
+  position: sticky;
+  top: 58px;
+  z-index: 99;
+  backdrop-filter: blur(8px);
 }
 .info-bar-tabs {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 20px 0 60px;
+  gap: 2px;
+  padding: 0 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.info-bar-tabs::-webkit-scrollbar { display: none; }
 .info-tab {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 7px 12px;
+  gap: 4px;
+  padding: 8px 10px;
   cursor: pointer;
   user-select: none;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
   border-radius: 6px;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
+  color: rgba(255,255,255,0.55);
+  flex-shrink: 0;
 }
-.info-tab.left { color: rgba(255,255,255,0.6); }
-.info-tab.center { color: rgba(255,255,255,0.6); }
-.info-tab.right { color: rgba(255,255,255,0.6); margin-left: auto; }
-.info-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.info-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.info-tab.active { color: var(--primary); background: rgba(0,229,255,0.1); }
 .info-tab .it-arrow {
   transition: transform 0.2s;
   display: inline-block;
@@ -219,7 +229,9 @@ body {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 0 20px 0 60px;
+  padding: 0 20px;
+  max-width: 1100px;
+  margin: 0 auto;
   font-size: 13px;
   color: #8B9DAF;
   line-height: 1.6;
@@ -280,8 +292,9 @@ body {
 .team-name { font-weight: 600; color: var(--text); }
 .team-role { color: var(--text-light); font-size: 12px; }
 @media (max-width: 768px) {
-  .info-bar-tabs { padding: 0 8px; justify-content: space-around; gap: 2px; }
-  .info-tab { font-size: 12px; padding: 6px 4px; gap: 3px; }
+  .info-bar { top: 52px; }
+  .info-bar-tabs { padding: 0 6px; gap: 0; }
+  .info-tab { font-size: 12px; padding: 6px 6px; gap: 3px; }
   .info-tab svg[width="15"] { width: 13px; height: 13px; }
   .info-panel { padding: 0 10px; font-size: 12px; }
   .info-panel .ip-tag { font-size: 12px; }
@@ -493,8 +506,8 @@ body {
   box-shadow: var(--shadow);
   padding: 12px;
   position: sticky;
-  top: 140px;
-  max-height: calc(100vh - 160px);
+  top: 120px;
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
 }
 .sidebar-title {
@@ -1184,11 +1197,17 @@ body {
     transform: translateX(-100%);
     transition: transform 0.25s;
     max-height: 100vh;
-    padding-top: 60px;
+    padding-top: 96px;
+    background: #0A0F1A;
   }
   .sidebar.open { transform: translateX(0); }
   .sidebar-overlay.show { display: block; }
   .mobile-toggle { display: flex; }
+  .sys-header { padding: 10px 12px; font-size: 15px; }
+  .sys-arrow { width: 16px; font-size: 12px; text-align: center; }
+  .ind-item { padding: 8px 12px; font-size: 14px; }
+  .ind-dot { width: 8px; height: 8px; }
+  .ind-list { padding-left: 24px; }
   .header { padding: 5px 10px; overflow: hidden; }
   .header-inner { gap: 6px; min-width: 0; }
   .header h1 { font-size: 13px; gap: 3px; padding: 0 6px; height: 42px; min-width: 0; overflow: hidden; }
@@ -2413,8 +2432,8 @@ body { padding-bottom: 60px; }
   .prov-acc-icon { width: 28px; height: 28px; font-size: 12px; }
   .prov-acc-name { font-size: 14px; }
   .prov-acc-count { font-size: 11px; }
-  .prov-bar-label { width: 45px; font-size: 11px; }
-  .prov-bar-track { height: 12px; }
+  .prov-bar-label { width: 40px; font-size: 11px; }
+  .prov-bar-track { height: 16px; }
   .map-stat-num { font-size: 18px; }
 }
 /* === Comprehensive mobile overflow fix === */
@@ -2922,8 +2941,8 @@ body { padding-bottom: 60px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
-  padding: 4px 8px;
+  margin-bottom: 3px;
+  padding: 2px 8px;
   border-radius: 6px;
   transition: background 0.2s;
 }
@@ -2931,7 +2950,7 @@ body { padding-bottom: 60px; }
   background: rgba(0,229,255,0.06);
 }
 .prov-bar-label {
-  width: 60px;
+  width: 52px;
   font-size: 12px;
   color: var(--text-light);
   text-align: right;
@@ -2939,15 +2958,15 @@ body { padding-bottom: 60px; }
 }
 .prov-bar-track {
   flex: 1;
-  height: 14px;
+  height: 20px;
   background: var(--surface-2);
-  border-radius: 3px;
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
 .prov-bar-fill {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 5px;
   transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 0;
 }
@@ -2956,7 +2975,7 @@ body { padding-bottom: 60px; }
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: #fff;
   text-shadow: 0 1px 2px rgba(0,0,0,0.5);
@@ -4019,15 +4038,39 @@ body { padding-bottom: 60px; }
 
 <div class="info-bar" id="infoBar">
   <div class="info-bar-tabs">
-    <div class="info-tab left" id="tab-disclaimer" onclick="toggleInfoBar('disclaimer')">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      平台声明
-      <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    <div class="info-tab" data-kb="hub" onclick="navToKb('hub')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+      首页
     </div>
-    <div class="info-tab right" id="tab-team" onclick="toggleInfoBar('team')">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      维护团队
-      <svg class="it-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    <div class="info-tab" data-kb="originals" onclick="navToKb('originals')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      评论
+    </div>
+    <div class="info-tab" data-kb="books" data-book-tab="books" onclick="navToKb('books','books')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      读书
+    </div>
+    <div class="info-tab" data-kb="books" data-book-tab="courses" onclick="navToKb('books','courses')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      课程
+    </div>
+    <div class="info-tab" data-kb="companies" onclick="navToKb('companies')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+      企业
+    </div>
+    <div class="info-tab" data-kb="report" onclick="navToKb('report')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+      数据
+    </div>
+    <div class="info-tab" id="tab-disclaimer" onclick="toggleInfoBar('disclaimer')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      声明
+      <svg class="it-arrow" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="info-tab" id="tab-team" onclick="toggleInfoBar('team')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      团队
+      <svg class="it-arrow" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </div>
   </div>
   <div class="info-panel" id="panel-disclaimer">
@@ -4738,7 +4781,7 @@ function renderContent() {
     var yrs = ALL_DATA.map(function(d){return d.year;}).filter(function(y){return y;});
     var yMin = yrs.length ? Math.min.apply(null, yrs) : '';
     var yMax = yrs.length ? Math.max.apply(null, yrs) : '';
-    overviewHtml += '<div class="content-header"><h2>临床文献数据</h2><div class="desc">' + svgIcon('doc', 14) + ' <b>' + ALL_DATA.length + '</b> 篇文献 · <b>' + totalSystemsGlobal + '</b> 个系统 · <b>' + totalInds + '</b> 个适应症 · <b>' + yMin + '–' + yMax + '</b><br>点击下方系统卡片或左侧导航树浏览文献，或在搜索框中输入关键词检索。</div></div>';
+    overviewHtml += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">基于 <b>' + ALL_DATA.length + '</b> 篇文献，覆盖 <b>' + totalSystemsGlobal + '</b> 个系统，<b>' + totalInds + '</b> 个适应症，时间跨度 <b>' + yMin + '–' + yMax + '</b> 年。点击下方系统卡片或左侧导航树浏览文献，也可在搜索框中输入关键词检索。</div></div>';
 
     // Search box
     overviewHtml += '<div class="lit-search-box">';
@@ -4802,7 +4845,7 @@ function renderContent() {
     const filtered = getSortedData(getFilteredData());
     const inds = [...new Set(filtered.map(d => d.indication))].sort();
 
-    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
+    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="literature" onclick="navTo(this)">临床文献数据</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
     html += '<div class="content-header"><h2>' + escapeHtml(sysName) + '</h2><div class="desc">共 ' + filtered.length + ' 篇文献，' + inds.length + ' 个适应症。点击下方适应症卡片可筛选特定疾病，或向下滚动浏览全部文献。</div></div>';
 
     // Indication cards
@@ -4886,12 +4929,15 @@ function renderContent() {
   }
 
   let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span>';
+  html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-section="literature" onclick="navTo(this)">临床文献数据</span>';
   if (currentFilter.system) {
     html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-action="sys" data-system="' + escapeHtml(currentFilter.system) + '" onclick="navTo(this)">' + escapeHtml(currentFilter.system) + '</span>';
-  } else {
+  }
+  if (currentFilter.indication) {
+    html += ' <span class="crumb-sep">›</span> <b>' + escapeHtml(currentFilter.indication) + '</b>';
+  } else if (searchQuery) {
     html += '<span class="crumb-sep">›</span> <b>搜索结果</b>';
   }
-  if (currentFilter.indication) html += ' <span class="crumb-sep">›</span> <b>' + escapeHtml(currentFilter.indication) + '</b>';
   html += '</div>';
 
   // Search box in results view (so user can modify query)
@@ -5789,7 +5835,21 @@ function updateLayout(section) {
     if (container) container.classList.add('no-sidebar');
     if (mobileToggle) mobileToggle.classList.add('hidden');
   }
-  if (infoBar) infoBar.style.display = (section === 'hub') ? '' : 'none';
+  if (infoBar) infoBar.style.display = '';
+  // Update knowledge base nav active state
+  document.querySelectorAll('.info-tab[data-kb]').forEach(function(el) {
+    var kb = el.getAttribute('data-kb');
+    var bt = el.getAttribute('data-book-tab');
+    if (kb === section) {
+      if (kb === 'books') {
+        el.classList.toggle('active', bt === currentBookTab);
+      } else {
+        el.classList.add('active');
+      }
+    } else {
+      el.classList.remove('active');
+    }
+  });
   if (section === 'report' && container) container.classList.add('no-sidebar');
   if (section === 'companies' && container) container.classList.add('no-sidebar');
   if (section === 'picks' && container) container.classList.add('no-sidebar');
@@ -5811,6 +5871,16 @@ function toggleInfoBar(panel) {
     content.classList.add('open');
     tab.classList.add('open');
   }
+}
+
+function navToKb(section, bookTab) {
+  // Close any open info panels
+  document.querySelectorAll('.info-panel').forEach(function(el){ el.classList.remove('open'); });
+  document.querySelectorAll('.info-tab').forEach(function(el){ el.classList.remove('open'); });
+  if (section === 'books' && bookTab) {
+    currentBookTab = bookTab;
+  }
+  switchSection(section);
 }
 
 // === MSC Industry Dashboard ===
@@ -7953,7 +8023,7 @@ function renderInstitutions() {
   }
   html += '</div>';
 
-  html += '<div class="content-header" style="padding-bottom:10px;"><div class="desc" style="font-weight:600;">全国已备案细胞治疗机构名录，覆盖7大地理区域106家三甲医院，数据截至2026年5月。</div></div>';
+  html += '<div class="content-header" style="padding-bottom:10px;"><div class="desc" style="text-indent:2em;line-height:1.8;">全国已备案细胞治疗机构名录，覆盖7大地理区域、24个省份共106家三甲医院及研究中心。点击地图省份或下方区域卡片可逐级下钻至机构详情，每家机构展示备案项目、细胞类型、研究阶段及联系方式。机构末尾设有"备案项目"汇总表格，可按细胞类型筛选查看。数据截至2026年5月，后续将随国家卫健委更新持续同步。</div></div>';
 
   // Region cards — always visible
   var regionCounts = {};
@@ -7998,6 +8068,17 @@ function renderInstitutions() {
     // Stats row
     var provCounts = countByProvince(INSTITUTIONS);
     html += '<div id="chinaMapContainer"><div class="map-loading">地图加载中...</div></div>';
+    // Quick-access pills for small provinces that are hard to tap on mobile
+    var smallProvs = ['北京','天津','上海','澳门','香港','台湾'];
+    var smallProvHtml = '<div class="map-quick-pills" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center;">';
+    smallProvs.forEach(function(pn) {
+      var sc = provCounts[pn] || 0;
+      var sn = PROVINCE_SHORT[pn] || pn;
+      smallProvHtml += '<div class="map-quick-pill" data-prov="' + pn + '" style="cursor:pointer;padding:5px 12px;background:var(--surface-1);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--text);transition:all 0.2s;" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">'
+        + escapeHtml(sn) + ' <b style="color:var(--primary);">' + sc + '</b></div>';
+    });
+    smallProvHtml += '</div>';
+    html += smallProvHtml;
     var provCount = Object.keys(provCounts).length;
     var regionCount = Object.keys(regionCounts).length;
     html += '<div style="margin-top:12px;padding:10px 16px;background:var(--surface-1);border-radius:8px;font-size:13px;color:var(--text-light);line-height:1.8;text-align:center;">'
@@ -8507,6 +8588,45 @@ function initChinaMap() {
     echarts.registerMap('china', CHINA_GEO_JSON);
     chinaMapChart = echarts.init(container, null, { renderer: 'canvas' });
     renderChinaMap();
+    // Bind quick-access pill clicks
+    document.querySelectorAll('.map-quick-pill').forEach(function(pill) {
+      var handler = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var provName = pill.getAttribute('data-prov');
+        if (provName && mapProvCounts[provName] !== undefined) {
+          var count = mapProvCounts[provName] || 0;
+          var shortName = PROVINCE_SHORT[provName] || provName;
+          if (count > 0) {
+            filterInsts('province:' + provName);
+          } else {
+            // Show a brief "no institutions" message
+            closeMapPopup();
+            var container2 = document.getElementById('chinaMapContainer');
+            if (container2) {
+              var existing2 = document.getElementById('mapPopupCard');
+              if (existing2) existing2.remove();
+              var bd = document.getElementById('mapPopupBackdrop');
+              if (bd) bd.remove();
+              var bd2 = document.createElement('div');
+              bd2.id = 'mapPopupBackdrop';
+              bd2.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99;';
+              bd2.addEventListener('click', function() { closeMapPopup(); });
+              bd2.addEventListener('touchend', function() { closeMapPopup(); });
+              document.body.appendChild(bd2);
+              var popup2 = document.createElement('div');
+              popup2.id = 'mapPopupCard';
+              popup2.style.cssText = 'position:absolute;z-index:100;background:var(--card-bg);border:1px solid var(--primary);border-radius:8px;padding:14px 18px;box-shadow:0 4px 20px rgba(0,229,255,0.15);min-width:180px;left:50%;top:50%;transform:translate(-50%,-50%);';
+              popup2.innerHTML = '<div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px;">' + svgIcon('map', 16) + ' ' + escapeHtml(shortName) + '</div><div style="font-size:13px;color:var(--text-light);">暂无备案机构</div>';
+              container2.style.position = 'relative';
+              container2.appendChild(popup2);
+            }
+          }
+        }
+      };
+      pill.addEventListener('click', handler);
+      pill.addEventListener('touchend', handler);
+    });
   } else {
     container.innerHTML = '<div class="map-loading">地图数据文件加载失败</div>';
   }
@@ -8556,6 +8676,7 @@ function renderChinaMap() {
   var option = {
     backgroundColor: 'transparent',
     tooltip: {
+      show: false,
       trigger: 'item',
       backgroundColor: 'rgba(10,15,26,0.92)',
       borderColor: 'rgba(0,229,255,0.3)',
@@ -8688,19 +8809,27 @@ function showMapPopup(params, shortName, fullName, count) {
   // Remove any existing popup
   var existing = document.getElementById('mapPopupCard');
   if (existing) existing.remove();
+  var existingBackdrop = document.getElementById('mapPopupBackdrop');
+  if (existingBackdrop) existingBackdrop.remove();
 
   var container = document.getElementById('chinaMapContainer');
   if (!container) return;
 
+  // Create a transparent backdrop to capture outside clicks/taps
+  var backdrop = document.createElement('div');
+  backdrop.id = 'mapPopupBackdrop';
+  backdrop.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99;';
+  document.body.appendChild(backdrop);
+
   var popup = document.createElement('div');
   popup.id = 'mapPopupCard';
-  popup.style.cssText = 'position:absolute;z-index:100;background:var(--card-bg);border:1px solid var(--primary);border-radius:8px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,229,255,0.2);min-width:180px;cursor:pointer;transition:transform 0.2s;';
+  popup.style.cssText = 'position:absolute;z-index:100;background:var(--card-bg);border:1px solid var(--primary);border-radius:8px;padding:14px 18px;box-shadow:0 4px 20px rgba(0,229,255,0.15);min-width:180px;cursor:pointer;transition:transform 0.2s;';
 
   var html = '<div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;">' + svgIcon('map', 16) + escapeHtml(shortName) + '</div>';
   html += '<div style="font-size:13px;color:var(--text);margin-bottom:4px;">备案机构：<b style="color:var(--primary);font-size:15px;">' + count + '</b> 家</div>';
   if (count > 0) {
     html += '<div style="font-size:12px;color:var(--text-light);margin-bottom:10px;">点击此处查看机构详情</div>';
-    html += '<div style="background:var(--primary);color:#0A0F1A;font-size:12px;font-weight:600;padding:6px 14px;border-radius:4px;text-align:center;">进入查看</div>';
+    html += '<div id="mapPopupEnter" style="background:var(--primary);color:#0A0F1A;font-size:12px;font-weight:600;padding:6px 14px;border-radius:4px;text-align:center;">进入查看</div>';
   } else {
     html += '<div style="font-size:12px;color:var(--text-light);">暂无备案机构</div>';
   }
@@ -8708,41 +8837,49 @@ function showMapPopup(params, shortName, fullName, count) {
 
   // Position the popup near the click point
   var containerRect = container.getBoundingClientRect();
-  var px = params.event ? (params.event.offsetX || params.event.event.offsetX) : containerRect.width / 2;
-  var py = params.event ? (params.event.offsetY || params.event.event.offsetY) : containerRect.height / 2;
+  var px = params.event ? (params.event.offsetX || (params.event.event && params.event.event.offsetX) || containerRect.width / 2) : containerRect.width / 2;
+  var py = params.event ? (params.event.offsetY || (params.event.event && params.event.event.offsetY) || containerRect.height / 2) : containerRect.height / 2;
   // Offset so popup doesn't cover the province
   var popupW = 200;
   var popupH = 120;
   var left = px + 15;
   var top = py - popupH / 2;
   if (left + popupW > containerRect.width) left = px - popupW - 15;
+  if (left < 0) left = 5;
   if (top < 0) top = 5;
   if (top + popupH > containerRect.height) top = containerRect.height - popupH - 5;
   popup.style.left = left + 'px';
   popup.style.top = top + 'px';
 
-  // Click on popup to enter
-  if (count > 0) {
-    popup.addEventListener('click', function(e) {
-      e.stopPropagation();
-      filterInsts('province:' + fullName);
-    });
-  }
-
   container.style.position = 'relative';
   container.appendChild(popup);
 
-  // Click elsewhere to dismiss
-  setTimeout(function() {
-    var dismissHandler = function(e) {
-      var card = document.getElementById('mapPopupCard');
-      if (card && !card.contains(e.target)) {
-        card.remove();
-        document.removeEventListener('click', dismissHandler);
-      }
+  // Click/tap on popup to enter (use both click and touchend for mobile compatibility)
+  if (count > 0) {
+    var enterHandler = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMapPopup();
+      filterInsts('province:' + fullName);
     };
-    document.addEventListener('click', dismissHandler);
-  }, 50);
+    popup.addEventListener('click', enterHandler);
+    popup.addEventListener('touchend', enterHandler);
+  }
+
+  // Click/tap on backdrop to dismiss
+  var dismissHandler = function(e) {
+    e.preventDefault();
+    closeMapPopup();
+  };
+  backdrop.addEventListener('click', dismissHandler);
+  backdrop.addEventListener('touchend', dismissHandler);
+}
+
+function closeMapPopup() {
+  var card = document.getElementById('mapPopupCard');
+  if (card) card.remove();
+  var backdrop = document.getElementById('mapPopupBackdrop');
+  if (backdrop) backdrop.remove();
 }
 
 function filterInsts(filter) {
