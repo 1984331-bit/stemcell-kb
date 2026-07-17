@@ -6989,26 +6989,63 @@ const ORIGINAL_ARTICLES = [
 ];
 
 const EXPERT_VIEWS = [
-  {name:'周琪', title:'中国科学院院士·干细胞与生殖生物学', avatar:'周', quote:'干细胞研究正从实验室走向临床，但我们必须坚持科学严谨的态度，避免过度宣传。监管体系的完善是推动行业健康发展的基石。', source:'公开演讲', date:'2025'},
-  {name:'王福生', title:'中国科学院院士·肝病与传染病专家', avatar:'王', quote:'间充质干细胞在肝病治疗中展现了免疫调节和组织修复的双重潜力，但需要更多高质量随机对照试验来验证其长期疗效和安全性。', source:'学术会议', date:'2025'},
-  {name:'裴钢', title:'中国科学院院士·细胞生物学', avatar:'裴', quote:'细胞治疗是未来医学的重要方向，但基础研究到临床转化之间还有很长的路要走，需要产学研医深度协同。', source:'行业论坛', date:'2024'},
-  {name:'陈竺', title:'中国科学院院士·血液学', avatar:'陈', quote:'中国在细胞治疗领域取得了举世瞩目的成就，CAR-T治疗白血病的成功证明了细胞治疗的力量。下一步要推动更多细胞治疗产品可及可负担。', source:'公开报道', date:'2024'},
-  {name:'行业投资视角', title:'资深生物医药投资人', avatar:'资', quote:'细胞治疗赛道投资逻辑已从概念驱动转向数据驱动。关注具有清晰临床终点、可规模化生产、有差异化壁垒的项目。MSC领域需要更多III期阳性数据来吸引资本。', source:'投资论坛', date:'2025'},
-  {name:'监管视角', title:'药监部门资深审评专家', avatar:'监', quote:'818号令的实施标志着中国细胞治疗监管进入新阶段。双轨制不是降低标准，而是为不同路径提供差异化的监管框架，确保安全有效。', source:'政策解读', date:'2026'}
+  {name:'周琪', title:'中国科学院院士·干细胞与生殖生物学', avatar:'周', quote:'干细胞研究正从实验室走向临床，但我们必须坚持科学严谨的态度，避免过度宣传。监管体系的完善是推动行业健康发展的基石。', source:'公开演讲', date:'2025', cat:'院士专家'},
+  {name:'王福生', title:'中国科学院院士·肝病与传染病专家', avatar:'王', quote:'间充质干细胞在肝病治疗中展现了免疫调节和组织修复的双重潜力，但需要更多高质量随机对照试验来验证其长期疗效和安全性。', source:'学术会议', date:'2025', cat:'院士专家'},
+  {name:'裴钢', title:'中国科学院院士·细胞生物学', avatar:'裴', quote:'细胞治疗是未来医学的重要方向，但基础研究到临床转化之间还有很长的路要走，需要产学研医深度协同。', source:'行业论坛', date:'2024', cat:'院士专家'},
+  {name:'陈竺', title:'中国科学院院士·血液学', avatar:'陈', quote:'中国在细胞治疗领域取得了举世瞩目的成就，CAR-T治疗白血病的成功证明了细胞治疗的力量。下一步要推动更多细胞治疗产品可及可负担。', source:'公开报道', date:'2024', cat:'院士专家'},
+  {name:'行业投资视角', title:'资深生物医药投资人', avatar:'资', quote:'细胞治疗赛道投资逻辑已从概念驱动转向数据驱动。关注具有清晰临床终点、可规模化生产、有差异化壁垒的项目。MSC领域需要更多III期阳性数据来吸引资本。', source:'投资论坛', date:'2025', cat:'行业投资'},
+  {name:'监管视角', title:'药监部门资深审评专家', avatar:'监', quote:'818号令的实施标志着中国细胞治疗监管进入新阶段。双轨制不是降低标准，而是为不同路径提供差异化的监管框架，确保安全有效。', source:'政策解读', date:'2026', cat:'监管视角'}
 ];
 
 function renderOriginals() {
   var content = document.getElementById('content');
   var html = '';
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创文章·大咖观点</span></div>';
-  html += '<div class="content-header"><h2>原创文章·大咖观点</h2><div class="desc">' + svgIcon('quote', 14) + ' 平台原创深度文章 · 行业院士专家领导投资人观点精选</div></div>';
 
-  // Section 1: Original Articles
-  html += '<div class="orig-section">';
-  html += '<div class="orig-section-title">' + svgIcon('pen', 18) + ' 原创文章</div>';
+  // Tab switcher (2 tabs)
+  html += '<div class="report-tabs report-tabs-even">';
+  html += '<button class="report-tab' + (currentOriginalTab === 'articles' ? ' active' : '') + '" data-tab="articles" onclick="switchOriginalTab(\'articles\')">' + svgIcon('pen', 14) + ' 原创文章</button>';
+  html += '<button class="report-tab' + (currentOriginalTab === 'experts' ? ' active' : '') + '" data-tab="experts" onclick="switchOriginalTab(\'experts\')">' + svgIcon('mic', 14) + ' 大咖观点</button>';
+  html += '</div>';
+
+  // === Articles tab ===
+  html += '<div class="report-tab-content' + (currentOriginalTab === 'articles' ? ' active' : '') + '" id="orig-tab-articles">';
+
+  // Description
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CAR-MSC、虚拟细胞AI平台等创业项目与行业趋势深度分析）、<b>政策解读</b>（818号令等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、MSC定位等学术热点评论）和<b>文献综述</b>（iPSC临床全景、外泌体疗法等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
+  html += '</div>';
+
+  // Category cards
+  var articleCats = [
+    {id:'all', name:'全部', color:'var(--primary)'},
+    {id:'专著', name:'专著连载', color:'#FFB74D'},
+    {id:'产业分析', name:'产业分析', color:'#66BB6A'},
+    {id:'政策解读', name:'政策解读', color:'#42A5F5'},
+    {id:'学术评论', name:'学术评论', color:'#AB47BC'},
+    {id:'文献综述', name:'文献综述', color:'#26C6DA'}
+  ];
+  var articleCatCounts = {};
   ORIGINAL_ARTICLES.forEach(function(a) {
+    if (!articleCatCounts[a.tag]) articleCatCounts[a.tag] = 0;
+    articleCatCounts[a.tag]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;">';
+  articleCats.forEach(function(c) {
+    var count = c.id === 'all' ? ORIGINAL_ARTICLES.length : (articleCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentArticleCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchArticleCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 篇</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Article cards (filtered)
+  var filteredArticles = currentArticleCat === 'all' ? ORIGINAL_ARTICLES : ORIGINAL_ARTICLES.filter(function(a) { return a.tag === currentArticleCat; });
+  filteredArticles.forEach(function(a) {
     html += '<div class="orig-article">';
-    html += '<span class="orig-article-tag">' + a.tag + '</span>';
+    html += '<span class="orig-article-tag">' + escapeHtml(a.tag) + '</span>';
     html += '<div class="orig-article-title">' + escapeHtml(a.title) + '</div>';
     html += '<div class="orig-article-desc">' + escapeHtml(a.desc) + '</div>';
     html += '<div class="orig-article-meta">';
@@ -7017,25 +7054,80 @@ function renderOriginals() {
     html += '</div>';
     html += '</div>';
   });
+  html += '</div>'; // end orig-tab-articles
+
+  // === Experts tab ===
+  html += '<div class="report-tab-content' + (currentOriginalTab === 'experts' ? ' active' : '') + '" id="orig-tab-experts">';
+
+  // Description
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目精选细胞与基因治疗领域<b>院士专家</b>（周琪、王福生、裴钢、陈竺等中国科学院院士）、<b>行业投资</b>（资深生物医药投资人）和<b>监管视角</b>（药监部门审评专家）的公开观点与言论，涵盖干细胞临床转化、MSC疗效评价、CAR-T可及性、投资逻辑、监管政策等核心议题。观点均引自公开演讲、学术会议及媒体报道，不代表本平台立场。</div>';
   html += '</div>';
 
-  // Section 2: Expert Views
-  html += '<div class="orig-section">';
-  html += '<div class="orig-section-title">' + svgIcon('mic', 18) + ' 大咖观点</div>';
+  // Category cards
+  var expertCats = [
+    {id:'all', name:'全部', color:'var(--primary)'},
+    {id:'院士专家', name:'院士专家', color:'#42A5F5'},
+    {id:'行业投资', name:'行业投资', color:'#66BB6A'},
+    {id:'监管视角', name:'监管视角', color:'#FFB74D'}
+  ];
+  var expertCatCounts = {};
   EXPERT_VIEWS.forEach(function(e) {
+    if (!expertCatCounts[e.cat]) expertCatCounts[e.cat] = 0;
+    expertCatCounts[e.cat]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
+  expertCats.forEach(function(c) {
+    var count = c.id === 'all' ? EXPERT_VIEWS.length : (expertCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentExpertCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchExpertCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 位</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Expert cards (filtered)
+  var filteredExperts = currentExpertCat === 'all' ? EXPERT_VIEWS : EXPERT_VIEWS.filter(function(e) { return e.cat === currentExpertCat; });
+  filteredExperts.forEach(function(e) {
     html += '<div class="expert-view">';
     html += '<div class="expert-quote">' + escapeHtml(e.quote) + '</div>';
     html += '<div class="expert-info">';
     html += '<div class="expert-avatar">' + e.avatar + '</div>';
     html += '<div><div class="expert-name">' + escapeHtml(e.name) + '</div><div class="expert-title">' + escapeHtml(e.title) + '</div></div>';
-    html += '<div class="expert-source">' + svgIcon('clock', 10) + ' ' + e.source + ' · ' + e.date + '</div>';
+    html += '<div class="expert-source">' + svgIcon('clock', 10) + ' ' + escapeHtml(e.source) + ' · ' + escapeHtml(e.date) + '</div>';
     html += '</div>';
     html += '</div>';
   });
-  html += '</div>';
+  html += '</div>'; // end orig-tab-experts
 
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+function switchOriginalTab(tab) {
+  currentOriginalTab = tab;
+  document.querySelectorAll('.report-tab[data-tab]').forEach(function(el) {
+    el.classList.toggle('active', el.getAttribute('data-tab') === tab);
+  });
+  ['articles', 'experts'].forEach(function(t) {
+    var el = document.getElementById('orig-tab-' + t);
+    if (el) el.classList.toggle('active', t === tab);
+  });
+}
+
+function switchArticleCat(cat) {
+  currentArticleCat = cat;
+  renderOriginals();
+  currentOriginalTab = 'articles';
+  switchOriginalTab('articles');
+}
+
+function switchExpertCat(cat) {
+  currentExpertCat = cat;
+  renderOriginals();
+  currentOriginalTab = 'experts';
+  switchOriginalTab('experts');
 }
 
 // === Books & Courses section ===
@@ -7087,6 +7179,9 @@ var currentBookCat = 'all';
 var currentBookTab = 'books';
 var currentCourseCat = 'all';
 var currentConfCat = 'all';
+var currentOriginalTab = 'articles';
+var currentArticleCat = 'all';
+var currentExpertCat = 'all';
 
 function renderBookCover(b) {
   if (b.coverType === 'image' && b.cover) {
