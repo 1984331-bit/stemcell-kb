@@ -3871,6 +3871,7 @@ body { padding-bottom: 60px; }
 }
 .report-tab-content { display: none; }
 .report-tab-content.active { display: block; }
+.report-tabs-even .report-tab { flex: 1; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
 .report-placeholder {
   text-align: center; padding: 60px 20px;
   color: var(--text-light);
@@ -7113,7 +7114,7 @@ function renderBooks() {
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">学习中心</span></div>';
 
   // Tab switcher (3 tabs)
-  html += '<div class="report-tabs">';
+  html += '<div class="report-tabs report-tabs-even">';
   html += '<button class="report-tab' + (currentBookTab === 'books' ? ' active' : '') + '" data-tab="books" onclick="switchBookTab(\'books\')">' + svgIcon('book', 14) + ' 行业书籍</button>';
   html += '<button class="report-tab' + (currentBookTab === 'courses' ? ' active' : '') + '" data-tab="courses" onclick="switchBookTab(\'courses\')">' + svgIcon('users', 14) + ' 课程培训</button>';
   html += '<button class="report-tab' + (currentBookTab === 'conferences' ? ' active' : '') + '" data-tab="conferences" onclick="switchBookTab(\'conferences\')">' + svgIcon('calendar', 14) + ' 会议论坛</button>';
@@ -7122,8 +7123,10 @@ function renderBooks() {
   // === Books tab content ===
   html += '<div class="report-tab-content' + (currentBookTab === 'books' ? ' active' : '') + '" id="book-tab-books">';
 
-  // Description text (no "声明" label, no background box, inline emphasis)
+  // Description text (wrapped in report-intro box)
+  html += '<div class="report-intro">';
   html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者，联系方式：手机/微信 <b>15932929299</b>。</div>';
+  html += '</div>';
 
   // Category cards
   var bookCats = [
@@ -7165,8 +7168,10 @@ function renderBooks() {
   // === Courses tab content ===
   html += '<div class="report-tab-content' + (currentBookTab === 'courses' ? ' active' : '') + '" id="book-tab-courses">';
 
-  // Course description
-  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，按主办方类型分为<b>大学在线课程</b>（Coursera、MITx、Harvard HMX、Stanford等名校系统课程）和<b>行业协会培训</b>（ISCT、中科院、中国细胞生物学学会、Miltenyi等专业机构实操培训）。涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。</div>';
+  // Course description (wrapped in report-intro box)
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，按主办方类型分为<b>大学在线课程</b>（Coursera、MITx、Harvard HMX、Stanford等名校系统课程）和<b>行业协会培训</b>（ISCT、中科院、中国细胞生物学学会、Miltenyi等专业机构实操培训）。涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。</div>';
+  html += '</div>';
 
   // Course category cards
   var courseCats = [
@@ -7210,8 +7215,10 @@ function renderBooks() {
   // === Conferences tab content ===
   html += '<div class="report-tab-content' + (currentBookTab === 'conferences' ? ' active' : '') + '" id="book-tab-conferences">';
 
-  // Conference description
-  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇集细胞与基因治疗（CGT）领域国内外重要学术会议、产业论坛、专家讲座与视频解读资源，按类型分为<b>国际会议</b>（ISCT、ASGCT等顶级学会年会）、<b>国内会议</b>（博鳌乐城细胞大会、WRC世界细胞治疗大会等）和<b>专家视频</b>（CGTLive专家访谈、EuroGCT科普视频等）。会议信息来自公开渠道，具体时间地点以官方发布为准。</div>';
+  // Conference description (wrapped in report-intro box)
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目汇集细胞与基因治疗（CGT）领域国内外重要学术会议、产业论坛、专家讲座与视频解读资源，按类型分为<b>国际会议</b>（ISCT、ASGCT等顶级学会年会）、<b>国内会议</b>（博鳌乐城细胞大会、WRC世界细胞治疗大会等）和<b>专家视频</b>（CGTLive专家访谈、EuroGCT科普视频等）。会议信息来自公开渠道，具体时间地点以官方发布为准。</div>';
+  html += '</div>';
 
   // Conference category cards
   var confCats = [
