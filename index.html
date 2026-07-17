@@ -2637,8 +2637,54 @@ body { padding-bottom: 60px; }
   position: relative;
   overflow: hidden;
 }
-#chinaMapContainer { width: 100%; height: 520px; }
-@media (max-width:768px) { #chinaMapContainer { height: 360px; } }
+#chinaMapContainer { width: 100%; min-height: 420px; }
+.china-tile-map {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  padding: 12px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.tile-province {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 8px 4px; border-radius: 6px; cursor: pointer;
+  font-size: 12px; font-weight: 600; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  border: 1px solid transparent; min-height: 52px; position: relative;
+  animation: tileFadeIn 0.4s ease both;
+}
+.tile-province:hover {
+  transform: scale(1.08); z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,229,255,0.25);
+  border-color: var(--primary);
+}
+.tile-province.tile-empty {
+  cursor: default; opacity: 0.3;
+  background: transparent !important; border-color: transparent !important;
+}
+.tile-province.tile-empty:hover { transform: none; box-shadow: none; }
+.tile-province .tile-name { line-height: 1.3; }
+.tile-province .tile-count {
+  font-size: 16px; font-weight: 800; margin-top: 2px;
+  font-family: var(--num-font, inherit);
+}
+.tile-legend {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px; padding: 0 4px; font-size: 11px; color: var(--text-light);
+}
+.tile-legend-bar {
+  flex: 1; height: 8px; border-radius: 4px;
+  background: linear-gradient(to right, rgba(0,60,80,0.3), rgba(0,131,143,0.5), rgba(0,200,200,0.7), rgba(0,229,255,0.9));
+}
+@media (max-width:768px) {
+  .china-tile-map { grid-template-columns: repeat(8, 1fr); gap: 2px; padding: 8px; }
+  .tile-province { font-size: 10px; padding: 4px 2px; min-height: 40px; }
+  .tile-province .tile-count { font-size: 13px; }
+  #chinaMapContainer { min-height: 320px; }
+}
+@keyframes tileFadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 .map-loading {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -5315,7 +5361,8 @@ function svgIcon(name, sz) {
     'bar': '<path d="M3 20h18M7 20V10M12 20V6M17 20v-7"/>',
     'arrow-left': '<path d="M19 12H5M12 19l-7-7 7-7"/>',
     'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/>',
-    'phone': '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>'
+    'phone': '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>',
+    'clipboard': '<path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -5383,7 +5430,23 @@ const PRODUCTS = [
   {name:'Laviv (azficel-T)', generic:'自体成纤维细胞', company:'Fibrocell Science', approved:'FDA 2011', indication:'成人鼻唇沟皱纹改善', cellType:'成纤维细胞', cellColor:'#888780', region:'美国', notes:'首个FDA批准的自体细胞美容产品。'},
   {name:'Stratagraft', generic:'同种异体角质形成细胞/成纤维细胞', company:'Mallinckrodt', approved:'FDA 2021', indication:'成人深度部分厚度热烧伤', cellType:'细胞组织产品', cellColor:'#185FA5', region:'美国', notes:'首个FDA批准的同种异体细胞治疗烧伤产品。'},
   {name:'Amtagvi (lifileucel)', generic:'同种异体肿瘤浸润淋巴细胞(TIL)', company:'Iovance Biotherapeutics', approved:'FDA 2024-02', indication:'晚期黑色素瘤(PD-1治疗后进展)', cellType:'TIL', cellColor:'#993C1D', region:'美国', notes:'首个FDA批准的TIL细胞疗法，实体瘤细胞治疗里程碑。约51.5万美元。'},
-  {name:'Tregzi (Orca-T)', generic:'同种异体调节性T细胞免疫疗法(HSPC+Treg+Tcon)', company:'Orca Bio', approved:'FDA 2026-06-30', indication:'成人血液系统恶性肿瘤allo-HSCT后改善慢性GVHD-free生存', cellType:'Treg+HSPC', cellColor:'#993C1D', region:'美国', notes:'全球首款Treg细胞疗法。Precision-T III期(n=187)：12个月cGFS 78% vs 38%(HR 0.26, P<0.00001)，慢性GVHD 13% vs 44%。约42.8万美元/剂。'}
+  {name:'Tregzi (Orca-T)', generic:'同种异体调节性T细胞免疫疗法(HSPC+Treg+Tcon)', company:'Orca Bio', approved:'FDA 2026-06-30', indication:'成人血液系统恶性肿瘤allo-HSCT后改善慢性GVHD-free生存', cellType:'Treg+HSPC', cellColor:'#993C1D', region:'美国', notes:'全球首款Treg细胞疗法。Precision-T III期(n=187)：12个月cGFS 78% vs 38%(HR 0.26, P<0.00001)，慢性GVHD 13% vs 44%。约42.8万美元/剂。'},
+  // --- 博鳌乐城特许转化（非药品审批，院内技术服务） ---
+  {name:'UC-MSC治疗2型糖尿病', generic:'脐带间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'2型糖尿病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价17.4万/疗程，多次静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'UC-MSC治疗骨关节炎', generic:'脐带间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'骨关节炎', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价3.6万/次，关节腔注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗心力衰竭', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'心力衰竭', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价6万/次，多次疗程18万。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗慢阻肺(COPD)', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'慢性阻塞性肺疾病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价15万/疗程，静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗卵巢早衰', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'卵巢早衰', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价8万/次，靶向注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'NK/CIK治疗肝癌术后防复发', generic:'NK细胞/CIK细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'肝癌术后防复发', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价10万/次，免疫细胞回输。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'牙髓干细胞治疗牙周病', generic:'牙髓间充质干细胞(DPSC)', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'牙周病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价5.98万/颗，局部注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗类风湿关节炎', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'类风湿关节炎', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价5万/次，静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗银屑病', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'银屑病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价12万/疗程，静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'干细胞治疗脑卒中后遗症', generic:'神经干细胞/MSC', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'脑卒中后遗症', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价20万/疗程，研究阶段。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC综合抗衰老', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'综合抗衰', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价8-15万/疗程，个性化方案。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'CAR-T治疗血液肿瘤(桥接)', generic:'CAR-T细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'血液肿瘤', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价30-50万/次，桥接治疗。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗系统性红斑狼疮', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'系统性红斑狼疮', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价10万/疗程，静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'MSC治疗脊髓损伤', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'脊髓损伤', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价18万/疗程，局部注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  {name:'NSC治疗帕金森病', generic:'神经干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'帕金森病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价25万/疗程，研究阶段。非NMPA药品审批，为先行区特许政策下院内技术服务。'}
 ];
 
 // === Section data: Editor Picks ===
@@ -5992,7 +6055,7 @@ function renderHub() {
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 科普导览</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床文献数据</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
-  html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CRISPR-HSC</div></div>';
+  html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · 博鳌乐城</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
@@ -6053,6 +6116,8 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
+
   // Hot search tags - curated list with heat tiers
   var hotTags = [
     {label: '糖尿病', query: '糖尿病'},
@@ -6070,7 +6135,6 @@ function renderHub() {
   });
   var maxC = Math.max.apply(null, tagData.map(function(t){return t.count;}));
   html += '<div class="hub-tags">';
-  html += '<div class="hub-tags-label">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div>';
   html += '<div class="hub-tags-cloud">';
   tagData.forEach(function(t, i){
     var tier = t.count >= maxC * 0.6 ? 't1' : (t.count >= maxC * 0.3 ? 't2' : (t.count >= maxC * 0.12 ? 't3' : 't4'));
@@ -7396,6 +7460,150 @@ var INST_REGION_COLORS = {
   '东北': '#BF360C'
 };
 
+// 备案项目数据（来源：国家卫健委干细胞临床研究备案公示、ChiCTR、各医院公告）
+var INSTITUTION_PROJECTS = {
+  '北京协和医院': [
+    {name:'UC-MSC治疗激素耐药急性移植物抗宿主病(aGVHD)', cell:'UC-MSC', phase:'I/II期'},
+    {name:'骨髓MSC治疗糖尿病足溃疡', cell:'BM-MSC', phase:'I期'},
+    {name:'干细胞治疗骨关节炎', cell:'MSC', phase:'I期'}
+  ],
+  '北京大学第三医院': [
+    {name:'UC-MSC治疗膝关节骨关节炎', cell:'UC-MSC', phase:'I/II期'},
+    {name:'免疫细胞治疗晚期实体瘤', cell:'CIK/NK', phase:'I期'},
+    {name:'UC-MSC治疗干燥综合征', cell:'UC-MSC', phase:'I期'}
+  ],
+  '解放军总医院（301医院）': [
+    {name:'CAR-T治疗复发难治B细胞淋巴瘤', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗放射性肠损伤', cell:'MSC', phase:'I期'}
+  ],
+  '北京大学人民医院': [
+    {name:'异基因造血干细胞移植后MSC干预GVHD', cell:'BM-MSC', phase:'II期'},
+    {name:'CAR-T治疗急性B淋巴细胞白血病', cell:'CAR-T', phase:'II期'}
+  ],
+  '中国医学科学院血液病医院': [
+    {name:'CAR-T治疗复发难治急性白血病', cell:'CAR-T', phase:'II期'},
+    {name:'MSC促进造血干细胞植入', cell:'UC-MSC', phase:'I/II期'},
+    {name:'NK细胞治疗骨髓增生异常综合征', cell:'NK', phase:'I期'}
+  ],
+  '北京大学肿瘤医院': [
+    {name:'TIL细胞治疗晚期黑色素瘤', cell:'TIL', phase:'I期'},
+    {name:'CAR-T治疗胃肠道肿瘤', cell:'CAR-T', phase:'I期'}
+  ],
+  '首都医科大学附属北京天坛医院': [
+    {name:'NSC治疗缺血性脑卒中后遗症', cell:'NSC', phase:'I/II期'},
+    {name:'MSC治疗帕金森病', cell:'MSC', phase:'I期'}
+  ],
+  '武汉协和医院（华中科技大学同济医学院附属协和医院）': [
+    {name:'CAR-T治疗复发难治B细胞恶性肿瘤(520+例)', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗多发性硬化', cell:'MSC', phase:'I期'},
+    {name:'CAR-T治疗多发性骨髓瘤', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗系统性红斑狼疮', cell:'MSC', phase:'I/II期'},
+    {name:'UC-MSC治疗肝硬化失代偿期', cell:'UC-MSC', phase:'II期'}
+  ],
+  '华中科技大学同济医学院附属同济医院': [
+    {name:'CAR-T治疗急性淋巴细胞白血病(近600例)', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗急性肾损伤', cell:'MSC', phase:'I期'},
+    {name:'UC-MSC治疗卵巢早衰', cell:'UC-MSC', phase:'I/II期'}
+  ],
+  '武汉大学中南医院': [
+    {name:'MSC治疗新型冠状病毒肺炎后遗症', cell:'MSC', phase:'I期'},
+    {name:'免疫细胞治疗晚期肝癌', cell:'CIK', phase:'I期'}
+  ],
+  '郑州大学第一附属医院': [
+    {name:'CAR-T治疗B细胞恶性肿瘤', cell:'CAR-T', phase:'II期'},
+    {name:'UC-MSC治疗肝衰竭', cell:'UC-MSC', phase:'I/II期'},
+    {name:'MSC治疗糖尿病肾病', cell:'MSC', phase:'I期'}
+  ],
+  '四川大学华西医院': [
+    {name:'MSC治疗急性肾损伤', cell:'MSC', phase:'I/II期'},
+    {name:'干细胞治疗糖尿病足', cell:'BM-MSC', phase:'I期'},
+    {name:'UC-MSC治疗放射性肺损伤', cell:'UC-MSC', phase:'I期'},
+    {name:'MSC治疗骨关节炎', cell:'MSC', phase:'II期'},
+    {name:'脂肪MSC治疗面部凹陷性瘢痕', cell:'AD-MSC', phase:'I期'},
+    {name:'UC-MSC治疗失代偿期肝硬化', cell:'UC-MSC', phase:'II期'}
+  ],
+  '陆军军医大学新桥医院': [
+    {name:'CAR-T治疗复发难滤泡淋巴瘤', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗移植物抗宿主病', cell:'UC-MSC', phase:'I/II期'},
+    {name:'半相合造血干细胞移植', cell:'HSC', phase:'II期'}
+  ],
+  '复旦大学附属中山医院': [
+    {name:'MSC治疗失代偿期肝硬化', cell:'MSC', phase:'II期'},
+    {name:'CAR-T治疗肝癌(GPC3靶点)', cell:'CAR-T', phase:'I期'}
+  ],
+  '上海瑞金医院': [
+    {name:'CAR-T治疗急性B淋巴细胞白血病', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗重症急性胰腺炎', cell:'MSC', phase:'I期'}
+  ],
+  '浙江大学医学院附属第一医院': [
+    {name:'MSC治疗肝衰竭', cell:'UC-MSC', phase:'II期'},
+    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I/II期'},
+    {name:'干细胞治疗糖尿病足', cell:'MSC', phase:'I期'}
+  ],
+  '浙江大学医学院附属第二医院': [
+    {name:'MSC治疗帕金森病', cell:'MSC', phase:'I期'},
+    {name:'NSC治疗脊髓损伤', cell:'NSC', phase:'I期'}
+  ],
+  '山东省立医院': [
+    {name:'UC-MSC治疗卵巢早衰', cell:'UC-MSC', phase:'I/II期'},
+    {name:'MSC治疗骨关节炎', cell:'MSC', phase:'I期'}
+  ],
+  '中山大学附属肿瘤医院': [
+    {name:'CAR-T治疗鼻咽癌(EBV靶点)', cell:'CAR-T', phase:'I期'},
+    {name:'TIL治疗晚期鼻咽癌', cell:'TIL', phase:'I期'}
+  ],
+  '中山大学附属第八医院': [
+    {name:'CGT创新转化项目(细胞与基因治疗)', cell:'CGT', phase:'I期'},
+    {name:'UC-MSC治疗炎症性肠病', cell:'UC-MSC', phase:'I期'}
+  ],
+  '南方医科大学南方医院': [
+    {name:'CAR-T治疗B细胞白血病', cell:'CAR-T', phase:'II期'},
+    {name:'MSC治疗肝硬化', cell:'UC-MSC', phase:'I/II期'}
+  ],
+  '广东省人民医院': [
+    {name:'MSC治疗心力衰竭', cell:'MSC', phase:'I/II期'},
+    {name:'CAR-T治疗淋巴瘤', cell:'CAR-T', phase:'I期'}
+  ],
+  '深圳市第三人民医院': [
+    {name:'NK010细胞治疗阿尔茨海默病', cell:'NK', phase:'I/II期'},
+    {name:'UC-MSC治疗慢性肝衰竭', cell:'UC-MSC', phase:'I期'},
+    {name:'CAR-T治疗HIV相关淋巴瘤', cell:'CAR-T', phase:'I期'},
+    {name:'MSC治疗急性呼吸窘迫综合征', cell:'MSC', phase:'I期'}
+  ],
+  '苏州大学附属第一医院': [
+    {name:'CAR-T治疗复发难治B细胞淋巴瘤', cell:'CAR-T', phase:'II期'},
+    {name:'MSC促进异基因造血干细胞植入', cell:'MSC', phase:'I/II期'}
+  ],
+  '青岛大学附属医院': [
+    {name:'UC-MSC治疗骨关节炎', cell:'UC-MSC', phase:'I/II期'},
+    {name:'MSC治疗糖尿病足', cell:'MSC', phase:'I期'}
+  ],
+  '南京大学医学院附属鼓楼医院': [
+    {name:'UC-MSC治疗系统性红斑狼疮', cell:'UC-MSC', phase:'II期'},
+    {name:'MSC治疗脊髓损伤', cell:'MSC', phase:'I/II期'}
+  ],
+  '湖南省肿瘤医院': [
+    {name:'自体造血干细胞移植治疗淋巴瘤', cell:'HSC', phase:'II期'},
+    {name:'CAR-T治疗复发难滤泡淋巴瘤', cell:'CAR-T', phase:'I期'}
+  ],
+  '东部战区总医院': [
+    {name:'MSC治疗狼疮性肾炎', cell:'MSC', phase:'II期'},
+    {name:'CAR-T治疗自身免疫病', cell:'CAR-T', phase:'I期'}
+  ],
+  '空军军医大学唐都医院': [
+    {name:'UC-MSC治疗肝硬化', cell:'UC-MSC', phase:'I/II期'},
+    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I期'}
+  ],
+  '吉林大学第一医院': [
+    {name:'CAR-T治疗儿童急性淋巴细胞白血病', cell:'CAR-T', phase:'II期'},
+    {name:'UC-MSC治疗脑性瘫痪', cell:'UC-MSC', phase:'I期'}
+  ],
+  '中国医科大学附属第一医院': [
+    {name:'MSC治疗糖尿病足', cell:'MSC', phase:'I期'},
+    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I期'}
+  ]
+};
+
 // City to province mapping
 var CITY_TO_PROVINCE = {
   '北京':'北京市','天津':'天津市','上海':'上海市','重庆':'重庆市',
@@ -7552,10 +7760,10 @@ function renderInstitutions() {
     // === Map view ===
     html += '<div class="china-map-wrap">';
     html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">';
-    html += '<div style="font-size:15px;font-weight:600;color:var(--primary);display:flex;align-items:center;gap:6px;">' + svgIcon('map', 18) + ' 全国备案机构分布地图</div>';
+    html += '<div style="font-size:15px;font-weight:600;color:var(--primary);display:flex;align-items:center;gap:6px;">' + svgIcon('map', 18) + ' 全国备案机构分布图</div>';
     html += '<div style="font-size:12px;color:var(--text-light);">点击省份查看详细信息</div>';
     html += '</div>';
-    html += '<div id="chinaMapContainer"><div class="map-loading">地图加载中...</div></div>';
+    html += '<div id="chinaMapContainer">' + renderChinaTileMap(provCounts) + '</div>';
     // Stats row
     var provCounts = countByProvince(INSTITUTIONS);
     var provCount = Object.keys(provCounts).length;
@@ -7620,6 +7828,19 @@ function renderInstitutions() {
       }
       html += '<span style="display:flex;align-items:center;gap:4px;color:' + (phoneVal === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 12) + ' ' + escapeHtml(phoneVal) + '</span>';
       html += '</div>';
+      // Projects section
+      var projects = INSTITUTION_PROJECTS[inst.name];
+      if (projects && projects.length > 0) {
+        html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">';
+        html += '<div style="font-size:12px;color:var(--text-light);margin-bottom:6px;display:flex;align-items:center;gap:4px;">' + svgIcon('clipboard', 12) + ' 备案项目 · ' + projects.length + '项</div>';
+        html += '<div style="display:flex;flex-wrap:wrap;gap:5px;">';
+        projects.forEach(function(proj) {
+          var pc = proj.phase.indexOf('II') >= 0 ? '#00E5FF' : '#4DB6AC';
+          html += '<span style="display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;background:' + pc + '12;color:' + pc + ';border:1px solid ' + pc + '25;line-height:1.4;">' + escapeHtml(proj.name) + ' <span style="opacity:0.6;font-size:10px;">[' + escapeHtml(proj.cell) + ' · ' + escapeHtml(proj.phase) + ']</span></span>';
+        });
+        html += '</div>';
+        html += '</div>';
+      }
       html += '</div>';
     });
 
@@ -7680,6 +7901,19 @@ function renderInstitutions() {
           }
           html += '<span style="display:flex;align-items:center;gap:3px;color:' + (phoneVal2 === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 11) + ' ' + escapeHtml(phoneVal2) + '</span>';
           html += '</div>';
+          // Projects section (compact in accordion)
+          var projects2 = INSTITUTION_PROJECTS[inst.name];
+          if (projects2 && projects2.length > 0) {
+            html += '<div style="margin-top:6px;padding-top:5px;border-top:1px solid var(--border);">';
+            html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;display:flex;align-items:center;gap:3px;">' + svgIcon('clipboard', 11) + ' 备案项目 · ' + projects2.length + '项</div>';
+            html += '<div style="display:flex;flex-wrap:wrap;gap:4px;">';
+            projects2.forEach(function(proj) {
+              var pc = proj.phase.indexOf('II') >= 0 ? '#00E5FF' : '#4DB6AC';
+              html += '<span style="display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;background:' + pc + '12;color:' + pc + ';border:1px solid ' + pc + '25;line-height:1.3;">' + escapeHtml(proj.name) + ' <span style="opacity:0.6;font-size:9px;">[' + escapeHtml(proj.cell) + ']</span></span>';
+            });
+            html += '</div>';
+            html += '</div>';
+          }
           html += '</div>';
         });
         html += '</div></div>';
@@ -7730,9 +7964,8 @@ function renderInstitutions() {
   content.innerHTML = html;
   updateFloatButtons();
 
-  // Initialize map if in map view
+  // Animate stat numbers if in map view
   if (instFilter === 'all') {
-    initChinaMap();
     // Animate stat numbers
     setTimeout(function() {
       document.querySelectorAll('.map-stat-num[data-count]').forEach(function(el) {
@@ -7815,6 +8048,78 @@ function fetchWithTimeout(url, ms) {
       setTimeout(function() { reject(new Error('timeout')); }, ms);
     })
   ]);
+}
+
+// === Custom CSS Grid tile map (no external dependencies) ===
+var CHINA_TILE_LAYOUT = [
+  ['新疆维吾尔自治区', null, null, null, null, null, '黑龙江省', null],
+  [null, null, null, null, '内蒙古自治区', null, '吉林省', null],
+  ['青海省', '甘肃省', '宁夏回族自治区', '山西省', '河北省', '北京市', '天津市', '辽宁省'],
+  ['西藏自治区', null, null, '陕西省', '河南省', '山东省', null, null],
+  [null, null, null, '重庆市', '湖北省', '安徽省', '江苏省', '上海市'],
+  [null, '四川省', null, '贵州省', '湖南省', '江西省', '浙江省', null],
+  [null, '云南省', null, '广西壮族自治区', '广东省', '福建省', null, '台湾省'],
+  [null, null, null, null, '海南省', null, null, null]
+];
+
+function renderChinaTileMap(provCounts) {
+  var maxCount = 1;
+  for (var p in provCounts) { if (provCounts[p] > maxCount) maxCount = provCounts[p]; }
+
+  function getTileColor(count) {
+    if (count === 0) return 'rgba(20,35,50,0.4)';
+    var ratio = count / maxCount;
+    if (ratio >= 0.75) return 'rgba(0,229,255,0.85)';
+    if (ratio >= 0.5) return 'rgba(0,200,200,0.75)';
+    if (ratio >= 0.25) return 'rgba(0,131,143,0.65)';
+    if (ratio >= 0.1) return 'rgba(0,100,120,0.55)';
+    return 'rgba(0,70,90,0.45)';
+  }
+
+  function getTextColor(count) {
+    if (count === 0) return 'rgba(139,157,175,0.5)';
+    if (count / maxCount >= 0.5) return '#0A0F1A';
+    return 'rgba(224,230,237,0.9)';
+  }
+
+  var html = '<div class="china-tile-map">';
+  var delay = 0;
+  CHINA_TILE_LAYOUT.forEach(function(row) {
+    row.forEach(function(provName) {
+      if (!provName) {
+        html += '<div class="tile-province tile-empty"></div>';
+        return;
+      }
+      var count = provCounts[provName] || 0;
+      var shortN = PROVINCE_SHORT[provName] || provName;
+      var bg = getTileColor(count);
+      var tc = getTextColor(count);
+      var delayStr = (delay * 0.02).toFixed(2);
+      delay++;
+      if (count > 0) {
+        var safeProv = provName.replace(/'/g, "\\'");
+        html += '<div class="tile-province" style="background:' + bg + ';color:' + tc + ';animation-delay:' + delayStr + 's;" onclick="filterInsts(\'province:' + safeProv + '\')" title="' + escapeHtml(shortN) + ' · ' + count + '家备案机构">';
+        html += '<div class="tile-name">' + escapeHtml(shortN) + '</div>';
+        html += '<div class="tile-count">' + count + '</div>';
+        html += '</div>';
+      } else {
+        html += '<div class="tile-province tile-empty" style="animation-delay:' + delayStr + 's;" title="' + escapeHtml(shortN) + ' · 暂无备案机构">';
+        html += '<div class="tile-name">' + escapeHtml(shortN) + '</div>';
+        html += '</div>';
+      }
+    });
+  });
+  html += '</div>';
+
+  // Legend
+  html += '<div class="tile-legend">';
+  html += '<span>少</span>';
+  html += '<div class="tile-legend-bar"></div>';
+  html += '<span>多</span>';
+  html += '<span style="margin-left:8px;color:var(--text-light);">· 点击省份查看详情</span>';
+  html += '</div>';
+
+  return html;
 }
 
 function initChinaMap() {
@@ -8292,7 +8597,8 @@ function renderProducts() {
   var catCounts = {};
   PRODUCTS.forEach(function(p) {
     var cat = p.cellType || '其他';
-    if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
+    if (cat === '特许转化') cat = '特许转化·博鳌乐城';
+    else if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
     else if (cat.indexOf('CRISPR') >= 0 || cat.indexOf('基因修饰') >= 0) cat = '基因修饰HSC';
     else if (cat.indexOf('iPSC') >= 0) cat = 'iPSC诱导多能干细胞';
     else cat = '其他细胞治疗';
@@ -8304,17 +8610,19 @@ function renderProducts() {
     '间充质干细胞(MSC)': '#0F6E56',
     '基因修饰HSC': '#534AB7',
     'iPSC诱导多能干细胞': '#993C1D',
-    '其他细胞治疗': '#185FA5'
+    '其他细胞治疗': '#185FA5',
+    '特许转化·博鳌乐城': '#FF8F00'
   };
 
-  html += '<div class="content-header"><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。含海南博鳌乐城先行区特许转化项目。点击下方分类卡片筛选。</div></div>';
 
   // Category cards — 5 in one row
   var catShortNames = {
     '间充质干细胞(MSC)': 'MSC',
     '基因修饰HSC': '基因修饰HSC',
     'iPSC诱导多能干细胞': 'iPSC',
-    '其他细胞治疗': '其他'
+    '其他细胞治疗': '其他',
+    '特许转化·博鳌乐城': '博鳌乐城'
   };
   html += '<div class="reg-cat-row">';
   Object.keys(catCounts).forEach(function(cat) {
@@ -8336,7 +8644,8 @@ function renderProducts() {
   if (prodFilter !== 'all') {
     filtered = PRODUCTS.filter(function(p) {
       var cat = p.cellType || '其他';
-      if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
+      if (cat === '特许转化') cat = '特许转化·博鳌乐城';
+      else if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
       else if (cat.indexOf('CRISPR') >= 0 || cat.indexOf('基因修饰') >= 0) cat = '基因修饰HSC';
       else if (cat.indexOf('iPSC') >= 0) cat = 'iPSC诱导多能干细胞';
       else cat = '其他细胞治疗';
@@ -8359,6 +8668,11 @@ function renderProducts() {
     if (p.notes) html += '<div class="rc-desc" style="margin-top:8px;font-size:13px;line-height:1.7;">' + escapeHtml(p.notes) + '</div>';
     html += '</div>';
   });
+
+  // Boao special notice
+  if (prodFilter === '特许转化·博鳌乐城') {
+    html += '<div class="edu-callout" style="margin-top:16px;border-color:rgba(255,143,0,0.3);background:rgba(255,143,0,0.06);"><div style="color:#FF8F00;">' + svgIcon('warn', 18) + '</div><div class="ec-text" style="color:var(--text);"><b style="color:#FF8F00;">重要说明：</b>博鳌乐城先行区的干细胞治疗项目是在国家赋予海南的"先行先试"特许政策框架下，由具备资质的医疗机构开展的<b>院内技术服务</b>。这些项目<b>非国家药监局（NMPA）批准上市的药品</b>，其定价和开展依据为海南省及博鳌乐城先行区管理局的相关规定。患者在接受治疗前应充分了解项目性质、风险及权益保障。</div></div>';
+  }
 
   content.innerHTML = html;
   updateFloatButtons();
