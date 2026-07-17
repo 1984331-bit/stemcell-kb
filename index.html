@@ -204,10 +204,10 @@ body {
   border-radius: 6px;
   transition: background 0.15s;
 }
-.info-tab.left { color: #00E5FF; }
-.info-tab.center { color: #00E5FF; }
-.info-tab.right { color: #64FFDA; margin-left: auto; }
-.info-tab:hover { background: rgba(0,0,0,0.04); }
+.info-tab.left { color: rgba(255,255,255,0.6); }
+.info-tab.center { color: rgba(255,255,255,0.6); }
+.info-tab.right { color: rgba(255,255,255,0.6); margin-left: auto; }
+.info-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .info-tab .it-arrow {
   transition: transform 0.2s;
   display: inline-block;
@@ -2330,6 +2330,15 @@ body { padding-bottom: 60px; }
   .dash-donut { width: 100px; height: 100px; }
   .dash-donut-center { width: 65px; height: 65px; }
   .dash-donut-center .ddc-num { font-size: 22px; }
+  /* Mobile: institution map & accordion */
+  .china-map-wrap { padding: 12px; }
+  .prov-acc-header { padding: 10px 14px; }
+  .prov-acc-icon { width: 28px; height: 28px; font-size: 12px; }
+  .prov-acc-name { font-size: 14px; }
+  .prov-acc-count { font-size: 11px; }
+  .prov-bar-label { width: 45px; font-size: 11px; }
+  .prov-bar-track { height: 18px; }
+  .map-stat-num { font-size: 18px; }
 }
 /* Originals & Books sections */
 .orig-section, .books-section { margin-bottom: 24px; }
@@ -2597,6 +2606,168 @@ body { padding-bottom: 60px; }
 .reg-card .rc-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--text-light); }
 .reg-card .rc-tag { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
 .reg-card .rc-desc { margin-top: 8px; font-size: 13px; line-height: 1.7; }
+/* China map for institutions */
+.china-map-wrap {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 16px;
+  position: relative;
+  overflow: hidden;
+}
+#chinaMapContainer { width: 100%; height: 520px; }
+@media (max-width:768px) { #chinaMapContainer { height: 360px; } }
+.map-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-light); font-size: 14px;
+  background: var(--card-bg);
+}
+.map-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.map-stat-card {
+  background: var(--surface-1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+}
+.map-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.map-stat-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+/* Province accordion cards */
+.prov-accordion {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.prov-accordion:hover { border-color: rgba(0,229,255,0.25); }
+.prov-acc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.prov-acc-header:hover { background: var(--surface-1); }
+.prov-acc-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prov-acc-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,229,255,0.1);
+  color: var(--primary);
+  font-size: 14px; font-weight: 700;
+}
+.prov-acc-name {
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+}
+.prov-acc-count {
+  font-size: 12px; color: var(--text-light);
+  margin-left: 6px;
+}
+.prov-acc-right {
+  display: flex; align-items: center; gap: 8px;
+}
+.prov-acc-badge {
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px; font-weight: 600;
+}
+.prov-acc-arrow {
+  transition: transform 0.25s;
+  color: var(--text-light);
+}
+.prov-accordion.open .prov-acc-arrow {
+  transform: rotate(180deg);
+}
+.prov-acc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.prov-accordion.open .prov-acc-body {
+  max-height: 3000px;
+}
+.prov-acc-inner {
+  padding: 4px 18px 14px;
+  border-top: 1px solid var(--border);
+}
+/* Province bar chart */
+.prov-bar-section {
+  margin-top: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.prov-bar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.prov-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.prov-bar-label {
+  width: 60px;
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: right;
+  flex-shrink: 0;
+}
+.prov-bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.prov-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 0;
+}
+.prov-bar-num {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
 /* Product cards */
 .prod-card {
   background: var(--card-bg);
@@ -3552,6 +3723,7 @@ body { padding-bottom: 60px; }
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 </head>
 <body>
 
@@ -5111,7 +5283,10 @@ function svgIcon(name, sz) {
     'book': '<path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6 8h3M6 12h3M15 8h3M15 12h3"/>',
     'pen': '<path d="M14 3l7 7-11 11H3v-7z"/><path d="M14 3l7 7M3 21l7-7"/>',
     'mic': '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v5"/>',
-    'heart': '<path d="M12 21s-7-5-9-10a5 5 0 019-3 5 5 0 019 3c-2 5-9 10-9 10z"/><path d="M9 11l2 2 4-4"/>'
+    'heart': '<path d="M12 21s-7-5-9-10a5 5 0 019-3 5 5 0 019 3c-2 5-9 10-9 10z"/><path d="M9 11l2 2 4-4"/>',
+    'map': '<path d="M9 3L3 5v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16M15 5v16"/>',
+    'bar': '<path d="M3 20h18M7 20V10M12 20V6M17 20v-7"/>',
+    'arrow-left': '<path d="M19 12H5M12 19l-7-7 7-7"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -5350,6 +5525,7 @@ function switchSection(section) {
   prodFilter = 'all';
   regFilter = 'all';
   companyFilter = 'all';
+  instFilter = 'all';
   if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
   if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
@@ -5811,8 +5987,8 @@ function renderHub() {
   // Books & courses entry (moved after originals)
   html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">学术专著·产业参考·原创专著</div>';
+  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·培训课程</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">学术专著·产业参考·原创专著·培训课程</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -6393,6 +6569,19 @@ function renderOriginals() {
 }
 
 // === Books & Courses section ===
+const LEARNING_COURSES = [
+  {title:'Stem Cell Science (Coursera)', desc:'加州大学系统开设的干细胞科学在线课程，涵盖胚胎干细胞、iPSC、MSC的生物学基础与临床应用，适合入门。', provider:'Coursera / UC System', duration:'自定进度', level:'入门', tag:'基础入门', url:'https://www.coursera.org/learn/stem-cells'},
+  {title:'Cell Therapy Manufacturing (MITx)', desc:'MIT开设的细胞治疗制造工艺课程，深度讲解CAR-T/MSC的GMP生产流程、质量控制、供应链管理。', provider:'MITx (edX)', duration:'12周', level:'高级', tag:'制造工艺', url:'https://www.edx.org/'},
+  {title:'Gene Therapy (Harvard HMX)', desc:'哈佛医学院基因治疗精品课程，涵盖AAV/慢病毒载体设计、体内基因递送、基因编辑技术前沿。', provider:'Harvard HMX', duration:'自定进度', level:'中级', tag:'基因治疗', url:'https://onlinelearning.hms.harvard.edu/hmx/'},
+  {title:'Stanford XGEN201 基因治疗', desc:'斯坦福大学继续教育的基因治疗专题课程，系统讲解从载体工程到临床试验设计的全链条知识。', provider:'Stanford Continuing Studies', duration:'10周', level:'中级', tag:'基因治疗', url:'https://xgen.stanford.edu/'},
+  {title:'UC Davis 细胞治疗证书项目', desc:'加州大学戴维斯分校的细胞治疗专业证书项目，涵盖干细胞生物学、GMP制造、法规监管和临床试验设计。', provider:'UC Davis Continuing Education', duration:'6个月', level:'中级', tag:'综合培训', url:'https://extension.ucdavis.edu/'},
+  {title:'ISCT Institute 培训课程', desc:'国际细胞治疗学会(ISCT)官方培训，涵盖MSC/CAR-T/NK细胞产品的质量控制、效价检测、监管合规等专题。', provider:'ISCT Institute', duration:'多门课程', level:'中-高级', tag:'监管法规', url:'https://isctglobal.org/'},
+  {title:'Educo Life Sciences CGT课程', desc:'面向CGT产业从业者的在线培训，涵盖细胞治疗产品开发、CMC、注册申报、商业化全流程。', provider:'Educo Life Sciences', duration:'自定进度', level:'中级', tag:'产业参考', url:'https://www.educolifesciences.com/'},
+  {title:'国家干细胞资源库干细胞高级培训', desc:'中国科学院干细胞与再生医学创新研究院主办，已举办51期，累计培训4000余人，涵盖干细胞基础理论、实验技术和临床转化。', provider:'中科院干细胞研究院', duration:'5-7天/期', level:'中-高级', tag:'综合培训', url:'https://www.ncbi.org.cn/'},
+  {title:'中国细胞生物学学会培训', desc:'中国细胞生物学学会定期举办干细胞、细胞治疗、基因编辑等主题的继续教育培训和学术研讨会。', provider:'中国细胞生物学学会', duration:'不定期', level:'入门-中级', tag:'基础入门', url:'https://www.cscb.org.cn/'},
+  {title:'CAR-T GMP制造培训 (Miltenyi)', desc:'Miltenyi University提供的CAR-T细胞GMP制造专题培训，涵盖T细胞分选、激活、转导、扩增全流程实操。', provider:'Miltenyi University', duration:'3-5天', level:'高级', tag:'制造工艺', url:'https://www.miltenyibiotec.com/'}
+];
+
 const INDUSTRY_BOOKS = [
   {title:'《干细胞临床应用手册》', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著'},
   {title:'《细胞生物学》（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著'},
@@ -6407,8 +6596,8 @@ var currentBookCat = 'all';
 function renderBooks() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍</b></div>';
-  html += '<div class="content-header"><h2>行业书籍</h2></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍·培训课程</b></div>';
+  html += '<div class="content-header"><h2>行业书籍·培训课程</h2></div>';
 
   // Description text
   html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。';
@@ -6447,6 +6636,24 @@ function renderBooks() {
     html += '<div class="book-cover-img">' + svgIcon('book', 32) + '</div>';
     html += '<div class="book-cover-name">' + escapeHtml(b.title) + '</div>';
     html += '<div class="book-cover-author">' + escapeHtml(b.author) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Training courses section
+  html += '<div style="margin-top:28px;">';
+  html += '<div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--primary);margin-bottom:14px;">' + svgIcon('users', 18) + ' 培训课程</div>';
+  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。<b>课程信息均来自公开渠道，具体开课时间、费用及报名方式请以官方发布为准。</b></div>';
+  LEARNING_COURSES.forEach(function(c) {
+    html += '<div class="course-card">';
+    html += '<div class="course-card-header">';
+    html += '<div class="course-icon">' + svgIcon('flask', 20) + '</div>';
+    html += '<div style="flex:1;">';
+    html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
+    html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
+    html += '<div class="course-meta"><span class="course-tag">' + c.tag + '</span><span>' + svgIcon('clock', 10) + ' ' + c.duration + '</span><span>' + svgIcon('users', 10) + ' ' + c.level + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
+    html += '</div>';
+    html += '</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -7156,6 +7363,74 @@ var INST_REGION_COLORS = {
   '东北': '#BF360C'
 };
 
+// City to province mapping
+var CITY_TO_PROVINCE = {
+  '北京':'北京市','天津':'天津市','上海':'上海市','重庆':'重庆市',
+  '石家庄':'河北省','唐山':'河北省','秦皇岛':'河北省',
+  '南京':'江苏省','苏州':'江苏省','徐州':'江苏省','常州':'江苏省','扬州':'江苏省','无锡':'江苏省','南通':'江苏省',
+  '杭州':'浙江省','宁波':'浙江省','东阳':'浙江省',
+  '合肥':'安徽省',
+  '福州':'福建省','泉州':'福建省','漳州':'福建省','厦门':'福建省',
+  '济南':'山东省','青岛':'山东省',
+  '武汉':'湖北省','襄阳':'湖北省',
+  '长沙':'湖南省',
+  '郑州':'河南省',
+  '广州':'广东省','深圳':'广东省',
+  '海口':'海南省','博鳌':'海南省','海南':'海南省',
+  '南宁':'广西壮族自治区',
+  '成都':'四川省','自贡':'四川省',
+  '咸阳':'陕西省','西安':'陕西省',
+  '兰州':'甘肃省',
+  '西宁':'青海省',
+  '沈阳':'辽宁省',
+  '哈尔滨':'黑龙江省',
+  '长春':'吉林省',
+  '上饶':'江西省'
+};
+
+// Region to provinces mapping
+var REGION_PROVINCES = {
+  '华北':['北京市','天津市','河北省','山西省','内蒙古自治区'],
+  '华东':['上海市','江苏省','浙江省','安徽省','福建省','江西省','山东省'],
+  '华中':['河南省','湖北省','湖南省'],
+  '华南':['广东省','广西壮族自治区','海南省'],
+  '西南':['重庆市','四川省','贵州省','云南省','西藏自治区'],
+  '西北':['陕西省','甘肃省','青海省','宁夏回族自治区','新疆维吾尔自治区'],
+  '东北':['辽宁省','吉林省','黑龙江省']
+};
+
+// Province short names
+var PROVINCE_SHORT = {
+  '北京市':'北京','天津市':'天津','河北省':'河北','山西省':'山西','内蒙古自治区':'内蒙古',
+  '上海市':'上海','江苏省':'江苏','浙江省':'浙江','安徽省':'安徽','福建省':'福建','江西省':'江西','山东省':'山东',
+  '河南省':'河南','湖北省':'湖北','湖南省':'湖南',
+  '广东省':'广东','广西壮族自治区':'广西','海南省':'海南',
+  '重庆市':'重庆','四川省':'四川','贵州省':'贵州','云南省':'云南','西藏自治区':'西藏',
+  '陕西省':'陕西','甘肃省':'甘肃','青海省':'青海','宁夏回族自治区':'宁夏','新疆维吾尔自治区':'新疆',
+  '辽宁省':'辽宁','吉林省':'吉林','黑龙江省':'黑龙江'
+};
+
+// Get province for an institution
+function getInstProvince(inst) {
+  return CITY_TO_PROVINCE[inst.city] || '未知';
+}
+
+// Count institutions by province
+function countByProvince(list) {
+  var counts = {};
+  list.forEach(function(inst) {
+    var prov = getInstProvince(inst);
+    if (!counts[prov]) counts[prov] = 0;
+    counts[prov]++;
+  });
+  return counts;
+}
+
+// China map state
+var chinaMapLoaded = false;
+var chinaMapChart = null;
+var chinaGeoJson = null;
+
 // === Companies data ===
 var companyFilter = 'all';
 var COMPANY_CATS = {
@@ -7194,15 +7469,29 @@ var COMPANIES = [
 
 function renderInstitutions() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="institutions" onclick="navTo(this)">备案机构查询</span>';
-  if (instFilter !== 'all') {
+  var html = '';
+  // Breadcrumb
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="institutions" onclick="filterInsts(\'all\')">备案机构查询</span>';
+  if (instFilter === 'all') {
+    html += '<span class="crumb-sep">›</span> <b>全国总览</b>';
+  } else if (instFilter.indexOf('province:') === 0) {
+    var provName = instFilter.slice(9);
+    var shortName = PROVINCE_SHORT[provName] || provName;
+    // Find the region this province belongs to
+    var provRegion = '';
+    for (var reg in REGION_PROVINCES) {
+      if (REGION_PROVINCES[reg].indexOf(provName) >= 0) { provRegion = reg; break; }
+    }
+    if (provRegion) html += '<span class="crumb-sep">›</span> <span class="crumb-link" onclick="filterInsts(\'' + provRegion + '\')">' + provRegion + '</span>';
+    html += '<span class="crumb-sep">›</span> <b>' + shortName + '</b>';
+  } else {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(instFilter) + '</b>';
   }
   html += '</div>';
 
   html += '<div class="content-header" style="padding-bottom:10px;"><div class="desc" style="font-weight:600;">全国已备案细胞治疗机构名录，覆盖7大地理区域106家三甲医院，数据截至2026年5月。</div></div>';
 
-  // Category cards — 8 in two rows (4 per row)
+  // Region cards — always visible
   var regionCounts = {};
   INSTITUTIONS.forEach(function(inst) {
     if (!regionCounts[inst.region]) regionCounts[inst.region] = 0;
@@ -7210,47 +7499,146 @@ function renderInstitutions() {
   });
 
   html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);">';
-  html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;" onclick="filterInsts(\'all\')">';
+  var allActive = (instFilter === 'all') ? 'background:rgba(0,229,255,0.06);' : '';
+  html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;' + allActive + '" onclick="filterInsts(\'all\')">';
   html += '<div class="rcc-countline"><span class="rcc-count">' + INSTITUTIONS.length + '</span><span class="rcc-unit"> 家</span></div>';
   html += '<div class="rcc-name">全部机构</div>';
   html += '</div>';
   ['华北','华东','华中','华南','西南','西北','东北'].forEach(function(reg) {
     var color = INST_REGION_COLORS[reg] || '#666';
-    html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterInsts(\'' + reg + '\')">';
+    var regActive = (instFilter === reg) ? 'background:rgba(0,229,255,0.06);' : '';
+    html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;' + regActive + '" onclick="filterInsts(\'' + reg + '\')">';
     html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + (regionCounts[reg]||0) + '</span><span class="rcc-unit"> 家</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(reg) + '</div>';
     html += '</div>';
   });
   html += '</div>';
 
-  // Filtered institution list
-  var filtered = INSTITUTIONS;
-  if (instFilter !== 'all') {
-    filtered = INSTITUTIONS.filter(function(inst) { return inst.region === instFilter; });
-  }
+  // === Three views based on instFilter ===
+  if (instFilter === 'all') {
+    // === Map view ===
+    html += '<div class="china-map-wrap">';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">';
+    html += '<div style="font-size:15px;font-weight:600;color:var(--primary);display:flex;align-items:center;gap:6px;">' + svgIcon('map', 18) + ' 全国备案机构分布地图</div>';
+    html += '<div style="font-size:12px;color:var(--text-light);">点击省份查看详细信息</div>';
+    html += '</div>';
+    html += '<div id="chinaMapContainer"><div class="map-loading">地图加载中...</div></div>';
+    // Stats row
+    var provCounts = countByProvince(INSTITUTIONS);
+    var provCount = Object.keys(provCounts).length;
+    var regionCount = Object.keys(regionCounts).length;
+    html += '<div class="map-stats-row">';
+    html += '<div class="map-stat-card"><div class="map-stat-num" data-count="' + INSTITUTIONS.length + '">0</div><div class="map-stat-label">备案机构</div></div>';
+    html += '<div class="map-stat-card"><div class="map-stat-num" data-count="' + provCount + '">0</div><div class="map-stat-label">覆盖省份</div></div>';
+    html += '<div class="map-stat-card"><div class="map-stat-num" data-count="' + regionCount + '">0</div><div class="map-stat-label">覆盖区域</div></div>';
+    html += '<div class="map-stat-card"><div class="map-stat-num" data-count="' + regionCounts['华东'] + '">0</div><div class="map-stat-label">华东最多</div></div>';
+    html += '</div>';
+    html += '</div>';
 
-  filtered.forEach(function(inst) {
-    var color = INST_REGION_COLORS[inst.region] || '#666';
-    html += '<div class="reg-card" style="border-left-color:' + color + ';">';
-    html += '<div class="rc-title">' + escapeHtml(inst.name) + '</div>';
-    html += '<div class="rc-meta">';
-    html += '<span class="rc-tag" style="background:' + color + '22;color:' + color + ';">' + escapeHtml(inst.region) + '</span>';
-    html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
-    html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
-    if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;">' + escapeHtml(inst.note) + '</span>';
+    // Province bar chart
+    html += '<div class="prov-bar-section">';
+    html += '<div class="prov-bar-title">' + svgIcon('bar', 16) + ' 各省机构数量排行</div>';
+    var provList = Object.keys(provCounts).map(function(k) { return {name:k, count:provCounts[k]}; });
+    provList.sort(function(a,b) { return b.count - a.count; });
+    var maxCount = provList.length > 0 ? provList[0].count : 1;
+    provList.forEach(function(p) {
+      var pct = (p.count / maxCount * 100).toFixed(1);
+      var shortN = PROVINCE_SHORT[p.name] || p.name;
+      html += '<div class="prov-bar-item">';
+      html += '<div class="prov-bar-label">' + escapeHtml(shortN) + '</div>';
+      html += '<div class="prov-bar-track">';
+      html += '<div class="prov-bar-fill" data-width="' + pct + '%"></div>';
+      html += '<div class="prov-bar-num">' + p.count + '</div>';
+      html += '</div>';
+      html += '</div>';
+    });
     html += '</div>';
+
+  } else if (instFilter.indexOf('province:') === 0) {
+    // === Province detail view ===
+    var provName2 = instFilter.slice(9);
+    var shortName2 = PROVINCE_SHORT[provName2] || provName2;
+    var provInsts = INSTITUTIONS.filter(function(inst) { return getInstProvince(inst) === provName2; });
+
+    html += '<div style="display:flex;align-items:center;gap:10px;margin:16px 0 14px;">';
+    html += '<button onclick="goBackFromProvince()" style="display:flex;align-items:center;gap:4px;cursor:pointer;border:1px solid var(--border);background:var(--card-bg);padding:6px 14px;border-radius:8px;color:var(--text-light);font-size:13px;transition:all 0.2s;" onmouseover="this.style.color=\'var(--primary)\';this.style.borderColor=\'var(--primary)\'" onmouseout="this.style.color=\'var(--text-light)\';this.style.borderColor=\'var(--border)\'">' + svgIcon('arrow-left', 14) + ' 返回</button>';
+    html += '<div style="font-size:18px;font-weight:700;color:var(--text);">' + escapeHtml(shortName2) + ' · 备案机构</div>';
+    html += '<span style="font-size:14px;color:var(--primary);font-weight:600;">' + provInsts.length + ' 家</span>';
     html += '</div>';
-  });
+
+    provInsts.forEach(function(inst) {
+      var color = INST_REGION_COLORS[inst.region] || '#666';
+      html += '<div class="reg-card" style="border-left-color:' + color + ';">';
+      html += '<div class="rc-title">' + escapeHtml(inst.name) + '</div>';
+      html += '<div class="rc-meta">';
+      html += '<span class="rc-tag" style="background:' + color + '22;color:' + color + ';">' + escapeHtml(inst.region) + '</span>';
+      html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
+      html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
+      if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;">' + escapeHtml(inst.note) + '</span>';
+      html += '</div>';
+      html += '</div>';
+    });
+
+  } else {
+    // === Region view: province accordions ===
+    var provinces = REGION_PROVINCES[instFilter] || [];
+    var regionColor = INST_REGION_COLORS[instFilter] || '#666';
+    var regionInsts = INSTITUTIONS.filter(function(inst) { return inst.region === instFilter; });
+    var regProvCounts = countByProvince(regionInsts);
+
+    html += '<div style="margin:16px 0 14px;font-size:15px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px;">';
+    html += '<span style="display:inline-block;width:4px;height:18px;background:' + regionColor + ';border-radius:2px;"></span>';
+    html += escapeHtml(instFilter) + '地区 · 省份分布';
+    html += '<span style="font-size:13px;color:var(--text-light);font-weight:400;">（点击省份展开机构列表）</span>';
+    html += '</div>';
+
+    // Only show provinces that have institutions
+    provinces.forEach(function(prov) {
+      var count = regProvCounts[prov] || 0;
+      var shortN = PROVINCE_SHORT[prov] || prov;
+      html += '<div class="prov-accordion' + (count === 0 ? '' : '') + '" id="prov-acc-' + prov.replace(/[^a-zA-Z\u4e00-\u9fa5]/g,'') + '">';
+      html += '<div class="prov-acc-header"' + (count > 0 ? ' onclick="toggleProvince(this)"' : '') + '>';
+      html += '<div class="prov-acc-left">';
+      html += '<div class="prov-acc-icon"' + (count > 0 ? ' style="background:' + regionColor + '22;color:' + regionColor + ';"' : ' style="opacity:0.3;"') + '>' + escapeHtml(shortN.charAt(0)) + '</div>';
+      html += '<div>';
+      html += '<div class="prov-acc-name">' + escapeHtml(shortN) + '</div>';
+      html += '<div class="prov-acc-count">' + (count > 0 ? count + ' 家备案机构' : '暂无备案机构') + '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div class="prov-acc-right">';
+      if (count > 0) {
+        html += '<span class="prov-acc-badge" style="background:' + regionColor + '22;color:' + regionColor + ';">' + count + '</span>';
+        html += '<svg class="prov-acc-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+      } else {
+        html += '<span style="font-size:11px;color:var(--text-light);opacity:0.5;">—</span>';
+      }
+      html += '</div>';
+      html += '</div>';
+      if (count > 0) {
+        html += '<div class="prov-acc-body"><div class="prov-acc-inner">';
+        var provInsts2 = regionInsts.filter(function(inst) { return getInstProvince(inst) === prov; });
+        provInsts2.forEach(function(inst) {
+          html += '<div class="reg-card" style="border-left-color:' + regionColor + ';margin-bottom:8px;padding:12px 16px;">';
+          html += '<div class="rc-title" style="font-size:14px;">' + escapeHtml(inst.name) + '</div>';
+          html += '<div class="rc-meta">';
+          html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
+          html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
+          if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;font-size:11px;">' + escapeHtml(inst.note) + '</span>';
+          html += '</div>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      }
+      html += '</div>';
+    });
+  }
 
   // Dual-track regulatory framework info box
   html += '<div style="margin-top:20px;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;">';
   html += '<div style="background:linear-gradient(135deg,#1A237E 0%,#1976D2 100%);color:white;padding:14px 20px;font-size:15px;font-weight:700;">中国细胞治疗双轨制监管体系</div>';
   html += '<div style="padding:16px 20px;">';
 
-  // Two pathways comparison
   html += '<div class="dual-track-grid">';
-
-  // Pathway 1: Technology
   html += '<div style="background:rgba(46,125,50,0.1);border-radius:8px;padding:14px;">';
   html += '<div style="font-size:14px;font-weight:700;color:#81C784;margin-bottom:8px;">技术路径（818号令）</div>';
   html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
@@ -7260,8 +7648,6 @@ function renderInstitutions() {
   html += '<b>流程：</b>三甲医院 → 学术+伦理审查 → 卫健委备案 → 开展研究 → 审批通过后可院内收费转化<br>';
   html += '<b>商业化：</b>院内技术服务收费';
   html += '</div></div>';
-
-  // Pathway 2: Drug
   html += '<div style="background:rgba(21,101,192,0.1);border-radius:8px;padding:14px;">';
   html += '<div style="font-size:14px;font-weight:700;color:#64B5F6;margin-bottom:8px;">药品路径（828号令）</div>';
   html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
@@ -7271,10 +7657,8 @@ function renderInstitutions() {
   html += '<b>流程：</b>IND申报 → 临床试验 → NDA → 药品上市许可<br>';
   html += '<b>商业化：</b>全国销售，药品上市';
   html += '</div></div>';
-
   html += '</div>';
 
-  // Key points
   html += '<div style="background:var(--warn-bg);border-left:4px solid var(--warn-text);border-radius:4px;padding:12px 16px;font-size:12px;line-height:1.8;">';
   html += '<b style="color:var(--warn-text);">核心要点：</b>';
   html += '① 机构必须是<b>三级甲等医院</b>，向国家卫健委统一备案；';
@@ -7284,19 +7668,231 @@ function renderInstitutions() {
   html += '⑤ 研究数据保存<b>30年</b>（涉及子代永久保存）；';
   html += '⑥ 两条路径不可混走，但IIT数据若符合GCP/GLP标准可用于药品注册申报。';
   html += '</div>';
-
   html += '</div></div>';
 
-  // Disclaimer
   html += '<div class="edu-callout" style="margin-top:14px;"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>温馨提示：</b>以上机构信息均来自公开报道，备案状态可能动态变化。如需确认某机构是否具备开展细胞治疗的资质，建议登录国家卫生健康委员会官网查询最新备案信息。切勿通过非正规渠道接受细胞治疗。</div></div>';
 
   content.innerHTML = html;
   updateFloatButtons();
+
+  // Initialize map if in map view
+  if (instFilter === 'all') {
+    initChinaMap();
+    // Animate stat numbers
+    setTimeout(function() {
+      document.querySelectorAll('.map-stat-num[data-count]').forEach(function(el) {
+        if (!el.classList.contains('counted')) animateCount(el);
+      });
+    }, 300);
+    // Animate bar chart
+    setTimeout(function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.getAttribute('data-width');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.prov-bar-fill[data-width]').forEach(function(el) {
+        observer.observe(el);
+      });
+    }, 100);
+  }
 }
 
-function filterInsts(region) {
+function toggleProvince(headerEl) {
+  var accordion = headerEl.parentElement;
+  accordion.classList.toggle('open');
+}
+
+function goBackFromProvince() {
+  // Find which region the current province belongs to
+  var provName = instFilter.slice(9);
+  for (var reg in REGION_PROVINCES) {
+    if (REGION_PROVINCES[reg].indexOf(provName) >= 0) {
+      filterInsts(reg);
+      return;
+    }
+  }
+  filterInsts('all');
+}
+
+function initChinaMap() {
+  var container = document.getElementById('chinaMapContainer');
+  if (!container) return;
+
+  if (typeof echarts === 'undefined') {
+    container.innerHTML = '<div class="map-loading">ECharts加载失败，请检查网络连接</div>';
+    return;
+  }
+
+  if (chinaMapChart) {
+    try { chinaMapChart.dispose(); } catch(e) {}
+    chinaMapChart = null;
+  }
+
+  chinaMapChart = echarts.init(container, null, { renderer: 'canvas' });
+
+  if (chinaGeoJson) {
+    renderChinaMap();
+  } else {
+    chinaMapChart.showLoading('default', {
+      text: '正在加载中国地图...',
+      color: '#00E5FF',
+      textColor: '#8B9DAF',
+      maskColor: 'rgba(18,28,42,0.8)'
+    });
+    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        chinaGeoJson = data;
+        echarts.registerMap('china', data);
+        chinaMapChart.hideLoading();
+        renderChinaMap();
+      })
+      .catch(function(err) {
+        chinaMapChart.hideLoading();
+        container.innerHTML = '<div class="map-loading" style="flex-direction:column;gap:10px;">地图数据加载失败<br><span style="font-size:12px;opacity:0.7;">请查看下方省份排行列表</span></div>';
+      });
+  }
+}
+
+function renderChinaMap() {
+  if (!chinaMapChart || !chinaGeoJson) return;
+
+  var provCounts = countByProvince(INSTITUTIONS);
+  var mapData = [];
+  for (var prov in provCounts) {
+    mapData.push({ name: prov, value: provCounts[prov] });
+  }
+
+  var maxVal = Math.max.apply(null, mapData.map(function(d) { return d.value; }));
+
+  var option = {
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(10,15,26,0.92)',
+      borderColor: 'rgba(0,229,255,0.3)',
+      borderWidth: 1,
+      textStyle: { color: '#E0E6ED', fontSize: 13 },
+      formatter: function(params) {
+        var count = params.value || 0;
+        var shortName = PROVINCE_SHORT[params.name] || params.name;
+        var html = '<div style="font-weight:600;font-size:14px;color:#00E5FF;margin-bottom:4px;">' + shortName + '</div>';
+        html += '<div style="font-size:12px;">备案机构：<b style="color:#fff;">' + count + '</b> 家</div>';
+        if (count > 0) html += '<div style="font-size:11px;color:#8B9DAF;margin-top:4px;">点击查看详情</div>';
+        return html;
+      }
+    },
+    visualMap: {
+      type: 'continuous',
+      min: 0,
+      max: maxVal,
+      calculable: false,
+      inRange: {
+        color: ['rgba(0,60,80,0.4)', 'rgba(0,131,143,0.6)', 'rgba(0,200,200,0.8)', 'rgba(0,229,255,0.9)']
+      },
+      textStyle: { color: '#8B9DAF', fontSize: 11 },
+      left: 10,
+      bottom: 10,
+      itemWidth: 12,
+      itemHeight: 80,
+      text: ['多', '少']
+    },
+    geo: {
+      map: 'china',
+      roam: true,
+      scaleLimit: { min: 0.8, max: 3 },
+      zoom: 1.15,
+      label: {
+        show: true,
+        fontSize: 10,
+        color: 'rgba(224,230,237,0.7)',
+        formatter: function(params) {
+          var shortName = PROVINCE_SHORT[params.name] || params.name;
+          var count = provCounts[params.name] || 0;
+          if (count > 0) {
+            return '{n|' + shortName + '}\n{c|' + count + '}';
+          }
+          return shortName;
+        },
+        rich: {
+          n: { fontSize: 10, color: 'rgba(224,230,237,0.8)', lineHeight: 14 },
+          c: { fontSize: 12, fontWeight: 'bold', color: '#00E5FF', lineHeight: 16 }
+        }
+      },
+      itemStyle: {
+        areaColor: 'rgba(20,35,50,0.6)',
+        borderColor: 'rgba(0,229,255,0.2)',
+        borderWidth: 0.8
+      },
+      emphasis: {
+        label: { show: true, color: '#fff' },
+        itemStyle: {
+          areaColor: 'rgba(0,229,255,0.3)',
+          borderColor: '#00E5FF',
+          borderWidth: 1.5,
+          shadowBlur: 15,
+          shadowColor: 'rgba(0,229,255,0.3)'
+        }
+      },
+      select: {
+        label: { show: true, color: '#fff' },
+        itemStyle: {
+          areaColor: 'rgba(0,229,255,0.4)',
+          borderColor: '#00E5FF',
+          borderWidth: 2
+        }
+      },
+      regions: mapData.map(function(d) {
+        return {
+          name: d.name,
+          itemStyle: {
+            areaColor: d.value > 0 ? null : 'rgba(20,35,50,0.3)',
+            opacity: d.value > 0 ? 1 : 0.4
+          }
+        };
+      })
+    },
+    series: [{
+      type: 'map',
+      map: 'china',
+      geoIndex: 0,
+      data: mapData
+    }],
+    animation: true,
+    animationDuration: 1200,
+    animationDurationUpdate: 600,
+    animationEasing: 'cubicOut'
+  };
+
+  chinaMapChart.setOption(option);
+
+  // Click handler
+  chinaMapChart.off('click');
+  chinaMapChart.on('click', function(params) {
+    if (params.name && provCounts[params.name] && provCounts[params.name] > 0) {
+      filterInsts('province:' + params.name);
+    }
+  });
+
+  // Resize handler
+  if (window._chinaMapResize) window.removeEventListener('resize', window._chinaMapResize);
+  window._chinaMapResize = function() {
+    if (chinaMapChart) chinaMapChart.resize();
+  };
+  window.addEventListener('resize', window._chinaMapResize);
+}
+
+function filterInsts(filter) {
   saveNavState();
-  instFilter = region;
+  instFilter = filter || 'all';
+  if (chinaMapChart) {
+    try { chinaMapChart.dispose(); } catch(e) {}
+    chinaMapChart = null;
+  }
   pushHistory();
   renderInstitutions();
   window.scrollTo({ top: 0, behavior: 'smooth' });
