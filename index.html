@@ -2473,6 +2473,8 @@ body { padding-bottom: 60px; }
 @media (max-width: 768px) {
   /* Force reg-cat-row to 3 columns on mobile, overriding inline styles */
   .reg-cat-row { grid-template-columns: repeat(3, 1fr) !important; gap: 4px !important; }
+  /* Exception: rows explicitly marked as 4-column should keep 4 on mobile */
+  .reg-cat-row-4 { grid-template-columns: repeat(4, 1fr) !important; gap: 3px !important; }
   .reg-cat-card { padding: 6px 2px !important; border-left-width: 3px !important; border-radius: 5px !important; }
   .reg-cat-card .rcc-count { font-size: 18px !important; }
   .reg-cat-card .rcc-unit { font-size: 8px !important; }
@@ -4141,7 +4143,7 @@ body { padding-bottom: 60px; }
     </div>
     <div class="info-tab" data-kb="picks" onclick="navToKb('picks')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M4 4l2 2M18 4l2 2M4 20l2-2M18 20l2-2" opacity="0.4"/></svg>
-      笔记
+      精选
     </div>
     <div class="info-tab" data-kb="originals" onclick="navToKb('originals')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9 8l-6 1 4.5 4.5L6 20l6-3 6 3-1.5-6.5L21 9l-6-1z"/></svg>
@@ -5647,7 +5649,8 @@ function svgIcon(name, sz) {
     'clipboard': '<path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
     'refresh': '<path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>',
     'play': '<path d="M5 3l14 9-14 9V3z"/>',
-    'cell': '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/>'
+    'cell': '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/>',
+    'share': '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -6988,6 +6991,19 @@ const ORIGINAL_ARTICLES = [
   {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约1.5万字'}
 ];
 
+const REPRINT_ARTICLES = [
+  {tag:'行业动态', title:'2025年全球细胞治疗产业盘点：获批产品、融资与管线进展', source:'医药魔方', date:'2026-01', url:'https://www.pharmcube.com/', desc:'系统回顾2025年全球细胞治疗领域的获批产品、重大融资事件和管线进展，涵盖CAR-T、MSC、基因治疗等方向，指出MSC赛道正从"有数据无产品"向"产品商业化"转型。'},
+  {tag:'行业动态', title:'博鳌乐城先行区细胞治疗特许项目最新进展', source:'海南日报', date:'2026-03', url:'https://www.hndnews.com/', desc:'博鳌乐城国际医疗旅游先行区在细胞治疗领域的最新特许项目进展，包括已定价的MSC抗衰、CAR-T桥接治疗、NSC帕金森等项目，定价8-50万/疗程不等。'},
+  {tag:'行业动态', title:'国产首个UC-MSC药物NDA获受理，818号令双轨制标杆案例', source:'研发客', date:'2026-07', url:'https://www.pharmexec.com.cn/', desc:'PLEB001(脐带MSC)治疗SR-aGVHD的110例多中心关键试验达主要终点(28天ORR 68.3%)，CDE正式受理NDA，标志着818号令下药品路径首个标杆案例。'},
+  {tag:'技术前沿', title:'AAV基因治疗的安全性问题：肝毒性与神经毒性的最新认知', source:'生物探索', date:'2026-03', url:'https://www.biodiscover.com/', desc:'综述AAV基因治疗中高剂量给药导致的肝毒性和感觉神经毒性事件，以及业界正在探索的剂量优化、免疫调控和新型衣壳设计等缓解策略。'},
+  {tag:'技术前沿', title:'外泌体疗法：无细胞治疗的新兴方向与挑战', source:'丁香园', date:'2026-04', url:'https://www.dxy.cn/', desc:'综述MSC外泌体在神经退行性疾病、创面修复和免疫调节中的最新研究进展，以及标准化制备、剂量规范和质控体系等临床转化关键挑战。'},
+  {tag:'技术前沿', title:'3D微载体培养技术：MSC规模化生产的破局之路', source:'生物谷', date:'2026-05', url:'https://www.bioon.com/', desc:'深度解析3D微载体生物反应器培养UC-MSC的工艺优势，单批次产量可达传统二维培养的25倍，成本降低60%，为MSC药物商业化提供关键技术支撑。'},
+  {tag:'政策法规', title:'CDE细胞治疗产品药学指导原则修订要点解读', source:'药智网', date:'2026-05', url:'https://www.yaozh.com/', desc:'解读CDE最新修订的细胞治疗产品药学指导原则，重点关注MSC产品效价检测要求（IFN-γ刺激IDO活性、T细胞共培养抑制率）、CMC变更管理和稳定性研究。'},
+  {tag:'政策法规', title:'818号令施行满月：全国细胞治疗机构备案与项目进展', source:'健康界', date:'2026-06', url:'https://www.cn-healthcare.com/', desc:'818号令施行一个月以来，全国已有超过200家医疗机构完成细胞治疗技术备案，涵盖MSC、CAR-T、NK细胞等方向，双轨制运行平稳。'},
+  {tag:'投资观察', title:'细胞治疗赛道2026年投资展望：从CAR-T红海到MSC蓝海', source:'动脉网', date:'2026-02', url:'https://www.vcbeat.top/', desc:'分析2026年细胞治疗领域投资趋势：CAR-T赛道竞争加剧、同质化严重，MSC和iPSC领域因Ryoncil获批、VX-880功能性治愈等催化事件成为新投资热点。'},
+  {tag:'投资观察', title:'全球MSC企业融资盘点：从临床数据到商业化能力', source:'医药魔方', date:'2026-06', url:'https://www.pharmcube.com/', desc:'盘点全球MSC领域主要企业的最新融资动态，分析投资人关注的核心指标：III期阳性数据、规模化生产工艺、效价检测标准化和商业化定价模型。'}
+];
+
 const EXPERT_VIEWS = [
   {name:'周琪', title:'中国科学院院士·干细胞与生殖生物学', avatar:'周', quote:'干细胞研究正从实验室走向临床，但我们必须坚持科学严谨的态度，避免过度宣传。监管体系的完善是推动行业健康发展的基石。', source:'公开演讲', date:'2025', cat:'院士专家'},
   {name:'王福生', title:'中国科学院院士·肝病与传染病专家', avatar:'王', quote:'间充质干细胞在肝病治疗中展现了免疫调节和组织修复的双重潜力，但需要更多高质量随机对照试验来验证其长期疗效和安全性。', source:'学术会议', date:'2025', cat:'院士专家'},
@@ -7000,11 +7016,12 @@ const EXPERT_VIEWS = [
 function renderOriginals() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创文章·大咖观点</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创·转载·大咖观点</span></div>';
 
-  // Tab switcher (2 tabs)
+  // Tab switcher (3 tabs)
   html += '<div class="report-tabs report-tabs-even">';
   html += '<button class="report-tab' + (currentOriginalTab === 'articles' ? ' active' : '') + '" data-tab="articles" onclick="switchOriginalTab(\'articles\')">' + svgIcon('pen', 14) + ' 原创文章</button>';
+  html += '<button class="report-tab' + (currentOriginalTab === 'reprints' ? ' active' : '') + '" data-tab="reprints" onclick="switchOriginalTab(\'reprints\')">' + svgIcon('share', 14) + ' 转载文章</button>';
   html += '<button class="report-tab' + (currentOriginalTab === 'experts' ? ' active' : '') + '" data-tab="experts" onclick="switchOriginalTab(\'experts\')">' + svgIcon('mic', 14) + ' 大咖观点</button>';
   html += '</div>';
 
@@ -7056,6 +7073,55 @@ function renderOriginals() {
   });
   html += '</div>'; // end orig-tab-articles
 
+  // === Reprints tab ===
+  html += '<div class="report-tab-content' + (currentOriginalTab === 'reprints' ? ' active' : '') + '" id="orig-tab-reprints">';
+
+  // Description
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目转载微信公众号及行业媒体中关于<b>细胞与基因治疗(CGT)</b>领域的优质文章，涵盖<b>行业动态</b>（获批产品、融资并购、管线进展）、<b>技术前沿</b>（AAV载体安全、外泌体疗法、3D微载体培养）、<b>政策法规</b>（CDE指导原则、818号令落地进展）和<b>投资观察</b>（赛道趋势、企业融资、商业化能力）四大方向。所有文章均注明来源公众号/媒体，版权归原作者所有，本平台仅作学习交流转载，不代表本平台观点。</div>';
+  html += '</div>';
+
+  // Category cards
+  var reprintCats = [
+    {id:'all', name:'全部', color:'var(--primary)'},
+    {id:'行业动态', name:'行业动态', color:'#42A5F5'},
+    {id:'技术前沿', name:'技术前沿', color:'#26C6DA'},
+    {id:'政策法规', name:'政策法规', color:'#FFB74D'},
+    {id:'投资观察', name:'投资观察', color:'#66BB6A'}
+  ];
+  var reprintCatCounts = {};
+  REPRINT_ARTICLES.forEach(function(a) {
+    if (!reprintCatCounts[a.tag]) reprintCatCounts[a.tag] = 0;
+    reprintCatCounts[a.tag]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;">';
+  reprintCats.forEach(function(c) {
+    var count = c.id === 'all' ? REPRINT_ARTICLES.length : (reprintCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentReprintCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchReprintCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 篇</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Reprint article cards (filtered)
+  var filteredReprints = currentReprintCat === 'all' ? REPRINT_ARTICLES : REPRINT_ARTICLES.filter(function(a) { return a.tag === currentReprintCat; });
+  var reprintTagColors = {'行业动态':{fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'},'技术前沿':{fg:'#26C6DA',bg:'rgba(38,198,218,0.15)'},'政策法规':{fg:'#FFB74D',bg:'rgba(255,183,77,0.15)'},'投资观察':{fg:'#66BB6A',bg:'rgba(102,187,106,0.15)'}};
+  filteredReprints.forEach(function(a) {
+    var tc = reprintTagColors[a.tag] || {fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'};
+    html += '<div class="orig-article" onclick="window.open(\'' + a.url + '\', \'_blank\')" style="cursor:pointer;">';
+    html += '<span class="orig-article-tag" style="background:' + tc.bg + ';color:' + tc.fg + ';">' + escapeHtml(a.tag) + '</span>';
+    html += '<div class="orig-article-title">' + escapeHtml(a.title) + '</div>';
+    html += '<div class="orig-article-desc">' + escapeHtml(a.desc) + '</div>';
+    html += '<div class="orig-article-meta">';
+    html += '<span>' + svgIcon('share', 12) + ' 转载自：' + escapeHtml(a.source) + '</span>';
+    html += '<span>' + svgIcon('calendar', 12) + ' ' + a.date + '</span>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>'; // end orig-tab-reprints
+
   // === Experts tab ===
   html += '<div class="report-tab-content' + (currentOriginalTab === 'experts' ? ' active' : '') + '" id="orig-tab-experts">';
 
@@ -7077,7 +7143,7 @@ function renderOriginals() {
     expertCatCounts[e.cat]++;
   });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
+  html += '<div class="reg-cat-row reg-cat-row-4" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
   expertCats.forEach(function(c) {
     var count = c.id === 'all' ? EXPERT_VIEWS.length : (expertCatCounts[c.id] || 0);
     html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentExpertCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchExpertCat(\'' + c.id + '\')">';
@@ -7110,7 +7176,7 @@ function switchOriginalTab(tab) {
   document.querySelectorAll('.report-tab[data-tab]').forEach(function(el) {
     el.classList.toggle('active', el.getAttribute('data-tab') === tab);
   });
-  ['articles', 'experts'].forEach(function(t) {
+  ['articles', 'reprints', 'experts'].forEach(function(t) {
     var el = document.getElementById('orig-tab-' + t);
     if (el) el.classList.toggle('active', t === tab);
   });
@@ -7121,6 +7187,13 @@ function switchArticleCat(cat) {
   renderOriginals();
   currentOriginalTab = 'articles';
   switchOriginalTab('articles');
+}
+
+function switchReprintCat(cat) {
+  currentReprintCat = cat;
+  renderOriginals();
+  currentOriginalTab = 'reprints';
+  switchOriginalTab('reprints');
 }
 
 function switchExpertCat(cat) {
@@ -7181,6 +7254,7 @@ var currentCourseCat = 'all';
 var currentConfCat = 'all';
 var currentOriginalTab = 'articles';
 var currentArticleCat = 'all';
+var currentReprintCat = 'all';
 var currentExpertCat = 'all';
 
 function renderBookCover(b) {
@@ -9311,6 +9385,7 @@ function showOnboarding() {
 
 var currentNewsTab = 'home';
 var currentPicksIssue = null; // null=latest, number=issue index
+var currentPicksCat = 'all'; // 'all' | 'clinical' | 'basic' | 'case'
 
 function switchNewsTab(tab) {
   saveNavState();
@@ -9620,7 +9695,12 @@ function renderEditorPicks() {
     currentPicksIssue = ALL_PICKS_ISSUES.length - 1;
   }
 
-  // Dropdown selector for quick jump
+  // Description box
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-text">本栏目为编辑精选周刊，每周一期，每期精选<b>临床试验</b>（III期阳性、注册里程碑、剂量探索等高级别证据）、<b>基础研究</b>（机制突破、新技术平台、标准更新等前沿发现）和<b>案例报道</b>（首例人体报告、创新给药途径、罕见病突破等临床探索）三大方向的重要文献。涵盖MSC、CAR-T、基因治疗、iPSC等细胞与基因治疗前沿领域，每篇均附编辑点评与关键数据提炼，仅供学术交流参考。</div>';
+  html += '</div>';
+
+  // Issue dropdown selector
   html += '<div class="pick-dropdown-wrap">';
   html += '<div class="pick-dropdown-btn" onclick="togglePicksDropdown(this)">';
   html += svgIcon('list', 14) + '<span>选择期数</span>' + svgIcon('chevron-down', 14);
@@ -9636,53 +9716,68 @@ function renderEditorPicks() {
   html += '</div>';
   html += '</div>';
 
-  // Image carousel: cover + article cards
   var issue = ALL_PICKS_ISSUES[currentPicksIssue];
-  var imgs = PICKS_IMAGES[currentPicksIssue];
-  if (imgs) {
-    var allSlides = [imgs.cover].concat(imgs.cards);
-    var total = allSlides.length;
-    html += '<div class="picks-viewport">';
-    html += '<button class="pk-nav-btn pk-nav-prev" onclick="picksScrollPrev()" aria-label="上一页">' + svgIcon('chevron-left', 20) + '</button>';
-    html += '<button class="pk-nav-btn pk-nav-next" onclick="picksScrollNext()" aria-label="下一页">' + svgIcon('chevron-right', 20) + '</button>';
-    html += '<div class="picks-carousel" id="picksCarousel">';
-    allSlides.forEach(function(src) {
-      html += '<div class="picks-carousel-slide"><img src="' + src + '" alt="编辑精选" loading="lazy" /></div>';
-    });
+
+  // Issue title
+  html += '<div style="text-align:center;margin-bottom:16px;">';
+  html += '<div style="font-size:16px;font-weight:600;color:var(--text);">' + escapeHtml(issue.issue) + ' · ' + escapeHtml(issue.title) + '</div>';
+  html += '<div style="font-size:12px;color:var(--text-light);margin-top:4px;">发布日期：' + escapeHtml(issue.date) + ' · 共' + issue.picks.length + '篇</div>';
+  html += '</div>';
+
+  // Category cards
+  var picksCats = [
+    {id:'all', name:'全部', color:'var(--primary)'},
+    {id:'clinical', name:'临床试验', color:'#42A5F5'},
+    {id:'basic', name:'基础研究', color:'#66BB6A'},
+    {id:'case', name:'案例报道', color:'#FFB74D'}
+  ];
+  var picksCatCounts = {};
+  issue.picks.forEach(function(p) {
+    if (!picksCatCounts[p.category]) picksCatCounts[p.category] = 0;
+    picksCatCounts[p.category]++;
+  });
+
+  html += '<div class="reg-cat-row reg-cat-row-4" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
+  picksCats.forEach(function(c) {
+    var count = c.id === 'all' ? issue.picks.length : (picksCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentPicksCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchPicksCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 篇</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
     html += '</div>';
+  });
+  html += '</div>';
+
+  // Content cards (filtered)
+  var catColors = {clinical:{fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'},basic:{fg:'#66BB6A',bg:'rgba(102,187,106,0.15)'},case:{fg:'#FFB74D',bg:'rgba(255,183,77,0.15)'}};
+  var filteredPicks = currentPicksCat === 'all' ? issue.picks : issue.picks.filter(function(p) { return p.category === currentPicksCat; });
+  filteredPicks.forEach(function(p) {
+    var tc = catColors[p.category] || {fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'};
+    html += '<div class="pick-card">';
+    html += '<div class="pk-header">';
+    html += '<span class="pk-tag" style="background:' + tc.bg + ';color:' + tc.fg + ';">' + escapeHtml(p.tag) + '</span>';
     html += '</div>';
-    html += '<div class="picks-carousel-counter" id="picksCounter">1 / ' + total + '</div>';
-    html += '<div class="picks-hint">左右滑动阅读 · 共' + (total - 1) + '篇</div>';
-  }
+    html += '<div class="pk-title">' + escapeHtml(p.title) + '</div>';
+    if (p.meta && p.meta.length) {
+      html += '<div class="pk-meta">' + p.meta.map(escapeHtml).join(' · ') + '</div>';
+    }
+    html += '<div class="pk-content">' + p.content + '</div>';
+    html += '</div>';
+  });
 
   content.innerHTML = html;
   updateFloatButtons();
   pushHistory();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Update counter on scroll
-  var carousel = document.getElementById('picksCarousel');
-  var counter = document.getElementById('picksCounter');
-  if (carousel && counter) {
-    carousel.addEventListener('scroll', function() {
-      var slideWidth = carousel.offsetWidth;
-      var idx = Math.round(carousel.scrollLeft / slideWidth);
-      counter.textContent = (idx + 1) + ' / ' + total;
-    });
-  }
 }
 
-function picksScrollPrev() {
-  var c = document.getElementById('picksCarousel');
-  if (c) c.scrollBy({ left: -c.offsetWidth, behavior: 'smooth' });
-}
-function picksScrollNext() {
-  var c = document.getElementById('picksCarousel');
-  if (c) c.scrollBy({ left: c.offsetWidth, behavior: 'smooth' });
+function switchPicksCat(cat) {
+  currentPicksCat = cat;
+  renderEditorPicks();
 }
 
 function switchPicksIssue(idx) {
   currentPicksIssue = idx;
+  currentPicksCat = 'all';
   closePicksDropdown();
   renderEditorPicks();
 }
