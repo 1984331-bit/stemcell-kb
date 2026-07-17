@@ -427,6 +427,10 @@ body {
   .site-footer { padding: 16px 14px; }
   .site-footer .sf-right { text-align: left; }
   .site-footer .sf-contact { align-items: flex-start; }
+  .global-search-box input { font-size: 13px; padding: 12px 70px 12px 42px; }
+  .global-search-box .gsb-icon { left: 12px; top: 13px; }
+  .global-search-box .gsb-btn { padding: 0 12px; font-size: 12px; }
+  .global-search-box .gsb-tag { font-size: 11px; padding: 3px 10px; }
 }
 /* Literature section search box */
 .lit-search-box {
@@ -455,6 +459,72 @@ body {
   transform: translateY(-50%);
   font-size: 18px;
   opacity: 0.5;
+}
+/* Global search box (hub page) */
+.global-search-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+.global-search-box input {
+  width: 100%;
+  padding: 14px 90px 14px 48px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  background: var(--card-solid);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.global-search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.15);
+}
+.global-search-box .gsb-icon {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: var(--text-light);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.global-search-box .gsb-btn {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  bottom: 6px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #0A0F1A;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.global-search-box .gsb-btn:hover { opacity: 0.85; }
+.global-search-box .gsb-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.global-search-box .gsb-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.global-search-box .gsb-tag:hover {
+  background: rgba(0,229,255,0.1);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 /* Literature section stats bar */
 .lit-stats {
@@ -612,13 +682,29 @@ body {
   cursor: pointer;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.15s;
+  transition: color 0.15s, background 0.15s;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(0,229,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .breadcrumb a:hover, .breadcrumb .crumb-link:hover {
   color: var(--primary-dark);
-  text-decoration: underline;
+  background: rgba(0,229,255,0.15);
 }
 .breadcrumb .crumb-sep { color: var(--text-light); }
+.breadcrumb .crumb-current {
+  color: var(--primary);
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(0,229,255,0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 .breadcrumb b { color: var(--primary); }
 /* Back to system button */
 /* content-header */
@@ -1238,8 +1324,11 @@ body {
   }
   .breadcrumb .crumb-link {
     padding: 4px 10px;
-    border-radius: 6px;
-    background: var(--accent);
+    font-size: 12px;
+  }
+  .breadcrumb .crumb-current {
+    padding: 4px 10px;
+    font-size: 12px;
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
   .breadcrumb b { font-size: 14px; }
@@ -4042,25 +4131,25 @@ body { padding-bottom: 60px; }
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
       首页
     </div>
+    <div class="info-tab" data-kb="picks" onclick="navToKb('picks')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="M8 8h8M8 12h8M8 16h5"/><path d="M4 4l2 2M18 4l2 2M4 20l2-2M18 20l2-2" opacity="0.4"/></svg>
+      笔记
+    </div>
     <div class="info-tab" data-kb="originals" onclick="navToKb('originals')">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      评论
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9 8l-6 1 4.5 4.5L6 20l6-3 6 3-1.5-6.5L21 9l-6-1z"/></svg>
+      评述
     </div>
-    <div class="info-tab" data-kb="books" data-book-tab="books" onclick="navToKb('books','books')">
+    <div class="info-tab" data-kb="books" onclick="navToKb('books')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      读书
-    </div>
-    <div class="info-tab" data-kb="books" data-book-tab="courses" onclick="navToKb('books','courses')">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-      课程
-    </div>
-    <div class="info-tab" data-kb="companies" onclick="navToKb('companies')">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
-      企业
+      学习
     </div>
     <div class="info-tab" data-kb="report" onclick="navToKb('report')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
       数据
+    </div>
+    <div class="info-tab" data-kb="companies" onclick="navToKb('companies')">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+      企业
     </div>
     <div class="info-tab" id="tab-disclaimer" onclick="toggleInfoBar('disclaimer')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
@@ -4773,7 +4862,7 @@ function renderContent() {
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>临床文献数据</b></div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">临床文献数据</span></div>';
     var totalInds = 0;
     var indSet = new Set();
     ALL_DATA.forEach(function(d) { indSet.add(d.indication || '未分类'); });
@@ -4845,7 +4934,7 @@ function renderContent() {
     const filtered = getSortedData(getFilteredData());
     const inds = [...new Set(filtered.map(d => d.indication))].sort();
 
-    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="literature" onclick="navTo(this)">临床文献数据</span><span class="crumb-sep">›</span> <b>' + escapeHtml(sysName) + '</b></div>';
+    let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="literature" onclick="navTo(this)">临床文献数据</span><span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(sysName) + '</span></div>';
     html += '<div class="content-header"><h2>' + escapeHtml(sysName) + '</h2><div class="desc">共 ' + filtered.length + ' 篇文献，' + inds.length + ' 个适应症。点击下方适应症卡片可筛选特定疾病，或向下滚动浏览全部文献。</div></div>';
 
     // Indication cards
@@ -4928,15 +5017,15 @@ function renderContent() {
     headerDesc = '共 ' + filtered.length + ' 篇文献';
   }
 
-  let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span>';
+  let html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span>';
   html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-section="literature" onclick="navTo(this)">临床文献数据</span>';
   if (currentFilter.system) {
     html += '<span class="crumb-sep">›</span> <span class="crumb-link" data-action="sys" data-system="' + escapeHtml(currentFilter.system) + '" onclick="navTo(this)">' + escapeHtml(currentFilter.system) + '</span>';
   }
   if (currentFilter.indication) {
-    html += ' <span class="crumb-sep">›</span> <b>' + escapeHtml(currentFilter.indication) + '</b>';
+    html += ' <span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(currentFilter.indication) + '</span>';
   } else if (searchQuery) {
-    html += '<span class="crumb-sep">›</span> <b>搜索结果</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">搜索结果</span>';
   }
   html += '</div>';
 
@@ -5841,7 +5930,7 @@ function updateLayout(section) {
     var kb = el.getAttribute('data-kb');
     var bt = el.getAttribute('data-book-tab');
     if (kb === section) {
-      if (kb === 'books') {
+      if (kb === 'books' && bt) {
         el.classList.toggle('active', bt === currentBookTab);
       } else {
         el.classList.add('active');
@@ -6270,6 +6359,17 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
+  // Global search section (placeholder, functionality TBD)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索</div><div class="sd-line"></div></div>';
+  html += '<div class="global-search-box">';
+  html += '<input type="text" id="globalSearchInput" placeholder="搜索文献、产品、政策、机构、适应症…（功能开发中）" readonly onclick="this.blur()" />';
+  html += '<span class="gsb-icon">' + svgIcon('search', 18) + '</span>';
+  html += '<button class="gsb-btn" onclick="return false;">检索</button>';
+  html += '<div class="gsb-tags">';
+  html += '<span class="gsb-tag">MSC</span><span class="gsb-tag">CAR-T</span><span class="gsb-tag">外泌体</span><span class="gsb-tag">818号令</span><span class="gsb-tag">博鳌乐城</span>';
+  html += '</div>';
+  html += '</div>';
+
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('book', 16) + ' 知识库栏目</div><div class="sd-line"></div></div>';
 
   // Picks entry (report-entry style, between hub-cards and MSC report)
@@ -6429,7 +6529,7 @@ var currentReportTab = 'msc';
 function renderReport() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>数据分析·行业报告</b></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">数据分析·行业报告</span></div>';
   
   // Intro section
   html += '<div class="report-intro">';
@@ -6898,7 +6998,7 @@ const EXPERT_VIEWS = [
 function renderOriginals() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>原创文章·大咖观点</b></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创文章·大咖观点</span></div>';
   html += '<div class="content-header"><h2>原创文章·大咖观点</h2><div class="desc">' + svgIcon('quote', 14) + ' 平台原创深度文章 · 行业院士专家领导投资人观点精选</div></div>';
 
   // Section 1: Original Articles
@@ -6965,7 +7065,7 @@ var currentBookTab = 'books';
 function renderBooks() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍·培训课程</b></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">行业书籍·培训课程</span></div>';
 
   // Tab switcher (replaces h2 header)
   html += '<div class="report-tabs">';
@@ -7094,7 +7194,7 @@ var HEALTH_PRODUCTS = [
 function renderHealthProducts() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>健康产品·编辑严选</b></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">健康产品·编辑严选</span></div>';
   html += '<div class="content-header"><h2>健康产品·编辑严选</h2><div class="desc">' + svgIcon('heart', 14) + ' 编辑团队亲测推荐 · 健康好物 · 品质保障</div></div>';
 
   // Disclaimer banner
@@ -7316,7 +7416,7 @@ function carouselGoTo(idx) {
 // === Intro section (认识细胞治疗) ===
 function renderIntro() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>认识细胞治疗</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">认识细胞治疗</span></div>';
   html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">面向大众及患者的细胞治疗科普导览，用最通俗易懂的语言，了解细胞治疗的原理、类型与应用。提示公众行业的特殊性，列出了大众和患者常见的问题，务必阅读下方<b>安全与监管须知</b>。</div></div>';
 
   // 1. 什么是细胞治疗 (foldable)
@@ -8005,9 +8105,9 @@ function renderInstitutions() {
   var content = document.getElementById('content');
   var html = '';
   // Breadcrumb
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="institutions" onclick="filterInsts(\'all\')">备案机构查询</span>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="institutions" onclick="filterInsts(\'all\')">备案机构查询</span>';
   if (instFilter === 'all') {
-    html += '<span class="crumb-sep">›</span> <b>全国总览</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">全国总览</span>';
   } else if (instFilter.indexOf('province:') === 0) {
     var provName = instFilter.slice(9);
     var shortName = PROVINCE_SHORT[provName] || provName;
@@ -8017,9 +8117,9 @@ function renderInstitutions() {
       if (REGION_PROVINCES[reg].indexOf(provName) >= 0) { provRegion = reg; break; }
     }
     if (provRegion) html += '<span class="crumb-sep">›</span> <span class="crumb-link" onclick="filterInsts(\'' + provRegion + '\')">' + provRegion + '</span>';
-    html += '<span class="crumb-sep">›</span> <b>' + shortName + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + shortName + '</span>';
   } else {
-    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(instFilter) + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(instFilter) + '</span>';
   }
   html += '</div>';
 
@@ -8335,7 +8435,7 @@ function showInstProjects() {
 
 function renderInstProjects() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <b>备案项目一览</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <span class="crumb-current">备案项目一览</span></div>';
 
   // Collect all projects with institution info
   var allProjects = [];
@@ -8897,9 +8997,9 @@ function filterInsts(filter) {
 
 function renderCompanies() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="companies" onclick="navTo(this)">企业巡览·产业相关</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="companies" onclick="navTo(this)">企业巡览·产业相关</span>';
   if (companyFilter !== 'all') {
-    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(COMPANY_CATS[companyFilter].name) + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(COMPANY_CATS[companyFilter].name) + '</span>';
   }
   html += '</div>';
 
@@ -8984,9 +9084,9 @@ function renderNews() {
   var html = '';
 
   var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
   if (currentNewsTab !== 'home') {
-    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</span>';
   }
   html += '</div>';
 
@@ -9089,9 +9189,9 @@ function togglePickDetail(i) {
 var regFilter = 'all';
 function renderRegulations() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="regulations" onclick="navTo(this)">监管政策汇编</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="regulations" onclick="navTo(this)">监管政策汇编</span>';
   if (regFilter !== 'all') {
-    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(regFilter) + '</span>';
   }
   html += '</div>';
   html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。</b></div></div>';
@@ -9165,9 +9265,9 @@ function filterRegs(cat) {
 var prodFilter = 'all';
 function renderProducts() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="products" onclick="navTo(this)">获批产品名录</span>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="products" onclick="navTo(this)">获批产品名录</span>';
   if (prodFilter !== 'all') {
-    html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(prodFilter) + '</b>';
+    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(prodFilter) + '</span>';
   }
   html += '</div>';
 
@@ -9272,7 +9372,7 @@ function filterProducts(cat) {
 // === Editor picks section ===
 function renderEditorPicks() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>编辑精选</b></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">编辑精选</span></div>';
   // Default to latest issue
   if (currentPicksIssue === null || currentPicksIssue >= ALL_PICKS_ISSUES.length) {
     currentPicksIssue = ALL_PICKS_ISSUES.length - 1;
