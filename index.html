@@ -656,7 +656,6 @@ body {
   box-shadow: var(--shadow);
   padding: 16px 20px;
   margin-bottom: 12px;
-  border-left: 4px solid var(--primary);
 }
 .overview-card {
   background: var(--card-bg);
@@ -733,7 +732,7 @@ body {
   gap: 1px;
 }
 .reg-cat-card .rcc-count {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 800;
   color: var(--primary);
   line-height: 1;
@@ -749,6 +748,31 @@ body {
   color: var(--text);
   margin-top: 4px;
   white-space: nowrap;
+}
+/* Updated badge for category cards */
+.reg-cat-card { position: relative; }
+.rcc-new-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #FF3B30;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(255,59,48,0.4);
+  z-index: 3;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+@media (max-width: 768px) {
+  .rcc-new-badge { font-size: 8px; padding: 1px 4px; }
 }
 /* Dual-track regulatory info box */
 .dual-track-grid {
@@ -1179,7 +1203,7 @@ body {
   .content-header h2 { font-size: 18px; }
   .reg-cat-row { gap: 5px; }
   .reg-cat-card { padding: 8px 3px; border-radius: 6px; border-left-width: 3px; }
-  .reg-cat-card .rcc-count { font-size: 16px; }
+  .reg-cat-card .rcc-count { font-size: 20px; }
   .reg-cat-card .rcc-unit { font-size: 9px; }
   .reg-cat-card .rcc-name { font-size: 10px; }
   .paper-card { padding: 12px 14px; }
@@ -1323,15 +1347,18 @@ body { padding-bottom: 60px; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 40px 50px 36px;
+  padding: 40px 50px 52px;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transform: scale(1.08);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
   cursor: pointer;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.wh-slide.active { opacity: 1; z-index: 2; }
+.wh-slide.active { opacity: 1; z-index: 2; transform: scale(1); }
+.wh-slide.exit-left { opacity: 0; transform: scale(1) translateX(-30px); z-index: 1; }
+.wh-slide.exit-right { opacity: 0; transform: scale(1) translateX(30px); z-index: 1; }
 .wh-slide::before {
   content: '';
   position: absolute;
@@ -1346,7 +1373,7 @@ body { padding-bottom: 60px; }
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 34px;
+  margin-bottom: 18px;
 }
 .wh-slide-text {
   font-size: 15px;
@@ -1431,7 +1458,7 @@ body { padding-bottom: 60px; }
 }
 @media (max-width: 768px) {
   .wh-carousel { max-height: 240px; }
-  .wh-slide { padding: 30px 40px 32px; }
+  .wh-slide { padding: 30px 40px 44px; }
   .wh-slide-text { font-size: 12px; }
   .wh-arrow { width: 28px; height: 28px; }
   .wh-title-overlay { font-size: 10px; top: 8px; left: 10px; }
@@ -4127,6 +4154,7 @@ body { padding-bottom: 60px; }
 var whCurrentIndex = 0;
 var whTotalSlides = 5;
 var whAutoPlayTimer = null;
+var whIsAnimating = false;
 
 function whGoTo(index) {
   var carousel = document.getElementById('whCarousel');
@@ -4135,13 +4163,25 @@ function whGoTo(index) {
   var dots = carousel.querySelectorAll('.wh-dot');
   if (slides.length === 0) return;
   whTotalSlides = slides.length;
-  whCurrentIndex = (index + whTotalSlides) % whTotalSlides;
+  var newIndex = (index + whTotalSlides) % whTotalSlides;
+  if (newIndex === whCurrentIndex) return;
+  // Direction-based exit animation
+  var dir = index > whCurrentIndex ? 1 : -1;
   slides.forEach(function(s, i) {
-    s.classList.toggle('active', i === whCurrentIndex);
+    if (i === whCurrentIndex) {
+      s.classList.remove('active');
+      s.classList.add(dir > 0 ? 'exit-left' : 'exit-right');
+    } else if (i === newIndex) {
+      s.classList.remove('exit-left', 'exit-right');
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active', 'exit-left', 'exit-right');
+    }
   });
   dots.forEach(function(d, i) {
-    d.classList.toggle('active', i === whCurrentIndex);
+    d.classList.toggle('active', i === newIndex);
   });
+  whCurrentIndex = newIndex;
 }
 
 function whSlide(dir) {
@@ -4153,33 +4193,35 @@ function whRestartAutoPlay() {
   if (whAutoPlayTimer) clearInterval(whAutoPlayTimer);
   whAutoPlayTimer = setInterval(function() {
     whGoTo(whCurrentIndex + 1);
-  }, 4500);
+  }, 3500);
 }
 
-function initCarousel() {
+function initWhCarousel() {
   var carousel = document.getElementById('whCarousel');
   if (!carousel) return;
   var slides = carousel.querySelectorAll('.wh-slide');
   whTotalSlides = slides.length;
   whCurrentIndex = 0;
+  // Clear any previous timer
+  if (whAutoPlayTimer) { clearInterval(whAutoPlayTimer); whAutoPlayTimer = null; }
   // Pause on hover
-  carousel.addEventListener('mouseenter', function() {
-    if (whAutoPlayTimer) clearInterval(whAutoPlayTimer);
-  });
-  carousel.addEventListener('mouseleave', function() {
+  carousel.onmouseenter = function() {
+    if (whAutoPlayTimer) { clearInterval(whAutoPlayTimer); whAutoPlayTimer = null; }
+  };
+  carousel.onmouseleave = function() {
     whRestartAutoPlay();
-  });
+  };
   // Touch swipe
   var touchStartX = 0;
-  carousel.addEventListener('touchstart', function(e) {
+  carousel.ontouchstart = function(e) {
     touchStartX = e.touches[0].clientX;
-  }, { passive: true });
-  carousel.addEventListener('touchend', function(e) {
+  };
+  carousel.ontouchend = function(e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 40) {
       whSlide(dx > 0 ? -1 : 1);
     }
-  }, { passive: true });
+  };
   whRestartAutoPlay();
 }
 
@@ -6156,7 +6198,7 @@ function renderHub() {
 
   content.innerHTML = html;
   updateFloatButtons();
-  initCarousel();
+  initWhCarousel();
   renderHotTagBatch();
 }
 
@@ -6677,6 +6719,26 @@ function animateCount(el) {
   requestAnimationFrame(step);
 }
 
+// === Animate category card counts (rcc-count) ===
+function animateRccCounts() {
+  document.querySelectorAll('.rcc-count[data-count]').forEach(function(el) {
+    if (el.classList.contains('counted')) return;
+    el.classList.add('counted');
+    var target = parseInt(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    var duration = 1000;
+    var start = performance.now();
+    el.textContent = '0';
+    function step(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased).toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+
 // === Original articles & Expert views section ===
 const ORIGINAL_ARTICLES = [
   {tag:'专著', title:'《干细胞临床应用手册》——24章系统综述', desc:'涵盖11大生理系统145+适应症，2058篇临床文献底稿，从基础生物学到临床转化全链条覆盖。包括ISCT 2025新标准、818号令全文解读、PREVENT-TAHA8 III期数据等最新进展。', date:'2026-07', words:'约38.9万字'},
@@ -7118,7 +7180,7 @@ function carouselGoTo(idx) {
 function renderIntro() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>认识细胞治疗</b></div>';
-  html += '<div class="content-header"><div class="desc">面向患者及公众的细胞治疗科普导览<br>用通俗易懂的语言，了解细胞治疗的原理、类型与应用</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">面向大众及患者的细胞治疗科普导览，用最通俗易懂的语言，了解细胞治疗的原理、类型与应用。提示公众行业的特殊性，列出了大众和患者常见的问题，务必阅读下方<b>安全与监管须知</b>。</div></div>';
 
   // 1. 什么是细胞治疗 (foldable)
   html += '<div class="edu-panel" id="edu-p1">';
@@ -7418,7 +7480,8 @@ function renderIntro() {
   html += '<li>境外"干细胞旅游"存在严重安全风险，多国已发出警告</li>';
   html += '</ul></div>';
   html += '</div>';
-  html += '<div class="edu-callout" style="margin-top:14px;"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>免责声明：</b>本页面内容仅供科普参考，不构成医疗建议。具体治疗方案请咨询主治医生。如有细胞治疗相关问题，可致电咨询：<b>15932929299（杨博士）</b>，或点击下方"备案机构查询"了解正规治疗渠道。</div></div>';
+  html += '<div class="edu-callout" style="margin-top:14px;"><div>' + svgIcon('warn', 18) + '</div><div class="ec-text"><b>免责声明：</b>本页面内容仅供科普参考，不构成医疗建议。具体治疗方案请咨询主治医生。如果有细胞治疗相关问题，可点击下方"备案机构查询"，查看全国各细胞治疗中心的咨询电话，致电咨询。</div></div>';
+  html += '<div style="text-align:center;margin-top:12px;"><button style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid var(--primary);background:var(--highlight-bg);padding:10px 28px;border-radius:8px;color:var(--primary);font-size:13px;font-weight:600;transition:background 0.2s;" onclick="switchSection(\'institutions\')">' + svgIcon('building', 16) + ' 查看全国细胞治疗中心咨询电话</button></div>';
   html += '</div></div></div>';
 
   content.innerHTML = html;
@@ -7835,14 +7898,14 @@ function renderInstitutions() {
   html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);">';
   var allActive = (instFilter === 'all') ? 'background:rgba(0,229,255,0.06);' : '';
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;' + allActive + '" onclick="filterInsts(\'all\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count">' + INSTITUTIONS.length + '</span><span class="rcc-unit"> 家</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + INSTITUTIONS.length + '"></span><span class="rcc-unit"> 家</span></div>';
   html += '<div class="rcc-name">全部机构</div>';
   html += '</div>';
   ['华北','华东','华中','华南','西南','西北','东北'].forEach(function(reg) {
     var color = INST_REGION_COLORS[reg] || '#666';
     var regActive = (instFilter === reg) ? 'background:rgba(0,229,255,0.06);' : '';
     html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;' + regActive + '" onclick="filterInsts(\'' + reg + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + (regionCounts[reg]||0) + '</span><span class="rcc-unit"> 家</span></div>';
+    html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + (regionCounts[reg]||0) + '" style="color:' + color + ';"></span><span class="rcc-unit"> 家</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(reg) + '</div>';
     html += '</div>';
   });
@@ -8056,6 +8119,7 @@ function renderInstitutions() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  animateRccCounts();
 
   // Animate stat numbers if in map view
   if (instFilter === 'all') {
@@ -8400,12 +8464,12 @@ function renderCompanies() {
   Object.keys(COMPANY_CATS).forEach(function(k) {
     var cc = COMPANY_CATS[k];
     html += '<div class="reg-cat-card" style="border-left-color:' + cc.color + ';cursor:pointer;" onclick="filterCompanies(\'' + k + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + cc.color + ';">' + catCounts[k] + '</span><span class="rcc-unit"> 家</span></div>';
+    html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + catCounts[k] + '" style="color:' + cc.color + ';"></span><span class="rcc-unit"> 家</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(cc.name) + '</div>';
     html += '</div>';
   });
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;" onclick="filterCompanies(\'all\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count">' + COMPANIES.length + '</span><span class="rcc-unit"> 家</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + COMPANIES.length + '"></span><span class="rcc-unit"> 家</span></div>';
   html += '<div class="rcc-name">全部企业</div>';
   html += '</div>';
   html += '</div>';
@@ -8437,6 +8501,7 @@ function renderCompanies() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  animateRccCounts();
   pushHistory();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -8487,20 +8552,23 @@ function renderNews() {
   ];
 
   // content-header (always shown)
-  html += '<div class="content-header"><div class="desc">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选感兴趣的内容。</div></div>';
 
   // Category cards — 6 in two rows (3 per row)
   var totalCount = NEWS_FLASH.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
   var tabShortLabels = { flash:'最新资讯', frontier:'前沿研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
+  var newsNewTabs = { flash: true, frontier: true }; // recently updated tabs
   html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);">';
   tabs.forEach(function(t) {
+    var newBadge = newsNewTabs[t.id] ? '<span class="rcc-new-badge">NEW</span>' : '';
     html += '<div class="reg-cat-card" style="border-left-color:' + t.color + ';cursor:pointer;" onclick="switchNewsTab(\'' + t.id + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + t.color + ';">' + t.count + '</span><span class="rcc-unit"> 条</span></div>';
+    html += newBadge;
+    html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + t.count + '" style="color:' + t.color + ';"></span><span class="rcc-unit"> 条</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(tabShortLabels[t.id] || t.label) + '</div>';
     html += '</div>';
   });
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;" onclick="switchNewsTab(\'home\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count">' + totalCount + '</span><span class="rcc-unit"> 条</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalCount + '"></span><span class="rcc-unit"> 条</span></div>';
   html += '<div class="rcc-name">全部资讯</div>';
   html += '</div>';
   html += '</div>';
@@ -8558,6 +8626,7 @@ function renderNews() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  animateRccCounts();
 }
 
 // Toggle pick detail
@@ -8577,7 +8646,7 @@ function renderRegulations() {
     html += '<span class="crumb-sep">›</span> <b>' + escapeHtml(regFilter) + '</b>';
   }
   html += '</div>';
-  html += '<div class="content-header"><div class="desc">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。</b></div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。</b></div></div>';
 
   // Category counts
   var catCounts = {};
@@ -8594,16 +8663,19 @@ function renderRegulations() {
   });
 
   // Category cards — 5 in one row
+  var regNewCats = { '法律法规': true }; // recently updated category
   html += '<div class="reg-cat-row">';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
+    var newBadge = regNewCats[cat] ? '<span class="rcc-new-badge">NEW</span>' : '';
     html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterRegs(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</span><span class="rcc-unit"> 份</span></div>';
+    html += newBadge;
+    html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + catCounts[cat] + '" style="color:' + color + ';"></span><span class="rcc-unit"> 份</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(cat) + '</div>';
     html += '</div>';
   });
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;" onclick="filterRegs(\'all\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count">' + REGULATIONS.length + '</span><span class="rcc-unit"> 份</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + REGULATIONS.length + '"></span><span class="rcc-unit"> 份</span></div>';
   html += '<div class="rcc-name">全部文件</div>';
   html += '</div>';
   html += '</div>';
@@ -8629,6 +8701,7 @@ function renderRegulations() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  animateRccCounts();
 }
 
 function filterRegs(cat) {
@@ -8671,7 +8744,7 @@ function renderProducts() {
     '特许转化·博鳌乐城': '#FF8F00'
   };
 
-  html += '<div class="content-header"><div class="desc">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。含海南博鳌乐城先行区特许转化项目。点击下方分类卡片筛选。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。含海南博鳌乐城先行区特许转化项目。点击下方分类卡片筛选。</div></div>';
 
   // Category cards — 5 in one row
   var catShortNames = {
@@ -8681,17 +8754,20 @@ function renderProducts() {
     '其他细胞治疗': '其他',
     '特许转化·博鳌乐城': '博鳌乐城'
   };
+  var prodNewCats = { '特许转化·博鳌乐城': true }; // recently updated category
   html += '<div class="reg-cat-row">';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
     var shortName = catShortNames[cat] || cat;
+    var newBadge = prodNewCats[cat] ? '<span class="rcc-new-badge">NEW</span>' : '';
     html += '<div class="reg-cat-card" style="border-left-color:' + color + ';cursor:pointer;" onclick="filterProducts(\'' + cat.replace(/'/g, "\\'") + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + color + ';">' + catCounts[cat] + '</span><span class="rcc-unit"> 款</span></div>';
+    html += newBadge;
+    html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + catCounts[cat] + '" style="color:' + color + ';"></span><span class="rcc-unit"> 款</span></div>';
     html += '<div class="rcc-name">' + escapeHtml(shortName) + '</div>';
     html += '</div>';
   });
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;" onclick="filterProducts(\'all\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count">' + PRODUCTS.length + '</span><span class="rcc-unit"> 款</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + PRODUCTS.length + '"></span><span class="rcc-unit"> 款</span></div>';
   html += '<div class="rcc-name">全部产品</div>';
   html += '</div>';
   html += '</div>';
@@ -8733,6 +8809,7 @@ function renderProducts() {
 
   content.innerHTML = html;
   updateFloatButtons();
+  animateRccCounts();
 }
 
 function filterProducts(cat) {
