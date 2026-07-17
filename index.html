@@ -1544,6 +1544,27 @@ body { padding-bottom: 60px; }
   .hub-card .hc-title { font-size: 13px; }
   .hub-card .hc-desc { font-size: 10px; }
 }
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 12px;
+}
+.section-divider .sd-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.section-divider .sd-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
 .hub-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2735,6 +2756,12 @@ body { padding-bottom: 60px; }
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.prov-bar-item:hover {
+  background: rgba(0,229,255,0.06);
 }
 .prov-bar-label {
   width: 60px;
@@ -5286,7 +5313,9 @@ function svgIcon(name, sz) {
     'heart': '<path d="M12 21s-7-5-9-10a5 5 0 019-3 5 5 0 019 3c-2 5-9 10-9 10z"/><path d="M9 11l2 2 4-4"/>',
     'map': '<path d="M9 3L3 5v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16M15 5v16"/>',
     'bar': '<path d="M3 20h18M7 20V10M12 20V6M17 20v-7"/>',
-    'arrow-left': '<path d="M19 12H5M12 19l-7-7 7-7"/>'
+    'arrow-left': '<path d="M19 12H5M12 19l-7-7 7-7"/>',
+    'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/>',
+    'phone': '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -5957,6 +5986,8 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('database', 16) + ' 数据库入口</div><div class="sd-line"></div></div>';
+
   html += '<div class="hub-cards">';
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 科普导览</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
@@ -5965,6 +5996,8 @@ function renderHub() {
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
+
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('book', 16) + ' 知识库栏目</div><div class="sd-line"></div></div>';
 
   // Picks entry (report-entry style, between hub-cards and MSC report)
   html += '<div class="report-entry amber" onclick="switchSection(\'picks\')">';
@@ -7238,118 +7271,118 @@ function renderIntro() {
 // === Institutions section ===
 var INSTITUTIONS = [
   // 华北 (24)
-  {region:'华北',name:'天津医科大学肿瘤医院',center:'细胞治疗中心',city:'天津'},
-  {region:'华北',name:'天津医科大学总医院',center:'细胞治疗中心',city:'天津'},
-  {region:'华北',name:'首都医科大学附属北京友谊医院',center:'细胞与基因治疗创新转化中心',city:'北京'},
-  {region:'华北',name:'北京大学国际医院',center:'血液肿瘤及细胞治疗中心',city:'北京'},
-  {region:'华北',name:'解放军总医院第三医学中心',center:'细胞移植科/细胞治疗中心',city:'北京'},
-  {region:'华北',name:'解放军总医院（301医院）',center:'实体瘤CAR-T中心',city:'北京'},
-  {region:'华北',name:'北京大学第三医院',center:'细胞治疗中心（免疫细胞治疗专病门诊）',city:'北京'},
-  {region:'华北',name:'中国医学科学院阜外医院',center:'心血管细胞治疗临床研究中心',city:'北京'},
-  {region:'华北',name:'北京大学人民医院',center:'干细胞临床研究中心',city:'北京'},
-  {region:'华北',name:'中国医学科学院血液病医院',center:'免疫细胞治疗中心',city:'天津'},
-  {region:'华北',name:'北京协和医院',center:'细胞治疗转化医学中心',city:'北京',note:'818号令后首个成功备案项目'},
-  {region:'华北',name:'解放军白求恩国际和平医院',center:'细胞治疗康复中心',city:'石家庄'},
-  {region:'华北',name:'首都医科大学附属北京天坛医院',center:'神经细胞治疗临床研究中心',city:'北京'},
-  {region:'华北',name:'解放军第五医学中心',center:'生物技术门诊',city:'北京'},
-  {region:'华北',name:'北戴河华是肿瘤医院',center:'细胞治疗专科医院',city:'秦皇岛'},
-  {region:'华北',name:'河北医科大学第二医院',center:'细胞治疗与再生医学中心',city:'石家庄'},
-  {region:'华北',name:'河北医科大学第四医院',center:'生物治疗科',city:'石家庄'},
-  {region:'华北',name:'北京大学肿瘤医院',center:'细胞与基因治疗重点实验室',city:'北京'},
-  {region:'华北',name:'首都医科大学附属北京地坛医院',center:'肿瘤生物治疗门诊',city:'北京'},
-  {region:'华北',name:'首都医科大学附属北京世纪坛医院',center:'肿瘤免疫治疗中心',city:'北京'},
-  {region:'华北',name:'北京大学第一医院',center:'细胞与基因治疗中心',city:'北京'},
-  {region:'华北',name:'唐山市工人医院',center:'细胞治疗中心',city:'唐山'},
-  {region:'华北',name:'秦皇岛市第一医院',center:'细胞治疗中心',city:'秦皇岛'},
-  {region:'华北',name:'玉田县中医医院',center:'细胞治疗中心',city:'唐山'},
+  {region:'华北',name:'天津医科大学肿瘤医院',center:'细胞治疗中心',city:'天津',website:'www.tjmuch.com',phone:'022-23340123'},
+  {region:'华北',name:'天津医科大学总医院',center:'细胞治疗中心',city:'天津',website:'www.tjmugh.com.cn',phone:'022-60362255'},
+  {region:'华北',name:'首都医科大学附属北京友谊医院',center:'细胞与基因治疗创新转化中心',city:'北京',website:'www.bjfh.com.cn',phone:'010-63016616'},
+  {region:'华北',name:'北京大学国际医院',center:'血液肿瘤及细胞治疗中心',city:'北京',website:'www.pkuih.edu.cn',phone:'010-69006900'},
+  {region:'华北',name:'解放军总医院第三医学中心',center:'细胞移植科/细胞治疗中心',city:'北京',website:'www.301hospital.com.cn',phone:'010-66939114'},
+  {region:'华北',name:'解放军总医院（301医院）',center:'实体瘤CAR-T中心',city:'北京',website:'www.301hospital.com.cn',phone:'010-66887329'},
+  {region:'华北',name:'北京大学第三医院',center:'细胞治疗中心（免疫细胞治疗专病门诊）',city:'北京',website:'www.puh3.net.cn',phone:'010-82266699'},
+  {region:'华北',name:'中国医学科学院阜外医院',center:'心血管细胞治疗临床研究中心',city:'北京',website:'www.fuwai.com',phone:'010-88398888'},
+  {region:'华北',name:'北京大学人民医院',center:'干细胞临床研究中心',city:'北京',website:'www.pkuph.cn',phone:'010-88324600'},
+  {region:'华北',name:'中国医学科学院血液病医院',center:'免疫细胞治疗中心',city:'天津',website:'www.chinablood.com.cn',phone:'022-23909999'},
+  {region:'华北',name:'北京协和医院',center:'细胞治疗转化医学中心',city:'北京',note:'818号令后首个成功备案项目',website:'www.pumch.cn',phone:'010-69156114'},
+  {region:'华北',name:'解放军白求恩国际和平医院',center:'细胞治疗康复中心',city:'石家庄',website:'www.hopchina.cn',phone:'0311-87998000'},
+  {region:'华北',name:'首都医科大学附属北京天坛医院',center:'神经细胞治疗临床研究中心',city:'北京',website:'www.bjtth.org',phone:'010-59976611'},
+  {region:'华北',name:'解放军第五医学中心',center:'生物技术门诊',city:'北京',website:'www.301hospital.com.cn',phone:'010-66933114'},
+  {region:'华北',name:'北戴河华是肿瘤医院',center:'细胞治疗专科医院',city:'秦皇岛',website:'',phone:'待完善'},
+  {region:'华北',name:'河北医科大学第二医院',center:'细胞治疗与再生医学中心',city:'石家庄',website:'www.he2yy.com',phone:'0311-66063999'},
+  {region:'华北',name:'河北医科大学第四医院',center:'生物治疗科',city:'石家庄',website:'www.hbch.cn',phone:'0311-86095588'},
+  {region:'华北',name:'北京大学肿瘤医院',center:'细胞与基因治疗重点实验室',city:'北京',website:'www.bjcancer.org',phone:'010-88196118'},
+  {region:'华北',name:'首都医科大学附属北京地坛医院',center:'肿瘤生物治疗门诊',city:'北京',website:'www.bjdth.com',phone:'010-84322000'},
+  {region:'华北',name:'首都医科大学附属北京世纪坛医院',center:'肿瘤免疫治疗中心',city:'北京',website:'www.bjgrh.com',phone:'010-63925588'},
+  {region:'华北',name:'北京大学第一医院',center:'细胞与基因治疗中心',city:'北京',website:'www.pkufh.com',phone:'010-83572211'},
+  {region:'华北',name:'唐山市工人医院',center:'细胞治疗中心',city:'唐山',website:'www.tsgrh.com',phone:'0315-3722114'},
+  {region:'华北',name:'秦皇岛市第一医院',center:'细胞治疗中心',city:'秦皇岛',website:'www.qhdsdyyy.com',phone:'0335-96395'},
+  {region:'华北',name:'玉田县中医医院',center:'细胞治疗中心',city:'唐山',website:'',phone:'待完善'},
   // 华东 (38)
-  {region:'华东',name:'复旦大学附属中山医院',center:'生物治疗中心',city:'上海'},
-  {region:'华东',name:'上海市第一人民医院',center:'细胞治疗中心',city:'上海'},
-  {region:'华东',name:'苏州大学附属第一医院',center:'造血干细胞移植与细胞治疗中心',city:'苏州'},
-  {region:'华东',name:'海军军医大学第一附属医院（上海长海医院）',center:'细胞治疗中心（CAR-T/MSC/TIL三大门诊）',city:'上海'},
-  {region:'华东',name:'福建漳州市医院',center:'细胞治疗与再生医学中心',city:'漳州'},
-  {region:'华东',name:'福建医科大学孟超肝胆医院',center:'细胞与基因治疗研究中心',city:'福州'},
-  {region:'华东',name:'复旦大学附属眼耳鼻喉科医院',center:'基因和细胞治疗中心',city:'上海'},
-  {region:'华东',name:'江苏省人民医院',center:'细胞治疗临床平台',city:'南京'},
-  {region:'华东',name:'东部战区总医院',center:'细胞治疗中心',city:'南京'},
-  {region:'华东',name:'青岛大学附属医院',center:'细胞与基因治疗创新转化中心',city:'青岛'},
-  {region:'华东',name:'康复大学青岛中心医院',center:'生物治疗中心',city:'青岛'},
-  {region:'华东',name:'山东大学齐鲁医院',center:'干细胞与再生医学研究治疗中心',city:'济南'},
-  {region:'华东',name:'东阳市人民医院',center:'CAR-T细胞治疗中心',city:'东阳'},
-  {region:'华东',name:'宁波大学附属人民医院',center:'生物与细胞治疗中心',city:'宁波'},
-  {region:'华东',name:'南京大学医学院附属鼓楼医院',center:'细胞治疗中心',city:'南京'},
-  {region:'华东',name:'浙江大学医学院附属第二医院',center:'细胞治疗中心',city:'杭州'},
-  {region:'华东',name:'浙江大学医学院附属第一医院',center:'干细胞与细胞治疗中心',city:'杭州'},
-  {region:'华东',name:'上海瑞金医院',center:'细胞治疗中心',city:'上海'},
-  {region:'华东',name:'杭州市第一人民医院',center:'细胞治疗门诊',city:'杭州'},
-  {region:'华东',name:'安徽省肿瘤医院',center:'T细胞免疫疗法中心',city:'合肥'},
-  {region:'华东',name:'安徽省儿童医院',center:'细胞治疗研究转化中心',city:'合肥'},
-  {region:'华东',name:'东南大学附属中大医院',center:'干细胞与再生医学研究中心',city:'南京'},
-  {region:'华东',name:'徐州医科大学附属医院',center:'细胞治疗中心',city:'徐州'},
-  {region:'华东',name:'南京医科大学第三附属医院',center:'再生医学中心',city:'常州'},
-  {region:'华东',name:'江苏省苏北人民医院',center:'干细胞研究中心',city:'扬州'},
-  {region:'华东',name:'无锡市人民医院',center:'细胞治疗临床研究中心',city:'无锡'},
-  {region:'华东',name:'南通大学附属医院',center:'肿瘤生物治疗科、细胞治疗平台',city:'南通'},
-  {region:'华东',name:'复旦大学附属肿瘤医院',center:'细胞治疗中心',city:'上海'},
-  {region:'华东',name:'常州市第一人民医院',center:'干细胞治疗中心',city:'常州'},
-  {region:'华东',name:'扬州市第一人民医院',center:'生物治疗中心',city:'扬州'},
-  {region:'华东',name:'杭州市萧山区第一人民医院',center:'生物医学治疗中心',city:'杭州'},
-  {region:'华东',name:'福建省立医院',center:'细胞治疗/基因治疗转化中心',city:'福州'},
-  {region:'华东',name:'福建医科大学附属第二医院',center:'细胞与基因治疗中心',city:'泉州'},
-  {region:'华东',name:'安徽医科大学第一附属医院',center:'细胞治疗与再生医学研究中心',city:'合肥'},
-  {region:'华东',name:'合肥市第一人民医院',center:'生物治疗中心',city:'合肥'},
-  {region:'华东',name:'中国科学技术大学附属第一医院',center:'干细胞/再生医学中心',city:'合肥'},
-  {region:'华东',name:'上饶市人民医院',center:'生物新技术与细胞治疗转化中心',city:'上饶'},
-  {region:'华东',name:'厦门大学附属第一医院',center:'细胞治疗研究中心',city:'厦门'},
+  {region:'华东',name:'复旦大学附属中山医院',center:'生物治疗中心',city:'上海',website:'www.zs-hospital.sh.cn',phone:'021-64041990'},
+  {region:'华东',name:'上海市第一人民医院',center:'细胞治疗中心',city:'上海',website:'www.firsthospital.cn',phone:'021-63240090'},
+  {region:'华东',name:'苏州大学附属第一医院',center:'造血干细胞移植与细胞治疗中心',city:'苏州',website:'www.sdfyy.cn',phone:'0512-65223637'},
+  {region:'华东',name:'海军军医大学第一附属医院（上海长海医院）',center:'细胞治疗中心（CAR-T/MSC/TIL三大门诊）',city:'上海',website:'www.chhospital.cn',phone:'021-31161114'},
+  {region:'华东',name:'福建漳州市医院',center:'细胞治疗与再生医学中心',city:'漳州',website:'www.fjzzsyy.com',phone:'0596-2089120'},
+  {region:'华东',name:'福建医科大学孟超肝胆医院',center:'细胞与基因治疗研究中心',city:'福州',website:'www.fjgcyy.com',phone:'0591-88113001'},
+  {region:'华东',name:'复旦大学附属眼耳鼻喉科医院',center:'基因和细胞治疗中心',city:'上海',website:'www.fdeent.org',phone:'021-64377134'},
+  {region:'华东',name:'江苏省人民医院',center:'细胞治疗临床平台',city:'南京',website:'www.jsph.net',phone:'025-68303120'},
+  {region:'华东',name:'东部战区总医院',center:'细胞治疗中心',city:'南京',website:'www.njjzyy.com',phone:'025-80860114'},
+  {region:'华东',name:'青岛大学附属医院',center:'细胞与基因治疗创新转化中心',city:'青岛',website:'www.qduh.cn',phone:'0532-82919999'},
+  {region:'华东',name:'康复大学青岛中心医院',center:'生物治疗中心',city:'青岛',website:'www.qdzxyy.com',phone:'0532-84965114'},
+  {region:'华东',name:'山东大学齐鲁医院',center:'干细胞与再生医学研究治疗中心',city:'济南',website:'www.qiluhospital.com',phone:'0531-82166114'},
+  {region:'华东',name:'东阳市人民医院',center:'CAR-T细胞治疗中心',city:'东阳',website:'www.dyrmyy.com',phone:'0579-86856114'},
+  {region:'华东',name:'宁波大学附属人民医院',center:'生物与细胞治疗中心',city:'宁波',website:'www.nbrmyy.com',phone:'0574-87016888'},
+  {region:'华东',name:'南京大学医学院附属鼓楼医院',center:'细胞治疗中心',city:'南京',website:'www.njglyy.com',phone:'025-83304616'},
+  {region:'华东',name:'浙江大学医学院附属第二医院',center:'细胞治疗中心',city:'杭州',website:'www.z2hospital.com',phone:'0571-87783777'},
+  {region:'华东',name:'浙江大学医学院附属第一医院',center:'干细胞与细胞治疗中心',city:'杭州',website:'www.zy91.com',phone:'0571-87236114'},
+  {region:'华东',name:'上海瑞金医院',center:'细胞治疗中心',city:'上海',website:'www.rjh.com.cn',phone:'021-64370045'},
+  {region:'华东',name:'杭州市第一人民医院',center:'细胞治疗门诊',city:'杭州',website:'www.hz-hospital.com',phone:'0571-56007666'},
+  {region:'华东',name:'安徽省肿瘤医院',center:'T细胞免疫疗法中心',city:'合肥',website:'www.ahzlyy.com',phone:'0551-65327666'},
+  {region:'华东',name:'安徽省儿童医院',center:'细胞治疗研究转化中心',city:'合肥',website:'www.ahsetyy.com',phone:'0551-62237114'},
+  {region:'华东',name:'东南大学附属中大医院',center:'干细胞与再生医学研究中心',city:'南京',website:'www.zda.cn',phone:'025-83262114'},
+  {region:'华东',name:'徐州医科大学附属医院',center:'细胞治疗中心',city:'徐州',website:'www.xyfy.com.cn',phone:'0516-85601999'},
+  {region:'华东',name:'南京医科大学第三附属医院',center:'再生医学中心',city:'常州',website:'www.njmu3.com',phone:'0519-68870114'},
+  {region:'华东',name:'江苏省苏北人民医院',center:'干细胞研究中心',city:'扬州',website:'www.sbyy.cn',phone:'0514-87373114'},
+  {region:'华东',name:'无锡市人民医院',center:'细胞治疗临床研究中心',city:'无锡',website:'www.wxph.cn',phone:'0510-85351114'},
+  {region:'华东',name:'南通大学附属医院',center:'肿瘤生物治疗科、细胞治疗平台',city:'南通',website:'www.affiliatedhospital.com',phone:'0513-81160114'},
+  {region:'华东',name:'复旦大学附属肿瘤医院',center:'细胞治疗中心',city:'上海',website:'www.shca.org.cn',phone:'021-64175590'},
+  {region:'华东',name:'常州市第一人民医院',center:'干细胞治疗中心',city:'常州',website:'www.czfph.com',phone:'0519-68870114'},
+  {region:'华东',name:'扬州市第一人民医院',center:'生物治疗中心',city:'扬州',website:'www.yzfph.com',phone:'0514-87937114'},
+  {region:'华东',name:'杭州市萧山区第一人民医院',center:'生物医学治疗中心',city:'杭州',website:'www.xsonline.cn',phone:'0571-82621050'},
+  {region:'华东',name:'福建省立医院',center:'细胞治疗/基因治疗转化中心',city:'福州',website:'www.fjsl.com.cn',phone:'0591-87557755'},
+  {region:'华东',name:'福建医科大学附属第二医院',center:'细胞与基因治疗中心',city:'泉州',website:'www.fyder.com',phone:'0595-22793114'},
+  {region:'华东',name:'安徽医科大学第一附属医院',center:'细胞治疗与再生医学研究中心',city:'合肥',website:'www.ayfy.com',phone:'0551-62922114'},
+  {region:'华东',name:'合肥市第一人民医院',center:'生物治疗中心',city:'合肥',website:'www.hfyyy.com',phone:'0551-62183114'},
+  {region:'华东',name:'中国科学技术大学附属第一医院',center:'干细胞/再生医学中心',city:'合肥',website:'www.ustc.edu.cn',phone:'0551-62283114'},
+  {region:'华东',name:'上饶市人民医院',center:'生物新技术与细胞治疗转化中心',city:'上饶',website:'www.srph.com.cn',phone:'0793-8100000'},
+  {region:'华东',name:'厦门大学附属第一医院',center:'细胞治疗研究中心',city:'厦门',website:'www.xmfh.com',phone:'0592-2137000'},
   // 华中 (9)
-  {region:'华中',name:'武汉协和医院（华中科技大学同济医学院附属协和医院）',center:'CAR-T细胞免疫治疗中心/干细胞中心',city:'武汉',note:'CAR-T 520+例，缓解率>90%'},
-  {region:'华中',name:'武汉大学中南医院',center:'细胞（生物）治疗门诊',city:'武汉',note:'2025.12.12揭牌'},
-  {region:'华中',name:'华中科技大学同济医学院附属同济医院',center:'CAR-T治疗中心',city:'武汉',note:'近600例血液肿瘤'},
-  {region:'华中',name:'中国人民解放军中部战区总医院',center:'干细胞特色专科门诊',city:'武汉',note:'军队体系'},
-  {region:'华中',name:'湖北襄阳市第一人民医院',center:'生物治疗技术临床转化研究中心',city:'襄阳'},
-  {region:'华中',name:'湖南省肿瘤医院',center:'自体造血干细胞移植和细胞治疗中心',city:'长沙',note:'2025.1.24成立'},
-  {region:'华中',name:'湖南省儿童医院',center:'细胞治疗研究转化中心',city:'长沙',note:'2025.10.27成立'},
-  {region:'华中',name:'湖南省中医院',center:'细胞与基因治疗咨询门诊',city:'长沙'},
-  {region:'华中',name:'郑州大学第一附属医院',center:'细胞治疗中心',city:'郑州'},
+  {region:'华中',name:'武汉协和医院（华中科技大学同济医学院附属协和医院）',center:'CAR-T细胞免疫治疗中心/干细胞中心',city:'武汉',note:'CAR-T 520+例，缓解率>90%',website:'www.wuh.org',phone:'027-85726114'},
+  {region:'华中',name:'武汉大学中南医院',center:'细胞（生物）治疗门诊',city:'武汉',note:'2025.12.12揭牌',website:'www.znyy.cn',phone:'027-67813120'},
+  {region:'华中',name:'华中科技大学同济医学院附属同济医院',center:'CAR-T治疗中心',city:'武汉',note:'近600例血液肿瘤',website:'www.tjh.com.cn',phone:'027-83662688'},
+  {region:'华中',name:'中国人民解放军中部战区总医院',center:'干细胞特色专科门诊',city:'武汉',note:'军队体系',website:'',phone:'待完善'},
+  {region:'华中',name:'湖北襄阳市第一人民医院',center:'生物治疗技术临床转化研究中心',city:'襄阳',website:'www.xysdyyy.com',phone:'0710-3512000'},
+  {region:'华中',name:'湖南省肿瘤医院',center:'自体造血干细胞移植和细胞治疗中心',city:'长沙',note:'2025.1.24成立',website:'www.hncancer.org',phone:'0731-89762114'},
+  {region:'华中',name:'湖南省儿童医院',center:'细胞治疗研究转化中心',city:'长沙',note:'2025.10.27成立',website:'www.hnch.cn',phone:'0731-85356114'},
+  {region:'华中',name:'湖南省中医院',center:'细胞与基因治疗咨询门诊',city:'长沙',website:'www.hnszy.com.cn',phone:'0731-84917777'},
+  {region:'华中',name:'郑州大学第一附属医院',center:'细胞治疗中心',city:'郑州',website:'www.fcc.zzu.edu.cn',phone:'0371-66913114'},
   // 华南 (19)
-  {region:'华南',name:'广东省第二人民医院',center:'细胞治疗中心',city:'广州'},
-  {region:'华南',name:'南部战区总医院',center:'细胞生物治疗中心',city:'广州'},
-  {region:'华南',name:'中山大学附属肿瘤医院',center:'细胞治疗中心',city:'广州'},
-  {region:'华南',name:'南方医科大学深圳医院',center:'细胞治疗中心',city:'深圳'},
-  {region:'华南',name:'香港大学深圳医院',center:'细胞治疗中心',city:'深圳'},
-  {region:'华南',name:'广州市第一人民医院南沙院区',center:'造血干细胞移植与细胞治疗中心',city:'广州'},
-  {region:'华南',name:'广州医科大学附属第五医院',center:'生物治疗中心',city:'广州'},
-  {region:'华南',name:'广东省人民医院',center:'细胞治疗中心',city:'广州'},
-  {region:'华南',name:'广州中医药大学第一附属医院',center:'细胞治疗中心',city:'广州'},
-  {region:'华南',name:'中山大学附属第八医院',center:'细胞与基因治疗创新转化中心',city:'深圳'},
-  {region:'华南',name:'前海人寿广州总医院',center:'生物治疗中心',city:'广州'},
-  {region:'华南',name:'海南医科大学第一附属医院',center:'细胞与基因治疗中心',city:'海口'},
-  {region:'华南',name:'海南省肿瘤医院',center:'细胞治疗中心',city:'海口'},
-  {region:'华南',name:'海口市人民医院',center:'生物医学新技术转化中心',city:'海口'},
-  {region:'华南',name:'上海儿童医学中心海南医院',center:'细胞基因治疗（CGT）创新技术转化平台',city:'海南'},
-  {region:'华南',name:'南宁市第一人民医院',center:'细胞生物研究与治疗中心',city:'南宁'},
-  {region:'华南',name:'南方医科大学南方医院',center:'细胞治疗中心',city:'广州'},
-  {region:'华南',name:'四川大学华西乐城医院',center:'生物医学新技术与细胞治疗中心',city:'博鳌'},
-  {region:'华南',name:'深圳市第三人民医院',center:'细胞与基因治疗联合实验室',city:'深圳'},
+  {region:'华南',name:'广东省第二人民医院',center:'细胞治疗中心',city:'广州',website:'www.gd2h.com',phone:'020-89168000'},
+  {region:'华南',name:'南部战区总医院',center:'细胞生物治疗中心',city:'广州',website:'www.gzzongyi.com',phone:'020-36653114'},
+  {region:'华南',name:'中山大学附属肿瘤医院',center:'细胞治疗中心',city:'广州',website:'www.sysucc.org.cn',phone:'020-87343000'},
+  {region:'华南',name:'南方医科大学深圳医院',center:'细胞治疗中心',city:'深圳',website:'www.szfch.com',phone:'0755-23360888'},
+  {region:'华南',name:'香港大学深圳医院',center:'细胞治疗中心',city:'深圳',website:'www.hku-szh.org',phone:'0755-86913333'},
+  {region:'华南',name:'广州市第一人民医院南沙院区',center:'造血干细胞移植与细胞治疗中心',city:'广州',website:'www.gzfph.com',phone:'020-81048000'},
+  {region:'华南',name:'广州医科大学附属第五医院',center:'生物治疗中心',city:'广州',website:'www.gyfyy.com',phone:'020-82285555'},
+  {region:'华南',name:'广东省人民医院',center:'细胞治疗中心',city:'广州',website:'www.gdghospital.org.cn',phone:'020-83827812'},
+  {region:'华南',name:'广州中医药大学第一附属医院',center:'细胞治疗中心',city:'广州',website:'www.gztcm.com.cn',phone:'020-36591912'},
+  {region:'华南',name:'中山大学附属第八医院',center:'细胞与基因治疗创新转化中心',city:'深圳',website:'www.sz8h.com',phone:'0755-83986114'},
+  {region:'华南',name:'前海人寿广州总医院',center:'生物治疗中心',city:'广州',website:'www.qhlife.com',phone:'020-32699999'},
+  {region:'华南',name:'海南医科大学第一附属医院',center:'细胞与基因治疗中心',city:'海口',website:'www.haiyiyuan.com',phone:'0898-66528114'},
+  {region:'华南',name:'海南省肿瘤医院',center:'细胞治疗中心',city:'海口',website:'www.hntumour.com',phone:'0898-65366000'},
+  {region:'华南',name:'海口市人民医院',center:'生物医学新技术转化中心',city:'海口',website:'www.haikouph.com',phone:'0898-66151001'},
+  {region:'华南',name:'上海儿童医学中心海南医院',center:'细胞基因治疗（CGT）创新技术转化平台',city:'海南',website:'www.scmc.com.cn',phone:'0898-66528000'},
+  {region:'华南',name:'南宁市第一人民医院',center:'细胞生物研究与治疗中心',city:'南宁',website:'www.nn1yy.com',phone:'0771-2672000'},
+  {region:'华南',name:'南方医科大学南方医院',center:'细胞治疗中心',city:'广州',website:'www.nfyy.com',phone:'020-61641114'},
+  {region:'华南',name:'四川大学华西乐城医院',center:'生物医学新技术与细胞治疗中心',city:'博鳌',website:'www.hxlecheng.com',phone:'0898-62611114'},
+  {region:'华南',name:'深圳市第三人民医院',center:'细胞与基因治疗联合实验室',city:'深圳',website:'www.szcrh.com',phone:'0755-61222333'},
   // 西南 (4)
-  {region:'西南',name:'四川大学华西医院',center:'生物医学新技术与细胞治疗中心',city:'成都'},
-  {region:'西南',name:'西南医科大学附属自贡医院',center:'细胞治疗科',city:'自贡'},
-  {region:'西南',name:'陆军军医大学新桥医院',center:'细胞治疗中心（院内一体化细胞治疗转化平台）',city:'重庆'},
-  {region:'西南',name:'重庆医科大学附属第三医院',center:'细胞治疗咨询门诊',city:'重庆'},
+  {region:'西南',name:'四川大学华西医院',center:'生物医学新技术与细胞治疗中心',city:'成都',website:'www.wchscu.cn',phone:'028-85422114'},
+  {region:'西南',name:'西南医科大学附属自贡医院',center:'细胞治疗科',city:'自贡',website:'www.swmu.edu.cn',phone:'0813-2101114'},
+  {region:'西南',name:'陆军军医大学新桥医院',center:'细胞治疗中心（院内一体化细胞治疗转化平台）',city:'重庆',website:'www.xqyy.com.cn',phone:'023-68755114'},
+  {region:'西南',name:'重庆医科大学附属第三医院',center:'细胞治疗咨询门诊',city:'重庆',website:'www.cqmu3.com',phone:'023-60353000'},
   // 西北 (7)
-  {region:'西北',name:'陕西中医药大学第二附属医院',center:'中西医结合细胞治疗中心',city:'咸阳'},
-  {region:'西北',name:'中山大学附属肿瘤医院甘肃医院',center:'CAR-T细胞治疗中心',city:'兰州'},
-  {region:'西北',name:'青海大学附属医院',center:'细胞与基因治疗创新转化中心',city:'西宁'},
-  {region:'西北',name:'甘肃省人民医院',center:'细胞治疗中心',city:'兰州'},
-  {region:'西北',name:'空军军医大学唐都医院',center:'细胞治疗研发中心',city:'西安'},
-  {region:'西北',name:'西安高新医院',center:'干细胞临床研究转化中心',city:'西安'},
-  {region:'西北',name:'联勤保障部队第940医院',center:'抗衰老与细胞治疗咨询门诊',city:'兰州'},
+  {region:'西北',name:'陕西中医药大学第二附属医院',center:'中西医结合细胞治疗中心',city:'咸阳',website:'www.sntcm.cn',phone:'029-33578000'},
+  {region:'西北',name:'中山大学附属肿瘤医院甘肃医院',center:'CAR-T细胞治疗中心',city:'兰州',website:'www.sysucc.org.cn',phone:'0931-8262114'},
+  {region:'西北',name:'青海大学附属医院',center:'细胞与基因治疗创新转化中心',city:'西宁',website:'www.qhuah.com',phone:'0971-61326114'},
+  {region:'西北',name:'甘肃省人民医院',center:'细胞治疗中心',city:'兰州',website:'www.gsrmyy.cn',phone:'0931-8281114'},
+  {region:'西北',name:'空军军医大学唐都医院',center:'细胞治疗研发中心',city:'西安',website:'www.tdyy.com',phone:'029-84777114'},
+  {region:'西北',name:'西安高新医院',center:'干细胞临床研究转化中心',city:'西安',website:'www.gxyy.cn',phone:'029-88330114'},
+  {region:'西北',name:'联勤保障部队第940医院',center:'抗衰老与细胞治疗咨询门诊',city:'兰州',website:'',phone:'待完善'},
   // 东北 (5)
-  {region:'东北',name:'北部战区总医院',center:'细胞治疗转化中心',city:'沈阳'},
-  {region:'东北',name:'中国医科大学附属第一医院',center:'细胞与基因治疗中心',city:'沈阳'},
-  {region:'东北',name:'哈尔滨医科大学附属肿瘤医院',center:'细胞与基因治疗中心',city:'哈尔滨'},
-  {region:'东北',name:'吉林大学第一医院',center:'细胞与基因治疗中心',city:'长春'},
-  {region:'东北',name:'解放军211医院',center:'细胞治疗中心',city:'哈尔滨'}
+  {region:'东北',name:'北部战区总医院',center:'细胞治疗转化中心',city:'沈阳',website:'www.nbgzzyy.com',phone:'024-28856114'},
+  {region:'东北',name:'中国医科大学附属第一医院',center:'细胞与基因治疗中心',city:'沈阳',website:'www.cmu1h.org',phone:'024-83282345'},
+  {region:'东北',name:'哈尔滨医科大学附属肿瘤医院',center:'细胞与基因治疗中心',city:'哈尔滨',website:'www.hrbmu.edu.cn',phone:'0451-85718114'},
+  {region:'东北',name:'吉林大学第一医院',center:'细胞与基因治疗中心',city:'长春',website:'www.jdyy.cn',phone:'0431-88782114'},
+  {region:'东北',name:'解放军211医院',center:'细胞治疗中心',city:'哈尔滨',website:'',phone:'待完善'}
 ];
 
 var instFilter = 'all';
@@ -7544,7 +7577,7 @@ function renderInstitutions() {
     provList.forEach(function(p) {
       var pct = (p.count / maxCount * 100).toFixed(1);
       var shortN = PROVINCE_SHORT[p.name] || p.name;
-      html += '<div class="prov-bar-item">';
+      html += '<div class="prov-bar-item" style="cursor:pointer;" onclick="jumpToProvince(\'' + p.name.replace(/'/g, "\\'") + '\')" title="点击查看' + escapeHtml(shortN) + '详情">';
       html += '<div class="prov-bar-label">' + escapeHtml(shortN) + '</div>';
       html += '<div class="prov-bar-track">';
       html += '<div class="prov-bar-fill" data-width="' + pct + '%"></div>';
@@ -7575,6 +7608,17 @@ function renderInstitutions() {
       html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
       html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
       if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;">' + escapeHtml(inst.note) + '</span>';
+      html += '</div>';
+      // Website and phone row
+      var webVal = inst.website || '待完善';
+      var phoneVal = inst.phone || '待完善';
+      html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;font-size:12px;">';
+      if (webVal && webVal !== '待完善') {
+        html += '<a href="https://' + escapeHtml(webVal) + '" target="_blank" style="display:flex;align-items:center;gap:4px;color:var(--primary);text-decoration:none;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">' + svgIcon('globe', 12) + ' ' + escapeHtml(webVal) + '</a>';
+      } else {
+        html += '<span style="display:flex;align-items:center;gap:4px;color:var(--text-light);opacity:0.5;">' + svgIcon('globe', 12) + ' 待完善</span>';
+      }
+      html += '<span style="display:flex;align-items:center;gap:4px;color:' + (phoneVal === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 12) + ' ' + escapeHtml(phoneVal) + '</span>';
       html += '</div>';
       html += '</div>';
     });
@@ -7624,6 +7668,17 @@ function renderInstitutions() {
           html += '<span>' + svgIcon('location', 12) + ' ' + escapeHtml(inst.city) + '</span>';
           html += '<span>' + svgIcon('hospital', 12) + ' ' + escapeHtml(inst.center) + '</span>';
           if (inst.note) html += '<span style="color:var(--warn-text);font-weight:600;font-size:11px;">' + escapeHtml(inst.note) + '</span>';
+          html += '</div>';
+          // Website and phone row
+          var webVal2 = inst.website || '待完善';
+          var phoneVal2 = inst.phone || '待完善';
+          html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:5px;font-size:11px;">';
+          if (webVal2 && webVal2 !== '待完善') {
+            html += '<a href="https://' + escapeHtml(webVal2) + '" target="_blank" style="display:flex;align-items:center;gap:3px;color:var(--primary);text-decoration:none;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">' + svgIcon('globe', 11) + ' ' + escapeHtml(webVal2) + '</a>';
+          } else {
+            html += '<span style="display:flex;align-items:center;gap:3px;color:var(--text-light);opacity:0.5;">' + svgIcon('globe', 11) + ' 待完善</span>';
+          }
+          html += '<span style="display:flex;align-items:center;gap:3px;color:' + (phoneVal2 === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 11) + ' ' + escapeHtml(phoneVal2) + '</span>';
           html += '</div>';
           html += '</div>';
         });
@@ -7718,6 +7773,50 @@ function goBackFromProvince() {
   filterInsts('all');
 }
 
+function jumpToProvince(provName) {
+  // Find which region the province belongs to
+  var targetRegion = '';
+  for (var reg in REGION_PROVINCES) {
+    if (REGION_PROVINCES[reg].indexOf(provName) >= 0) { targetRegion = reg; break; }
+  }
+  if (!targetRegion) { filterInsts('all'); return; }
+
+  // Switch to region view
+  filterInsts(targetRegion);
+
+  // After DOM renders, find and expand the province accordion
+  setTimeout(function() {
+    var accId = 'prov-acc-' + provName.replace(/[^a-zA-Z\u4e00-\u9fa5]/g, '');
+    var accEl = document.getElementById(accId);
+    if (accEl) {
+      // Close all other open accordions first
+      document.querySelectorAll('.prov-accordion.open').forEach(function(el) {
+        if (el.id !== accId) el.classList.remove('open');
+      });
+      // Open the target accordion
+      accEl.classList.add('open');
+      // Scroll into view
+      try {
+        accEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch(e) {
+        accEl.scrollIntoView();
+      }
+    }
+  }, 200);
+}
+
+function fetchWithTimeout(url, ms) {
+  return Promise.race([
+    fetch(url).then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }),
+    new Promise(function(_, reject) {
+      setTimeout(function() { reject(new Error('timeout')); }, ms);
+    })
+  ]);
+}
+
 function initChinaMap() {
   var container = document.getElementById('chinaMapContainer');
   if (!container) return;
@@ -7743,18 +7842,41 @@ function initChinaMap() {
       textColor: '#8B9DAF',
       maskColor: 'rgba(18,28,42,0.8)'
     });
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        chinaGeoJson = data;
-        echarts.registerMap('china', data);
+
+    // Multiple CDN fallback sources for China GeoJSON
+    var geoSources = [
+      'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json',
+      'https://cdn.jsdelivr.net/gh/apache/echarts@5.5.0/map/json/china.json',
+      'https://raw.githubusercontent.com/apache/echarts/5.5.0/map/json/china.json',
+      'https://fastly.jsdelivr.net/gh/apache/echarts@5.5.0/map/json/china.json'
+    ];
+
+    function tryGeoSource(idx) {
+      if (idx >= geoSources.length) {
         chinaMapChart.hideLoading();
-        renderChinaMap();
-      })
-      .catch(function(err) {
-        chinaMapChart.hideLoading();
-        container.innerHTML = '<div class="map-loading" style="flex-direction:column;gap:10px;">地图数据加载失败<br><span style="font-size:12px;opacity:0.7;">请查看下方省份排行列表</span></div>';
-      });
+        try { chinaMapChart.dispose(); } catch(e) {}
+        chinaMapChart = null;
+        container.innerHTML = '<div class="map-loading" style="flex-direction:column;gap:10px;">'
+          + '<div style="font-size:28px;opacity:0.3;">' + svgIcon('map', 28) + '</div>'
+          + '地图数据加载失败<br>'
+          + '<span style="font-size:12px;opacity:0.7;">请查看下方省份排行列表，点击省份即可查看详情</span>'
+          + '<button onclick="initChinaMap()" style="margin-top:8px;padding:6px 16px;border:1px solid var(--primary);background:transparent;color:var(--primary);border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.2s;" onmouseover="this.style.background=\'var(--primary)\';this.style.color=\'#0A0F1A\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--primary)\'">重新加载</button>'
+          + '</div>';
+        return;
+      }
+      fetchWithTimeout(geoSources[idx], 8000)
+        .then(function(data) {
+          if (!data || !data.features || data.features.length === 0) throw new Error('invalid data');
+          chinaGeoJson = data;
+          echarts.registerMap('china', data);
+          chinaMapChart.hideLoading();
+          renderChinaMap();
+        })
+        .catch(function(err) {
+          tryGeoSource(idx + 1);
+        });
+    }
+    tryGeoSource(0);
   }
 }
 
