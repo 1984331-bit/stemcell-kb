@@ -427,10 +427,6 @@ body {
   .site-footer { padding: 16px 14px; }
   .site-footer .sf-right { text-align: left; }
   .site-footer .sf-contact { align-items: flex-start; }
-  .global-search-box input { font-size: 13px; padding: 12px 70px 12px 42px; }
-  .global-search-box .gsb-icon { left: 12px; top: 13px; }
-  .global-search-box .gsb-btn { padding: 0 12px; font-size: 12px; }
-  .global-search-box .gsb-tag { font-size: 11px; padding: 3px 10px; }
 }
 /* Literature section search box */
 .lit-search-box {
@@ -459,72 +455,6 @@ body {
   transform: translateY(-50%);
   font-size: 18px;
   opacity: 0.5;
-}
-/* Global search box (hub page) */
-.global-search-box {
-  position: relative;
-  margin-bottom: 18px;
-}
-.global-search-box input {
-  width: 100%;
-  padding: 14px 90px 14px 48px;
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  font-size: 15px;
-  background: var(--card-solid);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-}
-.global-search-box input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0,229,255,0.15);
-}
-.global-search-box .gsb-icon {
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  color: var(--text-light);
-  opacity: 0.6;
-  pointer-events: none;
-}
-.global-search-box .gsb-btn {
-  position: absolute;
-  right: 6px;
-  top: 6px;
-  bottom: 6px;
-  padding: 0 20px;
-  border: none;
-  border-radius: 8px;
-  background: var(--primary);
-  color: #0A0F1A;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.global-search-box .gsb-btn:hover { opacity: 0.85; }
-.global-search-box .gsb-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-.global-search-box .gsb-tag {
-  font-size: 12px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  color: var(--text-light);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.global-search-box .gsb-tag:hover {
-  background: rgba(0,229,255,0.1);
-  border-color: var(--primary);
-  color: var(--primary);
 }
 /* Literature section stats bar */
 .lit-stats {
@@ -670,8 +600,8 @@ body {
 .breadcrumb {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
   color: var(--text-light);
   margin-bottom: 4px;
   flex-wrap: wrap;
@@ -682,28 +612,39 @@ body {
   cursor: pointer;
   text-decoration: none;
   font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
   transition: color 0.15s, background 0.15s;
-  padding: 3px 10px;
-  border-radius: 6px;
+  padding: 5px 9px;
+  border-radius: 5px;
   background: rgba(0,229,255,0.08);
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
+}
+.breadcrumb a svg, .breadcrumb .crumb-link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 .breadcrumb a:hover, .breadcrumb .crumb-link:hover {
   color: var(--primary-dark);
   background: rgba(0,229,255,0.15);
 }
-.breadcrumb .crumb-sep { color: var(--text-light); }
+.breadcrumb .crumb-sep { color: var(--text-light); font-size: 12px; }
 .breadcrumb .crumb-current {
   color: var(--primary);
   font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 5px 9px;
+  border-radius: 5px;
   background: rgba(0,229,255,0.12);
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 .breadcrumb b { color: var(--primary); }
 /* Back to system button */
@@ -1318,20 +1259,23 @@ body {
   .lit-stats b { font-size: 16px; }
   /* Mobile: bigger breadcrumb tap targets */
   .breadcrumb {
-    font-size: 14px;
+    font-size: 12px;
     padding: 2px 0;
-    gap: 6px;
+    gap: 5px;
   }
   .breadcrumb .crumb-link {
-    padding: 4px 10px;
+    padding: 6px 10px;
     font-size: 12px;
   }
+  .breadcrumb .crumb-link svg {
+    width: 13px;
+    height: 13px;
+  }
   .breadcrumb .crumb-current {
-    padding: 4px 10px;
+    padding: 6px 10px;
     font-size: 12px;
   }
   .breadcrumb .crumb-link:active { background: var(--primary-light); color: #fff; }
-  .breadcrumb b { font-size: 14px; }
   /* Mobile: floating controls handle their own positioning via .float-controls */
 }
 /* === Hub Homepage === */
@@ -2576,8 +2520,9 @@ body { padding-bottom: 60px; }
   .site-footer .sf-left { min-width: 0; }
   .site-footer .sf-right { min-width: 0; }
   /* Breadcrumb */
-  .breadcrumb { font-size: 12px; gap: 4px; }
-  .breadcrumb .crumb-link { padding: 3px 8px; font-size: 12px; }
+  .breadcrumb { font-size: 11px; gap: 4px; }
+  .breadcrumb .crumb-link { padding: 5px 8px; font-size: 11px; }
+  .breadcrumb .crumb-current { padding: 5px 8px; font-size: 11px; }
   /* Map popup card on mobile */
   #mapPopupCard { min-width: 140px !important; padding: 10px 12px !important; }
   #mapPopupCard div:first-child { font-size: 14px !important; }
@@ -6359,16 +6304,8 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
-  // Global search section (placeholder, functionality TBD)
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索</div><div class="sd-line"></div></div>';
-  html += '<div class="global-search-box">';
-  html += '<input type="text" id="globalSearchInput" placeholder="搜索文献、产品、政策、机构、适应症…（功能开发中）" readonly onclick="this.blur()" />';
-  html += '<span class="gsb-icon">' + svgIcon('search', 18) + '</span>';
-  html += '<button class="gsb-btn" onclick="return false;">检索</button>';
-  html += '<div class="gsb-tags">';
-  html += '<span class="gsb-tag">MSC</span><span class="gsb-tag">CAR-T</span><span class="gsb-tag">外泌体</span><span class="gsb-tag">818号令</span><span class="gsb-tag">博鳌乐城</span>';
-  html += '</div>';
-  html += '</div>';
+  // Global search section (divider only, functionality TBD)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索·功能开发中</div><div class="sd-line"></div></div>';
 
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('book', 16) + ' 知识库栏目</div><div class="sd-line"></div></div>';
 
@@ -9003,6 +8940,13 @@ function renderCompanies() {
   }
   html += '</div>';
 
+  // Section intro (about this column)
+  html += '<div class="report-intro">';
+  html += '<div class="report-intro-title">' + svgIcon('building', 18) + ' 关于本栏目</div>';
+  html += '<div class="report-intro-text">本栏目聚焦<b>细胞与基因治疗（CGT）产业链</b>上下游企业，覆盖药物研发、CRO/CDMO、设备耗材、检测服务、投融资等五大核心赛道，一站式呈现行业生态全景。数据持续更新中，点击下方分类卡片可按赛道筛选浏览。如需了解某家企业的详细信息，可点击企业卡片中的官网链接直接访问。</div>';
+  html += '<div class="report-intro-contact">' + svgIcon('plus', 14) + ' <b>企业入驻</b>：欢迎 CGT 领域企业在此展示，面向细胞治疗专业人士与投资者群体。请提供企业名称、所属分类、简介及核心产品信息，审核后上线。联系方式：邮箱 <b>contact@msckb.com</b> | 微信 <b>MSC-KnowledgeHub</b></div>';
+  html += '</div>';
+
   // Category cards
   var catCounts = {};
   Object.keys(COMPANY_CATS).forEach(function(k) { catCounts[k] = 0; });
@@ -9040,12 +8984,6 @@ function renderCompanies() {
     html += '</div>';
     html += '</div>';
   });
-
-  // Enterprise onboarding CTA card
-  html += '<div class="reg-card" style="border:2px dashed var(--warn-text);border-left:4px solid var(--warn-text);background:var(--warn-bg);cursor:pointer;" onclick="showOnboarding()">';
-  html += '<div class="rc-title" style="color:var(--warn-text);">' + svgIcon('plus', 16) + ' 企业入驻</div>';
-  html += '<div style="font-size:12px;color:#BF360C;line-height:1.6;margin:4px 0;">您的企业也可在此展示，面向细胞治疗领域专业人士。点击联系入驻 →</div>';
-  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
