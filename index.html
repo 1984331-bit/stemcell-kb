@@ -2689,6 +2689,68 @@ body { padding-bottom: 60px; }
 .book-cover-img svg { color: rgba(77,182,172,0.5); }
 .book-cover-img img { width: 100%; height: 100%; object-fit: cover; }
 .book-cover-item:hover .book-cover-img { border-color: rgba(0,229,255,0.4); box-shadow: 0 4px 16px rgba(0,229,255,0.12); }
+
+/* Custom designed book covers */
+.book-cover-custom {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border: none !important;
+  background: linear-gradient(135deg, #004D40, #00695C, #00897B) !important;
+  position: relative;
+}
+.book-cover-custom .book-cover-icon {
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 8px;
+}
+.book-cover-custom .book-cover-icon svg { width: 32px; height: 32px; }
+.book-cover-custom .book-cover-text {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  line-height: 1.3;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.book-cover-custom .book-cover-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255,179,77,0.85);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.book-cover-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(77,182,172,0.7);
+  text-align: center;
+  padding: 8px;
+}
+.book-cover-img.cover-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.book-cover-img.cover-error::after {
+  content: '封面加载中';
+  font-size: 11px;
+  color: rgba(77,182,172,0.5);
+}
+
+/* Conference card */
+.conf-card { cursor: pointer; }
+.conf-card .course-icon svg { color: var(--primary); }
 .book-cover-name {
   font-size: 12px;
   font-weight: 600;
@@ -5582,7 +5644,9 @@ function svgIcon(name, sz) {
     'database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/>',
     'phone': '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>',
     'clipboard': '<path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
-    'refresh': '<path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>'
+    'refresh': '<path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>',
+    'play': '<path d="M5 3l14 9-14 9V3z"/>',
+    'cell': '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -6975,48 +7039,91 @@ function renderOriginals() {
 
 // === Books & Courses section ===
 const LEARNING_COURSES = [
-  {title:'Stem Cell Science (Coursera)', desc:'加州大学系统开设的干细胞科学在线课程，涵盖胚胎干细胞、iPSC、MSC的生物学基础与临床应用，适合入门。', provider:'Coursera / UC System', duration:'自定进度', level:'入门', tag:'基础入门', url:'https://www.coursera.org/learn/stem-cells'},
-  {title:'Cell Therapy Manufacturing (MITx)', desc:'MIT开设的细胞治疗制造工艺课程，深度讲解CAR-T/MSC的GMP生产流程、质量控制、供应链管理。', provider:'MITx (edX)', duration:'12周', level:'高级', tag:'制造工艺', url:'https://www.edx.org/'},
-  {title:'Gene Therapy (Harvard HMX)', desc:'哈佛医学院基因治疗精品课程，涵盖AAV/慢病毒载体设计、体内基因递送、基因编辑技术前沿。', provider:'Harvard HMX', duration:'自定进度', level:'中级', tag:'基因治疗', url:'https://onlinelearning.hms.harvard.edu/hmx/'},
-  {title:'Stanford XGEN201 基因治疗', desc:'斯坦福大学继续教育的基因治疗专题课程，系统讲解从载体工程到临床试验设计的全链条知识。', provider:'Stanford Continuing Studies', duration:'10周', level:'中级', tag:'基因治疗', url:'https://xgen.stanford.edu/'},
-  {title:'UC Davis 细胞治疗证书项目', desc:'加州大学戴维斯分校的细胞治疗专业证书项目，涵盖干细胞生物学、GMP制造、法规监管和临床试验设计。', provider:'UC Davis Continuing Education', duration:'6个月', level:'中级', tag:'综合培训', url:'https://extension.ucdavis.edu/'},
-  {title:'ISCT Institute 培训课程', desc:'国际细胞治疗学会(ISCT)官方培训，涵盖MSC/CAR-T/NK细胞产品的质量控制、效价检测、监管合规等专题。', provider:'ISCT Institute', duration:'多门课程', level:'中-高级', tag:'监管法规', url:'https://isctglobal.org/'},
-  {title:'Educo Life Sciences CGT课程', desc:'面向CGT产业从业者的在线培训，涵盖细胞治疗产品开发、CMC、注册申报、商业化全流程。', provider:'Educo Life Sciences', duration:'自定进度', level:'中级', tag:'产业参考', url:'https://www.educolifesciences.com/'},
-  {title:'国家干细胞资源库干细胞高级培训', desc:'中国科学院干细胞与再生医学创新研究院主办，已举办51期，累计培训4000余人，涵盖干细胞基础理论、实验技术和临床转化。', provider:'中科院干细胞研究院', duration:'5-7天/期', level:'中-高级', tag:'综合培训', url:'https://www.ncbi.org.cn/'},
-  {title:'中国细胞生物学学会培训', desc:'中国细胞生物学学会定期举办干细胞、细胞治疗、基因编辑等主题的继续教育培训和学术研讨会。', provider:'中国细胞生物学学会', duration:'不定期', level:'入门-中级', tag:'基础入门', url:'https://www.cscb.org.cn/'},
-  {title:'CAR-T GMP制造培训 (Miltenyi)', desc:'Miltenyi University提供的CAR-T细胞GMP制造专题培训，涵盖T细胞分选、激活、转导、扩增全流程实操。', provider:'Miltenyi University', duration:'3-5天', level:'高级', tag:'制造工艺', url:'https://www.miltenyibiotec.com/'}
+  {title:'Stem Cell Science (Coursera)', desc:'加州大学系统开设的干细胞科学在线课程，涵盖胚胎干细胞、iPSC、MSC的生物学基础与临床应用，适合入门。', provider:'Coursera / UC System', duration:'自定进度', level:'入门', tag:'基础入门', courseCat:'大学课程', url:'https://www.coursera.org/learn/stem-cells'},
+  {title:'Cell Therapy Manufacturing (MITx)', desc:'MIT开设的细胞治疗制造工艺课程，深度讲解CAR-T/MSC的GMP生产流程、质量控制、供应链管理。', provider:'MITx (edX)', duration:'12周', level:'高级', tag:'制造工艺', courseCat:'大学课程', url:'https://www.edx.org/'},
+  {title:'Gene Therapy (Harvard HMX)', desc:'哈佛医学院基因治疗精品课程，涵盖AAV/慢病毒载体设计、体内基因递送、基因编辑技术前沿。', provider:'Harvard HMX', duration:'自定进度', level:'中级', tag:'基因治疗', courseCat:'大学课程', url:'https://onlinelearning.hms.harvard.edu/hmx/'},
+  {title:'Stanford XGEN201 基因治疗', desc:'斯坦福大学继续教育的基因治疗专题课程，系统讲解从载体工程到临床试验设计的全链条知识。', provider:'Stanford Continuing Studies', duration:'10周', level:'中级', tag:'基因治疗', courseCat:'大学课程', url:'https://xgen.stanford.edu/'},
+  {title:'UC Davis 细胞治疗证书项目', desc:'加州大学戴维斯分校的细胞治疗专业证书项目，涵盖干细胞生物学、GMP制造、法规监管和临床试验设计。', provider:'UC Davis Continuing Education', duration:'6个月', level:'中级', tag:'综合培训', courseCat:'大学课程', url:'https://extension.ucdavis.edu/'},
+  {title:'ISCT Institute 培训课程', desc:'国际细胞治疗学会(ISCT)官方培训，涵盖MSC/CAR-T/NK细胞产品的质量控制、效价检测、监管合规等专题。', provider:'ISCT Institute', duration:'多门课程', level:'中-高级', tag:'监管法规', courseCat:'行业培训', url:'https://isctglobal.org/'},
+  {title:'Educo Life Sciences CGT课程', desc:'面向CGT产业从业者的在线培训，涵盖细胞治疗产品开发、CMC、注册申报、商业化全流程。', provider:'Educo Life Sciences', duration:'自定进度', level:'中级', tag:'产业参考', courseCat:'行业培训', url:'https://www.educolifesciences.com/'},
+  {title:'国家干细胞资源库干细胞高级培训', desc:'中国科学院干细胞与再生医学创新研究院主办，已举办51期，累计培训4000余人，涵盖干细胞基础理论、实验技术和临床转化。', provider:'中科院干细胞研究院', duration:'5-7天/期', level:'中-高级', tag:'综合培训', courseCat:'行业培训', url:'https://www.ncbi.org.cn/'},
+  {title:'中国细胞生物学学会培训', desc:'中国细胞生物学学会定期举办干细胞、细胞治疗、基因编辑等主题的继续教育培训和学术研讨会。', provider:'中国细胞生物学学会', duration:'不定期', level:'入门-中级', tag:'基础入门', courseCat:'行业培训', url:'https://www.cscb.org.cn/'},
+  {title:'CAR-T GMP制造培训 (Miltenyi)', desc:'Miltenyi University提供的CAR-T细胞GMP制造专题培训，涵盖T细胞分选、激活、转导、扩增全流程实操。', provider:'Miltenyi University', duration:'3-5天', level:'高级', tag:'制造工艺', courseCat:'行业培训', url:'https://www.miltenyibiotec.com/'}
+];
+
+const CONFERENCE_EVENTS = [
+  // 国际学术会议
+  {title:'ISCT 2026 年会', desc:'国际细胞与基因治疗学会(ISCT)年会，全球CGT领域顶级盛会。涵盖细胞治疗制造、质量控制、临床转化、监管合规等全链条议题。', date:'2026年5月6-9日', location:'爱尔兰 都柏林', cat:'国际会议', url:'https://isctglobal.org/'},
+  {title:'ASGCT 2026 年会', desc:'美国基因与细胞治疗学会(ASGCT)年会，CGT领域规模最大的学术会议。172场专题会议，250+小时前沿学术内容，涵盖基因编辑、AAV载体、CAR-T等全线前沿。', date:'2026年5月11-15日', location:'美国 波士顿', cat:'国际会议', url:'https://annualmeeting.asgct.org/'},
+  {title:'ASGCT Breakthroughs 突破会议', desc:'ASGCT全新年度会议，三大专题轨道：治疗模态与平台、靶向与生物精准度、转化与制造。含Braindate深度交流平台。', date:'2026年11月12-13日', location:'美国 纳什维尔 + 线上', cat:'国际会议', url:'https://www.asgct.org/events-meetings/breakthroughs-in-cell-gene-therapy'},
+  {title:'Cell & Gene Therapy Summit', desc:'CGT产业峰会，聚焦细胞与基因治疗产品的商业化、制造策略、供应链与市场准入。', date:'2026年7月6-8日', location:'美国 波士顿', cat:'国际会议', url:'https://www.qiagen.com/ws/applications/pharma-biotech/cell-and-gene-therapy/cell-and-gene-therapy-events'},
+  {title:'ISCT Asia 2026 新加坡', desc:'ISCT亚洲区域会议，聚焦亚太地区CGT发展趋势、监管政策与临床转化。', date:'2026年9月2-5日', location:'新加坡', cat:'国际会议', url:'https://isctglobal.org/'},
+  // 国内学术会议
+  {title:'博鳌乐城细胞大会', desc:'第三届博鳌乐城干细胞大会，以"细胞引领第三次医学革命"为主题。诺奖得主Thomas Südhof主持，王福生/邓宏魁/乔杰等院士参与。七大专题论坛覆盖神经/免疫/女性疾病/肝病/内分泌/溶瘤病毒。会上发布新一批获批细胞治疗项目。', date:'2026年3月', location:'海南 博鳌乐城', cat:'国内会议', url:'https://www.toutiao.com/article/7618801318806700607/'},
+  {title:'博鳌干细胞产业大会', desc:'2025博鳌干细胞产业大会暨临床级干细胞资源库建设培训会。陈义汉/陈香美/李校堃/李劲松/裴钢等多位院士致辞，9场专题报告展示干细胞基础研究到产业化的全链条创新。', date:'2025年4月', location:'海南 博鳌', cat:'国内会议', url:'https://new.qq.com/rain/a/20250427A0837500'},
+  {title:'世界细胞治疗与再生医学大会(WRC)', desc:'第八届世界细胞治疗与再生医学大会暨展览会，与第七届中国国际生物技术大会同期举办。涵盖细胞治疗、基因工程疫苗、免疫治疗、3D生物打印等前沿方向。', date:'2025年4月', location:'北京', cat:'国内会议', url:'http://www.wrc-china.com'},
+  {title:'济南CGT创新发展交流会', desc:'中国(山东)自贸试验区济南片区细胞与基因治疗创新发展交流会。贾伟平院士、山东大学齐鲁医院主办，聚焦CGT临床研究与转化应用，发布《人源间充质干细胞质量控制管理规范》团体标准。', date:'2025年12月', location:'山东 济南', cat:'国内会议', url:'https://www.media.sdu.edu.cn/info/1002/40281.htm'},
+  // 专家讲座与视频解读
+  {title:'CGTLive 专家视频', desc:'CGTLive™平台提供细胞与基因治疗领域最新临床新闻视频报道，含CAR-T、基因治疗、干细胞等方向的关键意见领袖(KOL)访谈、FDA审批解读、临床试验结果分析。短小精悍，紧跟前沿。', date:'持续更新', location:'线上', cat:'专家视频', url:'https://www.cgtlive.com/shorts'},
+  {title:'EuroGCT/EuroStemCell YouTube', desc:'欧洲基因与细胞治疗组织和欧洲干细胞研究计划的官方YouTube频道，101个科普视频，总播放量超200万。涵盖干细胞基础知识、基因治疗原理、临床试验参与指南等，适合公众与患者教育。', date:'持续更新', location:'线上', cat:'专家视频', url:'https://www.youtube.com/c/eurostemcellorg/'},
+  {title:'Gene Horizons 纪录片', desc:'EuroGCT制作的基因治疗科普短片，采用独特的定格动画解释基因治疗背后的科学原理。结合5位领域顶尖专家访谈，适合公众与课堂教学。', date:'2025年', location:'线上', cat:'专家视频', url:'https://www.advancedcardiactherapies.ac.uk/knowledge-hub/gene-horizons'}
 ];
 
 const INDUSTRY_BOOKS = [
-  {title:'《干细胞临床应用手册》', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著'},
-  {title:'《细胞生物学》（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著'},
-  {title:'《间充质干细胞：生物学特性与临床应用》', author:'Robert Marx 等', desc:'MSC领域权威专著，涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据。', publisher:'Academic Press', year:'2024', pages:'约600页', cat:'学术专著'},
-  {title:'《细胞治疗：从实验室到临床》', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', cat:'产业参考'},
-  {title:'《基因治疗原理与实践》', author:'表面含有AAV、慢病毒等载体', desc:'基因治疗领域经典教材，涵盖载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', cat:'学术专著'},
-  {title:'《再生医学与组织工程》', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press', year:'2023', pages:'约800页', cat:'产业参考'}
+  // 原创专著
+  {title:'干细胞临床应用手册', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著', coverType:'original', coverColor:'teal'},
+  {title:'细胞生物学（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著', coverType:'original', coverColor:'blue'},
+  // 学术专著
+  {title:'Mesenchymal Stromal Cells: Biology and Clinical Applications', author:'Peiman Hematti, Armand Keating', desc:'MSC领域权威专著，由Hematti和Keating主编，Springer出版。涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据与转化策略。', publisher:'Springer / Humana Press', year:'2013', pages:'约400页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9406847-M.jpg'},
+  {title:'Principles of Regenerative Medicine', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，由Atala主编，Academic Press出版。涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press / Elsevier', year:'2011', pages:'约800页', cat:'产业参考', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9926803-M.jpg'},
+  {title:'细胞治疗：从实验室到临床', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', cat:'产业参考', coverType:'custom', coverColor:'green'},
+  {title:'基因治疗原理与实践', author:'多种载体设计专题', desc:'基因治疗领域经典教材，涵盖AAV/慢病毒载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', cat:'学术专著', coverType:'custom', coverColor:'purple'},
+  {title:'Stem Cells and Their Potential for Clinical Application', author:'Axel R. Zander 等', desc:'Springer出版的干细胞临床应用专著，系统介绍各类干细胞的生物学特性、临床转化策略与挑战，涵盖造血干细胞、MSC、iPSC等方向。', publisher:'Springer London', year:'2007', pages:'约300页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/2738794-M.jpg'},
+  {title:'Human Embryonic Stem Cells', author:'Roger A. Pedersen', desc:'胚胎干细胞领域经典著作，由Garland Science出版。涵盖hESC的分离培养、分化调控、伦理考量及临床应用前景，是理解多能干细胞基础的重要参考。', publisher:'Garland Science / BIOS', year:'2006', pages:'约350页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9803931-M.jpg'}
 ];
 
 var currentBookCat = 'all';
 var currentBookTab = 'books';
+var currentCourseCat = 'all';
+var currentConfCat = 'all';
+
+function renderBookCover(b) {
+  if (b.coverType === 'image' && b.cover) {
+    return '<div class="book-cover-img"><img src="' + b.cover + '" alt="' + escapeHtml(b.title) + '" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'cover-error\')" /></div>';
+  }
+  var colorMap = {
+    teal: 'linear-gradient(135deg, #004D40, #00695C, #00897B)',
+    blue: 'linear-gradient(135deg, #0D47A1, #1565C0, #1976D2)',
+    green: 'linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C)',
+    purple: 'linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2)'
+  };
+  var bg = colorMap[b.coverColor] || colorMap.teal;
+  var isOriginal = b.cat === '原创专著';
+  var iconSvg = isOriginal ? svgIcon('cell', 28) : svgIcon('book', 28);
+  return '<div class="book-cover-img book-cover-custom" style="background:' + bg + ';">' +
+    '<div class="book-cover-icon">' + iconSvg + '</div>' +
+    '<div class="book-cover-text">' + escapeHtml(b.title.substring(0, 14)) + '</div>' +
+    (isOriginal ? '<div class="book-cover-badge">原创</div>' : '') +
+    '</div>';
+}
 
 function renderBooks() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">行业书籍·培训课程</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">学习中心</span></div>';
 
-  // Tab switcher (replaces h2 header)
+  // Tab switcher (3 tabs)
   html += '<div class="report-tabs">';
   html += '<button class="report-tab' + (currentBookTab === 'books' ? ' active' : '') + '" data-tab="books" onclick="switchBookTab(\'books\')">' + svgIcon('book', 14) + ' 行业书籍</button>';
   html += '<button class="report-tab' + (currentBookTab === 'courses' ? ' active' : '') + '" data-tab="courses" onclick="switchBookTab(\'courses\')">' + svgIcon('users', 14) + ' 课程培训</button>';
+  html += '<button class="report-tab' + (currentBookTab === 'conferences' ? ' active' : '') + '" data-tab="conferences" onclick="switchBookTab(\'conferences\')">' + svgIcon('calendar', 14) + ' 会议论坛</button>';
   html += '</div>';
 
   // === Books tab content ===
   html += '<div class="report-tab-content' + (currentBookTab === 'books' ? ' active' : '') + '" id="book-tab-books">';
 
-  // Description text
-  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。';
-  html += '<div class="report-intro-contact" style="margin-top:10px;"><b>声明：</b>本平台不提供电子版下载，请通过正规渠道购买正版书籍。平台编者有需求可联系编辑团队免费获赠。</div>';
-  html += '</div>';
+  // Description text (no "声明" label, no background box, inline emphasis)
+  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者，联系方式：手机/微信 <b>15932929299</b>。</div>';
 
   // Category cards
   var bookCats = [
@@ -7047,7 +7154,7 @@ function renderBooks() {
   filtered.forEach(function(b, i) {
     var idx = INDUSTRY_BOOKS.indexOf(b);
     html += '<div class="book-cover-item" onclick="showBookDetail(' + idx + ')">';
-    html += '<div class="book-cover-img">' + svgIcon('book', 32) + '</div>';
+    html += renderBookCover(b);
     html += '<div class="book-cover-name">' + escapeHtml(b.title) + '</div>';
     html += '<div class="book-cover-author">' + escapeHtml(b.author) + '</div>';
     html += '</div>';
@@ -7057,20 +7164,96 @@ function renderBooks() {
 
   // === Courses tab content ===
   html += '<div class="report-tab-content' + (currentBookTab === 'courses' ? ' active' : '') + '" id="book-tab-courses">';
-  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。<b>课程信息均来自公开渠道，具体开课时间、费用及报名方式请以官方发布为准。</b></div>';
+
+  // Course description
+  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，按主办方类型分为<b>大学在线课程</b>（Coursera、MITx、Harvard HMX、Stanford等名校系统课程）和<b>行业协会培训</b>（ISCT、中科院、中国细胞生物学学会、Miltenyi等专业机构实操培训）。涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。</div>';
+
+  // Course category cards
+  var courseCats = [
+    {id:'all', name:'全部课程', color:'var(--primary)'},
+    {id:'大学课程', name:'大学在线课程', color:'#42A5F5'},
+    {id:'行业培训', name:'行业协会培训', color:'#FFB74D'}
+  ];
+  var courseCatCounts = {};
   LEARNING_COURSES.forEach(function(c) {
-    html += '<div class="course-card">';
+    if (!courseCatCounts[c.courseCat]) courseCatCounts[c.courseCat] = 0;
+    courseCatCounts[c.courseCat]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px;">';
+  courseCats.forEach(function(c) {
+    var count = c.id === 'all' ? LEARNING_COURSES.length : (courseCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentCourseCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchCourseCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 门</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Course cards (filtered)
+  var filteredCourses = currentCourseCat === 'all' ? LEARNING_COURSES : LEARNING_COURSES.filter(function(c) { return c.courseCat === currentCourseCat; });
+  filteredCourses.forEach(function(c) {
+    var catColor = c.courseCat === '大学课程' ? '#42A5F5' : '#FFB74D';
+    html += '<div class="course-card" onclick="window.open(\'' + (c.url || '#') + '\',\'_blank\')">';
     html += '<div class="course-card-header">';
     html += '<div class="course-icon">' + svgIcon('flask', 20) + '</div>';
     html += '<div style="flex:1;">';
     html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
     html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
-    html += '<div class="course-meta"><span class="course-tag">' + c.tag + '</span><span>' + svgIcon('clock', 10) + ' ' + c.duration + '</span><span>' + svgIcon('users', 10) + ' ' + c.level + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
+    html += '<div class="course-meta"><span class="course-tag" style="background:' + catColor + '20;color:' + catColor + ';">' + escapeHtml(c.courseCat) + '</span><span class="course-tag">' + escapeHtml(c.tag) + '</span><span>' + svgIcon('clock', 10) + ' ' + escapeHtml(c.duration) + '</span><span>' + svgIcon('users', 10) + ' ' + escapeHtml(c.level) + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
   });
   html += '</div>'; // end book-tab-courses
+
+  // === Conferences tab content ===
+  html += '<div class="report-tab-content' + (currentBookTab === 'conferences' ? ' active' : '') + '" id="book-tab-conferences">';
+
+  // Conference description
+  html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇集细胞与基因治疗（CGT）领域国内外重要学术会议、产业论坛、专家讲座与视频解读资源，按类型分为<b>国际会议</b>（ISCT、ASGCT等顶级学会年会）、<b>国内会议</b>（博鳌乐城细胞大会、WRC世界细胞治疗大会等）和<b>专家视频</b>（CGTLive专家访谈、EuroGCT科普视频等）。会议信息来自公开渠道，具体时间地点以官方发布为准。</div>';
+
+  // Conference category cards
+  var confCats = [
+    {id:'all', name:'全部', color:'var(--primary)'},
+    {id:'国际会议', name:'国际会议', color:'#42A5F5'},
+    {id:'国内会议', name:'国内会议', color:'#66BB6A'},
+    {id:'专家视频', name:'专家视频', color:'#FFB74D'}
+  ];
+  var confCatCounts = {};
+  CONFERENCE_EVENTS.forEach(function(c) {
+    if (!confCatCounts[c.cat]) confCatCounts[c.cat] = 0;
+    confCatCounts[c.cat]++;
+  });
+
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
+  confCats.forEach(function(c) {
+    var count = c.id === 'all' ? CONFERENCE_EVENTS.length : (confCatCounts[c.id] || 0);
+    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentConfCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchConfCat(\'' + c.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 项</span></div>';
+    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Conference cards (filtered)
+  var filteredConfs = currentConfCat === 'all' ? CONFERENCE_EVENTS : CONFERENCE_EVENTS.filter(function(c) { return c.cat === currentConfCat; });
+  var confCatColors = {'国际会议':'#42A5F5', '国内会议':'#66BB6A', '专家视频':'#FFB74D'};
+  filteredConfs.forEach(function(c) {
+    var catColor = confCatColors[c.cat] || 'var(--primary)';
+    var confIcon = c.cat === '专家视频' ? 'play' : 'calendar';
+    html += '<div class="course-card conf-card" onclick="window.open(\'' + (c.url || '#') + '\',\'_blank\')">';
+    html += '<div class="course-card-header">';
+    html += '<div class="course-icon" style="background:' + catColor + '15;">' + svgIcon(confIcon, 20) + '</div>';
+    html += '<div style="flex:1;">';
+    html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
+    html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
+    html += '<div class="course-meta"><span class="course-tag" style="background:' + catColor + '20;color:' + catColor + ';">' + escapeHtml(c.cat) + '</span><span>' + svgIcon('calendar', 10) + ' ' + escapeHtml(c.date) + '</span><span>' + svgIcon('location', 10) + ' ' + escapeHtml(c.location) + '</span></div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>'; // end book-tab-conferences
 
   // Modal placeholder
   html += '<div class="book-modal-overlay" id="bookModalOverlay" onclick="closeBookModal(event)">';
@@ -7084,14 +7267,29 @@ function renderBooks() {
 
 function switchBookTab(tab) {
   currentBookTab = tab;
-  var booksTab = document.querySelector('[data-tab="books"]');
-  var coursesTab = document.querySelector('[data-tab="courses"]');
-  if (booksTab) booksTab.classList.toggle('active', tab === 'books');
-  if (coursesTab) coursesTab.classList.toggle('active', tab === 'courses');
-  var booksContent = document.getElementById('book-tab-books');
-  var coursesContent = document.getElementById('book-tab-courses');
-  if (booksContent) booksContent.classList.toggle('active', tab === 'books');
-  if (coursesContent) coursesContent.classList.toggle('active', tab === 'courses');
+  document.querySelectorAll('.report-tab[data-tab]').forEach(function(el) {
+    el.classList.toggle('active', el.getAttribute('data-tab') === tab);
+  });
+  var tabIds = ['books', 'courses', 'conferences'];
+  tabIds.forEach(function(t) {
+    var el = document.getElementById('book-tab-' + t);
+    if (el) el.classList.toggle('active', t === tab);
+  });
+}
+
+function switchCourseCat(cat) {
+  currentCourseCat = cat;
+  renderBooks();
+  // Re-switch to courses tab after re-render
+  currentBookTab = 'courses';
+  switchBookTab('courses');
+}
+
+function switchConfCat(cat) {
+  currentConfCat = cat;
+  renderBooks();
+  currentBookTab = 'conferences';
+  switchBookTab('conferences');
 }
 
 function switchBookCat(cat) {
@@ -7105,6 +7303,10 @@ function showBookDetail(idx) {
   var modal = document.getElementById('bookModalContent');
   var html = '';
   html += '<button class="book-modal-close" onclick="closeBookModal()">&times;</button>';
+  // Cover image at top
+  if (b.coverType === 'image' && b.cover) {
+    html += '<div style="text-align:center;margin-bottom:16px;"><img src="' + b.cover + '" style="max-width:160px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.3);" onerror="this.style.display=\'none\'" /></div>';
+  }
   html += '<div class="book-modal-title">' + escapeHtml(b.title) + '</div>';
   html += '<div class="book-modal-author">' + escapeHtml(b.author) + ' · ' + escapeHtml(b.publisher) + ' · ' + b.year + '</div>';
   html += '<div class="book-modal-meta">';
@@ -7112,7 +7314,7 @@ function showBookDetail(idx) {
   html += '<span>' + svgIcon('doc', 10) + ' ' + escapeHtml(b.pages) + '</span>';
   html += '</div>';
   html += '<div class="book-modal-desc">' + escapeHtml(b.desc) + '</div>';
-  html += '<div class="book-modal-note">本平台不提供电子版下载，请通过正规渠道购买正版书籍。平台编者有需求可联系编辑团队免费获赠。</div>';
+  html += '<div class="book-modal-note">本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者。</div>';
   modal.innerHTML = html;
   document.getElementById('bookModalOverlay').classList.add('show');
 }
