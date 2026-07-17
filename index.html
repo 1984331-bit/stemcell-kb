@@ -1462,10 +1462,8 @@ body { padding-bottom: 60px; }
 }
 .hub-tags-label svg { color: var(--primary); }
 .hub-tags-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  overflow: visible;
+  display: block;
+  overflow: hidden;
   min-width: 0;
   padding: 4px 2px;
 }
@@ -1480,6 +1478,8 @@ body { padding-bottom: 60px; }
   user-select: none;
   transition: color 0.2s;
   white-space: nowrap;
+  float: right;
+  margin: 0 0 5px 8px;
 }
 .hub-tags-shuffle:hover {
   color: var(--primary);
@@ -1514,6 +1514,7 @@ body { padding-bottom: 60px; }
   display: inline-flex;
   align-items: baseline;
   gap: 4px;
+  margin: 0 5px 5px 0;
   padding: 3px 9px;
   border-radius: 16px;
   cursor: pointer;
@@ -2665,7 +2666,7 @@ body { padding-bottom: 60px; }
   position: relative;
   overflow: hidden;
 }
-#chinaMapContainer { width: 100%; min-height: 420px; }
+#chinaMapContainer { width: 100%; height: 520px; }
 .china-tile-map {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -2710,7 +2711,7 @@ body { padding-bottom: 60px; }
   .china-tile-map { grid-template-columns: repeat(8, 1fr); gap: 2px; padding: 8px; }
   .tile-province { font-size: 10px; padding: 4px 2px; min-height: 40px; }
   .tile-province .tile-count { font-size: 13px; }
-  #chinaMapContainer { min-height: 320px; }
+  #chinaMapContainer { height: 360px; }
 }
 @keyframes tileFadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 .map-loading {
@@ -3825,6 +3826,7 @@ body { padding-bottom: 60px; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="china-geo.js"></script>
 </head>
 <body>
 
@@ -6149,9 +6151,6 @@ function renderHub() {
 
   // Hot search tags - expanded pool with shuffle
   html += '<div class="hub-tags">';
-  html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px;">';
-  html += '<span class="hub-tags-shuffle" id="hotTagShuffleBtn" onclick="shuffleHotTags(this)">' + svgIcon('refresh', 13) + ' 换一换</span>';
-  html += '</div>';
   html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
   html += '</div>';
 
@@ -6200,6 +6199,8 @@ function renderHotTagBatch() {
   });
   var maxC = Math.max.apply(null, allTagData.map(function(t){return t.count;}));
   var html = '';
+  // Shuffle button first (floats right, same line as first row of tags)
+  html += '<span class="hub-tags-shuffle" id="hotTagShuffleBtn" onclick="shuffleHotTags(this)">' + svgIcon('refresh', 13) + ' 换一换</span>';
   for (var i = 0; i < HOT_TAG_BATCH; i++) {
     var idx = (hotTagOffset + i) % HOT_TAGS_POOL.length;
     var t = allTagData[idx];
@@ -6760,12 +6761,21 @@ const INDUSTRY_BOOKS = [
 ];
 
 var currentBookCat = 'all';
+var currentBookTab = 'books';
 
 function renderBooks() {
   var content = document.getElementById('content');
   var html = '';
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span> <b>行业书籍·培训课程</b></div>';
-  html += '<div class="content-header"><h2>行业书籍·培训课程</h2></div>';
+
+  // Tab switcher (replaces h2 header)
+  html += '<div class="report-tabs">';
+  html += '<button class="report-tab' + (currentBookTab === 'books' ? ' active' : '') + '" data-tab="books" onclick="switchBookTab(\'books\')">' + svgIcon('book', 14) + ' 行业书籍</button>';
+  html += '<button class="report-tab' + (currentBookTab === 'courses' ? ' active' : '') + '" data-tab="courses" onclick="switchBookTab(\'courses\')">' + svgIcon('users', 14) + ' 课程培训</button>';
+  html += '</div>';
+
+  // === Books tab content ===
+  html += '<div class="report-tab-content' + (currentBookTab === 'books' ? ' active' : '') + '" id="book-tab-books">';
 
   // Description text
   html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。';
@@ -6807,10 +6817,10 @@ function renderBooks() {
     html += '</div>';
   });
   html += '</div>';
+  html += '</div>'; // end book-tab-books
 
-  // Training courses section
-  html += '<div style="margin-top:28px;">';
-  html += '<div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--primary);margin-bottom:14px;">' + svgIcon('users', 18) + ' 培训课程</div>';
+  // === Courses tab content ===
+  html += '<div class="report-tab-content' + (currentBookTab === 'courses' ? ' active' : '') + '" id="book-tab-courses">';
   html += '<div class="report-intro-text" style="margin-bottom:14px;">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。<b>课程信息均来自公开渠道，具体开课时间、费用及报名方式请以官方发布为准。</b></div>';
   LEARNING_COURSES.forEach(function(c) {
     html += '<div class="course-card">';
@@ -6824,7 +6834,7 @@ function renderBooks() {
     html += '</div>';
     html += '</div>';
   });
-  html += '</div>';
+  html += '</div>'; // end book-tab-courses
 
   // Modal placeholder
   html += '<div class="book-modal-overlay" id="bookModalOverlay" onclick="closeBookModal(event)">';
@@ -6834,6 +6844,18 @@ function renderBooks() {
 
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+function switchBookTab(tab) {
+  currentBookTab = tab;
+  var booksTab = document.querySelector('[data-tab="books"]');
+  var coursesTab = document.querySelector('[data-tab="courses"]');
+  if (booksTab) booksTab.classList.toggle('active', tab === 'books');
+  if (coursesTab) coursesTab.classList.toggle('active', tab === 'courses');
+  var booksContent = document.getElementById('book-tab-books');
+  var coursesContent = document.getElementById('book-tab-courses');
+  if (booksContent) booksContent.classList.toggle('active', tab === 'books');
+  if (coursesContent) coursesContent.classList.toggle('active', tab === 'courses');
 }
 
 function switchBookCat(cat) {
@@ -7836,7 +7858,7 @@ function renderInstitutions() {
     html += '</div>';
     // Stats row
     var provCounts = countByProvince(INSTITUTIONS);
-    html += '<div id="chinaMapContainer">' + renderChinaTileMap(provCounts) + '</div>';
+    html += '<div id="chinaMapContainer"><div class="map-loading">地图加载中...</div></div>';
     var provCount = Object.keys(provCounts).length;
     var regionCount = Object.keys(regionCounts).length;
     html += '<div class="map-stats-row">';
@@ -8037,6 +8059,8 @@ function renderInstitutions() {
 
   // Animate stat numbers if in map view
   if (instFilter === 'all') {
+    // Initialize ECharts map with local GeoJSON
+    initChinaMap();
     // Animate stat numbers
     setTimeout(function() {
       document.querySelectorAll('.map-stat-num[data-count]').forEach(function(el) {
@@ -8207,52 +8231,14 @@ function initChinaMap() {
     chinaMapChart = null;
   }
 
-  chinaMapChart = echarts.init(container, null, { renderer: 'canvas' });
-
-  if (chinaGeoJson) {
+  // Use local GeoJSON data (embedded in china-geo.js, no CDN fetch needed)
+  if (typeof CHINA_GEO_JSON !== 'undefined' && CHINA_GEO_JSON && CHINA_GEO_JSON.features) {
+    chinaGeoJson = CHINA_GEO_JSON;
+    echarts.registerMap('china', CHINA_GEO_JSON);
+    chinaMapChart = echarts.init(container, null, { renderer: 'canvas' });
     renderChinaMap();
   } else {
-    chinaMapChart.showLoading('default', {
-      text: '正在加载中国地图...',
-      color: '#00E5FF',
-      textColor: '#8B9DAF',
-      maskColor: 'rgba(18,28,42,0.8)'
-    });
-
-    // Multiple CDN fallback sources for China GeoJSON
-    var geoSources = [
-      'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json',
-      'https://cdn.jsdelivr.net/gh/apache/echarts@5.5.0/map/json/china.json',
-      'https://raw.githubusercontent.com/apache/echarts/5.5.0/map/json/china.json',
-      'https://fastly.jsdelivr.net/gh/apache/echarts@5.5.0/map/json/china.json'
-    ];
-
-    function tryGeoSource(idx) {
-      if (idx >= geoSources.length) {
-        chinaMapChart.hideLoading();
-        try { chinaMapChart.dispose(); } catch(e) {}
-        chinaMapChart = null;
-        container.innerHTML = '<div class="map-loading" style="flex-direction:column;gap:10px;">'
-          + '<div style="font-size:28px;opacity:0.3;">' + svgIcon('map', 28) + '</div>'
-          + '地图数据加载失败<br>'
-          + '<span style="font-size:12px;opacity:0.7;">请查看下方省份排行列表，点击省份即可查看详情</span>'
-          + '<button onclick="initChinaMap()" style="margin-top:8px;padding:6px 16px;border:1px solid var(--primary);background:transparent;color:var(--primary);border-radius:6px;cursor:pointer;font-size:12px;transition:all 0.2s;" onmouseover="this.style.background=\'var(--primary)\';this.style.color=\'#0A0F1A\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--primary)\'">重新加载</button>'
-          + '</div>';
-        return;
-      }
-      fetchWithTimeout(geoSources[idx], 8000)
-        .then(function(data) {
-          if (!data || !data.features || data.features.length === 0) throw new Error('invalid data');
-          chinaGeoJson = data;
-          echarts.registerMap('china', data);
-          chinaMapChart.hideLoading();
-          renderChinaMap();
-        })
-        .catch(function(err) {
-          tryGeoSource(idx + 1);
-        });
-    }
-    tryGeoSource(0);
+    container.innerHTML = '<div class="map-loading">地图数据文件加载失败</div>';
   }
 }
 
