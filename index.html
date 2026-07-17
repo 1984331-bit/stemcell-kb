@@ -2875,7 +2875,28 @@ body { padding-bottom: 60px; }
   position: relative;
   overflow: hidden;
 }
-#chinaMapContainer { width: 100%; height: 520px; }
+#chinaMapContainer { width: 100%; height: 520px; touch-action: pan-y; }
+#chinaMapContainer canvas { touch-action: pan-y; }
+.map-zoom-controls {
+  position: absolute; right: 10px; top: 10px;
+  display: flex; flex-direction: column; gap: 4px; z-index: 10;
+}
+.map-zoom-btn {
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(13,27,42,0.85);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  padding: 0;
+}
+.map-zoom-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 8px rgba(0,229,255,0.2);
+}
 .china-tile-map {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -5636,6 +5657,7 @@ function svgIcon(name, sz) {
     'list': '<path d="M4 6h16M4 12h16M4 18h12"/>',
     'location': '<path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>',
     'plus': '<path d="M12 5v14M5 12h14"/>',
+    'minus': '<path d="M5 12h14"/>',
     'quote': '<path d="M7 7h4v6c0 2-1 3-3 3M13 7h4v6c0 2-1 3-3 3"/>',
     'book': '<path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M6 8h3M6 12h3M15 8h3M15 12h3"/>',
     'pen': '<path d="M14 3l7 7-11 11H3v-7z"/><path d="M14 3l7 7M3 21l7-7"/>',
@@ -8478,11 +8500,18 @@ function renderInstitutions() {
     html += '<div class="china-map-wrap">';
     html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">';
     html += '<div style="font-size:15px;font-weight:600;color:var(--primary);display:flex;align-items:center;gap:6px;">' + svgIcon('map', 18) + ' 全国备案机构分布图</div>';
-    html += '<div style="font-size:12px;color:var(--text-light);">点击省份查看详细信息</div>';
+    html += '<div style="font-size:12px;color:var(--text-light);">点击下方标签也可快速查询</div>';
     html += '</div>';
     // Stats row
     var provCounts = countByProvince(INSTITUTIONS);
+    html += '<div style="position:relative;">';
     html += '<div id="chinaMapContainer"><div class="map-loading">地图加载中...</div></div>';
+    html += '<div class="map-zoom-controls">';
+    html += '<button class="map-zoom-btn" onclick="mapZoomIn()" title="放大" aria-label="放大">' + svgIcon('plus', 16) + '</button>';
+    html += '<button class="map-zoom-btn" onclick="mapZoomOut()" title="缩小" aria-label="缩小">' + svgIcon('minus', 16) + '</button>';
+    html += '<button class="map-zoom-btn" onclick="mapZoomReset()" title="重置" aria-label="重置">' + svgIcon('refresh', 15) + '</button>';
+    html += '</div>';
+    html += '</div>';
     // Quick-access pills for small provinces that are hard to tap on mobile
     var smallProvs = ['北京','天津','上海','澳门','香港','台湾'];
     var smallProvHtml = '<div class="map-quick-pills" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center;">';
@@ -9003,44 +9032,17 @@ function initChinaMap() {
     echarts.registerMap('china', CHINA_GEO_JSON);
     chinaMapChart = echarts.init(container, null, { renderer: 'canvas' });
     renderChinaMap();
-    // Bind quick-access pill clicks
+    // Bind quick-access pill clicks — pills are the primary query method
     document.querySelectorAll('.map-quick-pill').forEach(function(pill) {
       var handler = function(e) {
         e.preventDefault();
         e.stopPropagation();
         var provName = pill.getAttribute('data-prov');
-        if (provName && mapProvCounts[provName] !== undefined) {
-          var count = mapProvCounts[provName] || 0;
-          var shortName = PROVINCE_SHORT[provName] || provName;
-          if (count > 0) {
-            filterInsts('province:' + provName);
-          } else {
-            // Show a brief "no institutions" message
-            closeMapPopup();
-            var container2 = document.getElementById('chinaMapContainer');
-            if (container2) {
-              var existing2 = document.getElementById('mapPopupCard');
-              if (existing2) existing2.remove();
-              var bd = document.getElementById('mapPopupBackdrop');
-              if (bd) bd.remove();
-              var bd2 = document.createElement('div');
-              bd2.id = 'mapPopupBackdrop';
-              bd2.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99;';
-              bd2.addEventListener('click', function() { closeMapPopup(); });
-              bd2.addEventListener('touchend', function() { closeMapPopup(); });
-              document.body.appendChild(bd2);
-              var popup2 = document.createElement('div');
-              popup2.id = 'mapPopupCard';
-              popup2.style.cssText = 'position:absolute;z-index:100;background:var(--card-bg);border:1px solid var(--primary);border-radius:8px;padding:14px 18px;box-shadow:0 4px 20px rgba(0,229,255,0.15);min-width:180px;left:50%;top:50%;transform:translate(-50%,-50%);';
-              popup2.innerHTML = '<div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px;">' + svgIcon('map', 16) + ' ' + escapeHtml(shortName) + '</div><div style="font-size:13px;color:var(--text-light);">暂无备案机构</div>';
-              container2.style.position = 'relative';
-              container2.appendChild(popup2);
-            }
-          }
+        if (provName) {
+          filterInsts('province:' + provName);
         }
       };
       pill.addEventListener('click', handler);
-      pill.addEventListener('touchend', handler);
     });
   } else {
     container.innerHTML = '<div class="map-loading">地图数据文件加载失败</div>';
@@ -9049,6 +9051,31 @@ function initChinaMap() {
 
 var mapZoomLevel = 1.0;
 var mapProvCounts = {};
+
+function getMapLabelFormatter() {
+  return function(params) {
+    var shortName = PROVINCE_SHORT[params.name] || params.name;
+    var count = mapProvCounts[params.name] || 0;
+    // When zoomed in (>=1.6), show all province names; otherwise only Beijing and Taiwan
+    if (mapZoomLevel >= 1.6) {
+      if (count > 0) {
+        return '{n|' + shortName + '}\n{c|' + count + '}';
+      }
+      return '{n|' + shortName + '}';
+    }
+    // Default: only Beijing and Taiwan show name
+    if (shortName === '北京' || shortName === '台湾省') {
+      if (count > 0) {
+        return '{n|' + shortName + '}\n{c|' + count + '}';
+      }
+      return '{n|' + shortName + '}';
+    }
+    if (count > 0) {
+      return '{c|' + count + '}';
+    }
+    return '';
+  };
+}
 
 function renderChinaMap() {
   if (!chinaMapChart || !chinaGeoJson) return;
@@ -9062,31 +9089,6 @@ function renderChinaMap() {
   }
 
   var maxVal = Math.max.apply(null, mapData.map(function(d) { return d.value; }));
-
-  function getLabelFormatter() {
-    return function(params) {
-      var shortName = PROVINCE_SHORT[params.name] || params.name;
-      var count = mapProvCounts[params.name] || 0;
-      // When zoomed in (>=1.6), show all province names; otherwise only Beijing and Taiwan
-      if (mapZoomLevel >= 1.6) {
-        if (count > 0) {
-          return '{n|' + shortName + '}\n{c|' + count + '}';
-        }
-        return '{n|' + shortName + '}';
-      }
-      // Default: only Beijing and Taiwan show name
-      if (shortName === '北京' || shortName === '台湾省') {
-        if (count > 0) {
-          return '{n|' + shortName + '}\n{c|' + count + '}';
-        }
-        return '{n|' + shortName + '}';
-      }
-      if (count > 0) {
-        return '{c|' + count + '}';
-      }
-      return '';
-    };
-  }
 
   var option = {
     backgroundColor: 'transparent',
@@ -9123,14 +9125,14 @@ function renderChinaMap() {
     },
     geo: {
       map: 'china',
-      roam: true,
+      roam: false,
       scaleLimit: { min: 0.8, max: 3 },
       zoom: 1.15,
       label: {
         show: true,
         fontSize: 10,
         color: 'rgba(224,230,237,0.7)',
-        formatter: getLabelFormatter(),
+        formatter: getMapLabelFormatter(),
         rich: {
           n: { fontSize: 10, color: 'rgba(224,230,237,0.8)', lineHeight: 14 },
           c: { fontSize: 13, fontWeight: 'bold', color: '#00E5FF', lineHeight: 16 }
@@ -9183,40 +9185,47 @@ function renderChinaMap() {
 
   chinaMapChart.setOption(option);
 
-  // Georoam handler — track zoom level and update labels
-  chinaMapChart.off('georoam');
-  chinaMapChart.on('georoam', function(params) {
-    if (params.zoom) {
-      try {
-        var opt = chinaMapChart.getOption();
-        var z = opt.geo[0].zoom;
-        if (z && Math.abs(z - mapZoomLevel) > 0.05) {
-          mapZoomLevel = z;
-          chinaMapChart.setOption({
-            geo: { label: { formatter: getLabelFormatter() } }
-          });
-        }
-      } catch(e) {}
-    }
-  });
-
-  // Click handler — show popup card instead of auto-jumping
-  chinaMapChart.off('click');
-  chinaMapChart.on('click', function(params) {
-    if (params.name && mapProvCounts[params.name] !== undefined) {
-      var count = mapProvCounts[params.name] || 0;
-      var shortName = PROVINCE_SHORT[params.name] || params.name;
-      // Show popup card
-      showMapPopup(params, shortName, params.name, count);
-    }
-  });
-
   // Resize handler
   if (window._chinaMapResize) window.removeEventListener('resize', window._chinaMapResize);
   window._chinaMapResize = function() {
     if (chinaMapChart) chinaMapChart.resize();
   };
   window.addEventListener('resize', window._chinaMapResize);
+}
+
+// Map zoom controls (button-driven, not touch-driven)
+function mapZoomIn() {
+  if (!chinaMapChart) return;
+  try {
+    var opt = chinaMapChart.getOption();
+    var currentZoom = (opt.geo && opt.geo[0] && opt.geo[0].zoom) || 1.15;
+    var newZoom = Math.min(currentZoom * 1.25, 3);
+    mapZoomLevel = newZoom;
+    chinaMapChart.setOption({
+      geo: [{ zoom: newZoom, label: { formatter: getMapLabelFormatter() } }]
+    });
+  } catch(e) {}
+}
+
+function mapZoomOut() {
+  if (!chinaMapChart) return;
+  try {
+    var opt = chinaMapChart.getOption();
+    var currentZoom = (opt.geo && opt.geo[0] && opt.geo[0].zoom) || 1.15;
+    var newZoom = Math.max(currentZoom / 1.25, 0.8);
+    mapZoomLevel = newZoom;
+    chinaMapChart.setOption({
+      geo: [{ zoom: newZoom, label: { formatter: getMapLabelFormatter() } }]
+    });
+  } catch(e) {}
+}
+
+function mapZoomReset() {
+  if (!chinaMapChart) return;
+  mapZoomLevel = 1.0;
+  chinaMapChart.setOption({
+    geo: [{ zoom: 1.15, center: [104.5, 36], label: { formatter: getMapLabelFormatter() } }]
+  });
 }
 
 // Map popup card
