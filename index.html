@@ -2470,6 +2470,17 @@ body { padding-bottom: 60px; }
   /* Breadcrumb */
   .breadcrumb { font-size: 12px; gap: 4px; }
   .breadcrumb .crumb-link { padding: 3px 8px; font-size: 12px; }
+  /* Map popup card on mobile */
+  #mapPopupCard { min-width: 140px !important; padding: 10px 12px !important; }
+  #mapPopupCard div:first-child { font-size: 14px !important; }
+  /* Project table mobile */
+  .inst-proj-table { font-size: 11px !important; }
+  .inst-proj-table th { padding: 8px 6px !important; font-size: 11px !important; }
+  .inst-proj-table td { padding: 6px 6px !important; }
+  .inst-proj-table th:nth-child(2), .inst-proj-table td:nth-child(2) { min-width: 120px; }
+  .inst-proj-table th:nth-child(5), .inst-proj-table td:nth-child(5) { min-width: 100px; }
+  /* Project filter buttons */
+  .proj-filter-btn { padding: 4px 10px !important; font-size: 11px !important; }
 }
 /* Originals & Books sections */
 .orig-section, .books-section { margin-bottom: 24px; }
@@ -4358,6 +4369,7 @@ function buildHash(state) {
     if (state.instFilter && state.instFilter !== 'all') return '#inst/' + encodeURIComponent(state.instFilter);
     return '#inst';
   }
+  if (s === 'inst_projects') return '#inst/projects';
   if (s === 'report') return '#report';
   if (s === 'originals') return '#originals';
   if (s === 'books') return '#books';
@@ -4374,6 +4386,7 @@ function parseHash() {
   if (!hash || hash === '#hub') return { section: 'hub' };
   if (hash === '#intro') return { section: 'intro' };
   if (hash === '#inst') return { section: 'institutions', instFilter: 'all' };
+  if (hash === '#inst/projects') return { section: 'inst_projects' };
   if (hash.indexOf('#inst/') === 0) return { section: 'institutions', instFilter: decodeURIComponent(hash.slice(6)) };
   if (hash === '#report') return { section: 'report' };
   if (hash === '#originals') return { section: 'originals' };
@@ -4707,6 +4720,7 @@ function renderContent() {
   if (currentSection === 'companies') { renderCompanies(); return; }
   if (currentSection === 'intro') { renderIntro(); return; }
   if (currentSection === 'institutions') { renderInstitutions(); return; }
+  if (currentSection === 'inst_projects') { renderInstProjects(); return; }
   if (currentSection === 'report') { renderReport(); return; }
   if (currentSection === 'originals') { renderOriginals(); return; }
   if (currentSection === 'books') { renderBooks(); return; }
@@ -5759,7 +5773,7 @@ function switchSection(section) {
 
 function updateBottomNav(section) {
   document.querySelectorAll('.bn-item').forEach(el => el.classList.remove('active'));
-  var navMap = { 'hub':'nav-home', 'intro':'nav-intro', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news', 'institutions':'nav-inst' };
+  var navMap = { 'hub':'nav-home', 'intro':'nav-intro', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news', 'institutions':'nav-inst', 'inst_projects':'nav-inst' };
   var el = document.getElementById(navMap[section]);
   if (el) el.classList.add('active');
 }
@@ -7948,7 +7962,7 @@ function renderInstitutions() {
     regionCounts[inst.region]++;
   });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);">';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);">';
   var allActive = (instFilter === 'all') ? 'background:rgba(0,229,255,0.06);' : '';
   html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;' + allActive + '" onclick="filterInsts(\'all\')">';
   html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + INSTITUTIONS.length + '"></span><span class="rcc-unit"> 家</span></div>';
@@ -7962,6 +7976,15 @@ function renderInstitutions() {
     html += '<div class="rcc-name">' + escapeHtml(reg) + '</div>';
     html += '</div>';
   });
+  // Add registered projects card
+  var totalProjCount = 0;
+  for (var k in INSTITUTION_PROJECTS) {
+    totalProjCount += INSTITUTION_PROJECTS[k].length;
+  }
+  html += '<div class="reg-cat-card" style="border-left-color:#7B1FA2;cursor:pointer;" onclick="showInstProjects()">';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#7B1FA2;"></span><span class="rcc-unit"> 项</span></div>';
+  html += '<div class="rcc-name">备案项目</div>';
+  html += '</div>';
   html += '</div>';
 
   // === Three views based on instFilter ===
@@ -8218,6 +8241,124 @@ function toggleProvince(headerEl) {
   accordion.classList.toggle('open');
 }
 
+function showInstProjects() {
+  saveNavState();
+  currentSection = 'inst_projects';
+  updateBottomNav('institutions');
+  updateLayout('institutions');
+  pushHistory();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+}
+
+function renderInstProjects() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + ' 首页</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <b>备案项目一览</b></div>';
+
+  // Collect all projects with institution info
+  var allProjects = [];
+  for (var instName in INSTITUTION_PROJECTS) {
+    var instInfo = INSTITUTIONS.find(function(i) { return i.name === instName; });
+    var region = instInfo ? instInfo.region : '';
+    var city = instInfo ? instInfo.city : '';
+    INSTITUTION_PROJECTS[instName].forEach(function(p) {
+      allProjects.push({
+        institution: instName,
+        region: region,
+        city: city,
+        name: p.name,
+        cell: p.cell,
+        phase: p.phase
+      });
+    });
+  }
+
+  // Sort by region, then by institution
+  allProjects.sort(function(a, b) {
+    if (a.region !== b.region) return a.region.localeCompare(b.region);
+    if (a.institution !== b.institution) return a.institution.localeCompare(b.institution);
+    return 0;
+  });
+
+  var totalProj = allProjects.length;
+  var totalInst = Object.keys(INSTITUTION_PROJECTS).length;
+
+  // Description
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构临床研究项目汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项备案项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构。按地区分类展示，涵盖细胞类型、研究阶段等信息。</div></div>';
+
+  // Filter buttons
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
+  html += '<button class="proj-filter-btn" data-filter="all" style="background:var(--primary);color:#0A0F1A;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;" onclick="filterInstProj(\'all\',this)">全部 ' + totalProj + '</button>';
+  // Cell type filter
+  var cellTypes = {};
+  allProjects.forEach(function(p) { cellTypes[p.cell] = (cellTypes[p.cell]||0)+1; });
+  Object.keys(cellTypes).sort().forEach(function(ct) {
+    html += '<button class="proj-filter-btn" data-filter="' + ct + '" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="filterInstProj(\'' + ct.replace(/'/g,"\\'") + '\',this)">' + escapeHtml(ct) + ' ' + cellTypes[ct] + '</button>';
+  });
+  html += '</div>';
+
+  // Table
+  html += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">';
+  html += '<table class="inst-proj-table" id="instProjTable" style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<thead><tr>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">序号</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:200px;">项目名称</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">细胞类型</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">研究阶段</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:160px;">备案机构</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">地区</th>';
+  html += '</tr></thead><tbody id="instProjBody">';
+
+  allProjects.forEach(function(p, idx) {
+    var phaseColor = p.phase.indexOf('II') >= 0 ? 'rgba(0,229,255,0.15)' : 'rgba(0,200,83,0.15)';
+    var phaseTextColor = p.phase.indexOf('II') >= 0 ? 'var(--primary)' : '#4CAF50';
+    var rowBg = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)';
+    html += '<tr class="proj-row" data-cell="' + escapeHtml(p.cell) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;">' + (idx+1) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(p.name) + '</td>';
+    html += '<td style="padding:8px 12px;white-space:nowrap;"><span style="background:rgba(123,31,162,0.15);color:#CE93D8;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.cell) + '</span></td>';
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:' + phaseColor + ';color:' + phaseTextColor + ';padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.phase) + '</span></td>';
+    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.institution) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(p.region) + (p.city ? '·' + escapeHtml(p.city) : '') + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+
+  // Footer note
+  html += '<div style="margin-top:14px;padding:10px 14px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.6;">';
+  html += '<b>说明：</b>以上项目信息来源于国家卫健委备案机构公开信息及临床试验注册库（ChiCTR），仅供参考。具体研究进展及入组信息请咨询相应机构。';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+function filterInstProj(filter, btn) {
+  // Update button styles
+  document.querySelectorAll('.proj-filter-btn').forEach(function(b) {
+    b.style.background = 'var(--surface-2)';
+    b.style.color = 'var(--text)';
+    b.style.border = '1px solid var(--border)';
+    b.style.fontWeight = '400';
+  });
+  btn.style.background = 'var(--primary)';
+  btn.style.color = '#0A0F1A';
+  btn.style.border = 'none';
+  btn.style.fontWeight = '600';
+
+  // Filter rows
+  var rows = document.querySelectorAll('.proj-row');
+  rows.forEach(function(row) {
+    if (filter === 'all') {
+      row.style.display = '';
+    } else {
+      row.style.display = (row.dataset.cell === filter) ? '' : 'none';
+    }
+  });
+}
+
 function goBackFromProvince() {
   // Find which region the current province belongs to
   var provName = instFilter.slice(9);
@@ -8371,16 +8512,46 @@ function initChinaMap() {
   }
 }
 
+var mapZoomLevel = 1.0;
+var mapProvCounts = {};
+
 function renderChinaMap() {
   if (!chinaMapChart || !chinaGeoJson) return;
 
   var provCounts = countByProvince(INSTITUTIONS);
+  mapProvCounts = provCounts;
+  mapZoomLevel = 1.0;
   var mapData = [];
   for (var prov in provCounts) {
     mapData.push({ name: prov, value: provCounts[prov] });
   }
 
   var maxVal = Math.max.apply(null, mapData.map(function(d) { return d.value; }));
+
+  function getLabelFormatter() {
+    return function(params) {
+      var shortName = PROVINCE_SHORT[params.name] || params.name;
+      var count = mapProvCounts[params.name] || 0;
+      // When zoomed in (>=1.6), show all province names; otherwise only Beijing and Taiwan
+      if (mapZoomLevel >= 1.6) {
+        if (count > 0) {
+          return '{n|' + shortName + '}\n{c|' + count + '}';
+        }
+        return '{n|' + shortName + '}';
+      }
+      // Default: only Beijing and Taiwan show name
+      if (shortName === '北京' || shortName === '台湾省') {
+        if (count > 0) {
+          return '{n|' + shortName + '}\n{c|' + count + '}';
+        }
+        return '{n|' + shortName + '}';
+      }
+      if (count > 0) {
+        return '{c|' + count + '}';
+      }
+      return '';
+    };
+  }
 
   var option = {
     backgroundColor: 'transparent',
@@ -8423,21 +8594,7 @@ function renderChinaMap() {
         show: true,
         fontSize: 10,
         color: 'rgba(224,230,237,0.7)',
-        formatter: function(params) {
-          var shortName = PROVINCE_SHORT[params.name] || params.name;
-          var count = provCounts[params.name] || 0;
-          // Only show province name for Beijing and Taiwan; others show just the number
-          if (shortName === '北京' || shortName === '台湾省') {
-            if (count > 0) {
-              return '{n|' + shortName + '}\n{c|' + count + '}';
-            }
-            return '{n|' + shortName + '}';
-          }
-          if (count > 0) {
-            return '{c|' + count + '}';
-          }
-          return '';
-        },
+        formatter: getLabelFormatter(),
         rich: {
           n: { fontSize: 10, color: 'rgba(224,230,237,0.8)', lineHeight: 14 },
           c: { fontSize: 13, fontWeight: 'bold', color: '#00E5FF', lineHeight: 16 }
@@ -8490,11 +8647,31 @@ function renderChinaMap() {
 
   chinaMapChart.setOption(option);
 
-  // Click handler
+  // Georoam handler — track zoom level and update labels
+  chinaMapChart.off('georoam');
+  chinaMapChart.on('georoam', function(params) {
+    if (params.zoom) {
+      try {
+        var opt = chinaMapChart.getOption();
+        var z = opt.geo[0].zoom;
+        if (z && Math.abs(z - mapZoomLevel) > 0.05) {
+          mapZoomLevel = z;
+          chinaMapChart.setOption({
+            geo: { label: { formatter: getLabelFormatter() } }
+          });
+        }
+      } catch(e) {}
+    }
+  });
+
+  // Click handler — show popup card instead of auto-jumping
   chinaMapChart.off('click');
   chinaMapChart.on('click', function(params) {
-    if (params.name && provCounts[params.name] && provCounts[params.name] > 0) {
-      filterInsts('province:' + params.name);
+    if (params.name && mapProvCounts[params.name] !== undefined) {
+      var count = mapProvCounts[params.name] || 0;
+      var shortName = PROVINCE_SHORT[params.name] || params.name;
+      // Show popup card
+      showMapPopup(params, shortName, params.name, count);
     }
   });
 
@@ -8504,6 +8681,68 @@ function renderChinaMap() {
     if (chinaMapChart) chinaMapChart.resize();
   };
   window.addEventListener('resize', window._chinaMapResize);
+}
+
+// Map popup card
+function showMapPopup(params, shortName, fullName, count) {
+  // Remove any existing popup
+  var existing = document.getElementById('mapPopupCard');
+  if (existing) existing.remove();
+
+  var container = document.getElementById('chinaMapContainer');
+  if (!container) return;
+
+  var popup = document.createElement('div');
+  popup.id = 'mapPopupCard';
+  popup.style.cssText = 'position:absolute;z-index:100;background:var(--card-bg);border:1px solid var(--primary);border-radius:8px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,229,255,0.2);min-width:180px;cursor:pointer;transition:transform 0.2s;';
+
+  var html = '<div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;">' + svgIcon('map', 16) + escapeHtml(shortName) + '</div>';
+  html += '<div style="font-size:13px;color:var(--text);margin-bottom:4px;">备案机构：<b style="color:var(--primary);font-size:15px;">' + count + '</b> 家</div>';
+  if (count > 0) {
+    html += '<div style="font-size:12px;color:var(--text-light);margin-bottom:10px;">点击此处查看机构详情</div>';
+    html += '<div style="background:var(--primary);color:#0A0F1A;font-size:12px;font-weight:600;padding:6px 14px;border-radius:4px;text-align:center;">进入查看</div>';
+  } else {
+    html += '<div style="font-size:12px;color:var(--text-light);">暂无备案机构</div>';
+  }
+  popup.innerHTML = html;
+
+  // Position the popup near the click point
+  var containerRect = container.getBoundingClientRect();
+  var px = params.event ? (params.event.offsetX || params.event.event.offsetX) : containerRect.width / 2;
+  var py = params.event ? (params.event.offsetY || params.event.event.offsetY) : containerRect.height / 2;
+  // Offset so popup doesn't cover the province
+  var popupW = 200;
+  var popupH = 120;
+  var left = px + 15;
+  var top = py - popupH / 2;
+  if (left + popupW > containerRect.width) left = px - popupW - 15;
+  if (top < 0) top = 5;
+  if (top + popupH > containerRect.height) top = containerRect.height - popupH - 5;
+  popup.style.left = left + 'px';
+  popup.style.top = top + 'px';
+
+  // Click on popup to enter
+  if (count > 0) {
+    popup.addEventListener('click', function(e) {
+      e.stopPropagation();
+      filterInsts('province:' + fullName);
+    });
+  }
+
+  container.style.position = 'relative';
+  container.appendChild(popup);
+
+  // Click elsewhere to dismiss
+  setTimeout(function() {
+    var dismissHandler = function(e) {
+      var card = document.getElementById('mapPopupCard');
+      if (card && !card.contains(e.target)) {
+        card.remove();
+        document.removeEventListener('click', dismissHandler);
+      }
+    };
+    document.addEventListener('click', dismissHandler);
+  }, 50);
 }
 
 function filterInsts(filter) {
