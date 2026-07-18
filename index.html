@@ -218,6 +218,22 @@ body {
 }
 .info-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .info-tab.active { color: var(--primary); background: rgba(0,229,255,0.1); }
+.info-tab .hot-badge {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  background: linear-gradient(135deg, #FF6B35, #FF1744);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 6px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 6px rgba(255,23,68,0.5);
+  pointer-events: none;
+}
+.info-tab { position: relative; }
 .info-tab .it-arrow {
   transition: transform 0.2s;
   display: inline-block;
@@ -296,6 +312,7 @@ body {
   .info-bar-tabs { padding: 0 6px; gap: 0; }
   .info-tab { font-size: 12px; padding: 6px 6px; gap: 3px; }
   .info-tab svg[width="15"] { width: 13px; height: 13px; }
+  .info-tab .hot-badge { font-size: 7px; padding: 1px 3px; top: -1px; right: -4px; }
   .info-panel { padding: 0 10px; font-size: 12px; }
   .info-panel .ip-tag { font-size: 12px; }
 }
@@ -1869,7 +1886,7 @@ body { padding-bottom: 60px; }
 .ai-counter-active .ai-data-info .num { animation: aiNumGlow 0.6s ease-out; }
 @keyframes aiNumGlow { 0% { text-shadow: 0 0 20px rgba(0,229,255,0.6); transform: scale(1.1); } 100% { text-shadow: none; transform: scale(1); } }
 /* Hub split cards (声明/团队) */
-.hub-split-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 10px; }
+.hub-split-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
 .hub-split-card { border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: box-shadow 0.2s ease, border-color 0.2s ease; border: 1px solid var(--border); }
 .hub-split-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,229,255,0.1); border-color: var(--primary); }
 .hub-split-card .hsc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
@@ -4329,7 +4346,7 @@ body { padding-bottom: 60px; }
     </div>
     <div class="info-tab" data-kb="ai" onclick="navToKb('ai')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      AI
+      AI<span class="hot-badge">HOT</span>
     </div>
   </div>
 </div>
@@ -6518,12 +6535,6 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
-  // Split cards: 声明 + 团队
-  html += '<div class="hub-split-cards">';
-  html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
-  html += '<div class="hub-split-card purple" onclick="showTeamModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">AI团队</div></div><div class="hsc-desc">5位AI智能体 · 1位专家审核 · 每日自主迭代</div></div>';
-  html += '</div>';
-
   // Global search section (divider only, functionality TBD)
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索·功能开发中</div><div class="sd-line"></div></div>';
 
@@ -6588,6 +6599,12 @@ function renderHub() {
   // Hot search tags - expanded pool with shuffle
   html += '<div class="hub-tags">';
   html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
+  html += '</div>';
+
+  // Split cards: 声明 + 团队 (moved to bottom)
+  html += '<div class="hub-split-cards">';
+  html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
+  html += '<div class="hub-split-card purple" onclick="showTeamModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">AI团队</div></div><div class="hsc-desc">5位AI智能体 · 1位专家审核 · 每日自主迭代</div></div>';
   html += '</div>';
 
   content.innerHTML = html;
