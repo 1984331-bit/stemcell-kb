@@ -2879,7 +2879,7 @@ body { padding-bottom: 60px; }
 #chinaMapContainer canvas { touch-action: pan-y; }
 .map-zoom-controls {
   position: absolute; right: 10px; bottom: 10px;
-  display: flex; flex-direction: row; gap: 4px; z-index: 10;
+  display: flex; flex-direction: column; gap: 4px; z-index: 10;
 }
 .map-zoom-btn {
   width: 34px; height: 34px;
@@ -3158,10 +3158,10 @@ body { padding-bottom: 60px; }
 /* Picks issue selector */
 .pick-issue-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; }
 .pick-issue-card { flex-shrink: 0; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); cursor: pointer; transition: border-color 0.15s, background 0.15s; text-align: center; min-width: 64px; }
-.pick-issue-card:hover { border-color: var(--warn-text); }
-.pick-issue-card.active { border-color: var(--warn-text); background: var(--warn-bg); }
+.pick-issue-card:hover { border-color: var(--primary); }
+.pick-issue-card.active { border-color: var(--primary); background: rgba(0,229,255,0.06); }
 .pick-issue-card .pic-num { font-size: 13px; font-weight: 700; color: var(--text); }
-.pick-issue-card.active .pic-num { color: var(--warn-text); }
+.pick-issue-card.active .pic-num { color: var(--primary); }
 .pick-issue-card .pic-date { font-size: 10px; color: var(--text-light); margin-top: 2px; }
 
 /* Picks dropdown selector */
@@ -3170,7 +3170,7 @@ body { padding-bottom: 60px; }
 /* Picks image carousel */
 .picks-viewport {
   position: relative;
-  border: 2px solid var(--warn-text);
+  border: 2px solid var(--primary);
   border-radius: 10px;
   padding: 5px;
   background: var(--card-solid);
@@ -3231,14 +3231,14 @@ body { padding-bottom: 60px; }
   opacity: 0.6;
   padding: 2px 0 8px;
 }
-.pick-dropdown-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--warn-text); border-radius: 8px; background: var(--warn-bg); cursor: pointer; font-size: 13px; font-weight: 600; color: var(--warn-text); }
+.pick-dropdown-btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--primary); border-radius: 8px; background: var(--card-bg); cursor: pointer; font-size: 13px; font-weight: 600; color: var(--primary); }
 .pick-dropdown-btn:hover { background: var(--surface-1); }
 .pick-dropdown-list { display: none; position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px; background: var(--card-solid); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 100; max-height: 240px; overflow-y: auto; }
 .pick-dropdown-list.open { display: block; }
 .pick-dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 13px; border-bottom: 1px solid var(--divider); transition: background 0.1s; }
 .pick-dropdown-item:last-child { border-bottom: none; }
-.pick-dropdown-item:hover { background: var(--warn-bg); }
-.pick-dropdown-item.active { background: var(--warn-bg); color: var(--warn-text); font-weight: 600; }
+.pick-dropdown-item:hover { background: var(--surface-1); }
+.pick-dropdown-item.active { background: rgba(0,229,255,0.08); color: var(--primary); font-weight: 600; }
 .pick-dropdown-item .pdi-title { font-size: 12px; color: var(--text-light); margin-top: 2px; }
 
 /* Picks cards (always expanded) */
@@ -3252,7 +3252,7 @@ body { padding-bottom: 60px; }
 .pk-acc-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 12px; color: var(--text-light); margin-bottom: 10px; }
 .pk-acc-content { font-size: 13px; line-height: 1.8; }
 .pk-acc-content p { margin-bottom: 8px; text-indent: 2em; }
-.pk-acc-content .pk-highlight { background: var(--highlight-bg); border-left: 3px solid var(--warn-text); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; text-indent: 0; }
+.pk-acc-content .pk-highlight { background: var(--highlight-bg); border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 13px; text-indent: 0; }
 
 /* News section */
 .news-tabs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; padding-bottom: 4px; }
@@ -5672,6 +5672,7 @@ function svgIcon(name, sz) {
     'chevron-right': '<path d="M9 6l6 6-6 6"/>',
     'chevron-left': '<path d="M15 6l-6 6 6 6"/>',
     'chevron-up': '<path d="M6 15l6-6 6 6"/>',
+    'link': '<path d="M10 14a4 4 0 005.66 0l3-3a4 4 0 00-5.66-5.66l-1.5 1.5"/><path d="M14 10a4 4 0 00-5.66 0l-3 3a4 4 0 005.66 5.66l1.5-1.5"/>',
     'flame': '<path d="M12 3c0 4-6 5-6 11a6 6 0 0012 0c0-2-1-3-2-4 0 1-1 2-2 2 0-3-2-6-2-9z"/>',
     'star': '<path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17.5 6.5 21 8 14 3 10l6.5-.5z"/>',
     'chevron-down': '<path d="M6 9l6 6 6-6"/>',
@@ -7353,7 +7354,7 @@ function renderBooks() {
     catCounts[b.cat]++;
   });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-top:16px;">';
+  html += '<div class="reg-cat-row reg-cat-row-4" style="grid-template-columns:repeat(4,1fr);margin-top:16px;">';
   bookCats.forEach(function(c) {
     var count = c.id === 'all' ? INDUSTRY_BOOKS.length : (catCounts[c.id] || 0);
     html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentBookCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchBookCat(\'' + c.id + '\')">';
@@ -7445,7 +7446,7 @@ function renderBooks() {
     confCatCounts[c.cat]++;
   });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
+  html += '<div class="reg-cat-row reg-cat-row-4" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px;">';
   confCats.forEach(function(c) {
     var count = c.id === 'all' ? CONFERENCE_EVENTS.length : (confCatCounts[c.id] || 0);
     html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentConfCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchConfCat(\'' + c.id + '\')">';
@@ -8429,7 +8430,8 @@ var COMPANY_CATS = {
   rnd:       { color: '#00E5FF', bg: 'rgba(0,229,255,0.1)', name: '研发企业' },
   reagent:   { color: '#64B5F6', bg: 'rgba(21,101,192,0.1)', name: '试剂供应商' },
   equipment: { color: '#81C784', bg: 'rgba(46,125,50,0.1)', name: '设备供应商' },
-  cro:       { color: '#CE93D8', bg: 'rgba(123,31,162,0.1)', name: 'CRO/CDMO' }
+  cro:       { color: '#CE93D8', bg: 'rgba(123,31,162,0.1)', name: 'CRO/CDMO' },
+  overseas:  { color: '#FFD54F', bg: 'rgba(255,213,79,0.1)', name: '国外企业' }
 };
 var COMPANIES = [
   // 研发企业
@@ -8456,7 +8458,13 @@ var COMPANIES = [
   // CRO/CDMO
   { name: '药明康德', cat: 'cro', city: '上海', desc: '全球领先CRO/CDMO，细胞基因治疗一体化服务', tags: ['CRO', 'CDMO', '一体化'] },
   { name: '金斯瑞', cat: 'cro', city: '南京', desc: '基因合成与细胞系开发，CAR-T CMC服务', tags: ['基因合成', '细胞系', 'CMC'] },
-  { name: '昭衍新药', cat: 'cro', city: '北京', desc: '临床前安全性评价CRO，细胞治疗药物非临床研究', tags: ['临床前CRO', '安全性评价', '毒理'] }
+  { name: '昭衍新药', cat: 'cro', city: '北京', desc: '临床前安全性评价CRO，细胞治疗药物非临床研究', tags: ['临床前CRO', '安全性评价', '毒理'] },
+  // 国外企业
+  { name: 'Novartis', cat: 'overseas', city: '瑞士·巴塞尔', desc: '全球首批CAR-T疗法Kymriah（tisagenlecleucel）开发商，2017年获FDA批准用于B-ALL，后续扩展至DLBCL', tags: ['CAR-T', 'CD19', 'FDA获批'], url: 'https://www.novartis.com/' },
+  { name: 'Gilead Sciences / Kite Pharma', cat: 'overseas', city: '美国·加州', desc: 'CAR-T疗法Yescarta（axicabtagene ciloleucel）开发商，FDA批准用于LBCL和FL，全球商业化最成功的CAR-T产品之一', tags: ['CAR-T', 'CD19', 'FDA获批'], url: 'https://www.gilead.com/' },
+  { name: 'Bristol-Myers Squibb', cat: 'overseas', city: '美国·纽约', desc: '拥有两款CAR-T产品：Breyanzi（lisocabtagene maraleucel，CD19）和Abecma（idecabtagene vicleucel，BCMA，与2seventy bio合作）', tags: ['CAR-T', 'CD19', 'BCMA', 'FDA获批'], url: 'https://www.bms.com/' },
+  { name: 'Vertex Pharmaceuticals', cat: 'overseas', city: '美国·波士顿', desc: '基因编辑疗法Casgevy（exagamglogene autotemcel）开发商，全球首个CRISPR基因编辑疗法，FDA批准用于SCD和TDT', tags: ['CRISPR', '基因编辑', 'FDA获批'], url: 'https://www.vrtx.com/' },
+  { name: 'Sana Biotechnology', cat: 'overseas', city: '美国·西雅图', desc: '下一代细胞治疗公司，专注in vivo CAR-T（体内编程T细胞）和iPSC分化低免疫原性细胞疗法，纳斯达克上市', tags: ['in vivo CAR-T', 'iPSC', '低免疫原性'], url: 'https://www.sanabio.com/' }
 ];
 
 function renderInstitutions() {
@@ -8540,11 +8548,6 @@ function renderInstitutions() {
     html += '</div>';
     // Dynamic province pills container (rendered by renderMapPills)
     html += '<div id="mapPillsContainer" style="margin-top:10px;"></div>';
-    var provCount = Object.keys(provCounts).length;
-    var regionCount = Object.keys(regionCounts).length;
-    html += '<div style="margin-top:12px;padding:10px 16px;background:var(--surface-1);border-radius:8px;font-size:13px;color:var(--text-light);line-height:1.8;text-align:center;">'
-      + '全国共 <b style="color:var(--primary);font-size:15px;">' + INSTITUTIONS.length + '</b> 家备案机构，覆盖 <b style="color:var(--primary);font-size:15px;">' + provCount + '</b> 个省份、<b style="color:var(--primary);font-size:15px;">' + regionCount + '</b> 大区域，其中 <b style="color:var(--primary);font-size:15px;">华东</b> 地区最多（<b style="color:var(--primary);font-size:15px;">' + regionCounts['华东'] + '</b> 家）'
-      + '</div>';
     html += '</div>';
 
     // Province bar chart
@@ -9240,15 +9243,21 @@ function mapZoomReset() {
   updateMapPanButtons();
 }
 
-// Pan the map by dx/dy pixels (button-driven, not touch)
+// Pan the map by adjusting center coordinates (setOption-based, works with roam:false)
 function mapPan(dx, dy) {
   if (!chinaMapChart) return;
   try {
-    chinaMapChart.dispatchAction({
-      type: 'geoRoam',
-      componentType: 'geo',
-      dx: dx,
-      dy: dy
+    var opt = chinaMapChart.getOption();
+    var currentCenter = (opt.geo && opt.geo[0] && opt.geo[0].center) || [104.5, 36];
+    var currentZoom = (opt.geo && opt.geo[0] && opt.geo[0].zoom) || 1.15;
+    // Convert direction to lng/lat offset (smaller step at higher zoom for finer control)
+    var stepLng = 3.0 / currentZoom;
+    var stepLat = 2.0 / currentZoom;
+    var dLng = (dx > 0 ? 1 : (dx < 0 ? -1 : 0)) * stepLng;
+    var dLat = (dy < 0 ? 1 : (dy > 0 ? -1 : 0)) * stepLat;
+    var newCenter = [currentCenter[0] + dLng, currentCenter[1] + dLat];
+    chinaMapChart.setOption({
+      geo: [{ center: newCenter }]
     });
   } catch(e) {}
 }
@@ -9285,19 +9294,21 @@ function renderMapPills() {
   var start = mapPillPage * MAP_PILLS_PER_PAGE;
   var pageProvs = provs.slice(start, start + MAP_PILLS_PER_PAGE);
 
-  var html = '<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;">';
+  var html = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;">';
+  if (totalPages > 1) {
+    html += '<button onclick="mapPillsPrev()" style="flex-shrink:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--surface-1);border:1px solid var(--border);border-radius:50%;color:var(--text);cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">' + svgIcon('chevron-left', 16) + '</button>';
+  }
+  html += '<div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;flex:1;">';
   pageProvs.forEach(function(p) {
     var sn = PROVINCE_SHORT[p.name] || p.name;
-    html += '<div class="map-quick-pill" data-prov="' + escapeHtml(p.name) + '" style="cursor:pointer;padding:5px 12px;background:var(--surface-1);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--text);transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">'
+    html += '<div class="map-quick-pill" data-prov="' + escapeHtml(p.name) + '" style="cursor:pointer;padding:5px 12px;background:var(--surface-1);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--text);transition:border-color 0.2s,color 0.2s;white-space:nowrap;" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">'
       + escapeHtml(sn) + ' <b style="color:var(--primary);">' + p.count + '</b></div>';
   });
-  if (totalPages > 1) {
-    html += '<div onclick="cycleMapPills()" style="cursor:pointer;padding:5px 12px;background:var(--primary);border:none;border-radius:16px;font-size:12px;color:var(--bg);font-weight:600;display:flex;align-items:center;gap:3px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.85\'" onmouseout="this.style.opacity=\'1\'">' + svgIcon('refresh', 12) + ' 换一换</div>';
-  }
   html += '</div>';
   if (totalPages > 1) {
-    html += '<div style="text-align:center;font-size:11px;color:var(--text-light);margin-top:6px;">第 ' + (mapPillPage + 1) + '/' + totalPages + ' 页 · 共 ' + provs.length + ' 个省份有备案机构</div>';
+    html += '<button onclick="mapPillsNext()" style="flex-shrink:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--surface-1);border:1px solid var(--border);border-radius:50%;color:var(--text);cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor=\'var(--primary)\';this.style.color=\'var(--primary)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">' + svgIcon('chevron-right', 16) + '</button>';
   }
+  html += '</div>';
   container.innerHTML = html;
 
   // Bind click handlers for pills
@@ -9311,7 +9322,15 @@ function renderMapPills() {
   });
 }
 
-function cycleMapPills() {
+function mapPillsPrev() {
+  var provs = getNonZeroProvinces();
+  var totalPages = Math.ceil(provs.length / MAP_PILLS_PER_PAGE);
+  if (totalPages <= 1) return;
+  mapPillPage = (mapPillPage - 1 + totalPages) % totalPages;
+  renderMapPills();
+}
+
+function mapPillsNext() {
   var provs = getNonZeroProvinces();
   var totalPages = Math.ceil(provs.length / MAP_PILLS_PER_PAGE);
   if (totalPages <= 1) return;
@@ -9422,7 +9441,7 @@ function renderCompanies() {
   html += '<div class="report-intro">';
   html += '<div class="report-intro-title">' + svgIcon('building', 18) + ' 关于本栏目</div>';
   html += '<div class="report-intro-text">本栏目聚焦<b>细胞与基因治疗（CGT）产业链</b>上下游企业，覆盖药物研发、CRO/CDMO、设备耗材、检测服务、投融资等五大核心赛道，一站式呈现行业生态全景。数据持续更新中，点击下方分类卡片可按赛道筛选浏览。如需了解某家企业的详细信息，可点击企业卡片中的官网链接直接访问。</div>';
-  html += '<div class="report-intro-contact">' + svgIcon('plus', 14) + ' <b>企业入驻</b>：欢迎 CGT 领域企业在此展示，面向细胞治疗专业人士与投资者群体。请提供企业名称、所属分类、简介及核心产品信息，审核后上线。联系方式：邮箱 <b>contact@msckb.com</b> | 微信 <b>MSC-KnowledgeHub</b></div>';
+  html += '<div class="report-intro-contact">' + svgIcon('plus', 14) + ' <b>企业入驻</b>：欢迎 CGT 领域企业在此展示，面向细胞治疗专业人士与投资者群体。请提供企业名称、所属分类、简介及核心产品信息，审核后上线。联系方式：手机/微信 <b>15932929299</b> | QQ <b>401848919</b></div>';
   html += '</div>';
 
   // Category cards
@@ -9430,7 +9449,7 @@ function renderCompanies() {
   Object.keys(COMPANY_CATS).forEach(function(k) { catCounts[k] = 0; });
   COMPANIES.forEach(function(c) { if (catCounts[c.cat] !== undefined) catCounts[c.cat]++; });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(5,1fr);">';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);">';
   Object.keys(COMPANY_CATS).forEach(function(k) {
     var cc = COMPANY_CATS[k];
     html += '<div class="reg-cat-card" style="border-left-color:' + cc.color + ';cursor:pointer;" onclick="filterCompanies(\'' + k + '\')">';
@@ -9460,6 +9479,9 @@ function renderCompanies() {
       html += '<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#F5F5F5;color:#666;">' + escapeHtml(t) + '</span>';
     });
     html += '</div>';
+    if (c.url) {
+      html += '<div style="margin-top:6px;"><a href="' + escapeHtml(c.url) + '" target="_blank" rel="noopener" style="font-size:12px;color:var(--primary);text-decoration:none;display:inline-flex;align-items:center;gap:3px;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">' + svgIcon('link', 12) + ' 官网</a></div>';
+    }
     html += '</div>';
   });
 
@@ -9480,7 +9502,7 @@ function filterCompanies(cat) {
 }
 
 function showOnboarding() {
-  alert('企业入驻请联系：\\n邮箱：contact@msckb.com\\n微信：MSC-KnowledgeHub\\n\\n请提供企业名称、所属分类、简介及核心产品信息，我们将在审核后上线展示。');
+  alert('企业入驻请联系：\\n手机/微信：15932929299\\nQQ：401848919\\n\\n请提供企业名称、所属分类、简介及核心产品信息，我们将在审核后上线展示。');
 }
 
 var currentNewsTab = 'home';
