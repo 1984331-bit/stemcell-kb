@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>数据展板预览 v2</title>
+<style>
+:root {
+  --bg: #0A0F1A;
+  --primary: #00E5FF;
+  --card-bg: rgba(18,28,42,0.85);
+  --text: #E0E0E0;
+  --text-light: #8892A6;
+  --border: rgba(0,229,255,0.12);
+  --surface-1: rgba(255,255,255,0.03);
+  --surface-2: rgba(255,255,255,0.06);
+  --glow: rgba(0,229,255,0.15);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* === Data Dashboard Section === */
+.dashboard-section {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 0;
+  overflow: hidden;
+}
+
+/* DNA helix background decoration */
+.dna-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  z-index: 0;
+}
+
+/* Section header */
+.dash-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.dash-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--primary);
+  background: rgba(0,229,255,0.05);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+.dash-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 2px;
+  line-height: 1.4;
+}
+.dash-title .accent {
+  background: linear-gradient(135deg, var(--primary) 0%, #26C6DA 50%, #66BB6A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dash-subtitle {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* Data grid - content metrics */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+.data-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 10px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.data-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.data-card:hover {
+  border-color: rgba(0,229,255,0.3);
+  transform: translateY(-3px);
+}
+.data-card:hover::before { opacity: 1; }
+.data-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.data-number .suffix {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-left: 2px;
+}
+.data-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Second row - process metrics (5 columns) */
+.data-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.data-card-2 {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+.data-card-2:hover { border-color: rgba(0,229,255,0.25); }
+.data-icon-wrap {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.data-icon-wrap svg { stroke: currentColor; }
+.data-info { flex: 1; }
+.data-info .num {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.data-info .lbl {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 3px;
+  letter-spacing: 0.3px;
+}
+
+/* AI industry chain illustration */
+.chain-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.chain-section::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.chain-title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  position: relative;
+}
+.chain-svg-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.chain-svg-wrap svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Chain node styles */
+.chain-node {
+  cursor: default;
+  transition: opacity 0.3s;
+}
+.chain-node:hover { opacity: 0.8; }
+.chain-node rect {
+  transition: stroke 0.3s;
+}
+.chain-node:hover rect {
+  stroke: var(--primary);
+  filter: drop-shadow(0 0 6px rgba(0,229,255,0.3));
+}
+
+/* AI center pulse */
+.ai-center circle.bg {
+  animation: aiPulse 3s ease-in-out infinite;
+}
+@keyframes aiPulse {
+  0%, 100% { opacity: 0.15; r: 50; }
+  50% { opacity: 0.05; r: 58; }
+}
+
+/* Flow lines */
+.flow-line {
+  stroke-dasharray: 4 4;
+  animation: flowDash 2s linear infinite;
+}
+@keyframes flowDash {
+  to { stroke-dashoffset: -16; }
+}
+
+/* Bottom text */
+.dash-footer {
+  text-align: center;
+  margin-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+.dash-footer-text {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
+.dash-footer-text .highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+.dash-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  margin: 0 auto 16px;
+}
+
+/* Counter animation state */
+.counter-active .data-number {
+  animation: numberGlow 0.6s ease-out;
+}
+.counter-active .data-info .num {
+  animation: numberGlow 0.6s ease-out;
+}
+@keyframes numberGlow {
+  0% { text-shadow: 0 0 20px rgba(0,229,255,0.6); transform: scale(1.1); }
+  100% { text-shadow: none; transform: scale(1); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .data-grid { grid-template-columns: repeat(3, 1fr); }
+  .data-grid-2 { grid-template-columns: repeat(3, 1fr); }
+  .dash-title { font-size: 20px; }
+  .data-number { font-size: 26px; }
+  .data-card { padding: 14px 6px; }
+  .data-label { font-size: 10px; }
+  .data-info .num { font-size: 18px; }
+  .data-info .lbl { font-size: 9px; }
+  .chain-section { padding: 20px 8px; }
+}
+@media (max-width: 480px) {
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .data-grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- Data Dashboard Section -->
+<div class="dashboard-section" id="dashboardSection">
+
+  <!-- DNA helix background -->
+  <svg class="dna-bg" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.5">
+      <!-- Left helix -->
+      <path d="M120 0 Q180 100 120 200 Q60 300 120 400 Q180 500 120 600" />
+      <path d="M180 0 Q120 100 180 200 Q240 300 180 400 Q120 500 180 600" />
+      <!-- Rungs -->
+      <line x1="120" y1="50" x2="180" y2="50" stroke-width="0.5"/>
+      <line x1="140" y1="100" x2="160" y2="100" stroke-width="0.5"/>
+      <line x1="120" y1="150" x2="180" y2="150" stroke-width="0.5"/>
+      <line x1="140" y1="200" x2="160" y2="200" stroke-width="0.5"/>
+      <line x1="120" y1="250" x2="180" y2="250" stroke-width="0.5"/>
+      <line x1="140" y1="300" x2="160" y2="300" stroke-width="0.5"/>
+      <line x1="120" y1="350" x2="180" y2="350" stroke-width="0.5"/>
+      <line x1="140" y1="400" x2="160" y2="400" stroke-width="0.5"/>
+      <line x1="120" y1="450" x2="180" y2="450" stroke-width="0.5"/>
+      <line x1="140" y1="500" x2="160" y2="500" stroke-width="0.5"/>
+      <line x1="120" y1="550" x2="180" y2="550" stroke-width="0.5"/>
+    </g>
+    <g stroke="#66BB6A" stroke-width="1" fill="none" opacity="0.4">
+      <!-- Right helix -->
+      <path d="M780 0 Q840 100 780 200 Q720 300 780 400 Q840 500 780 600" />
+      <path d="M840 0 Q780 100 840 200 Q900 300 840 400 Q780 500 840 600" />
+      <line x1="780" y1="50" x2="840" y2="50" stroke-width="0.5"/>
+      <line x1="800" y1="100" x2="820" y2="100" stroke-width="0.5"/>
+      <line x1="780" y1="150" x2="840" y2="150" stroke-width="0.5"/>
+      <line x1="800" y1="200" x2="820" y2="200" stroke-width="0.5"/>
+      <line x1="780" y1="250" x2="840" y2="250" stroke-width="0.5"/>
+      <line x1="800" y1="300" x2="820" y2="300" stroke-width="0.5"/>
+      <line x1="780" y1="350" x2="840" y2="350" stroke-width="0.5"/>
+      <line x1="800" y1="400" x2="820" y2="400" stroke-width="0.5"/>
+      <line x1="780" y1="450" x2="840" y2="450" stroke-width="0.5"/>
+      <line x1="800" y1="500" x2="820" y2="500" stroke-width="0.5"/>
+      <line x1="780" y1="550" x2="840" y2="550" stroke-width="0.5"/>
+    </g>
+    <!-- Floating cells -->
+    <g fill="none" stroke="#00E5FF" stroke-width="0.8" opacity="0.3">
+      <circle cx="350" cy="80" r="18"/>
+      <circle cx="350" cy="80" r="6"/>
+      <circle cx="620" cy="120" r="14"/>
+      <circle cx="620" cy="120" r="5"/>
+      <circle cx="480" cy="520" r="20"/>
+      <circle cx="480" cy="520" r="7"/>
+      <circle cx="280" cy="400" r="12"/>
+      <circle cx="280" cy="400" r="4"/>
+      <circle cx="700" cy="450" r="16"/>
+      <circle cx="700" cy="450" r="5"/>
+    </g>
+  </svg>
+
+  <!-- Header -->
+  <div class="dash-header">
+    <div class="dash-badge">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      DATA DASHBOARD
+    </div>
+    <div class="dash-title">行业全场景AI团队 · <span class="accent">赋能CGT产业</span></div>
+    <div class="dash-subtitle">从基础研究到临床转化 · AI驱动全链条数据赋能</div>
+  </div>
+
+  <!-- Data grid - content metrics -->
+  <div class="data-grid" id="dataGrid1">
+    <div class="data-card">
+      <div class="data-number" data-target="730"><span class="num-text">0</span></div>
+      <div class="data-label">临床文献</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="19"><span class="num-text">0</span></div>
+      <div class="data-label">覆盖系统</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="137"><span class="num-text">0</span></div>
+      <div class="data-label">适应症</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="45"><span class="num-text">0</span></div>
+      <div class="data-label">获批产品</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="21"><span class="num-text">0</span></div>
+      <div class="data-label">监管政策</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="106"><span class="num-text">0</span></div>
+      <div class="data-label">备案机构</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="5"><span class="num-text">0</span></div>
+      <div class="data-label">精选周刊</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="46"><span class="num-text">0</span></div>
+      <div class="data-label">精选文献</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="755"><span class="num-text">0</span></div>
+      <div class="data-label">PubMed摘要</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number" data-target="20"><span class="num-text">0</span><span class="suffix">+</span></div>
+      <div class="data-label">入驻企业</div>
+    </div>
+  </div>
+
+  <!-- Process metrics (5 cards) -->
+  <div class="data-grid-2" id="dataGrid2">
+    <div class="data-card-2">
+      <div class="data-icon-wrap" style="background:rgba(0,229,255,0.1);color:#00E5FF;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-6.219-8.56"/><path d="M12 2v4l3-3"/><path d="M12 22v-4l-3 3"/></svg>
+      </div>
+      <div class="data-info">
+        <div class="num" data-target="13" style="color:#00E5FF;"><span class="num-text">0</span><span style="font-size:12px;color:var(--text-light);"> 轮</span></div>
+        <div class="lbl">深度优化迭代</div>
+      </div>
+    </div>
+    <div class="data-card-2">
+      <div class="data-icon-wrap" style="background:rgba(102,187,106,0.1);color:#66BB6A;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/></svg>
+      </div>
+      <div class="data-info">
+        <div class="num" data-target="172" style="color:#66BB6A;"><span class="num-text">0</span><span style="font-size:12px;color:var(--text-light);"> 次</span></div>
+        <div class="lbl">代码版本迭代</div>
+      </div>
+    </div>
+    <div class="data-card-2">
+      <div class="data-icon-wrap" style="background:rgba(255,183,77,0.1);color:#FFB74D;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8"/><path d="M8 14h5"/><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+      </div>
+      <div class="data-info">
+        <div class="num" data-target="350" style="color:#FFB74D;"><span class="num-text">0</span><span style="font-size:12px;color:var(--text-light);">+</span></div>
+        <div class="lbl">AI对话交互轮次</div>
+      </div>
+    </div>
+    <div class="data-card-2">
+      <div class="data-icon-wrap" style="background:rgba(171,71,188,0.1);color:#AB47BC;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg>
+      </div>
+      <div class="data-info">
+        <div class="num" data-target="800" style="color:#AB47BC;"><span class="num-text">0</span><span style="font-size:12px;color:var(--text-light);">+</span></div>
+        <div class="lbl">数据清洗去重</div>
+      </div>
+    </div>
+    <div class="data-card-2">
+      <div class="data-icon-wrap" style="background:rgba(38,166,154,0.1);color:#26A69A;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div class="data-info">
+        <div class="num" data-target="1500" style="color:#26A69A;"><span class="num-text">0</span><span style="font-size:12px;color:var(--text-light);">+</span></div>
+        <div class="lbl">文献甄选审核</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Industry Chain Illustration -->
+  <div class="chain-section">
+    <div class="chain-title">AI赋能CGT全产业链</div>
+    <div class="chain-svg-wrap">
+      <svg viewBox="0 0 900 390" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.15"/>
+            <stop offset="100%" style="stop-color:#26C6DA;stop-opacity:0.05"/>
+          </linearGradient>
+          <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:rgba(18,28,42,0.95)"/>
+            <stop offset="100%" style="stop-color:rgba(10,15,26,0.95)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Row labels -->
+        <text x="450" y="12" text-anchor="middle" fill="rgba(0,229,255,0.35)" font-size="9" font-family="-apple-system,sans-serif" letter-spacing="4">研 发 前 沿</text>
+        <text x="450" y="385" text-anchor="middle" fill="rgba(102,187,106,0.35)" font-size="9" font-family="-apple-system,sans-serif" letter-spacing="4">转 化 应 用</text>
+
+        <!-- Center AI node -->
+        <g class="ai-center">
+          <circle class="bg" cx="450" cy="195" r="50" fill="url(#aiGrad)" stroke="#00E5FF" stroke-width="1.5"/>
+          <circle cx="450" cy="195" r="36" fill="rgba(0,229,255,0.06)" stroke="#00E5FF" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="450" y="190" text-anchor="middle" fill="#00E5FF" font-size="14" font-weight="700" font-family="-apple-system,sans-serif">AI</text>
+          <text x="450" y="207" text-anchor="middle" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">智能引擎</text>
+          <!-- Small DNA icon inside -->
+          <g transform="translate(436,165)" stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.5">
+            <path d="M0 0 Q7 5 0 10 Q-7 15 0 20"/>
+            <path d="M14 0 Q7 5 14 10 Q21 15 14 20"/>
+            <line x1="0" y1="3" x2="14" y2="3" stroke-width="0.5"/>
+            <line x1="0" y1="10" x2="14" y2="10" stroke-width="0.5"/>
+            <line x1="0" y1="17" x2="14" y2="17" stroke-width="0.5"/>
+          </g>
+        </g>
+
+        <!-- Flow lines from center to top nodes (curved) -->
+        <path d="M 415,155 Q 275,125 135,92" stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 435,145 Q 390,120 345,92" stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 465,145 Q 510,120 555,92" stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 485,155 Q 625,125 765,92" stroke="#00E5FF" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+
+        <!-- Flow lines from center to bottom nodes (curved) -->
+        <path d="M 415,235 Q 275,265 135,298" stroke="#66BB6A" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 435,245 Q 390,270 345,298" stroke="#66BB6A" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 465,245 Q 510,270 555,298" stroke="#66BB6A" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+        <path d="M 485,235 Q 625,265 765,298" stroke="#66BB6A" stroke-width="1" fill="none" opacity="0.3" class="flow-line"/>
+
+        <!-- ===== TOP ROW: 研发前沿 ===== -->
+
+        <!-- Node 1: 靶点发现 -->
+        <g class="chain-node">
+          <rect x="35" y="22" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+          <g transform="translate(51,40)" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <circle cx="10" cy="10" r="8"/>
+            <line x1="10" y1="1" x2="10" y2="4"/>
+            <line x1="10" y1="16" x2="10" y2="19"/>
+            <line x1="1" y1="10" x2="4" y2="10"/>
+            <line x1="16" y1="10" x2="19" y2="10"/>
+          </g>
+          <text x="83" y="50" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">靶点发现</text>
+          <text x="83" y="66" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">AI靶点识别 · 疾病机制解析</text>
+          <text x="83" y="80" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">多组学 · 虚拟疾病模型</text>
+        </g>
+
+        <!-- Node 2: 虚拟细胞 -->
+        <g class="chain-node">
+          <rect x="245" y="22" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+          <g transform="translate(261,40)" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <polygon points="10,2 18,7 18,13 10,18 2,13 2,7"/>
+            <circle cx="10" cy="10" r="3"/>
+          </g>
+          <text x="293" y="50" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">虚拟细胞</text>
+          <text x="293" y="66" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">数字孪生 · 细胞行为预测</text>
+          <text x="293" y="80" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">49亿参数 · 单细胞组学</text>
+        </g>
+
+        <!-- Node 3: 细胞设计 -->
+        <g class="chain-node">
+          <rect x="455" y="22" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+          <g transform="translate(471,40)" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M3 3 Q10 8 3 13 Q10 18 3 21"/>
+            <path d="M17 3 Q10 8 17 13 Q10 18 17 21"/>
+            <line x1="3" y1="6" x2="17" y2="6" stroke-width="0.8"/>
+            <line x1="3" y1="12" x2="17" y2="12" stroke-width="0.8"/>
+            <line x1="3" y1="18" x2="17" y2="18" stroke-width="0.8"/>
+          </g>
+          <text x="503" y="50" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">细胞设计</text>
+          <text x="503" y="66" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">CAR结构 · 基因编辑</text>
+          <text x="503" y="80" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">AI设计 · 精准编辑</text>
+        </g>
+
+        <!-- Node 4: 工艺优化 -->
+        <g class="chain-node">
+          <rect x="655" y="22" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
+          <g transform="translate(671,40)" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <circle cx="10" cy="10" r="3"/>
+            <path d="M10 1v3M10 16v3M1 10h3M16 10h3M3.5 3.5l2 2M14.5 14.5l2 2M3.5 16.5l2-2M14.5 5.5l2-2"/>
+          </g>
+          <text x="703" y="50" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">工艺优化</text>
+          <text x="703" y="66" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">智能制造 · 质量控制</text>
+          <text x="703" y="80" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">3D培养 · 自动化</text>
+        </g>
+
+        <!-- ===== BOTTOM ROW: 转化应用 ===== -->
+
+        <!-- Node 5: 临床转化 -->
+        <g class="chain-node">
+          <rect x="35" y="298" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(102,187,106,0.2)" stroke-width="1"/>
+          <g transform="translate(51,316)" stroke="#66BB6A" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M12 21s-7-4.5-7-11a7 7 0 0114 0c0 6.5-7 11-7 11z"/>
+            <circle cx="12" cy="10" r="2.5"/>
+          </g>
+          <text x="83" y="326" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">临床转化</text>
+          <text x="83" y="342" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">试验匹配 · 患者分层</text>
+          <text x="83" y="356" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">106家备案机构 · 全国分布</text>
+        </g>
+
+        <!-- Node 6: 数据分析 -->
+        <g class="chain-node">
+          <rect x="245" y="298" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(102,187,106,0.2)" stroke-width="1"/>
+          <g transform="translate(261,316)" stroke="#66BB6A" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M3 20h18M6 16V8M12 16V4M18 16v-6"/>
+          </g>
+          <text x="293" y="326" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">数据分析</text>
+          <text x="293" y="342" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">730+篇 · 证据分级</text>
+          <text x="293" y="356" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">19系统 · 137适应症</text>
+        </g>
+
+        <!-- Node 7: 产品追踪 -->
+        <g class="chain-node">
+          <rect x="455" y="298" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(102,187,106,0.2)" stroke-width="1"/>
+          <g transform="translate(471,316)" stroke="#66BB6A" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <rect x="3" y="3" width="14" height="14" rx="3"/>
+            <line x1="10" y1="7" x2="10" y2="13"/>
+            <line x1="7" y1="10" x2="13" y2="10"/>
+          </g>
+          <text x="503" y="326" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">产品追踪</text>
+          <text x="503" y="342" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">45款获批产品</text>
+          <text x="503" y="356" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">FDA · EMA · NMPA</text>
+        </g>
+
+        <!-- Node 8: 监管监控 -->
+        <g class="chain-node">
+          <rect x="655" y="298" width="200" height="70" rx="10" fill="url(#nodeGrad)" stroke="rgba(102,187,106,0.2)" stroke-width="1"/>
+          <g transform="translate(671,316)" stroke="#66BB6A" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/>
+          </g>
+          <text x="703" y="326" fill="#E0E0E0" font-size="12" font-weight="600" font-family="-apple-system,sans-serif">监管监控</text>
+          <text x="703" y="342" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">21份政策汇编</text>
+          <text x="703" y="356" fill="#8892A6" font-size="9" font-family="-apple-system,sans-serif">818令 · 双轨制</text>
+        </g>
+
+        <!-- Connection arrows (small triangles) on top -->
+        <g fill="#00E5FF" opacity="0.35">
+          <polygon points="135,92 130,84 140,84"/>
+          <polygon points="345,92 340,84 350,84"/>
+          <polygon points="555,92 550,84 560,84"/>
+          <polygon points="765,92 760,84 770,84"/>
+        </g>
+        <!-- Connection arrows on bottom -->
+        <g fill="#66BB6A" opacity="0.35">
+          <polygon points="135,298 130,290 140,290"/>
+          <polygon points="345,298 340,290 350,290"/>
+          <polygon points="555,298 550,290 560,290"/>
+          <polygon points="765,298 760,290 770,290"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Footer text -->
+  <div class="dash-footer">
+    <div class="dash-divider"></div>
+    <div class="dash-footer-text">
+      <span class="highlight">730+</span> 篇文献数据 · <span class="highlight">45</span> 款获批产品 · <span class="highlight">21</span> 份监管政策 · <span class="highlight">106</span> 家备案机构<br>
+      <span class="highlight">800+</span> 次数据清洗 · <span class="highlight">1500+</span> 篇文献甄选 · <span class="highlight">172</span> 次代码迭代 · <span class="highlight">13</span> 轮深度优化 · <span class="highlight">350+</span> 轮AI对话交互<br>
+      <span style="opacity:0.6;">持续更新中 · 每日自动检索PubMed最新文献 · 每周发布编辑精选</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Animated counter using IntersectionObserver
+function animateCounter(el, target, duration) {
+  var start = 0;
+  var startTime = null;
+  var numText = el.querySelector('.num-text');
+  if (!numText) return;
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp - startTime) / duration, 1);
+    // Ease out cubic
+    var eased = 1 - Math.pow(1 - progress, 3);
+    var current = Math.floor(eased * target);
+    numText.textContent = current;
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      numText.textContent = target;
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// Observe data grids
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var grid = entry.target;
+      grid.classList.add('counter-active');
+      var numbers = grid.querySelectorAll('[data-target]');
+      numbers.forEach(function(num, idx) {
+        var target = parseInt(num.getAttribute('data-target'));
+        setTimeout(function() {
+          animateCounter(num, target, 1500);
+        }, idx * 80);
+      });
+      observer.unobserve(grid);
+    }
+  });
+}, { threshold: 0.2 });
+
+var grid1 = document.getElementById('dataGrid1');
+var grid2 = document.getElementById('dataGrid2');
+if (grid1) observer.observe(grid1);
+if (grid2) observer.observe(grid2);
+</script>
+
+</body>
+</html>
