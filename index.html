@@ -2201,7 +2201,7 @@ body { padding-bottom: 60px; }
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .team-card:hover { box-shadow: 0 4px 20px rgba(0,229,255,0.1); border-color: var(--primary); }
-.team-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.team-card-head { display: flex; align-items: center; gap: 10px; }
 .team-card-avatar {
   width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -2213,7 +2213,7 @@ body { padding-bottom: 60px; }
 .team-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .team-card-info { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .team-card-role { font-size: 14px; color: var(--text-light); text-align: right; }
-.team-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; text-align: right; }
+.team-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; text-align: right; margin-top: 4px; }
 .team-placeholder {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 20px; border: 1px dashed var(--border); border-radius: 12px;
@@ -7199,7 +7199,7 @@ function renderHub() {
   html += '</div>';
 
   // 平台介绍 section divider (new)
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('info', 16) + ' 平台服务</div><div class="sd-line"></div></div>';
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('info', 16) + ' 平台介绍</div><div class="sd-line"></div></div>';
 
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
@@ -7209,13 +7209,16 @@ function renderHub() {
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
   html += '</div>';
 
+  // 平台服务 divider
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('layers', 16) + ' 平台服务</div><div class="sd-line"></div></div>';
+
   // AI poster banner entry
   html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
   html += '<div class="ai-poster-banner-content">';
   html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
   html += '<div class="ai-poster-banner-text">';
-  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
+  html += '<div class="ai-poster-banner-title">AI赋能·平台数据迭代</div>';
   html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
   html += '</div>';
   html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
@@ -7303,7 +7306,7 @@ function renderAIDashboard() {
 
   // === Section 5: AI Application Cases ===
   html += '<div class="ai-cases-section">';
-  html += '<div class="ai-cases-title">AI应用案例</div>';
+  html += '<div class="ai-cases-title">AI更新数据集</div>';
   html += '<div class="ai-cases-list">';
   var cases = [
     {tag:'文献', tagClass:'cyan', text:'730篇干细胞临床文献自动分类入库，覆盖19个系统137种适应症', num:'730篇'},
@@ -7316,25 +7319,6 @@ function renderAIDashboard() {
     html += '<div class="ai-case-item"><div class="ai-case-tag ' + c.tagClass + '">' + c.tag + '</div><div class="ai-case-text">' + c.text + '</div><div class="ai-case-num">' + c.num + '</div></div>';
   });
   html += '</div>';
-  html += '</div>';
-
-  // === Data grid ===
-  html += '<div class="ai-data-grid" id="aiDataGrid1">';
-  var metrics = [
-    {num:730, label:'临床文献'},
-    {num:19, label:'覆盖系统'},
-    {num:137, label:'适应症'},
-    {num:45, label:'获批产品'},
-    {num:21, label:'监管政策'},
-    {num:106, label:'备案机构'},
-    {num:5, label:'精选周刊'},
-    {num:46, label:'精选文献'},
-    {num:755, label:'PubMed摘要'},
-    {num:20, label:'入驻企业', suffix:'+'}
-  ];
-  metrics.forEach(function(m) {
-    html += '<div class="ai-data-card"><div class="ai-data-number" data-target="' + m.num + '"><span class="num-text">0</span>' + (m.suffix ? '<span class="suffix">' + m.suffix + '</span>' : '') + '</div><div class="ai-data-label">' + m.label + '</div></div>';
-  });
   html += '</div>';
 
   // Footer
