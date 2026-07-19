@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>间充质基质细胞知识库 | MSC Knowledge Hub</title>
+<title>细胞与基因治疗知识库 | CGT Knowledge Hub</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -849,9 +849,10 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 16px 20px;
+  padding: 12px 18px;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   border-left: 3px solid transparent;
+  margin-bottom: 8px;
 }
 .paper-card:hover {
   box-shadow: 0 4px 20px rgba(0,229,255,0.1);
@@ -2304,13 +2305,13 @@ body { padding-bottom: 60px; }
 .opencgt-hero-content { position: relative; z-index: 1; }
 .opencgt-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
 .opencgt-hero-title .accent { color: var(--primary); }
-.opencgt-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+.opencgt-hero-desc { font-size: 14px; color: var(--text-light); text-align: left; line-height: 1.8; max-width: 600px; margin: 0 auto; text-indent: 2em; }
 .opencgt-block {
   background: var(--card-bg); border: 1px solid var(--border);
   border-radius: 14px; padding: 20px 24px; margin-bottom: 12px;
 }
-.opencgt-block-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; justify-content: center; }
-.opencgt-block-content { font-size: 13px; color: var(--text-light); line-height: 1.8; text-align: center; }
+.opencgt-block-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.opencgt-block-content { font-size: 13px; color: var(--text-light); line-height: 1.8; text-align: left; text-indent: 2em; }
 .opencgt-value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .opencgt-value-card {
   background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
@@ -2320,7 +2321,7 @@ body { padding-bottom: 60px; }
 .opencgt-value-card-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.1); }
 .opencgt-value-card-title { font-size: 13px; font-weight: 700; color: var(--text); }
 .opencgt-value-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
-.opencgt-audience-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.opencgt-audience-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .opencgt-audience-chip {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border-radius: 10px;
@@ -2352,8 +2353,8 @@ body { padding-bottom: 60px; }
 }
 .opencgt-sphere-wrap { display: flex; justify-content: center; align-items: center; padding: 20px 0; }
 .opencgt-sphere {
-  position: relative; width: 340px; height: 340px;
-  perspective: 1000px;
+  position: relative; width: 360px; height: 360px;
+  perspective: 1200px;
 }
 .opencgt-sphere-inner {
   position: relative; width: 100%; height: 100%;
@@ -2362,37 +2363,49 @@ body { padding-bottom: 60px; }
 }
 .opencgt-sphere:hover .opencgt-sphere-inner { animation-play-state: paused; }
 @keyframes opencgt-sphere-rotate {
-  from { transform: rotateY(0deg) rotateX(-8deg); }
-  to { transform: rotateY(360deg) rotateX(-8deg); }
+  from { transform: rotateY(0deg) rotateX(-12deg); }
+  to { transform: rotateY(360deg) rotateX(-12deg); }
 }
 .opencgt-node {
   position: absolute; top: 50%; left: 50%;
-  width: 56px; height: 56px; margin: -28px 0 0 -28px;
+  width: 52px; height: 52px; margin: -26px 0 0 -26px;
   border-radius: 50%; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 30% 30%, rgba(0,229,255,0.3), rgba(0,229,255,0.08));
-  border: 1.5px solid rgba(0,229,255,0.4);
-  box-shadow: 0 0 12px rgba(0,229,255,0.2), inset 0 0 8px rgba(0,229,255,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  background: radial-gradient(circle at 32% 28%, rgba(0,229,255,0.55) 0%, rgba(0,229,255,0.25) 35%, rgba(0,184,212,0.1) 70%, rgba(10,15,26,0.6) 100%);
+  border: 1px solid rgba(0,229,255,0.35);
+  box-shadow:
+    0 0 14px rgba(0,229,255,0.25),
+    inset 2px 2px 6px rgba(0,229,255,0.3),
+    inset -2px -3px 8px rgba(0,0,0,0.4),
+    0 2px 8px rgba(0,0,0,0.3);
+  transition: box-shadow 0.3s;
   backface-visibility: visible;
 }
 .opencgt-node:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 24px rgba(0,229,255,0.5), inset 0 0 12px rgba(0,229,255,0.2);
+  box-shadow:
+    0 0 28px rgba(0,229,255,0.6),
+    inset 2px 2px 8px rgba(0,229,255,0.4),
+    inset -2px -3px 10px rgba(0,0,0,0.3),
+    0 4px 16px rgba(0,0,0,0.4);
   z-index: 10;
 }
-.opencgt-node-icon { color: var(--primary); }
+.opencgt-node-icon { color: var(--primary); filter: drop-shadow(0 0 3px rgba(0,229,255,0.5)); }
 .opencgt-node-label { font-size: 8px; color: var(--text); font-weight: 600; margin-top: 1px; text-align: center; line-height: 1.1; }
 .opencgt-sphere-core {
   position: absolute; top: 50%; left: 50%;
-  width: 80px; height: 80px; margin: -40px 0 0 -40px;
+  width: 84px; height: 84px; margin: -42px 0 0 -42px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(0,229,255,0.15), rgba(10,15,26,0.8));
-  border: 1px solid rgba(0,229,255,0.2);
+  background: radial-gradient(circle at 35% 30%, rgba(0,229,255,0.3) 0%, rgba(0,184,212,0.15) 40%, rgba(10,15,26,0.7) 100%);
+  border: 1px solid rgba(0,229,255,0.25);
+  box-shadow:
+    0 0 20px rgba(0,229,255,0.2),
+    inset 2px 2px 10px rgba(0,229,255,0.2),
+    inset -3px -4px 12px rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   font-size: 10px; font-weight: 700; color: var(--primary);
   text-align: center; line-height: 1.3;
 }
+.opencgt-conn-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transform-style: preserve-3d; }
 .opencgt-sphere-rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
 .opencgt-sphere-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(0,229,255,0.08); }
 .opencgt-sphere-hint { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px; }
@@ -2404,10 +2417,10 @@ body { padding-bottom: 60px; }
   .opencgt-flow-arrow { transform: rotate(90deg); }
   .opencgt-twophase { flex-direction: column; }
   .opencgt-phase { max-width: 100%; }
-  .opencgt-sphere { width: 280px; height: 280px; }
-  .opencgt-node { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+  .opencgt-sphere { width: 300px; height: 300px; }
+  .opencgt-node { width: 46px; height: 46px; margin: -23px 0 0 -23px; }
   .opencgt-node-label { font-size: 7px; }
-  .opencgt-sphere-core { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 9px; }
+  .opencgt-sphere-core { width: 68px; height: 68px; margin: -34px 0 0 -34px; font-size: 9px; }
 }
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
@@ -4741,8 +4754,8 @@ body { padding-bottom: 60px; }
         <circle cx="42" cy="18" r="3" fill="#64FFDA"/>
         <circle cx="16" cy="40" r="3" fill="#64FFDA"/>
       </svg>
-      <div class="wc-title">间充质基质细胞知识库</div>
-      <div class="wc-subtitle">MSC Knowledge Hub</div>
+      <div class="wc-title">细胞与基因治疗知识库</div>
+      <div class="wc-subtitle">CGT Knowledge Hub</div>
       <div class="wc-stats">
         <div class="wc-stat"><div class="wc-stat-num">730+</div><div class="wc-stat-label">临床文献</div></div>
         <div class="wc-stat"><div class="wc-stat-num">21</div><div class="wc-stat-label">监管政策</div></div>
@@ -4751,7 +4764,7 @@ body { padding-bottom: 60px; }
       </div>
     </div>
     <div class="wc-body">
-      <div class="wc-intro">本平台聚焦间充质干细胞（MSC）临床研究前沿，整合全球公开发表的学术文献、监管政策动态、获批产品追踪及行业深度分析，每日更新维护，致力于为科研与产业提供权威、系统的信息参考。</div>
+      <div class="wc-intro">本平台聚焦细胞与基因治疗（CGT）领域，整合全球公开发表的学术文献、监管政策动态、获批产品追踪及行业深度分析，每日更新维护，致力于为科研与产业提供权威、系统的信息参考。</div>
       
       <div class="wc-section-title">面向用户与核心功能</div>
       <div class="wc-user-grid">
@@ -4814,7 +4827,7 @@ body { padding-bottom: 60px; }
 
 <div class="header">
   <div class="header-inner">
-    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>间充质基质细胞知识库</span><span class="subtitle">MSC Knowledge Hub</span></div></h1>
+    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>细胞与基因治疗知识库</span><span class="subtitle">CGT Knowledge Hub</span></div></h1>
     <nav class="header-nav">
       <button class="bn-item" id="nav-intro" onclick="switchSection('intro')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="bn-label">科普</span></button>
       <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
@@ -5485,6 +5498,23 @@ function handleSearch() {
   }
 }
 
+function showLiteratureUnderConstruction(dbName) {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:440px;width:100%;padding:28px;box-shadow:0 8px 40px rgba(0,229,255,0.15);text-align:center;';
+  modal.innerHTML =
+    '<div style="width:64px;height:64px;border-radius:16px;background:rgba(0,229,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--primary);margin:0 auto 16px;">' + svgIcon('compass', 32) + '</div>' +
+    '<div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">' + dbName + '临床试验数据库</div>' +
+    '<div style="display:inline-block;font-size:11px;font-weight:600;color:var(--primary);padding:3px 12px;border-radius:20px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);margin-bottom:14px;">建设中 · 敬请期待</div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:20px;">AI团队正在紧锣密鼓地建设' + dbName + '临床试验数据库，包括文献检索、分类整理、数据清洗与结构化入库等全流程工作。完成后将在此提供与MSC数据库一致的高质量文献检索体验。</div>' +
+    '<div style="font-size:12px;color:var(--text-light);opacity:0.7;margin-bottom:16px;">当前可使用MSC临床试验数据库，后续将陆续上线' + dbName + '及更多数据库</div>' +
+    '<button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 28px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button>';
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
 let searchTimer = null;
 function debouncedSearch() {
   if (searchTimer) clearTimeout(searchTimer);
@@ -5550,12 +5580,28 @@ function renderContent() {
     var yrs = ALL_DATA.map(function(d){return d.year;}).filter(function(y){return y;});
     var yMin = yrs.length ? Math.min.apply(null, yrs) : '';
     var yMax = yrs.length ? Math.max.apply(null, yrs) : '';
-    overviewHtml += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">基于 <b>' + ALL_DATA.length + '</b> 篇文献，覆盖 <b>' + totalSystemsGlobal + '</b> 个系统，<b>' + totalInds + '</b> 个适应症，时间跨度 <b>' + yMin + '–' + yMax + '</b> 年。点击下方系统卡片或左侧导航树浏览文献，也可在搜索框中输入关键词检索。</div></div>';
+    overviewHtml += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">基于 <b>' + ALL_DATA.length + '</b> 篇文献，覆盖 <b>' + totalSystemsGlobal + '</b> 个系统，<b>' + totalInds + '</b> 个适应症，时间跨度 <b>' + yMin + '–' + yMax + '</b> 年。数据每周自动更新，点击下方系统卡片或在右下角导航树安静浏览文献，也可在搜索框中输入关键词检索。目前AI团队完成了MSC临床试验数据库的建设，CAR-T及基因治疗数据库正在建设。</div></div>';
 
     // Search box
     overviewHtml += '<div class="lit-search-box">';
     overviewHtml += '<span class="search-icon">' + svgIcon('search', 16) + '</span>';
     overviewHtml += '<input type="text" id="searchInput" placeholder="搜索标题、作者、期刊、PMID、适应症…" oninput="debouncedSearch()">';
+    overviewHtml += '</div>';
+
+    // Database switch cards: MSC / CAR-T / Gene Therapy
+    overviewHtml += '<div class="lit-db-switch" style="display:flex;gap:12px;margin:12px 0 4px;flex-wrap:wrap;">';
+    overviewHtml += '<div class="lit-db-card lit-db-active" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:rgba(0,229,255,0.06);border:1px solid var(--primary);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--primary);">' + svgIcon('dna', 16) + ' MSC临床试验数据库</div>';
+    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;">' + ALL_DATA.length + '篇 · 已建成</div>';
+    overviewHtml += '</div>';
+    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'CAR-T\')" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('shield', 16) + ' CAR-T临床试验数据库</div>';
+    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;opacity:0.6;">建设中 · 敬请期待</div>';
+    overviewHtml += '</div>';
+    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'基因治疗\')" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('flask', 16) + ' 基因治疗数据库</div>';
+    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;opacity:0.6;">建设中 · 敬请期待</div>';
+    overviewHtml += '</div>';
     overviewHtml += '</div>';
 
     const sysMap = {};
@@ -5587,16 +5633,16 @@ function renderContent() {
     var evColors = {A:'#e74c3c', B:'#3498db', C:'#27ae60', D:'#95a5a6'};
     var evLabels = {A:'A级 (RCT)', B:'B级 (临床试验)', C:'C级 (病例报告)', D:'D级 (其他)'};
     overviewHtml += '<div class="evidence-chart" style="margin-top:16px;">';
-    overviewHtml += '<div style="font-size:18px;font-weight:700;color:var(--primary-dark);margin-bottom:12px;">证据等级分布</div>';
+    overviewHtml += '<div style="font-size:18px;font-weight:700;color:var(--primary-dark);margin-bottom:12px;text-align:center;">证据等级分布</div>';
     ['A','B','C','D'].forEach(function(lv) {
       var pct = Math.round(evCounts[lv] / maxEv * 100);
-      overviewHtml += '<div class="ev-bar-row"><div class="ev-bar-label">' + evLabels[lv] + '</div><div class="ev-bar-track"><div class="ev-bar-fill" style="width:' + pct + '%;background:' + evColors[lv] + ';"></div></div><div class="ev-bar-count">' + evCounts[lv] + '</div></div>';
+      overviewHtml += '<div class="ev-bar-row"><div class="ev-bar-label">' + evLabels[lv] + '</div><div class="ev-bar-track"><div class="ev-bar-fill ev-bar-anim" data-target="' + pct + '" style="width:0%;background:' + evColors[lv] + ';"></div></div><div class="ev-bar-count">' + evCounts[lv] + '</div></div>';
     });
     overviewHtml += '</div>';
 
     // Recent papers
     const recent = [...ALL_DATA].sort((a,b) => (b.year||'').localeCompare(a.year||'')).slice(0, 5);
-    overviewHtml += '<div class="content-header" style="margin-top:16px;"><h2 style="font-size:18px;">最新文献</h2></div>';
+    overviewHtml += '<div class="content-header" style="margin-top:16px;"><h2 style="font-size:18px;text-align:center;">最新文献</h2></div>';
     overviewHtml += '<div class="paper-list" style="max-width:860px;">';
     recent.forEach((d, i) => {
       overviewHtml += renderPaperCard(d, i);
@@ -5605,6 +5651,16 @@ function renderContent() {
 
     content.innerHTML = overviewHtml;
     updateFloatButtons();
+    // Animate evidence bars
+    setTimeout(function() {
+      var animBars = document.querySelectorAll('.ev-bar-anim');
+      animBars.forEach(function(bar, idx) {
+        setTimeout(function() {
+          bar.style.transition = 'width 0.8s cubic-bezier(0.4,0,0.2,1)';
+          bar.style.width = bar.getAttribute('data-target') + '%';
+        }, idx * 120);
+      });
+    }, 100);
     return;
   }
 
@@ -7018,7 +7074,8 @@ function renderHub() {
     {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80)'},
     {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进', action:"switchSection('regulations')", bg:'url(https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)'},
     {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'}
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'},
+    {type:'opencgt', tag:'共创', text:'Open CGT共创联盟计划——AI驱动的开放细胞与基因治疗共创平台，提交你的想法，AI团队帮你规划实现路径', action:"switchSection('opencgt')", bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'}
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
@@ -7113,16 +7170,20 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  // AI poster banner entry - clickable, jumps to AI data dashboard
-  html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
-  html += '<div class="ai-poster-banner-bg"></div>';
-  html += '<div class="ai-poster-banner-content">';
-  html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
-  html += '<div class="ai-poster-banner-text">';
-  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
-  html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
+  // Open CGT CTA block (moved above 2×2 cards)
+  html += '<div class="opencgt-cta" onclick="switchSection(\'opencgt\')">';
+  html += '<div class="opencgt-cta-bg"></div>';
+  html += '<div class="opencgt-cta-content">';
+  html += '<div class="opencgt-cta-vision">Open CGT <span class="accent">共创联盟计划</span></div>';
+  html += '<div class="opencgt-cta-tagline">AI驱动的开放细胞与基因治疗共创平台</div>';
+  html += '<div class="opencgt-cta-steps">';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('lightbulb', 22) + '</div><div class="opencgt-cta-step-text">你提想法</div><div class="opencgt-cta-step-sub">AI团队规划路径</div></div>';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('link', 22) + '</div><div class="opencgt-cta-step-text">平台对接</div><div class="opencgt-cta-step-sub">联通机构企业资源</div></div>';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('handshake', 22) + '</div><div class="opencgt-cta-step-text">共创联盟</div><div class="opencgt-cta-step-sub">找到志同道合的人</div></div>';
   html += '</div>';
-  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '<div class="opencgt-cta-btns">';
+  html += '<div class="opencgt-cta-btn primary">' + svgIcon('arrow-right', 16) + ' 了解Open CGT</div>';
+  html += '</div>';
   html += '</div>';
   html += '</div>';
 
@@ -7137,27 +7198,23 @@ function renderHub() {
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
   html += '</div>';
 
-  // Open CGT CTA block
-  html += '<div class="opencgt-cta" onclick="switchSection(\'opencgt\')">';
-  html += '<div class="opencgt-cta-bg"></div>';
-  html += '<div class="opencgt-cta-content">';
-  html += '<div class="opencgt-cta-vision">Open CGT <span class="accent">共创计划</span></div>';
-  html += '<div class="opencgt-cta-tagline">AI驱动的开放细胞与基因治疗共创平台</div>';
-  html += '<div class="opencgt-cta-steps">';
-  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('lightbulb', 22) + '</div><div class="opencgt-cta-step-text">你提想法</div><div class="opencgt-cta-step-sub">AI团队规划路径</div></div>';
-  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('link', 22) + '</div><div class="opencgt-cta-step-text">平台对接</div><div class="opencgt-cta-step-sub">联通机构企业资源</div></div>';
-  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('handshake', 22) + '</div><div class="opencgt-cta-step-text">共创联盟</div><div class="opencgt-cta-step-sub">找到志同道合的人</div></div>';
-  html += '</div>';
-  html += '<div class="opencgt-cta-btns">';
-  html += '<div class="opencgt-cta-btn primary">' + svgIcon('arrow-right', 16) + ' 了解Open CGT</div>';
-  html += '</div>';
-  html += '</div>';
-  html += '</div>';
-
-  // 热门检索·快捷入口 (moved to bottom)
+  // 热门检索·快捷入口
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
   html += '<div class="hub-tags">';
   html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
+  html += '</div>';
+
+  // AI poster banner entry - moved to bottom (after 热门检索)
+  html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
+  html += '<div class="ai-poster-banner-bg"></div>';
+  html += '<div class="ai-poster-banner-content">';
+  html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
+  html += '<div class="ai-poster-banner-text">';
+  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
+  html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
+  html += '</div>';
+  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '</div>';
   html += '</div>';
 
   content.innerHTML = html;
@@ -7364,10 +7421,15 @@ function renderAIDashboard() {
 
 // === AI Panorama Page ===
 var currentAIModule = 'timeline'; // 'timeline' | 'directions' | 'cgt' | 'industry' | 'regulation' | 'literature'
+var currentReviewTab = 'ar-protein'; // literature review sub-tab
 function switchAIModule(mod) {
   currentAIModule = mod;
   renderAIReview();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function switchReviewTab(tab) {
+  currentReviewTab = tab;
+  renderAIReview();
 }
 function renderAIReview() {
   var html = '';
@@ -7399,7 +7461,7 @@ function renderAIReview() {
     { id:'regulation', icon:'shield', name:'监管动态', color:'#d2a8ff' },
     { id:'literature', icon:'book', name:'文献综述', color:'#58a6ff' }
   ];
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);">';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);position:sticky;top:56px;z-index:100;background:var(--bg);padding:8px 4px;margin-bottom:14px;border-radius:10px;">';
   aiModules.forEach(function(m) {
     var active = currentAIModule === m.id ? 'background:rgba(0,229,255,0.06);' : '';
     html += '<div class="reg-cat-card" style="border-left-color:' + m.color + ';cursor:pointer;' + active + '" onclick="switchAIModule(\'' + m.id + '\')">';
@@ -7641,14 +7703,24 @@ function renderAIReview() {
 
   html += '<div class="ai-pan-insight"><strong>\u5b66\u672f\u53c2\u8003\uff1a</strong>\u4ee5\u4e0b\u6587\u732e\u57fa\u4e8e PubMed\u3001Nature\u3001Cell \u7b49\u6743\u5a01\u6570\u636e\u5e93\u7cfb\u7edf\u68c0\u7d22 2024\u20132025 \u5e74\u95f4 AI \u5728\u751f\u7269\u9886\u57df\u5e94\u7528\u7684\u4ee3\u8868\u6027\u6587\u732e\uff0c\u6db5\u76d6\u86cb\u767d\u8d28\u7ed3\u6784\u9884\u6d4b\u3001AI \u836f\u7269\u53d1\u73b0\u3001\u57fa\u56e0\u7ec4\u5b66\u4e0e\u5355\u7ec6\u80de\u3001\u533b\u5b66\u5f71\u50cf\u3001\u751f\u7269\u5927\u8bed\u8a00\u6a21\u578b\u3001\u5408\u6210\u751f\u7269\u4e0e\u57fa\u56e0\u7f16\u8f91\u516d\u5927\u65b9\u5411\u3002</div>';
 
-  html += '<nav class="ai-review-nav" style="position:relative;top:0;margin-bottom:20px;">';
-  html += '<a class="ai-review-nav-item active" href="#ar-protein">\u86cb\u767d\u8d28\u7ed3\u6784</a>';
-  html += '<a class="ai-review-nav-item" href="#ar-drug">AI\u836f\u7269\u53d1\u73b0</a>';
-  html += '<a class="ai-review-nav-item" href="#ar-genomics">\u57fa\u56e0\u7ec4\u5b66</a>';
-  html += '<a class="ai-review-nav-item" href="#ar-imaging">\u533b\u5b66\u5f71\u50cf</a>';
-  html += '<a class="ai-review-nav-item" href="#ar-llm">\u751f\u7269\u5927\u6a21\u578b</a>';
-  html += '<a class="ai-review-nav-item" href="#ar-crispr">\u57fa\u56e0\u7f16\u8f91</a>';
-  html += '</nav>';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;">';
+  var reviewTabs = [
+    {id:'ar-protein', icon:'dna', name:'蛋白质结构', color:'#58a6ff'},
+    {id:'ar-drug', icon:'pill', name:'AI药物发现', color:'#56d364'},
+    {id:'ar-genomics', icon:'chart', name:'基因组学', color:'#d2a8ff'},
+    {id:'ar-imaging', icon:'shield', name:'医学影像', color:'#f78166'},
+    {id:'ar-llm', icon:'lightbulb', name:'生物大模型', color:'#ffa657'},
+    {id:'ar-crispr', icon:'flask', name:'基因编辑', color:'#79c0ff'}
+  ];
+  reviewTabs.forEach(function(t) {
+    var isActive = currentReviewTab === t.id;
+    var activeStyle = isActive ? 'background:rgba(0,229,255,0.06);border-color:' + t.color + ';' : '';
+    html += '<div class="reg-cat-card" style="border-left-color:' + t.color + ';cursor:pointer;' + activeStyle + '" onclick="switchReviewTab(\'' + t.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + t.color + ';">' + svgIcon(t.icon, 20) + '</span></div>';
+    html += '<div class="rcc-name">' + t.name + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
 
     var sections = [
     {
@@ -7760,8 +7832,9 @@ function renderAIReview() {
     }
   ];
 
-  // Render sections
+  // Render sections (only active tab)
   sections.forEach(function(sec) {
+    if (sec.id !== currentReviewTab) return;
     html += '<div class="ai-review-section" id="' + sec.id + '">';
     html += '<div class="ai-review-sec-header">';
     html += '<div class="ai-review-sec-icon ' + sec.iconClass + '">' + sec.icon + '</div>';
@@ -7840,32 +7913,6 @@ function renderAIReview() {
 
   document.getElementById('content').innerHTML = html;
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Scroll spy for literature nav (only relevant when literature module is active)
-  var litNavItems = document.querySelectorAll('.ai-review-nav-item');
-  var litSections = document.querySelectorAll('.ai-review-section');
-  function updateLitNav() {
-    var current = '';
-    litSections.forEach(function(s) {
-      if (window.scrollY >= s.offsetTop - 140) current = s.id;
-    });
-    litNavItems.forEach(function(n) {
-      var href = n.getAttribute('href') || '';
-      n.classList.toggle('active', href === '#' + current);
-    });
-  }
-  window.addEventListener('scroll', updateLitNav);
-  litNavItems.forEach(function(n) {
-    n.addEventListener('click', function(e) {
-      e.preventDefault();
-      var targetId = (n.getAttribute('href') || '').replace('#', '');
-      var target = document.getElementById(targetId);
-      if (target) {
-        var offset = target.offsetTop - 130;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-      }
-    });
-  });
 }
 
 // === Platform Guide ===
@@ -8110,6 +8157,11 @@ function positionSphereNodes() {
   if (!nodes.length) return;
   var count = nodes.length;
   var radius = 130;
+  var sphereInner = document.getElementById('opencgtSphereInner');
+  if (!sphereInner) return;
+  // Remove old connections
+  var oldConns = sphereInner.querySelectorAll('.opencgt-conn');
+  oldConns.forEach(function(c) { c.remove(); });
   for (var i = 0; i < count; i++) {
     var phi = Math.acos(-1 + (2 * i) / count);
     var theta = Math.sqrt(count * Math.PI) * phi;
@@ -8117,6 +8169,14 @@ function positionSphereNodes() {
     var y = radius * Math.sin(theta) * Math.sin(phi);
     var z = radius * Math.cos(phi);
     nodes[i].style.transform = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
+    // Draw connection line from center to node
+    var dist = Math.sqrt(x*x + y*y + z*z);
+    if (dist > 1) {
+      var conn = document.createElement('div');
+      conn.className = 'opencgt-conn';
+      conn.style.cssText = 'position:absolute;top:50%;left:50%;width:1px;height:' + dist + 'px;background:linear-gradient(to bottom, rgba(0,229,255,0.25), rgba(0,229,255,0.05));transform-origin:top center;transform:translate(-50%,0) rotateY(' + theta + 'rad) rotateZ(' + (Math.PI/2 - phi) + 'rad);pointer-events:none;';
+      sphereInner.insertBefore(conn, nodes[0]);
+    }
   }
 }
 
@@ -8148,7 +8208,7 @@ function renderOpenCGT() {
   html += '<div class="opencgt-hero">';
   html += '<div class="opencgt-hero-bg"></div>';
   html += '<div class="opencgt-hero-content">';
-  html += '<div class="opencgt-hero-title">Open CGT <span class="accent">共创计划</span></div>';
+  html += '<div class="opencgt-hero-title">Open CGT <span class="accent">共创联盟计划</span></div>';
   html += '<div class="opencgt-hero-desc">AI驱动的开放细胞与基因治疗共创平台。无论你是研究者、创业者、医生还是投资人——有想法，就有路径。AI团队帮你规划实现路径，联通平台资源，找到志同道合的伙伴，让想法真正落地。</div>';
   html += '</div>';
   html += '</div>';
@@ -8221,7 +8281,7 @@ function renderOpenCGT() {
   html += '</div>';
   html += '</div>';
   html += '</div>';
-  html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-align:center;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，同时AI会精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
+  html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-indent:2em;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，同时AI会精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
   html += '</div>';
 
   // Partners - 3D sphere
@@ -8252,7 +8312,7 @@ function renderOpenCGT() {
 
   // CTA
   html += '<div style="text-align:center;margin-top:16px;">';
-  html += '<div class="opencgt-cta-btn primary" style="display:inline-flex;" onclick="showOpenCGTSubmitModal()">' + svgIcon('lightbulb', 16) + ' 提交你的想法</div>';
+  html += '<div class="opencgt-cta-btn primary" style="display:inline-flex;" onclick="showOpenCGTSubmitModal()">' + svgIcon('lightbulb', 16) + ' 加入我们·提交您的需求</div>';
   html += '<div style="margin-top:10px;font-size:12px;color:var(--text-light);opacity:0.6;">（初创想法，暂时无法提交，功能开发中……）</div>';
   html += '</div>';
 
@@ -8267,8 +8327,8 @@ function showOpenCGTSubmitModal() {
   overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
   var modal = document.createElement('div');
   modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:480px;width:100%;padding:24px;box-shadow:0 8px 40px rgba(0,229,255,0.15);max-height:80vh;overflow-y:auto;';
-  modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(0,229,255,0.15);display:flex;align-items:center;justify-content:center;color:var(--primary);">' + svgIcon('lightbulb', 20) + '</div><div style="font-size:18px;font-weight:700;color:var(--primary);">提交你的想法</div></div>' +
-    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:16px;">Open CGT共创计划正在建设中。完成后，你可以在此提交你的CGT相关想法，AI团队将为你规划实现路径。</div>' +
+  modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(0,229,255,0.15);display:flex;align-items:center;justify-content:center;color:var(--primary);">' + svgIcon('lightbulb', 20) + '</div><div style="font-size:18px;font-weight:700;color:var(--primary);">加入我们·提交您的需求</div></div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:16px;">Open CGT共创联盟计划正在建设中。完成后，你可以在此提交你的CGT相关想法，AI团队将为你规划实现路径。</div>' +
     '<div style="font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;">提交功能即将上线，敬请期待。如需提前沟通，可通过平台声明中的联系方式与我们联系。</div>' +
     '<div style="text-align:center;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button></div>';
   overlay.appendChild(modal);
@@ -8326,7 +8386,7 @@ function showPlatformServiceModal() {
     {icon:'search', name:'文献检索', desc:'PubMed/ClinicalTrials多库检索 · 自动结构化分级 · 适应症/终点/安全性分析'},
     {icon:'shield', name:'政策追踪', desc:'NMPA/FDA/EMA/ISCT监管动态实时监控与深度解读'},
     {icon:'chart', name:'AI分析', desc:'行业报告自动生成 · 数据可视化 · 趋势预测 · 定制报告'},
-    {icon:'lightbulb', name:'Open CGT共创', desc:'想法提交 · AI路径规划 · 资源对接 · 共创联盟'},
+    {icon:'lightbulb', name:'Open CGT共创联盟', desc:'想法提交 · AI路径规划 · 资源对接 · 共创联盟'},
     {icon:'book', name:'知识库构建', desc:'多源数据清洗入库 · 持续迭代更新 · 专家审核'}
   ];
   var servicesHtml = services.map(function(s) {
@@ -11836,13 +11896,13 @@ document.addEventListener('dragstart', function(e) {
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-left">
-      <div class="sf-title"><svg viewBox="0 0 32 32" width="20" height="20" style="vertical-align:middle;margin-right:6px"><circle cx="16" cy="16" r="14" fill="none" stroke="#80CBC4" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#4DB6AC" opacity="0.8"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.7"/><circle cx="21" cy="9" r="1.5" fill="#80CBC4"/><circle cx="8" cy="20" r="1.5" fill="#80CBC4"/></svg> 间充质基质细胞知识库 | MSC Knowledge Hub</div>
+      <div class="sf-title"><svg viewBox="0 0 32 32" width="20" height="20" style="vertical-align:middle;margin-right:6px"><circle cx="16" cy="16" r="14" fill="none" stroke="#80CBC4" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#4DB6AC" opacity="0.8"/><circle cx="22" cy="20" r="2.5" fill="#00897B" opacity="0.7"/><circle cx="21" cy="9" r="1.5" fill="#80CBC4"/><circle cx="8" cy="20" r="1.5" fill="#80CBC4"/></svg> 细胞与基因治疗知识库 | CGT Knowledge Hub</div>
       <div class="sf-notice">
         <b>版权声明：</b>本网站所有内容（包括但不限于数据库结构、文献整理编排、行业分析报告、仪表盘图表设计、页面布局及源代码）均为原创，著作权归本平台所有。
         未经书面授权，任何单位及个人不得以任何方式复制、转载、摘编、镜像、传播或用于商业目的。
         经授权使用的内容应保留来源标注并链接至本站。如有侵权行为，将依法追究法律责任。
       </div>
-      <div class="sf-copy">© 2025-2026 间充质基质细胞知识库. All Rights Reserved. 保留所有权利.</div>
+      <div class="sf-copy">© 2025-2026 细胞与基因治疗知识库. All Rights Reserved. 保留所有权利.</div>
     </div>
   </div>
 </footer>
