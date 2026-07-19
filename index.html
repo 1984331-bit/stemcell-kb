@@ -2211,8 +2211,9 @@ body { padding-bottom: 60px; }
 .team-card-avatar.human { background: rgba(255,183,77,0.15); color: #FFB74D; box-shadow: 0 0 10px rgba(255,183,77,0.2); }
 .team-card-avatar.placeholder { background: rgba(255,255,255,0.06); color: var(--text-light); border: 1px dashed var(--border); }
 .team-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
-.team-card-role { font-size: 11px; color: var(--text-light); margin-top: 1px; }
-.team-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+.team-card-info { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.team-card-role { font-size: 14px; color: var(--text-light); text-align: right; }
+.team-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; text-align: right; }
 .team-placeholder {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 20px; border: 1px dashed var(--border); border-radius: 12px;
@@ -7198,23 +7199,17 @@ function renderHub() {
   html += '</div>';
 
   // 平台介绍 section divider (new)
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('info', 16) + ' 平台介绍</div><div class="sd-line"></div></div>';
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('info', 16) + ' 平台服务</div><div class="sd-line"></div></div>';
 
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
   html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
-  html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台服务</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
+  html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台功能</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
   html += '</div>';
 
-  // 热门检索·快捷入口
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
-  html += '<div class="hub-tags">';
-  html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
-  html += '</div>';
-
-  // AI poster banner entry - moved to bottom (after 热门检索)
+  // AI poster banner entry
   html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
   html += '<div class="ai-poster-banner-content">';
@@ -7225,6 +7220,12 @@ function renderHub() {
   html += '</div>';
   html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
   html += '</div>';
+  html += '</div>';
+
+  // 热门检索·快捷入口 (moved to bottom)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
+  html += '<div class="hub-tags">';
+  html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
   html += '</div>';
 
   content.innerHTML = html;
@@ -8018,7 +8019,7 @@ function renderTeam() {
     expertSlots.forEach(function(e) {
       html += '<div class="team-card">';
       html += '<div class="team-card-head"><div class="team-card-avatar placeholder">' + e.label.charAt(0) + '</div>';
-      html += '<div><div class="team-card-name">' + e.label + '</div><div class="team-card-role">' + e.role + '</div></div></div>';
+      html += '<div class="team-card-info"><div class="team-card-name">' + e.label + '</div><div class="team-card-role">' + e.role + '</div></div></div>';
       html += '</div>';
     });
     html += '</div>';
@@ -8029,6 +8030,11 @@ function renderTeam() {
   if (currentTeamTab === 'ops') {
     html += '<div class="team-section">';
     html += '<div class="team-grid">';
+    html += '<div class="team-card">';
+    html += '<div class="team-card-head"><div class="team-card-avatar human">杨</div>';
+    html += '<div class="team-card-info"><div class="team-card-name">杨老师</div><div class="team-card-role">审核员</div></div></div>';
+    html += '<div class="team-card-desc">最终审核、内容把关、方向决策</div>';
+    html += '</div>';
     var opsMembers = [
       {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
       {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
@@ -8039,7 +8045,7 @@ function renderTeam() {
     opsMembers.forEach(function(m) {
       html += '<div class="team-card">';
       html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
-      html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+      html += '<div class="team-card-info"><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
       html += '<div class="team-card-desc">' + m.desc + '</div>';
       html += '</div>';
     });
@@ -8060,7 +8066,7 @@ function renderTeam() {
     aiAll.forEach(function(m) {
       html += '<div class="team-card">';
       html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
-      html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+      html += '<div class="team-card-info"><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
       html += '<div class="team-card-desc">' + m.desc + '</div>';
       html += '</div>';
     });
