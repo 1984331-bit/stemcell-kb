@@ -4556,7 +4556,7 @@ body { padding-bottom: 60px; }
     </div>
     <div class="info-tab" data-kb="originals" onclick="navToKb('originals')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L9 8l-6 1 4.5 4.5L6 20l6-3 6 3-1.5-6.5L21 9l-6-1z"/></svg>
-      评述
+      专栏
     </div>
     <div class="info-tab" data-kb="books" onclick="navToKb('books')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -6765,19 +6765,6 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
-  // AI poster banner entry - clickable, jumps to AI data dashboard
-  html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
-  html += '<div class="ai-poster-banner-bg"></div>';
-  html += '<div class="ai-poster-banner-content">';
-  html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
-  html += '<div class="ai-poster-banner-text">';
-  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
-  html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
-  html += '</div>';
-  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
-  html += '</div>';
-  html += '</div>';
-
   // Global search section (divider only, functionality TBD)
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索·功能开发中</div><div class="sd-line"></div></div>';
 
@@ -6810,11 +6797,12 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  // Health products entry (after books)
-  html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
+  // Data analysis entry (moved before companies)
+  var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
+  html += '<div class="report-entry" onclick="switchSection(\'report\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
+  html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>数据分析·行业报告</span></div>';
+  html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -6828,11 +6816,11 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  var totalMscProducts = PRODUCTS.filter(function(p){return p.cellColor === '#0F6E56';}).length;
-  html += '<div class="report-entry" onclick="switchSection(\'report\')">';
+  // Health products entry (moved after companies)
+  html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>数据分析·行业报告</span></div>';
-  html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
+  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -6842,6 +6830,19 @@ function renderHub() {
   // Hot search tags - expanded pool with shuffle
   html += '<div class="hub-tags">';
   html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
+  html += '</div>';
+
+  // AI poster banner entry - clickable, jumps to AI data dashboard
+  html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
+  html += '<div class="ai-poster-banner-bg"></div>';
+  html += '<div class="ai-poster-banner-content">';
+  html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
+  html += '<div class="ai-poster-banner-text">';
+  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
+  html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
+  html += '</div>';
+  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '</div>';
   html += '</div>';
 
   // Split cards: 声明 + 团队 (moved to bottom)
@@ -7053,6 +7054,12 @@ function renderAIDashboard() {
 }
 
 // === AI Panorama Page ===
+var currentAIModule = 'timeline'; // 'timeline' | 'directions' | 'cgt' | 'industry' | 'regulation' | 'literature'
+function switchAIModule(mod) {
+  currentAIModule = mod;
+  renderAIReview();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function renderAIReview() {
   var html = '';
   // Breadcrumb
@@ -7074,19 +7081,29 @@ function renderAIReview() {
   html += '</div>';
   html += '</div>';
 
-  // ===== Module Nav =====
-  html += '<nav class="ai-pan-nav">';
-  html += '<a class="ai-pan-nav-item active" href="#ap-timeline">\u{1f9ed} \u6280\u672f\u91cc\u7a0b\u7891</a>';
-  html += '<a class="ai-pan-nav-item" href="#ap-directions">\u{1f4ca} \u516d\u5927\u65b9\u5411</a>';
-  html += '<a class="ai-pan-nav-item" href="#ap-cgt">AI\u00d7CGT \u4ea4\u53c9</a>';
-  html += '<a class="ai-pan-nav-item" href="#ap-industry">\u{1f3ed} \u4ea7\u4e1a\u683c\u5c40</a>';
-  html += '<a class="ai-pan-nav-item" href="#ap-regulation">\u2696\ufe0f \u76d1\u7ba1\u52a8\u6001</a>';
-  html += '<a class="ai-pan-nav-item" href="#ap-literature">\u{1f4da} \u6587\u732e\u7efc\u8ff0</a>';
-  html += '</nav>';
+  // ===== Module Nav (category cards, same style as other sections) =====
+  var aiModules = [
+    { id:'timeline', icon:'compass', name:'技术里程碑', color:'var(--primary)' },
+    { id:'directions', icon:'layers', name:'六大方向', color:'#56d364' },
+    { id:'cgt', icon:'dna', name:'AI×CGT', color:'#00E5FF' },
+    { id:'industry', icon:'trending', name:'产业格局', color:'#ffa657' },
+    { id:'regulation', icon:'shield', name:'监管动态', color:'#d2a8ff' },
+    { id:'literature', icon:'book', name:'文献综述', color:'#58a6ff' }
+  ];
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);">';
+  aiModules.forEach(function(m) {
+    var active = currentAIModule === m.id ? 'background:rgba(0,229,255,0.06);' : '';
+    html += '<div class="reg-cat-card" style="border-left-color:' + m.color + ';cursor:pointer;' + active + '" onclick="switchAIModule(\'' + m.id + '\')">';
+    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + m.color + ';">' + svgIcon(m.icon, 20) + '</span></div>';
+    html += '<div class="rcc-name">' + m.name + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
 
   html += '<div class="ai-review-main">';
 
   // ===== Module 1: Timeline =====
+  if (currentAIModule === 'timeline') {
   html += '<div class="ai-pan-section" id="ap-timeline">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(0,229,255,0.12);color:var(--primary);">' + svgIcon('compass', 22) + '</div>';
@@ -7127,8 +7144,10 @@ function renderAIReview() {
   });
   html += '</div>';
   html += '</div>';
+  }
 
   // ===== Module 2: Six Application Directions =====
+  if (currentAIModule === 'directions') {
   html += '<div class="ai-pan-section" id="ap-directions">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(86,211,100,0.12);color:#56d364;">' + svgIcon('layers', 22) + '</div>';
@@ -7167,8 +7186,10 @@ function renderAIReview() {
   });
   html += '</div>';
   html += '</div>';
+  }
 
   // ===== Module 3: AI x CGT Cross-Special =====
+  if (currentAIModule === 'cgt') {
   html += '<div class="ai-pan-section" id="ap-cgt">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(0,229,255,0.12);color:var(--primary);">' + svgIcon('dna', 22) + '</div>';
@@ -7202,8 +7223,10 @@ function renderAIReview() {
   });
   html += '</div>';
   html += '</div>';
+  }
 
   // ===== Module 4: Industry Landscape =====
+  if (currentAIModule === 'industry') {
   html += '<div class="ai-pan-section" id="ap-industry">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(255,166,87,0.12);color:#ffa657;">' + svgIcon('trending', 22) + '</div>';
@@ -7259,8 +7282,10 @@ function renderAIReview() {
 
   html += '<div class="ai-pan-insight" style="margin-top:20px;"><strong>\u4e2d\u56fd\u4ea7\u4e1a\u653f\u7b56\uff1a</strong>\u300a\u533b\u836f\u5de5\u4e1a\u6570\u667a\u5316\u8f6c\u578b\u5b9e\u65bd\u65b9\u6848\uff082025\u20142030\u5e74\uff09\u300b\u63d0\u51fa\u5230 2027 \u5e74\u53d6\u5f97\u91cd\u8981\u8fdb\u5c55\u30012030 \u5e74\u89c4\u4e0a\u4f01\u4e1a\u57fa\u672c\u5168\u8986\u76d6\u30022026\u5e746\u67082\u65e5\u6210\u7acb\u533b\u836f\u5de5\u4e1a\u6570\u667a\u5316\u8f6c\u578b\u4fc3\u8fdb\u4e2d\u5fc3\uff0c\u534e\u6da6\u533b\u836f\u3001\u6052\u745e\u533b\u836f\u3001\u590d\u661f\u533b\u836f\u3001\u77f3\u836f\u96c6\u56e2\u7b49\u5341\u4f59\u5bb6\u9f99\u5934\u4f01\u4e1a\u4e0e\u534e\u4e3a\u3001\u6676\u6cf0\u79d1\u6280\u7b49\u670d\u52a1\u5546\u8054\u5408\u5165\u5c40\u3002</div>';
   html += '</div>';
+  }
 
   // ===== Module 5: Regulatory =====
+  if (currentAIModule === 'regulation') {
   html += '<div class="ai-pan-section" id="ap-regulation">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(210,168,255,0.12);color:#d2a8ff;">' + svgIcon('shield', 22) + '</div>';
@@ -7295,8 +7320,10 @@ function renderAIReview() {
   html += '</div>';
   html += '</div>';
   html += '</div>';
+  }
 
   // ===== Module 6: Literature Review =====
+  if (currentAIModule === 'literature') {
   html += '<div class="ai-pan-section" id="ap-literature">';
   html += '<div class="ai-pan-sec-header">';
   html += '<div class="ai-pan-sec-icon" style="background:rgba(88,166,255,0.12);color:#58a6ff;">' + svgIcon('book', 22) + '</div>';
@@ -7498,39 +7525,14 @@ function renderAIReview() {
 
 
   html += '</div>'; // close ap-literature section
+  } // close if (currentAIModule === 'literature')
   html += '</div>'; // close ai-review-main
   html += '</div>'; // close ai-review-page
 
   document.getElementById('content').innerHTML = html;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Scroll spy for module nav
-  var modNavItems = document.querySelectorAll('.ai-pan-nav-item');
-  var modSections = document.querySelectorAll('.ai-pan-section');
-  function updateModNav() {
-    var current = '';
-    modSections.forEach(function(s) {
-      if (window.scrollY >= s.offsetTop - 140) current = s.id;
-    });
-    modNavItems.forEach(function(n) {
-      var href = n.getAttribute('href') || '';
-      n.classList.toggle('active', href === '#' + current);
-    });
-  }
-  window.addEventListener('scroll', updateModNav);
-  modNavItems.forEach(function(n) {
-    n.addEventListener('click', function(e) {
-      e.preventDefault();
-      var targetId = (n.getAttribute('href') || '').replace('#', '');
-      var target = document.getElementById(targetId);
-      if (target) {
-        var offset = target.offsetTop - 130;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-      }
-    });
-  });
-
-  // Scroll spy for literature nav
+  // Scroll spy for literature nav (only relevant when literature module is active)
   var litNavItems = document.querySelectorAll('.ai-review-nav-item');
   var litSections = document.querySelectorAll('.ai-review-section');
   function updateLitNav() {
