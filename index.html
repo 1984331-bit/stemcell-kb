@@ -2105,8 +2105,14 @@ body { padding-bottom: 60px; }
 .ai-pan-insight strong { color: var(--text); }
 
 @media (max-width: 768px) {
-  .ai-pan-hero h1 { font-size: 1.5rem; }
-  .ai-pan-hero-stats { gap: 14px; }
+  .ai-pan-hero { padding: 20px 14px 16px; }
+  .ai-pan-hero h1 { font-size: 1.25rem; margin-bottom: 8px; }
+  .ai-pan-hero-badge { font-size: 10px; padding: 3px 10px; margin-bottom: 10px; }
+  .ai-pan-hero-sub { font-size: 0.78rem; margin-bottom: 14px; line-height: 1.5; }
+  .ai-pan-hero-stats { gap: 10px 16px; }
+  .ai-pan-hero-stat { min-width: 60px; }
+  .ai-pan-hero-stat-num { font-size: 1.15rem; }
+  .ai-pan-hero-stat-label { font-size: 0.62rem; }
   .ai-pan-nav { top: 48px; }
   .ai-pan-dir-grid, .ai-pan-cgt-grid, .ai-pan-co-grid { grid-template-columns: 1fr; }
   .ai-pan-reg-grid { grid-template-columns: 1fr; }
@@ -5192,6 +5198,8 @@ function buildHash(state) {
   if (s === 'originals') return '#originals';
   if (s === 'books') return '#books';
   if (s === 'health') return '#health';
+  if (s === 'ai-review') return '#ai-review';
+  if (s === 'opencgt') return '#opencgt';
   if (s === 'companies') {
     if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
     return '#companies';
@@ -5210,6 +5218,8 @@ function parseHash() {
   if (hash === '#originals') return { section: 'originals' };
   if (hash === '#books') return { section: 'books' };
   if (hash === '#health') return { section: 'health' };
+  if (hash === '#ai-review') return { section: 'ai-review' };
+  if (hash === '#opencgt') return { section: 'opencgt' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -6690,6 +6700,8 @@ function updateLayout(section) {
   if (section === 'books' && container) container.classList.add('no-sidebar');
   if (section === 'health' && container) container.classList.add('no-sidebar');
   if (section === 'ai' && container) container.classList.add('no-sidebar');
+  if (section === 'ai-review' && container) container.classList.add('no-sidebar');
+  if (section === 'opencgt' && container) container.classList.add('no-sidebar');
 }
 
 function toggleInfoBar(panel) {
@@ -7165,7 +7177,10 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  // Open CGT CTA block (moved above 2×2 cards)
+  // Open CGT section divider (above CTA)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('lightbulb', 16) + ' Open CGT</div><div class="sd-line"></div></div>';
+
+  // Open CGT CTA block
   html += '<div class="opencgt-cta" onclick="switchSection(\'opencgt\')">';
   html += '<div class="opencgt-cta-bg"></div>';
   html += '<div class="opencgt-cta-content">';
@@ -7182,8 +7197,8 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
-  // Open CGT section divider
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('lightbulb', 16) + ' Open CGT</div><div class="sd-line"></div></div>';
+  // 平台介绍 section divider (new)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('info', 16) + ' 平台介绍</div><div class="sd-line"></div></div>';
 
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
@@ -7420,11 +7435,31 @@ var currentReviewTab = 'ar-protein'; // literature review sub-tab
 function switchAIModule(mod) {
   currentAIModule = mod;
   renderAIReview();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 滚动到模块导航栏位置（sticky分类卡片），而非页面最顶部，改善手机端体验
+  setTimeout(function() {
+    var nav = document.querySelector('.ai-review-page .reg-cat-row');
+    if (nav) {
+      var rect = nav.getBoundingClientRect();
+      window.scrollTo({ top: window.pageYOffset + rect.top - 60, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, 50);
 }
 function switchReviewTab(tab) {
   currentReviewTab = tab;
   renderAIReview();
+  // 滚动到文献综述子tab分类卡片位置，而非页面最顶部，避免手机端需重新下滑找卡片
+  setTimeout(function() {
+    var litSec = document.getElementById('ap-literature');
+    if (litSec) {
+      var catRow = litSec.querySelector('.reg-cat-row');
+      if (catRow) {
+        var rect = catRow.getBoundingClientRect();
+        window.scrollTo({ top: window.pageYOffset + rect.top - 60, behavior: 'smooth' });
+      }
+    }
+  }, 50);
 }
 function renderAIReview() {
   var html = '';
@@ -7545,7 +7580,8 @@ function renderAIReview() {
     });
     html += '</div>';
     if (d.linkHref) {
-      html += '<a class="ai-pan-dir-link" href="' + d.linkHref + '">' + d.link + '</a>';
+      var reviewTabId = d.linkHref.replace('#', '');
+      html += '<a class="ai-pan-dir-link" href="javascript:void(0)" onclick="switchAIModule(\'literature\');setTimeout(function(){switchReviewTab(\'' + reviewTabId + '\');},100)">' + d.link + '</a>';
     }
     html += '</div></div>';
     html += '</div>';
@@ -7907,7 +7943,7 @@ function renderAIReview() {
   html += '</div>'; // close ai-review-page
 
   document.getElementById('content').innerHTML = html;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 不在此处滚动到顶部——由 switchAIModule/switchReviewTab 按需滚动到对应位置
 }
 
 // === Platform Guide ===
