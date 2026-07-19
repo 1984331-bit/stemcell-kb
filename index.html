@@ -1708,7 +1708,7 @@ body { padding-bottom: 60px; }
 @media (max-width: 480px) {
   .ai-data-grid { grid-template-columns: repeat(2, 1fr); }
   .ai-hero-title { font-size: 16px; letter-spacing: 1px; }
-  .ai-data-number { font-size: 20px; }
+  .ai-data-number { font-size: 16px; }
   .ai-matrix { gap: 6px; }
   .ai-mnode { padding: 8px 6px; }
   .ai-tl-num { font-size: 13px; }
@@ -1906,7 +1906,7 @@ body { padding-bottom: 60px; }
 .ai-data-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0; transition: opacity 0.3s; }
 .ai-data-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); }
 .ai-data-card:hover::before { opacity: 1; }
-.ai-data-number { font-size: 30px; font-weight: 800; color: var(--primary); line-height: 1; font-variant-numeric: tabular-nums; }
+.ai-data-number { font-size: 22px; font-weight: 800; color: var(--primary); line-height: 1; font-variant-numeric: tabular-nums; }
 .ai-data-number .suffix { font-size: 13px; font-weight: 600; color: var(--text-light); margin-left: 2px; }
 .ai-data-label { font-size: 11px; color: var(--text-light); margin-top: 8px; letter-spacing: 0.5px; }
 /* Footer */
@@ -7276,40 +7276,10 @@ function renderAIDashboard() {
   // === Section 1: AI Engine Hero ===
   html += '<div class="ai-hero">';
   html += '<div class="ai-hero-badge"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> AI DATA DASHBOARD</div>';
-  html += '<div class="ai-hero-title">行业全场景AI团队 · <span class="accent">赋能CGT产业</span></div>';
+  html += '<div class="ai-hero-title">CGT行业全场景AI团队</div>';
   html += '<div class="ai-hero-subtitle">从基础研究到临床转化 · AI驱动全链条数据赋能</div>';
   html += '<div class="ai-hero-core"><span>AI</span></div>';
   html += '<div class="ai-hero-core-label">智能引擎</div>';
-  html += '<div class="ai-hero-branches"><div class="ai-hero-branch research">研发前沿</div><div class="ai-hero-branch application">转化应用</div></div>';
-  html += '</div>';
-
-  // === Section 2: Node Matrix ===
-  html += '<div class="ai-matrix-section">';
-  html += '<div class="ai-matrix-row-label research">研发前沿</div>';
-  html += '<div class="ai-matrix">';
-  var rNodes = [
-    {icon:'<circle cx="10" cy="10" r="8"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="10" y1="16" x2="10" y2="19"/><line x1="1" y1="10" x2="4" y2="10"/><line x1="16" y1="10" x2="19" y2="10"/>', title:'靶点发现', stat:'AI靶点识别'},
-    {icon:'<polygon points="10,2 18,7 18,13 10,18 2,13 2,7"/><circle cx="10" cy="10" r="3"/>', title:'虚拟细胞', stat:'49亿参数'},
-    {icon:'<path d="M3 3 Q10 8 3 13 Q10 18 3 21"/><path d="M17 3 Q10 8 17 13 Q10 18 17 21"/><line x1="3" y1="6" x2="17" y2="6" stroke-width="0.8"/><line x1="3" y1="12" x2="17" y2="12" stroke-width="0.8"/><line x1="3" y1="18" x2="17" y2="18" stroke-width="0.8"/>', title:'细胞设计', stat:'CAR结构优化'},
-    {icon:'<circle cx="10" cy="10" r="3"/><path d="M10 1v3M10 16v3M1 10h3M16 10h3M3.5 3.5l2 2M14.5 14.5l2 2M3.5 16.5l2-2M14.5 5.5l2-2"/>', title:'工艺优化', stat:'3D培养'}
-  ];
-  rNodes.forEach(function(n) {
-    html += '<div class="ai-mnode research"><div class="ai-mnode-icon research"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + n.icon + '</svg></div><div class="ai-mnode-body"><div class="ai-mnode-title">' + n.title + '</div><div class="ai-mnode-stat">' + n.stat + '</div></div></div>';
-  });
-  html += '</div>';
-  html += '<div class="ai-matrix-connector"></div>';
-  html += '<div class="ai-matrix-row-label application">转化应用</div>';
-  html += '<div class="ai-matrix">';
-  var aNodes = [
-    {icon:'<path d="M10 18s-6-4-6-9a6 6 0 0112 0c0 5-6 9-6 9z"/><circle cx="10" cy="9" r="2.5"/>', title:'临床转化', stat:'106家备案机构'},
-    {icon:'<path d="M3 17h14M5 13V7M10 13V3M15 13v-5"/>', title:'数据分析', stat:'730+篇文献'},
-    {icon:'<rect x="3" y="3" width="14" height="14" rx="3"/><line x1="10" y1="7" x2="10" y2="13"/><line x1="7" y1="10" x2="13" y2="10"/>', title:'产品追踪', stat:'45款获批产品'},
-    {icon:'<path d="M10 2L3 5v5c0 4 3 7 7 8 4-1 7-4 7-8V5l-7-3z"/>', title:'监管监控', stat:'21份政策文件'}
-  ];
-  aNodes.forEach(function(n) {
-    html += '<div class="ai-mnode application"><div class="ai-mnode-icon application"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + n.icon + '</svg></div><div class="ai-mnode-body"><div class="ai-mnode-title">' + n.title + '</div><div class="ai-mnode-stat">' + n.stat + '</div></div></div>';
-  });
-  html += '</div>';
   html += '</div>';
 
   // === Timeline - process metrics ===
@@ -7326,24 +7296,6 @@ function renderAIDashboard() {
   ];
   tlItems.forEach(function(t, i) {
     html += '<div class="ai-tl-item"><div class="ai-tl-dot c' + (i+1) + '"></div><div class="ai-tl-num" data-target="' + t.num + '" style="color:' + t.color + ';"><span class="num-text">0</span><span class="ai-tl-suffix">' + t.suffix + '</span></div><div class="ai-tl-label">' + t.label + '</div></div>';
-  });
-  html += '</div>';
-  html += '</div>';
-
-  // === Section 4: AI Services ===
-  html += '<div class="ai-services-section">';
-  html += '<div class="ai-services-title">AI团队服务能力</div>';
-  html += '<div class="ai-services-grid">';
-  var services = [
-    {icon:'<circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3"/><line x1="10" y1="0" x2="10" y2="3"/><line x1="10" y1="17" x2="10" y2="20"/>', name:'文献检索与证据分级', desc:'PubMed/ClinicalTrials多库检索，自动结构化分级'},
-    {icon:'<path d="M10 2L3 5v5c0 4 3 7 7 8 4-1 7-4 7-8V5l-7-3z"/><path d="M7 10l2 2 4-4"/>', name:'监管政策追踪解读', desc:'818令/FDA/EMA/NMPA政策实时监控与深度解读'},
-    {icon:'<rect x="3" y="3" width="14" height="14" rx="2"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="12" x2="11" y2="12"/>', name:'临床试验数据挖掘', desc:'730+篇文献结构化提取，适应症/终点/安全性分析'},
-    {icon:'<path d="M3 3h18v14H3z"/><path d="M3 8h18M8 3v14"/>', name:'产业报告自动生成', desc:'CGT日报/月报/专题报告AI撰写与排版'},
-    {icon:'<polygon points="10,2 18,7 18,13 10,18 2,13 2,7"/><circle cx="10" cy="10" r="3"/>', name:'知识库构建维护', desc:'多源数据清洗入库，持续迭代更新'},
-    {icon:'<path d="M5 5l10 10M5 15L15 5"/><circle cx="10" cy="10" r="8"/>', name:'细胞产品设计优化', desc:'CAR结构/工艺路线AI辅助设计与模拟'}
-  ];
-  services.forEach(function(s) {
-    html += '<div class="ai-service-card"><div class="ai-service-icon"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + s.icon + '</svg></div><div class="ai-service-name">' + s.name + '</div><div class="ai-service-desc">' + s.desc + '</div></div>';
   });
   html += '</div>';
   html += '</div>';
@@ -7953,7 +7905,7 @@ function renderGuide() {
   var html = '';
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">平台指南</span></div>';
 
-  html += '<div class="content-header"><div class="title">' + svgIcon('compass', 20) + ' 平台指南</div>';
+  html += '<div class="content-header"><div class="title" style="text-align:center;font-size:22px;font-weight:700;color:var(--primary);text-shadow:0 0 16px rgba(0,229,255,0.2);">' + svgIcon('compass', 20) + ' 平台指南</div>';
   html += '<div class="desc" style="text-indent:2em;line-height:1.8;">本指南帮助不同类型用户快速上手本平台，找到最适合自己的使用路径。选择你的角色标签，查看专属功能与操作步骤。</div></div>';
 
   var tabs = [
@@ -7979,12 +7931,6 @@ function renderGuide() {
     html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">使用<b>数据分析·行业报告</b>，获取MSC临床试验的统计分析与趋势报告</div></div>';
     html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>AI栏目</b>，查看AI驱动的技术里程碑、六大方向、产业格局等深度综述</div></div>';
     html += '</div>';
-    html += '<div class="guide-entry-list">';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'literature\')">' + svgIcon('doc', 12) + ' 文献库</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'picks\')">' + svgIcon('star', 12) + ' 编辑精选</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'report\')">' + svgIcon('chart', 12) + ' 数据分析</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'ai-review\')">' + svgIcon('layers', 12) + ' AI栏目</span>';
-    html += '</div>';
     html += '</div>';
   }
 
@@ -7997,12 +7943,6 @@ function renderGuide() {
     html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">查阅<b>监管政策</b>，了解NMPA/FDA/EMA最新细胞治疗监管法规与临床研究管理规范</div></div>';
     html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">浏览<b>获批产品</b>，追踪全球已获批细胞治疗产品的适应症、用法用量与安全性信息</div></div>';
     html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>行业资讯</b>，获取最新临床进展、会议报道与学术动态</div></div>';
-    html += '</div>';
-    html += '<div class="guide-entry-list">';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'literature\')">' + svgIcon('doc', 12) + ' 文献库</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'regulations\')">' + svgIcon('shield', 12) + ' 监管政策</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'products\')">' + svgIcon('flask', 12) + ' 获批产品</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
     html += '</div>';
     html += '</div>';
   }
@@ -8017,12 +7957,6 @@ function renderGuide() {
     html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">进入<b>企业巡览</b>，了解MSC/CAR-T相关企业的管线布局与产业动态</div></div>';
     html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>行业资讯</b>，获取最新产业新闻、会议报道与技术突破</div></div>';
     html += '</div>';
-    html += '<div class="guide-entry-list">';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'products\')">' + svgIcon('flask', 12) + ' 获批产品</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'regulations\')">' + svgIcon('shield', 12) + ' 监管政策</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'companies\')">' + svgIcon('building', 12) + ' 企业巡览</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
-    html += '</div>';
     html += '</div>';
   }
 
@@ -8036,24 +7970,8 @@ function renderGuide() {
     html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">关注<b>行业资讯</b>，获取投融资新闻、企业动态与市场分析</div></div>';
     html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">查看<b>AI栏目</b>，了解AI驱动的产业格局分析与前沿技术综述</div></div>';
     html += '</div>';
-    html += '<div class="guide-entry-list">';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'report\')">' + svgIcon('chart', 12) + ' 数据分析</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'companies\')">' + svgIcon('building', 12) + ' 企业巡览</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
-    html += '<span class="guide-entry-chip" onclick="switchSection(\'ai-review\')">' + svgIcon('layers', 12) + ' AI栏目</span>';
-    html += '</div>';
     html += '</div>';
   }
-
-  html += '<div class="guide-panel" style="margin-top:12px;">';
-  html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(0,229,255,0.1);color:var(--primary);">' + svgIcon('info', 20) + '</div><div class="guide-panel-title">通用功能</div></div>';
-  html += '<div class="guide-panel-desc">所有用户均可使用以下功能：</div>';
-  html += '<div class="guide-step-list">';
-  html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text"><b>热门检索</b>：首页快捷标签一键检索常见疾病/适应症</div></div>';
-  html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text"><b>AI数据看板</b>：AI引擎实时分析文献检索、政策追踪、报告生成</div></div>';
-  html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text"><b>Open CGT</b>：提交你的想法，AI团队帮你规划实现路径，联通平台资源</div></div>';
-  html += '</div>';
-  html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
@@ -8065,108 +7983,92 @@ function switchGuideTab(tab) {
 }
 
 // === Team Page ===
+var currentTeamTab = 'expert';
 function renderTeam() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">维护团队</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">关于我们</span></div>';
 
-  html += '<div class="content-header"><div class="title">' + svgIcon('users', 20) + ' 维护团队 · 关于我们</div>';
-  html += '<div class="desc" style="text-indent:2em;line-height:1.8;">本平台由专家团队与AI智能体团队共同维护。AI团队覆盖CGT全产业链，每日自主迭代学习，为平台提供文献筛选、政策追踪、产品监测、数据分析等全流程能力。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">本平台由专家团队与AI智能体团队共同维护。AI团队覆盖CGT全产业链，每日自主迭代学习，为平台提供文献筛选、政策追踪、产品监测、数据分析等全流程能力。</div></div>';
 
-  // Expert Team
-  html += '<div class="team-section">';
-  html += '<div class="team-section-head">';
-  html += '<div class="team-section-icon" style="background:rgba(255,183,77,0.15);color:#FFB74D;">' + svgIcon('users', 18) + '</div>';
-  html += '<div class="team-section-title">专家团队</div>';
-  html += '<div class="team-section-sub">真实团队 · 嘉禾创始人员</div>';
-  html += '</div>';
-  html += '<div class="team-grid">';
-  // Placeholder cards for expert team - info to be filled later
-  var expertSlots = [
-    {label:'倪博士', role:'待补充'},
-    {label:'邓博士', role:'待补充'},
-    {label:'许律师', role:'待补充'},
-    {label:'黄畦教授', role:'待补充'}
+  // Team tabs
+  var teamTabs = [
+    {id:'expert', name:'专家团队', icon:'users', color:'#FFB74D'},
+    {id:'ops', name:'运维团队', icon:'shield', color:'#5DCAA5'},
+    {id:'ai', name:'AI团队', icon:'cell', color:'#00E5FF'}
   ];
-  expertSlots.forEach(function(e) {
-    html += '<div class="team-card">';
-    html += '<div class="team-card-head"><div class="team-card-avatar placeholder">' + e.label.charAt(0) + '</div>';
-    html += '<div><div class="team-card-name">' + e.label + '</div><div class="team-card-role">' + e.role + '</div></div></div>';
-    html += '<div class="team-card-desc">个人信息待补充</div>';
-    html += '</div>';
+  html += '<div class="guide-tabs">';
+  teamTabs.forEach(function(t) {
+    var active = currentTeamTab === t.id ? ' active' : '';
+    html += '<div class="guide-tab' + active + '" onclick="switchTeamTab(\'' + t.id + '\')">' + svgIcon(t.icon, 14) + ' ' + t.name + '</div>';
   });
   html += '</div>';
-  html += '</div>';
 
-  // AI Team - Content Operations (existing 5)
-  html += '<div class="team-section">';
-  html += '<div class="team-section-head">';
-  html += '<div class="team-section-icon" style="background:rgba(0,229,255,0.15);color:var(--primary);">' + svgIcon('cell', 18) + '</div>';
-  html += '<div class="team-section-title">AI团队 · 内容运营组</div>';
-  html += '<div class="team-section-sub">5位AI智能体 · 日常内容维护</div>';
-  html += '</div>';
-  html += '<div class="team-grid">';
-  var aiContent = [
-    {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
-    {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
-    {name:'闻风', role:'政策哨兵', desc:'监控NMPA/FDA/EMA/ISCT监管动态'},
-    {name:'追光', role:'产品探针', desc:'追踪全球细胞治疗产品获批进展'},
-    {name:'织卷', role:'数据管家', desc:'数据库维护、去重分类、质量清洗'}
-  ];
-  aiContent.forEach(function(m) {
-    html += '<div class="team-card">';
-    html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
-    html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
-    html += '<div class="team-card-desc">' + m.desc + '</div>';
+  if (currentTeamTab === 'expert') {
+    html += '<div class="team-section">';
+    html += '<div class="team-grid">';
+    var expertSlots = [
+      {label:'张先生', role:''},
+      {label:'乔女士', role:''},
+      {label:'杨老师', role:''}
+    ];
+    expertSlots.forEach(function(e) {
+      html += '<div class="team-card">';
+      html += '<div class="team-card-head"><div class="team-card-avatar placeholder">' + e.label.charAt(0) + '</div>';
+      html += '<div><div class="team-card-name">' + e.label + '</div></div></div>';
+      html += '</div>';
+    });
     html += '</div>';
-  });
-  html += '</div>';
-  html += '</div>';
-
-  // AI Team - CGT Industry Chain (new 5)
-  html += '<div class="team-section">';
-  html += '<div class="team-section-head">';
-  html += '<div class="team-section-icon" style="background:rgba(102,187,106,0.15);color:#66BB6A;">' + svgIcon('trending', 18) + '</div>';
-  html += '<div class="team-section-title">AI团队 · CGT产业分析组</div>';
-  html += '<div class="team-section-sub">5位AI智能体 · 覆盖CGT全产业链</div>';
-  html += '</div>';
-  html += '<div class="team-grid">';
-  var aiIndustry = [
-    {name:'谋略', role:'产业分析师', desc:'CGT产业链上下游分析、市场趋势研判、竞争格局梳理'},
-    {name:'探源', role:'专利情报官', desc:'全球CGT专利检索与布局分析、知识产权风险评估'},
-    {name:'筑桥', role:'临床导航员', desc:'ClinicalTrials.gov/ChiCTR试验设计与入组策略分析'},
-    {name:'量尺', role:'质量合规审计', desc:'GMP/cGMP合规审查、CMC质控体系评估、注册申报支持'},
-    {name:'引路', role:'投融资顾问', desc:'CGT赛道投融资追踪、估值模型分析、BD交易情报'}
-  ];
-  aiIndustry.forEach(function(m) {
-    html += '<div class="team-card">';
-    html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
-    html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
-    html += '<div class="team-card-desc">' + m.desc + '</div>';
     html += '</div>';
-  });
-  html += '</div>';
-  html += '</div>';
+  }
 
-  // Human Reviewer
-  html += '<div class="team-section">';
-  html += '<div class="team-section-head">';
-  html += '<div class="team-section-icon" style="background:rgba(255,183,77,0.15);color:#FFB74D;">' + svgIcon('shield', 18) + '</div>';
-  html += '<div class="team-section-title">专家审核</div>';
-  html += '<div class="team-section-sub">最终审核 · 内容把关</div>';
-  html += '</div>';
-  html += '<div class="team-grid">';
-  html += '<div class="team-card">';
-  html += '<div class="team-card-head"><div class="team-card-avatar human">杨</div>';
-  html += '<div><div class="team-card-name">杨老师</div><div class="team-card-role">审核员</div></div></div>';
-  html += '<div class="team-card-desc">最终审核、内容把关、方向决策</div>';
-  html += '</div>';
-  html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 更多审核专家待加入</div>';
-  html += '</div>';
-  html += '</div>';
+  if (currentTeamTab === 'ops') {
+    html += '<div class="team-section">';
+    html += '<div class="team-grid">';
+    html += '<div class="team-card">';
+    html += '<div class="team-card-head"><div class="team-card-avatar human">杨</div>';
+    html += '<div><div class="team-card-name">杨老师</div><div class="team-card-role">审核员</div></div></div>';
+    html += '<div class="team-card-desc">最终审核、内容把关、方向决策</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 期待您的加入</div>';
+    html += '</div>';
+  }
+
+  if (currentTeamTab === 'ai') {
+    html += '<div class="team-section">';
+    html += '<div class="team-grid">';
+    var aiAll = [
+      {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
+      {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
+      {name:'闻风', role:'政策哨兵', desc:'监控NMPA/FDA/EMA/ISCT监管动态'},
+      {name:'追光', role:'产品探针', desc:'追踪全球细胞治疗产品获批进展'},
+      {name:'织卷', role:'数据管家', desc:'数据库维护、去重分类、质量清洗'},
+      {name:'谋略', role:'产业分析师', desc:'CGT产业链上下游分析、市场趋势研判、竞争格局梳理'},
+      {name:'探源', role:'专利情报官', desc:'全球CGT专利检索与布局分析、知识产权风险评估'},
+      {name:'筑桥', role:'临床导航员', desc:'ClinicalTrials.gov/ChiCTR试验设计与入组策略分析'},
+      {name:'量尺', role:'质量合规审计', desc:'GMP/cGMP合规审查、CMC质控体系评估、注册申报支持'},
+      {name:'引路', role:'投融资顾问', desc:'CGT赛道投融资追踪、估值模型分析、BD交易情报'}
+    ];
+    aiAll.forEach(function(m) {
+      html += '<div class="team-card">';
+      html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
+      html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+      html += '<div class="team-card-desc">' + m.desc + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 更多智能体训练中</div>';
+    html += '</div>';
+  }
 
   content.innerHTML = html;
   updateFloatButtons();
+}
+function switchTeamTab(tab) {
+  currentTeamTab = tab;
+  renderTeam();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // === Open CGT ===
