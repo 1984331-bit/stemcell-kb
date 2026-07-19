@@ -221,17 +221,17 @@ body {
 .info-tab { position: relative; }
 .info-tab .hot-tag {
   position: absolute;
-  top: -3px;
-  right: -10px;
-  font-size: 7px;
+  top: -2px;
+  right: -7px;
+  font-size: 5px;
   font-weight: 800;
   color: #fff;
   background: linear-gradient(135deg, #FF6B35, #FF1744);
-  padding: 0 3px;
-  border-radius: 4px;
+  padding: 0 2px;
+  border-radius: 3px;
   line-height: 1.3;
-  letter-spacing: 0.3px;
-  box-shadow: 0 1px 4px rgba(255,23,68,0.5);
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 3px rgba(255,23,68,0.5);
   pointer-events: none;
   z-index: 10;
 }
@@ -313,7 +313,7 @@ body {
   .info-bar-tabs { padding: 0 6px; gap: 0; }
   .info-tab { font-size: 12px; padding: 6px 6px; gap: 3px; }
   .info-tab svg[width="15"] { width: 13px; height: 13px; }
-  .info-tab .hot-tag { font-size: 6px; top: -2px; right: -8px; padding: 0 2px; }
+  .info-tab .hot-tag { font-size: 4px; top: -1px; right: -5px; padding: 0 1px; }
   .info-panel { padding: 0 10px; font-size: 12px; }
   .info-panel .ip-tag { font-size: 12px; }
 }
@@ -2127,6 +2127,227 @@ body { padding-bottom: 60px; }
 .hub-split-card.purple .hsc-icon { background: #534AB7; box-shadow: 0 0 12px rgba(83,74,183,0.4); color: #AFA9EC; }
 .hub-split-card.purple .hsc-title { color: #AFA9EC; }
 .hub-split-card.purple .hsc-desc { color: rgba(175,169,236,0.7); }
+/* New color variants for split cards */
+.hub-split-card.green { background: rgba(56,142,60,0.12); border-color: rgba(129,199,132,0.25); }
+.hub-split-card.green .hsc-icon { background: #2E7D32; box-shadow: 0 0 12px rgba(46,125,50,0.4); color: #81C784; }
+.hub-split-card.green .hsc-title { color: #81C784; }
+.hub-split-card.green .hsc-desc { color: rgba(129,199,132,0.7); }
+.hub-split-card.orange { background: rgba(230,81,0,0.12); border-color: rgba(255,138,101,0.25); }
+.hub-split-card.orange .hsc-icon { background: #E65100; box-shadow: 0 0 12px rgba(230,81,0,0.4); color: #FFAB91; }
+.hub-split-card.orange .hsc-title { color: #FFAB91; }
+.hub-split-card.orange .hsc-desc { color: rgba(255,171,145,0.7); }
+/* ===== Platform Guide ===== */
+.guide-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.guide-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card-bg);
+  font-size: 13px; font-weight: 600; color: var(--text-light);
+  transition: all 0.2s ease; white-space: nowrap;
+}
+.guide-tab:hover { border-color: var(--primary); color: var(--primary); }
+.guide-tab.active { background: rgba(0,229,255,0.1); border-color: var(--primary); color: var(--primary); }
+.guide-panel {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 24px; margin-bottom: 12px;
+}
+.guide-panel-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.guide-panel-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.guide-panel-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.guide-panel-desc { font-size: 13px; color: var(--text-light); line-height: 1.8; margin-bottom: 12px; }
+.guide-step-list { display: flex; flex-direction: column; gap: 8px; }
+.guide-step {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.1);
+}
+.guide-step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(0,229,255,0.15); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.guide-step-text { font-size: 13px; color: var(--text); line-height: 1.6; }
+.guide-step-text b { color: var(--primary); }
+.guide-entry-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.guide-entry-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 8px; cursor: pointer;
+  font-size: 12px; font-weight: 600;
+  background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2);
+  color: var(--primary); transition: all 0.2s ease;
+}
+.guide-entry-chip:hover { background: rgba(0,229,255,0.15); transform: translateY(-1px); }
+/* ===== Team Page ===== */
+.team-section { margin-bottom: 24px; }
+.team-section-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.team-section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.team-section-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.team-section-sub { font-size: 12px; color: var(--text-light); margin-left: auto; }
+.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.team-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.team-card:hover { box-shadow: 0 4px 20px rgba(0,229,255,0.1); border-color: var(--primary); }
+.team-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.team-card-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.team-card-avatar.ai { background: rgba(0,229,255,0.15); color: var(--primary); box-shadow: 0 0 10px rgba(0,229,255,0.2); }
+.team-card-avatar.human { background: rgba(255,183,77,0.15); color: #FFB74D; box-shadow: 0 0 10px rgba(255,183,77,0.2); }
+.team-card-avatar.placeholder { background: rgba(255,255,255,0.06); color: var(--text-light); border: 1px dashed var(--border); }
+.team-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.team-card-role { font-size: 11px; color: var(--text-light); margin-top: 1px; }
+.team-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+.team-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 20px; border: 1px dashed var(--border); border-radius: 12px;
+  color: var(--text-light); font-size: 13px; text-align: center; gap: 6px;
+  min-height: 80px;
+}
+@media (max-width: 768px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .guide-tab { font-size: 12px; padding: 6px 10px; }
+}
+/* ===== Open CGT CTA Block ===== */
+.opencgt-cta {
+  position: relative; border-radius: 16px; overflow: hidden;
+  margin-top: 16px; cursor: pointer;
+  border: 1px solid rgba(0,229,255,0.3);
+  transition: box-shadow 0.3s ease;
+}
+.opencgt-cta:hover { box-shadow: 0 4px 30px rgba(0,229,255,0.2); }
+.opencgt-cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,229,255,0.1) 0%, rgba(102,187,106,0.08) 50%, rgba(171,71,188,0.08) 100%);
+}
+.opencgt-cta-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,229,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.opencgt-cta-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0,229,255,0.12), transparent 60%),
+              radial-gradient(ellipse at 80% 30%, rgba(102,187,106,0.1), transparent 50%);
+}
+.opencgt-cta-content { position: relative; z-index: 1; padding: 24px 24px; }
+.opencgt-cta-vision {
+  font-size: 18px; font-weight: 800; color: var(--text);
+  text-align: center; margin-bottom: 4px; letter-spacing: 1px;
+}
+.opencgt-cta-vision .accent { color: var(--primary); }
+.opencgt-cta-tagline {
+  font-size: 12px; color: var(--text-light); text-align: center;
+  margin-bottom: 18px; letter-spacing: 0.5px;
+}
+.opencgt-cta-steps {
+  display: flex; justify-content: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.opencgt-cta-step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  max-width: 140px; text-align: center;
+}
+.opencgt-cta-step-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2);
+}
+.opencgt-cta-step-text { font-size: 12px; color: var(--text); font-weight: 600; line-height: 1.4; }
+.opencgt-cta-step-sub { font-size: 10px; color: var(--text-light); }
+.opencgt-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.opencgt-cta-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 24px; border-radius: 10px; cursor: pointer;
+  font-size: 14px; font-weight: 700; transition: all 0.2s ease;
+}
+.opencgt-cta-btn.primary {
+  background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(0,184,212,0.15));
+  border: 1px solid var(--primary); color: var(--primary);
+}
+.opencgt-cta-btn.primary:hover { background: rgba(0,229,255,0.25); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,229,255,0.2); }
+.opencgt-cta-btn.secondary {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text-light);
+}
+.opencgt-cta-btn.secondary:hover { border-color: var(--primary); color: var(--primary); }
+@media (max-width: 768px) {
+  .opencgt-cta-content { padding: 18px 14px; }
+  .opencgt-cta-vision { font-size: 15px; }
+  .opencgt-cta-steps { gap: 10px; }
+  .opencgt-cta-step { max-width: 100px; }
+  .opencgt-cta-step-icon { width: 32px; height: 32px; }
+  .opencgt-cta-step-text { font-size: 11px; }
+  .opencgt-cta-btn { padding: 8px 18px; font-size: 13px; }
+}
+/* ===== Open CGT Detail Page ===== */
+.opencgt-hero {
+  position: relative; border-radius: 16px; overflow: hidden;
+  padding: 32px 28px; margin-bottom: 16px;
+  border: 1px solid rgba(0,229,255,0.2);
+}
+.opencgt-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(102,187,106,0.06), rgba(171,71,188,0.06));
+}
+.opencgt-hero-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.opencgt-hero-content { position: relative; z-index: 1; }
+.opencgt-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
+.opencgt-hero-title .accent { color: var(--primary); }
+.opencgt-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+.opencgt-block {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 24px; margin-bottom: 12px;
+}
+.opencgt-block-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.opencgt-block-content { font-size: 13px; color: var(--text-light); line-height: 1.8; }
+.opencgt-value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.opencgt-value-card {
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
+  border-radius: 12px; padding: 16px;
+}
+.opencgt-value-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.opencgt-value-card-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.1); }
+.opencgt-value-card-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.opencgt-value-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+.opencgt-audience-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.opencgt-audience-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 10px;
+  background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15);
+  font-size: 13px; font-weight: 600; color: var(--primary);
+}
+.opencgt-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.opencgt-flow-step {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 16px; border-radius: 12px; min-width: 100px;
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
+}
+.opencgt-flow-num { font-size: 11px; font-weight: 800; color: var(--primary); }
+.opencgt-flow-text { font-size: 12px; color: var(--text); font-weight: 600; text-align: center; }
+.opencgt-flow-arrow { color: var(--text-light); opacity: 0.4; }
+.opencgt-partners-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; border: 1px dashed var(--border); border-radius: 12px;
+  color: var(--text-light); font-size: 13px; text-align: center; gap: 8px;
+}
+@media (max-width: 768px) {
+  .opencgt-value-grid { grid-template-columns: 1fr; }
+  .opencgt-hero { padding: 22px 16px; }
+  .opencgt-hero-title { font-size: 19px; }
+  .opencgt-flow { flex-direction: column; }
+  .opencgt-flow-arrow { transform: rotate(90deg); }
+}
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
   background: var(--card-bg);
@@ -5252,6 +5473,9 @@ function renderContent() {
   if (currentSection === 'health') { renderHealthProducts(); return; }
   if (currentSection === 'ai') { renderAIDashboard(); return; }
   if (currentSection === 'ai-review') { renderAIReview(); return; }
+  if (currentSection === 'guide') { renderGuide(); return; }
+  if (currentSection === 'team') { renderTeam(); return; }
+  if (currentSection === 'opencgt') { renderOpenCGT(); return; }
 
   const filtered = getFilteredData();
 
@@ -6042,7 +6266,10 @@ function svgIcon(name, sz) {
     'info': '<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>',
     'compass': '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
     'layers': '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5M3 18l9 5 9-5"/>',
-    'trending': '<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>'
+    'trending': '<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>',
+    'lightbulb': '<path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.5.5 1 1.5 1 2.5h6c0-1 .5-2 1-2.5A6 6 0 0012 3z"/>',
+    'handshake': '<path d="M11 17l-2-2-3 2-4-3 2-4 3 1 3-2 4 4M13 17l3-3 3 1 2-4-4-3-3 2"/>',
+    'arrow-right': '<path d="M5 12h14M12 5l7 7-7 7"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -6845,10 +7072,36 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
-  // Split cards: 声明 + 团队 (moved to bottom)
+  // Split cards: 声明 + 平台指南
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
-  html += '<div class="hub-split-card purple" onclick="showTeamModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">AI团队</div></div><div class="hsc-desc">5位AI智能体 · 1位专家审核 · 每日自主迭代</div></div>';
+  html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
+  html += '</div>';
+
+  // 维护团队 entry (full width)
+  html += '<div class="report-entry" style="border-color:rgba(175,169,236,0.2);margin-top:12px;" onclick="switchSection(\'team\')">';
+  html += '<div class="report-entry-left">';
+  html += '<div class="report-entry-title" style="color:#AFA9EC;">' + svgIcon('users', 16) + '<span>维护团队 · 关于我们</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(175,169,236,0.7);">专家团队 · 10位AI智能体覆盖CGT全产业链 · 每日自主迭代</div>';
+  html += '</div>';
+  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '</div>';
+
+  // Open CGT CTA block
+  html += '<div class="opencgt-cta" onclick="switchSection(\'opencgt\')">';
+  html += '<div class="opencgt-cta-bg"></div>';
+  html += '<div class="opencgt-cta-content">';
+  html += '<div class="opencgt-cta-vision">有想法，就有路径 — <span class="accent">Open CGT</span> 共创计划</div>';
+  html += '<div class="opencgt-cta-tagline">AI驱动的开放细胞与基因治疗共创平台</div>';
+  html += '<div class="opencgt-cta-steps">';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('lightbulb', 22) + '</div><div class="opencgt-cta-step-text">你提想法</div><div class="opencgt-cta-step-sub">AI团队规划路径</div></div>';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('link', 22) + '</div><div class="opencgt-cta-step-text">平台对接</div><div class="opencgt-cta-step-sub">联通机构企业资源</div></div>';
+  html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('handshake', 22) + '</div><div class="opencgt-cta-step-text">共创联盟</div><div class="opencgt-cta-step-sub">找到志同道合的人</div></div>';
+  html += '</div>';
+  html += '<div class="opencgt-cta-btns">';
+  html += '<div class="opencgt-cta-btn primary">' + svgIcon('arrow-right', 16) + ' 了解Open CGT</div>';
+  html += '</div>';
+  html += '</div>';
   html += '</div>';
 
   content.innerHTML = html;
@@ -7557,6 +7810,332 @@ function renderAIReview() {
       }
     });
   });
+}
+
+// === Platform Guide ===
+var currentGuideTab = 'researcher';
+function renderGuide() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">平台指南</span></div>';
+
+  html += '<div class="content-header"><div class="title">' + svgIcon('compass', 20) + ' 平台指南</div>';
+  html += '<div class="desc" style="text-indent:2em;line-height:1.8;">本指南帮助不同类型用户快速上手本平台，找到最适合自己的使用路径。选择你的角色标签，查看专属功能与操作步骤。</div></div>';
+
+  var tabs = [
+    {id:'researcher', name:'研究人员', icon:'flask', color:'#00E5FF'},
+    {id:'doctor', name:'临床医生', icon:'shield', color:'#5DCAA5'},
+    {id:'industry', name:'产业从业者', icon:'building', color:'#EF9F27'},
+    {id:'investor', name:'投资者', icon:'chart', color:'#AFA9EC'}
+  ];
+  html += '<div class="guide-tabs">';
+  tabs.forEach(function(t) {
+    var active = currentGuideTab === t.id ? ' active' : '';
+    html += '<div class="guide-tab' + active + '" onclick="switchGuideTab(\'' + t.id + '\')">' + svgIcon(t.icon, 14) + ' ' + t.name + '</div>';
+  });
+  html += '</div>';
+
+  if (currentGuideTab === 'researcher') {
+    html += '<div class="guide-panel">';
+    html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(0,229,255,0.15);color:#00E5FF;">' + svgIcon('flask', 20) + '</div><div class="guide-panel-title">研究人员使用指南</div></div>';
+    html += '<div class="guide-panel-desc">本平台收录730+篇MSC临床文献，覆盖19个疾病系统。作为研究人员，你可以高效检索文献、筛选证据等级、追踪前沿动态。</div>';
+    html += '<div class="guide-step-list">';
+    html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">进入<b>文献库</b>，按疾病系统或适应症浏览MSC临床试验数据，支持关键词检索（标题、PMID、期刊、作者）</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">查看<b>编辑精选</b>，阅读AI团队筛选的高价值文献摘要与深度解读</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">使用<b>数据分析·行业报告</b>，获取MSC临床试验的统计分析与趋势报告</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>AI栏目</b>，查看AI驱动的技术里程碑、六大方向、产业格局等深度综述</div></div>';
+    html += '</div>';
+    html += '<div class="guide-entry-list">';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'literature\')">' + svgIcon('doc', 12) + ' 文献库</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'picks\')">' + svgIcon('star', 12) + ' 编辑精选</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'report\')">' + svgIcon('chart', 12) + ' 数据分析</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'ai-review\')">' + svgIcon('layers', 12) + ' AI栏目</span>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  if (currentGuideTab === 'doctor') {
+    html += '<div class="guide-panel">';
+    html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(93,202,165,0.15);color:#5DCAA5;">' + svgIcon('shield', 20) + '</div><div class="guide-panel-title">临床医生使用指南</div></div>';
+    html += '<div class="guide-panel-desc">查阅MSC临床试验的详细数据，包括证据等级、细胞剂量、给药途径、安全性事件等，辅助临床决策参考。</div>';
+    html += '<div class="guide-step-list">';
+    html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">在<b>文献库</b>中按适应症检索，查看每篇文献的细胞类型、剂量、随访时间、主要终点等关键数据</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">查阅<b>监管政策</b>，了解NMPA/FDA/EMA最新细胞治疗监管法规与临床研究管理规范</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">浏览<b>获批产品</b>，追踪全球已获批细胞治疗产品的适应症、用法用量与安全性信息</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>行业资讯</b>，获取最新临床进展、会议报道与学术动态</div></div>';
+    html += '</div>';
+    html += '<div class="guide-entry-list">';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'literature\')">' + svgIcon('doc', 12) + ' 文献库</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'regulations\')">' + svgIcon('shield', 12) + ' 监管政策</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'products\')">' + svgIcon('flask', 12) + ' 获批产品</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  if (currentGuideTab === 'industry') {
+    html += '<div class="guide-panel">';
+    html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(239,159,39,0.15);color:#EF9F27;">' + svgIcon('building', 20) + '</div><div class="guide-panel-title">产业从业者使用指南</div></div>';
+    html += '<div class="guide-panel-desc">追踪全球细胞治疗产品获批进展、企业管线布局、监管动态与行业趋势，辅助产业决策。</div>';
+    html += '<div class="guide-step-list">';
+    html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">浏览<b>获批产品</b>，追踪全球28款已获批细胞治疗产品的适应症、企业与技术路线</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">查看<b>监管政策</b>，了解国内外细胞治疗法规、技术指南与临床研究管理规范</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">进入<b>企业巡览</b>，了解MSC/CAR-T相关企业的管线布局与产业动态</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">关注<b>行业资讯</b>，获取最新产业新闻、会议报道与技术突破</div></div>';
+    html += '</div>';
+    html += '<div class="guide-entry-list">';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'products\')">' + svgIcon('flask', 12) + ' 获批产品</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'regulations\')">' + svgIcon('shield', 12) + ' 监管政策</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'companies\')">' + svgIcon('building', 12) + ' 企业巡览</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  if (currentGuideTab === 'investor') {
+    html += '<div class="guide-panel">';
+    html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(175,169,236,0.15);color:#AFA9EC;">' + svgIcon('chart', 20) + '</div><div class="guide-panel-title">投资者使用指南</div></div>';
+    html += '<div class="guide-panel-desc">把握CGT行业趋势、企业动态与投融资信息，辅助投资决策与行业研判。</div>';
+    html += '<div class="guide-step-list">';
+    html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text">进入<b>数据分析·行业报告</b>，查看MSC临床试验统计、趋势分析与行业报告</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text">浏览<b>企业巡览</b>，了解CGT相关企业管线、融资进展与产业布局</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text">关注<b>行业资讯</b>，获取投融资新闻、企业动态与市场分析</div></div>';
+    html += '<div class="guide-step"><div class="guide-step-num">4</div><div class="guide-step-text">查看<b>AI栏目</b>，了解AI驱动的产业格局分析与前沿技术综述</div></div>';
+    html += '</div>';
+    html += '<div class="guide-entry-list">';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'report\')">' + svgIcon('chart', 12) + ' 数据分析</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'companies\')">' + svgIcon('building', 12) + ' 企业巡览</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'news\')">' + svgIcon('news', 12) + ' 行业资讯</span>';
+    html += '<span class="guide-entry-chip" onclick="switchSection(\'ai-review\')">' + svgIcon('layers', 12) + ' AI栏目</span>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  html += '<div class="guide-panel" style="margin-top:12px;">';
+  html += '<div class="guide-panel-head"><div class="guide-panel-icon" style="background:rgba(0,229,255,0.1);color:var(--primary);">' + svgIcon('info', 20) + '</div><div class="guide-panel-title">通用功能</div></div>';
+  html += '<div class="guide-panel-desc">所有用户均可使用以下功能：</div>';
+  html += '<div class="guide-step-list">';
+  html += '<div class="guide-step"><div class="guide-step-num">1</div><div class="guide-step-text"><b>热门检索</b>：首页快捷标签一键检索常见疾病/适应症</div></div>';
+  html += '<div class="guide-step"><div class="guide-step-num">2</div><div class="guide-step-text"><b>AI数据看板</b>：AI引擎实时分析文献检索、政策追踪、报告生成</div></div>';
+  html += '<div class="guide-step"><div class="guide-step-num">3</div><div class="guide-step-text"><b>Open CGT</b>：提交你的想法，AI团队帮你规划实现路径，联通平台资源</div></div>';
+  html += '</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+function switchGuideTab(tab) {
+  currentGuideTab = tab;
+  renderGuide();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === Team Page ===
+function renderTeam() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">维护团队</span></div>';
+
+  html += '<div class="content-header"><div class="title">' + svgIcon('users', 20) + ' 维护团队 · 关于我们</div>';
+  html += '<div class="desc" style="text-indent:2em;line-height:1.8;">本平台由专家团队与AI智能体团队共同维护。AI团队覆盖CGT全产业链，每日自主迭代学习，为平台提供文献筛选、政策追踪、产品监测、数据分析等全流程能力。</div></div>';
+
+  // Expert Team
+  html += '<div class="team-section">';
+  html += '<div class="team-section-head">';
+  html += '<div class="team-section-icon" style="background:rgba(255,183,77,0.15);color:#FFB74D;">' + svgIcon('users', 18) + '</div>';
+  html += '<div class="team-section-title">专家团队</div>';
+  html += '<div class="team-section-sub">真实团队 · 嘉禾创始人员</div>';
+  html += '</div>';
+  html += '<div class="team-grid">';
+  // Placeholder cards for expert team - info to be filled later
+  var expertSlots = [
+    {label:'倪博士', role:'待补充'},
+    {label:'邓博士', role:'待补充'},
+    {label:'许律师', role:'待补充'},
+    {label:'黄畦教授', role:'待补充'}
+  ];
+  expertSlots.forEach(function(e) {
+    html += '<div class="team-card">';
+    html += '<div class="team-card-head"><div class="team-card-avatar placeholder">' + e.label.charAt(0) + '</div>';
+    html += '<div><div class="team-card-name">' + e.label + '</div><div class="team-card-role">' + e.role + '</div></div></div>';
+    html += '<div class="team-card-desc">个人信息待补充</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // AI Team - Content Operations (existing 5)
+  html += '<div class="team-section">';
+  html += '<div class="team-section-head">';
+  html += '<div class="team-section-icon" style="background:rgba(0,229,255,0.15);color:var(--primary);">' + svgIcon('cell', 18) + '</div>';
+  html += '<div class="team-section-title">AI团队 · 内容运营组</div>';
+  html += '<div class="team-section-sub">5位AI智能体 · 日常内容维护</div>';
+  html += '</div>';
+  html += '<div class="team-grid">';
+  var aiContent = [
+    {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
+    {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
+    {name:'闻风', role:'政策哨兵', desc:'监控NMPA/FDA/EMA/ISCT监管动态'},
+    {name:'追光', role:'产品探针', desc:'追踪全球细胞治疗产品获批进展'},
+    {name:'织卷', role:'数据管家', desc:'数据库维护、去重分类、质量清洗'}
+  ];
+  aiContent.forEach(function(m) {
+    html += '<div class="team-card">';
+    html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
+    html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+    html += '<div class="team-card-desc">' + m.desc + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // AI Team - CGT Industry Chain (new 5)
+  html += '<div class="team-section">';
+  html += '<div class="team-section-head">';
+  html += '<div class="team-section-icon" style="background:rgba(102,187,106,0.15);color:#66BB6A;">' + svgIcon('trending', 18) + '</div>';
+  html += '<div class="team-section-title">AI团队 · CGT产业分析组</div>';
+  html += '<div class="team-section-sub">5位AI智能体 · 覆盖CGT全产业链</div>';
+  html += '</div>';
+  html += '<div class="team-grid">';
+  var aiIndustry = [
+    {name:'谋略', role:'产业分析师', desc:'CGT产业链上下游分析、市场趋势研判、竞争格局梳理'},
+    {name:'探源', role:'专利情报官', desc:'全球CGT专利检索与布局分析、知识产权风险评估'},
+    {name:'筑桥', role:'临床导航员', desc:'ClinicalTrials.gov/ChiCTR试验设计与入组策略分析'},
+    {name:'量尺', role:'质量合规审计', desc:'GMP/cGMP合规审查、CMC质控体系评估、注册申报支持'},
+    {name:'引路', role:'投融资顾问', desc:'CGT赛道投融资追踪、估值模型分析、BD交易情报'}
+  ];
+  aiIndustry.forEach(function(m) {
+    html += '<div class="team-card">';
+    html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
+    html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+    html += '<div class="team-card-desc">' + m.desc + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // Human Reviewer
+  html += '<div class="team-section">';
+  html += '<div class="team-section-head">';
+  html += '<div class="team-section-icon" style="background:rgba(255,183,77,0.15);color:#FFB74D;">' + svgIcon('shield', 18) + '</div>';
+  html += '<div class="team-section-title">专家审核</div>';
+  html += '<div class="team-section-sub">最终审核 · 内容把关</div>';
+  html += '</div>';
+  html += '<div class="team-grid">';
+  html += '<div class="team-card">';
+  html += '<div class="team-card-head"><div class="team-card-avatar human">杨</div>';
+  html += '<div><div class="team-card-name">杨老师</div><div class="team-card-role">审核员</div></div></div>';
+  html += '<div class="team-card-desc">最终审核、内容把关、方向决策</div>';
+  html += '</div>';
+  html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 更多审核专家待加入</div>';
+  html += '</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+// === Open CGT ===
+function renderOpenCGT() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">Open CGT</span></div>';
+
+  // Hero
+  html += '<div class="opencgt-hero">';
+  html += '<div class="opencgt-hero-bg"></div>';
+  html += '<div class="opencgt-hero-content">';
+  html += '<div class="opencgt-hero-title">Open CGT <span class="accent">共创计划</span></div>';
+  html += '<div class="opencgt-hero-desc">AI驱动的开放细胞与基因治疗共创平台。无论你是研究者、创业者、医生还是投资人——有想法，就有路径。AI团队帮你规划实现路径，联通平台资源，找到志同道合的伙伴，从想法到落地。</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Vision & Mission
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('lightbulb', 18) + ' 愿景与使命</div>';
+  html += '<div class="opencgt-block-content">';
+  html += '<p style="margin-bottom:8px;"><b style="color:var(--text);">愿景：</b>打造一个开放的CGT（细胞与基因治疗）平台，AI全流程参与，让每一个有价值的想法都能找到实现路径。</p>';
+  html += '<p style="margin-bottom:8px;"><b style="color:var(--text);">使命：</b>降低CGT领域的创新门槛——通过AI智能体团队提供从文献调研、专利分析、临床试验设计到投融资规划的全链路支持，联通知识库中的备案机构、获批企业与临床资源，构建志同道合者的共创联盟。</p>';
+  html += '<p><b style="color:var(--text);">价值观：</b>开放 · 协作 · AI赋能 · 想法驱动</p>';
+  html += '</div>';
+  html += '</div>';
+
+  // What we provide
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('layers', 18) + ' 我们能提供什么</div>';
+  html += '<div class="opencgt-value-grid">';
+  html += '<div class="opencgt-value-card">';
+  html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:var(--primary);">' + svgIcon('compass', 16) + '</div><div class="opencgt-value-card-title">AI路径规划</div></div>';
+  html += '<div class="opencgt-value-card-desc">10位AI智能体覆盖CGT全产业链，从文献调研、专利分析到临床试验设计、质量合规、投融资规划，为你的想法定制实现路径</div>';
+  html += '</div>';
+  html += '<div class="opencgt-value-card">';
+  html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:#66BB6A;">' + svgIcon('link', 16) + '</div><div class="opencgt-value-card-title">资源对接</div></div>';
+  html += '<div class="opencgt-value-card-desc">联通知识库中的备案机构、获批企业、临床试验中心与监管政策库，帮你找到合适的合作伙伴与资源</div>';
+  html += '</div>';
+  html += '<div class="opencgt-value-card">';
+  html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:#AFA9EC;">' + svgIcon('handshake', 16) + '</div><div class="opencgt-value-card-title">共创联盟</div></div>';
+  html += '<div class="opencgt-value-card-desc">连接志同道合的研究者、创业者、医生与投资人，从想法到团队，从团队到落地</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Who can join
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('users', 18) + ' 谁可以加入</div>';
+  html += '<div class="opencgt-audience-list">';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('flask', 14) + ' 研究人员</span>';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('shield', 14) + ' 临床医生</span>';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('building', 14) + ' 创业者</span>';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('chart', 14) + ' 投资人</span>';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('dna', 14) + ' 技术专家</span>';
+  html += '<span class="opencgt-audience-chip">' + svgIcon('book', 14) + ' 学生</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // How to participate
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('compass', 18) + ' 如何参与</div>';
+  html += '<div class="opencgt-flow">';
+  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 1</div><div class="opencgt-flow-text">提交想法</div></div>';
+  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 2</div><div class="opencgt-flow-text">AI评估</div></div>';
+  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 3</div><div class="opencgt-flow-text">路径规划</div></div>';
+  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 4</div><div class="opencgt-flow-text">资源对接</div></div>';
+  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 5</div><div class="opencgt-flow-text">共创落地</div></div>';
+  html += '</div>';
+  html += '<div style="margin-top:14px;font-size:13px;color:var(--text-light);line-height:1.8;">提交你的想法后，AI团队将在48小时内进行初步评估，生成可行性分析与实现路径建议。高价值想法将进入资源对接阶段，联通平台内的备案机构、企业与临床资源。最终，我们帮助你找到志同道合的伙伴，组建团队，推动想法落地。</div>';
+  html += '</div>';
+
+  // Partners placeholder
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('building', 18) + ' 已入驻伙伴</div>';
+  html += '<div class="opencgt-partners-placeholder">' + svgIcon('plus', 20) + ' <div>联盟计划刚刚启动，伙伴席位虚位以待</div><div style="font-size:12px;opacity:0.6;">如果你有CGT领域的机构、企业或团队资源，欢迎加入我们的共创联盟</div></div>';
+  html += '</div>';
+
+  // CTA
+  html += '<div style="text-align:center;margin-top:16px;">';
+  html += '<div class="opencgt-cta-btn primary" style="display:inline-flex;" onclick="showOpenCGTSubmitModal()">' + svgIcon('lightbulb', 16) + ' 提交你的想法</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+function showOpenCGTSubmitModal() {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:480px;width:100%;padding:24px;box-shadow:0 8px 40px rgba(0,229,255,0.15);max-height:80vh;overflow-y:auto;';
+  modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(0,229,255,0.15);display:flex;align-items:center;justify-content:center;color:var(--primary);">' + svgIcon('lightbulb', 20) + '</div><div style="font-size:18px;font-weight:700;color:var(--primary);">提交你的想法</div></div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:16px;">Open CGT共创计划正在建设中。完成后，你可以在此提交你的CGT相关想法，AI团队将为你规划实现路径。</div>' +
+    '<div style="font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;">提交功能即将上线，敬请期待。如需提前沟通，可通过平台声明中的联系方式与我们联系。</div>' +
+    '<div style="text-align:center;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button></div>';
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
 }
 
 // === Disclaimer & Team modals ===
