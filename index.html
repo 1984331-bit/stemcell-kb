@@ -8008,30 +8008,42 @@ function renderTeam() {
     html += '<div class="team-section">';
     html += '<div class="team-grid">';
     var expertSlots = [
-      {label:'张先生', role:''},
-      {label:'乔女士', role:''},
-      {label:'杨老师', role:''}
+      {label:'倪博士', role:'基因编辑专家'},
+      {label:'邓博士', role:'病毒研究专家'},
+      {label:'许律师', role:'知名律师'},
+      {label:'张先生', role:'投资顾问'},
+      {label:'乔女士', role:'大健康运营专家'},
+      {label:'张先生', role:'视觉专家设计达人'}
     ];
     expertSlots.forEach(function(e) {
       html += '<div class="team-card">';
       html += '<div class="team-card-head"><div class="team-card-avatar placeholder">' + e.label.charAt(0) + '</div>';
-      html += '<div><div class="team-card-name">' + e.label + '</div></div></div>';
+      html += '<div><div class="team-card-name">' + e.label + '</div><div class="team-card-role">' + e.role + '</div></div></div>';
       html += '</div>';
     });
     html += '</div>';
+    html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 期待您的加入</div>';
     html += '</div>';
   }
 
   if (currentTeamTab === 'ops') {
     html += '<div class="team-section">';
     html += '<div class="team-grid">';
-    html += '<div class="team-card">';
-    html += '<div class="team-card-head"><div class="team-card-avatar human">杨</div>';
-    html += '<div><div class="team-card-name">杨老师</div><div class="team-card-role">审核员</div></div></div>';
-    html += '<div class="team-card-desc">最终审核、内容把关、方向决策</div>';
+    var opsMembers = [
+      {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
+      {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
+      {name:'闻风', role:'政策哨兵', desc:'监控NMPA/FDA/EMA/ISCT监管动态'},
+      {name:'追光', role:'产品探针', desc:'追踪全球细胞治疗产品获批进展'},
+      {name:'织卷', role:'数据管家', desc:'数据库维护、去重分类、质量清洗'}
+    ];
+    opsMembers.forEach(function(m) {
+      html += '<div class="team-card">';
+      html += '<div class="team-card-head"><div class="team-card-avatar ai">' + m.name.charAt(0) + '</div>';
+      html += '<div><div class="team-card-name">' + m.name + '</div><div class="team-card-role">' + m.role + '</div></div></div>';
+      html += '<div class="team-card-desc">' + m.desc + '</div>';
+      html += '</div>';
+    });
     html += '</div>';
-    html += '</div>';
-    html += '<div class="team-placeholder">' + svgIcon('plus', 16) + ' 期待您的加入</div>';
     html += '</div>';
   }
 
@@ -8039,11 +8051,6 @@ function renderTeam() {
     html += '<div class="team-section">';
     html += '<div class="team-grid">';
     var aiAll = [
-      {name:'小虾', role:'内容总编', desc:'统筹内容、整合发布、最终编排'},
-      {name:'觅证', role:'文献猎手', desc:'每日扫描PubMed，筛选高价值MSC临床文献'},
-      {name:'闻风', role:'政策哨兵', desc:'监控NMPA/FDA/EMA/ISCT监管动态'},
-      {name:'追光', role:'产品探针', desc:'追踪全球细胞治疗产品获批进展'},
-      {name:'织卷', role:'数据管家', desc:'数据库维护、去重分类、质量清洗'},
       {name:'谋略', role:'产业分析师', desc:'CGT产业链上下游分析、市场趋势研判、竞争格局梳理'},
       {name:'探源', role:'专利情报官', desc:'全球CGT专利检索与布局分析、知识产权风险评估'},
       {name:'筑桥', role:'临床导航员', desc:'ClinicalTrials.gov/ChiCTR试验设计与入组策略分析'},
