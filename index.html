@@ -22,10 +22,10 @@
   --glow: 0 0 20px rgba(0,229,255,0.15);
   --surface-1: rgba(255,255,255,0.06);
   --surface-2: rgba(255,255,255,0.04);
-  --edu-bg: rgba(83,74,183,0.08);
-  --edu-border: rgba(83,74,183,0.2);
-  --edu-text: #C5C0F5;
-  --edu-accent: #AFA9EC;
+  --edu-bg: rgba(0,229,255,0.08);
+  --edu-border: rgba(0,229,255,0.2);
+  --edu-text: #80DEEA;
+  --edu-accent: #00E5FF;
   --warn-bg: rgba(230,81,0,0.12);
   --warn-border: rgba(255,167,38,0.25);
   --warn-text: #FFB74D;
@@ -3807,7 +3807,7 @@ body { padding-bottom: 60px; }
   box-shadow: var(--shadow);
   padding: 20px;
   margin-bottom: 16px;
-  border-left: 4px solid #534AB7;
+  border-left: 4px solid var(--primary);
   transition: box-shadow 0.15s;
 }
 .pick-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
@@ -3959,7 +3959,7 @@ body { padding-bottom: 60px; }
 
 /* === Intro / 认识细胞治疗 === */
 .edu-hero {
-  background: linear-gradient(135deg, #534AB7 0%, #7B1FA2 100%);
+  background: linear-gradient(135deg, #006978 0%, #00B8D4 100%);
   border-radius: 14px;
   padding: 28px 24px;
   color: #fff;
@@ -4018,7 +4018,7 @@ body { padding-bottom: 60px; }
   transition: box-shadow 0.2s, transform 0.15s;
   cursor: default;
 }
-.edu-type-card:hover { box-shadow: 0 3px 12px rgba(83,74,183,0.12); transform: translateY(-1px); }
+.edu-type-card:hover { box-shadow: 0 3px 12px rgba(0,229,255,0.12); transform: translateY(-1px); }
 .edu-type-card .et-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .edu-type-card .et-icon {
   width: 32px; height: 32px;
@@ -4264,7 +4264,7 @@ body { padding-bottom: 60px; }
   position: absolute;
   left: 8px; top: 4px; bottom: 4px;
   width: 2px;
-  background: linear-gradient(180deg, #534AB7, #7B1FA2);
+  background: linear-gradient(180deg, #006978, #00B8D4);
   border-radius: 1px;
 }
 .edu-tl-item { position: relative; margin-bottom: 14px; }
@@ -5074,10 +5074,8 @@ function whSlide(dir) {
 }
 
 function whRestartAutoPlay() {
-  if (whAutoPlayTimer) clearInterval(whAutoPlayTimer);
-  whAutoPlayTimer = setInterval(function() {
-    whGoTo(whCurrentIndex + 1);
-  }, 2500);
+  // Auto-play disabled by user request (2026-07-19) — manual swipe/arrows only
+  if (whAutoPlayTimer) { clearInterval(whAutoPlayTimer); whAutoPlayTimer = null; }
 }
 
 function initWhCarousel() {
@@ -5588,19 +5586,16 @@ function renderContent() {
     overviewHtml += '<input type="text" id="searchInput" placeholder="搜索标题、作者、期刊、PMID、适应症…" oninput="debouncedSearch()">';
     overviewHtml += '</div>';
 
-    // Database switch cards: MSC / CAR-T / Gene Therapy
-    overviewHtml += '<div class="lit-db-switch" style="display:flex;gap:12px;margin:12px 0 4px;flex-wrap:wrap;">';
-    overviewHtml += '<div class="lit-db-card lit-db-active" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:rgba(0,229,255,0.06);border:1px solid var(--primary);text-align:center;transition:all 0.2s;">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--primary);">' + svgIcon('dna', 16) + ' MSC临床试验数据库</div>';
-    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;">' + ALL_DATA.length + '篇 · 已建成</div>';
+    // Database switch cards: MSC / CAR-T / Gene Therapy (names only, inline on mobile)
+    overviewHtml += '<div class="lit-db-switch" style="display:flex;gap:8px;margin:12px 0 4px;">';
+    overviewHtml += '<div class="lit-db-card lit-db-active" style="flex:1;cursor:pointer;border-radius:10px;padding:10px 6px;background:rgba(0,229,255,0.06);border:1px solid var(--primary);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--primary);">' + svgIcon('dna', 14) + ' MSC</div>';
     overviewHtml += '</div>';
-    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'CAR-T\')" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('shield', 16) + ' CAR-T临床试验数据库</div>';
-    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;opacity:0.6;">建设中 · 敬请期待</div>';
+    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'CAR-T\')" style="flex:1;cursor:pointer;border-radius:10px;padding:10px 6px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('shield', 14) + ' CAR-T</div>';
     overviewHtml += '</div>';
-    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'基因治疗\')" style="flex:1;min-width:160px;cursor:pointer;border-radius:12px;padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('flask', 16) + ' 基因治疗数据库</div>';
-    overviewHtml += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;opacity:0.6;">建设中 · 敬请期待</div>';
+    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'基因治疗\')" style="flex:1;cursor:pointer;border-radius:10px;padding:10px 6px;background:var(--card-bg);border:1px solid var(--border);text-align:center;transition:all 0.2s;">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('flask', 14) + ' 基因治疗</div>';
     overviewHtml += '</div>';
     overviewHtml += '</div>';
 
@@ -7070,12 +7065,12 @@ function renderHub() {
   var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
   var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
   var highlights = [
+    {type:'opencgt', tag:'共创', text:'<div style="font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;">Open CGT共创联盟计划</div><div style="font-size:14px;opacity:0.92;font-weight:400;">AI驱动的细胞与基因治疗共创平台</div>', action:"switchSection('opencgt')", bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},
     {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=1200&q=80)'},
     {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80)'},
     {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进', action:"switchSection('regulations')", bg:'url(https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)'},
     {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'},
-    {type:'opencgt', tag:'共创', text:'Open CGT共创联盟计划——AI驱动的开放细胞与基因治疗共创平台，提交你的想法，AI团队帮你规划实现路径', action:"switchSection('opencgt')", bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'}
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'}
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
@@ -9852,20 +9847,20 @@ function renderIntro() {
 
   html += '<h5>二、MSC vs 胚胎干细胞（ESC）</h5>';
   html += '<div class="edu-source-grid">';
-  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">来自脐带/骨髓等成体组织 · 无伦理争议 · 分化范围有限（骨/软骨/脂肪）</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:var(--edu-accent)">MSC</div><div class="es-desc">来自脐带/骨髓等成体组织 · 无伦理争议 · 分化范围有限（骨/软骨/脂肪）</div></div>';
   html += '<div class="edu-source-card"><div class="es-name" style="color:#993C1D">ESC</div><div class="es-desc">来自早期胚胎 · 有伦理争议 · 可分化为人体任何细胞</div></div>';
   html += '</div>';
 
   html += '<h5>三、MSC vs 造血干细胞（HSC）</h5>';
   html += '<div class="edu-source-grid">';
-  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">免疫调节+旁分泌修复 · 不需清髓 · 安全性高 · 疗效以改善症状为主</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:var(--edu-accent)">MSC</div><div class="es-desc">免疫调节+旁分泌修复 · 不需清髓 · 安全性高 · 疗效以改善症状为主</div></div>';
   html += '<div class="edu-source-card"><div class="es-name" style="color:#D32F2F">HSC</div><div class="es-desc">重建造血系统 · 需清髓预处理 · 风险较高 · 可治愈血液系统疾病</div></div>';
   html += '</div>';
   html += '<p>这是患者最容易混淆的一点：<b>骨髓移植移植的是HSC，不是MSC</b>。MSC在造血干细胞移植中仅作为辅助，帮助预防GVHD。</p>';
 
   html += '<h5>四、MSC vs 诱导多能干细胞（iPSC）</h5>';
   html += '<div class="edu-source-grid">';
-  html += '<div class="edu-source-card"><div class="es-name" style="color:#534AB7">MSC</div><div class="es-desc">原代细胞 · 直接使用 · 无致瘤风险 · 但增殖代数有限</div></div>';
+  html += '<div class="edu-source-card"><div class="es-name" style="color:var(--edu-accent)">MSC</div><div class="es-desc">原代细胞 · 直接使用 · 无致瘤风险 · 但增殖代数有限</div></div>';
   html += '<div class="edu-source-card"><div class="es-name" style="color:#185FA5">iPSC</div><div class="es-desc">重编程细胞 · 需定向分化 · 有致瘤风险 · 理论上可无限增殖</div></div>';
   html += '</div>';
 
