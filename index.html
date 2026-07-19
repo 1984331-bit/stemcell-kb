@@ -1923,10 +1923,83 @@ body { padding-bottom: 60px; }
 .ai-poster-banner-content { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
 .ai-poster-banner-orb { width: 48px; height: 48px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(0,229,255,0.2), rgba(0,229,255,0.02)); border: 2px solid rgba(0,229,255,0.4); box-shadow: 0 0 14px rgba(0,229,255,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .ai-poster-banner-orb span { font-size: 14px; font-weight: 800; color: var(--primary); text-shadow: 0 0 6px rgba(0,229,255,0.35); }
+.ai-poster-banner-orb svg { filter: drop-shadow(0 0 4px rgba(0,229,255,0.4)); }
 .ai-poster-banner-text { flex: 1; }
 .ai-poster-banner-title { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: 1px; }
 .ai-poster-banner-desc { font-size: 11px; color: var(--text-light); margin-top: 4px; letter-spacing: 0.5px; }
 .ai-poster-banner-arrow { color: var(--primary); opacity: 0.6; flex-shrink: 0; }
+
+/* ===== AI Review Page (scoped) ===== */
+.ai-review-page {
+  --ar-accent: #58a6ff; --ar-accent2: #56d364; --ar-accent3: #f78166;
+  --ar-accent4: #d2a8ff; --ar-accent5: #ffa657; --ar-accent6: #79c0ff;
+  --ar-surface: var(--card-bg); --ar-surface2: var(--surface-2);
+  --ar-border: var(--border); --ar-text: var(--text); --ar-text-muted: var(--text-light);
+}
+.ai-review-hero { background: linear-gradient(135deg, var(--bg) 0%, rgba(26,31,46,0.6) 50%, var(--bg) 100%); border-bottom: 1px solid var(--ar-border); padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden; border-radius: 14px; margin-bottom: 20px; }
+.ai-review-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at 60% 40%, rgba(88,166,255,0.07) 0%, transparent 60%), radial-gradient(ellipse at 30% 70%, rgba(86,211,100,0.05) 0%, transparent 50%); pointer-events: none; }
+.ai-review-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.3); color: var(--ar-accent); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; position: relative; }
+.ai-review-hero h1 { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, var(--ar-text) 0%, var(--ar-accent) 50%, var(--ar-accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2; margin-bottom: 14px; position: relative; }
+.ai-review-sub { color: var(--ar-text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto 24px; position: relative; }
+.ai-review-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; position: relative; }
+.ai-review-stat { text-align: center; }
+.ai-review-stat-num { font-size: 1.8rem; font-weight: 700; color: var(--ar-accent); }
+.ai-review-stat-label { font-size: 0.72rem; color: var(--ar-text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.ai-review-nav { background: var(--ar-surface); border: 1px solid var(--ar-border); border-radius: 10px; padding: 0 8px; display: flex; gap: 2px; overflow-x: auto; position: sticky; top: 56px; z-index: 50; margin-bottom: 24px; }
+.ai-review-nav-item { display: flex; align-items: center; gap: 6px; padding: 12px 14px; color: var(--ar-text-muted); font-size: 13px; font-weight: 500; text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+.ai-review-nav-item:hover, .ai-review-nav-item.active { color: var(--ar-text); border-bottom-color: var(--ar-accent); }
+.ai-review-main { max-width: 1280px; margin: 0 auto; }
+.ai-review-section { margin-bottom: 48px; scroll-margin-top: 120px; }
+.ai-review-sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--ar-border); }
+.ai-review-sec-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.ai-review-sec-icon.blue { background: rgba(88,166,255,0.15); }
+.ai-review-sec-icon.green { background: rgba(86,211,100,0.15); }
+.ai-review-sec-icon.red { background: rgba(247,129,102,0.15); }
+.ai-review-sec-icon.purple { background: rgba(210,168,255,0.15); }
+.ai-review-sec-icon.orange { background: rgba(255,166,87,0.15); }
+.ai-review-sec-icon.cyan { background: rgba(121,192,255,0.15); }
+.ai-review-sec-tgroup { flex: 1; }
+.ai-review-sec-title { font-size: 1.25rem; font-weight: 700; color: var(--ar-text); }
+.ai-review-sec-sub { font-size: 0.78rem; color: var(--ar-text-muted); margin-top: 2px; }
+.ai-review-sec-count { background: var(--ar-surface2); border: 1px solid var(--ar-border); color: var(--ar-text-muted); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.ai-review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
+.ai-review-card { background: var(--ar-surface); border: 1px solid var(--ar-border); border-radius: 12px; padding: 18px; transition: border-color 0.2s, transform 0.2s; }
+.ai-review-card:hover { border-color: var(--ar-accent); transform: translateY(-2px); }
+.ai-review-card-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.ai-review-card-num { background: var(--ar-surface2); color: var(--ar-text-muted); width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.ai-review-card-title { font-size: 0.88rem; font-weight: 600; color: var(--ar-text); line-height: 1.45; }
+.ai-review-card-title a { color: inherit; text-decoration: none; }
+.ai-review-card-title a:hover { color: var(--ar-accent); }
+.ai-review-card-authors { font-size: 0.76rem; color: var(--ar-text-muted); margin-bottom: 8px; padding-left: 34px; }
+.ai-review-card-abstract { font-size: 0.8rem; color: var(--ar-text-muted); line-height: 1.55; margin-bottom: 10px; padding-left: 34px; }
+.ai-review-card-footer { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding-left: 34px; }
+.ai-review-tag { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; line-height: 1.4; }
+.ai-review-tag-journal { background: rgba(88,166,255,0.15); color: var(--ar-accent); border: 1px solid rgba(88,166,255,0.25); }
+.ai-review-tag-year { background: var(--ar-surface2); color: var(--ar-text-muted); border: 1px solid var(--ar-border); }
+.ai-review-tag-pmid { background: rgba(86,211,100,0.1); color: var(--ar-accent2); border: 1px solid rgba(86,211,100,0.2); font-size: 10px; }
+.ai-review-tag-china { background: rgba(247,129,102,0.12); color: #ff9e7a; border: 1px solid rgba(247,129,102,0.25); }
+.ai-review-tag-hot { background: rgba(255,166,87,0.12); color: var(--ar-accent5); border: 1px solid rgba(255,166,87,0.25); }
+.ai-review-tag-review { background: rgba(210,168,255,0.12); color: var(--ar-accent4); border: 1px solid rgba(210,168,255,0.2); }
+.ai-review-insight { background: rgba(88,166,255,0.05); border: 1px solid rgba(88,166,255,0.2); border-left: 3px solid var(--ar-accent); border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; font-size: 0.83rem; color: var(--ar-text-muted); }
+.ai-review-insight strong { color: var(--ar-text); }
+.ai-review-insight h4 { color: var(--ar-accent); font-size: 0.83rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.ai-review-trend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.ai-review-trend-card { background: var(--ar-surface); border: 1px solid var(--ar-border); border-radius: 10px; padding: 14px 16px; }
+.ai-review-trend-card h4 { font-size: 0.83rem; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; color: var(--ar-text); }
+.ai-review-trend-card p { font-size: 0.76rem; color: var(--ar-text-muted); line-height: 1.5; }
+.ai-review-tier-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 0.8rem; }
+.ai-review-tier-label { font-weight: 700; width: 90px; color: var(--ar-accent5); }
+.ai-review-tier-bar { flex: 1; height: 6px; background: var(--ar-surface2); border-radius: 3px; overflow: hidden; }
+.ai-review-tier-fill { height: 100%; border-radius: 3px; }
+.ai-review-tier-val { font-size: 11px; color: var(--ar-text-muted); width: 50px; text-align: right; }
+.ai-review-divider { height: 1px; background: var(--ar-border); margin: 36px 0; }
+.ai-review-footer { background: var(--ar-surface); border-top: 1px solid var(--ar-border); padding: 20px; text-align: center; color: var(--ar-text-muted); font-size: 0.78rem; border-radius: 10px; margin-top: 20px; }
+@media (max-width: 768px) {
+  .ai-review-hero h1 { font-size: 1.6rem; }
+  .ai-review-grid { grid-template-columns: 1fr; }
+  .ai-review-stats { gap: 16px; }
+  .ai-review-nav { top: 48px; }
+}
 /* Hub split cards (声明/团队) */
 .hub-split-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
 .hub-split-card { border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: box-shadow 0.2s ease, border-color 0.2s ease; border: 1px solid var(--border); }
@@ -4386,7 +4459,7 @@ body { padding-bottom: 60px; }
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
       企业
     </div>
-    <div class="info-tab" data-kb="ai" onclick="navToKb('ai')">
+    <div class="info-tab" data-kb="ai-review" onclick="navToKb('ai-review')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       AI<span class="hot-tag">HOT</span>
     </div>
@@ -5067,6 +5140,7 @@ function renderContent() {
   if (currentSection === 'books') { renderBooks(); return; }
   if (currentSection === 'health') { renderHealthProducts(); return; }
   if (currentSection === 'ai') { renderAIDashboard(); return; }
+  if (currentSection === 'ai-review') { renderAIReview(); return; }
 
   const filtered = getFilteredData();
 
@@ -6577,13 +6651,13 @@ function renderHub() {
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
   html += '</div>';
 
-  // AI poster banner entry - clickable, jumps to AI section
+  // AI poster banner entry - clickable, jumps to AI data dashboard
   html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
   html += '<div class="ai-poster-banner-content">';
-  html += '<div class="ai-poster-banner-orb"><span>AI</span></div>';
+  html += '<div class="ai-poster-banner-orb"><svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6" fill="rgba(0,229,255,0.15)"/><circle cx="10" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="10" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="14" r="3" fill="rgba(0,229,255,0.1)"/><circle cx="38" cy="34" r="3" fill="rgba(0,229,255,0.1)"/><line x1="13" y1="16" x2="19" y2="22"/><line x1="13" y1="32" x2="19" y2="26"/><line x1="29" y1="22" x2="35" y2="16"/><line x1="29" y1="26" x2="35" y2="32"/><circle cx="24" cy="24" r="2.5" fill="var(--primary)"/></svg></div>';
   html += '<div class="ai-poster-banner-text">';
-  html += '<div class="ai-poster-banner-title">AI赋能·智能数据看板</div>';
+  html += '<div class="ai-poster-banner-title">AI赋能·知识库数据看板</div>';
   html += '<div class="ai-poster-banner-desc">AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建</div>';
   html += '</div>';
   html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
@@ -6862,6 +6936,274 @@ function renderAIDashboard() {
   var g2 = document.getElementById('aiTimelineTrack');
   if (g1) aiObserver.observe(g1);
   if (g2) aiObserver.observe(g2);
+}
+
+// === AI Literature Review Page ===
+function renderAIReview() {
+  var html = '';
+  // Breadcrumb
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">></span> <span class="crumb-current">AI生物领域文献综述</span></div>';
+
+  html += '<div class="ai-review-page">';
+
+  // Hero
+  html += '<div class="ai-review-hero">';
+  html += '<div class="ai-review-badge">📚 文献综述</div>';
+  html += '<h1>AI 在生物领域的应用</h1>';
+  html += '<p class="ai-review-sub">系统整理 2024–2025 年国内外人工智能在生物与生命科学领域的前沿研究文献，按六大方向分类汇总</p>';
+  html += '<div class="ai-review-stats">';
+  html += '<div class="ai-review-stat"><div class="ai-review-stat-num">6</div><div class="ai-review-stat-label">应用方向</div></div>';
+  html += '<div class="ai-review-stat"><div class="ai-review-stat-num">47</div><div class="ai-review-stat-label">精选文献</div></div>';
+  html += '<div class="ai-review-stat"><div class="ai-review-stat-num">2024–25</div><div class="ai-review-stat-label">发表年份</div></div>';
+  html += '<div class="ai-review-stat"><div class="ai-review-stat-num">Nature/Cell</div><div class="ai-review-stat-label">顶刊覆盖</div></div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Nav bar
+  html += '<nav class="ai-review-nav">';
+  html += '<a class="ai-review-nav-item active" href="#ar-protein">🧬 蛋白质结构预测</a>';
+  html += '<a class="ai-review-nav-item" href="#ar-drug">💊 AI药物发现</a>';
+  html += '<a class="ai-review-nav-item" href="#ar-genomics">🔬 基因组学&单细胞</a>';
+  html += '<a class="ai-review-nav-item" href="#ar-imaging">🩻 医学影像</a>';
+  html += '<a class="ai-review-nav-item" href="#ar-llm">🤖 大语言模型</a>';
+  html += '<a class="ai-review-nav-item" href="#ar-crispr">✂️ 合成生物&基因编辑</a>';
+  html += '</nav>';
+
+  html += '<div class="ai-review-main">';
+
+  // Overview insight box
+  html += '<div class="ai-review-insight" style="margin-bottom:28px;background:rgba(86,211,100,0.05);border-color:rgba(86,211,100,0.25);border-left-color:#56d364;">';
+  html += '<h4>📊 研究概况</h4>';
+  html += '本报告基于 PubMed、Nature、Cell 等权威数据库，系统检索 2024–2025 年间人工智能在生物领域应用的代表性文献，涵盖<strong>蛋白质结构预测</strong>（409+ 篇）、<strong>AI药物发现</strong>（267+ 篇）、<strong>基因组学与单细胞</strong>（582+ 篇）、<strong>医学影像诊断</strong>（26,952+ 篇）、<strong>生物大语言模型</strong>（241+ 篇）、<strong>合成生物学与基因编辑</strong>（24 篇）六大方向。';
+  html += '</div>';
+
+  // Trend cards
+  var trends = [
+    { icon:'🚀', color:'#58a6ff', title:'AlphaFold3 领衔结构革命', desc:'AlphaFold3 在 Nature 发表，实现对蛋白-核酸-小分子复合物的联合结构预测，覆盖 2.14 亿序列的数据库全面更新。' },
+    { icon:'🔗', color:'#56d364', title:'多组学数据深度整合', desc:'AI 驱动的多组学数据整合（scRNA-seq + 蛋白质组 + 空间组学）成为解析复杂疾病微环境的核心手段。' },
+    { icon:'🧪', color:'#d2a8ff', title:'细胞基础大模型兴起', desc:'scGPT、scFoundation 等单细胞基础模型在 Nature Methods 发表，开创"将细胞视为语言"的新范式。' },
+    { icon:'🎯', color:'#ffa657', title:'AI加速临床转化', desc:'从计算预测到临床试验，Insilico Medicine 的 AI 发现药物 INS018_055 已进入 II 期临床，打通转化闭环。' },
+    { icon:'✂️', color:'#f78166', title:'AI×CRISPR深度融合', desc:'机器学习模型辅助 gRNA 设计、预测编辑结果、挖掘新型 CRISPR 系统，AI 与基因编辑实现深度协同。' },
+    { icon:'🏥', color:'#79c0ff', title:'影像AI进入临床规模', desc:'AI 医学影像 2025 年相关文献超 16,000 篇，从乳腺癌筛查到 COPD 定量分析，全面进入临床应用阶段。' }
+  ];
+  html += '<div class="ai-review-trend-grid">';
+  trends.forEach(function(t) {
+    html += '<div class="ai-review-trend-card"><h4><span style="color:' + t.color + '">' + t.icon + '</span> ' + t.title + '</h4><p>' + t.desc + '</p></div>';
+  });
+  html += '</div>';
+
+  // Define all sections with papers
+  var sections = [
+    {
+      id: 'ar-protein', icon: '🧬', iconClass: 'blue',
+      title: '蛋白质结构预测与设计',
+      subtitle: 'Protein Structure Prediction & Design · AlphaFold · RoseTTAFold · ESM',
+      count: '8 篇',
+      insightBg: '', insightBorder: '', insightLeft: '',
+      insight: '以 AlphaFold3 为代表，AI 蛋白质结构预测已突破单体边界，实现蛋白质-核酸-小分子配体的复合物联合预测，数据库覆盖超过 2.14 亿蛋白质序列。研究重心正从"预测"转向"设计"，AlphaFold 与 RoseTTAFold 已作为蛋白质设计的基础模型框架被广泛使用。',
+      papers: [
+        { num:1, title:'Accurate structure prediction of biomolecular interactions with AlphaFold 3', link:'https://pubmed.ncbi.nlm.nih.gov/38718835/', authors:'Abramson J, Adler J, Dunger J, et al.', abstract:'AlphaFold3 突破性地将预测范围扩展至蛋白质-核酸、蛋白质-小分子配体复合物，在蛋白质建模、药物设计中具有里程碑意义。', tags:[{c:'journal',t:'Nature'},{c:'year',t:'2024-06'},{c:'hot',t:'🔥 高引'},{c:'pmid',t:'PMID: 38718835'}] },
+        { num:2, title:'AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences', link:'https://pubmed.ncbi.nlm.nih.gov/37933859/', authors:'Varadi M, Bertoni D, Magana P, et al.', abstract:'AlphaFold 数据库更新至 2024 版，覆盖超 2.14 亿蛋白质结构预测，成为结构生物学领域最大免费数据库，极大推动下游研究。', tags:[{c:'journal',t:'Nucleic Acids Research'},{c:'year',t:'2024-01'},{c:'pmid',t:'PMID: 37933859'}] },
+        { num:3, title:'AlphaFold-Multimer accurately captures interactions and dynamics of intrinsically disordered protein regions', link:'https://pubmed.ncbi.nlm.nih.gov/39446390/', authors:'Omidi A, Møller MH, Malhis N, et al.', abstract:'研究证明 AlphaFold-Multimer 能够准确捕捉含内在无序区域（IDR）蛋白质的相互作用和动态变化，拓展了 AlphaFold 的适用边界。', tags:[{c:'journal',t:'PNAS'},{c:'year',t:'2024-10'},{c:'pmid',t:'PMID: 39446390'}] },
+        { num:4, title:'AI-Driven Deep Learning Techniques in Protein Structure Prediction', link:'https://pubmed.ncbi.nlm.nih.gov/39125995/', authors:'Chen L, Li Q, Nasif KFA, et al.', abstract:'系统综述深度学习在蛋白质结构预测中的各类方法，覆盖 CNN、GNN、Transformer 等架构，讨论现存挑战与未来方向。', tags:[{c:'journal',t:'Int J Mol Sci'},{c:'year',t:'2024-08'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 39125995'}] },
+        { num:5, title:'Protein Design Using Structure-Prediction Networks: AlphaFold and RoseTTAFold as Protein Structure Foundation Models', link:'https://pubmed.ncbi.nlm.nih.gov/38438190/', authors:'Wang J, Watson JL, Lisanza SL', abstract:'将 AlphaFold 和 RoseTTAFold 定位为蛋白质设计的"基础模型"，回顾最新蛋白质设计进展，为从头设计治疗性蛋白质提供重要框架。', tags:[{c:'journal',t:'Cold Spring Harbor Persp Biol'},{c:'year',t:'2024-07'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 38438190'}] },
+        { num:6, title:'Systematic discovery of protein interaction interfaces using AlphaFold and experimental validation', link:'https://pubmed.ncbi.nlm.nih.gov/38225382/', authors:'Lee CY, Hubrich D, Varga JK, et al.', abstract:'结合 AlphaFold 预测与实验验证，系统性探索蛋白质相互作用界面，为靶向 PPI 的药物开发提供大规模计算筛选新思路。', tags:[{c:'journal',t:'Mol Syst Biol'},{c:'year',t:'2024-02'},{c:'pmid',t:'PMID: 38225382'}] },
+        { num:7, title:'Recent Progress of Protein Tertiary Structure Prediction', link:'https://pubmed.ncbi.nlm.nih.gov/38398585/', authors:'Wuyun Q, Chen Y, Shen Y, et al.', abstract:'全面回顾蛋白质三级结构预测的里程碑进展与近期突破，对比 AlphaFold2、ESMFold、RoseTTAFold2 等方法的性能特点。', tags:[{c:'journal',t:'Molecules'},{c:'year',t:'2024-02'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 38398585'}] },
+        { num:8, title:'Proteins with alternative folds reveal blind spots in AlphaFold-based protein structure prediction', link:'https://pubmed.ncbi.nlm.nih.gov/39801626/', authors:'Chakravarty D, Lee M, Porter LL', abstract:'指出 AlphaFold 在预测具有多种折叠构象的"变形蛋白"时存在系统性盲点，提示结构多态性蛋白的预测仍是重大挑战。', tags:[{c:'journal',t:'arXiv / bioRxiv'},{c:'year',t:'2024-10'},{c:'pmid',t:'PMID: 39801626'}] }
+      ]
+    },
+    {
+      id: 'ar-drug', icon: '💊', iconClass: 'green',
+      title: 'AI 驱动的药物发现',
+      subtitle: 'AI Drug Discovery · Target Identification · Molecular Generation · Clinical Translation',
+      count: '8 篇',
+      insightBg: 'background:rgba(86,211,100,0.05);border-color:rgba(86,211,100,0.2);border-left-color:#56d364;',
+      insight: 'AI 正在重塑新药研发全链条——从靶点识别、化合物生成与筛选，到 ADMET 预测、临床试验优化。Insilico Medicine 的 AI 设计分子已进入 II 期临床，标志着 AI 药物发现从概念走向实践，多家平台（Isomorphic Labs、Atomwise、Exscientia）正引领行业格局变革。',
+      papers: [
+        { num:1, title:'A small-molecule TNIK inhibitor targets fibrosis in preclinical and clinical models', link:'https://pubmed.ncbi.nlm.nih.gov/39338756/', authors:'Ren F, Aliper A, Chen J, et al.', abstract:'利用 AI 方法识别 TRAF2-NCK 相互作用激酶（TNIK）为抗纤维化靶点，并设计小分子抑制剂，成功实现临床转化，是 AI 药物发现闭环的典型案例。', tags:[{c:'journal',t:'Nat Biotechnol'},{c:'year',t:'2025-01'},{c:'hot',t:'🔥 临床转化'}] },
+        { num:2, title:'AI-Driven Drug Discovery: A Comprehensive Review', link:'', authors:'Ferreira FJN, Carneiro AS', abstract:'全面回顾 AI 和机器学习在解决药物发现高成本、长周期（平均 10–15 年）、低成功率（&lt;10%）挑战中的系统性应用，覆盖靶点挖掘到临床试验各环节。', tags:[{c:'journal',t:'ACS Omega'},{c:'year',t:'2025-06'},{c:'review',t:'综述'}] },
+        { num:3, title:'Leading AI-driven drug discovery platforms: 2025 landscape and global outlook', link:'', authors:'Dharmasivam M, Kaya B, Akinware A, et al.', abstract:'全景分析 Insitro、Isomorphic Labs（DeepMind 旗下）、Atomwise 等顶级 AI 药物发现平台的发展现状，展望全球市场格局（预计 2030 年超 40 亿美元）。', tags:[{c:'journal',t:'Pharmacol Rev'},{c:'year',t:'2025'},{c:'review',t:'综述'}] },
+        { num:4, title:'Role of artificial intelligence in revolutionizing drug discovery', link:'', authors:'Rehman AU, Li M, Wu B, et al.', abstract:'总结 AI 在药物发现中的最新进展，重点介绍深度学习在靶点识别（基因组/蛋白质数据挖掘）、虚拟筛选和临床试验设计优化中的应用，兼顾国际与国内团队工作。', tags:[{c:'journal',t:'Fundam Res'},{c:'year',t:'2024-05'},{c:'china',t:'🇨🇳 中国团队'}] },
+        { num:5, title:'Machine learning for functional protein design', link:'', authors:'（来自 Nature Biotechnology 文献）', abstract:'提出统一框架按核心数据模态（序列、结构、功能标签）分类蛋白质设计机器学习方法，为 AI 辅助蛋白质药物设计提供系统性理论基础。', tags:[{c:'journal',t:'Nat Biotechnol'},{c:'year',t:'2024-02'},{c:'review',t:'综述'}] },
+        { num:6, title:'Utilizing AI for the Identification and Validation of Novel Therapeutic Targets and Repurposed Drugs for Endometriosis', link:'', authors:'Liu BHM, Lin Y, Long X, et al.', abstract:'利用 AI 平台整合转录组、蛋白质组和网络药理学数据，发现子宫内膜症的新治疗靶点并筛选候选药物，体现了 AI 在妇科疾病精准用药中的潜力。', tags:[{c:'journal',t:'Adv Sci'},{c:'year',t:'2025-02'}] },
+        { num:7, title:'Engineering CAR-T Therapeutics for Enhanced Solid Tumor Targeting', link:'', authors:'Zhu D, Kim WJ, Lee H, et al.', abstract:'回顾 AI 在 CAR-T 细胞治疗实体瘤中的应用，包括利用工程化类器官系统进行 AI 辅助验证，以及通过机器学习优化 CAR 构建设计。', tags:[{c:'journal',t:'Adv Mater'},{c:'year',t:'2025-06'},{c:'review',t:'综述'}] },
+        { num:8, title:'PDX models for functional precision oncology and discovery science', link:'', authors:'Blanchard Z, Brown EA, Ghazaryan A, et al.', abstract:'探讨 AI 与患者来源异种移植（PDX）模型结合在精准肿瘤学中的未来应用，利用深度学习分析药物敏感性数据，指导个体化用药决策。', tags:[{c:'journal',t:'Nat Rev Cancer'},{c:'year',t:'2025-03'},{c:'review',t:'综述'}] }
+      ]
+    },
+    {
+      id: 'ar-genomics', icon: '🔬', iconClass: 'purple',
+      title: '基因组学与单细胞组学',
+      subtitle: 'Genomics · Single-Cell Sequencing · Spatial Omics · Multi-omics Integration',
+      count: '7 篇',
+      insightBg: 'background:rgba(210,168,255,0.05);border-color:rgba(210,168,255,0.2);border-left-color:#d2a8ff;',
+      insight: 'AI 在基因组学领域的应用以多组学整合分析为核心趋势：单细胞 RNA 测序、空间组学与机器学习的结合，极大丰富了对肿瘤微环境、疾病异质性的解析能力；GWAS 与 scRNA-seq 的整合计算框架也为宿主-微生物互作研究提供了新工具。',
+      papers: [
+        { num:1, title:'Genome-coverage single-cell histone modifications for embryo lineage tracing', link:'https://pubmed.ncbi.nlm.nih.gov/40158847/', authors:'（来自 Nature 2025 年文章）', abstract:'开发 TACIT 新技术，在单细胞水平实现基因组覆盖的组蛋白修饰分析，结合 AI 算法追踪小鼠早期胚胎谱系发育，揭示表观遗传调控新机制。', tags:[{c:'journal',t:'Nature'},{c:'year',t:'2025-04'},{c:'hot',t:'🔥 封面'}] },
+        { num:2, title:'Integrating single-cell sequencing and machine learning to uncover the role of mitophagy in subtyping and prognosis of esophageal cancer', link:'', authors:'（来自 Apoptosis 2025 年文章）', abstract:'结合单细胞测序与机器学习，分析食管癌中线粒体自噬相关基因的表达模式，实现癌症分子亚型划分与预后预测模型构建。', tags:[{c:'journal',t:'Apoptosis'},{c:'year',t:'2025-04'}] },
+        { num:3, title:'Spatial single-cell proteomics landscape decodes the tumor microenvironmental ecosystem of intrahepatic cholangiocarcinoma', link:'', authors:'（来自 Hepatology 文章）', abstract:'利用 AI 辅助的空间单细胞蛋白质组学，全面解析肝内胆管癌肿瘤微环境，发现与免疫治疗响应相关的空间细胞生态位特征。', tags:[{c:'journal',t:'Hepatology'},{c:'year',t:'2025-02'},{c:'china',t:'🇨🇳 中国团队'}] },
+        { num:4, title:'Integrating microbial GWAS and single-cell transcriptomics reveals associations between host cell populations and the gut microbiome', link:'', authors:'（来自 Nat Microbiol 2025 年文章）', abstract:'提出 scBPS 计算框架，首次将微生物 GWAS 与多器官单细胞 RNA 测序整合，系统识别与肠道微生物组相关的宿主细胞类群，为微生物组靶向干预提供新靶点。', tags:[{c:'journal',t:'Nat Microbiol'},{c:'year',t:'2025-05'}] },
+        { num:5, title:'Single-cell spatial multi-omics and deep learning dissect enhancer-driven gene regulatory networks in liver zonation', link:'', authors:'（来自 Nat Cell Biol 2024 年文章）', abstract:'构建 DeepLiver 深度学习模型，整合空间多组学数据解析肝脏区带化发育过程中增强子驱动的基因调控网络，揭示肝脏区域功能分工的分子机制。', tags:[{c:'journal',t:'Nat Cell Biol'},{c:'year',t:'2024-01'},{c:'hot',t:'🔥 高引'}] },
+        { num:6, title:'How to build the virtual cell with artificial intelligence: Priorities and opportunities', link:'', authors:'（来自 Cell 2024 年文章）', abstract:'提出构建"AI 虚拟细胞"（AIVC）的路线图，将多模态、多尺度的细胞数字孪生视为基础模型的终极目标，代表下一代单细胞 AI 的研究愿景。', tags:[{c:'journal',t:'Cell'},{c:'year',t:'2024-12'},{c:'hot',t:'🔥 前沿展望'}] },
+        { num:7, title:'Integrated analysis of single-cell RNA-seq, bulk RNA-seq, Mendelian randomization, and eQTL in rheumatoid arthritis', link:'', authors:'（来自 Front Immunol 2024 年文章）', abstract:'整合单细胞测序、孟德尔随机化、eQTL 多维数据，构建类风湿关节炎 T 细胞诊断模型，兼具生物标志物发现与亚型分类的双重价值。', tags:[{c:'journal',t:'Front Immunol'},{c:'year',t:'2024-06'}] }
+      ]
+    },
+    {
+      id: 'ar-imaging', icon: '🩻', iconClass: 'red',
+      title: 'AI 医学影像诊断',
+      subtitle: 'Medical Imaging · Radiology AI · Foundation Models · Pathology',
+      count: '9 篇',
+      insightBg: 'background:rgba(247,129,102,0.05);border-color:rgba(247,129,102,0.2);border-left-color:#f78166;',
+      insight: 'AI 医学影像是文献数量最庞大的方向（2025 年超 16,000 篇），已从研究走向大规模临床应用。当前趋势从"任务专用模型"向"大规模基础模型"演进，覆盖 X 线、CT、MRI、超声、病理切片等全影像模态，在乳腺癌筛查、肺部疾病、胰腺癌早诊等领域表现突出。',
+      papers: [
+        { num:1, title:'Artificial intelligence in medical imaging: From task-specific models to large-scale foundation models', link:'https://pubmed.ncbi.nlm.nih.gov/40008785/', authors:'Bian Y, Li J, Ye C, et al.', abstract:'中国团队发表的重要综述，系统梳理 AI 在 X 线、CT、MRI、超声多模态影像中的深度学习应用，详细阐述从专用模型到大规模基础模型的演进路径。', tags:[{c:'journal',t:'Chin Med J'},{c:'year',t:'2025-03'},{c:'review',t:'综述'},{c:'china',t:'🇨🇳 中国团队'},{c:'pmid',t:'PMID: 40008785'}] },
+        { num:2, title:'A Review of Artificial Intelligence in Breast Imaging', link:'https://pubmed.ncbi.nlm.nih.gov/38787015/', authors:'Al-Karawi D, Al-Zaidi S, Helael KA, et al.', abstract:'综述 AI 在乳腺钼靶、乳腺超声、MRI 等多模态影像中的应用，评估其在乳腺癌早期筛查和诊断中的临床效能与商业化进展。', tags:[{c:'journal',t:'Tomography'},{c:'year',t:'2024-05'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 38787015'}] },
+        { num:3, title:'Artificial intelligence for breast cancer detection: Technology, challenges, and prospects', link:'https://pubmed.ncbi.nlm.nih.gov/38640824/', authors:'Díaz O, Rodríguez-Ruíz A, Sechopoulos I', abstract:'深入分析 AI 在数字化乳腺 X 线摄影和乳腺断层摄影中自动检测乳腺癌的技术原理，评估当前 FDA 获批产品的临床验证现状。', tags:[{c:'journal',t:'Eur J Radiol'},{c:'year',t:'2024-06'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 38640824'}] },
+        { num:4, title:'Artificial Intelligence in Pancreatic Imaging: A Systematic Review', link:'https://pubmed.ncbi.nlm.nih.gov/39865461/', authors:'Podină N, Gheorghe EC, Constantin A, et al.', abstract:'系统评价 AI 在胰腺 CT/MRI 影像中的应用，涵盖胰腺癌早期检测、胰腺炎分级、胰腺肿瘤分割等任务，针对胰腺癌 5 年生存率低的临床痛点。', tags:[{c:'journal',t:'United European Gastroenterol J'},{c:'year',t:'2025-02'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 39865461'}] },
+        { num:5, title:'Artificial intelligence in COPD CT images: identification, staging, and quantitation', link:'https://pubmed.ncbi.nlm.nih.gov/39174978/', authors:'Wu Y, Xia S, Liang Z, et al.', abstract:'回顾 AI 在 COPD 胸部 CT 中的应用，涵盖肺气肿定量、气道分割、肺纹理分析及疾病分期，显示 AI 在慢性肺疾病精准管理中的重要价值。', tags:[{c:'journal',t:'Respir Res'},{c:'year',t:'2024-08'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 39174978'}] },
+        { num:6, title:'Artificial Intelligence in Dental Caries Diagnosis and Detection: An Umbrella Review', link:'https://pubmed.ncbi.nlm.nih.gov/39206581/', authors:'Negi S, Mathur A, Tripathy S, et al.', abstract:'首项 AI 口腔 X 线龋齿诊断的伞状系统评价，汇总 15 项高质量系统综述数据，综合评估 CNN 等模型在临床环境中的诊断性能与局限性。', tags:[{c:'journal',t:'Clin Exp Dent Res'},{c:'year',t:'2024-08'},{c:'review',t:'伞状综述'},{c:'pmid',t:'PMID: 39206581'}] },
+        { num:7, title:'Artificial intelligence for radiographic imaging detection of caries lesions: a systematic review', link:'https://pubmed.ncbi.nlm.nih.gov/38402191/', authors:'Albano D, Galiano V, Basile M, et al.', abstract:'系统评价 AI 模型在牙科 X 线片中检测龋损的诊断性能，证明深度学习模型接近或达到专科医生诊断水平，尤其在大样本场景中优势显著。', tags:[{c:'journal',t:'BMC Oral Health'},{c:'year',t:'2024-02'},{c:'review',t:'系统综述'},{c:'pmid',t:'PMID: 38402191'}] },
+        { num:8, title:'Osteoarthritis year in review 2024: Imaging', link:'https://pubmed.ncbi.nlm.nih.gov/39490728/', authors:'Hayashi D, Roemer FW, Guermazi A', abstract:'2024 年度骨关节炎影像学综述，重点回顾 AI 在 MRI/X 线骨关节炎自动分级、软骨损伤定量、预后预测中的突破性进展。', tags:[{c:'journal',t:'Osteoarthritis Cartilage'},{c:'year',t:'2025-01'},{c:'review',t:'年度综述'},{c:'pmid',t:'PMID: 39490728'}] },
+        { num:9, title:'Artificial intelligence in medical imaging is a tool for clinical routine and scientific discovery', link:'https://pubmed.ncbi.nlm.nih.gov/38007360/', authors:'Langs G', abstract:'探讨 AI 影像如何从科研工具演进为临床常规工具，详细分析机器学习算法在放射科工作流程中的嵌入方式，以及其在大规模科学发现中的潜力。', tags:[{c:'journal',t:'Semin Arthritis Rheum'},{c:'year',t:'2024-02'},{c:'pmid',t:'PMID: 38007360'}] }
+      ]
+    },
+    {
+      id: 'ar-llm', icon: '🤖', iconClass: 'orange',
+      title: '生物大语言模型与基础模型',
+      subtitle: 'Bio-LLM · Foundation Models · scGPT · ESM · BioGPT · Virtual Cell',
+      count: '7 篇',
+      insightBg: 'background:rgba(255,166,87,0.05);border-color:rgba(255,166,87,0.2);border-left-color:#ffa657;',
+      insight: '受 GPT 系列启发，生物学家开始将语言模型范式迁移到生命科学：蛋白质序列被视为"蛋白质语言"，基因表达矩阵被视为"细胞语言"。scGPT、scFoundation、Cell2Sentence 等模型相继在 Nature Methods 等顶刊发表，代表着单细胞生物学进入大模型时代。',
+      papers: [
+        { num:1, title:'scGPT: toward building a foundation model for single-cell multi-omics using generative AI', link:'https://pubmed.ncbi.nlm.nih.gov/38409223/', authors:'Cui H, Wang C, Maan H, et al.', abstract:'借鉴 GPT 架构开发单细胞多组学基础模型 scGPT，实现细胞注释、基因扰动预测、多批次整合等多项下游任务，成为单细胞 AI 领域里程碑工作。', tags:[{c:'journal',t:'Nat Methods'},{c:'year',t:'2024-08'},{c:'hot',t:'🔥 高引'},{c:'pmid',t:'PMID: 38409223'}] },
+        { num:2, title:'Large-scale foundation model on single-cell transcriptomics', link:'https://pubmed.ncbi.nlm.nih.gov/38844628/', authors:'Hao M, Gong J, Zeng X, et al.', abstract:'开发 1 亿参数量的单细胞转录组专用大模型 scFoundation，在基因表达增强、细胞聚类、跨数据集整合等任务上全面超越现有方法，代表国内团队（浙大等）重要工作。', tags:[{c:'journal',t:'Nat Methods'},{c:'year',t:'2024-08'},{c:'china',t:'🇨🇳 中国团队'},{c:'pmid',t:'PMID: 38844628'}] },
+        { num:3, title:'Cell2Sentence: Teaching Large Language Models the Language of Biology', link:'https://pubmed.ncbi.nlm.nih.gov/39554079/', authors:'Levine D, Rizvi SA, Lévy S, et al.', abstract:'提出创新性的 Cell2Sentence 框架，将单细胞基因表达数据转化为"细胞句子"输入 LLM，实现 LLM 与单细胞生物学的无缝对接，开拓新型人机交互分析范式。', tags:[{c:'journal',t:'bioRxiv'},{c:'year',t:'2024-10'},{c:'hot',t:'🔥 创新范式'},{c:'pmid',t:'PMID: 39554079'}] },
+        { num:4, title:'An AI Agent for Fully Automated Multi-Omic Analyses', link:'', authors:'Zhou J, Zhang B, Li G, et al.', abstract:'介绍 AutoBA 自主 AI 智能体，整合 LLM 推理与生物信息学工具，实现多组学数据分析的完全自动化，降低生物学家的计算门槛，代表 AI Agent 在科学研究中的应用新方向。', tags:[{c:'journal',t:'Adv Sci'},{c:'year',t:'2024-11'},{c:'china',t:'🇨🇳 中国团队'},{c:'pmid',t:'PMID: 39361263'}] },
+        { num:5, title:'A large language model framework for literature-based disease-gene association prediction', link:'', authors:'Li PH, Sun YY, Juan HF, et al.', abstract:'构建基于 LLM 的疾病-基因关联预测框架，自动解析海量医学文献中的基因-疾病知识，在少样本条件下显著提升预测精度，体现了 LLM 在生物知识图谱构建中的潜力。', tags:[{c:'journal',t:'Brief Bioinform'},{c:'year',t:'2024-11'},{c:'pmid',t:'PMID: 39998433'}] },
+        { num:6, title:'Exploring the potential of large language model-based chatbots in challenges of ribosome profiling data analysis', link:'', authors:'Ding Z, Wei R, Xia J, et al.', abstract:'综述 LLM 聊天机器人在核糖体图谱（Ribo-seq）数据分析中的潜在应用，探讨其在理解翻译调控、预测翻译效率方面能否弥补专业生物信息学工具的局限。', tags:[{c:'journal',t:'Brief Bioinform'},{c:'year',t:'2024-11'},{c:'review',t:'综述'},{c:'pmid',t:'PMID: 39668339'}] },
+        { num:7, title:'How to build the virtual cell with artificial intelligence: Priorities and opportunities', link:'', authors:'（Cell 2024 年文章）', abstract:'论述构建 AI 虚拟细胞（AIVC）的战略优先级：以多模态基础模型为架构，整合基因组、转录组、蛋白质组、代谢组数据，目标是实现任意扰动条件下的细胞状态预测。', tags:[{c:'journal',t:'Cell'},{c:'year',t:'2024-12'},{c:'hot',t:'🔥 远景规划'}] }
+      ]
+    },
+    {
+      id: 'ar-crispr', icon: '✂️', iconClass: 'cyan',
+      title: '合成生物学与 AI 辅助基因编辑',
+      subtitle: 'Synthetic Biology · AI-guided CRISPR · Gene Editing · Biotech Singularity',
+      count: '8 篇',
+      insightBg: 'background:rgba(121,192,255,0.05);border-color:rgba(121,192,255,0.2);border-left-color:#79c0ff;',
+      insight: 'AI 与 CRISPR 基因编辑的融合是近两年的新兴热点。机器学习模型被用于预测 gRNA 活性与脱靶效应、挖掘新型 CRISPR 系统（如 Cas12、Cas13 变体）、优化碱基编辑与先导编辑的效率，多篇综述指出这一融合正在推动"生物技术奇点"的到来。',
+      papers: [
+        { num:1, title:'Artificial Intelligence in CRISPR-Cas Systems: A Review of Tool Applications', link:'', authors:'Khammampalli S, Vindal V', abstract:'系统综述深度学习与机器学习在 CRISPR-Cas 系统各类工具中的应用，包括 gRNA 设计、编辑效率/特异性预测、新型 Cas 蛋白的计算挖掘与改造。', tags:[{c:'journal',t:'Methods Mol Biol'},{c:'year',t:'2025'},{c:'review',t:'综述'}] },
+        { num:2, title:'Engineering a New Generation of Gene Editors: Integrating Synthetic Biology and AI Innovations', link:'', authors:'Chia BS, et al.', abstract:'讨论 AI 和机器学习如何与合成生物学工具结合，针对 CRISPR-Cas 系统的递送效率低、免疫原性强等挑战，加速下一代基因编辑工具的工程化开发。', tags:[{c:'journal',t:'ACS Synth Biol'},{c:'year',t:'2025'},{c:'hot',t:'🔥 重点文章'}] },
+        { num:3, title:'From Code to Life: The AI-Driven Revolution in Genome Editing', link:'', authors:'Li Z, et al.', abstract:'回顾 AI 推动基因组编辑技术变革的历程，覆盖 CRISPR 优化、表观遗传编辑、碱基编辑、先导编辑等前沿方向在医学、农业及合成生物学中的广泛应用。', tags:[{c:'journal',t:'Advanced Science'},{c:'year',t:'2025'},{c:'review',t:'综述'}] },
+        { num:4, title:'人工智能辅助 CRISPR-Cas 系统的设计、挖掘与改造', link:'', authors:'Mao Y, et al.（中文综述）', abstract:'国内团队中文综述，系统梳理 AI 在 CRISPR-Cas 系统设计优化、宏基因组挖掘新变体、功能改造（提高特异性/活性）中的应用，并展望其在医疗和农业中的前景。', tags:[{c:'journal',t:'生物工程学报'},{c:'year',t:'2025'},{c:'china',t:'🇨🇳 中文文献'},{c:'review',t:'综述'}] },
+        { num:5, title:'The path to biotechnological singularity: Current breakthroughs and outlook', link:'', authors:'Wen Z, et al.', abstract:'提出基因编辑、合成生物学、人工智能三大技术融合正推动生物技术走向"奇点"，系统展望 AI 在设计生物系统、预测生物行为中的颠覆性潜力。', tags:[{c:'journal',t:'Biotechnol Adv'},{c:'year',t:'2025'},{c:'hot',t:'🔥 前沿展望'}] },
+        { num:6, title:'Synergizing CRISPR-Cas9 with Advanced AI and Machine Learning for Precision Drug Delivery', link:'', authors:'Roy AA, et al.', abstract:'探讨 CRISPR-Cas9 与 AI/ML 在精准药物递送领域的协同应用，重点关注如何利用机器学习预测最优递送载体设计和靶向给药策略。', tags:[{c:'journal',t:'Curr Gene Ther'},{c:'year',t:'2025'}] },
+        { num:7, title:'Systematic discovery of CRISPR-boosted CAR T cell immunotherapies', link:'', authors:'Datlinger P, et al.', abstract:'利用大规模 CRISPR 功能基因组学筛选，结合 AI 算法系统性发现能增强 CAR-T 细胞功能的基因靶点，为下一代 CAR-T 产品的理性设计提供数据驱动基础。', tags:[{c:'journal',t:'Nature'},{c:'year',t:'2025-10'},{c:'hot',t:'🔥 Nature'}] },
+        { num:8, title:'Review on Advancement of AI in Synthetic Biology', link:'', authors:'Mirchandani I, et al.', abstract:'简要综述 AI 如何通过预测建模、代谢路径优化和基因线路设计增强合成生物学能力，涵盖 AI 辅助的代谢工程、蛋白质表达优化和生物传感器设计等案例。', tags:[{c:'journal',t:'Methods Mol Biol'},{c:'year',t:'2025'},{c:'review',t:'综述'}] }
+      ]
+    }
+  ];
+
+  // Render sections
+  sections.forEach(function(sec) {
+    html += '<div class="ai-review-section" id="' + sec.id + '">';
+    html += '<div class="ai-review-sec-header">';
+    html += '<div class="ai-review-sec-icon ' + sec.iconClass + '">' + sec.icon + '</div>';
+    html += '<div class="ai-review-sec-tgroup">';
+    html += '<div class="ai-review-sec-title">' + sec.title + '</div>';
+    html += '<div class="ai-review-sec-sub">' + sec.subtitle + '</div>';
+    html += '</div>';
+    html += '<div class="ai-review-sec-count">' + sec.count + '</div>';
+    html += '</div>';
+    html += '<div class="ai-review-insight"' + (sec.insightBg ? ' style="' + sec.insightBg + '"' : '') + '>';
+    html += '<h4>🔍 方向概述</h4>';
+    html += sec.insight;
+    html += '</div>';
+    html += '<div class="ai-review-grid">';
+    sec.papers.forEach(function(p) {
+      html += '<div class="ai-review-card">';
+      html += '<div class="ai-review-card-head">';
+      html += '<div class="ai-review-card-num">' + p.num + '</div>';
+      if (p.link) {
+        html += '<div class="ai-review-card-title"><a href="' + p.link + '" target="_blank">' + p.title + '</a></div>';
+      } else {
+        html += '<div class="ai-review-card-title">' + p.title + '</div>';
+      }
+      html += '</div>';
+      html += '<div class="ai-review-card-authors">' + p.authors + '</div>';
+      html += '<div class="ai-review-card-abstract">' + p.abstract + '</div>';
+      html += '<div class="ai-review-card-footer">';
+      p.tags.forEach(function(t) {
+        html += '<span class="ai-review-tag ai-review-tag-' + t.c + '">' + t.text + '</span>';
+      });
+      html += '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+
+  // Comparison chart
+  html += '<div class="ai-review-divider"></div>';
+  html += '<div style="margin-bottom:32px;">';
+  html += '<h3 style="font-size:1.1rem;font-weight:700;margin-bottom:18px;color:var(--ar-text);">📈 各方向文献体量对比</h3>';
+  html += '<div style="max-width:500px;">';
+  var tiers = [
+    { label:'医学影像', width:'100%', bg:'linear-gradient(90deg,#f78166,#ff9e7a)', val:'26,952' },
+    { label:'基因组学', width:'55%', bg:'linear-gradient(90deg,#d2a8ff,#b088e8)', val:'582' },
+    { label:'蛋白质结构', width:'40%', bg:'linear-gradient(90deg,#58a6ff,#79c0ff)', val:'409' },
+    { label:'AI 药物发现', width:'30%', bg:'linear-gradient(90deg,#56d364,#7ee787)', val:'267' },
+    { label:'生物 LLM', width:'20%', bg:'linear-gradient(90deg,#ffa657,#ffca83)', val:'241' },
+    { label:'合成生物×AI', width:'5%', bg:'linear-gradient(90deg,#79c0ff,#a5d6ff)', val:'24' }
+  ];
+  tiers.forEach(function(t) {
+    html += '<div class="ai-review-tier-row">';
+    html += '<span class="ai-review-tier-label">' + t.label + '</span>';
+    html += '<div class="ai-review-tier-bar"><div class="ai-review-tier-fill" style="width:' + t.width + ';background:' + t.bg + ';"></div></div>';
+    html += '<span class="ai-review-tier-val">' + t.val + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '<p style="font-size:0.73rem;color:var(--ar-text-muted);margin-top:8px;">数据来源：PubMed 2024-2025 年文献检索（检索时间：2026年4月3日）</p>';
+  html += '</div>';
+
+  // Footer
+  html += '<div class="ai-review-footer">';
+  html += '<p>📚 AI 在生物领域的应用文献综述 · 2024–2025 · 数据来源：PubMed、Nature、Cell 等权威数据库</p>';
+  html += '<p style="margin-top:6px;">文献整理日期：2026 年 4 月 3 日 | 仅供学术参考</p>';
+  html += '</div>';
+
+  html += '</div>'; // close ai-review-main
+  html += '</div>'; // close ai-review-page
+
+  document.getElementById('content').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Scroll spy for nav highlighting
+  var navItems = document.querySelectorAll('.ai-review-nav-item');
+  var reviewSections = document.querySelectorAll('.ai-review-section');
+  function updateNavHighlight() {
+    var current = '';
+    reviewSections.forEach(function(s) {
+      if (window.scrollY >= s.offsetTop - 140) current = s.id;
+    });
+    navItems.forEach(function(n) {
+      var href = n.getAttribute('href') || '';
+      n.classList.toggle('active', href === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateNavHighlight);
+  // Smooth scroll for nav clicks
+  navItems.forEach(function(n) {
+    n.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = (n.getAttribute('href') || '').replace('#', '');
+      var target = document.getElementById(targetId);
+      if (target) {
+        var offset = target.offsetTop - 130;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
 }
 
 // === Disclaimer & Team modals ===
