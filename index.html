@@ -2309,8 +2309,8 @@ body { padding-bottom: 60px; }
   background: var(--card-bg); border: 1px solid var(--border);
   border-radius: 14px; padding: 20px 24px; margin-bottom: 12px;
 }
-.opencgt-block-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.opencgt-block-content { font-size: 13px; color: var(--text-light); line-height: 1.8; }
+.opencgt-block-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; justify-content: center; }
+.opencgt-block-content { font-size: 13px; color: var(--text-light); line-height: 1.8; text-align: center; }
 .opencgt-value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .opencgt-value-card {
   background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
@@ -2320,7 +2320,7 @@ body { padding-bottom: 60px; }
 .opencgt-value-card-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.1); }
 .opencgt-value-card-title { font-size: 13px; font-weight: 700; color: var(--text); }
 .opencgt-value-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
-.opencgt-audience-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.opencgt-audience-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .opencgt-audience-chip {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border-radius: 10px;
@@ -2336,17 +2336,78 @@ body { padding-bottom: 60px; }
 .opencgt-flow-num { font-size: 11px; font-weight: 800; color: var(--primary); }
 .opencgt-flow-text { font-size: 12px; color: var(--text); font-weight: 600; text-align: center; }
 .opencgt-flow-arrow { color: var(--text-light); opacity: 0.4; }
+.opencgt-twophase { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.opencgt-phase { flex: 1; min-width: 260px; max-width: 400px; }
+.opencgt-phase-head { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 12px; }
+.opencgt-phase-badge { font-size: 12px; font-weight: 800; color: var(--primary); padding: 3px 10px; border-radius: 20px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2); }
+.opencgt-phase-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.opencgt-phase-steps { display: flex; flex-direction: column; gap: 8px; }
+.opencgt-phase-step { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.1); }
+.opencgt-phase-step-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--primary); background: rgba(0,229,255,0.12); flex-shrink: 0; }
+.opencgt-phase-step-text { font-size: 13px; color: var(--text); font-weight: 500; }
 .opencgt-partners-placeholder {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 24px; border: 1px dashed var(--border); border-radius: 12px;
   color: var(--text-light); font-size: 13px; text-align: center; gap: 8px;
 }
+.opencgt-sphere-wrap { display: flex; justify-content: center; align-items: center; padding: 20px 0; }
+.opencgt-sphere {
+  position: relative; width: 340px; height: 340px;
+  perspective: 1000px;
+}
+.opencgt-sphere-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  animation: opencgt-sphere-rotate 30s linear infinite;
+}
+.opencgt-sphere:hover .opencgt-sphere-inner { animation-play-state: paused; }
+@keyframes opencgt-sphere-rotate {
+  from { transform: rotateY(0deg) rotateX(-8deg); }
+  to { transform: rotateY(360deg) rotateX(-8deg); }
+}
+.opencgt-node {
+  position: absolute; top: 50%; left: 50%;
+  width: 56px; height: 56px; margin: -28px 0 0 -28px;
+  border-radius: 50%; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(0,229,255,0.3), rgba(0,229,255,0.08));
+  border: 1.5px solid rgba(0,229,255,0.4);
+  box-shadow: 0 0 12px rgba(0,229,255,0.2), inset 0 0 8px rgba(0,229,255,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  backface-visibility: visible;
+}
+.opencgt-node:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 24px rgba(0,229,255,0.5), inset 0 0 12px rgba(0,229,255,0.2);
+  z-index: 10;
+}
+.opencgt-node-icon { color: var(--primary); }
+.opencgt-node-label { font-size: 8px; color: var(--text); font-weight: 600; margin-top: 1px; text-align: center; line-height: 1.1; }
+.opencgt-sphere-core {
+  position: absolute; top: 50%; left: 50%;
+  width: 80px; height: 80px; margin: -40px 0 0 -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,229,255,0.15), rgba(10,15,26,0.8));
+  border: 1px solid rgba(0,229,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--primary);
+  text-align: center; line-height: 1.3;
+}
+.opencgt-sphere-rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+.opencgt-sphere-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(0,229,255,0.08); }
+.opencgt-sphere-hint { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px; }
 @media (max-width: 768px) {
   .opencgt-value-grid { grid-template-columns: 1fr; }
   .opencgt-hero { padding: 22px 16px; }
   .opencgt-hero-title { font-size: 19px; }
   .opencgt-flow { flex-direction: column; }
   .opencgt-flow-arrow { transform: rotate(90deg); }
+  .opencgt-twophase { flex-direction: column; }
+  .opencgt-phase { max-width: 100%; }
+  .opencgt-sphere { width: 280px; height: 280px; }
+  .opencgt-node { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+  .opencgt-node-label { font-size: 7px; }
+  .opencgt-sphere-core { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 9px; }
 }
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
@@ -7052,13 +7113,6 @@ function renderHub() {
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
 
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
-
-  // Hot search tags - expanded pool with shuffle
-  html += '<div class="hub-tags">';
-  html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
-  html += '</div>';
-
   // AI poster banner entry - clickable, jumps to AI data dashboard
   html += '<div class="ai-poster-banner" onclick="switchSection(\'ai\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
@@ -7072,26 +7126,22 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
-  // Split cards: 声明 + 平台指南
+  // Open CGT section divider
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('lightbulb', 16) + ' Open CGT</div><div class="sd-line"></div></div>';
+
+  // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
   html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
-  html += '</div>';
-
-  // 维护团队 entry (full width)
-  html += '<div class="report-entry" style="border-color:rgba(175,169,236,0.2);margin-top:12px;" onclick="switchSection(\'team\')">';
-  html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#AFA9EC;">' + svgIcon('users', 16) + '<span>维护团队 · 关于我们</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(175,169,236,0.7);">专家团队 · 10位AI智能体覆盖CGT全产业链 · 每日自主迭代</div>';
-  html += '</div>';
-  html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
+  html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台服务</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
+  html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
   html += '</div>';
 
   // Open CGT CTA block
   html += '<div class="opencgt-cta" onclick="switchSection(\'opencgt\')">';
   html += '<div class="opencgt-cta-bg"></div>';
   html += '<div class="opencgt-cta-content">';
-  html += '<div class="opencgt-cta-vision">有想法，就有路径 — <span class="accent">Open CGT</span> 共创计划</div>';
+  html += '<div class="opencgt-cta-vision">Open CGT <span class="accent">共创计划</span></div>';
   html += '<div class="opencgt-cta-tagline">AI驱动的开放细胞与基因治疗共创平台</div>';
   html += '<div class="opencgt-cta-steps">';
   html += '<div class="opencgt-cta-step"><div class="opencgt-cta-step-icon">' + svgIcon('lightbulb', 22) + '</div><div class="opencgt-cta-step-text">你提想法</div><div class="opencgt-cta-step-sub">AI团队规划路径</div></div>';
@@ -7102,6 +7152,12 @@ function renderHub() {
   html += '<div class="opencgt-cta-btn primary">' + svgIcon('arrow-right', 16) + ' 了解Open CGT</div>';
   html += '</div>';
   html += '</div>';
+  html += '</div>';
+
+  // 热门检索·快捷入口 (moved to bottom)
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
+  html += '<div class="hub-tags">';
+  html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
   html += '</div>';
 
   content.innerHTML = html;
@@ -8036,6 +8092,53 @@ function renderTeam() {
 }
 
 // === Open CGT ===
+var OPENCGT_PARTNERS = [
+  { short: '科研', icon: 'flask', name: '科研机构节点', desc: '高校实验室与研究所，提供前沿研究与技术开发支持', role: '基础研究 · 技术开发' },
+  { short: '临床', icon: 'hospital', name: '临床中心节点', desc: '三甲医院与临床试验机构，提供临床资源与试验执行支持', role: '临床试验 · 患者招募' },
+  { short: '企业', icon: 'building', name: 'CGT企业节点', desc: '细胞与基因治疗企业，提供产业化与生产工艺支持', role: '产业化 · 工艺开发' },
+  { short: '投资', icon: 'chart', name: '投资机构节点', desc: '生物医药投资机构，提供资金与投后管理支持', role: '投融资 · 战略规划' },
+  { short: '监管', icon: 'shield', name: '监管合规节点', desc: '法规咨询与合规团队，提供申报注册与政策解读支持', role: '注册申报 · 合规咨询' },
+  { short: 'CDMO', icon: 'layers', name: 'CDMO节点', desc: '合同研发生产组织，提供从工艺开发到GMP生产的全流程服务', role: '工艺开发 · GMP生产' },
+  { short: 'CRO', icon: 'clipboard', name: 'CRO节点', desc: '临床试验合同组织，提供临床试验设计与数据管理服务', role: '试验设计 · 数据管理' },
+  { short: 'AI', icon: 'lightbulb', name: 'AI技术节点', desc: '人工智能技术团队，提供数据分析与智能评估支持', role: 'AI评估 · 数据分析' },
+  { short: '媒体', icon: 'news', name: '行业媒体节点', desc: 'CGT行业媒体与传播平台，提供行业资讯与品牌传播支持', role: '行业资讯 · 品牌传播' },
+  { short: '学会', icon: 'users', name: '学术组织节点', desc: '学会与协会，提供学术交流与标准制定支持', role: '学术交流 · 标准制定' }
+];
+
+function positionSphereNodes() {
+  var nodes = document.querySelectorAll('.opencgt-node');
+  if (!nodes.length) return;
+  var count = nodes.length;
+  var radius = 130;
+  for (var i = 0; i < count; i++) {
+    var phi = Math.acos(-1 + (2 * i) / count);
+    var theta = Math.sqrt(count * Math.PI) * phi;
+    var x = radius * Math.cos(theta) * Math.sin(phi);
+    var y = radius * Math.sin(theta) * Math.sin(phi);
+    var z = radius * Math.cos(phi);
+    nodes[i].style.transform = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
+  }
+}
+
+function showPartnerInfo(idx) {
+  var p = OPENCGT_PARTNERS[idx];
+  if (!p) return;
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg);border:1px solid var(--primary);border-radius:16px;max-width:420px;width:100%;padding:28px;box-shadow:0 8px 40px rgba(0,229,255,0.2);text-align:center;';
+  modal.innerHTML =
+    '<div style="width:56px;height:56px;border-radius:14px;background:rgba(0,229,255,0.12);display:flex;align-items:center;justify-content:center;color:var(--primary);margin:0 auto 16px;">' + svgIcon(p.icon, 28) + '</div>' +
+    '<div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;">' + p.name + '</div>' +
+    '<div style="display:inline-block;font-size:11px;font-weight:600;color:var(--primary);padding:3px 12px;border-radius:20px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.15);margin-bottom:14px;">' + p.role + '</div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:20px;">' + p.desc + '</div>' +
+    '<div style="font-size:12px;color:var(--text-light);opacity:0.7;margin-bottom:16px;">该节点正在建设中，更多详细信息即将上线</div>' +
+    '<button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 28px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">关闭</button>';
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
 function renderOpenCGT() {
   var content = document.getElementById('content');
   var html = '';
@@ -8046,7 +8149,7 @@ function renderOpenCGT() {
   html += '<div class="opencgt-hero-bg"></div>';
   html += '<div class="opencgt-hero-content">';
   html += '<div class="opencgt-hero-title">Open CGT <span class="accent">共创计划</span></div>';
-  html += '<div class="opencgt-hero-desc">AI驱动的开放细胞与基因治疗共创平台。无论你是研究者、创业者、医生还是投资人——有想法，就有路径。AI团队帮你规划实现路径，联通平台资源，找到志同道合的伙伴，从想法到落地。</div>';
+  html += '<div class="opencgt-hero-desc">AI驱动的开放细胞与基因治疗共创平台。无论你是研究者、创业者、医生还是投资人——有想法，就有路径。AI团队帮你规划实现路径，联通平台资源，找到志同道合的伙伴，让想法真正落地。</div>';
   html += '</div>';
   html += '</div>';
 
@@ -8054,15 +8157,15 @@ function renderOpenCGT() {
   html += '<div class="opencgt-block">';
   html += '<div class="opencgt-block-title">' + svgIcon('lightbulb', 18) + ' 愿景与使命</div>';
   html += '<div class="opencgt-block-content">';
-  html += '<p style="margin-bottom:8px;"><b style="color:var(--text);">愿景：</b>打造一个开放的CGT（细胞与基因治疗）平台，AI全流程参与，让每一个有价值的想法都能找到实现路径。</p>';
-  html += '<p style="margin-bottom:8px;"><b style="color:var(--text);">使命：</b>降低CGT领域的创新门槛——通过AI智能体团队提供从文献调研、专利分析、临床试验设计到投融资规划的全链路支持，联通知识库中的备案机构、获批企业与临床资源，构建志同道合者的共创联盟。</p>';
-  html += '<p><b style="color:var(--text);">价值观：</b>开放 · 协作 · AI赋能 · 想法驱动</p>';
+  html += '<p style="margin-bottom:10px;"><b style="color:var(--text);">愿景：</b>助力创新药高效转化，服务中国GCT行业</p>';
+  html += '<p style="margin-bottom:10px;"><b style="color:var(--text);">使命：</b>提供从基础研究、药物生产监控、临床试验设计管理、药物申报等全链路支持。打造中国GCT创新药共创联盟。</p>';
+  html += '<p><b style="color:var(--text);">价值观：</b>开放 · 协作 · 包容 · 诚信</p>';
   html += '</div>';
   html += '</div>';
 
   // What we provide
   html += '<div class="opencgt-block">';
-  html += '<div class="opencgt-block-title">' + svgIcon('layers', 18) + ' 我们能提供什么</div>';
+  html += '<div class="opencgt-block-title">' + svgIcon('layers', 18) + ' 我们提供什么</div>';
   html += '<div class="opencgt-value-grid">';
   html += '<div class="opencgt-value-card">';
   html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:var(--primary);">' + svgIcon('compass', 16) + '</div><div class="opencgt-value-card-title">AI路径规划</div></div>';
@@ -8081,7 +8184,7 @@ function renderOpenCGT() {
 
   // Who can join
   html += '<div class="opencgt-block">';
-  html += '<div class="opencgt-block-title">' + svgIcon('users', 18) + ' 谁可以加入</div>';
+  html += '<div class="opencgt-block-title">' + svgIcon('users', 18) + ' 期待您的加入</div>';
   html += '<div class="opencgt-audience-list">';
   html += '<span class="opencgt-audience-chip">' + svgIcon('flask', 14) + ' 研究人员</span>';
   html += '<span class="opencgt-audience-chip">' + svgIcon('shield', 14) + ' 临床医生</span>';
@@ -8095,33 +8198,67 @@ function renderOpenCGT() {
   // How to participate
   html += '<div class="opencgt-block">';
   html += '<div class="opencgt-block-title">' + svgIcon('compass', 18) + ' 如何参与</div>';
-  html += '<div class="opencgt-flow">';
-  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 1</div><div class="opencgt-flow-text">提交想法</div></div>';
-  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
-  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 2</div><div class="opencgt-flow-text">AI评估</div></div>';
-  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
-  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 3</div><div class="opencgt-flow-text">路径规划</div></div>';
-  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
-  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 4</div><div class="opencgt-flow-text">资源对接</div></div>';
-  html += '<div class="opencgt-flow-arrow">' + svgIcon('chevron-right', 20) + '</div>';
-  html += '<div class="opencgt-flow-step"><div class="opencgt-flow-num">STEP 5</div><div class="opencgt-flow-text">共创落地</div></div>';
+  html += '<div class="opencgt-twophase">';
+  // Phase 1
+  html += '<div class="opencgt-phase">';
+  html += '<div class="opencgt-phase-head"><span class="opencgt-phase-badge">第一步</span><span class="opencgt-phase-title">申请加入</span></div>';
+  html += '<div class="opencgt-phase-steps">';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num">1</div><div class="opencgt-phase-step-text">填写资料</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num">2</div><div class="opencgt-phase-step-text">审核通过</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num">3</div><div class="opencgt-phase-step-text">成为联盟节点</div></div>';
   html += '</div>';
-  html += '<div style="margin-top:14px;font-size:13px;color:var(--text-light);line-height:1.8;">提交你的想法后，AI团队将在48小时内进行初步评估，生成可行性分析与实现路径建议。高价值想法将进入资源对接阶段，联通平台内的备案机构、企业与临床资源。最终，我们帮助你找到志同道合的伙伴，组建团队，推动想法落地。</div>';
+  html += '</div>';
+  // Phase 2
+  html += '<div class="opencgt-phase">';
+  html += '<div class="opencgt-phase-head"><span class="opencgt-phase-badge" style="color:#66BB6A;background:rgba(102,187,106,0.1);border-color:rgba(102,187,106,0.2);">第二步</span><span class="opencgt-phase-title">如何使用</span></div>';
+  html += '<div class="opencgt-phase-steps">';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">1</div><div class="opencgt-phase-step-text">提交想法</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">2</div><div class="opencgt-phase-step-text">AI评估</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">3</div><div class="opencgt-phase-step-text">精准匹配</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">4</div><div class="opencgt-phase-step-text">路径规划</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">5</div><div class="opencgt-phase-step-text">资源对接</div></div>';
+  html += '<div class="opencgt-phase-step"><div class="opencgt-phase-step-num" style="color:#66BB6A;background:rgba(102,187,106,0.12);">6</div><div class="opencgt-phase-step-text">共创落地</div></div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-align:center;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，同时AI会精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
   html += '</div>';
 
-  // Partners placeholder
+  // Partners - 3D sphere
   html += '<div class="opencgt-block">';
   html += '<div class="opencgt-block-title">' + svgIcon('building', 18) + ' 已入驻伙伴</div>';
-  html += '<div class="opencgt-partners-placeholder">' + svgIcon('plus', 20) + ' <div>联盟计划刚刚启动，伙伴席位虚位以待</div><div style="font-size:12px;opacity:0.6;">如果你有CGT领域的机构、企业或团队资源，欢迎加入我们的共创联盟</div></div>';
+  html += '<div class="opencgt-sphere-wrap">';
+  html += '<div class="opencgt-sphere">';
+  html += '<div class="opencgt-sphere-rings">';
+  html += '<div class="opencgt-sphere-ring" style="width:300px;height:300px;margin:-150px 0 0 -150px;"></div>';
+  html += '<div class="opencgt-sphere-ring" style="width:240px;height:240px;margin:-120px 0 0 -120px;"></div>';
+  html += '<div class="opencgt-sphere-ring" style="width:180px;height:180px;margin:-90px 0 0 -90px;"></div>';
+  html += '</div>';
+  html += '<div class="opencgt-sphere-inner" id="opencgtSphereInner">';
+  html += '<div class="opencgt-sphere-core">Open<br>CGT</div>';
+  // Nodes will be positioned by JS
+  for (var pi = 0; pi < OPENCGT_PARTNERS.length; pi++) {
+    var p = OPENCGT_PARTNERS[pi];
+    html += '<div class="opencgt-node" data-idx="' + pi + '" onclick="showPartnerInfo(' + pi + ')" id="opencgtNode' + pi + '">';
+    html += '<div class="opencgt-node-icon">' + svgIcon(p.icon, 16) + '</div>';
+    html += '<div class="opencgt-node-label">' + p.short + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div class="opencgt-sphere-hint">悬停暂停旋转 · 点击节点查看详情</div>';
   html += '</div>';
 
   // CTA
   html += '<div style="text-align:center;margin-top:16px;">';
   html += '<div class="opencgt-cta-btn primary" style="display:inline-flex;" onclick="showOpenCGTSubmitModal()">' + svgIcon('lightbulb', 16) + ' 提交你的想法</div>';
+  html += '<div style="margin-top:10px;font-size:12px;color:var(--text-light);opacity:0.6;">（初创想法，暂时无法提交，功能开发中……）</div>';
   html += '</div>';
 
   content.innerHTML = html;
   updateFloatButtons();
+  setTimeout(positionSphereNodes, 50);
 }
 
 function showOpenCGTSubmitModal() {
@@ -8176,6 +8313,31 @@ function showTeamModal() {
     '<div style="font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.6;">5位AI智能体 + 1位专家审核 · 每日自主迭代学习</div>' +
     membersHtml +
     '<div style="text-align:center;margin-top:16px;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(171,71,188,0.1);border:1px solid #AFA9EC;color:#AFA9EC;padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">关闭</button></div>';
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
+function showPlatformServiceModal() {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+  var services = [
+    {icon:'database', name:'数据查询', desc:'730+篇临床文献 · 45款获批产品 · 21份监管政策 · 106家备案机构'},
+    {icon:'search', name:'文献检索', desc:'PubMed/ClinicalTrials多库检索 · 自动结构化分级 · 适应症/终点/安全性分析'},
+    {icon:'shield', name:'政策追踪', desc:'NMPA/FDA/EMA/ISCT监管动态实时监控与深度解读'},
+    {icon:'chart', name:'AI分析', desc:'行业报告自动生成 · 数据可视化 · 趋势预测 · 定制报告'},
+    {icon:'lightbulb', name:'Open CGT共创', desc:'想法提交 · AI路径规划 · 资源对接 · 共创联盟'},
+    {icon:'book', name:'知识库构建', desc:'多源数据清洗入库 · 持续迭代更新 · 专家审核'}
+  ];
+  var servicesHtml = services.map(function(s) {
+    return '<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><div style="width:32px;height:32px;border-radius:8px;background:rgba(255,138,101,0.12);display:flex;align-items:center;justify-content:center;color:#FFAB91;flex-shrink:0;">' + svgIcon(s.icon, 16) + '</div><div><div style="font-weight:700;color:var(--text);font-size:14px;">' + s.name + '</div><div style="color:var(--text-light);font-size:12px;line-height:1.6;">' + s.desc + '</div></div></div>';
+  }).join('');
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:500px;width:100%;padding:24px;box-shadow:0 8px 40px rgba(230,81,0,0.15);max-height:80vh;overflow-y:auto;';
+  modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:#E65100;display:flex;align-items:center;justify-content:center;color:#FFAB91;">' + svgIcon('layers', 20) + '</div><div style="font-size:18px;font-weight:700;color:#FFAB91;">平台服务</div></div>' +
+    '<div style="font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.6;">知识库平台提供的核心服务能力，覆盖数据、文献、政策、AI分析等全链路</div>' +
+    servicesHtml +
+    '<div style="text-align:center;margin-top:16px;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(230,81,0,0.1);border:1px solid #FFAB91;color:#FFAB91;padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button></div>';
   overlay.appendChild(modal);
   document.body.appendChild(overlay);
 }
