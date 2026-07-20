@@ -2411,7 +2411,7 @@ body { padding-bottom: 60px; }
 @keyframes labPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 .lab-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
 .lab-hero-title .accent { color: #66BB6A; }
-.lab-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+.lab-hero-desc { font-size: 14px; color: var(--text-light); text-align: left; text-indent: 2em; line-height: 1.8; max-width: 600px; margin: 0 auto; }
 
 .lab-timeline { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 10px 0 16px; }
 .lab-tl-step { flex: 1; min-width: 80px; text-align: center; position: relative; }
@@ -2519,7 +2519,7 @@ body { padding-bottom: 60px; }
 .bp-hero-content { position: relative; z-index: 1; }
 .bp-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
 .bp-hero-title .accent { color: #CE93D8; }
-.bp-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+.bp-hero-desc { font-size: 14px; color: var(--text-light); text-align: left; text-indent: 2em; line-height: 1.8; max-width: 600px; margin: 0 auto; }
 
 .bp-roadmap { display: flex; gap: 0; align-items: stretch; }
 .bp-rm-phase {
@@ -8842,6 +8842,10 @@ function renderOpenCGT() {
   html += '<div class="opencgt-value-card-desc">10位AI智能体覆盖CGT全产业链，从文献调研、专利分析到临床试验设计、质量合规、投融资规划，为你的想法定制实现路径</div>';
   html += '</div>';
   html += '<div class="opencgt-value-card">';
+  html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:#FFB74D;">' + svgIcon('users', 16) + '</div><div class="opencgt-value-card-title">平台专家解答</div></div>';
+  html += '<div class="opencgt-value-card-desc">平台目前已有多位博士专家入驻，基本覆盖CGT行业，如果平台无法解答您的问题，AI将自动匹配资源</div>';
+  html += '</div>';
+  html += '<div class="opencgt-value-card">';
   html += '<div class="opencgt-value-card-head"><div class="opencgt-value-card-icon" style="color:#66BB6A;">' + svgIcon('link', 16) + '</div><div class="opencgt-value-card-title">资源对接</div></div>';
   html += '<div class="opencgt-value-card-desc">联通知识库中的备案机构、获批企业、临床试验中心与监管政策库，帮你找到合适的合作伙伴与资源</div>';
   html += '</div>';
@@ -8891,7 +8895,7 @@ function renderOpenCGT() {
   html += '</div>';
   html += '</div>';
   html += '</div>';
-  html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-indent:2em;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，同时AI会精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
+  html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-indent:2em;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，推送给平台已入驻专家库，同时AI将精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
   html += '</div>';
 
   // Partners - 3D force-directed sphere network
