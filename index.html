@@ -11279,7 +11279,7 @@ function renderInstitutions() {
   html += '</div>';
   // 临床招募 card
   html += '<div class="reg-cat-card" style="border-left-color:#0277BD;cursor:pointer;" onclick="showInstRecruiting()">';
-  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#0277BD;"></span><span class="rcc-unit"> 项</span></div>';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + RECRUITING_TRIALS.length + '" style="color:#0277BD;"></span><span class="rcc-unit"> 项</span></div>';
   html += '<div class="rcc-name">临床招募</div>';
   html += '</div>';
   html += '</div>';
@@ -11665,6 +11665,106 @@ function filterInstProj(filter, btn) {
   });
 }
 
+var RECRUITING_TRIALS = [
+  {nct:'NCT06027853', title:'Natural Killer(NK) Cell Therapy Targeting CLL1 in Acute Myeloid Leukemia', disease:'AML, Adult', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I期', institution:'Clinical research ethics committee of the first affiliated hospital, college of medicine, zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT06027853'},
+  {nct:'NCT07510802', title:'Dual-Target CAR-NK Cells for Advanced Breast Cancer HER2+ TNBC', disease:'Breast Cancer (Advanced/Metastatic); HER2-positive Breast Cancer; Triple-negative Breast Cancer', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07510802'},
+  {nct:'NCT07486089', title:'Dual-Target CAR-NK Cells for Advanced Breast Cancer (HER2+ and TNBC)', disease:'Breast Cancer (Locally Advanced or Metastatic); HER2-positive Breast Cancer; Triple-Negative Breast Cancer (TNBC)', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07486089'},
+  {nct:'NCT07410494', title:'Biomarker-Guided Allogeneic Single-Target or Dual-Target CAR-NK Cell Therapy for Advanced Solid Tumors', disease:'Cancer; Breast Cancer; Non-Small Cell Lung Cancer (NSCLC)', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'District One Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07410494'},
+  {nct:'NCT07589517', title:'Dual-Targeting CAR-NK Cells in Biomarker-Selected Advanced Colorectal Cancer', disease:'Colorectal Cancer; Metastatic Colorectal Adenocarcinoma; Unresectable Colorectal Cancer', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07589517'},
+  {nct:'NCT07617753', title:'Dual-Targeting CAR-NK Cells for Recurrent Ovarian Cancer (MSLN, FRα, MUC16) pt2', disease:'Epithelial Ovarian Cancer; Primary Peritoneal Carcinoma; Fallopian Tube Carcinoma', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07617753'},
+  {nct:'NCT07551336', title:'Dual-Targeting CAR-NK Cells for Recurrent/Progressive Glioblastoma and High-Grade Glioma', disease:'Malignant Glioma; High-Grade Gliomas; Glioblastoma', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07551336'},
+  {nct:'NCT07510815', title:'Dual-Target MSLN/FAP CAR-NK Cells for Pleural and Peritoneal Mesothelioma', disease:'Malignant Pleural Mesotheliomas', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07510815'},
+  {nct:'NCT07641049', title:'Dual-target PSMA/PSCA CAR-NK Cells in Advanced Prostate Cancer', disease:'Metastatic Castration-resistant Prostate Cancer; Advanced Prostate Adenocarcinoma; PSCA-positive Prostate Cancer', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07641049'},
+  {nct:'NCT07467863', title:'Dual-Target CAR-NK Cells Directed Against MSLN, EGFR, or HER2 in Advanced NSCLC', disease:'Non-Small Cell Lung Cancer; Advanced/Metastatic NSCLC', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07467863'},
+  {nct:'NCT07283315', title:'Exploratory Clinical Study of Second-generation CD19/BCMA Chimeric Antigen Receptor NK Cell Injection in Treating Paediatric B Cell-related Autoimmune Diseases', disease:'Paediatric B Cell-related Autoimmune Diseases; Autoimmune Diseases; CAR', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I期(早期)', institution:'Children\'s Hospital of Zhejiang University School of Medicine', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT07283315'},
+  {nct:'NCT06696846', title:'CD70-CAR-NK Cell Therapy for T Cell Lymphoma and Acute Myeloid Leukemia', disease:'Relapsed/Refractory T-cell Lymphoma; Relapsed/Refractory Acute Myeloid Leukemia', cellType:'CAR-NK', cellColor:'#1565C0', phase:'I期', institution:'The Second Affiliated Hospital, Zhejiang University School of Medicine', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT06696846'},
+  {nct:'NCT05388695', title:'To Observe the Dual-target Chimeric Antigen Receptor T Cells in the Treatment of B Cell Hematologic Tumors', disease:'19 and 22+ B Cell Hematologic Tumors; 19 and 20+ B Cell Hematologic Tumors', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Tongji Hospital', city:'Wuhan', url:'https://clinicaltrials.gov/study/NCT05388695'},
+  {nct:'NCT06346912', title:'CD19-BAFF CAR-T Cells Therapy for Patients With Relapsed / Refractory B-cell ALL and B-cell NHL', disease:'Acute Lymphoblastic Leukemia,B-Cell; Non-hodgkin Lymphoma,B Cell', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'The first affiliated hospital of medical college of zhejiang university', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT06346912'},
+  {nct:'NCT04227015', title:'A Study of CTA101 UCAR-T Cell Injection in Patients With Relapsed or Refractory CD19+ B-line Hematological Malignancy', disease:'Acute Lymphoblastic Leukemia; Non-hodgkin Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'The First Hospital of Zhejiang Medical Colleage Zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT04227015'},
+  {nct:'NCT07668557', title:'Anti-CD33-CLL1 CAR-T Cells (ICG415) for the Treatment of Relapsed/Refractory Acute Myeloid Leukemia', disease:'Acute Myeloid Leukemia (AML)', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Jiangxi Provincial People\'s Hospital (Participating Site)', city:'Nanchang', url:'https://clinicaltrials.gov/study/NCT07668557'},
+  {nct:'NCT07109518', title:'uCD7 CART for Relapsed or Refractory CD7 Positive Hematologic Malignancies', disease:'Acute Myeloid Leukemia (AML); T Lymphoblastic Leukemia/Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Institute of Hematology & Blood Diseases Hospital', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT07109518'},
+  {nct:'NCT06125652', title:'Administration of Anti Tim-3/CD123 CAR-T Cell Therapy in Relapsed and Refractory Acute Myeloid Leukemia (rr/AML)', disease:'Acute Myeloid Leukemia Refractory; Acute Myeloid Leukemia, in Relapse', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Kailin Xu', city:'Xuzhou', url:'https://clinicaltrials.gov/study/NCT06125652'},
+  {nct:'NCT05620706', title:'Study of GPC-3 CAR-T Cells in Treating With Hepatocellular Carcinoma', disease:'Advanced Hepatocellular Carcinoma', cellType:'CAR-T', cellColor:'#C62828', phase:'未分期', institution:'Li Yu', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT05620706'},
+  {nct:'NCT07395479', title:'A Platform Study of In Vivo CAR-T for Treating Advanced Malignant Tumors Based on Target Screening', disease:'Advanced Malignant Tumours', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'Cancer Hospital Chinese Academy of Medical Sciences 17 Panjiayuan Nanli, Chaoyang District', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07395479'},
+  {nct:'NCT07009002', title:'BCOR and ZC3H12 Genes Knock-out CD19-targeting CAR-T Cell Therapy in r/r B Cell Lymphoma', disease:'B Cell Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Biotherapeutic Department of Chinsese PLA Gereral Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07009002'},
+  {nct:'NCT04429438', title:'Multi-CAR-T Cells Targeting B Cell Lymphomas', disease:'B Cell Lymphoma (BCL)', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Shenzhen Geno-Immune Medical Institute', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT04429438'},
+  {nct:'NCT06822868', title:'A Clinical Study Exploring CT1190B in the Treatment of Patients With Relapsed/Refractory B-cell Non-Hodgkin Lymphoma', disease:'B-Cell Non-Hodgkin Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Beijing GoBroad Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT06822868'},
+  {nct:'NCT07575919', title:'Targeted CD22/CD19 CAR-T Therapy for Consolidation in Standard-Risk B-ALL', disease:'B-cell Acute Lymphoblastic Leukemia', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Chinese PLA General Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07575919'},
+  {nct:'NCT05436223', title:'Human CD19 Targeted T Cells Injection(CD19 CAR-T) Therapy for Relapsed and Refractory B-cell Non-Hodgkin\'s Lymphoma', disease:'B-cell Non-Hodgkin\'s Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'II期', institution:'Zhongshan Hospital, Fudan University', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT05436223'},
+  {nct:'NCT04430530', title:'4SCAR-T Therapy Post CD19-targeted Immunotherapy', disease:'CD19 Negative B-cell Malignancies', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Shenzhen Geno-Immune Medical Institute', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT04430530'},
+  {nct:'NCT07106723', title:'Clinical Study of the Safety and Efficacy of ASCT Combined With CD7-CART in the Treatment of CD7+ TCL', disease:'CD7 Positive; T - Cell Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'II期', institution:'Blood Disease Hospital, Chinese Academy of Medical Sciences', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT07106723'},
+  {nct:'NCT07259070', title:'Multicenter, Single-Arm Exploratory Phase I Clinical Study (Assessment of Safety and Efficacy) of Fully Human BAFF-R Chimeric Antigen Receptor T-Cell Injection in Relapsed/Refractory BAFF-R-Positive B-Cell Lymphoma', disease:'DLBCL; CLL; FL', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Institute of Hematology and Blood Diseases Hospital ,Chinese Academy of Medical Sciences', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT07259070'},
+  {nct:'NCT07180927', title:'DLL3 CAR-T Therapy Targeting Brain Tumors', disease:'Glioblastoma of Cerebellum', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Shenzhen Geno-immuno Medical Institute', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07180927'},
+  {nct:'NCT06607289', title:'National Longitudinal Cohort of Hematological Diseases (NICHE) - CART', disease:'Hematological Malignancies', cellType:'CAR-T', cellColor:'#C62828', phase:'未分期', institution:'Institute of Hematology & Blood Diseases Hospital', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT06607289'},
+  {nct:'NCT07350837', title:'CAR-T Therapy Targeting CD19 and BCMA in Highly Sensitized Kidney Transplant Participants', disease:'Highly Sensitized Patients Awaiting Kidney Transplant', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'Tongji Hospital, Tongji Medical Collage of Huazhong University of Science & Technology', city:'Wuhan', url:'https://clinicaltrials.gov/study/NCT07350837'},
+  {nct:'NCT06352281', title:'Efficacy and Safety of CAR-T Cells Therapy for Chronic or Refractory Primary Immune Thrombocytopenia (ITP)', disease:'ITP - Immune Thrombocytopenia', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'920th Hospital of Joint Logistics Support Force of People\'s Liberation Army of China', city:'Kunming', url:'https://clinicaltrials.gov/study/NCT06352281'},
+  {nct:'NCT04969354', title:'Clinical Study of CAIX-targeted CAR-T Cells in the Treatment of Advanced Renal Cell Carcinoma', disease:'Immunotherapy', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Affiliated Hospital of Xuzhou Medical University', city:'Xuzhou', url:'https://clinicaltrials.gov/study/NCT04969354'},
+  {nct:'NCT07179692', title:'CEA-Targeted CAR-T Therapy in CEA-Positive Advanced Solid Tumors', disease:'Lung Cancer; Gastric Cancer; Colon Cancer', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'The 901 Hospital of Joint Logistics Support Force of People Liberation Army', city:'Hefei', url:'https://clinicaltrials.gov/study/NCT07179692'},
+  {nct:'NCT05594797', title:'Human BCMA Targeted T Cells Injection（BCMA CAR-T）for Subjects With R/R MM', disease:'Multiple Myeloma', cellType:'CAR-T', cellColor:'#C62828', phase:'II期', institution:'Shanghai Changzheng Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT05594797'},
+  {nct:'NCT06759181', title:'Safety and Efficacy of Anti-BCMA/FcRL5 CAR-T Cell Therapy in Treating Relapsed and Refractory Multiple Myeloma (R/R MM)', disease:'Multiple Myeloma', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Xuzhou', city:'Xuzhou', url:'https://clinicaltrials.gov/study/NCT06759181'},
+  {nct:'NCT04603872', title:'CAR-T Cells Combined With Dasatinib for Patients With Relapsed and/or Refractory B-cell Hematological Malignancies', disease:'Multiple Myeloma in Relapse; Multiple Myeloma, Refractory; Acute Lymphoblastic Leukemia, in Relapse', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'The First Hospital of Zhejiang Medical Colleage Zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT04603872'},
+  {nct:'NCT06006741', title:'Universal CAR-T Cells Targeting Multiple Myeloma', disease:'Multiple Myeloma in Remission', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Shenzhen Geno-Immune Medical Institute', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT06006741'},
+  {nct:'NCT04440436', title:'Assessment of Safety and Efficacy of IM19 for Recurrent or Refractory (R/R) Non-Hodgkin\'s Lymphoma(NHL) Patients', disease:'NHL', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Beijing Cancer Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT04440436'},
+  {nct:'NCT06939166', title:'Universal Chimeric Antigen Receptor T-Cell （UCAR T-cell） Therapy Targeting CD19/B Cell Maturation Antigen （CD19/BCMA） in Patients With r/r Neurological Autoimmune Diseases', disease:'Neuromyelitis Optica Spectrum Disorders; Myasthenia Gravis; Multiple Sclerosis', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'Tianjin Huanhu Hospital', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT06939166'},
+  {nct:'NCT07248163', title:'Universal CAR-T Cell Therapy for NHL', disease:'Non-hodgkin Lymphoma,B Cell', cellType:'CAR-T', cellColor:'#C62828', phase:'未分期', institution:'Shanghi Tongji Hospital (Tongji Hospital of Tongji University)', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT07248163'},
+  {nct:'NCT05779917', title:'Mesothelin/GPC3/GUCY2C-CAR-T Cells Against Cancers', disease:'Pancreas Cancer; CAR-T Cell Therapy; Mesothelin', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'The Second Affiliated Hospital of Guangzhou Medical University', city:'Guangzhou', url:'https://clinicaltrials.gov/study/NCT05779917'},
+  {nct:'NCT05911217', title:'A Study to Evaluate the Efficacy and Safety of CT041 After Adjuvant Chemotherapy for Pancreatic Cancer', disease:'Pancreatic Cancer', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Beijing Cancer Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT05911217'},
+  {nct:'NCT07247396', title:'CEA CAR-T Therapy After Cytoreduction in Colorectal Cancer Patients With Peritoneal Metastases', disease:'Peritoneal Metastases From Colorectal Cancer', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'The Second Affiliated Hospital of Zhejiang University School of Medicine', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT07247396'},
+  {nct:'NCT05979363', title:'A Study of Bortezomib, Lenalidomide and Dexamethasone (VRd)-Based Regimen Followed by BCMA CAR-T Therapy in Transplant-Ineligible Patients With Primary Plasma Cell Leukemia', disease:'Plasma Cell Leukemia', cellType:'CAR-T', cellColor:'#C62828', phase:'II期', institution:'Institute of Hematology and Blood Diseases Hospital Chinese Academy of Medical Sciences', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT05979363'},
+  {nct:'NCT07193628', title:'B7H3/IL13Ra2 Bispecific Armored Chimeric Antigen Receptor T-Cell Therapy Study for Recurrent/Refractory Glioblastoma', disease:'Refractory Glioblastoma; Recurrent Glioblastoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'the Second Affiliated Hospital, School of Medicine, Zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT07193628'},
+  {nct:'NCT07266181', title:'Safety and Efficacy of CD19 Chimeric Antigen Receptor T-Cell (CAR-T) in the Treatment of Refractory Membranous Nephropathy', disease:'Refractory Membranous Nephropathy', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Department of Nephrology, Xijing Hospital', city:'Xi\'an', url:'https://clinicaltrials.gov/study/NCT07266181'},
+  {nct:'NCT07391657', title:'A Study Comparing AZD0120, a Dual-targeted CAR-T Against B-cell Maturation Antigen (BCMA) and CD19, Versus Standard Regimens in Participants With Relapsed Refractory Multiple Myeloma (DURGA-4)', disease:'Relapsed Refractory Multiple Myeloma', cellType:'CAR-T', cellColor:'#C62828', phase:'III期', institution:'Research Site', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07391657'},
+  {nct:'NCT06182696', title:'OriCAR-017 Chimeric Antigen Receptor (CAR) Modified T Cells for the Treatment of R/RMM', disease:'Relapsed and/or Refractory Multiple Myeloma', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'The First Affiliated Hospital College of Medicine Zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT06182696'},
+  {nct:'NCT07519187', title:'CAR 70-BCMA CAR-T Cells for the Treatment of Relapsed or Refractory Plasma Cell Neoplasms', disease:'Relapsed or Refractory Plasma Cell Neoplasms', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'General Hospital of Western Theater Command of PLA', city:'Chengdu', url:'https://clinicaltrials.gov/study/NCT07519187'},
+  {nct:'NCT07250269', title:'Study of GC012F, CAR-T Therapy Targeting CD19 and BCMA in Chinese Participants With Relapsed or Refractory AL Amyloidosis', disease:'Relapsed/Refractory AL Amyloidosis', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Research Site', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07250269'},
+  {nct:'NCT06532643', title:'Safety and Efficacy of Anti-CD20/CD30 CAR-T Cells in Subjects with Relapsed/Refractory Lymphoma', disease:'Relapsed/Refractory Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'The First Affiliated Hospital of Anhui Medical University', city:'Hefei', url:'https://clinicaltrials.gov/study/NCT06532643'},
+  {nct:'NCT07350863', title:'U69-CART-Cells For R/R T-ALL', disease:'Relapsed/Refractory T-lymphoblastic Leukemia/Lymphoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'The First Affiliated Hospital of Soochow University', city:'Suzhou', url:'https://clinicaltrials.gov/study/NCT07350863'},
+  {nct:'NCT06586658', title:'Anti-CD70-CAR-T Cell Injection for the Treatment of Locally Advanced or Relapsed/Metastatic CD70+ Inoperable Renal Cells', disease:'Renal Cell Carcinoma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'Changzheng hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06586658'},
+  {nct:'NCT07181720', title:'CD70-Targeted CAR-T Therapy in CD70-Positive Advanced Solid Tumors', disease:'Renal Cell Carcinoma (RCC); Lung Cancer; Anaplastic Thyroid Carcinomas', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'The 901 Hospital of Joint Logistics Support Force of People Liberation Army', city:'Hefei', url:'https://clinicaltrials.gov/study/NCT07181720'},
+  {nct:'NCT06056921', title:'Safety and Efficacy of CD19 Targeted CAR-T Therapy for Refractory Autoimmune Disease', disease:'SLE (Systemic Lupus); Sjogren\'s Syndrome; Systemic Scleroderma', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Shanxi Bethune Hospital', city:'Taiyuan', url:'https://clinicaltrials.gov/study/NCT06056921'},
+  {nct:'NCT06348797', title:'Phase I Clinical Study of α-PD-L1/DLL3 CAR-T in Patients With R/R SCLC', disease:'Small Cell Lung Cancer Extensive Stage', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'West China Hospital Sichuan University', city:'Chengdu', url:'https://clinicaltrials.gov/study/NCT06348797'},
+  {nct:'NCT07487597', title:'Functionally Enhanced ALPP-Targeted Engineered T Cells in Advanced Solid Tumors', disease:'Solid Tumor', cellType:'CAR-T', cellColor:'#C62828', phase:'I期(早期)', institution:'The Jinling Hospital', city:'Nanjing', url:'https://clinicaltrials.gov/study/NCT07487597'},
+  {nct:'NCT07231081', title:'Phase I Study of TX103 CAR-T Cells in Participants With Advanced Solid Tumors', disease:'Solid Tumors', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Beijing Cancer Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07231081'},
+  {nct:'NCT06941129', title:'CAR T-cell Therapy Targeting CD19 and BCMA in Patients With Relapse/Refractory Autoimmune Diseases', disease:'Systemic Lupus Erythematosus; Systemic Sclerosis (SSc); Inflammatory Myopathy', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Institute of Hematology & Blood Diseases Hospital', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT06941129'},
+  {nct:'NCT06414135', title:'Relmacabtagene Autoleucel for the Treatment of Systemic Sclerosis', disease:'Systemic Sclerosis', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Renji Hospital, Shanghai Jiaotong University School of Medicine', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06414135'},
+  {nct:'NCT06420076', title:'Sequential CAR-T Cells Therapy for CD5/CD7 Positive T-cell Acute Lymphoblastic Leukemia and Lymphoblastic Lymphoma Using CD5/CD7-Specific CAR-T Cells', disease:'T Cell Lymphoma; T Cell Leukemia; T-cell Acute Lymphoblastic Leukemia', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'District One Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT06420076'},
+  {nct:'NCT06316427', title:'Autologous and Donor-derived CD7 CAR-T Therapy in Refractory or Relapsed T-cell Malignancies', disease:'T-cell Acute Lymphoblastic Leukemia; Acute Lymphoblastic Leukemia, in Relapse; Refractory Acute Lymphoblastic Leukemia', cellType:'CAR-T', cellColor:'#C62828', phase:'I/II期', institution:'Beijing GoBroad Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT06316427'},
+  {nct:'NCT06136364', title:'CD7 CAR-T in Adults With Relapsed or Refractory T-LBL/ALL Clinical Study', disease:'T-lymphoblastic Lymphoma; T-ALL', cellType:'CAR-T', cellColor:'#C62828', phase:'I期', institution:'Shanghai Ruijin Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06136364'},
+  {nct:'NCT06106893', title:'A Clinical Study of CD19 Universal CAR-γδT Cells in Active Systemic Lupus Erythematosus', disease:'Systemic Lupus Erythematosus', cellType:'CAR-γδT', cellColor:'#6A1B9A', phase:'I/II期', institution:'Wuhan Union Hospital', city:'Wuhan', url:'https://clinicaltrials.gov/study/NCT06106893'},
+  {nct:'NCT06568328', title:'Chimeric Natural Killer Receptor-Universal T Cells for Refractory GVHD', disease:'Graft vs Host Disease', cellType:'Cell Therapy', cellColor:'#185FA5', phase:'I期', institution:'First Affiliated Hospital of Fujian Medical University', city:'Fuzhou', url:'https://clinicaltrials.gov/study/NCT06568328'},
+  {nct:'NCT06751134', title:'Chimeric Natural Killer Receptor-Universal T Cells for Relapsed or Refractory Neuroblastoma', disease:'Neuroblastoma, Recurrent, Refractory', cellType:'Cell Therapy', cellColor:'#185FA5', phase:'I期', institution:'Nanjing Children\'s Hospital', city:'Nanjing', url:'https://clinicaltrials.gov/study/NCT06751134'},
+  {nct:'NCT03193567', title:'Study of High Efficient Killing Cell Therapy for Advanced NSCLC', disease:'Non Small Cell Lung Cancer', cellType:'Cell Therapy', cellColor:'#185FA5', phase:'I期', institution:'Ruijin Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT03193567'},
+  {nct:'NCT07236801', title:'Exploratory Clinical Study on YTS109 Cell Therapy for Autoimmune Diseases', disease:'Systemic Lupus Erythematosus (SLE); Systemic Sclerosis; Sjogren\'s Syndrome (SS)', cellType:'Cell Therapy', cellColor:'#185FA5', phase:'I期', institution:'The Affiliated Hospital of Xuzhou Medical University', city:'Xuzhou', url:'https://clinicaltrials.gov/study/NCT07236801'},
+  {nct:'NCT06389305', title:'CIK Cell Therapy for Relapsed or Refractory Acute B-Lymphoblastic Leukemia: Prognostic Impact on Patients With Early CAR-T Cell Dysfunction', disease:'B-cell Acute Lymphoblastic Leukemia; Acute Lymphoblastic Leukemia, in Relapse; Refractory Acute Lymphoid Leukemia', cellType:'DC/CIK', cellColor:'#5D4037', phase:'未分期', institution:'Beijing GoBroad Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT06389305'},
+  {nct:'NCT05991336', title:'Growth and Development-related Outcomes in Children With Transfusion-dependent Beta-thalassemia After Gene Therapy', disease:'Transfusion-dependent Beta-Thalassemia; Gene Therapy', cellType:'Gene Therapy', cellColor:'#6A1B9A', phase:'未分期', institution:'Regenerative Medicine Center', city:'Tianjin', url:'https://clinicaltrials.gov/study/NCT05991336'},
+  {nct:'NCT06245746', title:'UCMSC-Exo for Chemotherapy-induced Myelosuppression in Acute Myeloid Leukemia', disease:'Acute Myeloid Leukemia; Neutropenia; Anemia', cellType:'MSC', cellColor:'#0F6E56', phase:'I期', institution:'Wuhan Union Hospital', city:'Wuhan', url:'https://clinicaltrials.gov/study/NCT06245746'},
+  {nct:'NCT07066228', title:'Bone Reconstruction With Autologous Bone Marrow Mesenchymal Stem Cells in Vitro to Repair Long Tubular Bone Defects', disease:'Defective Composite Restorations; Bone Cysts; Bone Defect', cellType:'MSC', cellColor:'#0F6E56', phase:'未分期', institution:'The First Affiliated Hospital of Xinxiang Medical College', city:'Xinxiang', url:'https://clinicaltrials.gov/study/NCT07066228'},
+  {nct:'NCT07623382', title:'Human Umbilical Cord Mesenchymal Stem Cell-derived Small Extracellular Vesicles for the Treatment of Dry Eye Disease', disease:'Dry Eye Disease; Umbilical Cord Mesenchymal Stem Cell-derived Small Extracellular Vesicles', cellType:'MSC', cellColor:'#0F6E56', phase:'I期(早期)', institution:'The First Affiliated Hospital of Xiamen University', city:'Xiamen', url:'https://clinicaltrials.gov/study/NCT07623382'},
+  {nct:'NCT06599346', title:'Effects of Mesenchymal Stem Cell Supernatant on Prevention and Treatment of Skin/Mucosal Injury in Hematology Patients', disease:'Mucositis; Hematopoietic Stem Cell Transplantation; Chemotherapy-Induced Mucositis', cellType:'MSC', cellColor:'#0F6E56', phase:'未分期', institution:'Department of Hematology, The General Hospital of Western Theater Command', city:'Chengdu', url:'https://clinicaltrials.gov/study/NCT06599346'},
+  {nct:'NCT07400328', title:'Amimestrocel Injection for Preventing Severe Oral Mucositis in HSCT Patients', disease:'Oral Mucositis; Stomatitis; Gastrointestinal Mucositis', cellType:'MSC', cellColor:'#0F6E56', phase:'II期', institution:'First Affiliated Hospital of Soochow University', city:'Suzhu', url:'https://clinicaltrials.gov/study/NCT07400328'},
+  {nct:'NCT07103980', title:'Inhaled Mesenchymal Stem Cell-Derived Exosomes in the Treatment of Post-Infectious Cough: A Single-Center Randomized Controlled Clinical Trial', disease:'Post-Infectious Cough', cellType:'MSC', cellColor:'#0F6E56', phase:'I/II期', institution:'Shanghai changzheng hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT07103980'},
+  {nct:'NCT05319106', title:'Phase Ⅱ Clinical Study of Human Umbilical Cord Mesenchymal Stem Cells in the Treatment of Venous Leg', disease:'Venous Leg Ulcer', cellType:'MSC', cellColor:'#0F6E56', phase:'未分期', institution:'Southwest Hospital, Army Medical University (Third Military Medical University)', city:'Chongqing', url:'https://clinicaltrials.gov/study/NCT05319106'},
+  {nct:'NCT07589530', title:'Phase 1/2 Study of EB-NK-301 (Allogeneic TROP2-CAR NK Cells) in Advanced TROP2-Expressing Solid Tumors', disease:'Advanced Solid Tumors; Metastatic Solid Tumors; TROP2-Expressing Solid Tumors', cellType:'NK Cell', cellColor:'#1565C0', phase:'I/II期', institution:'Peking University Shenzhen Hospital', city:'Shenzhen', url:'https://clinicaltrials.gov/study/NCT07589530'},
+  {nct:'NCT06464679', title:'An Exploratory Clinical Study of CD19 CAR NK Cell Injection for the Treatment of Relapsed/Refractory Autoimmune Diseases', disease:'Autoimmune Diseases', cellType:'NK Cell', cellColor:'#1565C0', phase:'I期', institution:'Changhai Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06464679'},
+  {nct:'NCT06318533', title:'A Clinical Study of CD19 CAR NK Cells for the Treatment of Relapsed/Refractory B-cell Related Autoimmune Diseases', disease:'Autoimmune Diseases', cellType:'NK Cell', cellColor:'#1565C0', phase:'I期(早期)', institution:'Affiliated Hospital of Jiangsu University', city:'Zhenjiang', url:'https://clinicaltrials.gov/study/NCT06318533'},
+  {nct:'NCT06848582', title:'Umbilical Cord Blood NK Cell Therapy for High-Risk Pediatric Soft Tissue Sarcoma: Efficacy and Safety Study', disease:'Soft Tissue Sarcoma (STS)', cellType:'NK Cell', cellColor:'#1565C0', phase:'未分期', institution:'Sun Yat-sen University Cancer Center', city:'Guangzhou', url:'https://clinicaltrials.gov/study/NCT06848582'},
+  {nct:'NCT06743477', title:'A Clinical Study of Ultra-transplantation for the Treatment of Major Thalassemia Scheme', disease:'Stem Cell Transplantation', cellType:'Other', cellColor:'#666666', phase:'未分期', institution:'Yunnan First People\'s Hospital', city:'Kunming', url:'https://clinicaltrials.gov/study/NCT06743477'},
+  {nct:'NCT07438067', title:'EBV-AST Cell Therapy for EBV-Related Diseases After Stem Cell Transplantation', disease:'EBV-DNA Viremia; Post-Transplant Lymphoproliferative Disorder', cellType:'Stem Cell', cellColor:'#185FA5', phase:'I/II期', institution:'Chinese PLA General Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07438067'},
+  {nct:'NCT06998706', title:'REGEND001 Autologous Basal Layer Stem Cell Transplantation for Interstitial Lung Disease (ILD): A Translational Application Study', disease:'Interstitial Lung Disease (ILD)', cellType:'Stem Cell', cellColor:'#185FA5', phase:'I期', institution:'Ruijin Hospital Hainan Branch, Shanghai Jiao Tong University School of Medicine', city:'Qionghai', url:'https://clinicaltrials.gov/study/NCT06998706'},
+  {nct:'NCT07239895', title:'Treatment of Pediatric Bronchiolitis Obliterans by Airway Basal Stem Cells', disease:'Pediatric Bronchiolitis Obliterans', cellType:'Stem Cell', cellColor:'#185FA5', phase:'I期(早期)', institution:'Shanghai Children\'s Hospital, School of Medicine, Shanghai Jiao Tong University', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT07239895'},
+  {nct:'NCT06703398', title:'A Study of GC101 TIL in Advanced Melanoma', disease:'Melanoma', cellType:'TIL', cellColor:'#E65100', phase:'II期', institution:'Beijing Cancer Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT06703398'},
+  {nct:'NCT06375187', title:'A Study of GC203 TIL in Advanced Malignant Solid Tumors', disease:'Solid Tumor; Gynecologic Cancer; Breast Cancer', cellType:'TIL', cellColor:'#E65100', phase:'I期', institution:'Fudan University Shanghai Cancer Center', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06375187'},
+  {nct:'NCT06671236', title:'Clinical Study of Regulatory T Cells (Tregs) in the Treatment of Neurodegenerative Diseases', disease:'Amyotrophic Lateral Sclerosis (ALS)', cellType:'Treg', cellColor:'#2E7D32', phase:'I期', institution:'The First Affiliated Hospital of Zhengzhou University', city:'Zhengzhou', url:'https://clinicaltrials.gov/study/NCT06671236'},
+  {nct:'NCT06765564', title:'Clinical Study of Induced Pluripotent Stem Cells Derived Motor Neuron Precursor Cell Therapy for Amyotrophic Lateral Sclerosis (ALS)', disease:'ALS', cellType:'iPSC', cellColor:'#993C1D', phase:'未分期', institution:'Shang hai East Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT06765564'},
+  {nct:'NCT06367673', title:'Natural Killer(NK) Cell Therapy Targeting CLL1 or CD33 in Acute Myeloid Leukemia', disease:'AML, Adult', cellType:'iPSC', cellColor:'#993C1D', phase:'I期', institution:'the First Affiliated Hospital, School of Medicine, Zhejiang University', city:'Hangzhou', url:'https://clinicaltrials.gov/study/NCT06367673'},
+  {nct:'NCT07145294', title:'Induced Pluripotent Stem Cells-derived Small Extracellular Vesicles May Promote Neurological Function and Improve Cognitive Impairment in Acute Ischemic Stroke Patients', disease:'Cognitive Impairment', cellType:'iPSC', cellColor:'#993C1D', phase:'I/II期', institution:'Shanghai Sixth People\'s Hospital', city:'Shanghai', url:'https://clinicaltrials.gov/study/NCT07145294'},
+  {nct:'NCT07065409', title:'Treatment of Moyamoya Disease With iPSC-derived Exosomes', disease:'Moyamoya Disease', cellType:'iPSC', cellColor:'#993C1D', phase:'I期', institution:'Tongji hospital', city:'Wuhan', url:'https://clinicaltrials.gov/study/NCT07065409'},
+  {nct:'NCT07080775', title:'The Safety and Tolerability of XS411CN Injection in Treatment of Primary Parkinson\'s Disease', disease:'Parkinson\'s Disease', cellType:'iPSC', cellColor:'#993C1D', phase:'I期', institution:'Beijing Tiantan Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07080775'},
+  {nct:'NCT06976229', title:'Safety and Early Efficacy of iPSC-Derived Motor Neuron Progenitor Cells (XS228) in Subacute Spinal Cord Injury: A Phase I Trial', disease:'Spinal Cord Injury; Safety; Clinical Trials', cellType:'iPSC', cellColor:'#993C1D', phase:'I期', institution:'The Third Affiliated Hospital of Sun Yat-sen University', city:'Guangzhou', url:'https://clinicaltrials.gov/study/NCT06976229'},
+  {nct:'NCT07126782', title:'The Efficacy and Safety Assessment of Allogeneic γδ T Cells in Patients With MRD-positive AML After Allo-HSCT', disease:'AML (Acute Myelogenous Leukemia); AML', cellType:'γδT Cell', cellColor:'#6A1B9A', phase:'I期(早期)', institution:'Institute of Hematology & Blood Diseases Hospital', city:'Beijing', url:'https://clinicaltrials.gov/study/NCT07126782'},
+  {nct:'NCT06150885', title:'A Safety and Efficacy Study of Allogeneic CAR Gamma-Delta T Cells in Subjects with Relapsed/Refractory Solid Tumors', disease:'Solid Tumor', cellType:'γδT Cell', cellColor:'#6A1B9A', phase:'I/II期', institution:'', city:'', url:'https://clinicaltrials.gov/study/NCT06150885'},
+];
+
 function showInstRecruiting() {
   saveNavState();
   currentSection = 'inst_recruiting';
@@ -11680,58 +11780,40 @@ function renderInstRecruiting() {
   var content = document.getElementById('content');
   var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <span class="crumb-current">临床招募信息</span></div>';
 
-  // Collect all projects with disease extraction
-  var allProjects = [];
-  for (var instName in INSTITUTION_PROJECTS) {
-    var instInfo = INSTITUTIONS.find(function(i) { return i.name === instName; });
-    var region = instInfo ? instInfo.region : '';
-    var city = instInfo ? instInfo.city : '';
-    INSTITUTION_PROJECTS[instName].forEach(function(p) {
-      var disease = p.name;
-      var idx = disease.indexOf('治疗');
-      if (idx >= 0) {
-        disease = disease.slice(idx + 2);
-        var pIdx1 = disease.indexOf('(');
-        if (pIdx1 >= 0) disease = disease.slice(0, pIdx1);
-        var pIdx2 = disease.indexOf('（');
-        if (pIdx2 >= 0) disease = disease.slice(0, pIdx2);
-      }
-      allProjects.push({
-        institution: instName,
-        region: region,
-        city: city,
-        name: p.name,
-        cell: p.cell,
-        phase: p.phase,
-        disease: disease
-      });
-    });
-  }
+  var totalTrials = RECRUITING_TRIALS.length;
 
-  // Sort by disease, then by institution
-  allProjects.sort(function(a, b) {
-    if (a.disease !== b.disease) return a.disease.localeCompare(b.disease);
-    if (a.institution !== b.institution) return a.institution.localeCompare(b.institution);
-    return 0;
+  // Cell type counts
+  var typeCounts = {};
+  RECRUITING_TRIALS.forEach(function(t) {
+    if (!typeCounts[t.cellType]) typeCounts[t.cellType] = 0;
+    typeCounts[t.cellType]++;
   });
+  var types = Object.keys(typeCounts).sort(function(a, b) { return typeCounts[b] - typeCounts[a]; });
 
-  var totalProj = allProjects.length;
-  var totalInst = Object.keys(INSTITUTION_PROJECTS).length;
-  var diseaseSet = {};
-  allProjects.forEach(function(p) { diseaseSet[p.disease] = true; });
+  // City counts for distribution
+  var cityCounts = {};
+  RECRUITING_TRIALS.forEach(function(t) {
+    if (t.city) {
+      if (!cityCounts[t.city]) cityCounts[t.city] = 0;
+      cityCounts[t.city]++;
+    }
+  });
+  var topCities = Object.keys(cityCounts).sort(function(a, b) { return cityCounts[b] - cityCounts[a]; }).slice(0, 8);
 
   // Description
-  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构临床招募信息汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项在研项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构，覆盖<b style="color:var(--primary);">' + Object.keys(diseaseSet).length + '</b> 类适应症。按适应症分类展示，提供细胞类型、研究阶段及机构信息。如需了解具体入组标准及招募状态，请联系相应机构或查询中国临床试验注册中心（ChiCTR）。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">本页面汇总了中国地区目前正在招募受试者的细胞治疗临床试验，共 <b style="color:var(--primary);">' + totalTrials + '</b> 项，数据来源于 <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener" style="color:var(--primary);">ClinicalTrials.gov</a>（检索日期：2026-07-20）。每项试验均附有 NCT 编号及可验证的原始链接，招募状态经 ClinicalTrials.gov 确认为"Recruiting"。ChiCTR（中国临床试验注册中心）数据后续补充。</div></div>';
 
-  // Disease filter buttons
-  var diseaseCounts = {};
-  allProjects.forEach(function(p) { diseaseCounts[p.disease] = (diseaseCounts[p.disease]||0)+1; });
-  var diseases = Object.keys(diseaseCounts).sort();
+  // Data source notice
+  html += '<div style="margin-bottom:14px;padding:10px 14px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:6px;font-size:12px;color:var(--text);line-height:1.7;">';
+  html += '<b style="color:var(--primary);">数据来源声明：</b>以下试验信息均来自 ClinicalTrials.gov 公开数据，NCT 编号可在 <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener" style="color:var(--primary);">clinicaltrials.gov</a> 验证。招募状态"招募中"为 ClinicalTrials.gov 官方状态，非推测。如需入组咨询，请点击每项试验的链接查看详细入组标准并联系研究机构。';
+  html += '</div>';
 
+  // Cell type filter buttons
   html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
-  html += '<button class="recruit-filter-btn" data-filter="all" style="background:var(--primary);color:#0A0F1A;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;" onclick="filterRecruit(\'all\',this)">全部 ' + totalProj + '</button>';
-  diseases.forEach(function(d) {
-    html += '<button class="recruit-filter-btn" data-filter="' + escapeHtml(d) + '" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="filterRecruit(\'' + d.replace(/'/g,"\\'") + '\',this)">' + escapeHtml(d) + ' ' + diseaseCounts[d] + '</button>';
+  html += '<button class="recruit-filter-btn" data-filter="all" style="background:var(--primary);color:#0A0F1A;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;" onclick="filterRecruit(\'all\',this)">全部 ' + totalTrials + '</button>';
+  types.forEach(function(t) {
+    var color = RECRUITING_TRIALS.find(function(x) { return x.cellType === t; }).cellColor;
+    html += '<button class="recruit-filter-btn" data-filter="' + escapeHtml(t) + '" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="filterRecruit(\'' + t.replace(/'/g, "\\'") + '\',this)">' + escapeHtml(t) + ' ' + typeCounts[t] + '</button>';
   });
   html += '</div>';
 
@@ -11739,54 +11821,73 @@ function renderInstRecruiting() {
   html += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">';
   html += '<table class="inst-proj-table" id="recruitTable" style="width:100%;border-collapse:collapse;font-size:13px;">';
   html += '<thead><tr>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">序号</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:200px;">项目名称</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">适应症</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">细胞类型</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">NCT编号</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:200px;">试验名称</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:120px;">适应症</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">细胞类型</th>';
   html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">研究阶段</th>';
   html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">招募状态</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:160px;">备案机构</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">地区</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:160px;">研究机构</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">城市</th>';
   html += '</tr></thead><tbody id="recruitBody">';
 
-  allProjects.forEach(function(p, idx) {
-    var phaseColor = p.phase.indexOf('II') >= 0 ? 'rgba(0,229,255,0.15)' : 'rgba(0,200,83,0.15)';
-    var phaseTextColor = p.phase.indexOf('II') >= 0 ? 'var(--primary)' : '#4CAF50';
+  RECRUITING_TRIALS.forEach(function(t, idx) {
     var rowBg = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)';
-    html += '<tr class="recruit-row" data-disease="' + escapeHtml(p.disease) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
-    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;">' + (idx+1) + '</td>';
-    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(p.name) + '</td>';
-    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.disease) + '</td>';
-    html += '<td style="padding:8px 12px;white-space:nowrap;"><span style="background:rgba(2,119,189,0.15);color:#64B5F6;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.cell) + '</span></td>';
-    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:' + phaseColor + ';color:' + phaseTextColor + ';padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.phase) + '</span></td>';
+    html += '<tr class="recruit-row" data-type="' + escapeHtml(t.cellType) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
+    // NCT ID with link
+    html += '<td style="padding:8px 12px;white-space:nowrap;"><a href="' + t.url + '" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;font-weight:600;">' + t.nct + '</a></td>';
+    // Title
+    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(t.title) + '</td>';
+    // Disease
+    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(t.disease) + '</td>';
+    // Cell type badge
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:' + t.cellColor + '20;color:' + t.cellColor + ';padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(t.cellType) + '</span></td>';
+    // Phase
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;font-size:12px;color:var(--text);">' + escapeHtml(t.phase) + '</td>';
+    // Status - REAL recruiting status from ClinicalTrials.gov
     html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:rgba(0,200,83,0.15);color:#4CAF50;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">招募中</span></td>';
-    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.institution) + '</td>';
-    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(p.region) + (p.city ? '\u00b7' + escapeHtml(p.city) : '') + '</td>';
+    // Institution
+    var instDisplay = t.institution || 'N/A';
+    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(instDisplay) + '</td>';
+    // City
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(t.city || 'N/A') + '</td>';
     html += '</tr>';
   });
 
   html += '</tbody></table></div>';
 
+  // City distribution
+  if (topCities.length > 0) {
+    html += '<div style="margin-top:16px;">';
+    html += '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;">城市分布</div>';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+    topCities.forEach(function(c) {
+      html += '<span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--surface-2);border:1px solid var(--border);border-radius:3px;font-size:12px;color:var(--text);">' + escapeHtml(c) + ' <b style="color:var(--primary);">' + cityCounts[c] + '</b></span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  }
+
   // Contact guidance
   html += '<div style="margin-top:16px;padding:14px 16px;background:rgba(2,119,189,0.08);border:1px solid rgba(2,119,189,0.3);border-radius:6px;">';
   html += '<div style="font-size:14px;font-weight:600;color:#0277BD;margin-bottom:8px;display:flex;align-items:center;gap:6px;">' + svgIcon('info', 16) + ' 入组咨询指南</div>';
   html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
-  html += '1. 上述项目均为国家卫健委备案的细胞治疗临床研究项目，可能正在招募受试者。<br>';
-  html += '2. 如需了解具体入组标准、排除标准及招募状态，请直接联系对应备案机构的临床研究部门。<br>';
-  html += '3. 也可通过中国临床试验注册中心（ChiCTR）或 ClinicalTrials.gov 查询项目注册信息及招募状态。<br>';
+  html += '1. 点击每项试验的 <b>NCT编号</b> 可跳转至 ClinicalTrials.gov 查看完整试验方案、入组标准、排除标准及联系方式。<br>';
+  html += '2. "招募中"状态来自 ClinicalTrials.gov 官方数据，最后更新于 2026-07-20，实际状态请以 ClinicalTrials.gov 最新信息为准。<br>';
+  html += '3. 如需了解具体入组条件，请在 ClinicalTrials.gov 试验页面查找研究联系人信息或联系对应研究机构。<br>';
   html += '4. 参与临床试验前，请充分了解研究方案、风险与获益，并在主治医生指导下做出决策。';
   html += '</div>';
   html += '</div>';
 
   // External links
   html += '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">';
+  html += '<a href="https://clinicaltrials.gov/search?cond=&term=cell+therapy&locn=China&recrs=ab&type=Intr" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;font-size:12px;color:var(--primary);text-decoration:none;">' + svgIcon('link', 14) + ' ClinicalTrials.gov 检索更多招募中试验</a>';
   html += '<a href="https://www.chictr.org.cn/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;font-size:12px;color:var(--primary);text-decoration:none;">' + svgIcon('link', 14) + ' ChiCTR 中国临床试验注册中心</a>';
-  html += '<a href="https://clinicaltrials.gov/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;font-size:12px;color:var(--primary);text-decoration:none;">' + svgIcon('link', 14) + ' ClinicalTrials.gov</a>';
   html += '</div>';
 
   // Disclaimer
   html += '<div style="margin-top:14px;padding:10px 14px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.6;">';
-  html += '<b>免责声明：</b>本页面所列项目信息来源于国家卫健委备案机构公开信息，"招募中"状态为基于项目备案信息的推测，不代表实际招募状态。实际入组情况请以机构官方回复为准。本平台不提供医疗建议，不参与受试者招募，不对项目安全性及有效性做出任何保证。';
+  html += '<b>免责声明：</b>本页面试验数据来源于 ClinicalTrials.gov 公开数据库（检索日期：2026-07-20），招募状态"招募中"为 ClinicalTrials.gov 官方确认状态。本平台不对试验信息的完整性、准确性及时效性做出保证，实际入组情况请以 ClinicalTrials.gov 及研究机构最新信息为准。本平台不提供医疗建议，不参与受试者招募，不对项目安全性及有效性做出任何保证。';
   html += '</div>';
 
   content.innerHTML = html;
@@ -11810,7 +11911,7 @@ function filterRecruit(filter, btn) {
     if (filter === 'all') {
       row.style.display = '';
     } else {
-      row.style.display = (row.dataset.disease === filter) ? '' : 'none';
+      row.style.display = (row.dataset.type === filter) ? '' : 'none';
     }
   });
 }
@@ -12686,6 +12787,8 @@ function renderProducts() {
       else if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
       else if (cat.indexOf('CRISPR') >= 0 || cat.indexOf('基因修饰') >= 0) cat = '基因修饰HSC';
       else if (cat.indexOf('iPSC') >= 0) cat = 'iPSC诱导多能干细胞';
+      else if (cat.indexOf('CAR-T') >= 0) cat = 'CAR-T';
+      else if (cat.indexOf('基因治疗') >= 0) cat = '基因治疗';
       else cat = '其他细胞治疗';
       return cat === prodFilter;
     });
