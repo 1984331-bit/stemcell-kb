@@ -2381,6 +2381,220 @@ body { padding-bottom: 60px; }
   .opencgt-phase { max-width: 100%; }
   .opencgt-3d-canvas { height: 380px; }
 }
+/* ===== Lab Construction Page ===== */
+.lab-hero {
+  position: relative; border-radius: 16px; overflow: hidden;
+  padding: 32px 28px; margin-bottom: 16px;
+  border: 1px solid rgba(102,187,106,0.25);
+}
+.lab-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(102,187,106,0.08), rgba(0,229,255,0.05), rgba(129,199,132,0.06));
+}
+.lab-hero-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(102,187,106,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(102,187,106,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.lab-hero-content { position: relative; z-index: 1; }
+.lab-hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  background: rgba(255,152,0,0.12); border: 1px solid rgba(255,152,0,0.3);
+  font-size: 12px; font-weight: 700; color: #FFB74D;
+  margin-bottom: 10px;
+}
+.lab-hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #FFB74D; animation: labPulse 1.5s ease-in-out infinite;
+}
+@keyframes labPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.lab-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
+.lab-hero-title .accent { color: #66BB6A; }
+.lab-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+.lab-timeline { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 10px 0 16px; }
+.lab-tl-step { flex: 1; min-width: 80px; text-align: center; position: relative; }
+.lab-tl-step:not(:last-child)::after {
+  content: ''; position: absolute; top: 16px; left: 50%; right: -50%;
+  height: 3px; border-radius: 2px;
+}
+.lab-tl-step.done:not(:last-child)::after { background: rgba(102,187,106,0.4); }
+.lab-tl-step.current:not(:last-child)::after { background: rgba(255,152,0,0.3); }
+.lab-tl-step.pending:not(:last-child)::after { background: var(--border); }
+.lab-tl-dot {
+  width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; position: relative; z-index: 1;
+}
+.lab-tl-step.done .lab-tl-dot { background: rgba(102,187,106,0.15); border: 2px solid #66BB6A; color: #66BB6A; }
+.lab-tl-step.current .lab-tl-dot { background: rgba(255,152,0,0.15); border: 2px solid #FFB74D; color: #FFB74D; box-shadow: 0 0 0 4px rgba(255,152,0,0.1); }
+.lab-tl-step.pending .lab-tl-dot { background: var(--card-bg); border: 2px solid var(--border); color: var(--text-light); }
+.lab-tl-label { font-size: 12px; font-weight: 600; color: var(--text); }
+.lab-tl-step.done .lab-tl-label { color: #66BB6A; }
+.lab-tl-step.current .lab-tl-label { color: #FFB74D; }
+.lab-tl-step.pending .lab-tl-label { color: var(--text-light); opacity: 0.5; }
+.lab-tl-date { font-size: 10px; color: var(--text-light); margin-top: 2px; }
+
+.lab-equip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.lab-equip-card {
+  background: rgba(102,187,106,0.04); border: 1px solid rgba(102,187,106,0.12);
+  border-radius: 12px; padding: 16px; text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.lab-equip-card:hover { transform: translateY(-2px); border-color: rgba(102,187,106,0.3); }
+.lab-equip-icon { width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; background: rgba(102,187,106,0.1); color: #66BB6A; }
+.lab-equip-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.lab-equip-desc { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+
+.lab-direction-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.lab-direction-card {
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
+  border-radius: 10px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 10px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.lab-direction-card:hover { transform: translateX(3px); border-color: rgba(0,229,255,0.3); }
+.lab-direction-num {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: var(--primary);
+  background: rgba(0,229,255,0.1);
+}
+.lab-direction-text { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+.lab-collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.lab-collab-card {
+  border-radius: 12px; padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.lab-collab-card.co-build {
+  background: rgba(102,187,106,0.06); border: 1px solid rgba(102,187,106,0.2);
+}
+.lab-collab-card.form {
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.15);
+}
+.lab-collab-card-head { display: flex; align-items: center; gap: 8px; }
+.lab-collab-card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.lab-collab-card.co-build .lab-collab-card-icon { background: rgba(102,187,106,0.12); color: #66BB6A; }
+.lab-collab-card.form .lab-collab-card-icon { background: rgba(0,229,255,0.1); color: var(--primary); }
+.lab-collab-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.lab-collab-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+.lab-collab-list { list-style: none; padding: 0; margin: 0; }
+.lab-collab-list li { font-size: 12px; color: var(--text-light); line-height: 1.8; padding-left: 14px; position: relative; }
+.lab-collab-list li::before { content: '·'; position: absolute; left: 4px; color: var(--primary); font-weight: 700; }
+.lab-collab-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  align-self: flex-start; transition: transform 0.2s, box-shadow 0.2s;
+}
+.lab-collab-btn.green { background: rgba(102,187,106,0.12); border: 1px solid #66BB6A; color: #66BB6A; }
+.lab-collab-btn.green:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,187,106,0.2); }
+.lab-collab-btn.cyan { background: rgba(0,229,255,0.1); border: 1px solid var(--primary); color: var(--primary); }
+.lab-collab-btn.cyan:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,229,255,0.2); }
+
+@media (max-width: 768px) {
+  .lab-hero { padding: 22px 16px; }
+  .lab-hero-title { font-size: 19px; }
+  .lab-equip-grid { grid-template-columns: repeat(2, 1fr); }
+  .lab-direction-grid { grid-template-columns: 1fr; }
+  .lab-collab-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Business Blueprint Page ===== */
+.bp-hero {
+  position: relative; border-radius: 16px; overflow: hidden;
+  padding: 32px 28px; margin-bottom: 16px;
+  border: 1px solid rgba(171,71,188,0.25);
+}
+.bp-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(171,71,188,0.08), rgba(0,229,255,0.05), rgba(102,187,106,0.05));
+}
+.bp-hero-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(171,71,188,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(171,71,188,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.bp-hero-content { position: relative; z-index: 1; }
+.bp-hero-title { font-size: 24px; font-weight: 800; color: var(--text); text-align: center; margin-bottom: 8px; }
+.bp-hero-title .accent { color: #CE93D8; }
+.bp-hero-desc { font-size: 14px; color: var(--text-light); text-align: center; line-height: 1.8; max-width: 600px; margin: 0 auto; }
+
+.bp-roadmap { display: flex; gap: 0; align-items: stretch; }
+.bp-rm-phase {
+  flex: 1; position: relative; padding: 18px 12px; border-radius: 12px;
+  text-align: center; transition: transform 0.2s;
+}
+.bp-rm-phase:not(:last-child) { margin-right: 8px; }
+.bp-rm-phase.active { background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.3); }
+.bp-rm-phase.done { background: rgba(102,187,106,0.04); border: 1px solid rgba(102,187,106,0.15); }
+.bp-rm-phase.pending { background: var(--card-bg); border: 1px solid var(--border); opacity: 0.6; }
+.bp-rm-phase-num {
+  width: 28px; height: 28px; border-radius: 50%; margin: 0 auto 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+}
+.bp-rm-phase.active .bp-rm-phase-num { background: rgba(0,229,255,0.15); border: 2px solid var(--primary); color: var(--primary); }
+.bp-rm-phase.done .bp-rm-phase-num { background: rgba(102,187,106,0.12); border: 2px solid #66BB6A; color: #66BB6A; }
+.bp-rm-phase.pending .bp-rm-phase-num { background: var(--card-bg); border: 2px solid var(--border); color: var(--text-light); }
+.bp-rm-phase-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.bp-rm-phase-desc { font-size: 11px; color: var(--text-light); line-height: 1.5; }
+.bp-rm-phase-tag {
+  display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 10px;
+  font-size: 10px; font-weight: 700;
+}
+.bp-rm-phase.active .bp-rm-phase-tag { background: rgba(0,229,255,0.12); color: var(--primary); }
+.bp-rm-phase.done .bp-rm-phase-tag { background: rgba(102,187,106,0.1); color: #66BB6A; }
+.bp-rm-phase.pending .bp-rm-phase-tag { background: rgba(150,150,150,0.1); color: var(--text-light); }
+
+.bp-path-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.bp-path-card {
+  background: rgba(171,71,188,0.04); border: 1px solid rgba(171,71,188,0.12);
+  border-radius: 12px; padding: 16px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.bp-path-card:hover { transform: translateY(-2px); border-color: rgba(171,71,188,0.25); }
+.bp-path-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.bp-path-card-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.bp-path-card-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.bp-path-card-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; margin-bottom: 8px; }
+.bp-path-card-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.bp-path-chip {
+  padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;
+  background: rgba(171,71,188,0.08); color: #CE93D8; border: 1px solid rgba(171,71,188,0.12);
+}
+
+.bp-advantage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.bp-advantage-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px; text-align: center;
+  transition: border-color 0.2s;
+}
+.bp-advantage-card:hover { border-color: rgba(171,71,188,0.2); }
+.bp-advantage-icon { width: 44px; height: 44px; border-radius: 12px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; background: rgba(171,71,188,0.08); color: #CE93D8; }
+.bp-advantage-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.bp-advantage-desc { font-size: 12px; color: var(--text-light); line-height: 1.6; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+.bp-advantage-placeholder { font-size: 11px; color: var(--text-light); opacity: 0.4; font-style: italic; }
+
+.bp-metric-row { display: flex; gap: 16px; justify-content: center; }
+.bp-metric-item {
+  text-align: center; padding: 16px 24px; border-radius: 12px;
+  background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12);
+  min-width: 100px;
+}
+.bp-metric-num { font-size: 28px; font-weight: 800; color: var(--primary); }
+.bp-metric-label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .bp-hero { padding: 22px 16px; }
+  .bp-hero-title { font-size: 19px; }
+  .bp-roadmap { flex-direction: column; gap: 8px; }
+  .bp-rm-phase:not(:last-child) { margin-right: 0; margin-bottom: 0; }
+  .bp-path-grid { grid-template-columns: 1fr; }
+  .bp-advantage-grid { grid-template-columns: 1fr; }
+  .bp-metric-row { flex-direction: column; gap: 8px; }
+}
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
   background: var(--card-bg);
@@ -5174,6 +5388,8 @@ function parseHash() {
   if (hash === '#ai') return { section: 'ai' };
   if (hash === '#ai-review') return { section: 'ai-review' };
   if (hash === '#opencgt') return { section: 'opencgt' };
+  if (hash === '#lab') return { section: 'lab' };
+  if (hash === '#blueprint') return { section: 'blueprint' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -5529,6 +5745,8 @@ function renderContent() {
   if (currentSection === 'guide') { renderGuide(); return; }
   if (currentSection === 'team') { renderTeam(); return; }
   if (currentSection === 'opencgt') { renderOpenCGT(); return; }
+  if (currentSection === 'lab') { renderLab(); return; }
+  if (currentSection === 'blueprint') { renderBlueprint(); return; }
 
   const filtered = getFilteredData();
 
@@ -6347,7 +6565,13 @@ function svgIcon(name, sz) {
     'trending': '<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>',
     'lightbulb': '<path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.5.5 1 1.5 1 2.5h6c0-1 .5-2 1-2.5A6 6 0 0012 3z"/>',
     'handshake': '<path d="M11 17l-2-2-3 2-4-3 2-4 3 1 3-2 4 4M13 17l3-3 3 1 2-4-4-3-3 2"/>',
-    'arrow-right': '<path d="M5 12h14M12 5l7 7-7 7"/>'
+    'arrow-right': '<path d="M5 12h14M12 5l7 7-7 7"/>',
+    'beaker': '<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/><path d="M7 14h10"/>',
+    'target': '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+    'wrench': '<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-2.5z"/>',
+    'rocket': '<path d="M12 2c3 2 5 5 5 9l-2 3H9l-2-3c0-4 2-7 5-9zM12 14v6M9 17l-3 2M15 17l3 2"/><circle cx="12" cy="9" r="1.5"/>',
+    'coin': '<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>',
+    'check': '<path d="M5 12l5 5L20 7"/>'
   };
   return '<svg viewBox="0 0 24 24" ' + s + '>' + (paths[name] || '') + '</svg>';
 }
@@ -6658,6 +6882,8 @@ function updateLayout(section) {
   if (section === 'ai' && container) container.classList.add('no-sidebar');
   if (section === 'ai-review' && container) container.classList.add('no-sidebar');
   if (section === 'opencgt' && container) container.classList.add('no-sidebar');
+  if (section === 'lab' && container) container.classList.add('no-sidebar');
+  if (section === 'blueprint' && container) container.classList.add('no-sidebar');
 }
 
 function toggleInfoBar(panel) {
@@ -7151,6 +7377,15 @@ function renderHub() {
   html += '<div class="opencgt-cta-btn primary">' + svgIcon('arrow-right', 16) + ' 了解Open CGT</div>';
   html += '</div>';
   html += '</div>';
+  html += '</div>';
+
+  // Lab & Blueprint section divider
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('beaker', 16) + ' 实验室·蓝图</div><div class="sd-line"></div></div>';
+
+  // Lab entry
+  html += '<div class="hub-split-cards">';
+  html += '<div class="hub-split-card green" onclick="switchSection(\'lab\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('beaker', 18) + '</div><div class="hsc-title">在建实验室</div></div><div class="hsc-desc">建设进度 · 平台设备 · 可服务方向 · 合作入口</div></div>';
+  html += '<div class="hub-split-card purple" onclick="switchSection(\'blueprint\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('target', 18) + '</div><div class="hsc-title">商业蓝图</div></div><div class="hsc-desc">平台定位 · 发展路线 · 变现路径 · 核心优势</div></div>';
   html += '</div>';
 
   // 平台介绍 section divider (new)
@@ -8677,6 +8912,246 @@ function renderOpenCGT() {
   content.innerHTML = html;
   updateFloatButtons();
   setTimeout(init3DForceGraph, 100);
+}
+
+// === Lab Construction Page ===
+function renderLab() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">在建实验室</span></div>';
+
+  // Hero
+  html += '<div class="lab-hero">';
+  html += '<div class="lab-hero-bg"></div>';
+  html += '<div class="lab-hero-content">';
+  html += '<div class="lab-hero-badge">在建中</div>';
+  html += '<div class="lab-hero-title">CGT <span class="accent">研发与转化实验室</span></div>';
+  html += '<div class="lab-hero-desc">面向细胞与基因治疗全链条的开放型研发与转化平台，覆盖工艺开发、质量研究、临床前评价与技术申报。平台正在建设中，建成后将为CGT创新药项目提供从概念到IND的一站式技术支撑。</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Construction Timeline
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('clock', 18) + ' 建设进度</div>';
+  html += '<div class="lab-timeline">';
+  html += '<div class="lab-tl-step done"><div class="lab-tl-dot">' + svgIcon('check', 14) + '</div><div class="lab-tl-label">规划立项</div><div class="lab-tl-date">已完成</div></div>';
+  html += '<div class="lab-tl-step done"><div class="lab-tl-dot">' + svgIcon('pen', 14) + '</div><div class="lab-tl-label">方案设计</div><div class="lab-tl-date">已完成</div></div>';
+  html += '<div class="lab-tl-step current"><div class="lab-tl-dot">' + svgIcon('wrench', 14) + '</div><div class="lab-tl-label">施工建设</div><div class="lab-tl-date">进行中</div></div>';
+  html += '<div class="lab-tl-step pending"><div class="lab-tl-dot">4</div><div class="lab-tl-label">设备安装</div><div class="lab-tl-date">待启动</div></div>';
+  html += '<div class="lab-tl-step pending"><div class="lab-tl-dot">5</div><div class="lab-tl-label">验证运营</div><div class="lab-tl-date">待启动</div></div>';
+  html += '</div>';
+  html += '<div style="font-size:12px;color:var(--text-light);line-height:1.8;text-indent:2em;margin-top:8px;">实验室目前处于施工建设阶段，核心功能区规划包括细胞制备区、分子生物学区、质量检验区及办公区。设备采购清单已基本确定，部分关键设备已在询价阶段。预计建成后可同时支撑3-5个CGT项目的并行研发。</div>';
+  html += '</div>';
+
+  // Platform Equipment
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('beaker', 18) + ' 平台设备展示</div>';
+  html += '<div class="lab-equip-grid">';
+  var equips = [
+    {icon: 'flask', name: '细胞培养平台', desc: '生物安全柜·CO2培养箱·3D微载体反应器'},
+    {icon: 'dna', name: '基因编辑技术平台', desc: 'CRISPR/Cas9·碱基编辑·引导编辑系统'},
+    {icon: 'layers', name: '病毒载体平台', desc: 'AAV/LV/慢病毒包装·纯化·滴度检测'},
+    {icon: 'cell', name: '流式分选平台', desc: '多色流式细胞仪·FACS单细胞分选'},
+    {icon: 'chart', name: '质量分析平台', desc: 'qPCR·Western blot·ELISA·质谱分析'},
+    {icon: 'shield', name: 'GMP合规体系', desc: '洁净室·环境监测·批次放行·文件体系'}
+  ];
+  equips.forEach(function(e) {
+    html += '<div class="lab-equip-card">';
+    html += '<div class="lab-equip-icon">' + svgIcon(e.icon, 20) + '</div>';
+    html += '<div class="lab-equip-name">' + e.name + '</div>';
+    html += '<div class="lab-equip-desc">' + e.desc + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // Service Directions
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('compass', 18) + ' 平台可服务研究方向</div>';
+  html += '<div class="lab-direction-grid">';
+  var directions = [
+    'MSC工艺优化',
+    '基因编辑技术精准化与多样化',
+    '通用/现货型CAR-T疗法',
+    '体内CAR-T疗法',
+    '实体瘤CAR-T技术优化',
+    'LNP递送系统开发',
+    'CAR-T/M/NK/Treg抗衰研究'
+  ];
+  directions.forEach(function(d, i) {
+    html += '<div class="lab-direction-card">';
+    html += '<div class="lab-direction-num">' + (i + 1) + '</div>';
+    html += '<div class="lab-direction-text">' + d + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  // Collaboration Entry — 共建意向 first, then form
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('handshake', 18) + ' 合作入口</div>';
+  html += '<div class="lab-collab-grid">';
+  // Co-build intent
+  html += '<div class="lab-collab-card co-build">';
+  html += '<div class="lab-collab-card-head"><div class="lab-collab-card-icon">' + svgIcon('users', 18) + '</div><div class="lab-collab-card-title">共建意向</div></div>';
+  html += '<div class="lab-collab-card-desc">欢迎高校、科研院所、CGT企业、CDMO/CRO机构以共建方式参与实验室建设，共享设备资源与技术能力。</div>';
+  html += '<ul class="lab-collab-list">';
+  html += '<li>设备共享：闲置设备入网，按需使用</li>';
+  html += '<li>技术共建：联合攻关，共享知识产权</li>';
+  html += '<li>人才培养：联合培养研究生/博士后</li>';
+  html += '<li>项目孵化：早期项目入驻，加速转化</li>';
+  html += '</ul>';
+  html += '<div class="lab-collab-btn green" onclick="showLabCollabModal(\'co-build\')">' + svgIcon('handshake', 16) + ' 表达共建意向</div>';
+  html += '</div>';
+  // Collaboration form
+  html += '<div class="lab-collab-card form">';
+  html += '<div class="lab-collab-card-head"><div class="lab-collab-card-icon">' + svgIcon('clipboard', 18) + '</div><div class="lab-collab-card-title">合作意向表单</div></div>';
+  html += '<div class="lab-collab-card-desc">如果您有具体的技术服务需求、项目合作意向或咨询需求，请填写表单，我们将在48小时内回复。</div>';
+  html += '<ul class="lab-collab-list">';
+  html += '<li>技术服务：工艺开发·质量研究·动物实验</li>';
+  html += '<li>项目合作：联合申报·临床前评价</li>';
+  html += '<li>技术咨询：法规路径·CMC策略</li>';
+  html += '<li>设备预约：平台设备按需预约使用</li>';
+  html += '</ul>';
+  html += '<div class="lab-collab-btn cyan" onclick="showLabCollabModal(\'form\')">' + svgIcon('clipboard', 16) + ' 填写合作表单</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+function showLabCollabModal(type) {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+  var modal = document.createElement('div');
+  modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:480px;width:100%;padding:24px;box-shadow:0 8px 40px rgba(0,229,255,0.15);max-height:80vh;overflow-y:auto;';
+  var title = type === 'co-build' ? '共建意向' : '合作意向表单';
+  var icon = type === 'co-build' ? 'handshake' : 'clipboard';
+  var color = type === 'co-build' ? '#66BB6A' : 'var(--primary)';
+  var bgColor = type === 'co-build' ? 'rgba(102,187,106,0.15)' : 'rgba(0,229,255,0.15)';
+  modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:' + bgColor + ';display:flex;align-items:center;justify-content:center;color:' + color + ';">' + svgIcon(icon, 20) + '</div><div style="font-size:18px;font-weight:700;color:' + color + ';">' + title + '</div></div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:16px;">' + (type === 'co-build' ? '感谢您对实验室共建的兴趣！请通过以下方式与我们联系，我们将在收到您的意向后尽快沟通共建方案。' : '请通过以下方式提交您的合作需求，我们将在48小时内回复。') + '</div>' +
+    '<div style="font-size:13px;color:var(--text-light);line-height:2;margin-bottom:16px;"><b style="color:var(--text);">联系电话：</b>待填写<br><b style="color:var(--text);">邮箱：</b>待填写<br><b style="color:var(--text);">微信：</b>待填写</div>' +
+    '<div style="font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;">在线表单功能即将上线，敬请期待。如需提前沟通，可通过平台声明中的联系方式与我们联系。</div>' +
+    '<div style="text-align:center;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button></div>';
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
+
+// === Business Blueprint Page ===
+function renderBlueprint() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">商业蓝图</span></div>';
+
+  // Hero
+  html += '<div class="bp-hero">';
+  html += '<div class="bp-hero-bg"></div>';
+  html += '<div class="bp-hero-content">';
+  html += '<div class="bp-hero-title">CGT知识库 <span class="accent">商业蓝图</span></div>';
+  html += '<div class="bp-hero-desc">以内容飞轮为核心引擎，通过持续生产高质量专业内容驱动用户增长，分阶段构建从免费引流到联盟生态的商业闭环。平台当前处于阶段一，免费面向研究者与学生开放。</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Platform Positioning
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('target', 18) + ' 平台定位</div>';
+  html += '<div class="opencgt-block-content">';
+  html += '<p style="margin-bottom:10px;"><b style="color:var(--text);">一句话定位：</b>AI驱动的CGT（细胞与基因治疗）行业知识库与共创平台。</p>';
+  html += '<p style="margin-bottom:10px;"><b style="color:var(--text);">价值主张：</b>把分散在文献、政策、产品、临床试验中的CGT知识，用AI整合成可检索、可追溯、可决策的结构化数据，让研究者少走弯路，让创新药更快到达患者。</p>';
+  html += '<p><b style="color:var(--text);">目标用户：</b>研究人员 · 临床医生 · 产业从业者 · 投资人 · 学生</p>';
+  html += '</div>';
+  html += '</div>';
+
+  // 4-Phase Roadmap
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('trending', 18) + ' 发展路线图</div>';
+  html += '<div class="bp-roadmap">';
+  html += '<div class="bp-rm-phase active"><div class="bp-rm-phase-num">1</div><div class="bp-rm-phase-title">免费引流</div><div class="bp-rm-phase-desc">内容驱动·多渠道分发·建立用户心智</div><div class="bp-rm-phase-tag">进行中</div></div>';
+  html += '<div class="bp-rm-phase pending"><div class="bp-rm-phase-num">2</div><div class="bp-rm-phase-title">内容付费</div><div class="bp-rm-phase-desc">手册·教材·行业报告·付费课程</div><div class="bp-rm-phase-tag">规划中</div></div>';
+  html += '<div class="bp-rm-phase pending"><div class="bp-rm-phase-num">3</div><div class="bp-rm-phase-title">平台服务</div><div class="bp-rm-phase-desc">会员体系·AI分析·API接口</div><div class="bp-rm-phase-tag">规划中</div></div>';
+  html += '<div class="bp-rm-phase pending"><div class="bp-rm-phase-num">4</div><div class="bp-rm-phase-title">联盟生态</div><div class="bp-rm-phase-desc">Open CGT撮合·项目孵化·股权合作</div><div class="bp-rm-phase-tag">规划中</div></div>';
+  html += '</div>';
+  html += '<div style="font-size:12px;color:var(--text-light);line-height:1.8;text-indent:2em;margin-top:12px;">当前阶段一的核心策略是内容飞轮：生产内容（日报+文献库+手册+3D可视化）→ 多渠道分发（微信生态+学术社区+短视频+高校渠道+SEO）→ 引流到平台 → 留存转化 → 数据反馈 → 优化内容。不花钱买流量，用已有内容重新包装分发实现免费引流。</div>';
+  html += '</div>';
+
+  // 4 Monetization Paths
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('coin', 18) + ' 变现路径</div>';
+  html += '<div class="bp-path-grid">';
+  // Education
+  html += '<div class="bp-path-card">';
+  html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(0,229,255,0.1);color:var(--primary);">' + svgIcon('book', 16) + '</div><div class="bp-path-card-title">教育培训</div></div>';
+  html += '<div class="bp-path-card-desc">标准化课程包+认证体系，依托大学教师背景，最快变现路径</div>';
+  html += '<div class="bp-path-card-items">';
+  html += '<span class="bp-path-chip">企业培训</span><span class="bp-path-chip">认证课程</span><span class="bp-path-chip">学术讲座</span>';
+  html += '</div>';
+  html += '</div>';
+  // Content & Data
+  html += '<div class="bp-path-card">';
+  html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(102,187,106,0.1);color:#66BB6A;">' + svgIcon('doc', 16) + '</div><div class="bp-path-card-title">内容数据</div></div>';
+  html += '<div class="bp-path-card-desc">手册·教材·行业报告付费下载，已有18万字手册+23万字教材</div>';
+  html += '<div class="bp-path-card-items">';
+  html += '<span class="bp-path-chip">付费手册</span><span class="bp-path-chip">行业报告</span><span class="bp-path-chip">数据包</span>';
+  html += '</div>';
+  html += '</div>';
+  // Platform Services
+  html += '<div class="bp-path-card">';
+  html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(255,152,0,0.1);color:#FFB74D;">' + svgIcon('layers', 16) + '</div><div class="bp-path-card-title">平台服务</div></div>';
+  html += '<div class="bp-path-card-desc">会员体系（免费/基础/企业）+ AI分析按次收费 + API接口</div>';
+  html += '<div class="bp-path-card-items">';
+  html += '<span class="bp-path-chip">会员订阅</span><span class="bp-path-chip">AI分析</span><span class="bp-path-chip">API接入</span>';
+  html += '</div>';
+  html += '</div>';
+  // Alliance Ecosystem
+  html += '<div class="bp-path-card">';
+  html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(171,71,188,0.1);color:#CE93D8;">' + svgIcon('rocket', 16) + '</div><div class="bp-path-card-title">联盟生态</div></div>';
+  html += '<div class="bp-path-card-desc">Open CGT撮合服务+项目孵化，天花板最高，需运营团队</div>';
+  html += '<div class="bp-path-card-items">';
+  html += '<span class="bp-path-chip">资源撮合</span><span class="bp-path-chip">项目孵化</span><span class="bp-path-chip">股权合作</span>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Core Advantages — content empty for now
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('star', 18) + ' 核心优势</div>';
+  html += '<div class="bp-advantage-grid">';
+  html += '<div class="bp-advantage-card">';
+  html += '<div class="bp-advantage-icon">' + svgIcon('doc', 22) + '</div>';
+  html += '<div class="bp-advantage-title">内容壁垒</div>';
+  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
+  html += '</div>';
+  html += '<div class="bp-advantage-card">';
+  html += '<div class="bp-advantage-icon">' + svgIcon('cell', 22) + '</div>';
+  html += '<div class="bp-advantage-title">技术壁垒</div>';
+  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
+  html += '</div>';
+  html += '<div class="bp-advantage-card">';
+  html += '<div class="bp-advantage-icon">' + svgIcon('users', 22) + '</div>';
+  html += '<div class="bp-advantage-title">学术壁垒</div>';
+  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Data Metrics — only UV, subscriptions, community size
+  html += '<div class="opencgt-block">';
+  html += '<div class="opencgt-block-title">' + svgIcon('chart', 18) + ' 关键指标</div>';
+  html += '<div class="bp-metric-row">';
+  html += '<div class="bp-metric-item"><div class="bp-metric-num">--</div><div class="bp-metric-label">日UV</div></div>';
+  html += '<div class="bp-metric-item"><div class="bp-metric-num">--</div><div class="bp-metric-label">订阅数</div></div>';
+  html += '<div class="bp-metric-item"><div class="bp-metric-num">--</div><div class="bp-metric-label">社群人数</div></div>';
+  html += '</div>';
+  html += '<div style="font-size:12px;color:var(--text-light);text-align:center;margin-top:12px;opacity:0.6;">数据统计功能上线后将实时更新，更多数据指标请查看AI数据看板</div>';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
 }
 
 function showOpenCGTSubmitModal() {
