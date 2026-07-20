@@ -7291,12 +7291,12 @@ function renderHub() {
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('database', 16) + ' 数据库入口</div><div class="sd-line"></div></div>';
 
   html += '<div class="hub-cards">';
-  html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 科普导览</div></div>';
+  html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 患者常见问题</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
-  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床文献数据</div></div><div class="hc-desc">' + ALL_DATA.length + '篇 · ' + totalSystemsGlobal + '系统 · 证据分级</div></div>';
+  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床试验数据</div></div><div class="hc-desc">730篇 · 19系统 · 证据分级 · 文献全文解读</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · 博鳌乐城</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
-  html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">818令备案 · 全国细胞治疗中心</div></div>';
+  html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">备案机构项目 · 全国细胞治疗中心 · 临床招募信息</div></div>';
   html += '</div>';
 
   // Global search section (divider only, functionality TBD)
@@ -7308,7 +7308,7 @@ function renderHub() {
   html += '<div class="report-entry amber" onclick="switchSection(\'picks\')">';
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('star', 16) + '<span>编辑精选·前沿解读</span></div>';
-  html += '<div class="report-entry-desc">重要文献深度解读·按期筛选</div>';
+  html += '<div class="report-entry-desc">重要文献前沿资讯深度解读·按期筛选</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -7336,7 +7336,7 @@ function renderHub() {
   html += '<div class="report-entry" onclick="switchSection(\'report\')">';
   html += '<div class="report-entry-left">';
   html += '<div class="report-entry-title">' + svgIcon('chart', 16) + '<span>数据分析·行业报告</span></div>';
-  html += '<div class="report-entry-desc">信息库AI团队打造·定时更新</div>';
+  html += '<div class="report-entry-desc">知识库AI团队打造·专家审核·实时更新</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
