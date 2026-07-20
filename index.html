@@ -1898,6 +1898,11 @@ body { padding-bottom: 60px; }
 .ai-case-tag.green { color: #66BB6A; background: rgba(102,187,106,0.1); }
 .ai-case-tag.amber { color: #FFB74D; background: rgba(255,183,77,0.1); }
 .ai-case-tag.purple { color: #AB47BC; background: rgba(171,71,188,0.1); }
+.ai-case-tag.pulsing { color: #FF8A65; background: rgba(255,138,101,0.12); border: 1px dashed rgba(255,138,101,0.4); animation: ai-tag-pulse 2s ease-in-out infinite; }
+@keyframes ai-tag-pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; box-shadow: 0 0 8px rgba(255,138,101,0.3); } }
+.ai-case-item.updating { border-style: dashed; border-color: rgba(255,138,101,0.2); }
+.ai-case-item.updating .ai-case-num { color: #FF8A65; font-size: 10px; font-style: italic; }
+.ai-cases-subtitle { text-align: center; font-size: 11px; font-weight: 600; color: var(--text-light); margin: 16px 0 8px; letter-spacing: 0.5px; }
 .ai-case-text { font-size: 12px; color: var(--text); flex: 1; line-height: 1.4; }
 .ai-case-num { font-size: 13px; font-weight: 700; color: var(--primary); flex-shrink: 0; }
 /* Data Grid */
@@ -2358,63 +2363,10 @@ body { padding-bottom: 60px; }
   padding: 24px; border: 1px dashed var(--border); border-radius: 12px;
   color: var(--text-light); font-size: 13px; text-align: center; gap: 8px;
 }
-.opencgt-sphere-wrap { display: flex; justify-content: center; align-items: center; padding: 20px 0; }
-.opencgt-sphere {
-  position: relative; width: 360px; height: 360px;
-  perspective: 1200px;
-}
-.opencgt-sphere-inner {
-  position: relative; width: 100%; height: 100%;
-  transform-style: preserve-3d;
-  animation: opencgt-sphere-rotate 30s linear infinite;
-}
-.opencgt-sphere:hover .opencgt-sphere-inner { animation-play-state: paused; }
-@keyframes opencgt-sphere-rotate {
-  from { transform: rotateY(0deg) rotateX(-12deg); }
-  to { transform: rotateY(360deg) rotateX(-12deg); }
-}
-.opencgt-node {
-  position: absolute; top: 50%; left: 50%;
-  width: 52px; height: 52px; margin: -26px 0 0 -26px;
-  border-radius: 50%; cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 32% 28%, rgba(0,229,255,0.55) 0%, rgba(0,229,255,0.25) 35%, rgba(0,184,212,0.1) 70%, rgba(10,15,26,0.6) 100%);
-  border: 1px solid rgba(0,229,255,0.35);
-  box-shadow:
-    0 0 14px rgba(0,229,255,0.25),
-    inset 2px 2px 6px rgba(0,229,255,0.3),
-    inset -2px -3px 8px rgba(0,0,0,0.4),
-    0 2px 8px rgba(0,0,0,0.3);
-  transition: box-shadow 0.3s;
-  backface-visibility: visible;
-}
-.opencgt-node:hover {
-  box-shadow:
-    0 0 28px rgba(0,229,255,0.6),
-    inset 2px 2px 8px rgba(0,229,255,0.4),
-    inset -2px -3px 10px rgba(0,0,0,0.3),
-    0 4px 16px rgba(0,0,0,0.4);
-  z-index: 10;
-}
-.opencgt-node-icon { color: var(--primary); filter: drop-shadow(0 0 3px rgba(0,229,255,0.5)); }
-.opencgt-node-label { font-size: 8px; color: var(--text); font-weight: 600; margin-top: 1px; text-align: center; line-height: 1.1; }
-.opencgt-sphere-core {
-  position: absolute; top: 50%; left: 50%;
-  width: 84px; height: 84px; margin: -42px 0 0 -42px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, rgba(0,229,255,0.3) 0%, rgba(0,184,212,0.15) 40%, rgba(10,15,26,0.7) 100%);
-  border: 1px solid rgba(0,229,255,0.25);
-  box-shadow:
-    0 0 20px rgba(0,229,255,0.2),
-    inset 2px 2px 10px rgba(0,229,255,0.2),
-    inset -3px -4px 12px rgba(0,0,0,0.5);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; color: var(--primary);
-  text-align: center; line-height: 1.3;
-}
-.opencgt-conn-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; transform-style: preserve-3d; }
-.opencgt-sphere-rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
-.opencgt-sphere-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(0,229,255,0.08); }
+.opencgt-sphere-wrap { display: flex; justify-content: center; align-items: center; padding: 10px 0; position: relative; }
+.opencgt-3d-canvas { width: 100%; max-width: 500px; height: 420px; border-radius: 12px; overflow: hidden; position: relative; cursor: grab; background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.03) 0%, transparent 70%); }
+.opencgt-3d-canvas:active { cursor: grabbing; }
+.opencgt-3d-canvas canvas { display: block; }
 .opencgt-sphere-hint { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px; }
 @media (max-width: 768px) {
   .opencgt-value-grid { grid-template-columns: 1fr; }
@@ -2424,10 +2376,7 @@ body { padding-bottom: 60px; }
   .opencgt-flow-arrow { transform: rotate(90deg); }
   .opencgt-twophase { flex-direction: column; }
   .opencgt-phase { max-width: 100%; }
-  .opencgt-sphere { width: 300px; height: 300px; }
-  .opencgt-node { width: 46px; height: 46px; margin: -23px 0 0 -23px; }
-  .opencgt-node-label { font-size: 7px; }
-  .opencgt-sphere-core { width: 68px; height: 68px; margin: -34px 0 0 -34px; font-size: 9px; }
+  .opencgt-3d-canvas { height: 340px; }
 }
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
@@ -4746,6 +4695,7 @@ body { padding-bottom: 60px; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="china-geo.js"></script>
 </head>
 <body>
@@ -7308,15 +7258,32 @@ function renderAIDashboard() {
   html += '<div class="ai-cases-section">';
   html += '<div class="ai-cases-title">AI更新数据集</div>';
   html += '<div class="ai-cases-list">';
+  // 已更新数据集
+  html += '<div class="ai-cases-subtitle">已更新数据集</div>';
   var cases = [
     {tag:'文献', tagClass:'cyan', text:'730篇干细胞临床文献自动分类入库，覆盖19个系统137种适应症', num:'730篇'},
     {tag:'政策', tagClass:'amber', text:'818号令全文58条逐条解读，全国106家备案机构实时追踪', num:'21份'},
     {tag:'产品', tagClass:'green', text:'45款全球获批细胞治疗产品信息整合，含FDA/EMA/NMPA', num:'45款'},
+    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'755篇'},
+    {tag:'企业', tagClass:'green', text:'CGT产业链企业入驻展示，覆盖CDMO/CRO/研发/生产全环节', num:'20+家'},
+    {tag:'会议', tagClass:'amber', text:'ASGCT/EULAR/ASCO等国际会议动态追踪，前沿数据同步更新', num:'12场'},
     {tag:'日报', tagClass:'purple', text:'CGT行业日报每日自动推送，累计350+期AI对话生成', num:'350+期'},
     {tag:'精选', tagClass:'cyan', text:'编辑精选5期52篇前沿文献深度解读，专家审核入库', num:'52篇'}
   ];
   cases.forEach(function(c) {
     html += '<div class="ai-case-item"><div class="ai-case-tag ' + c.tagClass + '">' + c.tag + '</div><div class="ai-case-text">' + c.text + '</div><div class="ai-case-num">' + c.num + '</div></div>';
+  });
+  // 正在更新数据集
+  html += '<div class="ai-cases-subtitle">正在更新数据集</div>';
+  var updating = [
+    {tag:'CAR-T', tagClass:'pulsing', text:'全球CAR-T临床试验全景数据库，覆盖靶点/适应症/管线阶段', num:'构建中'},
+    {tag:'IND', tagClass:'pulsing', text:'NMPA/FDA IND申报材料数据库，含药学/非临床/临床资料', num:'构建中'},
+    {tag:'评审', tagClass:'pulsing', text:'药监局CDE/FDA评审报告库，已公开品种审评报告整理', num:'构建中'},
+    {tag:'AAV', tagClass:'pulsing', text:'AAV基因治疗工艺与CMC数据库，覆盖血清型/滴度/纯度数据', num:'构建中'},
+    {tag:'投融资', tagClass:'pulsing', text:'全球CGT投融资交易数据库，含融资金额/估值/管线', num:'构建中'}
+  ];
+  updating.forEach(function(c) {
+    html += '<div class="ai-case-item updating"><div class="ai-case-tag ' + c.tagClass + '">' + c.tag + '</div><div class="ai-case-text">' + c.text + '</div><div class="ai-case-num">' + c.num + '</div></div>';
   });
   html += '</div>';
   html += '</div>';
@@ -8087,32 +8054,262 @@ var OPENCGT_PARTNERS = [
   { short: '学会', icon: 'users', name: '学术组织节点', desc: '学会与协会，提供学术交流与标准制定支持', role: '学术交流 · 标准制定' }
 ];
 
-function positionSphereNodes() {
-  var nodes = document.querySelectorAll('.opencgt-node');
-  if (!nodes.length) return;
-  var count = nodes.length;
-  var radius = 130;
-  var sphereInner = document.getElementById('opencgtSphereInner');
-  if (!sphereInner) return;
-  // Remove old connections
-  var oldConns = sphereInner.querySelectorAll('.opencgt-conn');
-  oldConns.forEach(function(c) { c.remove(); });
-  for (var i = 0; i < count; i++) {
-    var phi = Math.acos(-1 + (2 * i) / count);
-    var theta = Math.sqrt(count * Math.PI) * phi;
+// === 3D Force-Directed Sphere Network Graph ===
+var opencgt3DScene = null, opencgt3DCamera = null, opencgt3DRenderer = null;
+var opencgt3DNodes = [], opencgt3DNodeGroup = null, opencgt3DLines = null;
+var opencgt3DRot = { x: -0.3, y: 0 }, opencgt3DTargetRot = { x: -0.3, y: 0 };
+var opencgt3DIsDragging = false, opencgt3DLastMouse = { x: 0, y: 0 };
+var opencgt3DAutoRotate = true, opencgt3DZoom = 1, opencgt3DAnimId = null;
+var opencgt3DConnections = [];
+
+function init3DForceGraph() {
+  var container = document.getElementById('opencgt3DCanvas');
+  if (!container || typeof THREE === 'undefined') return;
+
+  // Cleanup
+  if (opencgt3DAnimId) cancelAnimationFrame(opencgt3DAnimId);
+  if (opencgt3DRenderer) { opencgt3DRenderer.dispose(); container.innerHTML = ''; }
+  opencgt3DNodes = []; opencgt3DConnections = [];
+
+  var w = container.clientWidth || 500;
+  var h = container.clientHeight || 420;
+
+  opencgt3DScene = new THREE.Scene();
+  opencgt3DCamera = new THREE.PerspectiveCamera(55, w / h, 0.1, 1000);
+  opencgt3DCamera.position.z = 360;
+
+  opencgt3DRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  opencgt3DRenderer.setSize(w, h);
+  opencgt3DRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(opencgt3DRenderer.domElement);
+
+  opencgt3DNodeGroup = new THREE.Group();
+
+  // Central core
+  var coreGeo = new THREE.SphereGeometry(14, 32, 32);
+  var coreMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.85 });
+  var core = new THREE.Mesh(coreGeo, coreMat);
+  opencgt3DNodeGroup.add(core);
+
+  var coreGlowGeo = new THREE.SphereGeometry(24, 32, 32);
+  var coreGlowMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.12 });
+  var coreGlow = new THREE.Mesh(coreGlowGeo, coreGlowMat);
+  opencgt3DNodeGroup.add(coreGlow);
+
+  // Outer nodes on sphere (Fibonacci distribution)
+  var nodeCount = 42;
+  var radius = 140;
+
+  for (var i = 0; i < nodeCount; i++) {
+    var phi = Math.acos(-1 + (2 * i) / nodeCount);
+    var theta = Math.sqrt(nodeCount * Math.PI) * phi;
     var x = radius * Math.cos(theta) * Math.sin(phi);
     var y = radius * Math.sin(theta) * Math.sin(phi);
     var z = radius * Math.cos(phi);
-    nodes[i].style.transform = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
-    // Draw connection line from center to node
-    var dist = Math.sqrt(x*x + y*y + z*z);
-    if (dist > 1) {
-      var conn = document.createElement('div');
-      conn.className = 'opencgt-conn';
-      conn.style.cssText = 'position:absolute;top:50%;left:50%;width:1px;height:' + dist + 'px;background:linear-gradient(to bottom, rgba(0,229,255,0.25), rgba(0,229,255,0.05));transform-origin:top center;transform:translate(-50%,0) rotateY(' + theta + 'rad) rotateZ(' + (Math.PI/2 - phi) + 'rad);pointer-events:none;';
-      sphereInner.insertBefore(conn, nodes[0]);
+
+    var nodeSize = 2.5 + Math.random() * 3.5;
+    var isHighlight = Math.random() > 0.55;
+    var color = isHighlight ? 0x00E5FF : 0x006978;
+    var opacity = isHighlight ? 0.9 : 0.55;
+
+    var geo = new THREE.SphereGeometry(nodeSize, 12, 12);
+    var mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: opacity });
+    var node = new THREE.Mesh(geo, mat);
+    node.position.set(x, y, z);
+    node.userData = { ox: x, oy: y, oz: z, phase: Math.random() * Math.PI * 2, speed: 0.4 + Math.random() * 0.6, baseSize: nodeSize };
+    opencgt3DNodes.push(node);
+    opencgt3DNodeGroup.add(node);
+
+    // Glow halo
+    var glowGeo = new THREE.SphereGeometry(nodeSize * 2.2, 12, 12);
+    var glowMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.08 });
+    var glow = new THREE.Mesh(glowGeo, glowMat);
+    glow.position.copy(node.position);
+    glow.userData.isGlow = true;
+    glow.userData.parentIdx = i;
+    opencgt3DNodeGroup.add(glow);
+  }
+
+  // Build connections: center→node + nearby node→node
+  var linePositions = [];
+  var lineColors = [];
+
+  // Center to each node
+  for (var i = 0; i < opencgt3DNodes.length; i++) {
+    var p = opencgt3DNodes[i].position;
+    linePositions.push(0, 0, 0, p.x, p.y, p.z);
+    lineColors.push(0, 0.9, 1, 0, 0.4, 0.5);
+    opencgt3DConnections.push({ type: 'center', a: -1, b: i });
+  }
+
+  // Nearby node-to-node
+  for (var i = 0; i < opencgt3DNodes.length; i++) {
+    var p1 = opencgt3DNodes[i].position;
+    var nearest = [];
+    for (var j = 0; j < opencgt3DNodes.length; j++) {
+      if (i === j) continue;
+      var p2 = opencgt3DNodes[j].position;
+      var d = Math.sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
+      if (d < 95) nearest.push({ idx: j, dist: d });
+    }
+    nearest.sort(function(a,b) { return a.dist - b.dist; });
+    for (var k = 0; k < Math.min(2, nearest.length); k++) {
+      var j = nearest[k].idx;
+      // Avoid duplicate
+      var dup = false;
+      for (var c = 0; c < opencgt3DConnections.length; c++) {
+        if ((opencgt3DConnections[c].a === i && opencgt3DConnections[c].b === j) ||
+            (opencgt3DConnections[c].a === j && opencgt3DConnections[c].b === i)) { dup = true; break; }
+      }
+      if (dup) continue;
+      var p2 = opencgt3DNodes[j].position;
+      linePositions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+      lineColors.push(0, 0.5, 0.6, 0, 0.3, 0.4);
+      opencgt3DConnections.push({ type: 'node', a: i, b: j });
     }
   }
+
+  var lineGeo = new THREE.BufferGeometry();
+  lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+  lineGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
+  var lineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending });
+  opencgt3DLines = new THREE.LineSegments(lineGeo, lineMat);
+  opencgt3DNodeGroup.add(opencgt3DLines);
+
+  // Outer wireframe sphere (faint)
+  var wireGeo = new THREE.SphereGeometry(radius, 24, 16);
+  var wireMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, wireframe: true, transparent: true, opacity: 0.04 });
+  var wire = new THREE.Mesh(wireGeo, wireMat);
+  opencgt3DNodeGroup.add(wire);
+
+  opencgt3DScene.add(opencgt3DNodeGroup);
+
+  // Interaction
+  var dom = opencgt3DRenderer.domElement;
+  dom.addEventListener('mousedown', function(e) {
+    opencgt3DIsDragging = true;
+    opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
+    opencgt3DAutoRotate = false;
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!opencgt3DIsDragging) return;
+    var dx = e.clientX - opencgt3DLastMouse.x;
+    var dy = e.clientY - opencgt3DLastMouse.y;
+    opencgt3DTargetRot.y += dx * 0.006;
+    opencgt3DTargetRot.x += dy * 0.006;
+    opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', function() {
+    opencgt3DIsDragging = false;
+    clearTimeout(window._opencgt3DResumeTimer);
+    window._opencgt3DResumeTimer = setTimeout(function() { opencgt3DAutoRotate = true; }, 3000);
+  });
+
+  // Touch
+  dom.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      opencgt3DIsDragging = true;
+      opencgt3DLastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      opencgt3DAutoRotate = false;
+    }
+  }, { passive: true });
+  dom.addEventListener('touchmove', function(e) {
+    if (!opencgt3DIsDragging || e.touches.length !== 1) return;
+    e.preventDefault();
+    var dx = e.touches[0].clientX - opencgt3DLastMouse.x;
+    var dy = e.touches[0].clientY - opencgt3DLastMouse.y;
+    opencgt3DTargetRot.y += dx * 0.006;
+    opencgt3DTargetRot.x += dy * 0.006;
+    opencgt3DLastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: false });
+  dom.addEventListener('touchend', function() {
+    opencgt3DIsDragging = false;
+    clearTimeout(window._opencgt3DResumeTimer);
+    window._opencgt3DResumeTimer = setTimeout(function() { opencgt3DAutoRotate = true; }, 3000);
+  });
+
+  // Zoom
+  dom.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    opencgt3DZoom *= e.deltaY > 0 ? 0.93 : 1.07;
+    opencgt3DZoom = Math.max(0.5, Math.min(2.5, opencgt3DZoom));
+  }, { passive: false });
+
+  // Animation loop
+  var t = 0;
+  function animate() {
+    opencgt3DAnimId = requestAnimationFrame(animate);
+    t += 0.01;
+
+    if (opencgt3DAutoRotate) opencgt3DTargetRot.y += 0.0025;
+
+    opencgt3DRot.x += (opencgt3DTargetRot.x - opencgt3DRot.x) * 0.1;
+    opencgt3DRot.y += (opencgt3DTargetRot.y - opencgt3DRot.y) * 0.1;
+    opencgt3DNodeGroup.rotation.x = opencgt3DRot.x;
+    opencgt3DNodeGroup.rotation.y = opencgt3DRot.y;
+
+    opencgt3DCamera.position.z = 360 / opencgt3DZoom;
+
+    // Force-directed float
+    for (var i = 0; i < opencgt3DNodes.length; i++) {
+      var n = opencgt3DNodes[i];
+      var u = n.userData;
+      var off = Math.sin(t * u.speed + u.phase) * 6;
+      var len = Math.sqrt(u.ox*u.ox + u.oy*u.oy + u.oz*u.oz);
+      n.position.set(
+        u.ox + (u.ox/len) * off,
+        u.oy + (u.oy/len) * off,
+        u.oz + (u.oz/len) * off
+      );
+      // Pulse size
+      var pulse = 1 + Math.sin(t * 1.5 + u.phase) * 0.12;
+      n.scale.setScalar(pulse);
+    }
+
+    // Update glow positions
+    var glows = opencgt3DNodeGroup.children.filter(function(c) { return c.userData.isGlow; });
+    for (var g = 0; g < glows.length; g++) {
+      var pIdx = glows[g].userData.parentIdx;
+      if (opencgt3DNodes[pIdx]) glows[g].position.copy(opencgt3DNodes[pIdx].position);
+    }
+
+    // Update line positions
+    var pos = opencgt3DLines.geometry.attributes.position.array;
+    var li = 0;
+    for (var c = 0; c < opencgt3DConnections.length; c++) {
+      var conn = opencgt3DConnections[c];
+      if (conn.type === 'center') {
+        pos[li++] = 0; pos[li++] = 0; pos[li++] = 0;
+        var np = opencgt3DNodes[conn.b].position;
+        pos[li++] = np.x; pos[li++] = np.y; pos[li++] = np.z;
+      } else {
+        var pa = opencgt3DNodes[conn.a].position;
+        var pb = opencgt3DNodes[conn.b].position;
+        pos[li++] = pa.x; pos[li++] = pa.y; pos[li++] = pa.z;
+        pos[li++] = pb.x; pos[li++] = pb.y; pos[li++] = pb.z;
+      }
+    }
+    opencgt3DLines.geometry.attributes.position.needsUpdate = true;
+
+    // Core pulse
+    core.scale.setScalar(1 + Math.sin(t * 2) * 0.06);
+    coreGlow.scale.setScalar(1 + Math.sin(t * 2) * 0.12);
+
+    opencgt3DRenderer.render(opencgt3DScene, opencgt3DCamera);
+  }
+  animate();
+
+  // Resize
+  if (window._opencgt3DResizeHandler) window.removeEventListener('resize', window._opencgt3DResizeHandler);
+  window._opencgt3DResizeHandler = function() {
+    if (!opencgt3DRenderer || !container) return;
+    var nw = container.clientWidth, nh = container.clientHeight;
+    if (nw < 10 || nh < 10) return;
+    opencgt3DCamera.aspect = nw / nh;
+    opencgt3DCamera.updateProjectionMatrix();
+    opencgt3DRenderer.setSize(nw, nh);
+  };
+  window.addEventListener('resize', window._opencgt3DResizeHandler);
 }
 
 function showPartnerInfo(idx) {
@@ -8219,30 +8416,13 @@ function renderOpenCGT() {
   html += '<div style="margin-top:16px;font-size:13px;color:var(--text-light);line-height:1.9;text-indent:2em;">成为联盟节点后，提交想法需求，平台将在48小时内生成可行性分析与实现路径建议，同时AI会精准匹配行业资源，经各方同意后，平台将规划线上资源对接方案。如果你是一名研究生，有课题需要研究建议；如果你是行业市场人员，需要咨询某位专家的学术问题；如果你是企业生产技术员，遇到细胞培养工艺方面的问题；如果你是临床医生，面对CGT药物缺乏足够的临床资料参考——Open CGT，开放、包容、高效，只要你愿意加入，有想法、有问题，这里就是你的路径起点。</div>';
   html += '</div>';
 
-  // Partners - 3D sphere
+  // Partners - 3D force-directed sphere network
   html += '<div class="opencgt-block">';
   html += '<div class="opencgt-block-title">' + svgIcon('building', 18) + ' 已入驻伙伴</div>';
   html += '<div class="opencgt-sphere-wrap">';
-  html += '<div class="opencgt-sphere">';
-  html += '<div class="opencgt-sphere-rings">';
-  html += '<div class="opencgt-sphere-ring" style="width:300px;height:300px;margin:-150px 0 0 -150px;"></div>';
-  html += '<div class="opencgt-sphere-ring" style="width:240px;height:240px;margin:-120px 0 0 -120px;"></div>';
-  html += '<div class="opencgt-sphere-ring" style="width:180px;height:180px;margin:-90px 0 0 -90px;"></div>';
+  html += '<div class="opencgt-3d-canvas" id="opencgt3DCanvas"></div>';
   html += '</div>';
-  html += '<div class="opencgt-sphere-inner" id="opencgtSphereInner">';
-  html += '<div class="opencgt-sphere-core">Open<br>CGT</div>';
-  // Nodes will be positioned by JS
-  for (var pi = 0; pi < OPENCGT_PARTNERS.length; pi++) {
-    var p = OPENCGT_PARTNERS[pi];
-    html += '<div class="opencgt-node" data-idx="' + pi + '" onclick="showPartnerInfo(' + pi + ')" id="opencgtNode' + pi + '">';
-    html += '<div class="opencgt-node-icon">' + svgIcon(p.icon, 16) + '</div>';
-    html += '<div class="opencgt-node-label">' + p.short + '</div>';
-    html += '</div>';
-  }
-  html += '</div>';
-  html += '</div>';
-  html += '</div>';
-  html += '<div class="opencgt-sphere-hint">悬停暂停旋转 · 点击节点查看详情</div>';
+  html += '<div class="opencgt-sphere-hint">拖拽旋转 · 滚轮缩放 · 节点自动浮动</div>';
   html += '</div>';
 
   // CTA
@@ -8253,7 +8433,7 @@ function renderOpenCGT() {
 
   content.innerHTML = html;
   updateFloatButtons();
-  setTimeout(positionSphereNodes, 50);
+  setTimeout(init3DForceGraph, 100);
 }
 
 function showOpenCGTSubmitModal() {
