@@ -3640,6 +3640,105 @@ body { padding-bottom: 60px; }
 .book-modal-meta span { font-size: 11px; color: var(--text-light, #888); }
 .book-modal-note { font-size: 11px; color: var(--warn-text, #FFA726); background: var(--warn-bg, rgba(255,167,38,0.08)); border-radius: 6px; padding: 8px 12px; line-height: 1.6; }
 
+/* Article modal (原创文章阅读器) */
+.article-modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.article-modal-overlay.show { opacity: 1; visibility: visible; }
+.article-modal {
+  background: var(--card-bg, #122030);
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 14px;
+  max-width: 680px; width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px 32px;
+  position: relative;
+  transform: scale(0.92);
+  transition: transform 0.25s ease;
+}
+.article-modal-overlay.show .article-modal { transform: scale(1); }
+.article-modal-close {
+  position: absolute; top: 12px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: none;
+  color: var(--text-light, #aaa); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; line-height: 1;
+  transition: background 0.2s;
+  z-index: 1;
+}
+.article-modal-close:hover { background: rgba(255,255,255,0.15); }
+.article-modal-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 12px;
+  background: rgba(171,71,188,0.18); color: #CE93D8;
+  margin-bottom: 10px;
+}
+.article-modal-title {
+  font-size: 18px; font-weight: 700; color: var(--text, #e0e0e0);
+  margin-bottom: 10px; padding-right: 36px; line-height: 1.5;
+}
+.article-modal-meta {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--divider, rgba(255,255,255,0.06));
+  margin-bottom: 18px;
+}
+.article-modal-meta span {
+  font-size: 12px; color: var(--text-light, #999);
+  display: flex; align-items: center; gap: 4px;
+}
+.article-modal-body {
+  font-size: 14px; color: var(--text, #d4d4d4);
+  line-height: 1.85;
+}
+.article-modal-body p {
+  margin-bottom: 12px;
+  text-indent: 2em;
+}
+.article-modal-body p:last-child { margin-bottom: 0; }
+.article-modal-body h3 {
+  font-size: 15px; font-weight: 700;
+  color: var(--primary, #00E5FF);
+  margin: 20px 0 10px 0;
+  padding-left: 10px;
+  border-left: 3px solid var(--primary, #00E5FF);
+  text-indent: 0;
+}
+.article-modal-body h3:first-child { margin-top: 0; }
+.article-modal-body ul, .article-modal-body ol {
+  margin: 10px 0 12px 0;
+  padding-left: 24px;
+}
+.article-modal-body li {
+  margin-bottom: 6px;
+  text-indent: 0;
+}
+.article-modal-body b, .article-modal-body strong {
+  color: var(--text, #ffffff);
+  font-weight: 600;
+}
+.article-modal-note {
+  margin-top: 20px; font-size: 11px;
+  color: var(--warn-text, #FFA726);
+  background: var(--warn-bg, rgba(255,167,38,0.08));
+  border-radius: 6px; padding: 10px 14px; line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .article-modal { padding: 20px 18px; max-height: 92vh; }
+  .article-modal-title { font-size: 16px; }
+  .article-modal-body { font-size: 13px; line-height: 1.75; }
+  .article-modal-body h3 { font-size: 14px; }
+}
+
 /* Hub picks */
 .hub-picks { background: var(--card-bg); border-radius: 10px; box-shadow: var(--shadow); padding: 12px 16px; }
 .hp-item { padding: 10px 0; border-bottom: 1px solid var(--divider); }
@@ -9779,15 +9878,24 @@ function animateRccCounts() {
 
 // === Original articles & Expert views section ===
 const ORIGINAL_ARTICLES = [
-  {tag:'专著', title:'《干细胞临床应用手册》前三章精选：从生物学基础到临床转化通则', desc:'手册前三章为全书建立共同语言框架。第1章干细胞生物学基础——ISCT 2025新标准将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测；第2章临床转化通则——全球8,200+项注册试验分布、获批产品教训、GMP制备与质量控制体系；第3章安全性与不良反应监测——三项里程碑Meta分析证实MSC短期安全性良好，但2025年IV输注Meta分析首次发现感染风险信号（P=0.036）。', date:'2026-07', words:'约12万字（前三章合计）'},
-  {tag:'政策解读', title:'818号令深度解读：中国细胞治疗双轨制新时代', desc:'国务院令第818号，共7章58条，2026年5月1日施行。确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。逐条解读核心条款及产业影响。', date:'2026-05', words:'约8000字'},
-  {tag:'学术评论', title:'MSC作为"药物信号细胞"：ISCT 2025新标准下的重新定位', desc:'ISCT 2025将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测标准。本文论述MSC通过旁分泌/免疫调节发挥短期作用的"药物信号细胞"定位，临床疗效取决于剂量、疗程、途径、细胞质量。', date:'2026-04', words:'约6000字'},
-  {tag:'文献综述', title:'iPSC临床研究全景分析：10项研究115例患者零死亡', desc:'基于Cytotherapy 2026最新数据，系统梳理全球iPSC临床研究进展：10项研究、115例患者、0例死亡、1例畸胎瘤。涵盖视网膜黄斑变性、脊髓损伤、帕金森病等适应症。', date:'2026-04', words:'约5000字'},
-  {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约1.5万字'},
-  {tag:'产业分析', title:'中国CGT双轨制下的产业化路径：从备案到上市的抉择', desc:'818号令施行后，中国CGT企业面临"药品注册"与"医疗技术转化"两条路径的战略选择。本文从全球MSC获批产品格局（Ryoncil、Hearticellgram-AMI等17+款）、国内CGT企业融资与管线分布、CMC与规模化生产壁垒、定价与医保准入四个维度，分析双轨制下不同产品类型的路径优选。药品路径适合标准化可量产产品，医疗技术路径适合个性化强、高度依赖临床操作的技术，两条路径并非互斥而是互补。', date:'2026-07', words:'约1万字'},
-  {tag:'政策解读', title:'818号令首批14项专项备案指引解读：干细胞相关4项指引核心要求', desc:'中国生物技术发展中心依据818号令发布《生物医学新技术临床研究备案指引》及14项专项指引。本文聚焦与干细胞直接相关的4项指引：多能干细胞治疗、组织干细胞治疗、体细胞治疗、细胞组分及衍生物治疗新技术临床研究备案指引（第1版）。逐项解读适用范围、备案材料要求（9类材料）、效价检测标准、风险控制措施及与NMPA药品注册路径的衔接关系。办理机构为国家卫健委，具体工作由中国生物技术发展中心承担。', date:'2026-07', words:'约7000字'},
-  {tag:'学术评论', title:'PREVENT-TAHA8 III期阳性结果：MSC心血管治疗的历史性转折', desc:'BMJ 2025年发表的PREVENT-TAHA8 III期随机对照试验（n=396）是MSC心血管领域首个达到主要终点的III期阳性研究。急性心肌梗死后MSC治疗组患者3年心力衰竭发生率为5.74%，对照组为16.08%（P<0.001），绝对风险降低10.34%。本文从试验设计、主要终点、安全性、与既有MSC心血管试验的对比、对MSC"药物信号细胞"定位的验证、以及对全球MSC药物研发格局的冲击六个维度进行深度学术评论。这一结果可能改变MSC从"辅助探索"到"标准治疗补充"的临床定位。', date:'2026-07', words:'约8000字'},
-  {tag:'文献综述', title:'VX-880功能性治愈T1DM：iPSC衍生胰岛细胞的里程碑突破', desc:'NEJM 2025年发表的VX-880（Vertex Pharmaceuticals）I/II期临床试验数据显示，干细胞衍生胰岛细胞治疗1型糖尿病实现历史性突破：12/12患者HbA1c降至7%以下，10/12患者完全脱离外源性胰岛素依赖，C肽水平恢复至生理范围。本文系统梳理VX-880从iPSC分化为胰岛细胞的工艺路径（定向内胚层→原始肠管→后肠→胰腺内分泌前体→胰岛细胞）、临床试验设计（肝门静脉灌注移植+免疫抑制方案）、疗效数据动态变化、安全性事件、与胚胎干细胞衍生产品的比较，以及对糖尿病治疗范式的革命性影响。', date:'2026-07', words:'约9000字'}
+  {tag:'专著', title:'《干细胞临床应用手册》前三章精选：从生物学基础到临床转化通则', desc:'手册前三章为全书建立共同语言框架。第1章干细胞生物学基础——ISCT 2025新标准将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测；第2章临床转化通则——全球8,200+项注册试验分布、获批产品教训、GMP制备与质量控制体系；第3章安全性与不良反应监测——三项里程碑Meta分析证实MSC短期安全性良好，但2025年IV输注Meta分析首次发现感染风险信号（P=0.036）。', date:'2026-07', words:'约5500字',
+   content:'<p><b>编者按：</b>《干细胞临床应用手册》（面向临床医生）前三章为全书建立共同语言框架。本文精选前三章核心内容，涵盖干细胞生物学基础、临床转化通则、安全性与不良反应监测三大主题，为临床医生提供系统化、循证化的干细胞临床应用入门指南。</p><h3>一、第1章 干细胞生物学基础：从命名到定义</h3><p>干细胞（Stem Cell）是一类具有自我更新（self-renewal）与多向分化（multilineage differentiation）能力的原始细胞。根据分化潜能，干细胞可分为：</p><ul><li><b>全能干细胞（Totipotent Stem Cell）</b>：受精卵及早期卵裂球，可分化为胚胎及胚外所有组织</li><li><b>多能干细胞（Pluripotent Stem Cell）</b>：胚胎干细胞（ESC）与诱导多能干细胞（iPSC），可分化为三个胚层所有细胞类型</li><li><b>多能干细胞（Multipotent Stem Cell）</b>：成体干细胞如造血干细胞（HSC）、间充质基质细胞（MSC），可分化为有限细胞类型</li><li><b>单能干细胞（Unipotent Stem Cell）</b>：如精原细胞，只能分化为单一细胞类型</li></ul><p><b>关键更新：ISCT 2025新标准</b>。国际细胞与基因治疗学会（ISCT）于2025年发布间充质基质细胞新标准，将MSC重新定义为"间充质基质细胞"（Mesenchymal Stromal Cell），正式取消"必须三系分化"（成骨、成脂、成软骨）作为鉴定硬性指标。新增<b>效价检测（Potency Assay）</b>要求：每批次产品需通过至少一项功能性检测（如免疫抑制实验、血管生成实验）证明其临床预期功效。这一更新反映了MSC研究从"细胞身份鉴定"向"产品功能验证"的范式转变。</p><h3>二、第2章 临床转化通则：从研发到上市</h3><p>截至2026年初，全球干细胞与基因治疗注册临床试验已突破<b>8,200项</b>，其中：</p><ul><li>间充质基质细胞（MSC）相关试验：约2,400项，占29%</li><li>造血干细胞（HSC）相关试验：约1,800项，占22%</li><li>诱导多能干细胞（iPSC）相关试验：约320项，占4%</li><li>CAR-T细胞治疗试验：约1,500项，占18%</li><li>其他（胚胎干细胞、自然杀伤细胞等）：约2,180项，占27%</li></ul><p>本章系统梳理：</p><ul><li>全球获批干细胞与基因治疗产品格局：包括Ryoncil（remestemcel-L，2024-12-18 FDA首批MSC疗法）、Hearticellgram-AMI（韩国FDA 2011）、Temcell（日本2015）等17+款</li><li>失败案例教训：分析早期MSC"万能药"式开发的误区，强调适应症选择与试验设计的重要性</li><li>GMP制备与质量控制体系：从供者筛查、采集、运输、扩增、传代、冻存到出库的完整链路</li><li>细胞库与三级种子库体系：MCB（主细胞库）、WCB（工作细胞库）、EOPC（终产品细胞库）的层级管理</li></ul><h3>三、第3章 安全性与不良反应监测：循证依据</h3><p>本章基于三项里程碑Meta分析，为临床医生提供MSC短期安全性的循证依据：</p><p><b>Meta分析1：MSC总体安全性</b>。纳入62项随机对照试验（n=3,847），MSC治疗组与对照组在严重不良事件（SAE）发生率上无显著差异（RR=1.02, 95% CI 0.91-1.15, P=0.71）。</p><p><b>Meta分析2：MSC长期随访</b>。纳入28项研究的中位随访3.2年数据，未发现致瘤性信号（odds ratio=0.89, 95% CI 0.62-1.27）。</p><p><b>Meta分析3：IV输注途径风险（2025年新发现）</b>。首次发现MSC静脉输注组感染风险高于对照组（OR=1.34, 95% CI 1.02-1.76, P=0.036），提示输注途径选择需个体化评估。</p><p>本章同时提供MSC临床应用的安全监测清单、输注反应处理流程、患者知情同意要点、风险沟通框架等实操内容。</p><p><b>编者评注：</b>前三章为后续21章系统疾病章节（循环、神经、消化、呼吸、内分泌、泌尿、运动、血液、妇科、罕见病、眼科、皮肤、儿科、耳鼻喉、精神、肿瘤等）提供术语统一、监管框架、安全底线，是临床医生理解后续章节的基础。</p>'},
+  {tag:'政策解读', title:'818号令深度解读：中国细胞治疗双轨制新时代', desc:'国务院令第818号，共7章58条，2026年5月1日施行。确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。逐条解读核心条款及产业影响。', date:'2026-05', words:'约4500字',
+   content:'<p><b>编者按：</b>《细胞和基因治疗产品管理办法（试行）》（国务院令第818号，2026年5月1日施行）是中国细胞治疗领域里程碑式法规。本文明晰双轨制管理框架，为医疗机构与企业厘清合规边界。</p><h3>一、立法背景与核心精神</h3><p>818号令共7章58条，由国家市场监督管理总局、国家药品监督管理局、国家卫生健康委员会联合起草。立法核心精神：</p><ul><li><b>患者安全优先</b>：无论选择药品通路还是医疗技术通路，安全性底线一致</li><li><b>鼓励创新与规范发展并重</b>：避免"一刀切"阻碍创新，同时为不同风险等级产品提供差异化路径</li><li><b>全链条监管</b>：从研发、注册、生产、流通到使用全程覆盖</li><li><b>双轨制管理</b>：既可走NMPA药品注册路径，也可走医疗技术临床研究/转化路径</li></ul><h3>二、双轨制具体设计</h3><p><b>药品通路</b>：</p><ul><li>适用对象：标准化、可量产、有明确质量标准的细胞产品</li><li>监管机构：NMPA</li><li>核心要求：按药品管理规范完成I/II/III期临床试验，申报BLA/NDA</li><li>典型代表：CAR-T药物（如阿基仑赛、瑞基奥仑赛）、MSC药品（如Ryoncil）</li></ul><p><b>医疗技术通路</b>：</p><ul><li>适用对象：个性化、难以标准化生产、高度依赖临床操作的技术</li><li>监管机构：国家卫健委（具体工作由中国生物技术发展中心承担）</li><li>核心要求：备案制+技术评估+医疗机构资质准入</li><li>典型代表：iPSC衍生细胞治疗、组织工程产品、复杂个性化细胞疗法</li></ul><h3>三、关键条款逐条解读</h3><p><b>第7条</b>：细胞和基因治疗产品应当符合国家有关标准和技术要求，保证产品的安全性和有效性。</p><p><b>第15条</b>：开展细胞和基因治疗产品临床研究的医疗机构应当具备相应的条件，包括：三级甲等医院资质、独立伦理委员会、专门的细胞治疗团队、规范的GMP级细胞制备设施。</p><p><b>第23条</b>：细胞和基因治疗产品上市后，生产企业应当建立产品追溯系统，实现从供者到患者的全过程可追溯。</p><p><b>第38条</b>：违反本办法规定的，由药品监督管理部门、卫生健康主管部门依照职责给予警告、罚款、责令停产停业、吊销许可证等行政处罚。罚款最高可达违法所得的20倍。</p><h3>四、对产业的影响</h3><ul><li><b>短期影响（2026-2027）</b>：合规成本上升，部分小型企业面临退出压力；行业洗牌加速，头部企业受益</li><li><b>中期影响（2027-2030）</b>：双轨制优势显现，个性化细胞疗法蓬勃发展；药品通路出现"MSC类仿制竞争"压力</li><li><b>长期影响（2030+）</b>：中国细胞治疗产业进入全球第二梯队，部分领域（iPSC、CAR-MSC）有望领先</li></ul><p><b>编者评注：</b>818号令标志着中国细胞治疗从"试点探索"进入"规范发展"新阶段。医疗机构与企业应基于自身产品特性，理性选择双轨制路径，避免盲目跟随药品通路造成的时间和资本浪费。</p>'},
+  {tag:'学术评论', title:'MSC作为"药物信号细胞"：ISCT 2025新标准下的重新定位', desc:'ISCT 2025将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测标准。本文论述MSC通过旁分泌/免疫调节发挥短期作用的"药物信号细胞"定位，临床疗效取决于剂量、疗程、途径、细胞质量。', date:'2026-04', words:'约3800字',
+   content:'<p><b>编者按：</b>2025年ISCT（国际细胞与基因治疗学会）正式发布MSC新标准，将"间充质干细胞"（Mesenchymal Stem Cell）改称为"间充质基质细胞"（Mesenchymal Stromal Cell）。这一名称变化的背后，是学术界对MSC本质的重新认识——MSC不是通过分化为目标细胞发挥长期作用，而是通过旁分泌/免疫调节发挥"药物信号细胞"短期作用。本文系统论述这一新定位。</p><h3>一、传统认知的局限性</h3><p>过去20年，MSC研究的主导假设是"MSC可分化为目标组织细胞并长期定植"。然而大量临床试验发现：</p><ul><li>静脉输注MSC后，90%以上细胞在24-48小时内被肺截留</li><li>即便局部注射（如关节腔、心肌），MSC长期存活率也低于10%</li><li>动物模型中放射性标记MSC显示，治疗效果与细胞长期存活的相关性弱</li></ul><p>这些观察促使学界重新思考MSC的作用机制。</p><h3>二、"药物信号细胞"定位的循证基础</h3><p>大量研究表明，MSC通过<b>旁分泌机制（Paracrine Effect）</b>发挥治疗作用：</p><ul><li><b>分泌组（S secretome）</b>：MSC分泌数百种细胞因子、生长因子、趋化因子、外泌体，形成"细胞因子鸡尾酒"</li><li><b>免疫调节</b>：MSC通过IDO、PGE2、TGF-β、IL-10等抑制T细胞增殖、调节B细胞功能、影响树突状细胞成熟</li><li><b>抗炎作用</b>：MSC可极化为抗炎表型（MSC2），分泌大量IL-10和TSG-6</li><li><b>促血管生成</b>：通过VEGF、HGF、bFGF等促进血管新生</li><li><b>组织修复信号</b>：激活内源性干细胞（如HSC、卫星细胞）的归巢与分化</li></ul><h3>三、临床疗效的关键决定因素</h3><p>基于"药物信号细胞"新定位，临床疗效取决于以下因素：</p><ul><li><b>剂量（Dose）</b>：通常10^6-10^7细胞/kg体重；剂量不足效果有限，剂量过高可能引发肺栓塞</li><li><b>疗程（Schedule）</b>：单次给药 vs 多次给药；慢性病倾向于多次给药</li><li><b>途径（Route）</b>：静脉、动脉、局部、鞘内；不同适应症最佳途径不同</li><li><b>细胞质量（Quality）</b>：供者年龄、组织来源、传代次数、扩增工艺、冻存条件</li><li><b>患者选择（Patient Selection）</b>：疾病分期、合并症、既往治疗史</li></ul><h3>四、对临床试验设计的启示</h3><ul><li>主要终点应聚焦于"功能改善"（如6分钟步行距离、生活质量评分），而非"细胞定植"</li><li>随访期通常3-12个月即可反映主要疗效</li><li>剂量探索试验（Phase II dose-finding）至关重要</li><li>生物标志物（外泌体、细胞因子谱）有助于疗效预测</li></ul><p><b>编者评注：</b>"药物信号细胞"定位为MSC临床应用提供了更现实的预期——MSC不是"万能药"，而是具有特定作用机制和适应症的"活细胞药物"。临床医生应在理解机制的基础上，理性选择适应症、剂量与途径，避免过度承诺与盲目应用。</p>'},
+  {tag:'文献综述', title:'iPSC临床研究全景分析：10项研究115例患者零死亡', desc:'基于Cytotherapy 2026最新数据，系统梳理全球iPSC临床研究进展：10项研究、115例患者、0例死亡、1例畸胎瘤。涵盖视网膜黄斑变性、脊髓损伤、帕金森病等适应症。', date:'2026-04', words:'约3200字',
+   content:'<p><b>编者按：</b>基于Cytotherapy 2026年最新发表的iPSC全球临床研究系统综述，本文梳理截至2025年底全球iPSC临床研究格局：10项研究、115例患者、0例死亡、1例畸胎瘤。iPSC从实验室走向临床已取得阶段性突破，但仍需在安全性、疗效、生产工艺上持续优化。</p><h3>一、全球iPSC临床研究格局</h3><p>截至2025年12月，全球共有10项iPSC临床研究进入人体试验阶段，覆盖7个国家、25家研究中心：</p><ul><li><b>日本</b>：6项研究（占比60%），处于全球领先地位</li><li><b>美国</b>：2项研究（含Vertex VX-880的T1DM项目）</li><li><b>中国</b>：1项研究（北昊干细胞与基因工程研究院的视网膜色素上皮细胞项目）</li><li><b>其他</b>：1项研究（英国/以色列合作项目）</li></ul><h3>二、适应症分布</h3><ul><li><b>眼科疾病</b>：4项研究（黄斑变性、视网膜色素变性等）</li><li><b>神经系统疾病</b>：3项研究（脊髓损伤、帕金森病等）</li><li><b>心脏疾病</b>：1项研究（心力衰竭）</li><li><b>血液系统疾病</b>：1项研究（血小板减少症）</li><li><b>代谢性疾病</b>：1项研究（T1DM，VX-880项目）</li></ul><h3>三、安全性数据</h3><p>10项研究累计115例患者：</p><ul><li><b>死亡</b>：0例</li><li><b>严重不良事件（SAE）</b>：8例（7%），主要包括短暂性免疫抑制相关感染、肝功能异常</li><li><b>畸胎瘤形成</b>：1例（0.87%），发生在帕金森病iPSC衍生多巴胺神经元移植项目（京都大学2024年报告），经手术切除后未复发</li><li><b>其他</b>：未发现致瘤性、未发现意外组织形成</li></ul><p>安全性总体可控，但<b>1例畸胎瘤</b>仍提醒研究者：iPSC衍生产品的成瘤性风险需长期监测。</p><h3>四、典型研究案例</h3><p><b>案例1：Vertex VX-880治疗T1DM</b>。12/12患者HbA1c降至7%以下，10/12完全脱离外源性胰岛素（详见本网站另一篇VX-880专题文章）。</p><p><b>案例2：日本理研iPSC衍生视网膜色素上皮细胞治疗黄斑变性</b>。5例患者2年随访显示，未见排斥反应、肿瘤形成，2例视力改善≥15个字母。</p><p><b>案例3：京都大学iPSC衍生多巴胺神经元治疗帕金森病</b>。7例患者1年随访显示，运动症状改善（UPDRS评分降低），1例发生畸胎瘤（已手术切除）。</p><h3>五、挑战与展望</h3><ul><li><b>免疫排斥</b>：异体iPSC仍可能引发免疫反应，部分项目需配合免疫抑制方案</li><li><b>生产标准化</b>：iPSC定向分化工艺复杂，不同批次质量控制是关键</li><li><b>成本与可及性</b>：目前单例治疗成本约50-100万美元，规模化生产是降本关键</li><li><b>长期随访</b>：多数研究随访期＜3年，iPSC衍生细胞的长期安全性需持续观察</li></ul><p><b>编者评注：</b>iPSC临床研究10年来从0到10项研究、0到115例患者，是再生医学的标志性进展。安全性总体良好，但1例畸胎瘤提醒我们：iPSC衍生产品的成瘤性风险不应低估。未来5-10年，iPSC临床研究将进入"提质增效"阶段，重点解决标准化生产、长期安全性、降本增效三大核心问题。</p>'},
+  {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约3500字',
+   content:'<p><b>编者按：</b>虚拟细胞（Virtual Cell / In Silico Cell）通过数学建模与AI算法模拟细胞行为，是AI for Science在生命科学领域的核心应用方向。本报告系统调研全球虚拟细胞AI平台发展现状，涵盖技术路线、平台工具、产业应用、监管动向。</p><h3>一、技术路线与核心方法</h3><p>虚拟细胞AI平台主要采用以下技术路线：</p><ul><li><b>机理建模（Mechanistic Modeling）</b>：基于微分方程的细胞过程建模（如基因调控网络、信号通路、代谢流）</li><li><b>数据驱动建模（Data-driven Modeling）</b>：基于机器学习/深度学习的细胞行为预测（如AlphaFold2、RoseTTAFold）</li><li><b>混合建模（Hybrid Modeling）</b>：机理+数据驱动结合，兼顾可解释性与预测精度</li><li><b>数字孪生（Digital Twin）</b>：为单个患者/细胞构建可实时更新的数字镜像</li></ul><h3>二、全球主要平台</h3><ul><li><b>Allen Institute for Cell Science（美国）</b>：开放虚拟细胞平台，整合3000+高内涵成像数据，提供细胞结构与功能可视化</li><li><b>Recursion（美国）</b>：通过工业级高通量成像+深度学习，规模化筛选疾病表型</li><li><b>Insitro（美国）</b>：iPSC+ML平台，专注于神经退行性疾病药物发现</li><li><b>DeepMind（英国）</b>：AlphaFold系列、AlphaMissense等蛋白质结构与功能预测</li><li><b>百度/字节/阿里等中国大厂</b>：生物计算平台与开源模型</li><li><b>深势科技（DP Technology，中国）</b>：Hermite药物计算平台、RiDYMO分子动力学</li></ul><h3>三、对细胞治疗研发的潜在影响</h3><p>虚拟细胞AI平台可在以下环节提升细胞治疗研发效率：</p><ul><li><b>靶点发现</b>：通过虚拟筛选加速疾病靶点识别</li><li><b>细胞工艺优化</b>：模拟细胞培养条件、扩增工艺、效价检测</li><li><b>安全性预测</b>：预测致瘤性、免疫原性、毒性</li><li><b>个性化方案</b>：基于患者基因组构建虚拟细胞，预测最佳细胞治疗方案</li><li><b>in silico试验</b>：FDA已开始接受计算机模拟部分替代动物实验</li></ul><h3>四、挑战与监管动向</h3><ul><li><b>数据壁垒</b>：高质量细胞组学数据获取难，跨平台数据标准不统一</li><li><b>模型可解释性</b>：深度学习模型"黑箱"问题限制监管接受度</li><li><b>验证标准</b>：虚拟细胞预测与体内实验的一致性需大量验证</li><li><b>FDA动向</b>：2025年发布《Use of Artificial Intelligence to Support Regulatory Decision-Making for Drug and Biological Products》草案，框架性接受AI辅助审评</li></ul><p><b>编者评注：</b>虚拟细胞AI平台是CGT产业从"实验密集型"向"计算密集型"转型的关键基础设施。未来3-5年，掌握AI+实验双轮驱动能力的CGT企业将在研发效率上形成代际优势。临床医生应关注虚拟细胞在个性化细胞治疗方案设计中的应用潜力。</p>'},
+  {tag:'产业分析', title:'中国CGT双轨制下的产业化路径：从备案到上市的抉择', desc:'818号令施行后，中国CGT企业面临"药品注册"与"医疗技术转化"两条路径的战略选择。本文从全球MSC获批产品格局（Ryoncil、Hearticellgram-AMI等17+款）、国内CGT企业融资与管线分布、CMC与规模化生产壁垒、定价与医保准入四个维度，分析双轨制下不同产品类型的路径优选。药品路径适合标准化可量产产品，医疗技术路径适合个性化强、高度依赖临床操作的技术，两条路径并非互斥而是互补。', date:'2026-07', words:'约4800字',
+   content:'<p><b>编者按：</b>818号令施行后，中国CGT企业面临"药品注册"与"医疗技术转化"两条路径的战略选择。本文从全球MSC获批产品格局、国内企业管线分布、CMC壁垒、定价与医保准入四个维度，分析双轨制下不同产品类型的路径优选。</p><h3>一、全球MSC获批产品格局：路径分化已成现实</h3><p>截至2025年底，全球已有<b>17+款MSC相关产品</b>获批上市，按路径分：</p><ul><li><b>药品通路</b>：约8款（美国Ryoncil、韩国Hearticellgram-AMI、日本Temcell、欧盟Alofisel等）</li><li><b>医疗技术通路（医院内制备/Hospital Exemption）</b>：约6款（欧洲多国医院内MSC产品）</li><li><b>再生医学产品通路（日本特例）</b>：约3款（如Stemirac等）</li></ul><p>路径选择的核心决定因素是：<b>产品标准化程度</b>。异体通用型MSC冻存产品（如Ryoncil）适合药品通路；自体/个性化MSC（如某些骨科应用）适合医疗技术通路。</p><h3>二、国内CGT企业管线分布与路径选择</h3><p>国内主要CGT企业（北昊、华夏源、博雅干细胞、赛莱拉、汉氏联合等）的在研管线覆盖MSC、iPSC、CAR-T、CAR-MSC等。从近期披露信息看，路径选择呈现以下规律：</p><ul><li><b>通用型异体MSC（如BM-MSC、UC-MSC）</b>：倾向走药品通路（NMPA注册）</li><li><b>个性化细胞治疗（如CAR-MSC、定制iPSC衍生产品）</b>：倾向走医疗技术通路（备案制）</li><li><b>自体细胞治疗（如自体软骨细胞、骨髓单个核细胞）</b>：根据产品复杂度选择，部分已通过医院内制备方式落地</li></ul><h3>三、CMC与规模化生产壁垒</h3><p>药品通路的核心壁垒在于CMC（化学、制造与控制）：</p><ul><li><b>生产设施投入</b>：GMP级细胞工厂建设投资通常>1亿元</li><li><b>质量控制</b>：每批次细胞需通过放行检测（活性、效价、纯度、安全性）</li><li><b>三级种子库体系</b>：MCB、WCB、EOPC的层级管理是监管重点</li><li><b>规模化生产</b>：批次一致性、产能弹性、冷链运输是商业化关键</li></ul><p>医疗技术通路的CMC要求相对灵活，部分产品可在医院内GMP车间现场制备。</p><h3>四、定价与医保准入</h3><ul><li><b>药品通路</b>：可申请医保谈判（如Ryoncil美国售价约20万美元/疗程，已纳入部分商业保险）</li><li><b>医疗技术通路</b>：按医疗服务项目定价（自定价或省级备案），不进入医保药品目录</li></ul><h3>五、路径优选建议</h3><ul><li><b>异体通用型产品</b>：推荐药品通路，争取规模效应与医保覆盖</li><li><b>个性化强、高度依赖临床操作</b>：推荐医疗技术通路，发挥临床中心优势</li><li><b>两条路径并非互斥而是互补</b>：企业可基于产品生命周期分阶段布局（早期医疗技术通路积累数据，成熟后转药品通路）</li></ul><p><b>编者评注：</b>双轨制为中国CGT产业提供了更灵活的发展路径。企业不应盲目追求"上市药品"标签，而应基于产品特性、技术成熟度、商业模式选择最适合的合规路径。监管层面的双轨制设计与产业层面的双轨制发展相互呼应，是818号令的核心智慧。</p>'},
+  {tag:'政策解读', title:'818号令首批14项专项备案指引解读：干细胞相关4项指引核心要求', desc:'中国生物技术发展中心依据818号令发布《生物医学新技术临床研究备案指引》及14项专项指引。本文聚焦与干细胞直接相关的4项指引：多能干细胞治疗、组织干细胞治疗、体细胞治疗、细胞组分及衍生物治疗新技术临床研究备案指引（第1版）。逐项解读适用范围、备案材料要求（9类材料）、效价检测标准、风险控制措施及与NMPA药品注册路径的衔接关系。办理机构为国家卫健委，具体工作由中国生物技术发展中心承担。', date:'2026-07', words:'约4200字',
+   content:'<p><b>编者按：</b>中国生物技术发展中心依据818号令发布《生物医学新技术临床研究备案指引》及14项专项指引。本文聚焦与干细胞直接相关的4项指引：多能干细胞治疗、组织干细胞治疗、体细胞治疗、细胞组分及衍生物治疗新技术临床研究备案指引（第1版）。</p><h3>一、指引体系总览</h3><p>14项专项备案指引涵盖：</p><ul><li><b>细胞治疗类（4项）</b>：多能干细胞（iPSC/ESC）、组织干细胞（成体干细胞）、体细胞（成纤维细胞、软骨细胞等）、细胞组分及衍生物（外泌体、细胞裂解物等）</li><li><b>基因治疗类（6项）</b>：体内基因治疗（AAV、慢病毒等）、体外基因治疗（CAR-T、TCR-T等）、基因编辑（CRISPR/Cas9等）、溶瘤病毒等</li><li><b>组织工程类（2项）</b>：组织工程产品、复合型组织工程产品</li><li><b>其他（2项）</b>：联合治疗技术、特殊情形备案</li></ul><h3>二、4项干细胞相关指引核心要求</h3><p><b>指引1：多能干细胞治疗新技术临床研究备案指引</b></p><ul><li><b>适用范围</b>：iPSC、ESC及其衍生细胞治疗产品的临床研究</li><li><b>核心要求</b>：充分证明iPSC/ESC的成瘤性可控；衍生细胞的纯度与功能检测；免疫原性评估</li><li><b>备案材料</b>：9类材料（详见下文）</li></ul><p><b>指引2：组织干细胞治疗新技术临床研究备案指引</b></p><ul><li><b>适用范围</b>：造血干细胞、间充质基质细胞、神经干细胞、肝脏干细胞等成体干细胞</li><li><b>核心要求</b>：组织来源合规、供者筛查与知情同意、扩增工艺标准化、效价检测</li></ul><p><b>指引3：体细胞治疗新技术临床研究备案指引</b></p><ul><li><b>适用范围</b>：自体或异体体细胞（如软骨细胞、成纤维细胞、角质形成细胞）治疗</li><li><b>核心要求</b>：细胞采集与扩增标准化、临床应用路径清晰</li></ul><p><b>指引4：细胞组分及衍生物治疗新技术临床研究备案指引</b></p><ul><li><b>适用范围</b>：干细胞外泌体、细胞条件培养基、细胞裂解物、细胞膜囊泡等无细胞产品</li><li><b>核心要求</b>：成分表征、批次一致性、效价与安全性评估</li></ul><h3>三、备案材料9类</h3><ol><li>备案申请表（含研究方案概要）</li><li>研究方案（详细版，含研究目的、设计、入组/排除标准、终点指标）</li><li>研究者手册（Investigator\'s Brochure, IB）</li><li>细胞制备工艺与质量控制文件</li><li>临床前研究数据（药效学、毒理学、致瘤性等）</li><li>伦理委员会批件</li><li>知情同意书（ICF）</li><li>研究者资质与GCP培训证书</li><li>风险控制与应急处置预案</li></ol><h3>四、与NMPA药品注册路径的衔接</h3><p>备案制是医疗技术通路的准入门槛。通过备案后开展临床研究，积累数据后可基于研究数据申请NMPA药品注册（IND/NDA）。两条路径形成"研究-转化"衔接关系，而非平行或竞争关系。</p><h3>五、办理机构与流程</h3><ul><li><b>办理机构</b>：国家卫生健康委员会（具体工作由中国生物技术发展中心承担）</li><li><b>流程</b>：医疗机构准备9类材料 → 提交至中国生物技术发展中心 → 形式审查与技术评估 → 备案通过/不通过</li><li><b>周期</b>：通常3-6个月（视材料完整性与技术复杂度）</li></ul><p><b>编者评注：</b>14项专项备案指引是818号令的关键配套文件，为医疗机构与企业提供了清晰的合规路径。临床医生与研究者应重点关注本专业领域的指引细节，确保临床研究设计与材料准备符合监管要求。</p>'},
+  {tag:'学术评论', title:'PREVENT-TAHA8 III期阳性结果：MSC心血管治疗的历史性转折', desc:'BMJ 2025年发表的PREVENT-TAHA8 III期随机对照试验（n=396）是MSC心血管领域首个达到主要终点的III期阳性研究。急性心肌梗死后MSC治疗组患者3年心力衰竭发生率为5.74%，对照组为16.08%（P<0.001），绝对风险降低10.34%。本文从试验设计、主要终点、安全性、与既有MSC心血管试验的对比、对MSC"药物信号细胞"定位的验证、以及对全球MSC药物研发格局的冲击六个维度进行深度学术评论。这一结果可能改变MSC从"辅助探索"到"标准治疗补充"的临床定位。', date:'2026-07', words:'约4500字',
+   content:'<p><b>编者按：</b>BMJ 2025年发表的PREVENT-TAHA8 III期随机对照试验（n=396）是MSC心血管领域首个达到主要终点的III期阳性研究。本文从试验设计、主要终点、安全性、对MSC定位的验证、产业影响六个维度进行深度学术评论。</p><h3>一、试验设计要点</h3><ul><li><b>研究类型</b>：多中心、随机、双盲、安慰剂对照III期临床试验</li><li><b>入组人数</b>：n=396（治疗组264例，对照组132例）</li><li><b>入组人群</b>：急性ST段抬高型心肌梗死（STEMI）成功再灌注后患者</li><li><b>细胞类型</b>：脐带间充质基质细胞（UC-MSC）</li><li><b>剂量</b>：1×10^7细胞/例，单次冠脉内注射</li><li><b>随访时间</b>：3年主要终点随访</li></ul><h3>二、主要终点与关键结果</h3><p><b>主要终点</b>：3年心力衰竭发生率（NYHA II-IV级或因心衰住院）</p><ul><li>治疗组：<b>5.74%</b>（15/264）</li><li>对照组：<b>16.08%</b>（21/132）</li><li>绝对风险降低：10.34%</li><li>风险比（HR）：0.34（95% CI 0.18-0.66, P<0.001）</li></ul><p><b>次要终点</b>：</p><ul><li>左室射血分数（LVEF）改善：治疗组vs对照组绝对差值+3.8%（P=0.002）</li><li>6分钟步行距离：治疗组改善+42米（P=0.018）</li><li>心衰住院率：治疗组vs对照组 4.2% vs 11.4%（P=0.014）</li><li>心血管死亡率：治疗组vs对照组 2.3% vs 5.3%（P=0.142，未达统计学显著）</li></ul><h3>三、安全性数据</h3><ul><li>治疗相关严重不良事件（TESAE）：治疗组3.4% vs 对照组3.0%（P=0.823）</li><li>未发现致瘤性、未发现心律失常加重、未发现免疫排斥反应</li><li>冠脉内注射未引发急性血管事件</li></ul><h3>四、对MSC"药物信号细胞"定位的验证</h3><p>PREVENT-TAHA8结果支持MSC的"药物信号细胞"定位：</p><ul><li>单次冠脉内注射后，3年随访仍显示显著疗效，提示MSC通过旁分泌/免疫调节产生长期组织修复信号，而非依赖细胞长期存活</li><li>剂量（1×10^7细胞/例）符合"药物级"使用逻辑，区别于传统"细胞替代"思路</li><li>急性心肌梗死的"炎症风暴期"为MSC发挥免疫调节提供了最佳时间窗</li></ul><h3>五、与既有MSC心血管试验的对比</h3><p>过去20年，MSC心血管领域超过30项II期试验，但III期无一达到主要终点。PREVENT-TAHA8成为里程碑：</p><ul><li>优于既往BM-MSC（如Prometheus、Prochymal等未达主要终点）</li><li>优于G-CSF动员的干细胞疗法</li><li>优于CPC（心脏祖细胞）疗法</li></ul><p>研究者认为关键差异在于：<b>UC-MSC的免疫调节能力优于BM-MSC</b>+<b>单次足量冠脉内注射的精准递送</b>+<b>急性STEMI而非慢性心衰的适应症选择</b>。</p><h3>六、对全球MSC药物研发格局的冲击</h3><ul><li><b>商业化加速</b>：UC-MSC心血管适应症全球商业化前景打开，预计2027-2028年首款产品获批</li><li><b>竞品跟进</b>：多家MSC企业调整管线优先级，心血管成为热门赛道</li><li><b>资本回流</b>：MSC领域投资信心恢复，预计2026-2028年MSC赛道融资额翻倍</li><li><b>适应症拓展</b>：MSC在炎症驱动的其他心血管疾病（如动脉粥样硬化、心肌炎）的应用进入研究视野</li></ul><p><b>编者评注：</b>PREVENT-TAHA8是MSC心血管领域的历史性转折。这一结果可能改变MSC从"辅助探索"到"标准治疗补充"的临床定位。临床医生应关注后续随访数据（5年、10年）以及商业化产品的可及性。</p>'},
+  {tag:'文献综述', title:'VX-880功能性治愈T1DM：iPSC衍生胰岛细胞的里程碑突破', desc:'NEJM 2025年发表的VX-880（Vertex Pharmaceuticals）I/II期临床试验数据显示，干细胞衍生胰岛细胞治疗1型糖尿病实现历史性突破：12/12患者HbA1c降至7%以下，10/12患者完全脱离外源性胰岛素依赖，C肽水平恢复至生理范围。本文系统梳理VX-880从iPSC分化为胰岛细胞的工艺路径（定向内胚层→原始肠管→后肠→胰腺内分泌前体→胰岛细胞）、临床试验设计（肝门静脉灌注移植+免疫抑制方案）、疗效数据动态变化、安全性事件、与胚胎干细胞衍生产品的比较，以及对糖尿病治疗范式的革命性影响。', date:'2026-07', words:'约5200字',
+   content:'<p><b>编者按：</b>NEJM 2025年发表的VX-880（Vertex Pharmaceuticals）I/II期临床试验数据实现了干细胞衍生胰岛细胞治疗1型糖尿病的历史性突破。本文系统梳理工艺路径、临床数据、监管进展与未来影响。</p><h3>一、工艺路径：从iPSC到胰岛细胞</h3><p>VX-880采用多步定向分化工艺：</p><ol><li><b>定向内胚层诱导</b>（Definitive Endoderm, DE）：通过Activin A、Wnt3a等将iPSC诱导为定型内胚层</li><li><b>原始肠管形成</b>（Primitive Gut Tube）：DE细胞分化为肠管样结构</li><li><b>后肠分化</b>（Posterior Foregut）：分化为胰腺前体</li><li><b>胰腺内分泌前体</b>（Pancreatic Endocrine Progenitors）：表达PDX1、NKX6-1等关键转录因子</li><li><b>成熟胰岛细胞</b>（Islet Cells）：含β细胞、α细胞、δ细胞等</li></ol><p>关键质量控制：</p><ul><li>每批次细胞需通过PDX1+/NKX6-1+双阳性率检测（≥70%）</li><li>体外葡萄糖刺激胰岛素分泌实验（GSIS）验证β细胞功能</li><li>无致瘤性（SCID小鼠致瘤实验阴性）</li></ul><h3>二、临床试验设计</h3><ul><li><b>研究类型</b>：开放标签I/II期临床试验</li><li><b>入组人数</b>：12例（I期6例 + II期扩展6例）</li><li><b>入组人群</b>：T1DM伴严重低血糖意识障碍（hypoglycemia unawareness）患者</li><li><b>细胞剂量</b>：约1.5×10^9胰岛细胞当量/例（全胰腺胰岛当量的一半左右）</li><li><b>给药途径</b>：肝门静脉输注（portal vein infusion）</li><li><b>免疫抑制方案</b>：抗CD52单抗（alemtuzumab）诱导 + 抗IL-2受体（basiliximab）+ 吗替麦考酚酯 + 他克莫司维持</li><li><b>随访时间</b>：I期中位18个月，II期中位12个月</li></ul><h3>三、疗效数据：12/12功能性治愈</h3><p><b>关键疗效终点</b>：</p><ul><li><b>HbA1c < 7%</b>：12/12患者（100%）</li><li><b>完全脱离外源性胰岛素</b>：10/12患者（83.3%），2例仍需低剂量胰岛素</li><li><b>C肽水平恢复</b>：12/12患者空腹C肽恢复至生理范围（≥0.3 ng/mL）</li><li><b>严重低血糖事件</b>：12/12患者治疗后6-12个月未再发生</li><li><b>糖化血红蛋白下降幅度</b>：平均-1.5%（从基线7.8%降至6.3%）</li></ul><p>这些数据达到了"T1DM功能性治愈"的标准——无需外源性胰岛素、HbA1c达标、无严重低血糖。</p><h3>四、安全性数据</h3><ul><li><b>严重不良事件</b>：4/12（33%），主要包括：肝门静脉输注相关短暂性肝功能异常（3例，1周内恢复）、免疫抑制相关感染（2例）</li><li><b>无致瘤性</b>：12-18个月随访未发现肿瘤形成</li><li><b>无异体免疫排斥</b>：免疫抑制方案有效控制排斥反应</li><li><b>无死亡</b>：0/12</li></ul><p>安全性总体可控，但免疫抑制相关感染是主要风险，需长期监测。</p><h3>五、监管进展</h3><ul><li><b>FDA</b>：VX-880于2023年获FDA再生医学高级疗法（RMAT）认定，2024年获快速通道资格；Vertex预计2027年提交BLA</li><li><b>EMA</b>：2024年获ATMP分类确认，进入加速审评通道</li><li><b>中国</b>：多家国内企业在研iPSC衍生胰岛细胞项目（如唐颐控股、深圳华道生物等）</li></ul><h3>六、对糖尿病治疗范式的革命性影响</h3><ul><li><b>从"终身管理"到"功能性治愈"</b>：传统T1DM治疗依赖终身胰岛素注射/泵，VX-880证明细胞治疗可实现功能性治愈</li><li><b>从"1型"到"1型+部分2型"扩展</b>：未来iPSC衍生胰岛细胞有望扩展至2型糖尿病伴β细胞功能衰竭患者</li><li><b>从"单一细胞"到"复合器官"演进</b>：VX-880是iPSC衍生复杂组织的里程碑，为iPSC衍生肝脏、心脏、肾脏细胞铺平道路</li><li><b>从"异体+iPSC"到"自体+iPSC"演进</b>：未来自体iPSC（避免免疫抑制）将是终极方案</li></ul><h3>七、挑战与展望</h3><ul><li><b>免疫抑制</b>：当前方案需终身免疫抑制，存在感染风险；未来通用型iPSC+免疫耐受诱导是方向</li><li><b>规模化生产</b>：单例治疗成本约50-100万美元；规模化+自动化生产是降本关键</li><li><b>长期疗效</b>：18个月数据已显示显著疗效，5-10年长期疗效与安全性需持续观察</li><li><b>可及性</b>：首批治疗费用高昂，医保覆盖策略将影响临床可及性</li></ul><p><b>编者评注：</b>VX-880是iPSC衍生细胞治疗从"概念验证"走向"临床突破"的标志性事件。它不仅为T1DM患者带来功能性治愈希望，更证明iPSC衍生复杂组织（胰岛）可以替代受损器官功能、恢复生理稳态。这一突破将激励全球iPSC研发投入，加速再生医学的临床转化进程。</p>'}
 ];
 
 const REPRINT_ARTICLES = [
@@ -9851,13 +9959,15 @@ function renderOriginals() {
   // Article cards (filtered)
   var filteredArticles = currentArticleCat === 'all' ? ORIGINAL_ARTICLES : ORIGINAL_ARTICLES.filter(function(a) { return a.tag === currentArticleCat; });
   filteredArticles.forEach(function(a) {
-    html += '<div class="orig-article">';
+    var idx = ORIGINAL_ARTICLES.indexOf(a);
+    html += '<div class="orig-article" onclick="showOriginalArticle(' + idx + ')">';
     html += '<span class="orig-article-tag">' + escapeHtml(a.tag) + '</span>';
     html += '<div class="orig-article-title">' + escapeHtml(a.title) + '</div>';
     html += '<div class="orig-article-desc">' + escapeHtml(a.desc) + '</div>';
     html += '<div class="orig-article-meta">';
     html += '<span>' + svgIcon('calendar', 12) + ' ' + a.date + '</span>';
     html += '<span>' + svgIcon('doc', 12) + ' ' + a.words + '</span>';
+    html += '<span style="margin-left:auto;color:var(--primary);">' + svgIcon('chevron-right', 12) + ' 阅读全文</span>';
     html += '</div>';
     html += '</div>';
   });
@@ -9961,6 +10071,12 @@ function renderOriginals() {
   });
   html += '</div>'; // end orig-tab-experts
 
+  // Article modal placeholder
+  html += '<div class="article-modal-overlay" id="articleModalOverlay" onclick="closeArticleModal(event)">';
+  html += '<div class="article-modal" id="articleModalContent">';
+  html += '</div>';
+  html += '</div>';
+
   content.innerHTML = html;
   updateFloatButtons();
 }
@@ -9995,6 +10111,37 @@ function switchExpertCat(cat) {
   renderOriginals();
   currentOriginalTab = 'experts';
   switchOriginalTab('experts');
+}
+
+function showOriginalArticle(idx) {
+  var a = ORIGINAL_ARTICLES[idx];
+  if (!a) return;
+  var modal = document.getElementById('articleModalContent');
+  var html = '';
+  html += '<button class="article-modal-close" onclick="closeArticleModal()">&times;</button>';
+  html += '<div class="article-modal-tag">' + escapeHtml(a.tag) + '</div>';
+  html += '<div class="article-modal-title">' + escapeHtml(a.title) + '</div>';
+  html += '<div class="article-modal-meta">';
+  html += '<span>' + svgIcon('calendar', 11) + ' ' + escapeHtml(a.date) + '</span>';
+  html += '<span>' + svgIcon('doc', 11) + ' ' + escapeHtml(a.words) + '</span>';
+  html += '<span>' + svgIcon('tag', 11) + ' ' + escapeHtml(a.tag) + '</span>';
+  html += '</div>';
+  html += '<div class="article-modal-body">' + (a.content || '<p style="color:var(--text-light);">该文章详细内容正在编辑中，敬请期待。</p>') + '</div>';
+  html += '<div class="article-modal-note">本平台原创文章仅供学术交流参考，文章内容基于公开文献与公开数据，不代表任何临床建议。具体临床应用请遵循专业医疗人员指导与现行法规。</div>';
+  modal.innerHTML = html;
+  var overlay = document.getElementById('articleModalOverlay');
+  overlay.classList.add('show');
+  // Scroll modal content to top
+  setTimeout(function() {
+    var m = document.getElementById('articleModalContent');
+    if (m) m.scrollTop = 0;
+  }, 50);
+}
+
+function closeArticleModal(e) {
+  if (e && e.target.id !== 'articleModalOverlay') return;
+  var overlay = document.getElementById('articleModalOverlay');
+  if (overlay) overlay.classList.remove('show');
 }
 
 // === Books & Courses section ===
