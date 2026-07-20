@@ -762,7 +762,7 @@ body {
 /* Regulation category row — 5 cards in one line */
 .reg-cat-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin-bottom: 14px;
 }
@@ -5361,6 +5361,7 @@ function buildHash(state) {
     return '#inst';
   }
   if (s === 'inst_projects') return '#inst/projects';
+  if (s === 'inst_recruiting') return '#inst/recruiting';
   if (s === 'report') return '#report';
   if (s === 'originals') return '#originals';
   if (s === 'books') return '#books';
@@ -5380,6 +5381,7 @@ function parseHash() {
   if (hash === '#intro') return { section: 'intro' };
   if (hash === '#inst') return { section: 'institutions', instFilter: 'all' };
   if (hash === '#inst/projects') return { section: 'inst_projects' };
+  if (hash === '#inst/recruiting') return { section: 'inst_recruiting' };
   if (hash.indexOf('#inst/') === 0) return { section: 'institutions', instFilter: decodeURIComponent(hash.slice(6)) };
   if (hash === '#report') return { section: 'report' };
   if (hash === '#originals') return { section: 'originals' };
@@ -5736,6 +5738,7 @@ function renderContent() {
   if (currentSection === 'intro') { renderIntro(); return; }
   if (currentSection === 'institutions') { renderInstitutions(); return; }
   if (currentSection === 'inst_projects') { renderInstProjects(); return; }
+  if (currentSection === 'inst_recruiting') { renderInstRecruiting(); return; }
   if (currentSection === 'report') { renderReport(); return; }
   if (currentSection === 'originals') { renderOriginals(); return; }
   if (currentSection === 'books') { renderBooks(); return; }
@@ -6601,7 +6604,28 @@ const REGULATIONS = [
   {title:'ISCT 2025 Position Statement: MSC Definition Update', issuer:'ISCT', date:'2025', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'MSC重新定义为"间充质基质细胞"(Mesenchymal Stromal Cells)，取消三系分化要求，新增效价检测标准。深刻影响全球MSC产品研发与注册。', url:'https://www.isctglobal.org/about/isct-committees/msc'},
   {title:'ISCT Minimum Criteria for MSC (2006)', issuer:'ISCT', date:'2006', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ISCT提出的MSC最低鉴定标准：塑料贴壁、CD标志物表达谱、三系分化能力。2025年更新后取消三系分化要求。', url:'https://www.sciencedirect.com/science/article/pii/S1465324906708817'},
   {title:'FACT-JACIE International Standards for Cell Therapy', issuer:'FACT-JACIE', date:'2024(第8版)', type:'行业标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'细胞治疗采集、处理和输注的国际标准，涵盖造血干细胞和免疫细胞治疗。全球细胞治疗机构认证的核心标准。', url:'https://factglobal.org/fact-standards/'},
-  {title:'ICH Q5D - Cell Substrates Quality', issuer:'ICH', date:'1997', type:'国际标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ICH关于人源细胞基质质量指南，涵盖细胞库建立、鉴定、稳定性等。细胞治疗产品CMC的国际协调标准。', url:'https://database.ich.org/sites/default/files/Q5D%20Guideline.pdf'}
+  {title:'ICH Q5D - Cell Substrates Quality', issuer:'ICH', date:'1997', type:'国际标准', typeColor:'#fff', typeBg:'#0F6E56', category:'行业标准', desc:'ICH关于人源细胞基质质量指南，涵盖细胞库建立、鉴定、稳定性等。细胞治疗产品CMC的国际协调标准。', url:'https://database.ich.org/sites/default/files/Q5D%20Guideline.pdf'},
+  // --- 专家共识 ---
+  {title:'中国膝骨关节炎关节腔注射治疗专家共识（2026版）', issuer:'中华医学会骨科学分会关节外科学组', date:'2026-02', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'共10条推荐意见，涵盖KOA关节腔注射适用人群、治疗目标、药物选择及新型制剂探索。明确干细胞（MSCs）关节腔注射在KOA治疗中具有一定应用前景，但应在监管框架内开展探索性实践。', url:''},
+  {title:'干细胞在创伤性骨缺损中的研究及临床转化专家共识', issuer:'中华医学会创伤学分会、中华医学会骨科学分会', date:'2025', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'构建面向临床的干细胞修复创伤性骨缺损"可执行最小集"，明确目标人群、终点指标、放行标准与材料参数。优先选用BMSCs，脐带/脂肪来源干细胞在受控研究下可选。', url:''},
+  {title:'HLA不合造血干细胞移植患者供者特异性抗HLA抗体检测结果临床解读中国专家共识（2025年版）', issuer:'中华医学会血液学分会干细胞应用学组', date:'2025', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'针对DSA阳性HLA不合移植候选患者的去敏治疗临床实践指导，由黄晓军、吴德培等牵头制定。', url:''},
+  {title:'CD19 CAR-T治疗成人B细胞非霍奇金淋巴瘤管理实践专家共识（2025版）', issuer:'中华肿瘤杂志', date:'2025', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'涵盖CAR-T治疗CRS、ICANS、IEC-HS、CARAC、ICAHT等不良反应分级管理，B细胞缺乏症处理，感染防治，继发肿瘤监测及长期随访方案。建议最少随访15年。', url:''},
+  {title:'T细胞免疫疗法治疗侵袭性B细胞淋巴瘤中国专家共识（2025年版）', issuer:'CSCO白血病、淋巴瘤及骨髓瘤专家委员会', date:'2025-01', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'马军、吴德沛等牵头。阐述双特异性抗体与CAR-T在R/R LBCL和R/R MCL中的疗效数据、治疗顺序及联合策略。首次提出双抗与CAR-T联合应用方案。', url:''},
+  {title:'CSCO CAR-T细胞治疗恶性血液病指南2024', issuer:'中国临床肿瘤学会(CSCO)', date:'2024', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'涵盖CD19 CAR-T治疗B-NHL、BCMA CAR-T治疗MM、CD19 CAR-T治疗R/R B-ALL及不良反应管理四大章节。新增CAR-T治疗不良反应管理章节，BCMA CAR-T治疗MM提升至I级推荐。', url:''},
+  {title:'异基因造血干细胞移植急性移植物抗宿主病诊断与治疗中国专家共识（2024年版）', issuer:'中华医学会血液学分会干细胞应用学组', date:'2024', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'在2020版基础上更新，涵盖急性GVHD预防及治疗新药物、新方案。随着MSC在GVHD防治中证据积累，本共识亦涉及MSC相关应用。', url:''},
+  {title:'慢性移植物抗宿主病诊断与治疗中国专家共识（2024年版）', issuer:'中华医学会血液学分会造血干细胞应用学组', date:'2024-08', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'对2021版进行修订更新。明确推荐可根据临床需求应用间充质干细胞预防cGVHD，MSC相关证据较2021版进一步完善。', url:''},
+  {title:'干细胞在银屑病治疗领域中的专家共识', issuer:'中南大学湘雅医院皮肤科牵头', date:'2024-06', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'国际首部干细胞治疗银屑病专家共识，中国主导，美英瑞典印度多国专家参与。明确干细胞类型、治疗方法、剂量途径及临床评价，规范采集制备质控标准。', url:''},
+  {title:'中国骨关节炎诊疗指南（2024版）', issuer:'中国老年保健协会疼痛病学分会', date:'2024-06', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'在2018、2021版基础上制定。阶梯化治疗方案中推荐干细胞技术，明确提出间充质干细胞是治疗轻度至中度膝骨关节炎的潜在方法。', url:''},
+  {title:'肾脏病领域"十大创新方向"中国专家共识（2024年版）', issuer:'肾脏创新与转化联盟(CKIA)', date:'2024-05', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'指出干细胞治疗多种急性肾损伤及慢性肾脏病动物模型显示多靶点肾脏保护作用，具有临床转化前景。细胞疗法被列为肾脏病十大创新方向之一。', url:''},
+  {title:'延缓衰老药物干预研究中国老年医学临床专家共识（2024）', issuer:'中华医学会老年医学分会', date:'2024-02', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'指出干细胞治疗是补充再生细胞的有效方法，属科学延缓衰老策略。强调需加强规范化管理，开展更大规模和设计严谨的转化研究。', url:''},
+  {title:'自体干细胞移植治疗心力衰竭中国专家共识（2022）', issuer:'中华医学会组织修复与再生分会心脏再生学组', date:'2023-05', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'重点阐述自体干细胞移植过程中的关键技术问题，对未来研究方向提出建议，以规范和促进干细胞临床研究及应用。', url:''},
+  {title:'异体间充质干细胞治疗系统性红斑狼疮专家共识', issuer:'中华医学会风湿病学分会、中国医院协会临床新技术应用专业委员会', date:'2022-01', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'明确多项临床研究已证实MSC治疗SLE安全有效。规范了适应证、用法、输注次数及细胞数、输注前后用药及合并妊娠/感染/肿瘤等情况的应用推荐。', url:''},
+  {title:'自体干细胞移植规范化治疗下肢慢性缺血性疾病专家共识', issuer:'中华医学会医学工程学分会干细胞工程专业委员会', date:'2021-10', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'明确自体干细胞移植对下肢慢性缺血性疾病治疗的安全性和有效性已成为学界公认。可诱导血管新生、改善缺血、促进溃疡愈合、避免截肢。', url:''},
+  {title:'干细胞移植规范化治疗肝硬化失代偿的专家共识（2021）', issuer:'中华医学会医学工程学分会干细胞工程专业学组', date:'2021-07', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'对干细胞移植规范化治疗失代偿期肝硬化进行论证更新，为临床工作提供参考和指导。', url:''},
+  {title:'间充质干细胞治疗新型冠状病毒肺炎专家共识', issuer:'国家感染性疾病临床医学研究中心、中华医学会感染病学分会', date:'2021-04', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'我国首个MSC治疗COVID-19专家共识。涵盖患者选择、细胞输注准备、不良反应处理、疗效评价等。综合结果表明MSC治疗COVID-19安全性良好。', url:''},
+  {title:'骨关节炎临床药物治疗专家共识', issuer:'中华医学会运动医疗分会等', date:'2021-07', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'在生物制剂栏目提到间充质干细胞。MSC经诱导可分化为成骨或软骨细胞，可用于修复受损骨或软骨，在骨关节炎治疗中已有应用。', url:''},
+  {title:'干细胞在整形修复美容领域研究和临床试验的专家共识', issuer:'中国医师协会整形美容医师分会干细胞和再生医学学组', date:'2021-01', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'推动整形修复美容领域干细胞临床转化。证明干细胞在促进皮肤再生修复、组织血管化、软组织再生、骨与软骨修复、毛囊再生等方面有较好效果。', url:''},
+  {title:'克罗恩病肛瘘诊断与治疗的专家共识意见', issuer:'克罗恩病肛瘘共识专家组', date:'2019-04', type:'专家共识', typeColor:'#fff', typeBg:'#7B1FA2', category:'专家共识', desc:'明确推荐间充质干细胞治疗克罗恩病肛瘘。引用ADMIRE-CD三期试验（NCT01541579，n=212），24周缓解率49.5% vs 34.3%（P=0.024）。', url:''}
 ];
 
 // === Section data: Approved Products ===
@@ -6640,6 +6664,32 @@ const PRODUCTS = [
   {name:'Stratagraft', generic:'同种异体角质形成细胞/成纤维细胞', company:'Mallinckrodt', approved:'FDA 2021', indication:'成人深度部分厚度热烧伤', cellType:'细胞组织产品', cellColor:'#185FA5', region:'美国', notes:'首个FDA批准的同种异体细胞治疗烧伤产品。'},
   {name:'Amtagvi (lifileucel)', generic:'同种异体肿瘤浸润淋巴细胞(TIL)', company:'Iovance Biotherapeutics', approved:'FDA 2024-02', indication:'晚期黑色素瘤(PD-1治疗后进展)', cellType:'TIL', cellColor:'#993C1D', region:'美国', notes:'首个FDA批准的TIL细胞疗法，实体瘤细胞治疗里程碑。约51.5万美元。'},
   {name:'Tregzi (Orca-T)', generic:'同种异体调节性T细胞免疫疗法(HSPC+Treg+Tcon)', company:'Orca Bio', approved:'FDA 2026-06-30', indication:'成人血液系统恶性肿瘤allo-HSCT后改善慢性GVHD-free生存', cellType:'Treg+HSPC', cellColor:'#993C1D', region:'美国', notes:'全球首款Treg细胞疗法。Precision-T III期(n=187)：12个月cGFS 78% vs 38%(HR 0.26, P<0.00001)，慢性GVHD 13% vs 44%。约42.8万美元/剂。'},
+  // --- CAR-T (嵌合抗原受体T细胞疗法) ---
+  {name:'Kymriah (tisagenlecleucel)', generic:'自体CD19 CAR-T细胞', company:'Novartis', approved:'FDA 2017-08', indication:'B-ALL(≤25岁) / DLBCL / 滤泡性淋巴瘤(FL)', cellType:'CAR-T', cellColor:'#C62828', region:'美国/欧盟', notes:'全球首个获批的CAR-T疗法。ZUMA-1试验ORR 83%，CR 58%。约47.5万美元。FDA 2025-06取消REMS。'},
+  {name:'Yescarta / 奕凯达 (axicabtagene ciloleucel)', generic:'自体CD19 CAR-T细胞', company:'Kite/Gilead · 复星凯特', approved:'FDA 2017-10 / NMPA 2021-06', indication:'R/R大B细胞淋巴瘤(LBCL) / 滤泡性淋巴瘤(FL) / 二线LBCL', cellType:'CAR-T', cellColor:'#C62828', region:'美国/中国', notes:'ZUMA-1 ORR 83% CR 58%。NMPA首批CAR-T。2023年NMPA扩至二线。国内约120万元/针。'},
+  {name:'Tecartus (brexucabtagene autoleucel)', generic:'自体CD19 CAR-T细胞', company:'Kite/Gilead', approved:'FDA 2020-07', indication:'套细胞淋巴瘤(MCL) / B-ALL', cellType:'CAR-T', cellColor:'#C62828', region:'美国/欧盟', notes:'ZUMA-2 ORR 93% CR 67%。约37.3万美元。'},
+  {name:'Breyanzi (lisocabtagene maraleucel)', generic:'自体CD19 CAR-T细胞(定义CD4/CD8比)', company:'BMS', approved:'FDA 2021-02', indication:'LBCL / FL / MCL / CLL-SLL / 边缘区淋巴瘤(MZL)', cellType:'CAR-T', cellColor:'#C62828', region:'美国', notes:'覆盖B细胞恶性肿瘤适应症最广的CAR-T。TRANSCEND FL MZL队列ORR 84.4%。约41万美元。'},
+  {name:'Abecma (idecabtagene vicleucel)', generic:'自体BCMA CAR-T细胞', company:'BMS / 2seventy bio', approved:'FDA 2021-03', indication:'复发/难治性多发性骨髓瘤(MM)', cellType:'CAR-T', cellColor:'#C62828', region:'美国', notes:'首个BCMA CAR-T。KarMMa试验ORR 72% CR 28%。约42万美元。2024年扩至二线。'},
+  {name:'Carvykti / 卡卫荻 (ciltacabtagene autoleucel)', generic:'自体BCMA CAR-T细胞(双表位)', company:'Janssen / 传奇生物', approved:'FDA 2022-02 / NMPA 2024-08', indication:'复发/难治性多发性骨髓瘤(MM)', cellType:'CAR-T', cellColor:'#C62828', region:'美国/中国', notes:'CARTITUDE-1 ORR 97% CR 67% mPFS 34.9个月。2025 Q1销售额3.69亿美元。2024年扩至二线。美国约46.5万美元。'},
+  {name:'Aucatzyl (obecabtagene autoleucel)', generic:'自体CD19 CAR-T细胞(新型结合域)', company:'Autolus', approved:'FDA 2024-11', indication:'成人B-ALL', cellType:'CAR-T', cellColor:'#C62828', region:'美国', notes:'FELIX II期ORR 76% CR 57%。采用新型CD19结合域设计降低脱靶。约45万美元。'},
+  {name:'倍诺达 (relmacabtagene autoleucel)', generic:'自体CD19 CAR-T细胞(4-1BB)', company:'药明巨诺', approved:'NMPA 2021-09', indication:'R/R大B细胞淋巴瘤(LBCL) / 滤泡性淋巴瘤(FL, 2022扩)', cellType:'CAR-T', cellColor:'#C62828', region:'中国', notes:'国内唯一获批FL适应症的CAR-T。4-1BB共刺激域，体内存续长，CRS/ICANS发生率低。RELIANCE试验ORR 79% CR 51.7%。约129万元/针。CSCO 2025指南R/R MCL II级推荐。'},
+  {name:'福可苏 (equecabtagene autoleucel, CT103A)', generic:'自体BCMA CAR-T细胞(全人源)', company:'驯鹿生物 / 信达生物', approved:'NMPA 2023-06', indication:'复发/难治性多发性骨髓瘤(MM)', cellType:'CAR-T', cellColor:'#C62828', region:'中国', notes:'全球首个获批的全人源BCMA CAR-T。ORR 96%。中国澳门已批准上市，新加坡/香港已受理。约116.6万元/针。'},
+  {name:'源瑞达 (nabcabtagene autoleucel)', generic:'自体CD19 CAR-T细胞', company:'合源生物', approved:'NMPA 2023-11', indication:'成人复发/难治性B-ALL', cellType:'CAR-T', cellColor:'#C62828', region:'中国', notes:'中国首个获批B-ALL适应症的CAR-T。约99.9万元/针。'},
+  {name:'赛恺泽 (zevorcabtagene autoleucel)', generic:'自体BCMA CAR-T细胞', company:'科济药业', approved:'NMPA 2024-03', indication:'复发/难治性多发性骨髓瘤(MM)', cellType:'CAR-T', cellColor:'#C62828', region:'中国', notes:'LUMMICAR-1研究ORR 92.5% CR 40%。约115万元/针。'},
+  {name:'恒凯莱 (ranikabtagene autoleucel)', generic:'自体CD19 CAR-T细胞', company:'恒润达生', approved:'NMPA 2025-07', indication:'成人复发/难治性大B细胞淋巴瘤', cellType:'CAR-T', cellColor:'#C62828', region:'中国', notes:'国内第7款获批CAR-T。价格未公布。'},
+  // --- 基因治疗 (In vivo基因治疗/AAV载体/溶瘤病毒) ---
+  {name:'Luxturna (voretigene neparvovec)', generic:'AAV2载体-RPE65基因', company:'Spark Therapeutics', approved:'FDA 2017-12', indication:'双等位基因RPE65突变相关遗传性视网膜营养不良(LCA)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟', notes:'首个FDA批准的遗传病基因治疗。视网膜下注射。约85万美元/眼。'},
+  {name:'Zolgensma (onasemnogene abeparvovec)', generic:'AAV9载体-SMN1基因', company:'Novartis Gene Therapies', approved:'FDA 2019-05', indication:'脊髓性肌萎缩症(SMA) <2岁', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟/日本', notes:'一次性静脉输注。STR1VE试验无事件生存率显著改善。约210万美元。2025年新增鞘内注射剂型(Itvisma)用于年长患者。'},
+  {name:'Imlygic (talimogene laherparepvec)', generic:'HSV-1溶瘤病毒-GM-CSF', company:'Amgen', approved:'FDA 2015-10', indication:'不可切除皮下/淋巴结病变黑色素瘤', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟', notes:'首个FDA批准的溶瘤病毒疗法。瘤内注射。约6.5万美元。'},
+  {name:'Hemgenix (etranacogene dezaparvovec)', generic:'AAV5载体-FIX基因', company:'CSL Behring', approved:'FDA 2022-11', indication:'成人血友病B(FIX缺乏)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟', notes:'一次性静脉输注。FIX活性从2%提升至37%。约350万美元，上市时为全球最贵药物。'},
+  {name:'Adstiladrin (nadofaragene firadenovec)', generic:'腺病毒载体-IFN-α2b', company:'Ferring Pharmaceuticals', approved:'FDA 2022-12', indication:'BCG无反应的非肌层浸润性膀胱癌(NMIBC)伴CIS', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟', notes:'膀胱内灌注非复制型腺病毒基因治疗。每3个月一次。'},
+  {name:'Roctavian (valoctocogene roxaparvovec)', generic:'AAV5载体-FVIII基因', company:'BioMarin', approved:'FDA 2023-06', indication:'成人重型血友病A(FVIII缺乏)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国/欧盟', notes:'一次性静脉输注。GENEr8-1试验FVIII活性均值101 IU/dL(2年)。约290万美元。'},
+  {name:'Elevidys (delandistrogene moxeparvovec)', generic:'AAVrh74载体-微型抗肌萎缩蛋白基因', company:'Sarepta Therapeutics', approved:'FDA 2023-06', indication:'4-5岁可行走杜氏肌营养不良(DMD)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国', notes:'递送截短版dystrophin基因。EMBARK试验NSAA功能改善。约320万美元。2024年FDA加速批准扩至不可行走患者。'},
+  {name:'Vyjuvek (beremagene geperpavec)', generic:'HSV-1载体-COL7A1基因', company:'Krystal Biotech', approved:'FDA 2023-05', indication:'≥6个月营养不良型大疱性表皮松解症(DEB)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国', notes:'首个外用基因治疗凝胶。局部涂抹给药。约63.1万美元/年。'},
+  {name:'Beqvez (fidanacogene elaparvovec)', generic:'AAV载体-FIX基因', company:'Pfizer', approved:'FDA 2024-04', indication:'成人血友病B(FIX缺乏)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国', notes:'BENEGENE-2试验FIX活性均值23.9%(15个月)。约350万美元。'},
+  {name:'Kebilidi (eladocagene exuparvovec)', generic:'AAV2载体-DDC基因', company:'PTC Therapeutics', approved:'FDA 2024-05', indication:'芳香族L-氨基酸脱羧酶(AADC)缺乏症', cellType:'基因治疗', cellColor:'#6A1B9A', region:'美国', notes:'立体定向脑内注射(壳核)。首个FDA批准的AADC缺乏症治疗。'},
+  {name:'Gendicine (重组人p53腺病毒注射液)', generic:'腺病毒载体-p53肿瘤抑制基因', company:'深圳赛百诺', approved:'NMPA 2003-10', indication:'晚期头颈部鳞状细胞癌(联合放疗)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'中国', notes:'全球首个获批的基因治疗药物(2003)。瘤内注射。中国NMPA批准。'},
+  {name:'Oncorine (H101, 重组人5型腺病毒)', generic:'E1B-55kDa缺失溶瘤腺病毒', company:'上海三维生物', approved:'NMPA 2005-11', indication:'晚期鼻咽癌(联合化疗)', cellType:'基因治疗', cellColor:'#6A1B9A', region:'中国', notes:'全球首个获批的溶瘤病毒产品(2005)。瘤内注射。'},
   // --- 博鳌乐城特许转化（非药品审批，院内技术服务） ---
   {name:'UC-MSC治疗2型糖尿病', generic:'脐带间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'2型糖尿病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价17.4万/疗程，多次静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
   {name:'UC-MSC治疗骨关节炎', generic:'脐带间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'骨关节炎', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价3.6万/次，关节腔注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
@@ -6799,7 +6849,7 @@ function switchSection(section) {
 
 function updateBottomNav(section) {
   document.querySelectorAll('.bn-item').forEach(el => el.classList.remove('active'));
-  var navMap = { 'hub':'nav-home', 'intro':'nav-intro', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news', 'institutions':'nav-inst', 'inst_projects':'nav-inst' };
+  var navMap = { 'hub':'nav-home', 'intro':'nav-intro', 'literature':'nav-lit', 'regulations':'nav-reg', 'products':'nav-prod', 'news':'nav-news', 'institutions':'nav-inst', 'inst_projects':'nav-inst', 'inst_recruiting':'nav-inst' };
   var el = document.getElementById(navMap[section]);
   if (el) el.classList.add('active');
 }
@@ -9745,9 +9795,9 @@ const REPRINT_ARTICLES = [
   {tag:'行业动态', title:'2025年全球细胞治疗产业盘点：获批产品、融资与管线进展', source:'医药魔方', date:'2026-01', url:'https://www.pharmcube.com/', desc:'系统回顾2025年全球细胞治疗领域的获批产品、重大融资事件和管线进展，涵盖CAR-T、MSC、基因治疗等方向，指出MSC赛道正从"有数据无产品"向"产品商业化"转型。'},
   {tag:'行业动态', title:'博鳌乐城先行区细胞治疗特许项目最新进展', source:'海南日报', date:'2026-03', url:'https://www.hndnews.com/', desc:'博鳌乐城国际医疗旅游先行区在细胞治疗领域的最新特许项目进展，包括已定价的MSC抗衰、CAR-T桥接治疗、NSC帕金森等项目，定价8-50万/疗程不等。'},
   {tag:'行业动态', title:'国产首个UC-MSC药物NDA获受理，818号令双轨制标杆案例', source:'研发客', date:'2026-07', url:'https://www.pharmexec.com.cn/', desc:'PLEB001(脐带MSC)治疗SR-aGVHD的110例多中心关键试验达主要终点(28天ORR 68.3%)，CDE正式受理NDA，标志着818号令下药品路径首个标杆案例。'},
-  {tag:'技术前沿', title:'AAV基因治疗的安全性问题：肝毒性与神经毒性的最新认知', source:'生物探索', date:'2026-03', url:'https://www.biodiscover.com/', desc:'综述AAV基因治疗中高剂量给药导致的肝毒性和感觉神经毒性事件，以及业界正在探索的剂量优化、免疫调控和新型衣壳设计等缓解策略。'},
-  {tag:'技术前沿', title:'外泌体疗法：无细胞治疗的新兴方向与挑战', source:'丁香园', date:'2026-04', url:'https://www.dxy.cn/', desc:'综述MSC外泌体在神经退行性疾病、创面修复和免疫调节中的最新研究进展，以及标准化制备、剂量规范和质控体系等临床转化关键挑战。'},
-  {tag:'技术前沿', title:'3D微载体培养技术：MSC规模化生产的破局之路', source:'生物谷', date:'2026-05', url:'https://www.bioon.com/', desc:'深度解析3D微载体生物反应器培养UC-MSC的工艺优势，单批次产量可达传统二维培养的25倍，成本降低60%，为MSC药物商业化提供关键技术支撑。'},
+  {tag:'学术前沿', title:'AAV基因治疗的安全性问题：肝毒性与神经毒性的最新认知', source:'生物探索', date:'2026-03', url:'https://www.biodiscover.com/', desc:'综述AAV基因治疗中高剂量给药导致的肝毒性和感觉神经毒性事件，以及业界正在探索的剂量优化、免疫调控和新型衣壳设计等缓解策略。'},
+  {tag:'学术前沿', title:'外泌体疗法：无细胞治疗的新兴方向与挑战', source:'丁香园', date:'2026-04', url:'https://www.dxy.cn/', desc:'综述MSC外泌体在神经退行性疾病、创面修复和免疫调节中的最新研究进展，以及标准化制备、剂量规范和质控体系等临床转化关键挑战。'},
+  {tag:'学术前沿', title:'3D微载体培养技术：MSC规模化生产的破局之路', source:'生物谷', date:'2026-05', url:'https://www.bioon.com/', desc:'深度解析3D微载体生物反应器培养UC-MSC的工艺优势，单批次产量可达传统二维培养的25倍，成本降低60%，为MSC药物商业化提供关键技术支撑。'},
   {tag:'政策法规', title:'CDE细胞治疗产品药学指导原则修订要点解读', source:'药智网', date:'2026-05', url:'https://www.yaozh.com/', desc:'解读CDE最新修订的细胞治疗产品药学指导原则，重点关注MSC产品效价检测要求（IFN-γ刺激IDO活性、T细胞共培养抑制率）、CMC变更管理和稳定性研究。'},
   {tag:'政策法规', title:'818号令施行满月：全国细胞治疗机构备案与项目进展', source:'健康界', date:'2026-06', url:'https://www.cn-healthcare.com/', desc:'818号令施行一个月以来，全国已有超过200家医疗机构完成细胞治疗技术备案，涵盖MSC、CAR-T、NK细胞等方向，双轨制运行平稳。'},
   {tag:'投资观察', title:'细胞治疗赛道2026年投资展望：从CAR-T红海到MSC蓝海', source:'动脉网', date:'2026-02', url:'https://www.vcbeat.top/', desc:'分析2026年细胞治疗领域投资趋势：CAR-T赛道竞争加剧、同质化严重，MSC和iPSC领域因Ryoncil获批、VX-880功能性治愈等催化事件成为新投资热点。'},
@@ -9828,14 +9878,14 @@ function renderOriginals() {
 
   // Description
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目转载微信公众号及行业媒体中关于<b>细胞与基因治疗(CGT)</b>领域的优质文章，涵盖<b>行业动态</b>（获批产品、融资并购、管线进展）、<b>技术前沿</b>（AAV载体安全、外泌体疗法、3D微载体培养）、<b>政策法规</b>（CDE指导原则、818号令落地进展）和<b>投资观察</b>（赛道趋势、企业融资、商业化能力）四大方向。所有文章均注明来源公众号/媒体，版权归原作者所有，本平台仅作学习交流转载，不代表本平台观点。</div>';
+  html += '<div class="report-intro-text">本栏目转载微信公众号及行业媒体中关于<b>细胞与基因治疗(CGT)</b>领域的优质文章，涵盖<b>行业动态</b>（获批产品、融资并购、管线进展）、<b>学术前沿</b>（AAV载体安全、外泌体疗法、3D微载体培养）、<b>政策法规</b>（CDE指导原则、818号令落地进展）和<b>投资观察</b>（赛道趋势、企业融资、商业化能力）四大方向。所有文章均注明来源公众号/媒体，版权归原作者所有，本平台仅作学习交流转载，不代表本平台观点。</div>';
   html += '</div>';
 
   // Category cards
   var reprintCats = [
     {id:'all', name:'全部', color:'var(--primary)'},
     {id:'行业动态', name:'行业动态', color:'#42A5F5'},
-    {id:'技术前沿', name:'技术前沿', color:'#26C6DA'},
+    {id:'学术前沿', name:'学术前沿', color:'#26C6DA'},
     {id:'政策法规', name:'政策法规', color:'#FFB74D'},
     {id:'投资观察', name:'投资观察', color:'#66BB6A'}
   ];
@@ -9857,7 +9907,7 @@ function renderOriginals() {
 
   // Reprint article cards (filtered)
   var filteredReprints = currentReprintCat === 'all' ? REPRINT_ARTICLES : REPRINT_ARTICLES.filter(function(a) { return a.tag === currentReprintCat; });
-  var reprintTagColors = {'行业动态':{fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'},'技术前沿':{fg:'#26C6DA',bg:'rgba(38,198,218,0.15)'},'政策法规':{fg:'#FFB74D',bg:'rgba(255,183,77,0.15)'},'投资观察':{fg:'#66BB6A',bg:'rgba(102,187,106,0.15)'}};
+  var reprintTagColors = {'行业动态':{fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'},'学术前沿':{fg:'#26C6DA',bg:'rgba(38,198,218,0.15)'},'政策法规':{fg:'#FFB74D',bg:'rgba(255,183,77,0.15)'},'投资观察':{fg:'#66BB6A',bg:'rgba(102,187,106,0.15)'}};
   filteredReprints.forEach(function(a) {
     var tc = reprintTagColors[a.tag] || {fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'};
     var hasValidUrl = a.url && a.url.indexOf('http') === 0 && a.url.length > 30;
@@ -11210,11 +11260,6 @@ function renderInstitutions() {
   });
 
   html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);">';
-  var allActive = (instFilter === 'all') ? 'background:rgba(0,229,255,0.06);' : '';
-  html += '<div class="reg-cat-card" style="border-left-color:var(--primary);cursor:pointer;' + allActive + '" onclick="filterInsts(\'all\')">';
-  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + INSTITUTIONS.length + '"></span><span class="rcc-unit"> 家</span></div>';
-  html += '<div class="rcc-name">全部机构</div>';
-  html += '</div>';
   ['华北','华东','华中','华南','西南','西北','东北'].forEach(function(reg) {
     var color = INST_REGION_COLORS[reg] || '#666';
     var regActive = (instFilter === reg) ? 'background:rgba(0,229,255,0.06);' : '';
@@ -11231,6 +11276,11 @@ function renderInstitutions() {
   html += '<div class="reg-cat-card" style="border-left-color:#7B1FA2;cursor:pointer;" onclick="showInstProjects()">';
   html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#7B1FA2;"></span><span class="rcc-unit"> 项</span></div>';
   html += '<div class="rcc-name">备案项目</div>';
+  html += '</div>';
+  // 临床招募 card
+  html += '<div class="reg-cat-card" style="border-left-color:#0277BD;cursor:pointer;" onclick="showInstRecruiting()">';
+  html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#0277BD;"></span><span class="rcc-unit"> 项</span></div>';
+  html += '<div class="rcc-name">临床招募</div>';
   html += '</div>';
   html += '</div>';
 
@@ -11611,6 +11661,156 @@ function filterInstProj(filter, btn) {
       row.style.display = '';
     } else {
       row.style.display = (row.dataset.cell === filter) ? '' : 'none';
+    }
+  });
+}
+
+function showInstRecruiting() {
+  saveNavState();
+  currentSection = 'inst_recruiting';
+  updateBottomNav('institutions');
+  updateLayout('institutions');
+  pushHistory();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+}
+
+function renderInstRecruiting() {
+  var content = document.getElementById('content');
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <span class="crumb-current">临床招募信息</span></div>';
+
+  // Collect all projects with disease extraction
+  var allProjects = [];
+  for (var instName in INSTITUTION_PROJECTS) {
+    var instInfo = INSTITUTIONS.find(function(i) { return i.name === instName; });
+    var region = instInfo ? instInfo.region : '';
+    var city = instInfo ? instInfo.city : '';
+    INSTITUTION_PROJECTS[instName].forEach(function(p) {
+      var disease = p.name;
+      var idx = disease.indexOf('治疗');
+      if (idx >= 0) {
+        disease = disease.slice(idx + 2);
+        var pIdx1 = disease.indexOf('(');
+        if (pIdx1 >= 0) disease = disease.slice(0, pIdx1);
+        var pIdx2 = disease.indexOf('（');
+        if (pIdx2 >= 0) disease = disease.slice(0, pIdx2);
+      }
+      allProjects.push({
+        institution: instName,
+        region: region,
+        city: city,
+        name: p.name,
+        cell: p.cell,
+        phase: p.phase,
+        disease: disease
+      });
+    });
+  }
+
+  // Sort by disease, then by institution
+  allProjects.sort(function(a, b) {
+    if (a.disease !== b.disease) return a.disease.localeCompare(b.disease);
+    if (a.institution !== b.institution) return a.institution.localeCompare(b.institution);
+    return 0;
+  });
+
+  var totalProj = allProjects.length;
+  var totalInst = Object.keys(INSTITUTION_PROJECTS).length;
+  var diseaseSet = {};
+  allProjects.forEach(function(p) { diseaseSet[p.disease] = true; });
+
+  // Description
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构临床招募信息汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项在研项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构，覆盖<b style="color:var(--primary);">' + Object.keys(diseaseSet).length + '</b> 类适应症。按适应症分类展示，提供细胞类型、研究阶段及机构信息。如需了解具体入组标准及招募状态，请联系相应机构或查询中国临床试验注册中心（ChiCTR）。</div></div>';
+
+  // Disease filter buttons
+  var diseaseCounts = {};
+  allProjects.forEach(function(p) { diseaseCounts[p.disease] = (diseaseCounts[p.disease]||0)+1; });
+  var diseases = Object.keys(diseaseCounts).sort();
+
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
+  html += '<button class="recruit-filter-btn" data-filter="all" style="background:var(--primary);color:#0A0F1A;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;" onclick="filterRecruit(\'all\',this)">全部 ' + totalProj + '</button>';
+  diseases.forEach(function(d) {
+    html += '<button class="recruit-filter-btn" data-filter="' + escapeHtml(d) + '" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);padding:6px 14px;border-radius:4px;font-size:12px;cursor:pointer;" onclick="filterRecruit(\'' + d.replace(/'/g,"\\'") + '\',this)">' + escapeHtml(d) + ' ' + diseaseCounts[d] + '</button>';
+  });
+  html += '</div>';
+
+  // Table
+  html += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">';
+  html += '<table class="inst-proj-table" id="recruitTable" style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<thead><tr>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">序号</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:200px;">项目名称</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">适应症</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">细胞类型</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">研究阶段</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">招募状态</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;min-width:160px;">备案机构</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid #0277BD;color:#0277BD;font-weight:600;white-space:nowrap;">地区</th>';
+  html += '</tr></thead><tbody id="recruitBody">';
+
+  allProjects.forEach(function(p, idx) {
+    var phaseColor = p.phase.indexOf('II') >= 0 ? 'rgba(0,229,255,0.15)' : 'rgba(0,200,83,0.15)';
+    var phaseTextColor = p.phase.indexOf('II') >= 0 ? 'var(--primary)' : '#4CAF50';
+    var rowBg = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)';
+    html += '<tr class="recruit-row" data-disease="' + escapeHtml(p.disease) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;">' + (idx+1) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(p.name) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.disease) + '</td>';
+    html += '<td style="padding:8px 12px;white-space:nowrap;"><span style="background:rgba(2,119,189,0.15);color:#64B5F6;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.cell) + '</span></td>';
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:' + phaseColor + ';color:' + phaseTextColor + ';padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.phase) + '</span></td>';
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:rgba(0,200,83,0.15);color:#4CAF50;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">招募中</span></td>';
+    html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.institution) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(p.region) + (p.city ? '\u00b7' + escapeHtml(p.city) : '') + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+
+  // Contact guidance
+  html += '<div style="margin-top:16px;padding:14px 16px;background:rgba(2,119,189,0.08);border:1px solid rgba(2,119,189,0.3);border-radius:6px;">';
+  html += '<div style="font-size:14px;font-weight:600;color:#0277BD;margin-bottom:8px;display:flex;align-items:center;gap:6px;">' + svgIcon('info', 16) + ' 入组咨询指南</div>';
+  html += '<div style="font-size:12px;color:var(--text);line-height:1.8;">';
+  html += '1. 上述项目均为国家卫健委备案的细胞治疗临床研究项目，可能正在招募受试者。<br>';
+  html += '2. 如需了解具体入组标准、排除标准及招募状态，请直接联系对应备案机构的临床研究部门。<br>';
+  html += '3. 也可通过中国临床试验注册中心（ChiCTR）或 ClinicalTrials.gov 查询项目注册信息及招募状态。<br>';
+  html += '4. 参与临床试验前，请充分了解研究方案、风险与获益，并在主治医生指导下做出决策。';
+  html += '</div>';
+  html += '</div>';
+
+  // External links
+  html += '<div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">';
+  html += '<a href="https://www.chictr.org.cn/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;font-size:12px;color:var(--primary);text-decoration:none;">' + svgIcon('link', 14) + ' ChiCTR 中国临床试验注册中心</a>';
+  html += '<a href="https://clinicaltrials.gov/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;font-size:12px;color:var(--primary);text-decoration:none;">' + svgIcon('link', 14) + ' ClinicalTrials.gov</a>';
+  html += '</div>';
+
+  // Disclaimer
+  html += '<div style="margin-top:14px;padding:10px 14px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.6;">';
+  html += '<b>免责声明：</b>本页面所列项目信息来源于国家卫健委备案机构公开信息，"招募中"状态为基于项目备案信息的推测，不代表实际招募状态。实际入组情况请以机构官方回复为准。本平台不提供医疗建议，不参与受试者招募，不对项目安全性及有效性做出任何保证。';
+  html += '</div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
+function filterRecruit(filter, btn) {
+  document.querySelectorAll('.recruit-filter-btn').forEach(function(b) {
+    b.style.background = 'var(--surface-2)';
+    b.style.color = 'var(--text)';
+    b.style.border = '1px solid var(--border)';
+    b.style.fontWeight = '400';
+  });
+  btn.style.background = 'var(--primary)';
+  btn.style.color = '#0A0F1A';
+  btn.style.border = 'none';
+  btn.style.fontWeight = '600';
+
+  var rows = document.querySelectorAll('.recruit-row');
+  rows.forEach(function(row) {
+    if (filter === 'all') {
+      row.style.display = '';
+    } else {
+      row.style.display = (row.dataset.disease === filter) ? '' : 'none';
     }
   });
 }
@@ -12352,7 +12552,8 @@ function renderRegulations() {
     '法律法规': '#993C1D',
     '规范性文件': '#BA7517',
     '技术指南': '#185FA5',
-    '行业标准': '#0F6E56'
+    '行业标准': '#0F6E56',
+    '专家共识': '#7B1FA2'
   };
   REGULATIONS.forEach(function(r) {
     var cat = r.category || '其他';
@@ -12360,8 +12561,8 @@ function renderRegulations() {
     catCounts[cat]++;
   });
 
-  // Category cards — 5 in one row
-  var regNewCats = { '法律法规': true }; // recently updated category
+  // Category cards — 3 per row, 2 rows for 6 cards
+  var regNewCats = { '法律法规': true, '专家共识': true }; // recently updated category
   html += '<div class="reg-cat-row">';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
@@ -12429,6 +12630,8 @@ function renderProducts() {
     else if (cat.indexOf('MSC') >= 0) cat = '间充质干细胞(MSC)';
     else if (cat.indexOf('CRISPR') >= 0 || cat.indexOf('基因修饰') >= 0) cat = '基因修饰HSC';
     else if (cat.indexOf('iPSC') >= 0) cat = 'iPSC诱导多能干细胞';
+    else if (cat.indexOf('CAR-T') >= 0) cat = 'CAR-T';
+    else if (cat.indexOf('基因治疗') >= 0) cat = '基因治疗';
     else cat = '其他细胞治疗';
     if (!catCounts[cat]) catCounts[cat] = 0;
     catCounts[cat]++;
@@ -12439,20 +12642,24 @@ function renderProducts() {
     '基因修饰HSC': '#534AB7',
     'iPSC诱导多能干细胞': '#993C1D',
     '其他细胞治疗': '#185FA5',
+    'CAR-T': '#C62828',
+    '基因治疗': '#6A1B9A',
     '特许转化·博鳌乐城': '#FF8F00'
   };
 
   html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球已获批上市的干细胞及细胞治疗产品，按细胞类型分类。含海南博鳌乐城先行区特许转化项目。点击下方分类卡片筛选。</div></div>';
 
-  // Category cards — 5 in one row
+  // Category cards — 3 per row
   var catShortNames = {
     '间充质干细胞(MSC)': 'MSC',
     '基因修饰HSC': '基因修饰HSC',
     'iPSC诱导多能干细胞': 'iPSC',
     '其他细胞治疗': '其他',
+    'CAR-T': 'CAR-T',
+    '基因治疗': '基因治疗',
     '特许转化·博鳌乐城': '博鳌乐城'
   };
-  var prodNewCats = { '特许转化·博鳌乐城': true }; // recently updated category
+  var prodNewCats = { 'CAR-T': true, '基因治疗': true }; // recently updated category
   html += '<div class="reg-cat-row">';
   Object.keys(catCounts).forEach(function(cat) {
     var color = catColors[cat] || '#666';
