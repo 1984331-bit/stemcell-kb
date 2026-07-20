@@ -7301,7 +7301,7 @@ function renderHub() {
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 患者常见问题</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床试验数据</div></div><div class="hc-desc">730篇 · 19系统 · 证据分级 · 文献全文解读</div></div>';
-  html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · 博鳌乐城</div></div>';
+  html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CAR-T · 博鳌乐城</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">备案机构项目 · 全国细胞治疗中心 · 临床招募信息</div></div>';
   html += '</div>';
@@ -7392,7 +7392,7 @@ function renderHub() {
   // Lab entry
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card green" onclick="switchSection(\'lab\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('beaker', 18) + '</div><div class="hsc-title">在建实验室</div></div><div class="hsc-desc">建设进度 · 平台设备 · 可服务方向 · 合作入口</div></div>';
-  html += '<div class="hub-split-card purple" onclick="switchSection(\'blueprint\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('target', 18) + '</div><div class="hsc-title">商业蓝图</div></div><div class="hsc-desc">平台定位 · 发展路线 · 变现路径 · 核心优势</div></div>';
+  html += '<div class="hub-split-card purple" onclick="switchSection(\'blueprint\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('target', 18) + '</div><div class="hsc-title">发展蓝图</div></div><div class="hsc-desc">平台定位·发展路线·阶段目标·核心优势</div></div>';
   html += '</div>';
 
   // 平台介绍 section divider (new)
@@ -9056,14 +9056,14 @@ function showLabCollabModal(type) {
 function renderBlueprint() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">商业蓝图</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">发展蓝图</span></div>';
 
   // Hero
   html += '<div class="bp-hero">';
   html += '<div class="bp-hero-bg"></div>';
   html += '<div class="bp-hero-content">';
-  html += '<div class="bp-hero-title">CGT知识库 <span class="accent">商业蓝图</span></div>';
-  html += '<div class="bp-hero-desc">以内容飞轮为核心引擎，通过持续生产高质量专业内容驱动用户增长，分阶段构建从免费引流到联盟生态的商业闭环。平台当前处于阶段一，免费面向研究者与学生开放。</div>';
+  html += '<div class="bp-hero-title">CGT知识库 <span class="accent">发展蓝图</span></div>';
+  html += '<div class="bp-hero-desc">以内容飞轮为核心引擎，通过持续生产高质量专业内容驱动用户增长，分阶段构建从免费开放到联盟生态的发展路径。平台当前处于阶段一，免费面向研究者与学生开放。</div>';
   html += '</div>';
   html += '</div>';
 
@@ -9091,12 +9091,11 @@ function renderBlueprint() {
 
   // 4 Monetization Paths
   html += '<div class="opencgt-block">';
-  html += '<div class="opencgt-block-title">' + svgIcon('coin', 18) + ' 变现路径</div>';
+  html += '<div class="opencgt-block-title">' + svgIcon('coin', 18) + ' 合作路径</div>';
   html += '<div class="bp-path-grid">';
   // Education
   html += '<div class="bp-path-card">';
   html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(0,229,255,0.1);color:var(--primary);">' + svgIcon('book', 16) + '</div><div class="bp-path-card-title">教育培训</div></div>';
-  html += '<div class="bp-path-card-desc">标准化课程包+认证体系，依托大学教师背景，最快变现路径</div>';
   html += '<div class="bp-path-card-items">';
   html += '<span class="bp-path-chip">企业培训</span><span class="bp-path-chip">认证课程</span><span class="bp-path-chip">学术讲座</span>';
   html += '</div>';
@@ -9104,7 +9103,6 @@ function renderBlueprint() {
   // Content & Data
   html += '<div class="bp-path-card">';
   html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(102,187,106,0.1);color:#66BB6A;">' + svgIcon('doc', 16) + '</div><div class="bp-path-card-title">内容数据</div></div>';
-  html += '<div class="bp-path-card-desc">手册·教材·行业报告付费下载，已有18万字手册+23万字教材</div>';
   html += '<div class="bp-path-card-items">';
   html += '<span class="bp-path-chip">付费手册</span><span class="bp-path-chip">行业报告</span><span class="bp-path-chip">数据包</span>';
   html += '</div>';
@@ -9112,7 +9110,6 @@ function renderBlueprint() {
   // Platform Services
   html += '<div class="bp-path-card">';
   html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(255,152,0,0.1);color:#FFB74D;">' + svgIcon('layers', 16) + '</div><div class="bp-path-card-title">平台服务</div></div>';
-  html += '<div class="bp-path-card-desc">会员体系（免费/基础/企业）+ AI分析按次收费 + API接口</div>';
   html += '<div class="bp-path-card-items">';
   html += '<span class="bp-path-chip">会员订阅</span><span class="bp-path-chip">AI分析</span><span class="bp-path-chip">API接入</span>';
   html += '</div>';
@@ -9120,7 +9117,6 @@ function renderBlueprint() {
   // Alliance Ecosystem
   html += '<div class="bp-path-card">';
   html += '<div class="bp-path-card-head"><div class="bp-path-card-icon" style="background:rgba(171,71,188,0.1);color:#CE93D8;">' + svgIcon('rocket', 16) + '</div><div class="bp-path-card-title">联盟生态</div></div>';
-  html += '<div class="bp-path-card-desc">Open CGT撮合服务+项目孵化，天花板最高，需运营团队</div>';
   html += '<div class="bp-path-card-items">';
   html += '<span class="bp-path-chip">资源撮合</span><span class="bp-path-chip">项目孵化</span><span class="bp-path-chip">股权合作</span>';
   html += '</div>';
@@ -9783,25 +9779,19 @@ function animateRccCounts() {
 
 // === Original articles & Expert views section ===
 const ORIGINAL_ARTICLES = [
-  {tag:'专著', title:'《干细胞临床应用手册》——24章系统综述', desc:'涵盖11大生理系统145+适应症，2058篇临床文献底稿，从基础生物学到临床转化全链条覆盖。包括ISCT 2025新标准、818号令全文解读、PREVENT-TAHA8 III期数据等最新进展。', date:'2026-07', words:'约38.9万字'},
-  {tag:'产业分析', title:'CAR-MSC治疗炎症性肠病：从机制到临床转化', desc:'靶向MUC1的CAR-MSC治疗IBD创业项目深度分析。涵盖靶点选择、CAR结构设计（anti-MUC1 scFv + 4-1BB + CD3ζ + iCasp9安全开关）、3D微载体培养、肠系膜上动脉灌注给药策略及四层级联安全控制体系。', date:'2026-06', words:'约1.2万字'},
+  {tag:'专著', title:'《干细胞临床应用手册》前三章精选：从生物学基础到临床转化通则', desc:'手册前三章为全书建立共同语言框架。第1章干细胞生物学基础——ISCT 2025新标准将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测；第2章临床转化通则——全球8,200+项注册试验分布、获批产品教训、GMP制备与质量控制体系；第3章安全性与不良反应监测——三项里程碑Meta分析证实MSC短期安全性良好，但2025年IV输注Meta分析首次发现感染风险信号（P=0.036）。', date:'2026-07', words:'约12万字（前三章合计）'},
   {tag:'政策解读', title:'818号令深度解读：中国细胞治疗双轨制新时代', desc:'国务院令第818号，共7章58条，2026年5月1日施行。确立细胞和基因治疗产品双轨制管理（药品通路+医疗技术通路），涵盖研发、生产、审批、使用全链条，最高罚款20倍。逐条解读核心条款及产业影响。', date:'2026-05', words:'约8000字'},
   {tag:'学术评论', title:'MSC作为"药物信号细胞"：ISCT 2025新标准下的重新定位', desc:'ISCT 2025将MSC重新定义为"间充质基质细胞"，取消三系分化要求，新增效价检测标准。本文论述MSC通过旁分泌/免疫调节发挥短期作用的"药物信号细胞"定位，临床疗效取决于剂量、疗程、途径、细胞质量。', date:'2026-04', words:'约6000字'},
   {tag:'文献综述', title:'iPSC临床研究全景分析：10项研究115例患者零死亡', desc:'基于Cytotherapy 2026最新数据，系统梳理全球iPSC临床研究进展：10项研究、115例患者、0例死亡、1例畸胎瘤。涵盖视网膜黄斑变性、脊髓损伤、帕金森病等适应症。', date:'2026-04', words:'约5000字'},
-  {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约1.5万字'}
+  {tag:'产业分析', title:'虚拟细胞AI平台深度调研报告', desc:'系统调研全球虚拟细胞AI平台发展现状，涵盖AI-driven cell modeling、digital twin、in silico trial等技术方向，分析对细胞治疗研发的潜在影响。', date:'2026-04', words:'约1.5万字'},
+  {tag:'产业分析', title:'中国CGT双轨制下的产业化路径：从备案到上市的抉择', desc:'818号令施行后，中国CGT企业面临"药品注册"与"医疗技术转化"两条路径的战略选择。本文从全球MSC获批产品格局（Ryoncil、Hearticellgram-AMI等17+款）、国内CGT企业融资与管线分布、CMC与规模化生产壁垒、定价与医保准入四个维度，分析双轨制下不同产品类型的路径优选。药品路径适合标准化可量产产品，医疗技术路径适合个性化强、高度依赖临床操作的技术，两条路径并非互斥而是互补。', date:'2026-07', words:'约1万字'},
+  {tag:'政策解读', title:'818号令首批14项专项备案指引解读：干细胞相关4项指引核心要求', desc:'中国生物技术发展中心依据818号令发布《生物医学新技术临床研究备案指引》及14项专项指引。本文聚焦与干细胞直接相关的4项指引：多能干细胞治疗、组织干细胞治疗、体细胞治疗、细胞组分及衍生物治疗新技术临床研究备案指引（第1版）。逐项解读适用范围、备案材料要求（9类材料）、效价检测标准、风险控制措施及与NMPA药品注册路径的衔接关系。办理机构为国家卫健委，具体工作由中国生物技术发展中心承担。', date:'2026-07', words:'约7000字'},
+  {tag:'学术评论', title:'PREVENT-TAHA8 III期阳性结果：MSC心血管治疗的历史性转折', desc:'BMJ 2025年发表的PREVENT-TAHA8 III期随机对照试验（n=396）是MSC心血管领域首个达到主要终点的III期阳性研究。急性心肌梗死后MSC治疗组患者3年心力衰竭发生率为5.74%，对照组为16.08%（P<0.001），绝对风险降低10.34%。本文从试验设计、主要终点、安全性、与既有MSC心血管试验的对比、对MSC"药物信号细胞"定位的验证、以及对全球MSC药物研发格局的冲击六个维度进行深度学术评论。这一结果可能改变MSC从"辅助探索"到"标准治疗补充"的临床定位。', date:'2026-07', words:'约8000字'},
+  {tag:'文献综述', title:'VX-880功能性治愈T1DM：iPSC衍生胰岛细胞的里程碑突破', desc:'NEJM 2025年发表的VX-880（Vertex Pharmaceuticals）I/II期临床试验数据显示，干细胞衍生胰岛细胞治疗1型糖尿病实现历史性突破：12/12患者HbA1c降至7%以下，10/12患者完全脱离外源性胰岛素依赖，C肽水平恢复至生理范围。本文系统梳理VX-880从iPSC分化为胰岛细胞的工艺路径（定向内胚层→原始肠管→后肠→胰腺内分泌前体→胰岛细胞）、临床试验设计（肝门静脉灌注移植+免疫抑制方案）、疗效数据动态变化、安全性事件、与胚胎干细胞衍生产品的比较，以及对糖尿病治疗范式的革命性影响。', date:'2026-07', words:'约9000字'}
 ];
 
 const REPRINT_ARTICLES = [
-  {tag:'行业动态', title:'2025年全球细胞治疗产业盘点：获批产品、融资与管线进展', source:'医药魔方', date:'2026-01', url:'https://www.pharmcube.com/', desc:'系统回顾2025年全球细胞治疗领域的获批产品、重大融资事件和管线进展，涵盖CAR-T、MSC、基因治疗等方向，指出MSC赛道正从"有数据无产品"向"产品商业化"转型。'},
-  {tag:'行业动态', title:'博鳌乐城先行区细胞治疗特许项目最新进展', source:'海南日报', date:'2026-03', url:'https://www.hndnews.com/', desc:'博鳌乐城国际医疗旅游先行区在细胞治疗领域的最新特许项目进展，包括已定价的MSC抗衰、CAR-T桥接治疗、NSC帕金森等项目，定价8-50万/疗程不等。'},
-  {tag:'行业动态', title:'国产首个UC-MSC药物NDA获受理，818号令双轨制标杆案例', source:'研发客', date:'2026-07', url:'https://www.pharmexec.com.cn/', desc:'PLEB001(脐带MSC)治疗SR-aGVHD的110例多中心关键试验达主要终点(28天ORR 68.3%)，CDE正式受理NDA，标志着818号令下药品路径首个标杆案例。'},
-  {tag:'学术前沿', title:'AAV基因治疗的安全性问题：肝毒性与神经毒性的最新认知', source:'生物探索', date:'2026-03', url:'https://www.biodiscover.com/', desc:'综述AAV基因治疗中高剂量给药导致的肝毒性和感觉神经毒性事件，以及业界正在探索的剂量优化、免疫调控和新型衣壳设计等缓解策略。'},
-  {tag:'学术前沿', title:'外泌体疗法：无细胞治疗的新兴方向与挑战', source:'丁香园', date:'2026-04', url:'https://www.dxy.cn/', desc:'综述MSC外泌体在神经退行性疾病、创面修复和免疫调节中的最新研究进展，以及标准化制备、剂量规范和质控体系等临床转化关键挑战。'},
-  {tag:'学术前沿', title:'3D微载体培养技术：MSC规模化生产的破局之路', source:'生物谷', date:'2026-05', url:'https://www.bioon.com/', desc:'深度解析3D微载体生物反应器培养UC-MSC的工艺优势，单批次产量可达传统二维培养的25倍，成本降低60%，为MSC药物商业化提供关键技术支撑。'},
-  {tag:'政策法规', title:'CDE细胞治疗产品药学指导原则修订要点解读', source:'药智网', date:'2026-05', url:'https://www.yaozh.com/', desc:'解读CDE最新修订的细胞治疗产品药学指导原则，重点关注MSC产品效价检测要求（IFN-γ刺激IDO活性、T细胞共培养抑制率）、CMC变更管理和稳定性研究。'},
-  {tag:'政策法规', title:'818号令施行满月：全国细胞治疗机构备案与项目进展', source:'健康界', date:'2026-06', url:'https://www.cn-healthcare.com/', desc:'818号令施行一个月以来，全国已有超过200家医疗机构完成细胞治疗技术备案，涵盖MSC、CAR-T、NK细胞等方向，双轨制运行平稳。'},
-  {tag:'投资观察', title:'细胞治疗赛道2026年投资展望：从CAR-T红海到MSC蓝海', source:'动脉网', date:'2026-02', url:'https://www.vcbeat.top/', desc:'分析2026年细胞治疗领域投资趋势：CAR-T赛道竞争加剧、同质化严重，MSC和iPSC领域因Ryoncil获批、VX-880功能性治愈等催化事件成为新投资热点。'},
-  {tag:'投资观察', title:'全球MSC企业融资盘点：从临床数据到商业化能力', source:'医药魔方', date:'2026-06', url:'https://www.pharmcube.com/', desc:'盘点全球MSC领域主要企业的最新融资动态，分析投资人关注的核心指标：III期阳性数据、规模化生产工艺、效价检测标准化和商业化定价模型。'}
+  // 转载文章已清空，等待用户提供分类+链接后重新部署
 ];
 
 const EXPERT_VIEWS = [
@@ -9816,12 +9806,11 @@ const EXPERT_VIEWS = [
 function renderOriginals() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创·转载·大咖观点</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">原创·大咖观点</span></div>';
 
-  // Tab switcher (3 tabs)
+  // Tab switcher (2 tabs)
   html += '<div class="report-tabs report-tabs-even">';
   html += '<button class="report-tab' + (currentOriginalTab === 'articles' ? ' active' : '') + '" data-tab="articles" onclick="switchOriginalTab(\'articles\')">' + svgIcon('pen', 14) + ' 原创文章</button>';
-  html += '<button class="report-tab' + (currentOriginalTab === 'reprints' ? ' active' : '') + '" data-tab="reprints" onclick="switchOriginalTab(\'reprints\')">' + svgIcon('share', 14) + ' 转载文章</button>';
   html += '<button class="report-tab' + (currentOriginalTab === 'experts' ? ' active' : '') + '" data-tab="experts" onclick="switchOriginalTab(\'experts\')">' + svgIcon('mic', 14) + ' 大咖观点</button>';
   html += '</div>';
 
@@ -9830,7 +9819,7 @@ function renderOriginals() {
 
   // Description
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CAR-MSC、虚拟细胞AI平台等创业项目与行业趋势深度分析）、<b>政策解读</b>（818号令等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、MSC定位等学术热点评论）和<b>文献综述</b>（iPSC临床全景、外泌体疗法等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
+  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CGT双轨制产业化路径、虚拟细胞AI平台等行业趋势深度分析）、<b>政策解读</b>（818号令、14项专项备案指引等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、PREVENT-TAHA8 III期阳性结果等学术热点评论）和<b>文献综述</b>（iPSC临床全景、VX-880功能性治愈T1DM等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
   html += '</div>';
 
   // Category cards
@@ -9872,60 +9861,6 @@ function renderOriginals() {
     html += '</div>';
   });
   html += '</div>'; // end orig-tab-articles
-
-  // === Reprints tab ===
-  html += '<div class="report-tab-content' + (currentOriginalTab === 'reprints' ? ' active' : '') + '" id="orig-tab-reprints">';
-
-  // Description
-  html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目转载微信公众号及行业媒体中关于<b>细胞与基因治疗(CGT)</b>领域的优质文章，涵盖<b>行业动态</b>（获批产品、融资并购、管线进展）、<b>学术前沿</b>（AAV载体安全、外泌体疗法、3D微载体培养）、<b>政策法规</b>（CDE指导原则、818号令落地进展）和<b>投资观察</b>（赛道趋势、企业融资、商业化能力）四大方向。所有文章均注明来源公众号/媒体，版权归原作者所有，本平台仅作学习交流转载，不代表本平台观点。</div>';
-  html += '</div>';
-
-  // Category cards
-  var reprintCats = [
-    {id:'all', name:'全部', color:'var(--primary)'},
-    {id:'行业动态', name:'行业动态', color:'#42A5F5'},
-    {id:'学术前沿', name:'学术前沿', color:'#26C6DA'},
-    {id:'政策法规', name:'政策法规', color:'#FFB74D'},
-    {id:'投资观察', name:'投资观察', color:'#66BB6A'}
-  ];
-  var reprintCatCounts = {};
-  REPRINT_ARTICLES.forEach(function(a) {
-    if (!reprintCatCounts[a.tag]) reprintCatCounts[a.tag] = 0;
-    reprintCatCounts[a.tag]++;
-  });
-
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px;">';
-  reprintCats.forEach(function(c) {
-    var count = c.id === 'all' ? REPRINT_ARTICLES.length : (reprintCatCounts[c.id] || 0);
-    html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentReprintCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchReprintCat(\'' + c.id + '\')">';
-    html += '<div class="rcc-countline"><span class="rcc-count" style="color:' + c.color + ';">' + count + '</span><span class="rcc-unit"> 篇</span></div>';
-    html += '<div class="rcc-name">' + escapeHtml(c.name) + '</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  // Reprint article cards (filtered)
-  var filteredReprints = currentReprintCat === 'all' ? REPRINT_ARTICLES : REPRINT_ARTICLES.filter(function(a) { return a.tag === currentReprintCat; });
-  var reprintTagColors = {'行业动态':{fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'},'学术前沿':{fg:'#26C6DA',bg:'rgba(38,198,218,0.15)'},'政策法规':{fg:'#FFB74D',bg:'rgba(255,183,77,0.15)'},'投资观察':{fg:'#66BB6A',bg:'rgba(102,187,106,0.15)'}};
-  filteredReprints.forEach(function(a) {
-    var tc = reprintTagColors[a.tag] || {fg:'#42A5F5',bg:'rgba(66,165,245,0.15)'};
-    var hasValidUrl = a.url && a.url.indexOf('http') === 0 && a.url.length > 30;
-    if (hasValidUrl) {
-      html += '<div class="orig-article" onclick="window.open(\'' + a.url + '\', \'_blank\')" style="cursor:pointer;">';
-    } else {
-      html += '<div class="orig-article">';
-    }
-    html += '<span class="orig-article-tag" style="background:' + tc.bg + ';color:' + tc.fg + ';">' + escapeHtml(a.tag) + '</span>';
-    html += '<div class="orig-article-title">' + escapeHtml(a.title) + '</div>';
-    html += '<div class="orig-article-desc">' + escapeHtml(a.desc) + '</div>';
-    html += '<div class="orig-article-meta">';
-    html += '<span>' + svgIcon('share', 12) + ' 转载自：' + escapeHtml(a.source) + '</span>';
-    html += '<span>' + svgIcon('calendar', 12) + ' ' + a.date + '</span>';
-    html += '</div>';
-    html += '</div>';
-  });
-  html += '</div>'; // end orig-tab-reprints
 
   // === Experts tab ===
   html += '<div class="report-tab-content' + (currentOriginalTab === 'experts' ? ' active' : '') + '" id="orig-tab-experts">';
@@ -9981,7 +9916,7 @@ function switchOriginalTab(tab) {
   document.querySelectorAll('.report-tab[data-tab]').forEach(function(el) {
     el.classList.toggle('active', el.getAttribute('data-tab') === tab);
   });
-  ['articles', 'reprints', 'experts'].forEach(function(t) {
+  ['articles', 'experts'].forEach(function(t) {
     var el = document.getElementById('orig-tab-' + t);
     if (el) el.classList.toggle('active', t === tab);
   });
@@ -10035,22 +9970,16 @@ const CONFERENCE_EVENTS = [
   {title:'世界细胞治疗与再生医学大会(WRC)', desc:'第八届世界细胞治疗与再生医学大会暨展览会，与第七届中国国际生物技术大会同期举办。涵盖细胞治疗、基因工程疫苗、免疫治疗、3D生物打印等前沿方向。', date:'2025年4月', location:'北京', cat:'国内会议', url:'http://www.wrc-china.com'},
   {title:'济南CGT创新发展交流会', desc:'中国(山东)自贸试验区济南片区细胞与基因治疗创新发展交流会。贾伟平院士、山东大学齐鲁医院主办，聚焦CGT临床研究与转化应用，发布《人源间充质干细胞质量控制管理规范》团体标准。', date:'2025年12月', location:'山东 济南', cat:'国内会议', url:'https://www.media.sdu.edu.cn/info/1002/40281.htm'},
   // 专家讲座与视频解读
-  {title:'CGTLive 专家视频', desc:'CGTLive™平台提供细胞与基因治疗领域最新临床新闻视频报道，含CAR-T、基因治疗、干细胞等方向的关键意见领袖(KOL)访谈、FDA审批解读、临床试验结果分析。短小精悍，紧跟前沿。', date:'持续更新', location:'线上', cat:'专家视频', url:'https://www.cgtlive.com/shorts'},
-  {title:'EuroGCT/EuroStemCell YouTube', desc:'欧洲基因与细胞治疗组织和欧洲干细胞研究计划的官方YouTube频道，101个科普视频，总播放量超200万。涵盖干细胞基础知识、基因治疗原理、临床试验参与指南等，适合公众与患者教育。', date:'持续更新', location:'线上', cat:'专家视频', url:'https://www.youtube.com/c/eurostemcellorg/'},
-  {title:'Gene Horizons 纪录片', desc:'EuroGCT制作的基因治疗科普短片，采用独特的定格动画解释基因治疗背后的科学原理。结合5位领域顶尖专家访谈，适合公众与课堂教学。', date:'2025年', location:'线上', cat:'专家视频', url:'https://www.advancedcardiactherapies.ac.uk/knowledge-hub/gene-horizons'}
+  {title:'CGTLive 讲座视频', desc:'CGTLive™平台提供细胞与基因治疗领域最新临床新闻视频报道，含CAR-T、基因治疗、干细胞等方向的关键意见领袖(KOL)访谈、FDA审批解读、临床试验结果分析。短小精悍，紧跟前沿。', date:'持续更新', location:'线上', cat:'讲座视频', url:'https://www.cgtlive.com/shorts'},
+  {title:'EuroGCT/EuroStemCell YouTube', desc:'欧洲基因与细胞治疗组织和欧洲干细胞研究计划的官方YouTube频道，101个科普视频，总播放量超200万。涵盖干细胞基础知识、基因治疗原理、临床试验参与指南等，适合公众与患者教育。', date:'持续更新', location:'线上', cat:'讲座视频', url:'https://www.youtube.com/c/eurostemcellorg/'},
+  {title:'Gene Horizons 纪录片', desc:'EuroGCT制作的基因治疗科普短片，采用独特的定格动画解释基因治疗背后的科学原理。结合5位领域顶尖专家访谈，适合公众与课堂教学。', date:'2025年', location:'线上', cat:'讲座视频', url:'https://www.advancedcardiactherapies.ac.uk/knowledge-hub/gene-horizons'}
 ];
 
 const INDUSTRY_BOOKS = [
   // 原创专著
   {title:'干细胞临床应用手册', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著', coverType:'original', coverColor:'teal'},
-  {title:'细胞生物学（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著', coverType:'original', coverColor:'blue'},
-  // 学术专著
-  {title:'Mesenchymal Stromal Cells: Biology and Clinical Applications', author:'Peiman Hematti, Armand Keating', desc:'MSC领域权威专著，由Hematti和Keating主编，Springer出版。涵盖MSC的分离培养、鉴定标准、作用机制及各系统临床应用。系统梳理全球MSC临床试验数据与转化策略。', publisher:'Springer / Humana Press', year:'2013', pages:'约400页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9406847-M.jpg'},
-  {title:'Principles of Regenerative Medicine', author:'Anthony Atala 等', desc:'再生医学领域标杆著作，由Atala主编，Academic Press出版。涵盖干细胞、生物材料、3D生物打印、器官芯片等核心技术，以及皮肤、软骨、膀胱等组织工程临床应用案例。', publisher:'Academic Press / Elsevier', year:'2011', pages:'约800页', cat:'产业参考', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9926803-M.jpg'},
-  {title:'细胞治疗：从实验室到临床', author:'Bruce Levine 等', desc:'全面介绍细胞治疗产品开发全流程，包括CAR-T、TCR-T、TIL、MSC、iPSC等各类细胞治疗产品的工艺开发、质量控制、临床试验设计和注册申报。', publisher:'Wiley', year:'2023', pages:'约500页', cat:'产业参考', coverType:'custom', coverColor:'green'},
-  {title:'基因治疗原理与实践', author:'多种载体设计专题', desc:'基因治疗领域经典教材，涵盖AAV/慢病毒载体设计、递送策略、临床试验设计及监管考量。对理解体内基因治疗（in vivo CAR-T、基因编辑等）前沿方向有重要参考价值。', publisher:'Springer', year:'2024', pages:'约450页', cat:'学术专著', coverType:'custom', coverColor:'purple'},
-  {title:'Stem Cells and Their Potential for Clinical Application', author:'Axel R. Zander 等', desc:'Springer出版的干细胞临床应用专著，系统介绍各类干细胞的生物学特性、临床转化策略与挑战，涵盖造血干细胞、MSC、iPSC等方向。', publisher:'Springer London', year:'2007', pages:'约300页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/2738794-M.jpg'},
-  {title:'Human Embryonic Stem Cells', author:'Roger A. Pedersen', desc:'胚胎干细胞领域经典著作，由Garland Science出版。涵盖hESC的分离培养、分化调控、伦理考量及临床应用前景，是理解多能干细胞基础的重要参考。', publisher:'Garland Science / BIOS', year:'2006', pages:'约350页', cat:'学术专著', coverType:'image', cover:'https://covers.openlibrary.org/b/id/9803931-M.jpg'}
+  {title:'细胞生物学（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著', coverType:'original', coverColor:'blue'}
+  // 行业书籍已清空，等待用户提供图书题目+封面后重新部署
 ];
 
 var currentBookCat = 'all';
@@ -10091,7 +10020,7 @@ function renderBooks() {
   html += '<div class="report-tabs report-tabs-even">';
   html += '<button class="report-tab' + (currentBookTab === 'books' ? ' active' : '') + '" data-tab="books" onclick="switchBookTab(\'books\')">' + svgIcon('book', 14) + ' 行业书籍</button>';
   html += '<button class="report-tab' + (currentBookTab === 'courses' ? ' active' : '') + '" data-tab="courses" onclick="switchBookTab(\'courses\')">' + svgIcon('users', 14) + ' 课程培训</button>';
-  html += '<button class="report-tab' + (currentBookTab === 'conferences' ? ' active' : '') + '" data-tab="conferences" onclick="switchBookTab(\'conferences\')">' + svgIcon('calendar', 14) + ' 会议论坛</button>';
+  html += '<button class="report-tab' + (currentBookTab === 'conferences' ? ' active' : '') + '" data-tab="conferences" onclick="switchBookTab(\'conferences\')">' + svgIcon('calendar', 14) + ' 会议讲座</button>';
   html += '</div>';
 
   // === Books tab content ===
@@ -10099,14 +10028,12 @@ function renderBooks() {
 
   // Description text (wrapped in report-intro box)
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者，联系方式：手机/微信 <b>15932929299</b>。</div>';
+  html += '<div class="report-intro-text">本栏目展示平台<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击书籍封面查看详细介绍。原创专著提供试读章节，需要完整版请联系作者，联系方式：手机/微信 <b>15932929299</b>。更多行业书籍筹备中，敬请期待。</div>';
   html += '</div>';
 
   // Category cards
   var bookCats = [
     {id:'all', name:'全部书籍', color:'var(--primary)'},
-    {id:'学术专著', name:'学术专著', color:'#42A5F5'},
-    {id:'产业参考', name:'产业参考', color:'#66BB6A'},
     {id:'原创专著', name:'原创专著', color:'#FFB74D'}
   ];
   var catCounts = {};
@@ -10115,7 +10042,7 @@ function renderBooks() {
     catCounts[b.cat]++;
   });
 
-  html += '<div class="reg-cat-row reg-cat-row-4" style="grid-template-columns:repeat(4,1fr);margin-top:16px;">';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(2,1fr);margin-top:16px;">';
   bookCats.forEach(function(c) {
     var count = c.id === 'all' ? INDUSTRY_BOOKS.length : (catCounts[c.id] || 0);
     html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentBookCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchBookCat(\'' + c.id + '\')">';
@@ -10179,7 +10106,8 @@ function renderBooks() {
     html += '<div style="flex:1;">';
     html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
     html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
-    html += '<div class="course-meta"><span class="course-tag" style="background:' + catColor + '20;color:' + catColor + ';">' + escapeHtml(c.courseCat) + '</span><span class="course-tag">' + escapeHtml(c.tag) + '</span><span>' + svgIcon('clock', 10) + ' ' + escapeHtml(c.duration) + '</span><span>' + svgIcon('users', 10) + ' ' + escapeHtml(c.level) + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
+    html += '<div class="course-meta"><span class="course-tag" style="background:' + catColor + '20;color:' + catColor + ';">' + escapeHtml(c.courseCat) + '</span><span class="course-tag">' + escapeHtml(c.tag) + '</span></div>';
+    html += '<div class="course-meta" style="margin-top:2px;"><span>' + svgIcon('clock', 10) + ' ' + escapeHtml(c.duration) + '</span><span>' + svgIcon('users', 10) + ' ' + escapeHtml(c.level) + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
@@ -10191,7 +10119,7 @@ function renderBooks() {
 
   // Conference description (wrapped in report-intro box)
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目汇集细胞与基因治疗（CGT）领域国内外重要学术会议、产业论坛、专家讲座与视频解读资源，按类型分为<b>国际会议</b>（ISCT、ASGCT等顶级学会年会）、<b>国内会议</b>（博鳌乐城细胞大会、WRC世界细胞治疗大会等）和<b>专家视频</b>（CGTLive专家访谈、EuroGCT科普视频等）。会议信息来自公开渠道，具体时间地点以官方发布为准。</div>';
+  html += '<div class="report-intro-text">本栏目汇集细胞与基因治疗（CGT）领域国内外重要学术会议、产业论坛、专家讲座与视频解读资源，按类型分为<b>国际会议</b>（ISCT、ASGCT等顶级学会年会）、<b>国内会议</b>（博鳌乐城细胞大会、WRC世界细胞治疗大会等）和<b>讲座视频</b>（CGTLive专家访谈、EuroGCT科普视频等）。会议信息来自公开渠道，具体时间地点以官方发布为准。</div>';
   html += '</div>';
 
   // Conference category cards
@@ -10199,7 +10127,7 @@ function renderBooks() {
     {id:'all', name:'全部', color:'var(--primary)'},
     {id:'国际会议', name:'国际会议', color:'#42A5F5'},
     {id:'国内会议', name:'国内会议', color:'#66BB6A'},
-    {id:'专家视频', name:'专家视频', color:'#FFB74D'}
+    {id:'讲座视频', name:'讲座视频', color:'#FFB74D'}
   ];
   var confCatCounts = {};
   CONFERENCE_EVENTS.forEach(function(c) {
@@ -10219,10 +10147,10 @@ function renderBooks() {
 
   // Conference cards (filtered)
   var filteredConfs = currentConfCat === 'all' ? CONFERENCE_EVENTS : CONFERENCE_EVENTS.filter(function(c) { return c.cat === currentConfCat; });
-  var confCatColors = {'国际会议':'#42A5F5', '国内会议':'#66BB6A', '专家视频':'#FFB74D'};
+  var confCatColors = {'国际会议':'#42A5F5', '国内会议':'#66BB6A', '讲座视频':'#FFB74D'};
   filteredConfs.forEach(function(c) {
     var catColor = confCatColors[c.cat] || 'var(--primary)';
-    var confIcon = c.cat === '专家视频' ? 'play' : 'calendar';
+    var confIcon = c.cat === '讲座视频' ? 'play' : 'calendar';
     html += '<div class="course-card conf-card" onclick="window.open(\'' + (c.url || '#') + '\',\'_blank\')">';
     html += '<div class="course-card-header">';
     html += '<div class="course-icon" style="background:' + catColor + '15;">' + svgIcon(confIcon, 20) + '</div>';
@@ -11025,21 +10953,26 @@ var CITY_TO_PROVINCE = {
   '杭州':'浙江省','宁波':'浙江省','东阳':'浙江省',
   '合肥':'安徽省',
   '福州':'福建省','泉州':'福建省','漳州':'福建省','厦门':'福建省',
-  '济南':'山东省','青岛':'山东省',
-  '武汉':'湖北省','襄阳':'湖北省',
-  '长沙':'湖南省',
+  '济南':'山东省','青岛':'山东省','聊城':'山东省','烟台':'山东省',
+  '武汉':'湖北省','襄阳':'湖北省','十堰':'湖北省',
+  '长沙':'湖南省','衡阳':'湖南省',
   '郑州':'河南省',
   '广州':'广东省','深圳':'广东省',
   '海口':'海南省','博鳌':'海南省','海南':'海南省',
   '南宁':'广西壮族自治区',
   '成都':'四川省','自贡':'四川省',
+  '贵阳':'贵州省','遵义':'贵州省',
+  '昆明':'云南省',
   '咸阳':'陕西省','西安':'陕西省',
   '兰州':'甘肃省',
   '西宁':'青海省',
-  '沈阳':'辽宁省',
+  '银川':'宁夏回族自治区',
+  '乌鲁木齐':'新疆维吾尔自治区',
+  '沈阳':'辽宁省','大连':'辽宁省',
   '哈尔滨':'黑龙江省',
   '长春':'吉林省',
-  '上饶':'江西省'
+  '上饶':'江西省','南昌':'江西省',
+  '包头':'内蒙古自治区'
 };
 
 // Region to provinces mapping
@@ -11557,6 +11490,42 @@ function renderDualTrackExplanation() {
   html += '</div>';
   html += '</div>';
 
+  // Link 6: CMBA
+  html += '<div style="padding:12px 14px;border-radius:8px;background:rgba(38,166,154,0.04);border-left:3px solid #26A69A;">';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">6. 中国医药生物技术协会（CMBA）\u00b7 干细胞备案公示</div>';
+  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;">承担国家干细胞临床研究专家委员会秘书处职能 \u00b7 发布各批次备案项目公示信息 \u00b7 备案材料审核要点下载</div>';
+  html += '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+  html += '<a href="https://www.cmba.org.cn/" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(38,166,154,0.1);color:#26A69A;border:1px solid rgba(38,166,154,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' 协会官网</a>';
+  html += '<a href="http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(38,166,154,0.1);color:#26A69A;border:1px solid rgba(38,166,154,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' 备案公示示例（7个项目）</a>';
+  html += '<a href="http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(38,166,154,0.1);color:#26A69A;border:1px solid rgba(38,166,154,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' 备案公示示例（8个项目）</a>';
+  html += '</div>';
+  html += '<div style="font-size:10px;color:var(--text-light);margin-top:4px;opacity:0.7;">提示：CMBA官网"干细胞备案"栏目汇总了各批次备案项目公示，可关注其微信公众号获取最新动态</div>';
+  html += '</div>';
+
+  // Link 7: China Biotech Development Center
+  html += '<div style="padding:12px 14px;border-radius:8px;background:rgba(255,152,0,0.04);border-left:3px solid #FF9800;">';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">7. 中国生物技术发展中心\u00b7 备案指引（818号令）</div>';
+  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;">依据《生物医学新技术临床研究和临床转化应用管理条例》（国务院令第818号）制定 \u00b7 发布14项专项备案指引 \u00b7 承担备案具体工作</div>';
+  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:6px;line-height:1.8;">';
+  html += '<strong style="color:#FF9800;">干细胞相关指引：</strong>多能干细胞治疗、组织干细胞治疗、体细胞治疗、细胞组分及衍生物治疗新技术临床研究备案指引（第1版）';
+  html += '</div>';
+  html += '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+  html += '<a href="https://bydrug.pharmcube.com/news/detail/d57017630aa2add0b41ae9bead9f823b" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(255,152,0,0.1);color:#FF9800;border:1px solid rgba(255,152,0,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' 备案指引解读</a>';
+  html += '</div>';
+  html += '<div style="font-size:10px;color:var(--text-light);margin-top:4px;opacity:0.7;">办理机构：国家卫生健康委员会（具体工作由中国生物技术发展中心承担）</div>';
+  html += '</div>';
+
+  // Link 8: CDE
+  html += '<div style="padding:12px 14px;border-radius:8px;background:rgba(33,150,243,0.04);border-left:3px solid #2196F3;">';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">8. NMPA药品审评中心（CDE）\u00b7 药品注册路径查询</div>';
+  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;">细胞治疗产品IND申请、临床试验审批、上市申请进度查询 \u00b7 CGT产品注册审查要点</div>';
+  html += '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+  html += '<a href="https://www.cde.org.cn/" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(33,150,243,0.1);color:#2196F3;border:1px solid rgba(33,150,243,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' CDE官网</a>';
+  html += '<a href="https://www.cde.org.cn/zdyz/index" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(33,150,243,0.1);color:#2196F3;border:1px solid rgba(33,150,243,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' 指导原则</a>';
+  html += '<a href="https://www.nmpa.gov.cn/" target="_blank" style="display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10px;background:rgba(33,150,243,0.1);color:#2196F3;border:1px solid rgba(33,150,243,0.2);text-decoration:none;">' + svgIcon('external', 10) + ' NMPA官网</a>';
+  html += '</div>';
+  html += '</div>';
+
   html += '</div>'; // end link list
 
   // Data source statement
@@ -11604,7 +11573,7 @@ function renderInstProjects() {
   html += '<div style="margin-bottom:14px;padding:14px 18px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:8px;">';
   html += '<div style="font-size:14px;font-weight:600;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;">' + svgIcon('shield', 16) + ' 数据来源声明</div>';
   html += '<div style="font-size:12px;color:var(--text);line-height:1.8;text-indent:2em;">';
-  html += '本页面仅收录经公开来源验证的细胞治疗备案项目，每条项目均附来源链接可点击验证。数据来源包括：国家卫健委医学研究登记备案信息系统公示信息、中国医药生物技术协会（CMBA）官方公示、中国临床试验注册中心（ChiCTR）、以及各医院/政府官网新闻报道。';
+  html += '本页面仅收录经公开来源验证的细胞治疗备案项目，每条项目均附来源链接可点击验证。数据来源包括：国家卫健委医学研究登记备案信息系统公示信息、<a href="https://www.cmba.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">中国医药生物技术协会（CMBA）</a>官方公示、中国临床试验注册中心（ChiCTR）、以及各医院/政府官网新闻报道。';
   html += '<br><br>国家卫健委医学研究登记备案信息系统（<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">medicalresearch.org.cn</a>）显示，全国已有 8,452 家注册机构、126,834 项备案项目（含各类医学研究）。本页面仅收录其中与细胞治疗相关的部分已公开验证项目，不代表完整名录。';
   html += '<br><br>如需查询完整备案信息，请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">官方备案系统</a>。';
   html += '</div></div>';
