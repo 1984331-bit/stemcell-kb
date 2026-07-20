@@ -11176,7 +11176,7 @@ function renderInstitutions() {
   var totalProjCount = VERIFIED_PROJECTS.length;
   html += '<div class="reg-cat-card" style="border-left-color:#7B1FA2;cursor:pointer;" onclick="showInstProjects()">';
   html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#7B1FA2;"></span><span class="rcc-unit"> 项</span></div>';
-  html += '<div class="rcc-name">备案项目</div>';
+  html += '<div class="rcc-name">备案项目<span style="font-size:9px;color:#7B1FA2;opacity:0.7;">·已验证</span></div>';
   html += '</div>';
   // 临床招募 card
   html += '<div class="reg-cat-card" style="border-left-color:#0277BD;cursor:pointer;" onclick="showInstRecruiting()">';
@@ -11290,6 +11290,10 @@ function renderInstitutions() {
         });
         html += '</div>';
         html += '</div>';
+      } else {
+        html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">';
+        html += '<div style="font-size:11px;color:var(--text-light);opacity:0.5;display:flex;align-items:center;gap:4px;">' + svgIcon('clipboard', 12) + ' 暂无已验证备案项目 <span style="font-size:10px;">(待后续更新)</span></div>';
+        html += '</div>';
       }
       html += '</div>';
     });
@@ -11362,6 +11366,10 @@ function renderInstitutions() {
               html += '<span style="display:inline-block;padding:2px 6px;border-radius:3px;font-size:10px;background:' + pc + '12;color:' + pc + ';border:1px solid ' + pc + '25;line-height:1.3;">' + escapeHtml(proj.name) + ' <span style="opacity:0.6;font-size:9px;">[' + escapeHtml(proj.cell) + ']</span></span>';
             });
             html += '</div>';
+            html += '</div>';
+          } else {
+            html += '<div style="margin-top:6px;padding-top:5px;border-top:1px solid var(--border);">';
+            html += '<div style="font-size:10px;color:var(--text-light);opacity:0.4;display:flex;align-items:center;gap:3px;">' + svgIcon('clipboard', 11) + ' 暂无已验证备案项目</div>';
             html += '</div>';
           }
           html += '</div>';
