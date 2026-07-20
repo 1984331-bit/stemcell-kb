@@ -2364,7 +2364,7 @@ body { padding-bottom: 60px; }
   color: var(--text-light); font-size: 13px; text-align: center; gap: 8px;
 }
 .opencgt-sphere-wrap { display: flex; justify-content: center; align-items: center; padding: 10px 0; position: relative; }
-.opencgt-3d-canvas { width: 100%; max-width: 500px; height: 420px; border-radius: 12px; overflow: hidden; position: relative; cursor: grab; background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.03) 0%, transparent 70%); }
+.opencgt-3d-canvas { width: 100%; max-width: 560px; height: 480px; border-radius: 12px; overflow: hidden; position: relative; cursor: grab; background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%); }
 .opencgt-3d-canvas:active { cursor: grabbing; }
 .opencgt-3d-canvas canvas { display: block; }
 .opencgt-sphere-hint { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 10px; }
@@ -2376,7 +2376,7 @@ body { padding-bottom: 60px; }
   .opencgt-flow-arrow { transform: rotate(90deg); }
   .opencgt-twophase { flex-direction: column; }
   .opencgt-phase { max-width: 100%; }
-  .opencgt-3d-canvas { height: 340px; }
+  .opencgt-3d-canvas { height: 380px; }
 }
 /* ===== MSC Industry Dashboard ===== */
 .dash-board {
@@ -8063,6 +8063,8 @@ var opencgt3DRot = { x: -0.3, y: 0 }, opencgt3DTargetRot = { x: -0.3, y: 0 };
 var opencgt3DIsDragging = false, opencgt3DLastMouse = { x: 0, y: 0 };
 var opencgt3DAutoRotate = true, opencgt3DZoom = 1, opencgt3DAnimId = null;
 var opencgt3DCenter = { x: 0, y: 0 };
+var opencgt3DLastProjected = [];
+var opencgt3DHovered = -1;
 
 function init3DForceGraph() {
   var container = document.getElementById('opencgt3DCanvas');
@@ -8086,13 +8088,28 @@ function init3DForceGraph() {
   opencgt3DCtx.scale(dpr, dpr);
   opencgt3DCenter = { x: rect.width / 2, y: rect.height / 2 };
 
+  // Partner category colors (RGB strings) and labels
+  var pColors = [
+    '0,229,255',   // 科研
+    '102,187,106', // 临床
+    '255,183,77',  // 企业
+    '171,71,188',  // 投资
+    '239,83,80',   // 监管
+    '66,165,245',  // CDMO
+    '38,198,218',  // CRO
+    '255,238,88',  // AI
+    '255,138,101', // 媒体
+    '121,134,203'  // 学会
+  ];
+  var pShort = ['\u79d1\u7814','\u4e34\u5e8a','\u4f01\u4e1a','\u6295\u8d44','\u76d1\u7ba1','CDMO','CRO','AI','\u5a92\u4f53','\u5b66\u4f1a'];
+
   opencgt3DNodes = [];
   opencgt3DConnections = [];
 
   var nodeCount = 42;
   var radius = 130;
 
-  // Fibonacci sphere distribution
+  // Fibonacci sphere distribution with category assignment
   for (var i = 0; i < nodeCount; i++) {
     var phi = Math.acos(-1 + (2 * i) / nodeCount);
     var theta = Math.sqrt(nodeCount * Math.PI) * phi;
@@ -8100,8 +8117,10 @@ function init3DForceGraph() {
     var y = radius * Math.sin(theta) * Math.sin(phi);
     var z = radius * Math.cos(phi);
 
-    var size = 2.5 + Math.random() * 3.5;
-    var isHighlight = Math.random() > 0.55;
+    var catIdx = Math.floor(i * 10 / nodeCount);
+    catIdx = Math.min(catIdx, 9);
+
+    var size = 3 + Math.random() * 2.5;
 
     opencgt3DNodes.push({
       ox: x, oy: y, oz: z,
@@ -8109,8 +8128,11 @@ function init3DForceGraph() {
       size: size,
       phase: Math.random() * Math.PI * 2,
       speed: 0.4 + Math.random() * 0.6,
-      highlight: isHighlight,
-      pulse: Math.random() * Math.PI * 2
+      highlight: true,
+      pulse: Math.random() * Math.PI * 2,
+      cat: catIdx,
+      color: pColors[catIdx],
+      label: pShort[catIdx]
     });
   }
 
@@ -8144,6 +8166,37 @@ function init3DForceGraph() {
     }
   }
 
+  // Data flow pulses (animated dots traveling along center connections)
+  var pulses = [];
+  for (var i = 0; i < 18; i++) {
+    pulses.push({
+      connIdx: Math.floor(Math.random() * nodeCount),
+      progress: Math.random(),
+      speed: 0.003 + Math.random() * 0.006,
+      dir: Math.random() > 0.35 ? -1 : 1
+    });
+  }
+
+  // Starfield background
+  var stars = [];
+  for (var i = 0; i < 70; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      size: 0.5 + Math.random() * 1.5,
+      twinkle: Math.random() * Math.PI * 2,
+      speed: 0.5 + Math.random()
+    });
+  }
+
+  // Tooltip element
+  var tooltip = document.createElement('div');
+  tooltip.style.cssText = 'position:absolute;pointer-events:none;background:rgba(13,27,42,0.92);border:1px solid var(--primary);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text);white-space:nowrap;z-index:10;opacity:0;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(0,0,0,0.4);';
+  container.appendChild(tooltip);
+
+  // Tap detection for mobile
+  var touchStartPos = null, touchStartTime = 0, touchMoved = false;
+
   // Interaction
   var dom = opencgt3DCanvas;
   dom.addEventListener('mousedown', function(e) {
@@ -8152,17 +8205,55 @@ function init3DForceGraph() {
     opencgt3DAutoRotate = false;
   });
   window.addEventListener('mousemove', function(e) {
-    if (!opencgt3DIsDragging) return;
-    var dx = e.clientX - opencgt3DLastMouse.x;
-    var dy = e.clientY - opencgt3DLastMouse.y;
-    opencgt3DTargetRot.y += dx * 0.008;
-    opencgt3DTargetRot.x += dy * 0.008;
-    opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
+    if (opencgt3DIsDragging) {
+      var dx = e.clientX - opencgt3DLastMouse.x;
+      var dy = e.clientY - opencgt3DLastMouse.y;
+      opencgt3DTargetRot.y += dx * 0.008;
+      opencgt3DTargetRot.x += dy * 0.008;
+      opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
+    } else {
+      // Hover detection
+      var cr = opencgt3DCanvas.getBoundingClientRect();
+      var mx = e.clientX - cr.left;
+      var my = e.clientY - cr.top;
+      if (mx < 0 || my < 0 || mx > cr.width || my > cr.height) {
+        opencgt3DHovered = -1;
+        tooltip.style.opacity = '0';
+        return;
+      }
+      opencgt3DHovered = -1;
+      var minDist = 22;
+      for (var i = 0; i < opencgt3DLastProjected.length; i++) {
+        var p = opencgt3DLastProjected[i];
+        if (!p) continue;
+        var d = Math.sqrt((p.x - mx) * (p.x - mx) + (p.y - my) * (p.y - my));
+        if (d < minDist) { minDist = d; opencgt3DHovered = i; }
+      }
+      if (opencgt3DHovered >= 0) {
+        var n = opencgt3DNodes[opencgt3DHovered];
+        var partner = OPENCGT_PARTNERS[n.cat];
+        tooltip.innerHTML = '<span style="color:rgb(' + n.color + ');font-weight:700;">' + n.label + '</span> <span style="opacity:0.6;">\u00b7</span> ' + partner.role;
+        tooltip.style.left = Math.min(mx + 14, cr.width - 200) + 'px';
+        tooltip.style.top = Math.max(my - 36, 4) + 'px';
+        tooltip.style.opacity = '1';
+        dom.style.cursor = 'pointer';
+      } else {
+        tooltip.style.opacity = '0';
+        dom.style.cursor = 'grab';
+      }
+    }
   });
   window.addEventListener('mouseup', function() {
     opencgt3DIsDragging = false;
     clearTimeout(window._opencgt3DResumeTimer);
     window._opencgt3DResumeTimer = setTimeout(function() { opencgt3DAutoRotate = true; }, 3000);
+  });
+
+  // Click handler
+  dom.addEventListener('click', function(e) {
+    if (opencgt3DHovered >= 0) {
+      showPartnerInfo(opencgt3DNodes[opencgt3DHovered].cat);
+    }
   });
 
   // Touch
@@ -8171,6 +8262,9 @@ function init3DForceGraph() {
       opencgt3DIsDragging = true;
       opencgt3DLastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       opencgt3DAutoRotate = false;
+      touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      touchStartTime = Date.now();
+      touchMoved = false;
     }
   }, { passive: true });
   dom.addEventListener('touchmove', function(e) {
@@ -8178,14 +8272,30 @@ function init3DForceGraph() {
     e.preventDefault();
     var dx = e.touches[0].clientX - opencgt3DLastMouse.x;
     var dy = e.touches[0].clientY - opencgt3DLastMouse.y;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) touchMoved = true;
     opencgt3DTargetRot.y += dx * 0.008;
     opencgt3DTargetRot.x += dy * 0.008;
     opencgt3DLastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: false });
-  dom.addEventListener('touchend', function() {
+  dom.addEventListener('touchend', function(e) {
     opencgt3DIsDragging = false;
     clearTimeout(window._opencgt3DResumeTimer);
     window._opencgt3DResumeTimer = setTimeout(function() { opencgt3DAutoRotate = true; }, 3000);
+    // Tap detection
+    if (!touchMoved && touchStartPos && Date.now() - touchStartTime < 300) {
+      var cr = opencgt3DCanvas.getBoundingClientRect();
+      var mx = touchStartPos.x - cr.left;
+      var my = touchStartPos.y - cr.top;
+      var tapNode = -1, minDist = 28;
+      for (var i = 0; i < opencgt3DLastProjected.length; i++) {
+        var p = opencgt3DLastProjected[i];
+        if (!p) continue;
+        var d = Math.sqrt((p.x - mx) * (p.x - mx) + (p.y - my) * (p.y - my));
+        if (d < minDist) { minDist = d; tapNode = i; }
+      }
+      if (tapNode >= 0) showPartnerInfo(opencgt3DNodes[tapNode].cat);
+    }
+    touchStartPos = null;
   });
 
   // Zoom
@@ -8211,6 +8321,7 @@ function init3DForceGraph() {
 
   // Animation loop
   var t = 0;
+
   function project(p) {
     var rx = opencgt3DRot.x;
     var ry = opencgt3DRot.y;
@@ -8243,9 +8354,9 @@ function init3DForceGraph() {
     }
 
     // Project all nodes
-    var projected = [];
+    opencgt3DLastProjected = [];
     for (var i = 0; i < opencgt3DNodes.length; i++) {
-      projected.push(project(opencgt3DNodes[i]));
+      opencgt3DLastProjected.push(project(opencgt3DNodes[i]));
     }
 
     var ctx = opencgt3DCtx;
@@ -8253,18 +8364,47 @@ function init3DForceGraph() {
     var h = opencgt3DCanvas.height / dpr;
     ctx.clearRect(0, 0, w, h);
 
-    // Draw faint outer sphere wireframe
+    // Draw starfield
+    for (var s = 0; s < stars.length; s++) {
+      var star = stars[s];
+      var twinkle = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * star.speed + star.twinkle));
+      ctx.fillStyle = 'rgba(0,229,255,' + (twinkle * 0.12) + ')';
+      ctx.beginPath();
+      ctx.arc(star.x * w, star.y * h, star.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Draw orbital rings (3 tilted)
+    for (var ring = 0; ring < 3; ring++) {
+      var ringTilt = ring * 0.55 + 0.25;
+      var ringR = 148 + ring * 10;
+      ctx.strokeStyle = 'rgba(0,229,255,' + (0.08 - ring * 0.02) + ')';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var a = 0; a <= 64; a++) {
+        var ang = (a / 64) * Math.PI * 2;
+        var rx = Math.cos(ang) * ringR;
+        var rz = Math.sin(ang) * ringR;
+        var ry2 = rz * Math.sin(ringTilt);
+        var rz2 = rz * Math.cos(ringTilt);
+        var sp = project({ x: rx, y: ry2, z: rz2 });
+        if (a === 0) ctx.moveTo(sp.x, sp.y);
+        else ctx.lineTo(sp.x, sp.y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    // Draw faint equator wireframe
     ctx.strokeStyle = 'rgba(0,229,255,0.04)';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    var equatorPoints = [];
     for (var a = 0; a <= 64; a++) {
       var ang = (a / 64) * Math.PI * 2;
       var sp = project({ x: Math.cos(ang) * 130, y: 0, z: Math.sin(ang) * 130 });
-      equatorPoints.push(sp);
+      if (a === 0) ctx.moveTo(sp.x, sp.y);
+      else ctx.lineTo(sp.x, sp.y);
     }
-    ctx.moveTo(equatorPoints[0].x, equatorPoints[0].y);
-    for (var a = 1; a < equatorPoints.length; a++) ctx.lineTo(equatorPoints[a].x, equatorPoints[a].y);
     ctx.closePath();
     ctx.stroke();
 
@@ -8276,13 +8416,29 @@ function init3DForceGraph() {
     for (var c = 0; c < opencgt3DConnections.length; c++) {
       var conn = opencgt3DConnections[c];
       var p1, p2;
-      if (conn.type === 'center') { p1 = coreP; p2 = projected[conn.b]; }
-      else { p1 = projected[conn.a]; p2 = projected[conn.b]; }
+      if (conn.type === 'center') { p1 = coreP; p2 = opencgt3DLastProjected[conn.b]; }
+      else { p1 = opencgt3DLastProjected[conn.a]; p2 = opencgt3DLastProjected[conn.b]; }
       drawList.push({ type: 'line', z: Math.max(p1.z, p2.z), p1: p1, p2: p2, conn: conn });
     }
 
-    for (var i = 0; i < projected.length; i++) {
-      drawList.push({ type: 'node', z: projected[i].z, p: projected[i], node: opencgt3DNodes[i] });
+    // Data flow pulses
+    for (var pi = 0; pi < pulses.length; pi++) {
+      var pulse = pulses[pi];
+      pulse.progress += pulse.speed * pulse.dir;
+      if (pulse.progress > 1) { pulse.progress = 0; pulse.connIdx = Math.floor(Math.random() * nodeCount); pulse.dir = Math.random() > 0.35 ? -1 : 1; }
+      if (pulse.progress < 0) { pulse.progress = 1; pulse.connIdx = Math.floor(Math.random() * nodeCount); pulse.dir = Math.random() > 0.35 ? -1 : 1; }
+      var pulseConn = opencgt3DConnections[pulse.connIdx];
+      if (!pulseConn) continue;
+      var pp1 = coreP, pp2 = opencgt3DLastProjected[pulseConn.b];
+      if (!pp2) continue;
+      var px = pp1.x + (pp2.x - pp1.x) * pulse.progress;
+      var py = pp1.y + (pp2.y - pp1.y) * pulse.progress;
+      var pz = pp1.z + (pp2.z - pp1.z) * pulse.progress;
+      drawList.push({ type: 'pulse', z: pz, x: px, y: py, nodeIdx: pulseConn.b });
+    }
+
+    for (var i = 0; i < opencgt3DLastProjected.length; i++) {
+      drawList.push({ type: 'node', z: opencgt3DLastProjected[i].z, p: opencgt3DLastProjected[i], node: opencgt3DNodes[i], idx: i });
     }
 
     drawList.sort(function(a, b) { return a.z - b.z; });
@@ -8290,64 +8446,113 @@ function init3DForceGraph() {
     for (var i = 0; i < drawList.length; i++) {
       var item = drawList[i];
       if (item.type === 'core') {
-        var r = 14 * item.p.scale;
-        var grd = ctx.createRadialGradient(item.p.x, item.p.y, 0, item.p.x, item.p.y, r * 2);
-        grd.addColorStop(0, 'rgba(0,229,255,0.6)');
-        grd.addColorStop(0.5, 'rgba(0,229,255,0.15)');
-        grd.addColorStop(1, 'rgba(0,229,255,0)');
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(item.p.x, item.p.y, r * 2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = 'rgba(0,229,255,0.9)';
-        ctx.beginPath();
-        ctx.arc(item.p.x, item.p.y, r * 0.6, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.font = 'bold ' + Math.max(8, 10 * item.p.scale) + 'px Microsoft YaHei, sans-serif';
-        ctx.fillStyle = 'rgba(0,229,255,0.9)';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('AI', item.p.x, item.p.y);
-      } else if (item.type === 'line') {
-        var alpha = Math.max(0.05, 0.35 * ((item.p1.z + item.p2.z + 260) / 520));
-        if (item.conn.type === 'center') {
-          var grd = ctx.createLinearGradient(item.p1.x, item.p1.y, item.p2.x, item.p2.y);
-          grd.addColorStop(0, 'rgba(0,229,255,' + (alpha * 0.4) + ')');
-          grd.addColorStop(1, 'rgba(0,229,255,' + alpha + ')');
-          ctx.strokeStyle = grd;
-        } else {
-          ctx.strokeStyle = 'rgba(0,150,170,' + (alpha * 0.5) + ')';
-        }
-        ctx.lineWidth = 0.6 * Math.min(item.p1.scale, item.p2.scale);
-        ctx.beginPath();
-        ctx.moveTo(item.p1.x, item.p1.y);
-        ctx.lineTo(item.p2.x, item.p2.y);
-        ctx.stroke();
-      } else if (item.type === 'node') {
-        var n = item.node;
-        var r = n.size * item.p.scale;
-        var alpha = Math.max(0.35, 0.85 * ((item.p.z + 130) / 260));
-        var color = n.highlight ? '0,229,255' : '0,131,143';
+        var r = 16 * item.p.scale;
+        // Outer glow
         var grd = ctx.createRadialGradient(item.p.x, item.p.y, 0, item.p.x, item.p.y, r * 2.5);
-        grd.addColorStop(0, 'rgba(' + color + ',' + (alpha * 0.5) + ')');
-        grd.addColorStop(0.4, 'rgba(' + color + ',' + (alpha * 0.15) + ')');
-        grd.addColorStop(1, 'rgba(' + color + ',0)');
+        grd.addColorStop(0, 'rgba(0,229,255,0.5)');
+        grd.addColorStop(0.4, 'rgba(0,229,255,0.12)');
+        grd.addColorStop(1, 'rgba(0,229,255,0)');
         ctx.fillStyle = grd;
         ctx.beginPath();
         ctx.arc(item.p.x, item.p.y, r * 2.5, 0, Math.PI * 2);
         ctx.fill();
+        // Core pulse
+        var corePulse = 0.85 + 0.15 * Math.sin(t * 2);
+        ctx.fillStyle = 'rgba(0,229,255,' + corePulse + ')';
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * 0.65, 0, Math.PI * 2);
+        ctx.fill();
+        // Inner bright
+        ctx.fillStyle = 'rgba(180,255,255,0.85)';
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * 0.32, 0, Math.PI * 2);
+        ctx.fill();
+        // Label
+        ctx.font = 'bold ' + Math.max(9, 11 * item.p.scale) + 'px Microsoft YaHei, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AI', item.p.x, item.p.y);
+      } else if (item.type === 'line') {
+        var isHov = opencgt3DHovered >= 0 && (item.conn.a === opencgt3DHovered || item.conn.b === opencgt3DHovered);
+        var alpha = Math.max(0.05, 0.35 * ((item.p1.z + item.p2.z + 260) / 520));
+        if (isHov) alpha = Math.min(1, alpha * 2.5);
+        if (item.conn.type === 'center') {
+          var lineNode = opencgt3DNodes[item.conn.b];
+          var lineColor = isHov ? lineNode.color : '0,229,255';
+          var grd = ctx.createLinearGradient(item.p1.x, item.p1.y, item.p2.x, item.p2.y);
+          grd.addColorStop(0, 'rgba(' + lineColor + ',' + (alpha * 0.3) + ')');
+          grd.addColorStop(1, 'rgba(' + lineColor + ',' + alpha + ')');
+          ctx.strokeStyle = grd;
+        } else {
+          var na = opencgt3DNodes[item.conn.a];
+          ctx.strokeStyle = isHov ? 'rgba(' + na.color + ',' + (alpha * 0.8) + ')' : 'rgba(0,150,170,' + (alpha * 0.4) + ')';
+        }
+        ctx.lineWidth = isHov ? 1.2 : 0.6 * Math.min(item.p1.scale, item.p2.scale);
+        ctx.beginPath();
+        ctx.moveTo(item.p1.x, item.p1.y);
+        ctx.lineTo(item.p2.x, item.p2.y);
+        ctx.stroke();
+      } else if (item.type === 'pulse') {
+        var pn = opencgt3DNodes[item.nodeIdx];
+        if (!pn) continue;
+        var pAlpha = Math.max(0.3, 0.85 * ((item.z + 130) / 260));
+        var pScale = Math.max(0.5, (500 / (500 + item.z)));
+        var pR = 2.2 * pScale;
+        var pGrd = ctx.createRadialGradient(item.x, item.y, 0, item.x, item.y, pR * 3.5);
+        pGrd.addColorStop(0, 'rgba(' + pn.color + ',' + (pAlpha * 0.8) + ')');
+        pGrd.addColorStop(0.5, 'rgba(' + pn.color + ',' + (pAlpha * 0.2) + ')');
+        pGrd.addColorStop(1, 'rgba(' + pn.color + ',0)');
+        ctx.fillStyle = pGrd;
+        ctx.beginPath();
+        ctx.arc(item.x, item.y, pR * 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,' + pAlpha + ')';
+        ctx.beginPath();
+        ctx.arc(item.x, item.y, pR, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (item.type === 'node') {
+        var n = item.node;
+        var isHov = item.idx === opencgt3DHovered;
+        var r = (isHov ? n.size * 1.5 : n.size) * item.p.scale;
+        var alpha = Math.max(0.4, 0.9 * ((item.p.z + 130) / 260));
+        var color = n.color;
+        // Glow
+        var grd = ctx.createRadialGradient(item.p.x, item.p.y, 0, item.p.x, item.p.y, r * (isHov ? 4 : 2.5));
+        grd.addColorStop(0, 'rgba(' + color + ',' + (alpha * (isHov ? 0.7 : 0.4)) + ')');
+        grd.addColorStop(0.4, 'rgba(' + color + ',' + (alpha * 0.1) + ')');
+        grd.addColorStop(1, 'rgba(' + color + ',0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * (isHov ? 4 : 2.5), 0, Math.PI * 2);
+        ctx.fill();
+        // Node body
         ctx.fillStyle = 'rgba(' + color + ',' + alpha + ')';
         ctx.beginPath();
         ctx.arc(item.p.x, item.p.y, r, 0, Math.PI * 2);
         ctx.fill();
+        // Hover ring
+        if (isHov) {
+          ctx.strokeStyle = 'rgba(' + color + ',0.8)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(item.p.x, item.p.y, r * 2, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        // Label for closer/larger nodes
+        if (item.p.z < 40 && item.p.scale > 0.65) {
+          ctx.font = Math.max(8, 9 * item.p.scale) + 'px Microsoft YaHei, sans-serif';
+          ctx.fillStyle = 'rgba(' + color + ',' + (alpha * 0.85) + ')';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillText(n.label, item.p.x, item.p.y + r + 3);
+        }
       }
     }
   }
 
   draw();
-}
-
-function showPartnerInfo(idx) {
+}function showPartnerInfo(idx) {
   var p = OPENCGT_PARTNERS[idx];
   if (!p) return;
   var overlay = document.createElement('div');
@@ -8457,7 +8662,7 @@ function renderOpenCGT() {
   html += '<div class="opencgt-sphere-wrap">';
   html += '<div class="opencgt-3d-canvas" id="opencgt3DCanvas"></div>';
   html += '</div>';
-  html += '<div class="opencgt-sphere-hint">拖拽旋转 · 滚轮缩放 · 节点自动浮动</div>';
+  html += '<div class="opencgt-sphere-hint">拖拽旋转 · 滚轮缩放 · 点击节点查看详情 · 悬停高亮</div>';
   html += '</div>';
 
   // CTA
