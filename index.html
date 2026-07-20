@@ -10974,148 +10974,52 @@ var INST_REGION_COLORS = {
 };
 
 // 备案项目数据（来源：国家卫健委干细胞临床研究备案公示、ChiCTR、各医院公告）
-var INSTITUTION_PROJECTS = {
-  '北京协和医院': [
-    {name:'UC-MSC治疗激素耐药急性移植物抗宿主病(aGVHD)', cell:'UC-MSC', phase:'I/II期'},
-    {name:'骨髓MSC治疗糖尿病足溃疡', cell:'BM-MSC', phase:'I期'},
-    {name:'干细胞治疗骨关节炎', cell:'MSC', phase:'I期'}
-  ],
-  '北京大学第三医院': [
-    {name:'UC-MSC治疗膝关节骨关节炎', cell:'UC-MSC', phase:'I/II期'},
-    {name:'免疫细胞治疗晚期实体瘤', cell:'CIK/NK', phase:'I期'},
-    {name:'UC-MSC治疗干燥综合征', cell:'UC-MSC', phase:'I期'}
-  ],
-  '解放军总医院（301医院）': [
-    {name:'CAR-T治疗复发难治B细胞淋巴瘤', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗放射性肠损伤', cell:'MSC', phase:'I期'}
-  ],
-  '北京大学人民医院': [
-    {name:'异基因造血干细胞移植后MSC干预GVHD', cell:'BM-MSC', phase:'II期'},
-    {name:'CAR-T治疗急性B淋巴细胞白血病', cell:'CAR-T', phase:'II期'}
-  ],
-  '中国医学科学院血液病医院': [
-    {name:'CAR-T治疗复发难治急性白血病', cell:'CAR-T', phase:'II期'},
-    {name:'MSC促进造血干细胞植入', cell:'UC-MSC', phase:'I/II期'},
-    {name:'NK细胞治疗骨髓增生异常综合征', cell:'NK', phase:'I期'}
-  ],
-  '北京大学肿瘤医院': [
-    {name:'TIL细胞治疗晚期黑色素瘤', cell:'TIL', phase:'I期'},
-    {name:'CAR-T治疗胃肠道肿瘤', cell:'CAR-T', phase:'I期'}
-  ],
-  '首都医科大学附属北京天坛医院': [
-    {name:'NSC治疗缺血性脑卒中后遗症', cell:'NSC', phase:'I/II期'},
-    {name:'MSC治疗帕金森病', cell:'MSC', phase:'I期'}
-  ],
-  '武汉协和医院（华中科技大学同济医学院附属协和医院）': [
-    {name:'CAR-T治疗复发难治B细胞恶性肿瘤(520+例)', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗多发性硬化', cell:'MSC', phase:'I期'},
-    {name:'CAR-T治疗多发性骨髓瘤', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗系统性红斑狼疮', cell:'MSC', phase:'I/II期'},
-    {name:'UC-MSC治疗肝硬化失代偿期', cell:'UC-MSC', phase:'II期'}
-  ],
-  '华中科技大学同济医学院附属同济医院': [
-    {name:'CAR-T治疗急性淋巴细胞白血病(近600例)', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗急性肾损伤', cell:'MSC', phase:'I期'},
-    {name:'UC-MSC治疗卵巢早衰', cell:'UC-MSC', phase:'I/II期'}
-  ],
-  '武汉大学中南医院': [
-    {name:'MSC治疗新型冠状病毒肺炎后遗症', cell:'MSC', phase:'I期'},
-    {name:'免疫细胞治疗晚期肝癌', cell:'CIK', phase:'I期'}
-  ],
-  '郑州大学第一附属医院': [
-    {name:'CAR-T治疗B细胞恶性肿瘤', cell:'CAR-T', phase:'II期'},
-    {name:'UC-MSC治疗肝衰竭', cell:'UC-MSC', phase:'I/II期'},
-    {name:'MSC治疗糖尿病肾病', cell:'MSC', phase:'I期'}
-  ],
-  '四川大学华西医院': [
-    {name:'MSC治疗急性肾损伤', cell:'MSC', phase:'I/II期'},
-    {name:'干细胞治疗糖尿病足', cell:'BM-MSC', phase:'I期'},
-    {name:'UC-MSC治疗放射性肺损伤', cell:'UC-MSC', phase:'I期'},
-    {name:'MSC治疗骨关节炎', cell:'MSC', phase:'II期'},
-    {name:'脂肪MSC治疗面部凹陷性瘢痕', cell:'AD-MSC', phase:'I期'},
-    {name:'UC-MSC治疗失代偿期肝硬化', cell:'UC-MSC', phase:'II期'}
-  ],
-  '陆军军医大学新桥医院': [
-    {name:'CAR-T治疗复发难滤泡淋巴瘤', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗移植物抗宿主病', cell:'UC-MSC', phase:'I/II期'},
-    {name:'半相合造血干细胞移植', cell:'HSC', phase:'II期'}
-  ],
-  '复旦大学附属中山医院': [
-    {name:'MSC治疗失代偿期肝硬化', cell:'MSC', phase:'II期'},
-    {name:'CAR-T治疗肝癌(GPC3靶点)', cell:'CAR-T', phase:'I期'}
-  ],
-  '上海瑞金医院': [
-    {name:'CAR-T治疗急性B淋巴细胞白血病', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗重症急性胰腺炎', cell:'MSC', phase:'I期'}
-  ],
-  '浙江大学医学院附属第一医院': [
-    {name:'MSC治疗肝衰竭', cell:'UC-MSC', phase:'II期'},
-    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I/II期'},
-    {name:'干细胞治疗糖尿病足', cell:'MSC', phase:'I期'}
-  ],
-  '浙江大学医学院附属第二医院': [
-    {name:'MSC治疗帕金森病', cell:'MSC', phase:'I期'},
-    {name:'NSC治疗脊髓损伤', cell:'NSC', phase:'I期'}
-  ],
-  '山东省立医院': [
-    {name:'UC-MSC治疗卵巢早衰', cell:'UC-MSC', phase:'I/II期'},
-    {name:'MSC治疗骨关节炎', cell:'MSC', phase:'I期'}
-  ],
-  '中山大学附属肿瘤医院': [
-    {name:'CAR-T治疗鼻咽癌(EBV靶点)', cell:'CAR-T', phase:'I期'},
-    {name:'TIL治疗晚期鼻咽癌', cell:'TIL', phase:'I期'}
-  ],
-  '中山大学附属第八医院': [
-    {name:'CGT创新转化项目(细胞与基因治疗)', cell:'CGT', phase:'I期'},
-    {name:'UC-MSC治疗炎症性肠病', cell:'UC-MSC', phase:'I期'}
-  ],
-  '南方医科大学南方医院': [
-    {name:'CAR-T治疗B细胞白血病', cell:'CAR-T', phase:'II期'},
-    {name:'MSC治疗肝硬化', cell:'UC-MSC', phase:'I/II期'}
-  ],
-  '广东省人民医院': [
-    {name:'MSC治疗心力衰竭', cell:'MSC', phase:'I/II期'},
-    {name:'CAR-T治疗淋巴瘤', cell:'CAR-T', phase:'I期'}
-  ],
-  '深圳市第三人民医院': [
-    {name:'NK010细胞治疗阿尔茨海默病', cell:'NK', phase:'I/II期'},
-    {name:'UC-MSC治疗慢性肝衰竭', cell:'UC-MSC', phase:'I期'},
-    {name:'CAR-T治疗HIV相关淋巴瘤', cell:'CAR-T', phase:'I期'},
-    {name:'MSC治疗急性呼吸窘迫综合征', cell:'MSC', phase:'I期'}
-  ],
-  '苏州大学附属第一医院': [
-    {name:'CAR-T治疗复发难治B细胞淋巴瘤', cell:'CAR-T', phase:'II期'},
-    {name:'MSC促进异基因造血干细胞植入', cell:'MSC', phase:'I/II期'}
-  ],
-  '青岛大学附属医院': [
-    {name:'UC-MSC治疗骨关节炎', cell:'UC-MSC', phase:'I/II期'},
-    {name:'MSC治疗糖尿病足', cell:'MSC', phase:'I期'}
-  ],
-  '南京大学医学院附属鼓楼医院': [
-    {name:'UC-MSC治疗系统性红斑狼疮', cell:'UC-MSC', phase:'II期'},
-    {name:'MSC治疗脊髓损伤', cell:'MSC', phase:'I/II期'}
-  ],
-  '湖南省肿瘤医院': [
-    {name:'自体造血干细胞移植治疗淋巴瘤', cell:'HSC', phase:'II期'},
-    {name:'CAR-T治疗复发难滤泡淋巴瘤', cell:'CAR-T', phase:'I期'}
-  ],
-  '东部战区总医院': [
-    {name:'MSC治疗狼疮性肾炎', cell:'MSC', phase:'II期'},
-    {name:'CAR-T治疗自身免疫病', cell:'CAR-T', phase:'I期'}
-  ],
-  '空军军医大学唐都医院': [
-    {name:'UC-MSC治疗肝硬化', cell:'UC-MSC', phase:'I/II期'},
-    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I期'}
-  ],
-  '吉林大学第一医院': [
-    {name:'CAR-T治疗儿童急性淋巴细胞白血病', cell:'CAR-T', phase:'II期'},
-    {name:'UC-MSC治疗脑性瘫痪', cell:'UC-MSC', phase:'I期'}
-  ],
-  '中国医科大学附属第一医院': [
-    {name:'MSC治疗糖尿病足', cell:'MSC', phase:'I期'},
-    {name:'CAR-T治疗B细胞淋巴瘤', cell:'CAR-T', phase:'I期'}
-  ]
-};
+// VERIFIED_PROJECTS: 仅包含经公开来源验证的真实备案项目
+// 数据来源：国家卫健委官方公示、医学研究登记备案信息系统、ChiCTR、权威新闻报道
+// 每条项目均附来源链接，可在原始出处验证
+var VERIFIED_PROJECTS = [
+  // === 官方公示备案项目（2017-2020批次）===
+  // 来源：北京大学第三医院医学研究伦理委员会公示平台 https://imir.puh3.net.cn/Html/News/Articles/1147.html
+  // 来源：中国医药生物技术协会 http://www.cmba.org.cn/
+  {institution:'大连医科大学附属第一医院', name:'脐带间充质干细胞/神经干细胞治疗小儿脑性瘫痪', cell:'UC-MSC/NSC', phase:'I/II期', city:'大连', region:'东北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'大连医科大学附属第一医院', name:'脐带间充质干细胞移植治疗狼疮性肾炎', cell:'UC-MSC', phase:'I/II期', city:'大连', region:'东北', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'大连医科大学附属第一医院', name:'自体外周血干细胞治疗糖尿病性皮肤病', cell:'自体外周血干细胞', phase:'I期', city:'大连', region:'东北', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'广东省中医院', name:'卡泊三醇+银屑灵优化方联合脂肪原始间充质干细胞治疗中重度寻常型银屑病', cell:'AD-MSC', phase:'I/II期', city:'广州', region:'华南', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'中国医学科学院阜外医院', name:'自体骨髓间充质干细胞心梗注射液移植治疗急性心肌梗死（随机、双盲、安慰剂对照、多中心）', cell:'BM-MSC', phase:'I期', city:'北京', region:'华北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'中国医学科学院阜外医院', name:'人脐带间充质干细胞膜片治疗低射血分数冠心病', cell:'UC-MSC膜片', phase:'I期', city:'北京', region:'华北', date:'2024-11', filingNo:'ChiCTR2400092039', source:'https://www.chictr.org.cn/hvshowprojectEN.html?id=263343'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'卵巢早衰合并不孕症患者脐带间充质干细胞移植干预', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'胶原膜复合脐带间充质干细胞治疗子宫内膜瘢痕化、薄型内膜所致不孕症', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'脐带间充质干细胞治疗狼疮性肾炎（随机盲态平行对照多中心）', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'异体脂肪来源间充质祖细胞治疗膝骨关节炎', cell:'AD-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'脐带源间充质干细胞治疗视神经脊髓炎谱系疾病（前瞻性多中心随机对照）', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人自体支气管基底层细胞治疗间质性肺病', cell:'自体干细胞', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人脐带间充质干细胞治疗心衰', cell:'UC-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'iPSC分化的多巴胺能神经前体细胞治疗帕金森病（全国首个iPSC国家级备案项目）', cell:'iPSC', phase:'I期', city:'上海', region:'华东', date:'2025-01', source:'https://www.shobserver.com/wx/detail.do?id=840711'},
+  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的视网膜色素上皮细胞治疗干性年龄相关性黄斑变性', cell:'ESC-RPE', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的神经前体细胞治疗帕金森病', cell:'ESC-NPC', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'郑州大学第一附属医院', name:'临床级人胚胎干细胞来源的视网膜色素上皮细胞治疗视网膜色素变性', cell:'ESC-RPE', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'河北医科大学第一医院', name:'自体骨髓间充质干细胞心梗注射液移植治疗急性心肌梗死（多中心）', cell:'BM-MSC', phase:'I期', city:'石家庄', region:'华北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'聊城市人民医院', name:'脂肪间充质干细胞治疗中重度溃疡性结肠炎（I/II期随机对照）', cell:'AD-MSC', phase:'I/II期', city:'聊城', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海交通大学医学院附属第九人民医院', name:'应用新型干细胞过滤富集器快速制备活性生物材料植骨与自体骨移植', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'上海交通大学医学院附属第九人民医院', name:'自体骨髓干细胞技术重建下鼻甲改善空鼻综合症', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞(19#释胞儿-LC)治疗失代偿期乙型肝炎肝硬化', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞治疗银屑病', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
+  {institution:'中南大学湘雅医院', name:'脐带间充质干细胞联合脐血干细胞治疗外伤性脊髓损伤', cell:'UC-MSC+UCB', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'中南大学湘雅医院', name:'脐带间充质干细胞联合脐血干细胞治疗脊髓小脑性共济失调', cell:'UC-MSC+UCB', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  // === 近期获批备案项目（2024-2025）===
+  {institution:'华中科技大学同济医学院附属同济医院', name:'人脐带间充质干细胞移植治疗亚急性期脑出血', cell:'UC-MSC', phase:'I期', city:'武汉', region:'华中', date:'2025-01-15', filingNo:'MR-42-25-002783', pi:'唐洲平教授', source:'https://tjh.com.cn/contents/1387/55080.html'},
+  {institution:'深圳市第三人民医院', name:'NK010注射液在阿尔茨海默病中的安全性及初步疗效（开放、对照）', cell:'NK', phase:'I/II期', city:'深圳', region:'华南', date:'2025-04-27', pi:'赵宇、张政', source:'https://www.dutenews.com/n/article/10623230'},
+  {institution:'新乡医学院第一附属医院', name:'自体骨髓间充质干细胞体外构建骨修复四肢长管状骨缺损', cell:'BM-MSC', phase:'I期', city:'新乡', region:'华中', date:'2025-02-17', source:'https://www.toutiao.com/article/7472295184139665960'},
+  {institution:'高州市人民医院', name:'骨髓间充质干细胞治疗缺血性心肌病（随机对照）— 全国县级首家双备案', cell:'BM-MSC', phase:'I期', city:'高州', region:'华南', date:'2024-01', source:'http://www.gaozhou.gov.cn/ztzl/zwwgk/fwgk/content/post_1300227.html'},
+  {institution:'苏北人民医院', name:'人脐带间充质干细胞治疗肩袖损伤（前瞻性、随机、对照）', cell:'UC-MSC', phase:'I期', city:'扬州', region:'华东', date:'2025-01-03', source:'https://wjw.yangzhou.gov.cn/xwzx/gzdt/art/2025/art_8131a505b36741c88177cf5e472cc04b.html'},
+  {institution:'赣南医科大学第一附属医院', name:'骨髓间充质干细胞治疗乙肝相关慢加急性肝衰竭(ACLF) — 江西省首家双备案', cell:'BM-MSC', phase:'I/II期', city:'赣州', region:'华东', date:'2024', source:'https://www.gmu.edu.cn/info/1003/14553.htm'},
+  {institution:'中国医学科学院北京协和医院', name:'人脂肪间充质干细胞注射液局部注射治疗系统性硬化症手部皮肤病变', cell:'AD-MSC', phase:'I期', city:'北京', region:'华北', date:'2023-09', filingNo:'伦理批号KS20231294', source:'https://www.chictr.org.cn/showproj.html?proj=208895'},
+];
+
+// Helper: get verified projects for a given institution
+function getVerifiedProjects(instName) {
+  return VERIFIED_PROJECTS.filter(function(p) { return p.institution === instName; });
+}
 
 // City to province mapping
 var CITY_TO_PROVINCE = {
@@ -11250,7 +11154,7 @@ function renderInstitutions() {
   }
   html += '</div>';
 
-  html += '<div class="content-header" style="padding-bottom:10px;"><div class="desc" style="text-indent:2em;line-height:1.8;">全国已备案细胞治疗机构名录，覆盖7大地理区域、24个省份共106家三甲医院及研究中心。点击地图省份或下方区域卡片可逐级下钻至机构详情，每家机构展示备案项目、细胞类型、研究阶段及联系方式。机构末尾设有"备案项目"汇总表格，可按细胞类型筛选查看。数据截至2026年5月，后续将随国家卫健委更新持续同步。</div></div>';
+  html += '<div class="content-header" style="padding-bottom:10px;"><div class="desc" style="text-indent:2em;line-height:1.8;">全国已备案细胞治疗机构名录，覆盖7大地理区域、24个省份共106家三甲医院及研究中心（基于国家卫健委2016-2019年公布的干细胞临床研究备案机构名单）。点击地图省份或下方区域卡片可逐级下钻至机构详情。每家机构仅展示经公开来源验证的备案项目（附来源链接），末尾设有"已验证备案项目"汇总表格。完整备案信息请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">医学研究登记备案信息系统</a>。</div></div>';
 
   // Region cards — always visible
   var regionCounts = {};
@@ -11269,10 +11173,7 @@ function renderInstitutions() {
     html += '</div>';
   });
   // Add registered projects card
-  var totalProjCount = 0;
-  for (var k in INSTITUTION_PROJECTS) {
-    totalProjCount += INSTITUTION_PROJECTS[k].length;
-  }
+  var totalProjCount = VERIFIED_PROJECTS.length;
   html += '<div class="reg-cat-card" style="border-left-color:#7B1FA2;cursor:pointer;" onclick="showInstProjects()">';
   html += '<div class="rcc-countline"><span class="rcc-count" data-count="' + totalProjCount + '" style="color:#7B1FA2;"></span><span class="rcc-unit"> 项</span></div>';
   html += '<div class="rcc-name">备案项目</div>';
@@ -11377,14 +11278,15 @@ function renderInstitutions() {
       html += '<span style="display:flex;align-items:center;gap:4px;color:' + (phoneVal === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 12) + ' ' + escapeHtml(phoneVal) + '</span>';
       html += '</div>';
       // Projects section
-      var projects = INSTITUTION_PROJECTS[inst.name];
+      var projects = getVerifiedProjects(inst.name);
       if (projects && projects.length > 0) {
         html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">';
-        html += '<div style="font-size:12px;color:var(--text-light);margin-bottom:6px;display:flex;align-items:center;gap:4px;">' + svgIcon('clipboard', 12) + ' 备案项目 · ' + projects.length + '项</div>';
+        html += '<div style="font-size:12px;color:var(--text-light);margin-bottom:6px;display:flex;align-items:center;gap:4px;">' + svgIcon('clipboard', 12) + ' 已验证备案项目 · ' + projects.length + '项 <span style="font-size:10px;opacity:0.6;">(来源可查)</span></div>';
         html += '<div style="display:flex;flex-wrap:wrap;gap:5px;">';
         projects.forEach(function(proj) {
           var pc = proj.phase.indexOf('II') >= 0 ? '#00E5FF' : '#4DB6AC';
-          html += '<span style="display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;background:' + pc + '12;color:' + pc + ';border:1px solid ' + pc + '25;line-height:1.4;">' + escapeHtml(proj.name) + ' <span style="opacity:0.6;font-size:10px;">[' + escapeHtml(proj.cell) + ' · ' + escapeHtml(proj.phase) + ']</span></span>';
+          var srcLink = proj.source ? ' <a href="' + proj.source + '" target="_blank" style="color:' + pc + ';opacity:0.7;font-size:9px;text-decoration:underline;">[来源]</a>' : '';
+          html += '<span style="display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;background:' + pc + '12;color:' + pc + ';border:1px solid ' + pc + '25;line-height:1.4;">' + escapeHtml(proj.name) + ' <span style="opacity:0.6;font-size:10px;">[' + escapeHtml(proj.cell) + ' · ' + escapeHtml(proj.phase) + ']</span>' + srcLink + '</span>';
         });
         html += '</div>';
         html += '</div>';
@@ -11450,10 +11352,10 @@ function renderInstitutions() {
           html += '<span style="display:flex;align-items:center;gap:3px;color:' + (phoneVal2 === '待完善' ? 'var(--text-light);opacity:0.5' : 'var(--text-light)') + ';">' + svgIcon('phone', 11) + ' ' + escapeHtml(phoneVal2) + '</span>';
           html += '</div>';
           // Projects section (compact in accordion)
-          var projects2 = INSTITUTION_PROJECTS[inst.name];
+          var projects2 = getVerifiedProjects(inst.name);
           if (projects2 && projects2.length > 0) {
             html += '<div style="margin-top:6px;padding-top:5px;border-top:1px solid var(--border);">';
-            html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;display:flex;align-items:center;gap:3px;">' + svgIcon('clipboard', 11) + ' 备案项目 · ' + projects2.length + '项</div>';
+            html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:4px;display:flex;align-items:center;gap:3px;">' + svgIcon('clipboard', 11) + ' 已验证备案项目 · ' + projects2.length + '项</div>';
             html += '<div style="display:flex;flex-wrap:wrap;gap:4px;">';
             projects2.forEach(function(proj) {
               var pc = proj.phase.indexOf('II') >= 0 ? '#00E5FF' : '#4DB6AC';
@@ -11560,25 +11462,9 @@ function showInstProjects() {
 
 function renderInstProjects() {
   var content = document.getElementById('content');
-  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <span class="crumb-current">备案项目一览</span></div>';
+  var html = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span><span class="crumb-link" onclick="switchSection(\'institutions\')">备案机构</span><span class="crumb-sep">›</span> <span class="crumb-current">已验证备案项目</span></div>';
 
-  // Collect all projects with institution info
-  var allProjects = [];
-  for (var instName in INSTITUTION_PROJECTS) {
-    var instInfo = INSTITUTIONS.find(function(i) { return i.name === instName; });
-    var region = instInfo ? instInfo.region : '';
-    var city = instInfo ? instInfo.city : '';
-    INSTITUTION_PROJECTS[instName].forEach(function(p) {
-      allProjects.push({
-        institution: instName,
-        region: region,
-        city: city,
-        name: p.name,
-        cell: p.cell,
-        phase: p.phase
-      });
-    });
-  }
+  var allProjects = VERIFIED_PROJECTS.slice();
 
   // Sort by region, then by institution
   allProjects.sort(function(a, b) {
@@ -11588,15 +11474,25 @@ function renderInstProjects() {
   });
 
   var totalProj = allProjects.length;
-  var totalInst = Object.keys(INSTITUTION_PROJECTS).length;
+  var totalInst = {};
+  allProjects.forEach(function(p) { totalInst[p.institution] = true; });
+  totalInst = Object.keys(totalInst).length;
+
+  // Data source declaration
+  html += '<div style="margin-bottom:14px;padding:14px 18px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:8px;">';
+  html += '<div style="font-size:14px;font-weight:600;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;">' + svgIcon('shield', 16) + ' 数据来源声明</div>';
+  html += '<div style="font-size:12px;color:var(--text);line-height:1.8;text-indent:2em;">';
+  html += '本页面仅收录经公开来源验证的细胞治疗备案项目，每条项目均附来源链接可点击验证。数据来源包括：国家卫健委医学研究登记备案信息系统公示信息、中国医药生物技术协会（CMBA）官方公示、中国临床试验注册中心（ChiCTR）、以及各医院/政府官网新闻报道。';
+  html += '<br><br>国家卫健委医学研究登记备案信息系统（<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">medicalresearch.org.cn</a>）显示，全国已有 8,452 家注册机构、126,834 项备案项目（含各类医学研究）。本页面仅收录其中与细胞治疗相关的部分已公开验证项目，不代表完整名录。';
+  html += '<br><br>如需查询完整备案信息，请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">官方备案系统</a>。';
+  html += '</div></div>';
 
   // Description
-  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构临床研究项目汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项备案项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构。按地区分类展示，涵盖细胞类型、研究阶段等信息。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构已验证临床研究项目汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项已验证备案项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构。每条项目均附来源链接，可在原始出处验证。数据将持续更新，如有遗漏或错误请联系我们。</div></div>';
 
   // Filter buttons
   html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
   html += '<button class="proj-filter-btn" data-filter="all" style="background:var(--primary);color:#0A0F1A;border:none;padding:6px 16px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;" onclick="filterInstProj(\'all\',this)">全部 ' + totalProj + '</button>';
-  // Cell type filter
   var cellTypes = {};
   allProjects.forEach(function(p) { cellTypes[p.cell] = (cellTypes[p.cell]||0)+1; });
   Object.keys(cellTypes).sort().forEach(function(ct) {
@@ -11609,32 +11505,39 @@ function renderInstProjects() {
   html += '<table class="inst-proj-table" id="instProjTable" style="width:100%;border-collapse:collapse;font-size:13px;">';
   html += '<thead><tr>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">序号</th>';
-  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:200px;">项目名称</th>';
+  html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:240px;">项目名称</th>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">细胞类型</th>';
   html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">研究阶段</th>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:160px;">备案机构</th>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">地区</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">备案/获批</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">来源</th>';
   html += '</tr></thead><tbody id="instProjBody">';
 
   allProjects.forEach(function(p, idx) {
     var phaseColor = p.phase.indexOf('II') >= 0 ? 'rgba(0,229,255,0.15)' : 'rgba(0,200,83,0.15)';
     var phaseTextColor = p.phase.indexOf('II') >= 0 ? 'var(--primary)' : '#4CAF50';
     var rowBg = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)';
+    var dateStr = p.date || '-';
+    var filingStr = p.filingNo ? '<span style="font-size:10px;color:var(--text-light);">' + escapeHtml(p.filingNo) + '</span><br>' : '';
+    var srcLink = p.source ? '<a href="' + p.source + '" target="_blank" style="color:var(--primary);text-decoration:none;font-size:11px;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">' + svgIcon('external', 12) + ' 查看</a>' : '-';
     html += '<tr class="proj-row" data-cell="' + escapeHtml(p.cell) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
     html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;">' + (idx+1) + '</td>';
-    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(p.name) + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text);">' + escapeHtml(p.name) + (p.pi ? '<br><span style="font-size:10px;color:var(--text-light);">PI: ' + escapeHtml(p.pi) + '</span>' : '') + '</td>';
     html += '<td style="padding:8px 12px;white-space:nowrap;"><span style="background:rgba(123,31,162,0.15);color:#CE93D8;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.cell) + '</span></td>';
     html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;"><span style="background:' + phaseColor + ';color:' + phaseTextColor + ';padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;">' + escapeHtml(p.phase) + '</span></td>';
     html += '<td style="padding:8px 12px;color:var(--text);font-size:12px;">' + escapeHtml(p.institution) + '</td>';
-    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(p.region) + (p.city ? '·' + escapeHtml(p.city) : '') + '</td>';
+    html += '<td style="padding:8px 12px;color:var(--text-light);white-space:nowrap;font-size:12px;">' + escapeHtml(p.region) + (p.city ? '\u00b7' + escapeHtml(p.city) : '') + '</td>';
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;font-size:11px;color:var(--text-light);">' + filingStr + escapeHtml(dateStr) + '</td>';
+    html += '<td style="padding:8px 12px;text-align:center;white-space:nowrap;">' + srcLink + '</td>';
     html += '</tr>';
   });
 
   html += '</tbody></table></div>';
 
   // Footer note
-  html += '<div style="margin-top:14px;padding:10px 14px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.6;">';
-  html += '<b>说明：</b>以上项目信息来源于国家卫健委备案机构公开信息及临床试验注册库（ChiCTR），仅供参考。具体研究进展及入组信息请咨询相应机构。';
+  html += '<div style="margin-top:14px;padding:12px 16px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.8;">';
+  html += '<b>\u26a0\ufe0f 重要说明：</b>本页面仅收录经公开来源验证的备案项目（截至2026年7月），每条项目均附来源链接。国家卫健委备案系统中还有大量未公开详细信息的备案项目，本页面不代表完整名录。如需查询完整信息，请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--warn-text);text-decoration:underline;">医学研究登记备案信息系统</a>。';
   html += '</div>';
 
   content.innerHTML = html;
