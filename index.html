@@ -4695,7 +4695,6 @@ body { padding-bottom: 60px; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="china-geo.js"></script>
 </head>
 <body>
@@ -5169,6 +5168,7 @@ function parseHash() {
   if (hash === '#originals') return { section: 'originals' };
   if (hash === '#books') return { section: 'books' };
   if (hash === '#health') return { section: 'health' };
+  if (hash === '#ai') return { section: 'ai' };
   if (hash === '#ai-review') return { section: 'ai-review' };
   if (hash === '#opencgt') return { section: 'opencgt' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
@@ -6276,8 +6276,10 @@ function openSidebar() {
   document.getElementById('overlay').classList.add('show');
 }
 function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('overlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (overlay) overlay.classList.remove('show');
 }
 
 function escapeHtml(str) {
@@ -8054,52 +8056,43 @@ var OPENCGT_PARTNERS = [
   { short: '学会', icon: 'users', name: '学术组织节点', desc: '学会与协会，提供学术交流与标准制定支持', role: '学术交流 · 标准制定' }
 ];
 
-// === 3D Force-Directed Sphere Network Graph ===
-var opencgt3DScene = null, opencgt3DCamera = null, opencgt3DRenderer = null;
-var opencgt3DNodes = [], opencgt3DNodeGroup = null, opencgt3DLines = null;
+// === 3D Force-Directed Sphere Network Graph (Canvas 2D) ===
+var opencgt3DCtx = null, opencgt3DCanvas = null;
+var opencgt3DNodes = [], opencgt3DConnections = [];
 var opencgt3DRot = { x: -0.3, y: 0 }, opencgt3DTargetRot = { x: -0.3, y: 0 };
 var opencgt3DIsDragging = false, opencgt3DLastMouse = { x: 0, y: 0 };
 var opencgt3DAutoRotate = true, opencgt3DZoom = 1, opencgt3DAnimId = null;
-var opencgt3DConnections = [];
+var opencgt3DCenter = { x: 0, y: 0 };
 
 function init3DForceGraph() {
   var container = document.getElementById('opencgt3DCanvas');
-  if (!container || typeof THREE === 'undefined') return;
+  if (!container) return;
 
   // Cleanup
   if (opencgt3DAnimId) cancelAnimationFrame(opencgt3DAnimId);
-  if (opencgt3DRenderer) { opencgt3DRenderer.dispose(); container.innerHTML = ''; }
-  opencgt3DNodes = []; opencgt3DConnections = [];
+  container.innerHTML = '';
 
-  var w = container.clientWidth || 500;
-  var h = container.clientHeight || 420;
+  opencgt3DCanvas = document.createElement('canvas');
+  opencgt3DCanvas.style.width = '100%';
+  opencgt3DCanvas.style.height = '100%';
+  opencgt3DCanvas.style.display = 'block';
+  container.appendChild(opencgt3DCanvas);
 
-  opencgt3DScene = new THREE.Scene();
-  opencgt3DCamera = new THREE.PerspectiveCamera(55, w / h, 0.1, 1000);
-  opencgt3DCamera.position.z = 360;
+  var rect = container.getBoundingClientRect();
+  var dpr = Math.min(window.devicePixelRatio, 2);
+  opencgt3DCanvas.width = rect.width * dpr;
+  opencgt3DCanvas.height = rect.height * dpr;
+  opencgt3DCtx = opencgt3DCanvas.getContext('2d');
+  opencgt3DCtx.scale(dpr, dpr);
+  opencgt3DCenter = { x: rect.width / 2, y: rect.height / 2 };
 
-  opencgt3DRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  opencgt3DRenderer.setSize(w, h);
-  opencgt3DRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(opencgt3DRenderer.domElement);
+  opencgt3DNodes = [];
+  opencgt3DConnections = [];
 
-  opencgt3DNodeGroup = new THREE.Group();
-
-  // Central core
-  var coreGeo = new THREE.SphereGeometry(14, 32, 32);
-  var coreMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.85 });
-  var core = new THREE.Mesh(coreGeo, coreMat);
-  opencgt3DNodeGroup.add(core);
-
-  var coreGlowGeo = new THREE.SphereGeometry(24, 32, 32);
-  var coreGlowMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.12 });
-  var coreGlow = new THREE.Mesh(coreGlowGeo, coreGlowMat);
-  opencgt3DNodeGroup.add(coreGlow);
-
-  // Outer nodes on sphere (Fibonacci distribution)
   var nodeCount = 42;
-  var radius = 140;
+  var radius = 130;
 
+  // Fibonacci sphere distribution
   for (var i = 0; i < nodeCount; i++) {
     var phi = Math.acos(-1 + (2 * i) / nodeCount);
     var theta = Math.sqrt(nodeCount * Math.PI) * phi;
@@ -8107,85 +8100,52 @@ function init3DForceGraph() {
     var y = radius * Math.sin(theta) * Math.sin(phi);
     var z = radius * Math.cos(phi);
 
-    var nodeSize = 2.5 + Math.random() * 3.5;
+    var size = 2.5 + Math.random() * 3.5;
     var isHighlight = Math.random() > 0.55;
-    var color = isHighlight ? 0x00E5FF : 0x006978;
-    var opacity = isHighlight ? 0.9 : 0.55;
 
-    var geo = new THREE.SphereGeometry(nodeSize, 12, 12);
-    var mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: opacity });
-    var node = new THREE.Mesh(geo, mat);
-    node.position.set(x, y, z);
-    node.userData = { ox: x, oy: y, oz: z, phase: Math.random() * Math.PI * 2, speed: 0.4 + Math.random() * 0.6, baseSize: nodeSize };
-    opencgt3DNodes.push(node);
-    opencgt3DNodeGroup.add(node);
-
-    // Glow halo
-    var glowGeo = new THREE.SphereGeometry(nodeSize * 2.2, 12, 12);
-    var glowMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.08 });
-    var glow = new THREE.Mesh(glowGeo, glowMat);
-    glow.position.copy(node.position);
-    glow.userData.isGlow = true;
-    glow.userData.parentIdx = i;
-    opencgt3DNodeGroup.add(glow);
+    opencgt3DNodes.push({
+      ox: x, oy: y, oz: z,
+      x: x, y: y, z: z,
+      size: size,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.4 + Math.random() * 0.6,
+      highlight: isHighlight,
+      pulse: Math.random() * Math.PI * 2
+    });
   }
 
-  // Build connections: center→node + nearby node→node
-  var linePositions = [];
-  var lineColors = [];
-
-  // Center to each node
-  for (var i = 0; i < opencgt3DNodes.length; i++) {
-    var p = opencgt3DNodes[i].position;
-    linePositions.push(0, 0, 0, p.x, p.y, p.z);
-    lineColors.push(0, 0.9, 1, 0, 0.4, 0.5);
+  // Connections: center to each node
+  for (var i = 0; i < nodeCount; i++) {
     opencgt3DConnections.push({ type: 'center', a: -1, b: i });
   }
 
-  // Nearby node-to-node
-  for (var i = 0; i < opencgt3DNodes.length; i++) {
-    var p1 = opencgt3DNodes[i].position;
+  // Connections: nearby node to node
+  for (var i = 0; i < nodeCount; i++) {
+    var p1 = opencgt3DNodes[i];
     var nearest = [];
-    for (var j = 0; j < opencgt3DNodes.length; j++) {
+    for (var j = 0; j < nodeCount; j++) {
       if (i === j) continue;
-      var p2 = opencgt3DNodes[j].position;
-      var d = Math.sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
+      var p2 = opencgt3DNodes[j];
+      var d = Math.sqrt((p1.ox-p2.ox)*(p1.ox-p2.ox) + (p1.oy-p2.oy)*(p1.oy-p2.oy) + (p1.oz-p2.oz)*(p1.oz-p2.oz));
       if (d < 95) nearest.push({ idx: j, dist: d });
     }
     nearest.sort(function(a,b) { return a.dist - b.dist; });
     for (var k = 0; k < Math.min(2, nearest.length); k++) {
       var j = nearest[k].idx;
-      // Avoid duplicate
       var dup = false;
       for (var c = 0; c < opencgt3DConnections.length; c++) {
-        if ((opencgt3DConnections[c].a === i && opencgt3DConnections[c].b === j) ||
-            (opencgt3DConnections[c].a === j && opencgt3DConnections[c].b === i)) { dup = true; break; }
+        if (opencgt3DConnections[c].type === 'node' &&
+            ((opencgt3DConnections[c].a === i && opencgt3DConnections[c].b === j) ||
+             (opencgt3DConnections[c].a === j && opencgt3DConnections[c].b === i))) {
+          dup = true; break;
+        }
       }
-      if (dup) continue;
-      var p2 = opencgt3DNodes[j].position;
-      linePositions.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
-      lineColors.push(0, 0.5, 0.6, 0, 0.3, 0.4);
-      opencgt3DConnections.push({ type: 'node', a: i, b: j });
+      if (!dup) opencgt3DConnections.push({ type: 'node', a: i, b: j });
     }
   }
 
-  var lineGeo = new THREE.BufferGeometry();
-  lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-  lineGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
-  var lineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending });
-  opencgt3DLines = new THREE.LineSegments(lineGeo, lineMat);
-  opencgt3DNodeGroup.add(opencgt3DLines);
-
-  // Outer wireframe sphere (faint)
-  var wireGeo = new THREE.SphereGeometry(radius, 24, 16);
-  var wireMat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, wireframe: true, transparent: true, opacity: 0.04 });
-  var wire = new THREE.Mesh(wireGeo, wireMat);
-  opencgt3DNodeGroup.add(wire);
-
-  opencgt3DScene.add(opencgt3DNodeGroup);
-
   // Interaction
-  var dom = opencgt3DRenderer.domElement;
+  var dom = opencgt3DCanvas;
   dom.addEventListener('mousedown', function(e) {
     opencgt3DIsDragging = true;
     opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
@@ -8195,8 +8155,8 @@ function init3DForceGraph() {
     if (!opencgt3DIsDragging) return;
     var dx = e.clientX - opencgt3DLastMouse.x;
     var dy = e.clientY - opencgt3DLastMouse.y;
-    opencgt3DTargetRot.y += dx * 0.006;
-    opencgt3DTargetRot.x += dy * 0.006;
+    opencgt3DTargetRot.y += dx * 0.008;
+    opencgt3DTargetRot.x += dy * 0.008;
     opencgt3DLastMouse = { x: e.clientX, y: e.clientY };
   });
   window.addEventListener('mouseup', function() {
@@ -8218,8 +8178,8 @@ function init3DForceGraph() {
     e.preventDefault();
     var dx = e.touches[0].clientX - opencgt3DLastMouse.x;
     var dy = e.touches[0].clientY - opencgt3DLastMouse.y;
-    opencgt3DTargetRot.y += dx * 0.006;
-    opencgt3DTargetRot.x += dy * 0.006;
+    opencgt3DTargetRot.y += dx * 0.008;
+    opencgt3DTargetRot.x += dy * 0.008;
     opencgt3DLastMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: false });
   dom.addEventListener('touchend', function() {
@@ -8235,81 +8195,156 @@ function init3DForceGraph() {
     opencgt3DZoom = Math.max(0.5, Math.min(2.5, opencgt3DZoom));
   }, { passive: false });
 
-  // Animation loop
-  var t = 0;
-  function animate() {
-    opencgt3DAnimId = requestAnimationFrame(animate);
-    t += 0.01;
-
-    if (opencgt3DAutoRotate) opencgt3DTargetRot.y += 0.0025;
-
-    opencgt3DRot.x += (opencgt3DTargetRot.x - opencgt3DRot.x) * 0.1;
-    opencgt3DRot.y += (opencgt3DTargetRot.y - opencgt3DRot.y) * 0.1;
-    opencgt3DNodeGroup.rotation.x = opencgt3DRot.x;
-    opencgt3DNodeGroup.rotation.y = opencgt3DRot.y;
-
-    opencgt3DCamera.position.z = 360 / opencgt3DZoom;
-
-    // Force-directed float
-    for (var i = 0; i < opencgt3DNodes.length; i++) {
-      var n = opencgt3DNodes[i];
-      var u = n.userData;
-      var off = Math.sin(t * u.speed + u.phase) * 6;
-      var len = Math.sqrt(u.ox*u.ox + u.oy*u.oy + u.oz*u.oz);
-      n.position.set(
-        u.ox + (u.ox/len) * off,
-        u.oy + (u.oy/len) * off,
-        u.oz + (u.oz/len) * off
-      );
-      // Pulse size
-      var pulse = 1 + Math.sin(t * 1.5 + u.phase) * 0.12;
-      n.scale.setScalar(pulse);
-    }
-
-    // Update glow positions
-    var glows = opencgt3DNodeGroup.children.filter(function(c) { return c.userData.isGlow; });
-    for (var g = 0; g < glows.length; g++) {
-      var pIdx = glows[g].userData.parentIdx;
-      if (opencgt3DNodes[pIdx]) glows[g].position.copy(opencgt3DNodes[pIdx].position);
-    }
-
-    // Update line positions
-    var pos = opencgt3DLines.geometry.attributes.position.array;
-    var li = 0;
-    for (var c = 0; c < opencgt3DConnections.length; c++) {
-      var conn = opencgt3DConnections[c];
-      if (conn.type === 'center') {
-        pos[li++] = 0; pos[li++] = 0; pos[li++] = 0;
-        var np = opencgt3DNodes[conn.b].position;
-        pos[li++] = np.x; pos[li++] = np.y; pos[li++] = np.z;
-      } else {
-        var pa = opencgt3DNodes[conn.a].position;
-        var pb = opencgt3DNodes[conn.b].position;
-        pos[li++] = pa.x; pos[li++] = pa.y; pos[li++] = pa.z;
-        pos[li++] = pb.x; pos[li++] = pb.y; pos[li++] = pb.z;
-      }
-    }
-    opencgt3DLines.geometry.attributes.position.needsUpdate = true;
-
-    // Core pulse
-    core.scale.setScalar(1 + Math.sin(t * 2) * 0.06);
-    coreGlow.scale.setScalar(1 + Math.sin(t * 2) * 0.12);
-
-    opencgt3DRenderer.render(opencgt3DScene, opencgt3DCamera);
-  }
-  animate();
-
   // Resize
   if (window._opencgt3DResizeHandler) window.removeEventListener('resize', window._opencgt3DResizeHandler);
   window._opencgt3DResizeHandler = function() {
-    if (!opencgt3DRenderer || !container) return;
-    var nw = container.clientWidth, nh = container.clientHeight;
-    if (nw < 10 || nh < 10) return;
-    opencgt3DCamera.aspect = nw / nh;
-    opencgt3DCamera.updateProjectionMatrix();
-    opencgt3DRenderer.setSize(nw, nh);
+    if (!opencgt3DCanvas || !container) return;
+    var r = container.getBoundingClientRect();
+    if (r.width < 10 || r.height < 10) return;
+    var d = Math.min(window.devicePixelRatio, 2);
+    opencgt3DCanvas.width = r.width * d;
+    opencgt3DCanvas.height = r.height * d;
+    opencgt3DCtx.setTransform(d, 0, 0, d, 0, 0);
+    opencgt3DCenter = { x: r.width / 2, y: r.height / 2 };
   };
   window.addEventListener('resize', window._opencgt3DResizeHandler);
+
+  // Animation loop
+  var t = 0;
+  function project(p) {
+    var rx = opencgt3DRot.x;
+    var ry = opencgt3DRot.y;
+    var y1 = p.y * Math.cos(rx) - p.z * Math.sin(rx);
+    var z1 = p.y * Math.sin(rx) + p.z * Math.cos(rx);
+    var x2 = p.x * Math.cos(ry) + z1 * Math.sin(ry);
+    var z2 = -p.x * Math.sin(ry) + z1 * Math.cos(ry);
+    var fov = 500;
+    var scale = (fov / (fov + z2)) * opencgt3DZoom;
+    return { x: x2 * scale + opencgt3DCenter.x, y: y1 * scale + opencgt3DCenter.y, z: z2, scale: scale };
+  }
+
+  function draw() {
+    opencgt3DAnimId = requestAnimationFrame(draw);
+    t += 0.012;
+
+    if (opencgt3DAutoRotate) opencgt3DTargetRot.y += 0.0025;
+
+    opencgt3DRot.x += (opencgt3DTargetRot.x - opencgt3DRot.x) * 0.08;
+    opencgt3DRot.y += (opencgt3DTargetRot.y - opencgt3DRot.y) * 0.08;
+
+    // Update node positions with force-directed float
+    for (var i = 0; i < opencgt3DNodes.length; i++) {
+      var n = opencgt3DNodes[i];
+      var off = Math.sin(t * n.speed + n.phase) * 5;
+      var len = Math.sqrt(n.ox*n.ox + n.oy*n.oy + n.oz*n.oz);
+      n.x = n.ox + (n.ox / len) * off;
+      n.y = n.oy + (n.oy / len) * off;
+      n.z = n.oz + (n.oz / len) * off;
+    }
+
+    // Project all nodes
+    var projected = [];
+    for (var i = 0; i < opencgt3DNodes.length; i++) {
+      projected.push(project(opencgt3DNodes[i]));
+    }
+
+    var ctx = opencgt3DCtx;
+    var w = opencgt3DCanvas.width / dpr;
+    var h = opencgt3DCanvas.height / dpr;
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw faint outer sphere wireframe
+    ctx.strokeStyle = 'rgba(0,229,255,0.04)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    var equatorPoints = [];
+    for (var a = 0; a <= 64; a++) {
+      var ang = (a / 64) * Math.PI * 2;
+      var sp = project({ x: Math.cos(ang) * 130, y: 0, z: Math.sin(ang) * 130 });
+      equatorPoints.push(sp);
+    }
+    ctx.moveTo(equatorPoints[0].x, equatorPoints[0].y);
+    for (var a = 1; a < equatorPoints.length; a++) ctx.lineTo(equatorPoints[a].x, equatorPoints[a].y);
+    ctx.closePath();
+    ctx.stroke();
+
+    // Build draw list with z-depth
+    var drawList = [];
+    var coreP = project({ x: 0, y: 0, z: 0 });
+    drawList.push({ type: 'core', z: coreP.z, p: coreP });
+
+    for (var c = 0; c < opencgt3DConnections.length; c++) {
+      var conn = opencgt3DConnections[c];
+      var p1, p2;
+      if (conn.type === 'center') { p1 = coreP; p2 = projected[conn.b]; }
+      else { p1 = projected[conn.a]; p2 = projected[conn.b]; }
+      drawList.push({ type: 'line', z: Math.max(p1.z, p2.z), p1: p1, p2: p2, conn: conn });
+    }
+
+    for (var i = 0; i < projected.length; i++) {
+      drawList.push({ type: 'node', z: projected[i].z, p: projected[i], node: opencgt3DNodes[i] });
+    }
+
+    drawList.sort(function(a, b) { return a.z - b.z; });
+
+    for (var i = 0; i < drawList.length; i++) {
+      var item = drawList[i];
+      if (item.type === 'core') {
+        var r = 14 * item.p.scale;
+        var grd = ctx.createRadialGradient(item.p.x, item.p.y, 0, item.p.x, item.p.y, r * 2);
+        grd.addColorStop(0, 'rgba(0,229,255,0.6)');
+        grd.addColorStop(0.5, 'rgba(0,229,255,0.15)');
+        grd.addColorStop(1, 'rgba(0,229,255,0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(0,229,255,0.9)';
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = 'bold ' + Math.max(8, 10 * item.p.scale) + 'px Microsoft YaHei, sans-serif';
+        ctx.fillStyle = 'rgba(0,229,255,0.9)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AI', item.p.x, item.p.y);
+      } else if (item.type === 'line') {
+        var alpha = Math.max(0.05, 0.35 * ((item.p1.z + item.p2.z + 260) / 520));
+        if (item.conn.type === 'center') {
+          var grd = ctx.createLinearGradient(item.p1.x, item.p1.y, item.p2.x, item.p2.y);
+          grd.addColorStop(0, 'rgba(0,229,255,' + (alpha * 0.4) + ')');
+          grd.addColorStop(1, 'rgba(0,229,255,' + alpha + ')');
+          ctx.strokeStyle = grd;
+        } else {
+          ctx.strokeStyle = 'rgba(0,150,170,' + (alpha * 0.5) + ')';
+        }
+        ctx.lineWidth = 0.6 * Math.min(item.p1.scale, item.p2.scale);
+        ctx.beginPath();
+        ctx.moveTo(item.p1.x, item.p1.y);
+        ctx.lineTo(item.p2.x, item.p2.y);
+        ctx.stroke();
+      } else if (item.type === 'node') {
+        var n = item.node;
+        var r = n.size * item.p.scale;
+        var alpha = Math.max(0.35, 0.85 * ((item.p.z + 130) / 260));
+        var color = n.highlight ? '0,229,255' : '0,131,143';
+        var grd = ctx.createRadialGradient(item.p.x, item.p.y, 0, item.p.x, item.p.y, r * 2.5);
+        grd.addColorStop(0, 'rgba(' + color + ',' + (alpha * 0.5) + ')');
+        grd.addColorStop(0.4, 'rgba(' + color + ',' + (alpha * 0.15) + ')');
+        grd.addColorStop(1, 'rgba(' + color + ',0)');
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r * 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(' + color + ',' + alpha + ')';
+        ctx.beginPath();
+        ctx.arc(item.p.x, item.p.y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+
+  draw();
 }
 
 function showPartnerInfo(idx) {
