@@ -6805,7 +6805,17 @@ const PRODUCTS = [
   {name:'CAR-T治疗血液肿瘤(桥接)', generic:'CAR-T细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'血液肿瘤', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价30-50万/次，桥接治疗。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
   {name:'MSC治疗系统性红斑狼疮', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'系统性红斑狼疮', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价10万/疗程，静脉输注。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
   {name:'MSC治疗脊髓损伤', generic:'间充质干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'脊髓损伤', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价18万/疗程，局部注射。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
-  {name:'NSC治疗帕金森病', generic:'神经干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'帕金森病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价25万/疗程，研究阶段。非NMPA药品审批，为先行区特许政策下院内技术服务。'}
+  {name:'NSC治疗帕金森病', generic:'神经干细胞', company:'海南博鳌乐城先行区', approved:'乐城特许·已定价', indication:'帕金森病', cellType:'特许转化', cellColor:'#FF8F00', region:'中国海南', notes:'定价25万/疗程，研究阶段。非NMPA药品审批，为先行区特许政策下院内技术服务。'},
+  // --- 2025年新增获批产品（按官方公告）---
+  // 基因修饰HSC
+  {name:'Waskyra (etuvetidigene autotemcel)', generic:'慢病毒载体WAS基因修饰自体CD34+造血干细胞', company:'Fondazione Telethon ETS (意大利)', approved:'FDA 2025-12-09', indication:'6月龄及以上Wiskott-Aldrich综合征(WAS)患者,需HSCT但无合适HLA匹配相关供者', cellType:'基因修饰HSC', cellColor:'#534AB7', region:'美国/欧盟', notes:'全球首个WAS基因治疗产品,也是首个由非营利基金会研发并获批的CGT产品。最小推荐剂量7×10⁶ CD34+细胞/kg。临床试验NCT01515462/NCT03837483。EMA 2026-01-16批准。'},
+  // 其他细胞治疗(封装细胞+脐血扩增)
+  {name:'Encelto (revakinagene taroretcel-lwey)', generic:'封装细胞疗法-异体RPE细胞持续释放rhCNTF', company:'Neurotech Pharmaceuticals', approved:'FDA 2025-03-05', indication:'成人2型黄斑毛细血管扩张症(MacTel 2)', cellType:'封装细胞疗法', cellColor:'#185FA5', region:'美国', notes:'全球首个MacTel 2治疗产品。每个植入物含20万-44万个表达rhCNTF的异体RPE细胞,玻璃体内植入,半透膜持续释放CNTF。两项III期研究显示24个月内显著延缓黄斑光感受器丢失。临床试验NCT01327911/01949324/03071965/03316300/03319849/04729972。J-Code J3403(2025-10-01生效)。'},
+  {name:'Zemcelpro (dorocubicel + 非扩增CD34-细胞)', generic:'UM171扩增脐带血CD34+细胞 + 非扩增CD34-细胞', company:'Cordex Biologics International (爱尔兰)', approved:'EMA 2025-08-25 (条件批准)', indication:'需异基因造血干细胞移植但无合适供者的成人血液恶性肿瘤', cellType:'脐带血干细胞', cellColor:'#185FA5', region:'欧盟', notes:'全球首个EMA批准的PRIME通道脐血干细胞扩增产品。UM171扩增CD34+细胞(中位20天中性粒细胞植入,68%患者中位40天血小板植入)。欧盟每年>1万例患者适用。已被授予Orphan Drug + PRIME + RMAT资格。'},
+  // 基因治疗(体外/免疫/鞘内AAV)
+  {name:'Zevaskyn (prademagene zamikeracel)', generic:'COL7A1基因矫正自体角质形成细胞片', company:'Abeona Therapeutics', approved:'FDA 2025-04-28', indication:'成人及儿童隐性营养不良型大疱性表皮松解症(RDEB)创面', cellType:'基因治疗(体外)', cellColor:'#6A1B9A', region:'美国', notes:'全球首个也是唯一一个FDA批准的RDEB单次应用疗法,自体细胞片+体外慢病毒COL7A1基因矫正+创面移植。III期VIITAL研究(NCT04227106, n=11, 43个创面):81%创面6个月≥50%愈合 vs 16%对照(P<0.0001);疼痛显著下降。一次性定价310万美元。'},
+  {name:'Papzimeos (zopapogene imadenovec-drba)', generic:'非复制型腺病毒载体-HPV 6/11融合抗原免疫疗法', company:'Precigen', approved:'FDA 2025-08-14', indication:'成人复发性呼吸道乳头状瘤病(RRP)', cellType:'基因治疗(免疫)', cellColor:'#6A1B9A', region:'美国', notes:'全球首个FDA批准的RRP治疗产品。12周内4次皮下注射,激活针对HPV 6/11感染细胞的T细胞免疫。关键试验:51.4%(18/35)患者12个月内免手术完全缓解;15/18(83%)中位36个月仍持续缓解。已被授予Orphan Drug + Breakthrough Therapy。'},
+  {name:'Itvisma (onasemnogene abeparvovec-brve)', generic:'AAV9-SMN1基因(鞘内注射剂型)', company:'Novartis Gene Therapies', approved:'FDA 2025-11-24', indication:'≥2岁确诊SMN1基因突变的脊髓性肌萎缩症(SMA)', cellType:'基因治疗(鞘内AAV)', cellColor:'#6A1B9A', region:'美国', notes:'Zolgensma鞘内剂型,固定剂量(不按体重),一次性鞘内输注,直接递送SMN1基因至运动神经元。III期STEER研究(NCT05089656, n=126):HFMSE评分2.39分改善 vs 假手术0.51分(组间差1.88, P=0.0074);IIIb期STRENGTH研究证实既往治疗者运动功能稳定。WAC价259万美元。已被授予Fast Track + Breakthrough Therapy + Priority Review + Orphan Drug。'}
 ];
 
 // === Section data: Editor Picks ===
