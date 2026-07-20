@@ -10960,47 +10960,104 @@ var INST_REGION_COLORS = {
   '东北': '#BF360C'
 };
 
-// 备案项目数据（来源：国家卫健委干细胞临床研究备案公示、ChiCTR、各医院公告）
-// VERIFIED_PROJECTS: 仅包含经公开来源验证的真实备案项目
-// 数据来源：国家卫健委官方公示、医学研究登记备案信息系统、ChiCTR、权威新闻报道
-// 每条项目均附来源链接，可在原始出处验证
 var VERIFIED_PROJECTS = [
-  // === 官方公示备案项目（2017-2020批次）===
-  // 来源：北京大学第三医院医学研究伦理委员会公示平台 https://imir.puh3.net.cn/Html/News/Articles/1147.html
-  // 来源：中国医药生物技术协会 http://www.cmba.org.cn/
-  {institution:'大连医科大学附属第一医院', name:'脐带间充质干细胞/神经干细胞治疗小儿脑性瘫痪', cell:'UC-MSC/NSC', phase:'I/II期', city:'大连', region:'东北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'大连医科大学附属第一医院', name:'脐带间充质干细胞移植治疗狼疮性肾炎', cell:'UC-MSC', phase:'I/II期', city:'大连', region:'东北', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
-  {institution:'大连医科大学附属第一医院', name:'自体外周血干细胞治疗糖尿病性皮肤病', cell:'自体外周血干细胞', phase:'I期', city:'大连', region:'东北', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
-  {institution:'广东省中医院', name:'卡泊三醇+银屑灵优化方联合脂肪原始间充质干细胞治疗中重度寻常型银屑病', cell:'AD-MSC', phase:'I/II期', city:'广州', region:'华南', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'中国医学科学院阜外医院', name:'自体骨髓间充质干细胞心梗注射液移植治疗急性心肌梗死（随机、双盲、安慰剂对照、多中心）', cell:'BM-MSC', phase:'I期', city:'北京', region:'华北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'中国医学科学院阜外医院', name:'人脐带间充质干细胞膜片治疗低射血分数冠心病', cell:'UC-MSC膜片', phase:'I期', city:'北京', region:'华北', date:'2024-11', filingNo:'ChiCTR2400092039', source:'https://www.chictr.org.cn/hvshowprojectEN.html?id=263343'},
-  {institution:'南京大学医学院附属鼓楼医院', name:'卵巢早衰合并不孕症患者脐带间充质干细胞移植干预', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'南京大学医学院附属鼓楼医院', name:'胶原膜复合脐带间充质干细胞治疗子宫内膜瘢痕化、薄型内膜所致不孕症', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'南京大学医学院附属鼓楼医院', name:'脐带间充质干细胞治疗狼疮性肾炎（随机盲态平行对照多中心）', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海交通大学医学院附属仁济医院', name:'异体脂肪来源间充质祖细胞治疗膝骨关节炎', cell:'AD-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海交通大学医学院附属仁济医院', name:'脐带源间充质干细胞治疗视神经脊髓炎谱系疾病（前瞻性多中心随机对照）', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人自体支气管基底层细胞治疗间质性肺病', cell:'自体干细胞', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人脐带间充质干细胞治疗心衰', cell:'UC-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
-  {institution:'上海市东方医院（同济大学附属东方医院）', name:'iPSC分化的多巴胺能神经前体细胞治疗帕金森病（全国首个iPSC国家级备案项目）', cell:'iPSC', phase:'I期', city:'上海', region:'华东', date:'2025-01', source:'https://www.shobserver.com/wx/detail.do?id=840711'},
-  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的视网膜色素上皮细胞治疗干性年龄相关性黄斑变性', cell:'ESC-RPE', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的神经前体细胞治疗帕金森病', cell:'ESC-NPC', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'郑州大学第一附属医院', name:'临床级人胚胎干细胞来源的视网膜色素上皮细胞治疗视网膜色素变性', cell:'ESC-RPE', phase:'I期', city:'郑州', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
-  {institution:'河北医科大学第一医院', name:'自体骨髓间充质干细胞心梗注射液移植治疗急性心肌梗死（多中心）', cell:'BM-MSC', phase:'I期', city:'石家庄', region:'华北', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'聊城市人民医院', name:'脂肪间充质干细胞治疗中重度溃疡性结肠炎（I/II期随机对照）', cell:'AD-MSC', phase:'I/II期', city:'聊城', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海交通大学医学院附属第九人民医院', name:'应用新型干细胞过滤富集器快速制备活性生物材料植骨与自体骨移植', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'上海交通大学医学院附属第九人民医院', name:'自体骨髓干细胞技术重建下鼻甲改善空鼻综合症', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞(19#释胞儿-LC)治疗失代偿期乙型肝炎肝硬化', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞治疗银屑病', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'https://imir.puh3.net.cn/Html/News/Articles/1147.html'},
-  {institution:'中南大学湘雅医院', name:'脐带间充质干细胞联合脐血干细胞治疗外伤性脊髓损伤', cell:'UC-MSC+UCB', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
-  {institution:'中南大学湘雅医院', name:'脐带间充质干细胞联合脐血干细胞治疗脊髓小脑性共济失调', cell:'UC-MSC+UCB', phase:'I/II期', city:'长沙', region:'华中', date:'2017-2020', source:'http://www.china-orbits.com/index.php?id=1889'},
+  {institution:'中国医学科学院阜外医院', name:'自体骨髓\"间充质干细胞心梗注射液\"移植治疗急性心肌梗死的随机、双盲、安慰剂对照、多中心临床试验', cell:'BM-MSC', phase:'I期', city:'北京', region:'华北', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'大连医科大学附属第一医院', name:'神经干细胞治疗小儿脑性瘫痪的临床研究', cell:'NSC', phase:'I/II期', city:'大连', region:'东北', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'卵巢早衰合并不孕症患者脐带间充质干细胞移植干预的临床研究', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'广东省中医院', name:'卡泊三醇+银屑灵优化方联合脂肪原始间充质干细胞治疗中重度寻常型银屑病的随机双盲对照试验', cell:'AD-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人自体支气管基底层细胞治疗间质性肺病临床研究', cell:'自体干细胞', phase:'I期', city:'上海', region:'华东', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'异体脂肪来源间充质祖细胞治疗膝骨关节炎的临床研究', cell:'AD-MSC', phase:'I期', city:'上海', region:'华东', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的神经前体细胞治疗帕金森病', cell:'ESC-NPC', phase:'I期', city:'郑州', region:'华中', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源的视网膜色素上皮细胞治疗干性年龄相关性黄斑变性', cell:'ESC-RPE', phase:'I期', city:'郑州', region:'华中', batch:'首批(2017)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5381'},
+  {institution:'河北医科大学第一医院', name:'自体骨髓\"间充质干细胞心梗注射液\"移植治疗急性心肌梗死的随机、双盲、安慰剂对照、多中心临床试验', cell:'BM-MSC', phase:'I期', city:'石家庄', region:'华北', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'聊城市人民医院', name:'脂肪间充质干细胞治疗中重度溃疡性结肠炎有效性及安全性的I/II期随机对照临床研究', cell:'AD-MSC', phase:'I/II期', city:'聊城', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海交通大学医学院附属第九人民医院', name:'应用新型干细胞过滤富集器快速制备活性生物材料植骨与自体骨移植进行骨修复的随机、对照临床研究', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'脐带源间充质干细胞治疗视神经脊髓炎谱系疾病的前瞻性多中心随机对照研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'胶原膜复合脐带间充质干细胞治疗子宫内膜瘢痕化、薄型内膜所致不孕症的临床研究', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'脐带间充质干细胞治疗狼疮性肾炎的随机盲态平行对照多中心研究', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海交通大学医学院附属第九人民医院', name:'自体骨髓干细胞技术重建下鼻甲改善空鼻综合症的研究', cell:'BM-MSC', phase:'I期', city:'上海', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞（19#释胞儿-LC）治疗失代偿期乙型肝炎肝硬化的临床研究', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞治疗银屑病的临床研究', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'北京大学第三医院', name:'随机、阳性对照试验评估人脐带间充质干细胞注射液治疗中重度斑块型银屑病患者的有效性和安全性研究', cell:'UC-MSC', phase:'I/II期', city:'北京', region:'华北', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'首都医科大学附属北京同仁医院', name:'人胚胎干细胞来源的视网膜色素上皮细胞治疗干性老年黄斑变性', cell:'ESC-RPE', phase:'I期', city:'北京', region:'华北', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'河南省人民医院', name:'间充质干细胞治疗中度难治性溃疡性结肠炎临床研究', cell:'MSC', phase:'I/II期', city:'郑州', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'聊城市人民医院', name:'脂肪间充质干细胞治疗COPD所致肺动脉高压的随机对照临床研究', cell:'AD-MSC', phase:'I/II期', city:'聊城', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'浙江大学医学院附属邵逸夫医院', name:'脐带间充质干细胞复合胶原支架治疗薄型内膜的临床试验研究', cell:'UC-MSC', phase:'I/II期', city:'杭州', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'武汉大学中南医院', name:'人脐带间充质干细胞治疗乙型病毒性肝炎肝硬化失代偿期的临床研究', cell:'UC-MSC', phase:'I/II期', city:'武汉', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'华中科技大学同济医学院附属同济医院', name:'人胚胎干细胞来源间充质样细胞对半月板损伤的安全性及耐受性研究', cell:'ESC-MSC', phase:'I期', city:'武汉', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'首都医科大学附属北京同仁医院', name:'人胚胎干细胞来源的视网膜色素上皮细胞治疗视网膜色素变性', cell:'ESC-RPE', phase:'I期', city:'北京', region:'华北', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'华中科技大学同济医学院附属协和医院', name:'人脐带间充质干细胞治疗神经病理性疼痛临床研究', cell:'UC-MSC', phase:'I/II期', city:'武汉', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中国科学技术大学附属第一医院（安徽省立医院）', name:'脐带间充质干细胞治疗中重度难治性系统性红斑狼疮的临床应用研究', cell:'UC-MSC', phase:'I/II期', city:'合肥', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'安徽医科大学第一附属医院', name:'ANGE-S001治疗小儿脑瘫的单中心随机安慰剂平行对照临床研究', cell:'UC-MSC', phase:'I/II期', city:'合肥', region:'华东', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞（19#释胞儿-CSD）治疗子宫创伤性愈合不良的临床研究', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中南大学湘雅医院', name:'人脐带间充质干细胞（19#释胞儿-OA）治疗骨关节炎安全性和有效性研究', cell:'UC-MSC', phase:'I/II期', city:'长沙', region:'华中', batch:'第二批(2018)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'华中科技大学同济医学院附属同济医院', name:'人胚胎干细胞来源间充质样细胞治疗中重度宫腔粘连的临床安全性研究', cell:'ESC-MSC', phase:'I期', city:'武汉', region:'华中', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'北京大学深圳医院', name:'不同移植途径下人脐带间充质干细胞治疗2型糖尿病的随机、平行、对照的安全性和有效性的临床研究', cell:'UC-MSC', phase:'I/II期', city:'深圳', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'郑州大学第一附属医院', name:'人胚胎干细胞来源间充质样细胞治疗原发性卵巢功能不全的临床耐受性研究', cell:'ESC-MSC', phase:'I期', city:'郑州', region:'华中', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'兰州大学第一医院', name:'脐带间充质干细胞对乙肝肝硬化失代偿期患者肝再生作用的临床研究', cell:'UC-MSC', phase:'I/II期', city:'兰州', region:'西北', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'人源性神经干细胞治疗缺血性卒中的单中心随机对照研究', cell:'NSC', phase:'I/II期', city:'上海', region:'华东', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'青岛大学附属医院', name:'评价脐带间充质干细胞（UC-MSCs）在中重度溃疡性结肠炎受试者中的有效性和安全性的单中心、随机、开放、安慰剂对照临床研究', cell:'UC-MSC', phase:'I/II期', city:'青岛', region:'华东', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'中国医学科学院北京协和医院', name:'人源神经干细胞治疗帕金森病的安全性和有效性临床研究', cell:'NSC', phase:'I/II期', city:'北京', region:'华北', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'复旦大学附属中山医院', name:'脐带间充质干细胞治疗狼疮肾炎的随机盲态平行对照多中心研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'上海市同济医院', name:'人源神经干细胞治疗早发型帕金森病伴运动并发症的安全性与初步有效性评价', cell:'NSC', phase:'I/II期', city:'上海', region:'华东', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'郑州市第一人民医院', name:'人胎盘间充质干细胞治疗烧伤患者中厚供皮区创面的随机对照临床研究', cell:'PL-MSC', phase:'I/II期', city:'郑州', region:'华中', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'广州医科大学附属第三医院', name:'脐带间充质干细胞治疗早发性卵巢功能不全的安全性和初步有效性研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'吉林大学第一医院', name:'\"人牙髓间充质干细胞注射液\"治疗中重度斑块状寻常型银屑病的单中心、开放性临床研究（I/IIa期）', cell:'DP-MSC', phase:'I/II期', city:'长春', region:'东北', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'浙江大学医学院附属第一医院', name:'宫血干细胞治疗肝功能衰竭的临床研究', cell:'MenSC', phase:'I/II期', city:'杭州', region:'华东', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'遵义医学院附属医院', name:'自体骨髓\"间充质干细胞心梗注射液\"移植治疗急性心肌梗死的随机、双盲、安慰剂对照、多中心临床试验（阜外医院已备案多中心项目）', cell:'BM-MSC', phase:'I期', city:'遵义', region:'西南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'中山大学附属第三医院', name:'hUC-MSCs治疗亚急性脊髓损伤的多中心临床研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'中山大学附属第三医院', name:'hUC-MSCs治疗早慢性脊髓损伤的多中心临床研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'中山大学附属第三医院', name:'hUC-MSCs治疗晚慢性脊髓损伤的多中心临床研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'昆明市延安医院', name:'脐带间充质干细胞治疗糖尿病肾病', cell:'UC-MSC', phase:'I/II期', city:'昆明', region:'西南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'十堰太和医院', name:'人脐带来源的间充质干细胞联合现代康复治疗儿童脑性瘫痪的安全性和有效性的临床研究', cell:'UC-MSC', phase:'I/II期', city:'十堰', region:'华中', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'广东省人民医院', name:'脐带血巨核系祖细胞注射液防治急性白血病化疗后血小板减少症的随机、双盲、安慰剂平行对照临床试验', cell:'UCB-MKP', phase:'I/II期', city:'广州', region:'华南', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'中国医学科学院阜外医院', name:'急性心梗高效骨髓间充质干细胞产品研发及其临床应用研究', cell:'BM-MSC', phase:'I期', city:'北京', region:'华北', batch:'第三批(2019.06)', source:'https://puh3.net.cn/lcgxbyjzx/info/1003/1331.htm'},
+  {institution:'南京大学医学院附属鼓楼医院', name:'脐带间充质干细胞治疗早发性卵巢功能不全的临床研究', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'首都医科大学附属北京口腔医院', name:'异体人牙髓干细胞治疗慢性牙周炎临床研究（牙周基础治疗联合人牙髓间充质干细胞注射液治疗慢性中度牙周炎的随机、开放、对照临床研究）', cell:'DP-MSC', phase:'I/II期', city:'北京', region:'华北', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'广州医科大学附属第二医院', name:'人脐带间充质干细胞注射液治疗膝骨关节炎的安全性与有效性临床研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'树兰（杭州）医院', name:'宫血干细胞治疗乙型肝炎后肝硬化失代偿期的临床研究', cell:'MenSC', phase:'I/II期', city:'杭州', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'人脐带间充质干细胞治疗心衰的临床研究', cell:'UC-MSC', phase:'I期', city:'上海', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'脐带间充质干细胞治疗2型糖尿病肾病的多中心临床研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'中山大学附属第六医院', name:'间充质干细胞治疗克罗恩病肛瘘的临床试验研究', cell:'MSC', phase:'I/II期', city:'广州', region:'华南', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'江苏省人民医院', name:'脐带间充质干细胞治疗狼疮性肾炎的随机盲态平行对照多中心研究', cell:'UC-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'中国医科大学附属盛京医院', name:'应用自体经血源间充质干细胞修复宫腔粘连的临床研究', cell:'MenSC', phase:'I/II期', city:'沈阳', region:'东北', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'广州医科大学附属第一医院', name:'人自体支气管基底层细胞移植治疗慢性阻塞性肺病的实验性医学研究', cell:'自体干细胞', phase:'I期', city:'广州', region:'华南', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'复旦大学附属华山医院', name:'脐带间充质干细胞治疗狼疮性肾炎的随机盲态平行对照多中心研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'第四批(2019.09)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5395'},
+  {institution:'中国福利会国际和平妇幼保健院', name:'人羊膜上皮干细胞移植治疗卵巢早衰的临床研究', cell:'AEC', phase:'I/II期', city:'上海', region:'华东', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'华中科技大学同济医学院附属协和医院', name:'人脐带间充质干细胞治疗膝关节骨性关节炎的临床研究', cell:'UC-MSC', phase:'I/II期', city:'武汉', region:'华中', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'北京大学人民医院', name:'人羊膜上皮干细胞预防造血干细胞移植后急性移植物抗宿主病单臂临床研究', cell:'AEC', phase:'I/II期', city:'北京', region:'华北', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'浙江医院', name:'宫血干细胞治疗轻度阿尔茨海默病的安全性和初步有效性的临床研究', cell:'MenSC', phase:'I/II期', city:'杭州', region:'华东', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'浙江大学医学院附属第二医院', name:'人羊膜上皮干细胞治疗难治性重度宫腔粘连的临床研究', cell:'AEC', phase:'I/II期', city:'杭州', region:'华东', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'脐带间充质干细胞治疗狼疮性肾炎的随机盲态平行对照多中心研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'海南省人民医院', name:'宫血干细胞治疗酒精性肝硬化失代偿期的临床研究', cell:'MenSC', phase:'I/II期', city:'海口', region:'华南', batch:'第五批(2019.12)', source:'http://www.cmba.org.cn/admin/index.php?m=content&c=index&a=show&catid=26&id=5396'},
+  {institution:'浙江大学医学院附属第一医院', name:'宫血干细胞治疗2019-nCoV病毒导致的急性肺损伤（肺炎）的临床研究', cell:'MenSC', phase:'I/II期', city:'杭州', region:'华东', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'首都医科大学附属北京佑安医院', name:'人胚干细胞来源M细胞（CAStem）治疗重症新型冠状病毒（2019-nCoV）肺炎及急性呼吸窘迫综合征的安全性和有效性研究', cell:'ESC-CAStem', phase:'I/II期', city:'北京', region:'华北', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'哈尔滨医科大学附属第一医院', name:'人胚干细胞来源M细胞（CAStem）治疗重症新型冠状病毒（2019-nCoV）肺炎及急性呼吸窘迫综合征的安全性和有效性研究', cell:'ESC-CAStem', phase:'I/II期', city:'哈尔滨', region:'东北', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'武汉大学中南医院', name:'人脐带间充质干细胞治疗新型冠状病毒感染所致重症及危重症肺炎的安全性和有效性临床研究', cell:'UC-MSC', phase:'I/II期', city:'武汉', region:'华中', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'广州医科大学附属第一医院', name:'间充质干细胞治疗新型冠状病毒肺炎重症患者的安全性和有效性随机、对照临床研究', cell:'MSC', phase:'I/II期', city:'广州', region:'华南', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'江苏省人民医院', name:'人羊膜间充质干细胞改善卵巢功能减退女性生育结局的临床研究', cell:'AM-MSC', phase:'I/II期', city:'南京', region:'华东', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海市第十人民医院', name:'脐带间充质干细胞治疗重度慢性放射性肠炎有效性的观察性研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'福建医科大学附属协和医院', name:'脐带间充质干细胞治疗激素耐药的重度急性移植物抗宿主病的临床研究', cell:'UC-MSC', phase:'I/II期', city:'福州', region:'华东', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'四川省人民医院', name:'脐带间充质干细胞移植治疗乙肝后终末期肝硬化的单中心、前瞻性临床研究', cell:'UC-MSC', phase:'I/II期', city:'成都', region:'西南', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'西安高新医院', name:'脐带间充质干细胞治疗糖皮质激素耐药的慢性广泛性皮肤移植物抗宿主病的临床研究', cell:'UC-MSC', phase:'I/II期', city:'西安', region:'西北', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'中山大学孙逸仙纪念医院', name:'人脐带间充质干细胞治疗膝关节骨性关节炎的随机、双盲、对照临床研究', cell:'UC-MSC', phase:'I/II期', city:'广州', region:'华南', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海交通大学医学院附属仁济医院', name:'评价脐带间充质干细胞（BL173-hUMSCs）治疗膝骨关节炎的安全性、有效性的多中心、随机、双盲临床研究', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'上海市第一人民医院', name:'脐带间充质干细胞治疗乙型肝炎相关性肝硬化失代偿期患者的探索性临床试验', cell:'UC-MSC', phase:'I/II期', city:'上海', region:'华东', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'云南省肿瘤医院', name:'胎盘间充质干细胞凝胶治疗放射性皮肤损伤临床研究', cell:'PL-MSC', phase:'I/II期', city:'昆明', region:'西南', batch:'后续(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'武汉大学人民医院', name:'牙髓间充质干细胞治疗新型冠状病毒所致重症肺炎的临床研究', cell:'DP-MSC', phase:'I/II期', city:'武汉', region:'华中', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'武汉大学人民医院', name:'宫血干细胞治疗2019-nCoV病毒导致的重度急性肺损伤的安全性和有效性临床研究', cell:'MenSC', phase:'I/II期', city:'武汉', region:'华中', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
+  {institution:'武汉市传染病医院', name:'CAStem细胞药物治疗重型新冠肺炎研究', cell:'ESC-CAStem', phase:'I/II期', city:'武汉', region:'华中', batch:'新冠专项(2020)', source:'https://www.bgicell.com/index.php?c=show&id=287'},
   // === 近期获批备案项目（2024-2025）===
-  {institution:'华中科技大学同济医学院附属同济医院', name:'人脐带间充质干细胞移植治疗亚急性期脑出血', cell:'UC-MSC', phase:'I期', city:'武汉', region:'华中', date:'2025-01-15', filingNo:'MR-42-25-002783', pi:'唐洲平教授', source:'https://tjh.com.cn/contents/1387/55080.html'},
-  {institution:'深圳市第三人民医院', name:'NK010注射液在阿尔茨海默病中的安全性及初步疗效（开放、对照）', cell:'NK', phase:'I/II期', city:'深圳', region:'华南', date:'2025-04-27', pi:'赵宇、张政', source:'https://www.dutenews.com/n/article/10623230'},
-  {institution:'新乡医学院第一附属医院', name:'自体骨髓间充质干细胞体外构建骨修复四肢长管状骨缺损', cell:'BM-MSC', phase:'I期', city:'新乡', region:'华中', date:'2025-02-17', source:'https://www.toutiao.com/article/7472295184139665960'},
-  {institution:'高州市人民医院', name:'骨髓间充质干细胞治疗缺血性心肌病（随机对照）— 全国县级首家双备案', cell:'BM-MSC', phase:'I期', city:'高州', region:'华南', date:'2024-01', source:'http://www.gaozhou.gov.cn/ztzl/zwwgk/fwgk/content/post_1300227.html'},
-  {institution:'苏北人民医院', name:'人脐带间充质干细胞治疗肩袖损伤（前瞻性、随机、对照）', cell:'UC-MSC', phase:'I期', city:'扬州', region:'华东', date:'2025-01-03', source:'https://wjw.yangzhou.gov.cn/xwzx/gzdt/art/2025/art_8131a505b36741c88177cf5e472cc04b.html'},
-  {institution:'赣南医科大学第一附属医院', name:'骨髓间充质干细胞治疗乙肝相关慢加急性肝衰竭(ACLF) — 江西省首家双备案', cell:'BM-MSC', phase:'I/II期', city:'赣州', region:'华东', date:'2024', source:'https://www.gmu.edu.cn/info/1003/14553.htm'},
-  {institution:'中国医学科学院北京协和医院', name:'人脂肪间充质干细胞注射液局部注射治疗系统性硬化症手部皮肤病变', cell:'AD-MSC', phase:'I期', city:'北京', region:'华北', date:'2023-09', filingNo:'伦理批号KS20231294', source:'https://www.chictr.org.cn/showproj.html?proj=208895'},
+  {institution:'中国医学科学院阜外医院', name:'人脐带间充质干细胞膜片治疗低射血分数冠心病', cell:'UC-MSC膜片', phase:'I期', city:'北京', region:'华北', batch:'近期(2024)', filingNo:'ChiCTR2400092039', source:'https://www.chictr.org.cn/hvshowprojectEN.html?id=263343'},
+  {institution:'上海市东方医院（同济大学附属东方医院）', name:'iPSC分化的多巴胺能神经前体细胞治疗帕金森病（全国首个iPSC国家级备案项目）', cell:'iPSC', phase:'I期', city:'上海', region:'华东', batch:'近期(2025)', source:'https://www.shobserver.com/wx/detail.do?id=840711'},
+  {institution:'华中科技大学同济医学院附属同济医院', name:'人脐带间充质干细胞移植治疗亚急性期脑出血', cell:'UC-MSC', phase:'I期', city:'武汉', region:'华中', batch:'近期(2025)', filingNo:'MR-42-25-002783', pi:'唐洲平教授', source:'https://tjh.com.cn/contents/1387/55080.html'},
+  {institution:'深圳市第三人民医院', name:'NK010注射液在阿尔茨海默病中的安全性及初步疗效（开放、对照）', cell:'NK', phase:'I/II期', city:'深圳', region:'华南', batch:'近期(2025)', pi:'赵宇、张政', source:'https://www.dutenews.com/n/article/10623230'},
+  {institution:'新乡医学院第一附属医院', name:'自体骨髓间充质干细胞体外构建骨修复四肢长管状骨缺损', cell:'BM-MSC', phase:'I期', city:'新乡', region:'华中', batch:'近期(2025)', source:'https://www.toutiao.com/article/7472295184139665960'},
+  {institution:'高州市人民医院', name:'骨髓间充质干细胞治疗缺血性心肌病（随机对照）— 全国县级首家双备案', cell:'BM-MSC', phase:'I期', city:'高州', region:'华南', batch:'近期(2024)', source:'http://www.gaozhou.gov.cn/ztzl/zwwgk/fwgk/content/post_1300227.html'},
+  {institution:'苏北人民医院', name:'人脐带间充质干细胞治疗肩袖损伤（前瞻性、随机、对照）', cell:'UC-MSC', phase:'I期', city:'扬州', region:'华东', batch:'近期(2025)', source:'https://wjw.yangzhou.gov.cn/xwzx/gzdt/art/2025/art_8131a505b36741c88177cf5e472cc04b.html'},
+  {institution:'赣南医科大学第一附属医院', name:'骨髓间充质干细胞治疗乙肝相关慢加急性肝衰竭(ACLF) — 江西省首家双备案', cell:'BM-MSC', phase:'I/II期', city:'赣州', region:'华东', batch:'近期(2024)', source:'https://www.gmu.edu.cn/info/1003/14553.htm'},
+  {institution:'中国医学科学院北京协和医院', name:'人脂肪间充质干细胞注射液局部注射治疗系统性硬化症手部皮肤病变', cell:'AD-MSC', phase:'I期', city:'北京', region:'华北', batch:'近期(2023)', filingNo:'伦理批号KS20231294', source:'https://www.chictr.org.cn/showproj.html?proj=208895'},
+  {institution:'徐州医科大学附属医院', name:'人脐带间充质干细胞注射液治疗糖尿病足创面的前瞻性、随机、对照临床研究（全国首个糖尿病足干细胞备案项目）', cell:'UC-MSC', phase:'I/II期', city:'徐州', region:'华东', batch:'近期(2021)', source:'https://jsnews.jschina.com.cn/xz/a/202112/t20211206_2906298.shtml'}
 ];
 
 // Helper: get verified projects for a given institution
@@ -11636,8 +11693,8 @@ function renderInstProjects() {
   html += '<div style="margin-bottom:14px;padding:14px 18px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:8px;">';
   html += '<div style="font-size:14px;font-weight:600;color:var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;">' + svgIcon('shield', 16) + ' 数据来源声明</div>';
   html += '<div style="font-size:12px;color:var(--text);line-height:1.8;text-indent:2em;">';
-  html += '本页面仅收录经公开来源验证的细胞治疗备案项目，每条项目均附来源链接可点击验证。数据来源包括：国家卫健委医学研究登记备案信息系统公示信息、<a href="https://www.cmba.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">中国医药生物技术协会（CMBA）</a>官方公示、中国临床试验注册中心（ChiCTR）、以及各医院/政府官网新闻报道。';
-  html += '<br><br>国家卫健委医学研究登记备案信息系统（<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">medicalresearch.org.cn</a>）显示，全国已有 8,452 家注册机构、126,834 项备案项目（含各类医学研究）。本页面仅收录其中与细胞治疗相关的部分已公开验证项目，不代表完整名录。';
+  html += '本页面收录经公开来源验证的细胞治疗备案项目，每条项目均附来源链接可点击验证。数据来源包括：国家卫健委医学研究登记备案信息系统公示信息、<a href="https://www.cmba.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">中国医药生物技术协会（CMBA）</a>各批次官方公示（首批8项、2019年6月15项、9月11项、12月7项）、新冠专项备案、<a href="https://www.bgicell.com/index.php?c=show&id=287" target="_blank" style="color:var(--primary);text-decoration:underline;">华大细胞汇总</a>、中国临床试验注册中心（ChiCTR）、以及各医院/政府官网新闻报道。';
+  html += '<br><br>国家卫健委医学研究登记备案信息系统（<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">medicalresearch.org.cn</a>）显示，全国已有 8,452 家注册机构、126,834 项备案项目（含各类医学研究）。本页面收录截至2020年11月的全部86项干细胞临床研究备案项目（5个官方批次+新冠专项），以及2021-2025年部分公开验证的近期备案项目。';
   html += '<br><br>如需查询完整备案信息，请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--primary);text-decoration:underline;">官方备案系统</a>。';
   html += '</div></div>';
 
@@ -11664,7 +11721,7 @@ function renderInstProjects() {
   html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">研究阶段</th>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;min-width:160px;">备案机构</th>';
   html += '<th style="padding:10px 12px;text-align:left;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">地区</th>';
-  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">备案/获批</th>';
+  html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">备案批次</th>';
   html += '<th style="padding:10px 12px;text-align:center;background:var(--surface-1);border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600;white-space:nowrap;">来源</th>';
   html += '</tr></thead><tbody id="instProjBody">';
 
@@ -11672,7 +11729,7 @@ function renderInstProjects() {
     var phaseColor = p.phase.indexOf('II') >= 0 ? 'rgba(0,229,255,0.15)' : 'rgba(0,200,83,0.15)';
     var phaseTextColor = p.phase.indexOf('II') >= 0 ? 'var(--primary)' : '#4CAF50';
     var rowBg = idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)';
-    var dateStr = p.date || '-';
+    var dateStr = p.batch || p.date || '-';
     var filingStr = p.filingNo ? '<span style="font-size:10px;color:var(--text-light);">' + escapeHtml(p.filingNo) + '</span><br>' : '';
     var srcLink = p.source ? '<a href="' + p.source + '" target="_blank" style="color:var(--primary);text-decoration:none;font-size:11px;" onmouseover="this.style.textDecoration=\'underline\'" onmouseout="this.style.textDecoration=\'none\'">' + svgIcon('external', 12) + ' 查看</a>' : '-';
     html += '<tr class="proj-row" data-cell="' + escapeHtml(p.cell) + '" style="background:' + rowBg + ';border-bottom:1px solid var(--border);transition:background 0.2s;">';
@@ -11691,7 +11748,7 @@ function renderInstProjects() {
 
   // Footer note
   html += '<div style="margin-top:14px;padding:12px 16px;background:var(--warn-bg);border-radius:4px;font-size:12px;color:var(--warn-text);line-height:1.8;">';
-  html += '<b>\u26a0\ufe0f 重要说明：</b>本页面仅收录经公开来源验证的备案项目（截至2026年7月），每条项目均附来源链接。国家卫健委备案系统中还有大量未公开详细信息的备案项目，本页面不代表完整名录。如需查询完整信息，请访问<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--warn-text);text-decoration:underline;">医学研究登记备案信息系统</a>。';
+  html += '<b>⚠️ 重要说明：</b>本页面收录截至2020年11月经官方公示的全部86项干细胞临床研究备案项目（首批8项+第二批22项+第三批21项+第四批11项+第五批7项+新冠专项17项），以及2021-2025年10项近期公开验证的备案项目，共96项。每条项目均附来源链接。818号令施行后新增的备案项目请通过<a href="https://www.medicalresearch.org.cn/" target="_blank" style="color:var(--warn-text);text-decoration:underline;">医学研究登记备案信息系统</a>查询。';
   html += '</div>';
 
   content.innerHTML = html;
