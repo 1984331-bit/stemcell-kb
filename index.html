@@ -10211,10 +10211,12 @@ const CONFERENCE_EVENTS = [
 ];
 
 const INDUSTRY_BOOKS = [
+  // 学术专著
+  {title:'Advancement in CAR T-Cell Therapy in Tumors: Current Challenges and Future Directions', author:'Umesh Kumar, Anil Kumar, Deepak Parashar (eds.)', desc:'Springer 2026年1月出版的CAR-T学术专著（精装+电子+软精装三版，XIX+332页/12章）。聚焦实体瘤CAR-T前沿：①CAR-T历史演化 ②基本原理与机制 ③载体设计与基因编辑 ④增殖/持久性/记忆优化 ⑤血液瘤成功经验 ⑥CRS/ICANS不良反应管理 ⑦实体瘤微环境克服策略 ⑧制造工艺与监管路径 ⑨与免疫疗法联用（PD-1抑制剂、双特异性、溶瘤病毒） ⑩下一代CAR/合成生物学/逻辑门控/即用型CAR-T ⑪全球监管全景（FDA/EMA/NMPA） ⑫个性化CAR-T与未来方向。编辑团队跨印美两国（印度昌迪加尔大学+印度国家免疫学研究所+美国威斯康辛医学院），代表亚洲CAR-T实体瘤研究的最新进展。', publisher:'Springer', year:'2026', pages:'XIX+332 页/12 章', cat:'学术专著', coverType:'image', cover:'assets/cart-cell-tumors-2026.jpg', url:'https://link.springer.com/book/10.1007/978-981-95-3628-3'},
   // 原创专著
   {title:'干细胞临床应用手册', author:'本平台编著', desc:'24章系统覆盖11大生理系统145+适应症，2058篇临床文献底稿。从MSC基础生物学到临床转化全链条，含ISCT 2025新标准、818号令解读、各系统前沿对比分析。', publisher:'本平台', year:'2026', pages:'约38.9万字', cat:'原创专著', coverType:'original', coverColor:'teal'},
   {title:'细胞生物学（14章精简重构版）', author:'本平台编著', desc:'面向生科专业本科及CGT产业转型教材。三窗体例（产业前沿/前沿发现/监管前沿），第13章干细胞独立成章，第14章细胞治疗与转化医学（国内首创）。', publisher:'本平台', year:'2026', pages:'约23万字', cat:'原创专著', coverType:'original', coverColor:'blue'}
-  // 行业书籍已清空，等待用户提供图书题目+封面后重新部署
+  // 行业书籍持续更新中——产业参考分类等待用户提供书目
 ];
 
 var currentBookCat = 'all';
@@ -10467,6 +10469,9 @@ function showBookDetail(idx) {
   html += '<span>' + svgIcon('doc', 10) + ' ' + escapeHtml(b.pages) + '</span>';
   html += '</div>';
   html += '<div class="book-modal-desc">' + escapeHtml(b.desc) + '</div>';
+  if (b.url) {
+    html += '<div style="margin-top:14px;text-align:center;"><a href="' + escapeHtml(b.url) + '" target="_blank" rel="noopener" class="book-modal-link">' + svgIcon('globe', 14) + ' 访问出版社官网 →</a></div>';
+  }
   html += '<div class="book-modal-note">本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者。</div>';
   modal.innerHTML = html;
   document.getElementById('bookModalOverlay').classList.add('show');
