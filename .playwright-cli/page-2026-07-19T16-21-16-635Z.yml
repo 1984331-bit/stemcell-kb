@@ -1,0 +1,309 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img [ref=e5]
+      - generic [ref=e11]: 细胞与基因治疗知识库
+      - generic [ref=e12]: CGT Knowledge Hub
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: 730+
+          - generic [ref=e16]: 临床文献
+        - generic [ref=e17]:
+          - generic [ref=e18]: "21"
+          - generic [ref=e19]: 监管政策
+        - generic [ref=e20]:
+          - generic [ref=e21]: "28"
+          - generic [ref=e22]: 获批产品
+        - generic [ref=e23]:
+          - generic [ref=e24]: "19"
+          - generic [ref=e25]: 疾病系统
+    - generic [ref=e26]:
+      - generic [ref=e27]: 本平台聚焦细胞与基因治疗（CGT）领域，整合全球公开发表的学术文献、监管政策动态、获批产品追踪及行业深度分析，每日更新维护，致力于为科研与产业提供权威、系统的信息参考。
+      - generic [ref=e28]: 面向用户与核心功能
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - img [ref=e33]
+            - generic [ref=e35]: 研究人员
+          - generic [ref=e36]: 检索MSC临床试验文献，按疾病系统/适应症精准筛选
+          - generic [ref=e37]: 文献库 / 编辑精选 / 数据分析·行业报告
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - img [ref=e41]
+            - generic [ref=e44]: 临床医生
+          - generic [ref=e45]: 查阅临床试验数据、证据等级、剂量方案与安全性
+          - generic [ref=e46]: 文献库 / 监管政策 / 获批产品
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - img [ref=e50]
+            - generic [ref=e53]: 产业从业者
+          - generic [ref=e54]: 追踪全球细胞治疗产品获批进展与监管动态
+          - generic [ref=e55]: 获批产品 / 监管政策 / 行业资讯
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - img [ref=e59]
+            - generic [ref=e62]: 投资者
+          - generic [ref=e63]: 把握行业趋势、企业动态与投融资信息
+          - generic [ref=e64]: 数据分析·行业报告 / 企业巡览 / 行业资讯
+      - generic [ref=e65]: 免责声明：本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供科研与行业交流参考，不构成任何医疗建议或诊疗方案。如有健康问题请咨询专业医疗机构。
+    - generic [ref=e66]:
+      - button "进入网站" [ref=e67] [cursor=pointer]
+      - generic [ref=e68] [cursor=pointer]:
+        - checkbox "不再显示此页面" [ref=e69]
+        - generic [ref=e70]: 不再显示此页面
+      - generic [ref=e71]: 点击页面空白处也可进入
+  - generic [ref=e73]:
+    - heading "细胞与基因治疗知识库 CGT Knowledge Hub" [level=1] [ref=e74] [cursor=pointer]:
+      - img [ref=e75]
+      - generic [ref=e81]:
+        - generic [ref=e82]: 细胞与基因治疗知识库
+        - generic [ref=e83]: CGT Knowledge Hub
+    - navigation [ref=e84]:
+      - button "科普" [ref=e85] [cursor=pointer]:
+        - img [ref=e87]
+        - generic [ref=e91]: 科普
+      - button "资讯" [ref=e92] [cursor=pointer]:
+        - img [ref=e94]
+        - generic [ref=e97]: 资讯
+      - button "政策" [ref=e98] [cursor=pointer]:
+        - img [ref=e100]
+        - generic [ref=e103]: 政策
+      - button "文献" [ref=e104] [cursor=pointer]:
+        - img [ref=e106]
+        - generic [ref=e108]: 文献
+      - button "产品" [ref=e109] [cursor=pointer]:
+        - img [ref=e111]
+        - generic [ref=e114]: 产品
+      - button "机构" [ref=e115] [cursor=pointer]:
+        - img [ref=e117]
+        - generic [ref=e119]: 机构
+  - generic [ref=e121]:
+    - generic [ref=e122] [cursor=pointer]:
+      - img [ref=e123]
+      - text: 首页
+    - generic [ref=e125] [cursor=pointer]:
+      - img [ref=e126]
+      - text: 精选
+    - generic [ref=e130] [cursor=pointer]:
+      - img [ref=e131]
+      - text: 专栏
+    - generic [ref=e133] [cursor=pointer]:
+      - img [ref=e134]
+      - text: 学习
+    - generic [ref=e137] [cursor=pointer]:
+      - img [ref=e138]
+      - text: 数据
+    - generic [ref=e141] [cursor=pointer]:
+      - img [ref=e142]
+      - text: 企业
+    - generic [ref=e144] [cursor=pointer]:
+      - img [ref=e145]
+      - text: AI
+      - generic: HOT
+  - main [ref=e150]:
+    - generic [ref=e151]:
+      - generic [ref=e153]:
+        - generic [ref=e154]: 本周热点
+        - generic [ref=e155] [cursor=pointer]:
+          - generic [ref=e156]: 7.20 - 7.26
+          - generic [ref=e157]: 1 / 6
+          - generic [ref=e159]:
+            - generic [ref=e160]: Open CGT共创联盟计划
+            - generic [ref=e161]: AI驱动的细胞与基因治疗共创平台
+        - generic [ref=e162] [cursor=pointer]:
+          - generic [ref=e163]: 7.20 - 7.26
+          - generic [ref=e164]: 2 / 6
+          - generic [ref=e166]: Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)
+        - generic [ref=e167] [cursor=pointer]:
+          - generic [ref=e168]: 7.20 - 7.26
+          - generic [ref=e169]: 3 / 6
+          - generic [ref=e171]: PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%
+        - generic [ref=e172] [cursor=pointer]:
+          - generic [ref=e173]: 7.20 - 7.26
+          - generic [ref=e174]: 4 / 6
+          - generic [ref=e176]: 818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进
+        - generic [ref=e177] [cursor=pointer]:
+          - generic [ref=e178]: 7.20 - 7.26
+          - generic [ref=e179]: 5 / 6
+          - generic [ref=e181]: Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血
+        - generic [ref=e182] [cursor=pointer]:
+          - generic [ref=e183]: 7.20 - 7.26
+          - generic [ref=e184]: 6 / 6
+          - generic [ref=e186]: VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)
+        - img [ref=e188] [cursor=pointer]
+        - img [ref=e191] [cursor=pointer]
+      - generic [ref=e202]:
+        - img [ref=e203]
+        - text: 数据库入口
+      - generic [ref=e208]:
+        - generic [ref=e209] [cursor=pointer]:
+          - generic [ref=e210]:
+            - img [ref=e212]
+            - generic [ref=e214]: 认识细胞治疗
+          - generic [ref=e215]: 什么是MSC · 能治哪些病 · 科普导览
+        - generic [ref=e216] [cursor=pointer]:
+          - generic [ref=e217]:
+            - img [ref=e219]
+            - generic [ref=e222]: 行业资讯精选
+          - generic [ref=e223]: 前沿研究 · 行业报告 · 地方政策 · 融资趋势
+        - generic [ref=e224] [cursor=pointer]:
+          - generic [ref=e225]:
+            - img [ref=e227]
+            - generic [ref=e229]: 临床文献数据
+          - generic [ref=e230]: 730篇 · 19系统 · 证据分级
+        - generic [ref=e231] [cursor=pointer]:
+          - generic [ref=e232]:
+            - img [ref=e234]
+            - generic [ref=e237]: 获批产品名录
+          - generic [ref=e238]: 45款 · MSC · iPSC · 博鳌乐城
+        - generic [ref=e239] [cursor=pointer]:
+          - generic [ref=e240]:
+            - img [ref=e242]
+            - generic [ref=e245]: 监管政策汇编
+          - generic [ref=e246]: 21份 · 818令 · FDA · EMA · NMPA · ISCT
+        - generic [ref=e247] [cursor=pointer]:
+          - generic [ref=e248]:
+            - img [ref=e250]
+            - generic [ref=e252]: 备案机构查询
+          - generic [ref=e253]: 818令备案 · 全国细胞治疗中心
+      - generic [ref=e256]:
+        - img [ref=e257]
+        - text: 全库检索·功能开发中
+      - generic [ref=e263]:
+        - img [ref=e264]
+        - text: 知识库栏目
+      - generic [ref=e268] [cursor=pointer]:
+        - generic [ref=e269]:
+          - generic [ref=e270]:
+            - img [ref=e271]
+            - generic [ref=e273]: 编辑精选·前沿解读
+          - generic [ref=e274]: 重要文献深度解读·按期筛选
+        - img [ref=e276]
+      - generic [ref=e278] [cursor=pointer]:
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - img [ref=e281]
+            - generic [ref=e283]: 原创文章·大咖观点
+          - generic [ref=e284]: 平台原创·行业大咖评论·院士专家观点
+        - img [ref=e286]
+      - generic [ref=e288] [cursor=pointer]:
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - img [ref=e291]
+            - generic [ref=e294]: 行业书籍·培训课程
+          - generic [ref=e295]: 学术专著·产业参考·原创专著·培训课程
+        - img [ref=e297]
+      - generic [ref=e299] [cursor=pointer]:
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - img [ref=e302]
+            - generic [ref=e305]: 数据分析·行业报告
+          - generic [ref=e306]: 信息库AI团队打造·定时更新
+        - img [ref=e308]
+      - generic [ref=e310] [cursor=pointer]:
+        - generic [ref=e311]:
+          - generic [ref=e312]:
+            - img [ref=e313]
+            - generic [ref=e315]: 企业巡览·产业相关
+          - generic [ref=e316]: 产业相关企业介绍·点击查看
+        - img [ref=e318]
+      - generic [ref=e320] [cursor=pointer]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - img [ref=e323]
+            - generic [ref=e326]: 健康产品·编辑严选
+          - generic [ref=e327]: 编辑团队亲测推荐·健康好物·品质保障
+        - img [ref=e329]
+      - generic [ref=e333]:
+        - img [ref=e334]
+        - text: Open CGT
+      - generic [ref=e339] [cursor=pointer]:
+        - generic [ref=e340]: Open CGT 共创联盟计划
+        - generic [ref=e341]: AI驱动的开放细胞与基因治疗共创平台
+        - generic [ref=e342]:
+          - generic [ref=e343]:
+            - img [ref=e345]
+            - generic [ref=e347]: 你提想法
+            - generic [ref=e348]: AI团队规划路径
+          - generic [ref=e349]:
+            - img [ref=e351]
+            - generic [ref=e354]: 平台对接
+            - generic [ref=e355]: 联通机构企业资源
+          - generic [ref=e356]:
+            - img [ref=e358]
+            - generic [ref=e360]: 共创联盟
+            - generic [ref=e361]: 找到志同道合的人
+        - generic [ref=e363]:
+          - img [ref=e364]
+          - text: 了解Open CGT
+      - generic [ref=e368]:
+        - img [ref=e369]
+        - text: 平台介绍
+      - generic [ref=e373]:
+        - generic [ref=e374] [cursor=pointer]:
+          - generic [ref=e375]:
+            - img [ref=e377]
+            - generic [ref=e380]: 平台声明
+          - generic [ref=e381]: 数据来源 · 适用人群 · 转载须知 · 免责提示
+        - generic [ref=e382] [cursor=pointer]:
+          - generic [ref=e383]:
+            - img [ref=e385]
+            - generic [ref=e388]: 平台指南
+          - generic [ref=e389]: 研究人员 · 临床医生 · 产业从业者 · 投资者
+        - generic [ref=e390] [cursor=pointer]:
+          - generic [ref=e391]:
+            - img [ref=e393]
+            - generic [ref=e396]: 平台功能
+          - generic [ref=e397]: 数据查询 · 文献检索 · 政策追踪 · AI分析
+        - generic [ref=e398] [cursor=pointer]:
+          - generic [ref=e399]:
+            - img [ref=e401]
+            - generic [ref=e405]: 关于我们
+          - generic [ref=e406]: 专家团队 · AI智能体覆盖CGT全产业链
+      - generic [ref=e409]:
+        - img [ref=e410]
+        - text: 平台服务
+      - generic [ref=e416] [cursor=pointer]:
+        - img [ref=e418]
+        - generic [ref=e429]:
+          - generic [ref=e430]: AI赋能·平台数据迭代
+          - generic [ref=e431]: AI引擎实时分析 · 文献检索 · 政策追踪 · 报告生成 · 知识库构建
+        - img [ref=e433]
+      - generic [ref=e437]:
+        - img [ref=e438]
+        - text: 热门检索·快捷入口
+      - generic [ref=e442]:
+        - generic [ref=e443] [cursor=pointer]:
+          - img [ref=e444]
+          - text: 换一换
+        - generic [ref=e447] [cursor=pointer]:
+          - text: 糖尿病
+          - generic [ref=e448]: "43"
+        - generic [ref=e449] [cursor=pointer]:
+          - text: 脊髓损伤
+          - generic [ref=e450]: "27"
+        - generic [ref=e451] [cursor=pointer]:
+          - text: 骨关节炎
+          - generic [ref=e452]: "27"
+        - generic [ref=e453] [cursor=pointer]:
+          - text: 自闭症
+          - generic [ref=e454]: "21"
+        - generic [ref=e455] [cursor=pointer]:
+          - text: 心肌梗死
+          - generic [ref=e456]: "13"
+        - generic [ref=e457] [cursor=pointer]:
+          - text: 阿尔兹海默
+          - generic [ref=e458]: "8"
+        - generic [ref=e459] [cursor=pointer]:
+          - text: 帕金森
+          - generic [ref=e460]: "6"
+        - generic [ref=e461] [cursor=pointer]:
+          - text: 抗衰
+          - generic [ref=e462]: "23"
+  - contentinfo [ref=e463]:
+    - generic [ref=e465]:
+      - generic [ref=e466]:
+        - img [ref=e467]
+        - text: 细胞与基因治疗知识库 | CGT Knowledge Hub
+      - generic [ref=e473]: 版权声明：本网站所有内容（包括但不限于数据库结构、文献整理编排、行业分析报告、仪表盘图表设计、页面布局及源代码）均为原创，著作权归本平台所有。 未经书面授权，任何单位及个人不得以任何方式复制、转载、摘编、镜像、传播或用于商业目的。 经授权使用的内容应保留来源标注并链接至本站。如有侵权行为，将依法追究法律责任。
+      - generic [ref=e474]: © 2025-2026 细胞与基因治疗知识库. All Rights Reserved. 保留所有权利.
