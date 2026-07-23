@@ -7407,12 +7407,12 @@ function renderHub() {
   var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
   var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
   var highlights = [
-    {type:'opencgt', tag:'共创', text:'<div style="font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;">Open CGT共创联盟计划</div><div style="font-size:14px;opacity:0.92;font-weight:400;">AI驱动的细胞与基因治疗共创平台</div>', action:"switchSection(’opencgt’)", bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},
-    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)', action:"switchSection(’products’)", bg:'url(https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag(’心肌梗死’)", bg:'url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80)'},
-    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进', action:"switchSection(’regulations’)", bg:'url(https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)'},
-    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection(’products’)", bg:'url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=80)'},
-    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag(’糖尿病’)", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'}
+    {type:'opencgt', tag:'共创', text:'<div style="font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;">Open CGT共创联盟计划</div><div style="font-size:14px;opacity:0.92;font-weight:400;">AI驱动的细胞与基因治疗共创平台</div>', action:"switchSection('opencgt')", bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},
+    {type:'newproduct', tag:'新产品', text:'Tregzi获批——首款Treg细胞疗法，开创免疫调节细胞治疗新纪元 (Orca Bio, FDA 2026-06-30)', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=1200&q=80)'},
+    {type:'clinical', tag:'临床', text:'PREVENT-TAHA8 III期阳性：MSC治疗急性心梗，3年心衰发生率5.74% vs 16.08%', action:"searchTag('心肌梗死')", bg:'url(https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&q=80)'},
+    {type:'policy', tag:'政策', text:'818号令施行满两月，全国备案细胞治疗中心持续扩容，行业规范化加速推进', action:"switchSection('regulations')", bg:'url(https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80)'},
+    {type:'product', tag:'产品', text:'Casgevy扩展至≥2岁适应症，SCD患者100%无血管闭塞危象，TDT 88.9%脱离输血', action:"switchSection('products')", bg:'url(https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1200&q=80)'},
+    {type:'clinical', tag:'临床', text:'VX-880功能性治愈1型糖尿病：12/12患者HbA1c<7%，10/12脱离外源胰岛素 (NEJM 2025)', action:"searchTag('糖尿病')", bg:'url(https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&q=80)'}
   ];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
@@ -10292,7 +10292,7 @@ function renderBooks() {
 
   // Description text (wrapped in report-intro box)
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者，联系方式：手机/微信 <b>15932929299</b>。行业书籍持续更新中，敬请期待。</div>';
+  html += '<div class="report-intro-text">本栏目精选细胞治疗与再生医学领域的专业书籍，涵盖三大类别：<b>学术专著</b>——侧重基础研究与机制探索，适合科研人员与研究生深入研读；<b>产业参考</b>——聚焦工艺开发、质量管控与商业化路径，面向CGT产业从业者；<b>原创专著</b>——本平台编著的独家内容，整合最新临床数据与监管动态。点击下方分类卡片切换浏览，点击书籍封面查看详细介绍。本平台电子书供学习交流之用，请通过正规渠道购买正版书籍，需电子版交流学习请联系网站作者。行业书籍持续更新中，敬请期待。</div>';
   html += '</div>';
 
   // Category cards
@@ -10501,7 +10501,7 @@ function showBookDetail(idx) {
   if (b.url) {
     html += '<div style="margin-top:14px;text-align:center;"><a href="' + escapeHtml(b.url) + '" target="_blank" rel="noopener" class="book-modal-link">' + svgIcon('globe', 14) + ' 访问出版社官网 →</a></div>';
   }
-  html += '<div class="book-modal-note">本平台电子书只供学习交流之用，原创专著提供试读章节，不提供电子版下载链接，专业书籍请通过正规渠道购买正版书籍，原创专著需要完整版请联系作者。</div>';
+  html += '<div class="book-modal-note">本平台电子书供学习交流之用，请通过正规渠道购买正版书籍，需电子版交流学习请联系网站作者。</div>';
   modal.innerHTML = html;
   document.getElementById('bookModalOverlay').classList.add('show');
 }
@@ -11332,14 +11332,14 @@ var CITY_TO_PROVINCE = {
   '北京':'北京市','天津':'天津市','上海':'上海市','重庆':'重庆市',
   '石家庄':'河北省','唐山':'河北省','秦皇岛':'河北省',
   '南京':'江苏省','苏州':'江苏省','徐州':'江苏省','常州':'江苏省','扬州':'江苏省','无锡':'江苏省','南通':'江苏省',
-  '杭州':'浙江省','宁波':'浙江省','东阳':'浙江省',
+  '杭州':'浙江省','宁波':'浙江省','东阳':'浙江省','温州':'浙江省',
   '合肥':'安徽省',
   '福州':'福建省','泉州':'福建省','漳州':'福建省','厦门':'福建省',
   '济南':'山东省','青岛':'山东省','聊城':'山东省','烟台':'山东省',
   '武汉':'湖北省','襄阳':'湖北省','十堰':'湖北省',
   '长沙':'湖南省','衡阳':'湖南省',
-  '郑州':'河南省',
-  '广州':'广东省','深圳':'广东省',
+  '郑州':'河南省','新乡':'河南省',
+  '广州':'广东省','深圳':'广东省','高州':'广东省',
   '海口':'海南省','博鳌':'海南省','海南':'海南省',
   '南宁':'广西壮族自治区',
   '成都':'四川省','自贡':'四川省',
@@ -11353,7 +11353,7 @@ var CITY_TO_PROVINCE = {
   '沈阳':'辽宁省','大连':'辽宁省',
   '哈尔滨':'黑龙江省',
   '长春':'吉林省',
-  '上饶':'江西省','南昌':'江西省',
+  '上饶':'江西省','南昌':'江西省','赣州':'江西省',
   '包头':'内蒙古自治区'
 };
 
