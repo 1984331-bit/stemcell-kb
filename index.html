@@ -5045,7 +5045,7 @@ body { padding-bottom: 60px; }
       <div class="wc-title">细胞与基因治疗知识库</div>
       <div class="wc-subtitle">CGT Knowledge Hub</div>
       <div class="wc-stats">
-        <div class="wc-stat"><div class="wc-stat-num">745+</div><div class="wc-stat-label">临床文献</div></div>
+        <div class="wc-stat"><div class="wc-stat-num">769+</div><div class="wc-stat-label">临床文献</div></div>
         <div class="wc-stat"><div class="wc-stat-num">55</div><div class="wc-stat-label">监管政策</div></div>
         <div class="wc-stat"><div class="wc-stat-num">79</div><div class="wc-stat-label">获批产品</div></div>
         <div class="wc-stat"><div class="wc-stat-num">20</div><div class="wc-stat-label">疾病系统</div></div>
@@ -5455,9 +5455,28 @@ const CART_DATA = [
   {"pmid": "34347960", "nct": "", "title": "CD19-Targeted CAR T Cells in Refractory Systemic Lupus Erythematosus.", "title_cn": "CD19靶向CAR-T治疗难治性系统性红斑狼疮（全球首例报道）。", "system": "自身免疫病", "indication": "难治性系统性红斑狼疮(SLE)", "doi": "10.1056/NEJMc2107725", "journal": "The New England journal of medicine", "authors": "Mougiakakos D, Krönke G, Völkl S, Kretschmann S, Aigner M et al.", "institution": "Deutsches Zentrum für Immuntherapie", "type": "案例报道", "year": "2021", "evidence_level": "C", "evidence_note": "病例报告(Letter)", "target": "CD19", "product": "自体CD19 CAR-T", "audit_status": "NEW", "audit_note": "CAR-T数据库种子文献·里程碑试验（2026-07-24 P1框架）"},
 ];
 
-// === 多数据库切换（MSC / CAR-T） ===
+const GT_DATA = [
+  {"pmid": "12089448", "nct": "", "title": "Correction of ADA-SCID by stem cell gene therapy combined with nonmyeloablative conditioning.", "title_cn": "非清髓性预处理联合造血干细胞基因治疗纠正ADA-SCID（全球首例成功HSC基因治疗，Strimvelis技术源头）。", "system": "原发性免疫缺陷", "indication": "腺苷脱氨酶缺乏重症联合免疫缺陷(ADA-SCID)", "doi": "10.1126/science.1070104", "journal": "Science (New York, N.Y.)", "authors": "Aiuti A, Slavin S, Aker M, Ficara F, Deola S, Mortellaro A et al.", "institution": "San Raffaele Telethon Institute for Gene Therapy (HSR-TIGET), Milan", "type": "临床试验", "year": "2002", "evidence_level": "B", "evidence_note": "小样本临床试验（历史性首证）", "target": "ADA", "vector": "逆转录病毒（体外HSC转导）", "product": "自体HSC基因治疗（Strimvelis前身）", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "16188130", "nct": "", "title": "[Recombinant adenovirus-p53 gene therapy combined with radiotherapy for head and neck squamous-cell carcinoma].", "title_cn": "重组人p53腺病毒（今又生Gendicine）基因治疗联合放疗治疗头颈部鳞状细胞癌（RCT）。全球首个获批基因治疗产品（中国2003）的关键临床证据。", "system": "肿瘤基因治疗", "indication": "头颈部鳞状细胞癌", "doi": "", "journal": "Zhonghua zhong liu za zhi [Chinese journal of oncology]", "authors": "Zhang SW, Xiao SW, Liu CQ, Sun Y, Su X, Li DM et al.", "institution": "Department of Radiotherapy, Beijing University School of Oncology, Beijing", "type": "临床试验", "year": "2005", "evidence_level": "A", "evidence_note": "随机对照(RCT)", "target": "TP53", "vector": "腺病毒（瘤内注射）", "product": "Gendicine (今又生)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "26014293", "nct": "NCT00769704", "title": "Talimogene Laherparepvec Improves Durable Response Rate in Patients With Advanced Melanoma.", "title_cn": "Talimogene laherparepvec（T-VEC）提高晚期黑色素瘤患者持续缓解率（OPTiM III期RCT）。全球首个获批溶瘤病毒疗法。", "system": "肿瘤基因治疗", "indication": "晚期黑色素瘤", "doi": "10.1200/JCO.2014.58.3377", "journal": "Journal of clinical oncology : official journal of the American Society of Clinical Oncology", "authors": "Andtbacka RH, Kaufman HL, Collichio F, Amatruda T, Senzer N, Chesney J et al.", "institution": "Huntsman Cancer Institute, University of Utah", "type": "临床试验", "year": "2015", "evidence_level": "A", "evidence_note": "III期随机对照(RCT)", "target": "GM-CSF（溶瘤HSV-1）", "vector": "溶瘤单纯疱疹病毒（瘤内注射）", "product": "Imlygic (talimogene laherparepvec/T-VEC)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "28712537", "nct": "NCT00999609", "title": "Efficacy and safety of voretigene neparvovec (AAV2-hRPE65v2) in patients with RPE65-mediated inherited retinal dystrophy: a randomised, controlled, open-label, phase 3 trial.", "title_cn": "Voretigene neparvovec（AAV2-hRPE65v2）治疗RPE65介导的遗传性视网膜营养不良：随机对照开放标签III期试验。美国首个获批体内基因治疗。", "system": "遗传性视网膜病", "indication": "RPE65介导遗传性视网膜营养不良", "doi": "10.1016/S0140-6736(17)31868-8", "journal": "Lancet (London, England)", "authors": "Russell S, Bennett J, Wellman JA, Chung DC, Yu ZF, Tillman A et al.", "institution": "Department of Ophthalmology and Visual Sciences, University of Iowa", "type": "临床试验", "year": "2017", "evidence_level": "A", "evidence_note": "III期随机对照(RCT)", "target": "RPE65", "vector": "AAV2（视网膜下注射）", "product": "Luxturna (voretigene neparvovec)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "29091557", "nct": "NCT02122952", "title": "Single-Dose Gene-Replacement Therapy for Spinal Muscular Atrophy.", "title_cn": "单剂量基因替代疗法治疗脊髓性肌萎缩症（START I/II期）。全球首个SMA基因治疗（Zolgensma）的里程碑试验。", "system": "神经肌肉疾病", "indication": "1型脊髓性肌萎缩症(SMA1)", "doi": "10.1056/NEJMoa1706198", "journal": "The New England journal of medicine", "authors": "Mendell JR, Al-Zaidy S, Shell R, Arnold WD, Rodino-Klapac LR, Prior TW et al.", "institution": "Center for Gene Therapy, Nationwide Children's Hospital", "type": "临床试验", "year": "2017", "evidence_level": "B", "evidence_note": "I/II期", "target": "SMN1", "vector": "AAV9（静脉输注）", "product": "Zolgensma (onasemnogene abeparvovec/AVXS-101)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "28976817", "nct": "NCT01896102", "title": "Hematopoietic Stem-Cell Gene Therapy for Cerebral Adrenoleukodystrophy.", "title_cn": "造血干细胞基因治疗脑型肾上腺脑白质营养不良（STARBEAM II/III期）。", "system": "代谢与贮积症", "indication": "脑型肾上腺脑白质营养不良(CALD)", "doi": "10.1056/NEJMoa1700554", "journal": "The New England journal of medicine", "authors": "Eichler F, Duncan C, Musolino PL, Orchard PJ, De Oliveira S, Thrasher AJ et al.", "institution": "Massachusetts General Hospital and Harvard Medical School", "type": "临床试验", "year": "2017", "evidence_level": "B", "evidence_note": "II/III期单臂", "target": "ABCD1", "vector": "慢病毒（体外CD34+ HSC转导）", "product": "Skysona (elivaldogene autotemcel/Lenti-D)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "34253733", "nct": "NCT02852213", "title": "Gene therapy for aromatic L-amino acid decarboxylase deficiency by MR-guided direct delivery of AAV2-AADC to midbrain dopaminergic neurons.", "title_cn": "MRI引导AAV2-AADC直接递送至中脑多巴胺能神经元治疗芳香族L-氨基酸脱羧酶缺乏症（I期）。", "system": "神经系统罕见病", "indication": "芳香族L-氨基酸脱羧酶缺乏症(AADC缺乏症)", "doi": "10.1038/s41467-021-24524-8", "journal": "Nature communications", "authors": "Pearson TS, Gupta N, San Sebastian W, Imamura-Ching J, Viehoever A, Grijalvo-Perez A et al.", "institution": "Department of Neurological Surgery, University of California San Francisco", "type": "临床试验", "year": "2021", "evidence_level": "B", "evidence_note": "I期", "target": "DDC (AADC)", "vector": "AAV2（MRI引导脑实质内递送）", "product": "AAV2-AADC（试验性）", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "34891223", "nct": "NCT02906202", "title": "Betibeglogene Autotemcel Gene Therapy for Non-β0/β0 Genotype β-Thalassemia.", "title_cn": "Betibeglogene autotemcel基因治疗非β0/β0基因型β-地中海贫血（Northstar-2/3 III期）。", "system": "遗传性血液病", "indication": "输血依赖型β-地中海贫血(非β0/β0基因型)", "doi": "10.1056/NEJMoa2113206", "journal": "The New England journal of medicine", "authors": "Locatelli F, Thompson AA, Kwiatkowski JL, Porter JB, Thrasher AJ, Hongeng S et al.", "institution": "IRCCS Ospedale Pediatrico Bambino Gesù, Rome", "type": "临床试验", "year": "2022", "evidence_level": "B", "evidence_note": "III期单臂", "target": "HBB (βA-T87Q)", "vector": "慢病毒（体外HSC转导）", "product": "Zynteglo (betibeglogene autotemcel/beti-cel)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "34898139", "nct": "NCT02140554", "title": "Biologic and Clinical Efficacy of LentiGlobin for Sickle Cell Disease.", "title_cn": "LentiGlobin治疗镰状细胞贫血的生物学与临床疗效（HGB-206 I/II期）。", "system": "遗传性血液病", "indication": "镰状细胞贫血(SCD)", "doi": "10.1056/NEJMoa2117175", "journal": "The New England journal of medicine", "authors": "Kanter J, Walters MC, Krishnamurti L, Mapara MY, Kwiatkowski JL, Rifkin-Zenenberg S et al.", "institution": "University of Alabama Birmingham", "type": "临床试验", "year": "2022", "evidence_level": "B", "evidence_note": "I/II期", "target": "HBB (βA-T87Q)", "vector": "慢病毒（体外HSC转导）", "product": "Lyfgenia (lovotibeglogene autotemcel/LentiGlobin)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "35294811", "nct": "NCT03370913", "title": "Valoctocogene Roxaparvovec Gene Therapy for Hemophilia A.", "title_cn": "Valoctocogene roxaparvovec基因治疗血友病A（GENEr8-1 III期）。全球首个获批血友病A基因治疗。", "system": "凝血障碍-血友病", "indication": "重型血友病A", "doi": "10.1056/NEJMoa2113708", "journal": "The New England journal of medicine", "authors": "Ozelo MC, Mahlangu J, Pasi KJ, Giermasz A, Leavitt AD, Laffan M et al.", "institution": "Hemocentro UNICAMP, School of Medical Sciences, University of Campinas", "type": "临床试验", "year": "2022", "evidence_level": "B", "evidence_note": "III期单臂", "target": "F8 (BDD-FVIII)", "vector": "AAV5（静脉输注）", "product": "Roctavian (valoctocogene roxaparvovec)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "35598604", "nct": "NCT04135300", "title": "Safety and activity of an engineered, liver-tropic adeno-associated virus vector expressing a hyperactive Padua factor IX administered with prophylactic glucocorticoids in patients with haemophilia B: a single-centre, single-arm, phase 1, pilot trial.", "title_cn": "工程化肝嗜性AAV载体表达高活性Padua因子IX联合预防性糖皮质激素治疗血友病B：单中心单臂I期pilot试验。中国首个进入临床的系统性AAV基因治疗（信念医药BBM-H901）。", "system": "凝血障碍-血友病", "indication": "血友病B", "doi": "10.1016/S2352-3026(22)00113-2", "journal": "The Lancet. Haematology", "authors": "Xue F, Li H, Wu X, Liu W, Zhang F, Tang D et al.", "institution": "State Key Laboratory of Experimental Hematology, National Clinical Research Center for Blood Diseases, CAMS/PUMC", "type": "临床试验", "year": "2022", "evidence_level": "B", "evidence_note": "I期pilot（中国）", "target": "F9 (FIX-Padua)", "vector": "工程化肝嗜性AAV（静脉输注）", "product": "BBM-H901（信念医药）", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "36812434", "nct": "NCT03569891", "title": "Gene Therapy with Etranacogene Dezaparvovec for Hemophilia B.", "title_cn": "Etranacogene dezaparvovec基因治疗血友病B（HOPE-B III期）。全球首个获批血友病B基因治疗。", "system": "凝血障碍-血友病", "indication": "中重度-重型血友病B", "doi": "10.1056/NEJMoa2211644", "journal": "The New England journal of medicine", "authors": "Pipe SW, Leebeek FWG, Recht M, Key NS, Castaman G, Miesbach W et al.", "institution": "Departments of Pediatrics and Pathology, University of Michigan, Ann Arbor", "type": "临床试验", "year": "2023", "evidence_level": "B", "evidence_note": "III期单臂", "target": "F9 (FIX-Padua)", "vector": "AAV5（静脉输注）", "product": "Hemgenix (etranacogene dezaparvovec)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "38661449", "nct": "NCT03745287", "title": "Exagamglogene Autotemcel for Severe Sickle Cell Disease.", "title_cn": "Exagamglogene autotemcel治疗重型镰状细胞贫血（CLIMB-121 III期）。全球首个获批CRISPR基因编辑疗法（Casgevy）。", "system": "遗传性血液病", "indication": "重型镰状细胞贫血(SCD)", "doi": "10.1056/NEJMoa2309676", "journal": "The New England journal of medicine", "authors": "Frangoul H, Locatelli F, Sharma A, Bhatia M, Mapara M, Molinari L et al.", "institution": "Sarah Cannon Research Institute at the Children's Hospital at TriStar Centennial", "type": "临床试验", "year": "2024", "evidence_level": "B", "evidence_note": "III期单臂", "target": "BCL11A增强子（CRISPR编辑）", "vector": "CRISPR-Cas9（体外HSC电穿孔）", "product": "Casgevy (exagamglogene autotemcel/exa-cel)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "38657265", "nct": "NCT03655678", "title": "Exagamglogene Autotemcel for Transfusion-Dependent β-Thalassemia.", "title_cn": "Exagamglogene autotemcel治疗输血依赖型β-地中海贫血（CLIMB-111 III期）。", "system": "遗传性血液病", "indication": "输血依赖型β-地中海贫血", "doi": "10.1056/NEJMoa2309673", "journal": "The New England journal of medicine", "authors": "Locatelli F, Lang P, Wall D, Meisel R, Corbacioglu S, Li AM et al.", "institution": "IRCCS Ospedale Pediatrico Bambino Gesù, Rome", "type": "临床试验", "year": "2024", "evidence_level": "B", "evidence_note": "III期单臂", "target": "BCL11A增强子（CRISPR编辑）", "vector": "CRISPR-Cas9（体外HSC电穿孔）", "product": "Casgevy (exagamglogene autotemcel/exa-cel)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "39385046", "nct": "NCT05096221", "title": "AAV gene therapy for Duchenne muscular dystrophy: the EMBARK phase 3 randomized trial.", "title_cn": "AAV基因治疗杜氏肌营养不良：EMBARK III期随机试验（Elevidys确证性试验）。", "system": "神经肌肉疾病", "indication": "杜氏肌营养不良(DMD)", "doi": "10.1038/s41591-024-03304-z", "journal": "Nature medicine", "authors": "Mendell JR, Muntoni F, McDonald CM, Mercuri EM, Ciafaloni E, Komaki H et al.", "institution": "Center for Gene Therapy, Nationwide Children's Hospital, Columbus", "type": "临床试验", "year": "2025", "evidence_level": "A", "evidence_note": "III期随机对照(RCT)", "target": "DMD (micro-dystrophin)", "vector": "AAVrh74（静脉输注）", "product": "Elevidys (delandistrogene moxeparvovec/SRP-9001)", "approach": "体内", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"},
+  {"pmid": "40267426", "nct": "NCT01560182", "title": "Long-Term Effects of Atidarsagene Autotemcel for Metachromatic Leukodystrophy.", "title_cn": "Atidarsagene autotemcel治疗异染性脑白质营养不良的长期疗效（I/II期+扩大使用）。", "system": "代谢与贮积症", "indication": "异染性脑白质营养不良(MLD)", "doi": "10.1056/NEJMoa2405727", "journal": "The New England journal of medicine", "authors": "Fumagalli F, Calbi V, Gallo V, Zambon AA, Recupero S, Ciotti F et al.", "institution": "San Raffaele Telethon Institute for Gene Therapy (SR-Tiget), Milan", "type": "临床试验", "year": "2025", "evidence_level": "B", "evidence_note": "I/II期长期随访", "target": "ARSA", "vector": "慢病毒（体外HSC转导）", "product": "Lenmeldy/Libmeldy (atidarsagene autotemcel/OTL-200)", "approach": "体外", "audit_status": "NEW", "audit_note": "基因治疗数据库种子文献·里程碑试验（2026-07-25 P1框架）"}
+];
+
+// === 多数据库切换（MSC / CAR-T / 基因治疗） ===
 var currentDB = 'MSC';
-function getActiveData() { return currentDB === 'CART' ? CART_DATA : ALL_DATA; }
+function getActiveData() { return currentDB === 'CART' ? CART_DATA : (currentDB === 'GT' ? GT_DATA : ALL_DATA); }
 
 const PAGE_SIZE = 20;
 let currentPage = 1;
@@ -5826,7 +5845,7 @@ function handleSearch() {
   }
 }
 
-// === 文献库数据库切换（MSC / CAR-T） ===
+// === 文献库数据库切换（MSC / CAR-T / 基因治疗） ===
 var sidebarOriginalHtml = null;
 function switchLiteratureDB(db) {
   if (db === currentDB) return;
@@ -5853,7 +5872,7 @@ function rebuildSidebarForDB() {
     var ind = d.indication || '未分类';
     map[s].inds[ind] = (map[s].inds[ind] || 0) + 1;
   });
-  var html = '<div class="sidebar-title">疾病领域导航 · CAR-T</div>';
+  var html = '<div class="sidebar-title">疾病领域导航 · ' + (currentDB === 'CART' ? 'CAR-T' : '基因治疗') + '</div>';
   Object.keys(map).sort(function(a,b){ return map[b].count - map[a].count; }).forEach(function(s){
     html += '<div class="sys-block" data-system="' + s + '"><div class="sys-header" onclick="toggleSystem(this)"><span class="sys-arrow">▶</span><span class="sys-name">' + s + '</span><span class="sys-count">' + map[s].count + '</span></div><div class="ind-list" style="display:none;">';
     Object.keys(map[s].inds).sort(function(a,b){ return map[s].inds[b] - map[s].inds[a]; }).forEach(function(ind){
@@ -5902,7 +5921,10 @@ function getFilteredData() {
              (d.indication || '').toLowerCase().includes(searchQuery) ||
              (d.system || '').toLowerCase().includes(searchQuery) ||
              (d.institution || '').toLowerCase().includes(searchQuery) ||
-             (d.nct || '').toLowerCase().includes(searchQuery);
+             (d.nct || '').toLowerCase().includes(searchQuery) ||
+             (d.target || '').toLowerCase().includes(searchQuery) ||
+             (d.vector || '').toLowerCase().includes(searchQuery) ||
+             (d.product || '').toLowerCase().includes(searchQuery);
     });
   } else if (currentFilter.system && currentFilter.indication) {
     result = result.filter(d => d.system === currentFilter.system && d.indication === currentFilter.indication);
@@ -5941,7 +5963,7 @@ function renderContent() {
 
   if (!searchQuery && !currentFilter.system) {
     // Overview
-    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">临床文献数据' + (currentDB === 'CART' ? ' · CAR-T库' : ' · MSC库') + '</span></div>';
+    let overviewHtml = '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">临床文献数据' + (currentDB === 'CART' ? ' · CAR-T库' : (currentDB === 'GT' ? ' · 基因治疗库' : ' · MSC库')) + '</span></div>';
     var ACTIVE = getActiveData();
     var totalInds = 0;
     var indSet = new Set();
@@ -5950,10 +5972,12 @@ function renderContent() {
     var yrs = ACTIVE.map(function(d){return d.year;}).filter(function(y){return y;});
     var yMin = yrs.length ? Math.min.apply(null, yrs) : '';
     var yMax = yrs.length ? Math.max.apply(null, yrs) : '';
-    var sysLabel = currentDB === 'CART' ? '个疾病领域' : '个系统';
+    var sysLabel = currentDB === 'MSC' ? '个系统' : '个疾病领域';
     var dbDesc = currentDB === 'CART'
       ? 'CAR-T临床试验数据库（一期框架·8篇里程碑种子文献）。覆盖血液肿瘤、实体瘤、自身免疫病等领域，近20年文献批量建仓审核中，将陆续扩容。'
-      : '目前AI团队完成了MSC临床试验数据库的建设，CAR-T及基因治疗数据库正在建设。';
+      : (currentDB === 'GT'
+        ? '基因治疗临床试验数据库（一期框架·16篇里程碑种子文献）。覆盖遗传性血液病、血友病、神经肌肉疾病、代谢与贮积症、免疫缺陷、遗传性视网膜病、肿瘤基因治疗等领域，近20年文献批量建仓审核中，将陆续扩容。'
+        : '目前AI团队完成了MSC临床试验数据库的建设，CAR-T及基因治疗数据库已上线一期框架，可点击下方卡片切换。');
     overviewHtml += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">基于 <b>' + ACTIVE.length + '</b> 篇文献，覆盖 <b>' + totalSystemsGlobal + '</b> ' + sysLabel + '，<b>' + totalInds + '</b> 个适应症，时间跨度 <b>' + yMin + '–' + yMax + '</b> 年。数据每周自动更新，点击下方系统卡片或在右下角导航树安静浏览文献，也可在搜索框中输入关键词检索。' + dbDesc + '</div></div>';
 
     // Search box
@@ -5976,8 +6000,8 @@ function renderContent() {
     overviewHtml += '<div class="lit-db-card' + (currentDB === 'CART' ? ' lit-db-active' : '') + '" onclick="switchLiteratureDB(\'CART\')" style="' + dbCardStyle(currentDB === 'CART') + '">';
     overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'CART') + ';">' + svgIcon('shield', 14) + ' CAR-T <span style="font-size:11px;font-weight:400;">' + CART_DATA.length + '篇</span></div>';
     overviewHtml += '</div>';
-    overviewHtml += '<div class="lit-db-card" onclick="showLiteratureUnderConstruction(\'基因治疗\')" style="' + dbCardStyle(false) + '">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:var(--text-light);">' + svgIcon('flask', 14) + ' 基因治疗</div>';
+    overviewHtml += '<div class="lit-db-card' + (currentDB === 'GT' ? ' lit-db-active' : '') + '" onclick="switchLiteratureDB(\'GT\')" style="' + dbCardStyle(currentDB === 'GT') + '">';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'GT') + ';">' + svgIcon('flask', 14) + ' 基因治疗 <span style="font-size:11px;font-weight:400;">' + GT_DATA.length + '篇</span></div>';
     overviewHtml += '</div>';
     overviewHtml += '</div>';
 
@@ -6232,6 +6256,10 @@ function renderPaperCard(d, idx) {
   card += '<div class="detail-section-title">' + svgIcon('hospital', 16) + ' 临床信息</div>';
   if (d.indication) card += '<div class="detail-row"><span class="detail-label">适应症</span><span>' + escapeHtml(d.indication) + '</span></div>';
   if (d.system) card += '<div class="detail-row"><span class="detail-label">系统分类</span><span>' + escapeHtml(d.system) + '</span></div>';
+  if (d.target) card += '<div class="detail-row"><span class="detail-label">靶点/目的基因</span><span>' + escapeHtml(d.target) + '</span></div>';
+  if (d.vector) card += '<div class="detail-row"><span class="detail-label">载体/技术</span><span>' + escapeHtml(d.vector) + '</span></div>';
+  if (d.product) card += '<div class="detail-row"><span class="detail-label">产品</span><span>' + escapeHtml(d.product) + '</span></div>';
+  if (d.approach) card += '<div class="detail-row"><span class="detail-label">治疗路径</span><span>' + escapeHtml(d.approach) + '</span></div>';
   if (d.nct) card += '<div class="detail-row"><span class="detail-label">临床试验号</span><span><a href="https://clinicaltrials.gov/search?term=' + encodeURIComponent(d.nct) + '" target="_blank" style="color:var(--primary);text-decoration:none;font-weight:600;">' + escapeHtml(d.nct) + ' ↗</a></span></div>';
   if (d.type) card += '<div class="detail-row"><span class="detail-label">文献类型</span><span>' + escapeHtml(d.type) + '</span></div>';
   card += '</div>';
@@ -7588,7 +7616,7 @@ function renderHub() {
   html += '<div class="hub-cards">';
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 患者常见问题</div></div>';
   html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
-  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床试验数据</div></div><div class="hc-desc">745篇 · 20系统 · 证据分级 · 文献全文解读</div></div>';
+  html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床试验数据</div></div><div class="hc-desc">769篇 · MSC/CAR-T/基因治疗三库 · 证据分级</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CAR-T · 博鳌乐城</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
   html += '<div class="hub-card rose" data-section="institutions" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('building', 18) + '</div><div class="hc-title">备案机构查询</div></div><div class="hc-desc">备案机构项目 · 全国细胞治疗中心 · 临床招募信息</div></div>';
