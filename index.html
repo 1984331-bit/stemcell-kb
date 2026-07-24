@@ -238,6 +238,22 @@ body {
   pointer-events: none;
   z-index: 10;
 }
+.hot-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #FF6B35, #FF1744);
+  padding: 2px 7px;
+  border-radius: 9px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(255,23,68,0.45);
+  pointer-events: none;
+  z-index: 10;
+}
 .info-tab .it-arrow {
   transition: transform 0.2s;
   display: inline-block;
@@ -5147,7 +5163,7 @@ body { padding-bottom: 60px; }
 <div class="container">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-title">系统导航</div>
-    <div class="sys-block" data-system="宠物领域"><div class="sys-header" onclick="toggleSystem(this)" style="position:relative;"><span class="sys-arrow">▶</span><span class="sys-name">宠物领域</span><span class="hot-tag">HOT</span><span class="sys-count">2</span></div><div class="ind-list" style="display:none;"><div class="ind-item" data-indication="免疫性溶血性贫血（犬）" data-system="宠物领域" onclick="selectIndication('宠物领域','免疫性溶血性贫血（犬）')"><span class="ind-dot"></span><span class="ind-name">免疫性溶血性贫血（犬）</span><span class="ind-count">1</span></div>
+    <div class="sys-block" data-system="宠物领域"><div class="sys-header" onclick="toggleSystem(this)" style="position:relative;"><span class="sys-arrow">▶</span><span class="sys-name">宠物领域</span><span class="hot-badge">HOT</span><span class="sys-count">2</span></div><div class="ind-list" style="display:none;"><div class="ind-item" data-indication="免疫性溶血性贫血（犬）" data-system="宠物领域" onclick="selectIndication('宠物领域','免疫性溶血性贫血（犬）')"><span class="ind-dot"></span><span class="ind-name">免疫性溶血性贫血（犬）</span><span class="ind-count">1</span></div>
 <div class="ind-item" data-indication="尿道狭窄（羊驼）" data-system="宠物领域" onclick="selectIndication('宠物领域','尿道狭窄（羊驼）')"><span class="ind-dot"></span><span class="ind-name">尿道狭窄（羊驼）</span><span class="ind-count">1</span></div></div></div>
 <div class="sys-block" data-system="神经系统"><div class="sys-header" onclick="toggleSystem(this)"><span class="sys-arrow">▶</span><span class="sys-name">神经系统</span><span class="sys-count">148</span></div><div class="ind-list" style="display:none;"><div class="ind-item" data-indication="脑性瘫痪" data-system="神经系统" onclick="selectIndication('神经系统','脑性瘫痪')"><span class="ind-dot"></span><span class="ind-name">脑性瘫痪</span><span class="ind-count">28</span></div>
 <div class="ind-item" data-indication="脊髓损伤" data-system="神经系统" onclick="selectIndication('神经系统','脊髓损伤')"><span class="ind-dot"></span><span class="ind-name">脊髓损伤</span><span class="ind-count">27</span></div>
@@ -5912,7 +5928,7 @@ function renderContent() {
 
     overviewHtml += '<div class="overview">';
     sysArr.forEach(([s, info]) => {
-      overviewHtml += '<div class="overview-card"' + (s === '宠物领域' ? ' style="position:relative;"' : '') + ' onclick="quickSelect(\'' + s.replace(/'/g, "\\’") + '\')">' + (s === '宠物领域' ? '<span class="hot-tag">HOT</span>' : '');
+      overviewHtml += '<div class="overview-card"' + (s === '宠物领域' ? ' style="position:relative;"' : '') + ' onclick="quickSelect(\'' + s.replace(/'/g, "\\’") + '\')">' + (s === '宠物领域' ? '<span class="hot-badge">HOT</span>' : '');
       overviewHtml += '<div class="oc-count">' + info.count + ' <span style="font-size:14px;font-weight:600;color:#666;">篇</span></div>';
       overviewHtml += '<div class="oc-name">' + s + ' <span style="font-size:12px;font-weight:400;color:var(--text-light);">· ' + info.inds.size + '个适应症</span></div>';
       overviewHtml += '</div>';
