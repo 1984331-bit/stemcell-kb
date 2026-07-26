@@ -5025,6 +5025,96 @@ body { padding-bottom: 60px; }
   .dh-fill, .dash-year-bar, .dash-market-bar, .dash-sales-bar, .ds-fill { transition: none !important; }
 }
 
+/* === 产业服务 Services === */
+.svc-hero{padding:40px 0 26px;text-align:center}
+.svc-kick{display:inline-block;font-size:13px;letter-spacing:3px;color:var(--primary);border:1px solid rgba(0,229,255,0.35);border-radius:999px;padding:6px 18px;margin-bottom:18px}
+.svc-hero-sub{max-width:680px;margin:0 auto;color:var(--text-light);font-size:14px;line-height:1.9}
+.svc-badges{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
+.svc-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:10px 20px;text-align:center}
+.svc-badge b{display:block;font-size:20px;color:var(--primary)}
+.svc-badge span{font-size:11px;color:var(--text-light)}
+.svc-sec{padding:28px 0}
+.svc-sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.svc-sec-h h2{font-size:19px;font-weight:700;color:var(--text)}
+.svc-sec-h .en{font-size:10px;letter-spacing:2px;color:var(--text-light)}
+.svc-sec-d{color:var(--text-light);font-size:12px;margin-bottom:18px;line-height:1.7}
+.svc-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.svc-tab{background:var(--card-bg);border:1px solid var(--border);color:var(--text-light);border-radius:999px;padding:8px 16px;font-size:13px;cursor:pointer;transition:border-color .2s,color .2s}
+.svc-tab.on{background:rgba(0,229,255,0.08);border-color:var(--primary);color:var(--primary)}
+.svc-panel{display:none}
+.svc-panel.on{display:block}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.svc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;transition:transform .2s,border-color .2s}
+.svc-card:hover{transform:translateY(-2px);border-color:rgba(0,229,255,0.35)}
+.svc-ic{width:36px;height:36px;border-radius:9px;background:rgba(0,229,255,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--primary)}
+.svc-card h3{font-size:15px;font-weight:600;margin-bottom:6px;padding-right:52px;color:var(--text)}
+.svc-desc{font-size:12px;color:var(--text-light);margin-bottom:10px;line-height:1.7}
+.svc-meta{font-size:11px;color:var(--text-light);border-top:1px solid var(--border);padding-top:9px;display:grid;gap:3px;line-height:1.6}
+.svc-meta .who{color:#66BB6A}
+.svc-price{margin-top:9px;font-size:13px;color:var(--primary);font-weight:600}
+.svc-tag{position:absolute;top:14px;right:14px;font-size:10px;border-radius:5px;padding:1px 7px;border:1px solid}
+.svc-tag.flag{color:#E8B33C;border-color:rgba(232,179,60,.45)}
+.svc-tag.must{color:#E5645A;border-color:rgba(229,100,90,.45)}
+.svc-tag.new{color:var(--primary);border-color:rgba(0,229,255,.35)}
+.svc-tag.ally{color:#66BB6A;border-color:rgba(102,187,106,.45)}
+.svc-sub-h{display:flex;align-items:baseline;gap:10px;margin:26px 0 6px}
+.svc-sub-h h3{font-size:16px;font-weight:600;color:var(--text)}
+.svc-sub-h .en{font-size:10px;letter-spacing:2px;color:var(--text-light)}
+.svc-ally{background:rgba(102,187,106,0.06);border:1px solid rgba(102,187,106,0.3);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.8}
+.svc-ally b{color:#66BB6A}
+.svc-card.svc-manual{grid-column:1/-1}
+.svc-manual-imgs{display:flex;gap:10px;margin-top:10px}
+.svc-manual-imgs img{flex:1;width:0;border-radius:8px;border:1px solid var(--border);cursor:zoom-in;display:block}
+.svc-manual-cap{font-size:11px;color:var(--text-light);margin-top:8px}
+.svc-lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;cursor:zoom-out}
+.svc-lightbox.on{display:flex}
+.svc-lightbox img{max-width:92vw;max-height:92vh;border-radius:8px}
+.svc-db-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.svc-db{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.svc-st{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--text-light);margin-bottom:4px}
+.svc-st i{width:6px;height:6px;border-radius:50%;display:inline-block}
+.svc-st.live i{background:#66BB6A}
+.svc-st.build i{background:#E8B33C}
+.svc-st.plan i{background:#55607a}
+.svc-db b{display:block;font-size:12px;color:var(--text);font-weight:600;margin-bottom:2px}
+.svc-db span{font-size:10px;color:var(--text-light)}
+.svc-gloss{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px}
+.svc-gloss-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.svc-gloss-item:last-of-type{border-bottom:none}
+.svc-ab{flex:none;width:60px;font-size:15px;font-weight:700;color:var(--primary)}
+.svc-ex{font-size:12px;color:var(--text-light);line-height:1.7}
+.svc-ex b{color:var(--text);font-weight:500}
+.svc-gloss-more{display:inline-block;margin-top:12px;font-size:12px;color:var(--primary)}
+.svc-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.svc-step{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+.svc-step .no{font-size:19px;font-weight:700;color:var(--primary);opacity:.85}
+.svc-step h4{font-size:13px;margin:6px 0 4px;color:var(--text)}
+.svc-step p{font-size:11px;color:var(--text-light);line-height:1.6}
+.svc-cta{background:var(--card-bg);border:1px solid rgba(0,229,255,0.35);border-radius:14px;padding:30px;text-align:center}
+.svc-cta h2{font-size:19px;margin-bottom:8px;color:var(--text)}
+.svc-cta p{color:var(--text-light);font-size:13px;max-width:560px;margin:0 auto 18px;line-height:1.8}
+.svc-cta-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.svc-btn{display:inline-flex;align-items:center;gap:6px;border-radius:9px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(0,229,255,0.35)}
+.svc-btn.pri{background:var(--primary);color:#06222a;border-color:var(--primary)}
+.svc-btn.ghost{color:var(--primary);background:transparent}
+.svc-tip{margin-top:12px;font-size:11px;color:var(--text-light)}
+@media (max-width: 768px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-db-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-flow{grid-template-columns:repeat(2,1fr)}
+  .svc-hero{padding:28px 0 18px}
+}
+@media (max-width: 480px){
+  .svc-grid{grid-template-columns:1fr}
+  .svc-manual-imgs{flex-direction:column}
+  .svc-manual-imgs img{width:100%;flex:none}
+  .svc-kick{font-size:11px;letter-spacing:2px;padding:5px 14px}
+  .svc-badge{padding:8px 14px}
+  .svc-badge b{font-size:17px}
+  .svc-cta{padding:22px 14px}
+  .svc-sec{padding:22px 0}
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="china-geo.js"></script>
@@ -8251,6 +8341,7 @@ function renderContent() {
   if (currentSection === 'opencgt') { renderOpenCGT(); return; }
   if (currentSection === 'lab') { renderLab(); return; }
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
+  if (currentSection === 'services') { renderServices(); return; }
 
   const filtered = getFilteredData();
 
@@ -10031,6 +10122,19 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
+  // AI poster banner entry 2: 产业服务体系
+  html += '<div class="ai-poster-banner" onclick="switchSection(\'services\')">';
+  html += '<div class="ai-poster-banner-bg"></div>';
+  html += '<div class="ai-poster-banner-content">';
+  html += '<div class="ai-poster-banner-orb">' + svgIcon('rocket', 24) + '</div>';
+  html += '<div class="ai-poster-banner-text">';
+  html += '<div class="ai-poster-banner-title">AI赋能·CGT全产业链服务体系</div>';
+  html += '<div class="ai-poster-banner-desc">基础科研 · 生产工艺 · 质量控制 · 临床试验 · 联盟实验交付</div>';
+  html += '</div>';
+  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '</div>';
+  html += '</div>';
+
   // 热门检索·快捷入口 (moved to bottom)
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('flame', 16) + ' 热门检索·快捷入口</div><div class="sd-line"></div></div>';
   html += '<div class="hub-tags">';
@@ -10041,6 +10145,211 @@ function renderHub() {
   updateFloatButtons();
   initWhCarousel();
   renderHotTagBatch();
+}
+
+// === 产业服务 Services ===
+var SVC_TABS = [
+  { k: 'res', label: '基础科研 Research' },
+  { k: 'cmc', label: '生产工艺 CMC' },
+  { k: 'qc', label: '质量控制 QC/QA' },
+  { k: 'ct', label: '临床试验 Clinical' }
+];
+var SVC_CARDS = {
+  res: [
+    { tag:'flag', tagTx:'学术旗舰', ic:'book', t:'开题 / 立项循证报告', d:'指定研究方向的全球格局：发文趋势、主要团队、技术路线演进、临床转化证据（该方向已进入哪些临床试验、进展到几期）、研究空白点分析。', m:['交付物：20-30 页格局报告（附转化证据表）','客户：研究生开题 · 教师基金申请','周期：1-2 周'], p:'¥500-2000 / 份' },
+    { ic:'file', t:'基金标书证据包', d:'立项依据的文献证据包 + 研究热点与空白分析 + 历年同类立项项目清单。提供弹药，不代写标书。', m:['交付物：证据包 + 立项项目清单','客户：国自然 / 省基金申请人','周期：1-2 周'], p:'¥1000-3000 / 份' },
+    { ic:'flame', t:'研究热点订阅', d:'指定细分领域（如 CAR-T 实体瘤、MSC 外泌体）的月度新文献中文精读推送，从此告别追不动 PubMed。', m:['交付物：月度精读邮件/微信推送','客户：研究生 · 科研岗','周期：按月'], p:'¥199-365 / 年' },
+    { ic:'database', t:'公共数据挖掘', d:'GEO / TCGA 指定数据集标准分析：差异表达、富集、预后模型，附方法学描述与出版级图表。', m:['交付物：分析结果 + 图表 + 方法学段落','客户：有生信需求的课题组','周期：1-3 周'], p:'¥1000-5000 / 项目' },
+    { ic:'pen', t:'论文润色与选刊', d:'AI 润色 + 专家把关学术表达；按主题匹配目标期刊（IF / 分区 / 审稿周期 / 接收偏好）。', m:['交付物：润色稿 + 选刊建议清单','客户：投稿中的师生','周期：3-7 天'], p:'¥300-800 / 篇' },
+    { ic:'flask', t:'实验方案循证对比', d:'某实验（如 UC-MSC 成骨诱导）的各家 protocol 参数对比表：细胞代次、培养基、诱导时长、鉴定方法，照着就能做。', m:['交付物：protocol 对比表 + 推荐方案','客户：刚进实验室的研究生','周期：1 周'], p:'¥500-1500 / 份' },
+    { tag:'new', tagTx:'新', ic:'lightbulb', t:'专利初检与转化对接', d:'技术方向的专利布局初筛 + 潜在企业合作方线索，让实验室成果找到产业出口。', m:['交付物：专利初检报告 + 对接线索','客户：有成果转化需求的团队','周期：1-2 周'], p:'¥1000-3000 / 次' }
+  ],
+  cmc: [
+    { tag:'new', tagTx:'新', ic:'beaker', t:'工艺循证情报报告', d:'针对指定产品类型（UC-MSC、AAV9、CAR-NK 等），交付全球公开工艺路线、关键参数区间、放大策略与培养基/耗材选型证据。', m:['交付物：30-50 页循证报告（附文献溯源表）','客户：Biotech CMC 团队 · CDMO','周期：2-3 周'], p:'¥1-3 万 / 份' },
+    { ic:'clock', t:'CMC 法规雷达订阅', d:'NMPA / FDA / EMA 细胞与基因治疗 CMC 指南持续监测，条款级中美欧差异对比，变更影响月度解读。', m:['交付物：月度差异解读报告 + 条款库权限','客户：注册部 · CMC 负责人','周期：按月交付'], p:'¥1-2 万 / 年' },
+    { ic:'check', t:'可比性研究方案支持', d:'工艺变更后可比性研究（Comparability）设计框架，同类变更审评问询要点梳理，降低发补风险。', m:['交付物：方案框架 + 问询要点清单','客户：工艺变更中的企业','周期：1-2 周'], p:'¥1-2 万 / 次' }
+  ],
+  qc: [
+    { ic:'shield', t:'放行标准与验证方案包', d:'按产品类型整理药典、指南与 79 款已上市产品公开质控标准，AI 起草方法学验证方案模板，专家审核。', m:['交付物：标准清单 + 验证方案模板包','客户：QC 经理 · 新建实验室','周期：2-4 周'], p:'¥1-2 万 / 套' },
+    { ic:'target', t:'快速微生物检测选型', d:'短货架期产品（自体 CAR-T 等）的快速无菌/支原体方法对比、验证路径与中美欧法规接受度证据。', m:['交付物：选型对比表 + 验证路径图','客户：细胞制备企业 QA','周期：1-2 周'], p:'¥5千-1万 / 次' },
+    { ic:'doc', t:'PQR 年度报告 AI 代写', d:'企业提供批次数据，AI 起草年度产品质量回顾（PQR）框架与趋势分析初稿，QA 审定即可用。', m:['交付物：PQR 报告初稿 + 趋势图','客户：中小企业 QA','周期：1 周'], p:'按次计费' }
+  ],
+  ct: [
+    { tag:'flag', tagTx:'旗舰', ic:'layers', t:'方案循证设计报告', d:'同适应症全球试验设计要素分析：入排标准分布、剂量递增方案（3+3 / BOIN）、给药途径与次数、主要/次要终点选择、随访时长，全部出自 3,062 篇文献库，条条可溯源。', m:['交付物：50-80 页设计要素分析报告','客户：申办方医学部 · IND 前 Biotech','周期：2-3 周'], p:'¥2-5 万 / 份' },
+    { tag:'must', tagTx:'法定刚需', ic:'search', t:'PV 文献监测', d:'GVP 要求 MAH 定期开展安全性文献检索。按月交付检索记录 + 潜在 SUSAR 线索初筛（AI 初筛 + 人工复核），留痕备查。', m:['交付物：月度监测报告 + 检索留痕档案','客户：MAH 药物警戒部','周期：按月交付'], p:'¥3-6 万 / 年 / 产品' },
+    { ic:'users', t:'患者-试验匹配', d:'患者端免费使用（知识库招募板块引流），按疾病、分期、地区匹配招募中的 CGT 试验，按成功入组向申办方收费。', m:['交付物：匹配清单 + 招募进展月报','客户：申办方 · CRO 招募组','周期：持续'], p:'按入组付费' },
+    { ic:'pen', t:'医学撰写 AI 辅助', d:'IB、试验方案、ICF、CSR 的 AI 起草 + 医学撰写员精修，报价比传统 CRO 低 30-50%。', m:['交付物：撰写初稿 + 两轮精修','客户：中小 Biotech','周期：按项目'], p:'项目报价' },
+    { ic:'trending', t:'竞品临床动态监测', d:'指定靶点、适应症或竞品的全球临床进展月度监测：新登记试验、数据读出、审评动态、会议摘要。', m:['交付物：月度监测报告','客户：BD · 投资机构','周期：按月交付'], p:'¥2-5 万 / 年' },
+    { ic:'bar', t:'统计学循证支持', d:'样本量估算与主要终点选择的同类文献依据汇总，为方案统计学部分提供循证参照。', m:['交付物：循证依据备忘录','客户：申办方 · 统计师','周期：1 周'], p:'¥5千-1万 / 次' }
+  ]
+};
+var ALLY_CARDS = [
+  { ic:'cell', t:'E1 模式动物与疾病模型', d:'基因编辑大小鼠定制（全身/条件性敲除、转基因、敲入）；50 余种疾病模型：脑卒中、心肌缺血再灌注、NAFLD、糖尿病、肿瘤移植/诱导、肾缺血再灌注等，小动物与大动物（兔猪犬非人灵长类）均可。', m:['交付：拉伊卜生物 · 模式动物平台','周期：按项目评估'], p:'平台统一询价' },
+  { ic:'target', t:'E2 动物分子影像', d:'PET、Micro-CT、MRI、活体光学、超声、X 光成像；放射药物合成、仪器扫描、图像重建与数据分析出图一站式服务。', m:['交付：拉伊卜生物 · 影像团队','周期：按项目评估'], p:'平台统一询价' },
+  { ic:'search', t:'E3 病理学研究', d:'包埋切片、HE/特殊染色、免疫组化/免疫荧光、TUNEL、原位杂交、组织芯片制作、数字扫描与明场/荧光采图。', m:['交付：拉伊卜生物 · 病理平台','周期：1-3 周'], p:'平台统一询价' },
+  { ic:'cell', t:'E4 细胞生物学实验', d:'流式细胞术检测、细胞模型构建、细胞表型实验、CCK-8 活性检测、原代/传代细胞培养与体外药筛。', m:['交付：拉伊卜生物 · 细胞平台','周期：1-4 周'], p:'平台统一询价' },
+  { ic:'dna', t:'E5 分子克隆与病毒包装', d:'分子/亚克隆、定点突变；慢病毒、腺病毒包装（滴度 10¹⁰-10¹¹ pfu/ml），载体构建到病毒感染验证全流程——CGT 课题直接可用；另有蛋白与 RNA 实验服务。', m:['交付：拉伊卜生物 · 分子平台','周期：2-6 周'], p:'平台统一询价' },
+  { ic:'chart', t:'E6 组学测序与生信', d:'全基因组重测序、全外显子、表观组、转录组、单细胞测序及个性化生信分析——测序由联盟执行，分析解读由我方 AI 流水线加持。', m:['交付：拉伊卜生物 + 我方生信解读','周期：3-8 周'], p:'平台统一询价' },
+  { ic:'mic', t:'E7 科研培训与成果转化', d:'国自然申请、SCI 写作、CRISPR/外泌体等 30+ 讲座课题（可定制）；院企联合课题、专利转让与价值评估、SCI 论文全程协助。', m:['交付：拉伊卜生物 + 我方课程板块','周期：按项目'], p:'平台统一询价' }
+];
+var SVC_DB_LIST = [
+  { st:'live', stTx:'已上线', t:'临床试验文献库', d:'3,062 篇 · 三库合一' },
+  { st:'live', stTx:'已上线', t:'文献摘要库', d:'2,849 篇全文摘要' },
+  { st:'live', stTx:'已上线', t:'法规政策库', d:'55 份 · 持续监测' },
+  { st:'live', stTx:'已上线', t:'获批产品库', d:'79 款全球产品' },
+  { st:'build', stTx:'建设中', t:'试验设计要素库', d:'剂量·终点·入排结构化' },
+  { st:'build', stTx:'建设中', t:'CMC 法规差异库', d:'中美欧条款级对照' },
+  { st:'build', stTx:'建设中', t:'产业术语库', d:'300+ 条白话词典' },
+  { st:'build', stTx:'建设中', t:'质控标准库', d:'放行标准 × 产品类型' },
+  { st:'build', stTx:'建设中', t:'联盟服务能力库', d:'成员×平台×项目×质控' },
+  { st:'plan', stTx:'规划中', t:'PV 监测库', d:'产品 × 月度检索留痕' },
+  { st:'plan', stTx:'规划中', t:'招募中试验库', d:'官方 API 每周同步' },
+  { st:'plan', stTx:'规划中', t:'工艺参数库', d:'工艺路线 × 关键参数' },
+  { st:'plan', stTx:'规划中', t:'竞品管线库', d:'企业 × 靶点 × 阶段' },
+  { st:'plan', stTx:'规划中', t:'检测方法库', d:'方法学 × 验证要点' },
+  { st:'plan', stTx:'规划中', t:'耗材设备库', d:'选型 × 文献证据' },
+  { st:'plan', stTx:'规划中', t:'基金项目库', d:'历年立项 × 关键词' },
+  { st:'plan', stTx:'规划中', t:'期刊情报库', d:'IF · 分区 · 审稿周期' },
+  { st:'plan', stTx:'规划中', t:'专家库', d:'细分领域专家网络' },
+  { st:'plan', stTx:'规划中', t:'服务案例库', d:'脱敏案例沉淀' }
+];
+function svcCardHtml(c, ally) {
+  var h = '<div class="svc-card">';
+  if (c.tag) h += '<span class="svc-tag ' + c.tag + '">' + c.tagTx + '</span>';
+  if (ally) h += '<span class="svc-tag ally">联盟交付</span>';
+  h += '<div class="svc-ic">' + svgIcon(c.ic, 19) + '</div>';
+  h += '<h3>' + c.t + '</h3>';
+  h += '<div class="svc-desc">' + c.d + '</div>';
+  h += '<div class="svc-meta">';
+  c.m.forEach(function(line) {
+    if (line.indexOf('交付：') === 0) { h += '<span class="who">' + line + '</span>'; }
+    else { h += '<span>' + line + '</span>'; }
+  });
+  h += '</div>';
+  h += '<div class="svc-price">' + c.p + '</div>';
+  h += '</div>';
+  return h;
+}
+function renderServices() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">产业服务</span></div>';
+
+  // Hero
+  html += '<div class="svc-hero">';
+  html += '<span class="svc-kick">从文献数据 到产业决策</span>';
+  html += '<div class="svc-hero-sub">覆盖细胞治疗、CAR-T、基因治疗三大领域的数据资产与 AI 产能，为科研工作者与 CGT 企业提供从开题立项到生产工艺、质量控制、临床试验全链条的情报与循证服务。每一条结论，都有可溯源的文献出处。</div>';
+  html += '<div class="svc-badges">';
+  html += '<div class="svc-badge"><b>3,062</b><span>临床试验文献</span></div>';
+  html += '<div class="svc-badge"><b>79</b><span>全球获批产品</span></div>';
+  html += '<div class="svc-badge"><b>55</b><span>法规政策文件</span></div>';
+  html += '<div class="svc-badge"><b>20</b><span>年数据追溯</span></div>';
+  html += '</div></div>';
+
+  // 服务目录
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>服务目录</h2><span class="en">SERVICES</span></div>';
+  html += '<div class="svc-sec-d">按客群与产业环节分为四组，点击切换查看。所有服务均为「AI 检索 + 行业专家终审」双重把关。</div>';
+  html += '<div class="svc-tabs">';
+  SVC_TABS.forEach(function(t, i) {
+    html += '<button class="svc-tab' + (i === 0 ? ' on' : '') + '" data-svctab="' + t.k + '" onclick="switchSvcTab(\'' + t.k + '\')">' + t.label + '</button>';
+  });
+  html += '</div>';
+  SVC_TABS.forEach(function(t, i) {
+    html += '<div class="svc-panel' + (i === 0 ? ' on' : '') + '" data-svcpanel="' + t.k + '">';
+    html += '<div class="svc-grid">';
+    SVC_CARDS[t.k].forEach(function(c) { html += svcCardHtml(c, false); });
+    html += '</div>';
+    if (t.k === 'res') {
+      html += '<div class="svc-sub-h"><h3>OPEN CGT 联盟实验交付</h3><span class="en">WET-LAB SERVICES BY ALLIANCE</span></div>';
+      html += '<div class="svc-ally">以上循证服务解决「做什么、怎么做」；以下实验服务解决「谁来动手」。<b>知识库统一接单与质控，联盟成员实验室交付</b>——首个成员：<b>江西拉伊卜生物技术有限公司</b>（南昌，六大实验平台，AAA 级信用企业，合作单位覆盖协和、湘雅、中山、复旦、川大等数十家院校）。方案设计 → 实验执行 → 数据分析 → 论文转化，一站完成。</div>';
+      html += '<div class="svc-grid">';
+      ALLY_CARDS.forEach(function(c) { html += svcCardHtml(c, true); });
+      // E8 实验手册目录
+      html += '<div class="svc-card svc-manual">';
+      html += '<span class="svc-tag ally">联盟交付</span>';
+      html += '<div class="svc-ic">' + svgIcon('book', 19) + '</div>';
+      html += '<h3>E8 实验手册 · 服务目录</h3>';
+      html += '<div class="svc-desc">拉伊卜技术服务手册前三页：封面、公司简介、完整实验服务目录。点击图片放大查看。</div>';
+      html += '<div class="svc-manual-imgs">';
+      html += '<img src="assets/manual-p1.jpg" alt="手册封面" onclick="svcZoom(this.src)">';
+      html += '<img src="assets/manual-p2.jpg" alt="公司简介" onclick="svcZoom(this.src)">';
+      html += '<img src="assets/manual-p3.jpg" alt="服务目录" onclick="svcZoom(this.src)">';
+      html += '</div>';
+      html += '<div class="svc-manual-cap">江西拉伊卜生物技术有限公司 · 技术服务手册（封面 / 公司简介 / 服务目录）</div>';
+      html += '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // 数据底座
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>数据底座</h2><span class="en">DATA FOUNDATION</span></div>';
+  html += '<div class="svc-sec-d">服务背后的数据库资产。绿色已上线，黄色建设中，灰色规划中——持续扩容，服务能力随之升级。</div>';
+  html += '<div class="svc-db-grid">';
+  SVC_DB_LIST.forEach(function(db) {
+    html += '<div class="svc-db"><span class="svc-st ' + db.st + '"><i></i>' + db.stTx + '</span><b>' + db.t + '</b><span>' + db.d + '</span></div>';
+  });
+  html += '</div></div>';
+
+  // 术语词典
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
+  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
+  html += '<div class="svc-gloss">';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
+  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
+  html += '</div></div>';
+
+  // 交付流程
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>交付流程</h2><span class="en">HOW WE WORK</span></div>';
+  html += '<div class="svc-sec-d">AI 产能保证速度与覆盖面，专家终审保证专业质量。</div>';
+  html += '<div class="svc-flow">';
+  html += '<div class="svc-step"><div class="no">01</div><h4>需求沟通</h4><p>明确适应症、产品类型、交付物与时限，签署保密协议</p></div>';
+  html += '<div class="svc-step"><div class="no">02</div><h4>AI 检索结构化</h4><p>数据底座全量扫描，条款级溯源，不留记忆型错误</p></div>';
+  html += '<div class="svc-step"><div class="no">03</div><h4>行业专家终审</h4><p>从业专家逐条把关，存疑数据宁可标注也不编造</p></div>';
+  html += '<div class="svc-step"><div class="no">04</div><h4>交付与更新</h4><p>报告交付 + 可选持续监测，数据动态长期跟踪</p></div>';
+  html += '</div></div>';
+
+  // CTA
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-cta">';
+  html += '<h2>预约一次免费需求评估</h2>';
+  html += '<p>无论您是准备开题的研究生，还是筹备 IND 的企业团队——告诉我们您的方向，24 小时内回复：我们能交付什么、周期多久、报价多少。评估免费，不满意不签约。</p>';
+  html += '<div class="svc-cta-row">';
+  html += '<a class="svc-btn pri" onclick="switchSection(\'team\')">' + svgIcon('phone', 16) + ' 联系咨询</a>';
+  html += '<a class="svc-btn ghost" data-action="home" onclick="navTo(this)">返回首页</a>';
+  html += '</div>';
+  html += '<div class="svc-tip">签署保密协议后启动 · 支持对公付款与发票 · 高校团队合作另有课题通道</div>';
+  html += '</div></div>';
+
+  // 图片放大层
+  html += '<div class="svc-lightbox" id="svcLightbox" onclick="svcZoomClose()"><img id="svcLightboxImg" alt="放大查看"></div>';
+
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+function switchSvcTab(k) {
+  document.querySelectorAll('.svc-tab').forEach(function(el) {
+    el.classList.toggle('on', el.getAttribute('data-svctab') === k);
+  });
+  document.querySelectorAll('.svc-panel').forEach(function(el) {
+    el.classList.toggle('on', el.getAttribute('data-svcpanel') === k);
+  });
+}
+function svcZoom(src) {
+  var lb = document.getElementById('svcLightbox');
+  var img = document.getElementById('svcLightboxImg');
+  if (lb && img) { img.src = src; lb.classList.add('on'); }
+}
+function svcZoomClose() {
+  var lb = document.getElementById('svcLightbox');
+  if (lb) lb.classList.remove('on');
 }
 
 // === AI Data Dashboard ===
