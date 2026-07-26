@@ -5028,16 +5028,24 @@ body { padding-bottom: 60px; }
 /* === 产业服务 Services === */
 .svc-hero{padding:40px 0 26px;text-align:center}
 .svc-kick{display:inline-block;font-size:13px;letter-spacing:3px;color:var(--primary);border:1px solid rgba(0,229,255,0.35);border-radius:999px;padding:6px 18px;margin-bottom:18px}
-.svc-hero-sub{max-width:680px;margin:0 auto;color:var(--text-light);font-size:14px;line-height:1.9}
+.svc-hero-sub{max-width:680px;margin:0 auto;color:var(--text-light);font-size:14px;line-height:1.9;text-align:justify;text-indent:2em}
 .svc-badges{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
 .svc-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:10px 20px;text-align:center}
 .svc-badge b{display:block;font-size:20px;color:var(--primary)}
 .svc-badge span{font-size:11px;color:var(--text-light)}
 .svc-sec{padding:28px 0}
-.svc-sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.svc-sec-h{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px;text-align:center}
 .svc-sec-h h2{font-size:19px;font-weight:700;color:var(--text)}
 .svc-sec-h .en{font-size:10px;letter-spacing:2px;color:var(--text-light)}
-.svc-sec-d{color:var(--text-light);font-size:12px;margin-bottom:18px;line-height:1.7}
+.svc-sec-d{color:var(--text-light);font-size:12px;margin-bottom:18px;line-height:1.7;text-align:center}
+.svc-groups{display:grid;gap:12px;max-width:760px;margin:0 auto}
+.svc-group{display:flex;align-items:center;gap:14px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;cursor:pointer;transition:transform .2s,border-color .2s;text-align:left}
+.svc-group:hover{transform:translateY(-2px);border-color:rgba(0,229,255,0.35)}
+.svc-group-ic{width:42px;height:42px;border-radius:10px;background:rgba(0,229,255,0.08);display:flex;align-items:center;justify-content:center;color:var(--primary);flex:none}
+.svc-group-text{flex:1}
+.svc-group-text h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.svc-group-text p{font-size:12px;color:var(--text-light);line-height:1.6}
+.svc-group-arrow{color:var(--primary);flex:none}
 .svc-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
 .svc-tab{background:var(--card-bg);border:1px solid var(--border);color:var(--text-light);border-radius:999px;padding:8px 16px;font-size:13px;cursor:pointer;transition:border-color .2s,color .2s}
 .svc-tab.on{background:rgba(0,229,255,0.08);border-color:var(--primary);color:var(--primary)}
@@ -5113,6 +5121,9 @@ body { padding-bottom: 60px; }
   .svc-badge b{font-size:17px}
   .svc-cta{padding:22px 14px}
   .svc-sec{padding:22px 0}
+  .svc-group{padding:14px;gap:10px}
+  .svc-group-ic{width:36px;height:36px}
+  .svc-hero-sub{font-size:13px}
 }
 
 </style>
@@ -10123,7 +10134,7 @@ function renderHub() {
   html += '</div>';
 
   // AI poster banner entry 2: 产业服务体系
-  html += '<div class="ai-poster-banner" onclick="switchSection(\'services\')">';
+  html += '<div class="ai-poster-banner" onclick="svcView=\'home\';switchSection(\'services\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
   html += '<div class="ai-poster-banner-content">';
   html += '<div class="ai-poster-banner-orb">' + svgIcon('rocket', 24) + '</div>';
@@ -10148,12 +10159,15 @@ function renderHub() {
 }
 
 // === 产业服务 Services ===
-var SVC_TABS = [
-  { k: 'res', label: '基础科研 Research' },
-  { k: 'cmc', label: '生产工艺 CMC' },
-  { k: 'qc', label: '质量控制 QC/QA' },
-  { k: 'ct', label: '临床试验 Clinical' }
+var SVC_GROUPS = [
+  { k: 'res', t: '基础科研', en: 'RESEARCH', ic: 'book', d: '开题立项循证 · 基金标书证据包 · 研究热点订阅 · 公共数据挖掘 · 论文润色选刊 · 实验方案对比 · 专利转化对接，含 OPEN CGT 联盟实验交付（拉伊卜六大平台）' },
+  { k: 'cmc', t: '生产工艺', en: 'CMC', ic: 'beaker', d: '工艺循证情报报告 · 中美欧 CMC 法规雷达订阅 · 工艺变更可比性研究支持' },
+  { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写' },
+  { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持' }
 ];
+var svcView = 'home';
+function svcOpenGroup(k) { svcView = k; renderServices(); window.scrollTo({ top: 0 }); }
+function svcBackHome() { svcView = 'home'; renderServices(); window.scrollTo({ top: 0 }); }
 var SVC_CARDS = {
   res: [
     { tag:'flag', tagTx:'学术旗舰', ic:'book', t:'开题 / 立项循证报告', d:'指定研究方向的全球格局：发文趋势、主要团队、技术路线演进、临床转化证据（该方向已进入哪些临床试验、进展到几期）、研究空白点分析。', m:['交付物：20-30 页格局报告（附转化证据表）','客户：研究生开题 · 教师基金申请','周期：1-2 周'], p:'¥500-2000 / 份' },
@@ -10233,39 +10247,24 @@ function svcCardHtml(c, ally) {
 function renderServices() {
   var content = document.getElementById('content');
   var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">产业服务</span></div>';
 
-  // Hero
-  html += '<div class="svc-hero">';
-  html += '<span class="svc-kick">从文献数据 到产业决策</span>';
-  html += '<div class="svc-hero-sub">覆盖细胞治疗、CAR-T、基因治疗三大领域的数据资产与 AI 产能，为科研工作者与 CGT 企业提供从开题立项到生产工艺、质量控制、临床试验全链条的情报与循证服务。每一条结论，都有可溯源的文献出处。</div>';
-  html += '<div class="svc-badges">';
-  html += '<div class="svc-badge"><b>3,062</b><span>临床试验文献</span></div>';
-  html += '<div class="svc-badge"><b>79</b><span>全球获批产品</span></div>';
-  html += '<div class="svc-badge"><b>55</b><span>法规政策文件</span></div>';
-  html += '<div class="svc-badge"><b>20</b><span>年数据追溯</span></div>';
-  html += '</div></div>';
-
-  // 服务目录
-  html += '<div class="svc-sec">';
-  html += '<div class="svc-sec-h"><h2>服务目录</h2><span class="en">SERVICES</span></div>';
-  html += '<div class="svc-sec-d">按客群与产业环节分为四组，点击切换查看。所有服务均为「AI 检索 + 行业专家终审」双重把关。</div>';
-  html += '<div class="svc-tabs">';
-  SVC_TABS.forEach(function(t, i) {
-    html += '<button class="svc-tab' + (i === 0 ? ' on' : '') + '" data-svctab="' + t.k + '" onclick="switchSvcTab(\'' + t.k + '\')">' + t.label + '</button>';
-  });
-  html += '</div>';
-  SVC_TABS.forEach(function(t, i) {
-    html += '<div class="svc-panel' + (i === 0 ? ' on' : '') + '" data-svcpanel="' + t.k + '">';
+  // === 分组详情页 ===
+  if (svcView !== 'home') {
+    var g = null;
+    SVC_GROUPS.forEach(function(x) { if (x.k === svcView) g = x; });
+    if (!g) { svcView = 'home'; renderServices(); return; }
+    html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" onclick="svcBackHome()">产业服务</span><span class="crumb-sep">›</span> <span class="crumb-current">' + g.t + '</span></div>';
+    html += '<div class="svc-sec">';
+    html += '<div class="svc-sec-h"><h2>' + g.t + '</h2><span class="en">' + g.en + '</span></div>';
+    html += '<div class="svc-sec-d">' + g.d + '</div>';
     html += '<div class="svc-grid">';
-    SVC_CARDS[t.k].forEach(function(c) { html += svcCardHtml(c, false); });
+    SVC_CARDS[g.k].forEach(function(c) { html += svcCardHtml(c, false); });
     html += '</div>';
-    if (t.k === 'res') {
+    if (g.k === 'res') {
       html += '<div class="svc-sub-h"><h3>OPEN CGT 联盟实验交付</h3><span class="en">WET-LAB SERVICES BY ALLIANCE</span></div>';
       html += '<div class="svc-ally">以上循证服务解决「做什么、怎么做」；以下实验服务解决「谁来动手」。<b>知识库统一接单与质控，联盟成员实验室交付</b>——首个成员：<b>江西拉伊卜生物技术有限公司</b>（南昌，六大实验平台，AAA 级信用企业，合作单位覆盖协和、湘雅、中山、复旦、川大等数十家院校）。方案设计 → 实验执行 → 数据分析 → 论文转化，一站完成。</div>';
       html += '<div class="svc-grid">';
       ALLY_CARDS.forEach(function(c) { html += svcCardHtml(c, true); });
-      // E8 实验手册目录
       html += '<div class="svc-card svc-manual">';
       html += '<span class="svc-tag ally">联盟交付</span>';
       html += '<div class="svc-ic">' + svgIcon('book', 19) + '</div>';
@@ -10281,8 +10280,34 @@ function renderServices() {
       html += '</div>';
     }
     html += '</div>';
-  });
+    html += '<div class="svc-lightbox" id="svcLightbox" onclick="svcZoomClose()"><img id="svcLightboxImg" alt="放大查看"></div>';
+    content.innerHTML = html;
+    updateFloatButtons();
+    return;
+  }
+
+  // === 概览页 ===
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">产业服务</span></div>';
+
+  // Hero
+  html += '<div class="svc-hero">';
+  html += '<span class="svc-kick">从基础研究到产业转化 全链路服务</span>';
+  html += '<div class="svc-hero-sub">覆盖细胞治疗、CAR-T、基因治疗三大领域的数据资产与 AI 产能，为科研工作者与 CGT 企业提供从开题立项到生产工艺、质量控制、临床试验全链条的情报与循证服务。每一条结论，都有可溯源的文献出处。</div>';
   html += '</div>';
+
+  // 服务目录（四方向卡）
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>服务目录</h2><span class="en">SERVICES</span></div>';
+  html += '<div class="svc-sec-d">四大服务方向，点击查看详情。所有服务均为「AI 检索 + 行业专家终审」双重把关。</div>';
+  html += '<div class="svc-groups">';
+  SVC_GROUPS.forEach(function(g) {
+    html += '<div class="svc-group" onclick="svcOpenGroup(\'' + g.k + '\')">';
+    html += '<div class="svc-group-ic">' + svgIcon(g.ic, 22) + '</div>';
+    html += '<div class="svc-group-text"><h3>' + g.t + ' <span style="font-size:10px;letter-spacing:2px;color:var(--text-light);font-weight:400;">' + g.en + '</span></h3><p>' + g.d + '</p></div>';
+    html += '<div class="svc-group-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
 
   // 数据底座
   html += '<div class="svc-sec">';
@@ -10294,17 +10319,6 @@ function renderServices() {
   });
   html += '</div></div>';
 
-  // 术语词典
-  html += '<div class="svc-sec">';
-  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
-  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
-  html += '<div class="svc-gloss">';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
-  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
-  html += '</div></div>';
-
   // 交付流程
   html += '<div class="svc-sec">';
   html += '<div class="svc-sec-h"><h2>交付流程</h2><span class="en">HOW WE WORK</span></div>';
@@ -10314,6 +10328,17 @@ function renderServices() {
   html += '<div class="svc-step"><div class="no">02</div><h4>AI 检索结构化</h4><p>数据底座全量扫描，条款级溯源，不留记忆型错误</p></div>';
   html += '<div class="svc-step"><div class="no">03</div><h4>行业专家终审</h4><p>从业专家逐条把关，存疑数据宁可标注也不编造</p></div>';
   html += '<div class="svc-step"><div class="no">04</div><h4>交付与更新</h4><p>报告交付 + 可选持续监测，数据动态长期跟踪</p></div>';
+  html += '</div></div>';
+
+  // 术语词典
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
+  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
+  html += '<div class="svc-gloss">';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
+  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
   html += '</div></div>';
 
   // CTA
@@ -10333,14 +10358,6 @@ function renderServices() {
 
   content.innerHTML = html;
   updateFloatButtons();
-}
-function switchSvcTab(k) {
-  document.querySelectorAll('.svc-tab').forEach(function(el) {
-    el.classList.toggle('on', el.getAttribute('data-svctab') === k);
-  });
-  document.querySelectorAll('.svc-panel').forEach(function(el) {
-    el.classList.toggle('on', el.getAttribute('data-svcpanel') === k);
-  });
 }
 function svcZoom(src) {
   var lb = document.getElementById('svcLightbox');
