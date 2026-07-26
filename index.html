@@ -5066,9 +5066,12 @@ body { padding-bottom: 60px; }
 .svc-tag.new{color:var(--primary);border-color:rgba(0,229,255,.35)}
 .svc-tag.ally{color:#66BB6A;border-color:rgba(102,187,106,.45)}
 .svc-sub-h{display:flex;align-items:baseline;gap:10px;margin:26px 0 6px}
+.svc-sub-h.center{flex-direction:column;align-items:center;text-align:center}
 .svc-sub-h h3{font-size:16px;font-weight:600;color:var(--text)}
+.svc-sub-h.center h3{text-align:center}
 .svc-sub-h .en{font-size:10px;letter-spacing:2px;color:var(--text-light)}
-.svc-ally{background:rgba(102,187,106,0.06);border:1px solid rgba(102,187,106,0.3);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.8}
+.svc-sub-h.center .en{display:block;text-align:center;margin-top:2px}
+.svc-ally{background:rgba(102,187,106,0.06);border:1px solid rgba(102,187,106,0.3);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--text-light);margin-bottom:14px;line-height:1.8;text-indent:2em;text-align-last:center}
 .svc-ally b{color:#66BB6A}
 .svc-card.svc-manual{grid-column:1/-1}
 .svc-manual-imgs{display:flex;gap:10px;margin-top:10px}
@@ -10149,7 +10152,7 @@ function renderHub() {
   html += '<div class="ai-poster-banner-orb">' + svgIcon('rocket', 24) + '</div>';
   html += '<div class="ai-poster-banner-text">';
   html += '<div class="ai-poster-banner-title">AI赋能·CGT全产业链服务体系</div>';
-  html += '<div class="ai-poster-banner-desc">基础科研 · 生产工艺 · 质量控制 · 临床试验 · 联盟实验交付</div>';
+  html += '<div class="ai-poster-banner-desc">基础科研 · 生产工艺 · 质量控制 · 临床试验 · 联盟实验平台交付</div>';
   html += '</div>';
   html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
   html += '</div>';
@@ -10178,7 +10181,7 @@ function renderHub() {
 
 // === 产业服务 Services ===
 var SVC_GROUPS = [
-  { k: 'res', t: '基础科研', en: 'RESEARCH', ic: 'book', d: '开题立项循证 · 基金标书证据包 · 研究热点订阅 · 公共数据挖掘 · 论文润色选刊 · 实验方案对比 · 专利转化对接，含 OPEN CGT 联盟实验交付（拉伊卜六大平台）' },
+  { k: 'res', t: '基础科研', en: 'RESEARCH', ic: 'book', d: '开题立项循证 · 基金标书证据包 · 研究热点订阅 · 公共数据挖掘 · 论文润色选刊 · 实验方案对比 · 专利转化对接 · 文献库定制及综述报告，含 Open CGT 联盟实验平台交付（拉伊卜六大平台）' },
   { k: 'cmc', t: '生产工艺', en: 'CMC', ic: 'beaker', d: '工艺循证情报报告 · 中美欧 CMC 法规雷达订阅 · 工艺变更可比性研究支持' },
   { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写' },
   { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持' }
@@ -10194,7 +10197,8 @@ var SVC_CARDS = {
     { ic:'database', t:'公共数据挖掘', d:'GEO / TCGA 指定数据集标准分析：差异表达、富集、预后模型，附方法学描述与出版级图表。', m:['交付物：分析结果 + 图表 + 方法学段落','客户：有生信需求的课题组','周期：1-3 周'], p:'¥1000-5000 / 项目' },
     { ic:'pen', t:'论文润色与选刊', d:'AI 润色 + 专家把关学术表达；按主题匹配目标期刊（IF / 分区 / 审稿周期 / 接收偏好）。', m:['交付物：润色稿 + 选刊建议清单','客户：投稿中的师生','周期：3-7 天'], p:'¥300-800 / 篇' },
     { ic:'flask', t:'实验方案循证对比', d:'某实验（如 UC-MSC 成骨诱导）的各家 protocol 参数对比表：细胞代次、培养基、诱导时长、鉴定方法，照着就能做。', m:['交付物：protocol 对比表 + 推荐方案','客户：刚进实验室的研究生','周期：1 周'], p:'¥500-1500 / 份' },
-    { tag:'new', tagTx:'新', ic:'lightbulb', t:'专利初检与转化对接', d:'技术方向的专利布局初筛 + 潜在企业合作方线索，让实验室成果找到产业出口。', m:['交付物：专利初检报告 + 对接线索','客户：有成果转化需求的团队','周期：1-2 周'], p:'¥1000-3000 / 次' }
+    { tag:'new', tagTx:'新', ic:'lightbulb', t:'专利初检与转化对接', d:'技术方向的专利布局初筛 + 潜在企业合作方线索，让实验室成果找到产业出口。', m:['交付物：专利初检报告 + 对接线索','客户：有成果转化需求的团队','周期：1-2 周'], p:'¥1000-3000 / 次' },
+    { tag:'new', tagTx:'新', ic:'database', t:'研究领域专属文献库定制及综述报告', d:'基于研究人员研究方向，定制个性化文献知识库（PubMed + ClinicalTrials.gov + 中文数据库全覆盖），AI自动分类与证据分级标注；并在此基础上生成结构化文献综述报告——研究格局、技术路线演进、临床转化证据、研究空白点，一库在手，综述即出。', m:['交付物：针对研究人员研究领域的个性化知识库 + 基于知识库的文献综述报告','客户：有固定研究方向的科研人员、学生及专科医生','周期：视数据清洗难度而定'], p:'¥3000-6000 / 次' }
   ],
   cmc: [
     { tag:'new', tagTx:'新', ic:'beaker', t:'工艺循证情报报告', d:'针对指定产品类型（UC-MSC、AAV9、CAR-NK 等），交付全球公开工艺路线、关键参数区间、放大策略与培养基/耗材选型证据。', m:['交付物：30-50 页循证报告（附文献溯源表）','客户：Biotech CMC 团队 · CDMO','周期：2-3 周'], p:'¥1-3 万 / 份' },
@@ -10279,7 +10283,7 @@ function renderServices() {
     SVC_CARDS[g.k].forEach(function(c) { html += svcCardHtml(c, false); });
     html += '</div>';
     if (g.k === 'res') {
-      html += '<div class="svc-sub-h"><h3>OPEN CGT 联盟实验交付</h3><span class="en">WET-LAB SERVICES BY ALLIANCE</span></div>';
+      html += '<div class="svc-sub-h center"><h3>Open CGT联盟实验平台交付</h3><span class="en">Open CGT Alliance Wet-Lab Platform Delivery</span></div>';
       html += '<div class="svc-ally">以上循证服务解决「做什么、怎么做」；以下实验服务解决「谁来动手」。<b>知识库统一接单与质控，联盟成员实验室交付</b>——首个成员：<b>江西拉伊卜生物技术有限公司</b>（南昌，六大实验平台，AAA 级信用企业，合作单位覆盖协和、湘雅、中山、复旦、川大等数十家院校）。方案设计 → 实验执行 → 数据分析 → 论文转化，一站完成。</div>';
       html += '<div class="svc-grid">';
       ALLY_CARDS.forEach(function(c) { html += svcCardHtml(c, true); });
