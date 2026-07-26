@@ -5037,7 +5037,7 @@ body { padding-bottom: 60px; }
 .svc-sec-h{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px;text-align:center}
 .svc-sec-h h2{font-size:19px;font-weight:700;color:var(--text)}
 .svc-sec-h .en{font-size:10px;letter-spacing:2px;color:var(--text-light)}
-.svc-sec-d{color:var(--text-light);font-size:12px;margin-bottom:18px;line-height:1.7;text-align:center}
+.svc-sec-d{color:var(--text-light);font-size:12px;margin:0 auto 18px;line-height:1.8;text-align:justify;text-indent:2em;max-width:760px}
 .svc-groups{display:grid;gap:12px;max-width:760px;margin:0 auto}
 .svc-group{display:flex;align-items:center;gap:14px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:18px 20px;cursor:pointer;transition:transform .2s,border-color .2s;text-align:left}
 .svc-group:hover{transform:translateY(-2px);border-color:rgba(0,229,255,0.35)}
@@ -7894,7 +7894,8 @@ function getCurrentState() {
     prodFilter: prodFilter,
     regFilter: regFilter,
     instFilter: instFilter,
-    companyFilter: companyFilter
+    companyFilter: companyFilter,
+    svcView: (typeof svcView !== 'undefined') ? svcView : 'home'
   };
 }
 
@@ -7927,8 +7928,15 @@ function buildHash(state) {
   if (s === 'originals') return '#originals';
   if (s === 'books') return '#books';
   if (s === 'health') return '#health';
+  if (s === 'ai') return '#ai';
   if (s === 'ai-review') return '#ai-review';
+  if (s === 'guide') return '#guide';
+  if (s === 'team') return '#team';
   if (s === 'opencgt') return '#opencgt';
+  if (s === 'services') {
+    if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
+    return '#services';
+  }
   if (s === 'companies') {
     if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
     return '#companies';
@@ -7950,7 +7958,11 @@ function parseHash() {
   if (hash === '#health') return { section: 'health' };
   if (hash === '#ai') return { section: 'ai' };
   if (hash === '#ai-review') return { section: 'ai-review' };
+  if (hash === '#guide') return { section: 'guide' };
+  if (hash === '#team') return { section: 'team' };
   if (hash === '#opencgt') return { section: 'opencgt' };
+  if (hash === '#services') return { section: 'services', svcView: 'home' };
+  if (hash.indexOf('#services/') === 0) return { section: 'services', svcView: hash.slice(10) };
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
@@ -7992,6 +8004,7 @@ function restoreState(state) {
     companyFilter = 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
+    if (typeof svcView !== 'undefined') svcView = 'home';
   } else {
     currentSection = state.section || 'hub';
     currentFilter = state.filter || { system: null, indication: null };
@@ -8004,6 +8017,7 @@ function restoreState(state) {
     companyFilter = state.companyFilter || 'all';
     if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = (state.picksIssue !== undefined && state.picksIssue !== null) ? state.picksIssue : null;
+    if (typeof svcView !== 'undefined') svcView = state.svcView || 'home';
   }
   var si = document.getElementById('searchInput');
   if (si) si.value = searchQuery;
@@ -8390,13 +8404,16 @@ function renderContent() {
     var dbTextColor = function(active) { return active ? 'var(--primary)' : 'var(--text-light)'; };
     overviewHtml += '<div class="lit-db-switch" style="display:flex;gap:8px;margin:12px 0 4px;">';
     overviewHtml += '<div class="lit-db-card' + (currentDB === 'MSC' ? ' lit-db-active' : '') + '" onclick="switchLiteratureDB(\'MSC\')" style="' + dbCardStyle(currentDB === 'MSC') + '">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'MSC') + ';">' + svgIcon('dna', 14) + ' MSC <span style="font-size:11px;font-weight:400;">' + ALL_DATA.length + '篇</span></div>';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'MSC') + ';">' + svgIcon('dna', 14) + ' MSC</div>';
+    overviewHtml += '<div style="font-size:11px;font-weight:400;color:' + dbTextColor(currentDB === 'MSC') + ';opacity:0.85;margin-top:2px;">' + ALL_DATA.length + '篇</div>';
     overviewHtml += '</div>';
     overviewHtml += '<div class="lit-db-card' + (currentDB === 'CART' ? ' lit-db-active' : '') + '" onclick="switchLiteratureDB(\'CART\')" style="' + dbCardStyle(currentDB === 'CART') + '">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'CART') + ';">' + svgIcon('shield', 14) + ' CAR-T <span style="font-size:11px;font-weight:400;">' + CART_DATA.length + '篇</span></div>';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'CART') + ';">' + svgIcon('shield', 14) + ' CAR-T</div>';
+    overviewHtml += '<div style="font-size:11px;font-weight:400;color:' + dbTextColor(currentDB === 'CART') + ';opacity:0.85;margin-top:2px;">' + CART_DATA.length + '篇</div>';
     overviewHtml += '</div>';
     overviewHtml += '<div class="lit-db-card' + (currentDB === 'GT' ? ' lit-db-active' : '') + '" onclick="switchLiteratureDB(\'GT\')" style="' + dbCardStyle(currentDB === 'GT') + '">';
-    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'GT') + ';">' + svgIcon('flask', 14) + ' 基因治疗 <span style="font-size:11px;font-weight:400;">' + GT_DATA.length + '篇</span></div>';
+    overviewHtml += '<div style="font-size:14px;font-weight:700;color:' + dbTextColor(currentDB === 'GT') + ';">' + svgIcon('flask', 14) + ' 基因治疗</div>';
+    overviewHtml += '<div style="font-size:11px;font-weight:400;color:' + dbTextColor(currentDB === 'GT') + ';opacity:0.85;margin-top:2px;">' + GT_DATA.length + '篇</div>';
     overviewHtml += '</div>';
     overviewHtml += '</div>';
 
@@ -10166,8 +10183,8 @@ var SVC_GROUPS = [
   { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持' }
 ];
 var svcView = 'home';
-function svcOpenGroup(k) { svcView = k; renderServices(); window.scrollTo({ top: 0 }); }
-function svcBackHome() { svcView = 'home'; renderServices(); window.scrollTo({ top: 0 }); }
+function svcOpenGroup(k) { svcView = k; pushHistory(); renderServices(); window.scrollTo({ top: 0 }); }
+function svcBackHome() { svcView = 'home'; pushHistory(); renderServices(); window.scrollTo({ top: 0 }); }
 var SVC_CARDS = {
   res: [
     { tag:'flag', tagTx:'学术旗舰', ic:'book', t:'开题 / 立项循证报告', d:'指定研究方向的全球格局：发文趋势、主要团队、技术路线演进、临床转化证据（该方向已进入哪些临床试验、进展到几期）、研究空白点分析。', m:['交付物：20-30 页格局报告（附转化证据表）','客户：研究生开题 · 教师基金申请','周期：1-2 周'], p:'¥500-2000 / 份' },
@@ -10330,17 +10347,6 @@ function renderServices() {
   html += '<div class="svc-step"><div class="no">04</div><h4>交付与更新</h4><p>报告交付 + 可选持续监测，数据动态长期跟踪</p></div>';
   html += '</div></div>';
 
-  // 术语词典
-  html += '<div class="svc-sec">';
-  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
-  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
-  html += '<div class="svc-gloss">';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
-  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
-  html += '</div></div>';
-
   // CTA
   html += '<div class="svc-sec">';
   html += '<div class="svc-cta">';
@@ -10351,6 +10357,17 @@ function renderServices() {
   html += '<a class="svc-btn ghost" data-action="home" onclick="navTo(this)">返回首页</a>';
   html += '</div>';
   html += '<div class="svc-tip">签署保密协议后启动 · 支持对公付款与发票 · 高校团队合作另有课题通道</div>';
+  html += '</div></div>';
+
+  // 术语词典
+  html += '<div class="svc-sec">';
+  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
+  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
+  html += '<div class="svc-gloss">';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
+  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
+  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
   html += '</div></div>';
 
   // 图片放大层
@@ -10440,29 +10457,40 @@ function renderAIDashboard() {
   html += '<div class="ai-cases-section">';
   html += '<div class="ai-cases-title">AI更新数据集</div>';
   html += '<div class="ai-cases-list">';
-  // 已更新数据集
+  // 已更新数据集（动态引用数据数组，随入库自动更新）
   html += '<div class="ai-cases-subtitle">已更新数据集</div>';
+  var totalLitAll = ALL_DATA.length + CART_DATA.length + GT_DATA.length;
   var cases = [
-    {tag:'文献', tagClass:'cyan', text:'745篇干细胞临床文献自动分类入库，覆盖20个系统148种适应症', num:'745篇'},
-    {tag:'政策', tagClass:'amber', text:'818号令全文58条逐条解读，全国102家备案机构实时追踪', num:'21份'},
-    {tag:'产品', tagClass:'green', text:'45款全球获批细胞治疗产品信息整合，含FDA/EMA/NMPA', num:'45款'},
-    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'755篇'},
-    {tag:'企业', tagClass:'green', text:'CGT产业链企业入驻展示，覆盖CDMO/CRO/研发/生产全环节', num:'20+家'},
-    {tag:'会议', tagClass:'amber', text:'ASGCT/EULAR/ASCO等国际会议动态追踪，前沿数据同步更新', num:'12场'},
+    {tag:'文献', tagClass:'cyan', text:'MSC/CAR-T/基因治疗三库临床文献自动分类入库：MSC覆盖20个系统，CAR-T 6大疾病领域，基因治疗9大疾病领域', num: totalLitAll + '篇'},
+    {tag:'政策', tagClass:'amber', text:'818号令全文逐条解读，全国备案机构实时追踪，中美欧监管动态同步更新', num: REGULATIONS.length + '份'},
+    {tag:'产品', tagClass:'green', text:'全球获批细胞与基因治疗产品信息整合，覆盖FDA/EMA/NMPA获批品种', num: PRODUCTS.length + '款'},
+    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'2,849篇'},
+    {tag:'企业', tagClass:'green', text:'CGT产业链企业入驻展示，覆盖CDMO/CRO/研发/生产全环节', num: COMPANIES.length + '家'},
+    {tag:'会议', tagClass:'amber', text:'ASGCT/EULAR/ASCO等国际会议动态追踪，前沿数据同步更新', num: CONFERENCE_EVENTS.length + '场'},
     {tag:'日报', tagClass:'purple', text:'CGT行业日报每日自动推送，累计350+期AI对话生成', num:'350+期'},
-    {tag:'精选', tagClass:'cyan', text:'编辑精选5期25篇前沿文献深度解读，专家审核入库', num:'25篇'}
+    {tag:'精选', tagClass:'cyan', text:'编辑精选前沿文献深度解读，专家审核入库', num:'5期25篇'}
   ];
   cases.forEach(function(c) {
     html += '<div class="ai-case-item"><div class="ai-case-tag ' + c.tagClass + '">' + c.tag + '</div><div class="ai-case-text">' + c.text + '</div><div class="ai-case-num">' + c.num + '</div></div>';
   });
-  // 正在更新数据集
+  // 正在更新数据集（对应全产业链服务规划的15个新数据库）
   html += '<div class="ai-cases-subtitle">正在更新数据集</div>';
   var updating = [
-    {tag:'CAR-T', tagClass:'pulsing', text:'全球CAR-T临床试验全景数据库，覆盖靶点/适应症/管线阶段', num:'构建中'},
-    {tag:'IND', tagClass:'pulsing', text:'NMPA/FDA IND申报材料数据库，含药学/非临床/临床资料', num:'构建中'},
-    {tag:'评审', tagClass:'pulsing', text:'药监局CDE/FDA评审报告库，已公开品种审评报告整理', num:'构建中'},
-    {tag:'AAV', tagClass:'pulsing', text:'AAV基因治疗工艺与CMC数据库，覆盖血清型/滴度/纯度数据', num:'构建中'},
-    {tag:'投融资', tagClass:'pulsing', text:'全球CGT投融资交易数据库，含融资金额/估值/管线', num:'构建中'}
+    {tag:'要素', tagClass:'pulsing', text:'临床试验设计要素库：剂量/给药途径/终点/随访/入排标准结构化，支撑方案循证设计服务', num:'建设中'},
+    {tag:'法规', tagClass:'pulsing', text:'CMC法规差异条款库：NMPA/FDA/EMA条款级中美欧对照', num:'建设中'},
+    {tag:'术语', tagClass:'pulsing', text:'CGT产业术语库：300+条白话词典，基础研究背景友好', num:'建设中'},
+    {tag:'质控', tagClass:'pulsing', text:'质控标准库：按产品类型整理放行标准与方法学验证要求', num:'建设中'},
+    {tag:'联盟', tagClass:'pulsing', text:'联盟服务能力库：OPEN CGT联盟成员实验平台×项目×质控（首个成员：拉伊卜生物）', num:'建设中'},
+    {tag:'PV', tagClass:'pulsing', text:'PV文献监测库：已上市产品月度安全性检索留痕，GVP法定刚需', num:'规划中'},
+    {tag:'招募', tagClass:'pulsing', text:'招募中试验库：ClinicalTrials.gov官方API每周同步RECRUITING状态', num:'规划中'},
+    {tag:'工艺', tagClass:'pulsing', text:'工艺参数库：培养基/细胞密度/收率等关键工艺参数结构化', num:'规划中'},
+    {tag:'管线', tagClass:'pulsing', text:'竞品管线库：企业×靶点×适应症×临床阶段×进度事件', num:'规划中'},
+    {tag:'方法', tagClass:'pulsing', text:'检测方法库：方法学原理×适用产品×验证要点', num:'规划中'},
+    {tag:'耗材', tagClass:'pulsing', text:'耗材设备库：品牌型号选型×文献使用证据', num:'规划中'},
+    {tag:'基金', tagClass:'pulsing', text:'基金项目库：国自然/省基金CGT方向历年立项项目', num:'规划中'},
+    {tag:'期刊', tagClass:'pulsing', text:'期刊情报库：影响因子/分区/审稿周期/接收偏好年度更新', num:'规划中'},
+    {tag:'专家', tagClass:'pulsing', text:'专家库：细分领域专家网络与合作记录', num:'规划中'},
+    {tag:'案例', tagClass:'pulsing', text:'服务案例库：脱敏服务案例沉淀与销售物料', num:'规划中'}
   ];
   updating.forEach(function(c) {
     html += '<div class="ai-case-item updating"><div class="ai-case-tag ' + c.tagClass + '">' + c.tag + '</div><div class="ai-case-text">' + c.text + '</div><div class="ai-case-num">' + c.num + '</div></div>';
@@ -13243,7 +13271,8 @@ function renderBooks() {
     html += '<div class="course-title">' + escapeHtml(c.title) + '</div>';
     html += '<div class="course-desc">' + escapeHtml(c.desc) + '</div>';
     html += '<div class="course-meta"><span class="course-tag" style="background:' + catColor + '20;color:' + catColor + ';">' + escapeHtml(c.courseCat) + '</span><span class="course-tag">' + escapeHtml(c.tag) + '</span></div>';
-    html += '<div class="course-meta" style="margin-top:2px;"><span>' + svgIcon('clock', 10) + ' ' + escapeHtml(c.duration) + '</span><span>' + svgIcon('users', 10) + ' ' + escapeHtml(c.level) + '</span><span>' + escapeHtml(c.provider) + '</span></div>';
+    html += '<div class="course-meta" style="margin-top:2px;"><span>' + svgIcon('clock', 10) + ' ' + escapeHtml(c.duration) + '</span><span>' + svgIcon('users', 10) + ' ' + escapeHtml(c.level) + '</span></div>';
+    html += '<div class="course-meta" style="margin-top:2px;"><span>' + escapeHtml(c.provider) + '</span></div>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
@@ -16200,6 +16229,7 @@ function closePicksDropdown() {
     if (parsed.newsTab && typeof currentNewsTab !== 'undefined') currentNewsTab = parsed.newsTab;
     if (parsed.instFilter) instFilter = parsed.instFilter;
     if (parsed.picksIssue !== undefined && parsed.picksIssue !== null) currentPicksIssue = parsed.picksIssue;
+    if (parsed.svcView && typeof svcView !== 'undefined') svcView = parsed.svcView;
   }
   var si = document.getElementById('searchInput');
   if (si) si.value = searchQuery;
