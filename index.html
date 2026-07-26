@@ -3534,6 +3534,37 @@ body { padding-bottom: 60px; }
 .path-hint-card b { color: var(--primary); }
 .path-hint-card .phc-btn { display: inline-block; margin-top: 8px; padding: 5px 14px; border-radius: 8px; background: rgba(0,229,255,0.12); color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid rgba(0,229,255,0.35); }
 
+/* Growth roadmap full page (platform service view) */
+.path-hero { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; margin-bottom: 16px; text-align: center; }
+.path-hero-kick { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--primary); background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 20px; padding: 4px 14px; margin-bottom: 10px; }
+.path-hero-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+.path-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 640px; margin: 0 auto; text-align: justify; text-align-last: center; }
+.path-stage-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: border-color 0.2s ease; }
+.path-stage-card:hover { border-color: rgba(0,229,255,0.35); }
+.path-stage-card.goal { border-color: rgba(255,183,77,0.4); background: linear-gradient(135deg, rgba(255,183,77,0.06), var(--card-bg)); }
+.psc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.psc-num { width: 34px; height: 34px; border-radius: 50%; background: rgba(0,229,255,0.14); color: var(--primary); font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.path-stage-card.goal .psc-num { background: rgba(255,183,77,0.18); color: #FFB74D; }
+.psc-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.psc-en { font-size: 9px; letter-spacing: 2px; color: var(--text-light); margin-top: 2px; }
+.psc-content { font-size: 12px; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; text-align: justify; text-indent: 2em; }
+.psc-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 7px; }
+.psc-label { font-size: 11px; color: var(--primary); font-weight: 700; flex-shrink: 0; margin-right: 2px; }
+.path-stage-card.goal .psc-label { color: #FFB74D; }
+.psc-chip { font-size: 11px; padding: 4px 10px; border-radius: 8px; background: rgba(0,229,255,0.07); color: var(--text); cursor: pointer; border: 1px solid rgba(0,229,255,0.16); transition: border-color 0.15s ease, background 0.15s ease; }
+.psc-chip:hover { border-color: var(--primary); background: rgba(0,229,255,0.14); }
+.psc-chip.db { cursor: default; }
+.psc-chip.db:hover { border-color: rgba(0,229,255,0.16); background: rgba(0,229,255,0.07); }
+.psc-chip.db.live { background: rgba(102,187,106,0.1); border-color: rgba(102,187,106,0.32); }
+.psc-chip.db.live:hover { border-color: rgba(102,187,106,0.32); background: rgba(102,187,106,0.1); }
+.psc-chip.db.build { background: rgba(255,183,77,0.09); border-color: rgba(255,183,77,0.32); }
+.psc-chip.db.build:hover { border-color: rgba(255,183,77,0.32); background: rgba(255,183,77,0.09); }
+.psc-chip.db.plan { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-light); }
+.psc-chip.db.plan:hover { border-color: var(--border); background: rgba(255,255,255,0.04); }
+.psc-chip .dbn { opacity: 0.75; font-size: 10px; margin-left: 3px; }
+.path-footer-note { text-align: center; font-size: 11px; color: var(--text-light); line-height: 1.7; margin: 14px 0 6px; }
+.path-footer-note b { color: var(--primary); }
+
 /* Book cover grid */
 .book-grid {
   display: grid;
@@ -7959,6 +7990,7 @@ function buildHash(state) {
   if (s === 'opencgt') return '#opencgt';
   if (s === 'lab') return '#lab';
   if (s === 'blueprint') return '#blueprint';
+  if (s === 'path') return '#path';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -7991,6 +8023,7 @@ function parseHash() {
   if (hash.indexOf('#services/') === 0) return { section: 'services', svcView: hash.slice(10) };
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
+  if (hash === '#path') return { section: 'path' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8398,6 +8431,7 @@ function renderContent() {
   if (currentSection === 'lab') { renderLab(); return; }
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
   if (currentSection === 'services') { renderServices(); return; }
+  if (currentSection === 'path') { renderPath(); return; }
 
   const filtered = getFilteredData();
 
@@ -10187,6 +10221,19 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
+  // AI poster banner entry 3: 从业者成长路线图
+  html += '<div class="ai-poster-banner" onclick="switchSection(\'path\')">';
+  html += '<div class="ai-poster-banner-bg"></div>';
+  html += '<div class="ai-poster-banner-content">';
+  html += '<div class="ai-poster-banner-orb">' + svgIcon('layers', 24) + '</div>';
+  html += '<div class="ai-poster-banner-text">';
+  html += '<div class="ai-poster-banner-title">AI赋能·CGT从业者成长路线图</div>';
+  html += '<div class="ai-poster-banner-desc">七阶段成长路径 · 每步对应平台服务 · 数据库 · 栏目内容</div>';
+  html += '</div>';
+  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '</div>';
+  html += '</div>';
+
   // Lab & Blueprint section divider (moved above hot-tags)
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('beaker', 16) + ' 实验室·蓝图</div><div class="sd-line"></div></div>';
 
@@ -10212,8 +10259,8 @@ function renderHub() {
 var SVC_GROUPS = [
   { k: 'res', t: '基础科研', en: 'RESEARCH', ic: 'book', d: '开题立项循证 · 基金标书证据包 · 研究热点订阅 · 公共数据挖掘 · 论文润色选刊 · 实验方案对比 · 专利转化对接 · 文献库定制及综述报告，含 Open CGT 联盟实验平台交付（拉伊卜六大平台）' },
   { k: 'cmc', t: '生产工艺', en: 'CMC', ic: 'beaker', d: '工艺循证情报报告 · 中美欧 CMC 法规雷达订阅 · 工艺变更可比性研究支持' },
-  { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写' },
-  { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持' }
+  { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写 · 验证体系 AI 辅助包' },
+  { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持 · IND 申报 CTD 资料 AI 辅助' }
 ];
 var svcView = 'home';
 function svcOpenGroup(k) { saveNavState(); svcView = k; pushHistory(); renderServices(); window.scrollTo({ top: 0 }); }
@@ -10237,7 +10284,8 @@ var SVC_CARDS = {
   qc: [
     { ic:'shield', t:'放行标准与验证方案包', d:'按产品类型整理药典、指南与 79 款已上市产品公开质控标准，AI 起草方法学验证方案模板，专家审核。', m:['交付物：标准清单 + 验证方案模板包','客户：QC 经理 · 新建实验室','周期：2-4 周'], p:'¥1-2 万 / 套' },
     { ic:'target', t:'快速微生物检测选型', d:'短货架期产品（自体 CAR-T 等）的快速无菌/支原体方法对比、验证路径与中美欧法规接受度证据。', m:['交付物：选型对比表 + 验证路径图','客户：细胞制备企业 QA','周期：1-2 周'], p:'¥5千-1万 / 次' },
-    { ic:'doc', t:'PQR 年度报告 AI 代写', d:'企业提供批次数据，AI 起草年度产品质量回顾（PQR）框架与趋势分析初稿，QA 审定即可用。', m:['交付物：PQR 报告初稿 + 趋势图','客户：中小企业 QA','周期：1 周'], p:'按次计费' }
+    { ic:'doc', t:'PQR 年度报告 AI 代写', d:'企业提供批次数据，AI 起草年度产品质量回顾（PQR）框架与趋势分析初稿，QA 审定即可用。', m:['交付物：PQR 报告初稿 + 趋势图','客户：中小企业 QA','周期：1 周'], p:'按次计费' },
+    { tag:'new', tagTx:'新', ic:'check', t:'验证体系 AI 辅助包', d:'设备确认（IQ/OQ/PQ）、工艺验证、清洁验证的方案模板与再验证周期评估：AI 起草 URS 与验证方案框架，GMP 专家终审；覆盖验证主计划（VMP）编制、周期性/变更性再验证触发评估，对齐 GMP 第七章确认与验证要求。', m:['交付物：验证方案模板包 + VMP 框架 + 再验证评估清单','客户：设备验证工程师 · QA · 新建实验室','周期：2-3 周'], p:'¥1-2 万 / 套' }
   ],
   ct: [
     { tag:'flag', tagTx:'旗舰', ic:'layers', t:'方案循证设计报告', d:'同适应症全球试验设计要素分析：入排标准分布、剂量递增方案（3+3 / BOIN）、给药途径与次数、主要/次要终点选择、随访时长，全部出自 3,062 篇文献库，条条可溯源。', m:['交付物：50-80 页设计要素分析报告','客户：申办方医学部 · IND 前 Biotech','周期：2-3 周'], p:'¥2-5 万 / 份' },
@@ -10245,7 +10293,8 @@ var SVC_CARDS = {
     { ic:'users', t:'患者-试验匹配', d:'患者端免费使用（知识库招募板块引流），按疾病、分期、地区匹配招募中的 CGT 试验，按成功入组向申办方收费。', m:['交付物：匹配清单 + 招募进展月报','客户：申办方 · CRO 招募组','周期：持续'], p:'按入组付费' },
     { ic:'pen', t:'医学撰写 AI 辅助', d:'IB、试验方案、ICF、CSR 的 AI 起草 + 医学撰写员精修，报价比传统 CRO 低 30-50%。', m:['交付物：撰写初稿 + 两轮精修','客户：中小 Biotech','周期：按项目'], p:'项目报价' },
     { ic:'trending', t:'竞品临床动态监测', d:'指定靶点、适应症或竞品的全球临床进展月度监测：新登记试验、数据读出、审评动态、会议摘要。', m:['交付物：月度监测报告','客户：BD · 投资机构','周期：按月交付'], p:'¥2-5 万 / 年' },
-    { ic:'bar', t:'统计学循证支持', d:'样本量估算与主要终点选择的同类文献依据汇总，为方案统计学部分提供循证参照。', m:['交付物：循证依据备忘录','客户：申办方 · 统计师','周期：1 周'], p:'¥5千-1万 / 次' }
+    { ic:'bar', t:'统计学循证支持', d:'样本量估算与主要终点选择的同类文献依据汇总，为方案统计学部分提供循证参照。', m:['交付物：循证依据备忘录','客户：申办方 · 统计师','周期：1 周'], p:'¥5千-1万 / 次' },
+    { tag:'new', tagTx:'新', ic:'file', t:'IND 申报 CTD 资料 AI 辅助', d:'CTD 五大模块资料组织辅导：模块 2 通用技术文档总结 AI 起草，M3 质量 / M4 非临床 / M5 临床资料清单逐项核对，"不适用"项目的合规表述（理由充分性 + 依据明确性），对齐 CDE eCTD 格式要求与 60 日默示许可审评要点。', m:['交付物：模块 2 综述初稿 + 全模块资料清单 + 不适用项表述建议','客户：注册部 · IND 前 Biotech','周期：2-4 周'], p:'¥2-4 万 / 次' }
   ]
 };
 var ALLY_CARDS = [
@@ -10278,6 +10327,85 @@ var SVC_DB_LIST = [
   { st:'plan', stTx:'规划中', t:'专家库', d:'细分领域专家网络' },
   { st:'plan', stTx:'规划中', t:'服务案例库', d:'脱敏案例沉淀' }
 ];
+// === Growth Roadmap Page (AI赋能·CGT从业者成长路线图) ===
+var PATH_STAGES = [
+  { n:1, t:'基础知识', en:'FOUNDATIONS',
+    content:'细胞生物学、分子生物学、免疫学、干细胞生物学、基因编辑技术原理——搭建CGT从业的学科地基。',
+    svcs:[{t:'研究热点订阅', g:'res'}, {t:'开题/立项循证报告', g:'res'}, {t:'公共数据挖掘', g:'res'}],
+    dbs:[{t:'临床试验文献库', st:'live', n:'3,062篇'}, {t:'文献摘要库', st:'live', n:'2,849篇'}],
+    cols:[{t:'学习课程 · 基础知识4门', s:'books'}, {t:'行业书籍 · 原创专著', s:'books'}, {t:'临床文献库', s:'literature'}] },
+  { n:2, t:'行业认知', en:'LANDSCAPE',
+    content:'行业格局与里程碑事件、代表产品、产业链上中下游全景、监管框架概览与商业模式——建立产业敏感度。',
+    svcs:[{t:'竞品临床动态监测', g:'ct'}, {t:'开题/立项循证报告', g:'res'}],
+    dbs:[{t:'获批产品库', st:'live', n:'79款'}, {t:'法规政策库', st:'live', n:'55份'}, {t:'竞品管线库', st:'plan', n:'规划中'}],
+    cols:[{t:'行业报告', s:'report'}, {t:'获批产品', s:'products'}, {t:'转载文章 · 行业报道', s:'originals'}, {t:'企业名录', s:'companies'}] },
+  { n:3, t:'岗位技能', en:'JOB SKILLS',
+    content:'研发、CMC制造、QA/QC、临床运营、注册申报五大岗位线的专业技能——protocol执行、验证确认、监查核查、申报组织，样样有章法。',
+    svcs:[{t:'实验方案循证对比', g:'res'}, {t:'工艺循证情报报告', g:'cmc'}, {t:'放行标准与验证方案包', g:'qc'}, {t:'方案循证设计报告', g:'ct'}],
+    dbs:[{t:'试验设计要素库', st:'build', n:'建设中'}, {t:'质控标准库', st:'build', n:'建设中'}, {t:'工艺参数库', st:'plan', n:'规划中'}, {t:'检测方法库', st:'plan', n:'规划中'}],
+    cols:[{t:'学习课程 · 岗位技能8门', s:'books'}, {t:'产业服务 · 联盟实验平台', s:'services'}] },
+  { n:4, t:'法规合规', en:'REGULATORY',
+    content:'GMP/GLP/GCP体系、818号令与14项备案指引、IND申报与eCTD、中美欧监管差异——合规是CGT的生命线。',
+    svcs:[{t:'CMC法规雷达订阅', g:'cmc'}, {t:'IND申报CTD资料AI辅助', g:'ct'}, {t:'验证体系AI辅助包', g:'qc'}, {t:'可比性研究方案支持', g:'cmc'}],
+    dbs:[{t:'法规政策库', st:'live', n:'55份'}, {t:'CMC法规差异库', st:'build', n:'建设中'}],
+    cols:[{t:'监管政策', s:'regulations'}, {t:'学习课程 · 法规合规11门', s:'books'}, {t:'原创文章 · 818号令解读', s:'originals'}] },
+  { n:5, t:'综合贯通', en:'INTEGRATION',
+    content:'全流程串联、跨学科协作、项目管理与团队协作——从单点技能到全链条视野。',
+    svcs:[{t:'医学撰写AI辅助', g:'ct'}, {t:'统计学循证支持', g:'ct'}, {t:'PQR年度报告AI代写', g:'qc'}],
+    dbs:[{t:'联盟服务能力库', st:'build', n:'建设中'}, {t:'服务案例库', st:'plan', n:'规划中'}],
+    cols:[{t:'Open CGT联盟 · 共创计划', s:'opencgt'}, {t:'学习课程 · 综合贯通3门', s:'books'}] },
+  { n:6, t:'前沿进阶', en:'FRONTIER',
+    content:'AI+CGT、新一代基因编辑、体内CAR-T、通用型细胞疗法——站在产业变革的最前沿。',
+    svcs:[{t:'文献库定制及综述报告', g:'res'}, {t:'专利初检与转化对接', g:'res'}, {t:'研究热点订阅', g:'res'}],
+    dbs:[{t:'文献摘要库', st:'live', n:'2,849篇'}, {t:'基金项目库', st:'plan', n:'规划中'}, {t:'期刊情报库', st:'plan', n:'规划中'}],
+    cols:[{t:'原创文章 · AI赋能细胞治疗', s:'originals'}, {t:'编辑精选 · 前沿解读', s:'picks'}, {t:'前沿研究 · 行业报告', s:'report'}] },
+  { n:7, t:'复合型人才', en:'T-SHAPED', goal:true,
+    content:'技术 + 法规 + 产业三维贯通——从平台使用者，成长为行业共建者。',
+    svcs:[{t:'加入共创联盟 · 共建知识库', g:'', s:'opencgt'}],
+    dbs:[{t:'专家库', st:'plan', n:'规划中'}],
+    cols:[{t:'共创联盟计划', s:'opencgt'}, {t:'团队与联系', s:'team'}] }
+];
+function pathSvc(g) { switchSection('services'); svcOpenGroup(g); }
+function pathGo(s) { switchSection(s); }
+function renderPath() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">成长路线图</span></div>';
+  html += '<div class="path-hero">';
+  html += '<div class="path-hero-kick">AI赋能 · CGT CAREER ROADMAP</div>';
+  html += '<div class="path-hero-title">CGT从业者成长路线图</div>';
+  html += '<div class="path-hero-sub">七个阶段，从基础知识到复合型人才。每一步，平台都有对应的AI服务、数据库与栏目内容为你托底——学什么、用什么、去哪儿看，一图讲清。</div>';
+  html += '</div>';
+  PATH_STAGES.forEach(function(p) {
+    html += '<div class="path-stage-card' + (p.goal ? ' goal' : '') + '">';
+    html += '<div class="psc-head"><div class="psc-num">' + p.n + '</div><div><div class="psc-title">' + escapeHtml(p.t) + '</div><div class="psc-en">' + p.en + '</div></div></div>';
+    html += '<div class="psc-content">' + escapeHtml(p.content) + '</div>';
+    // services row
+    html += '<div class="psc-row"><span class="psc-label">平台服务</span>';
+    p.svcs.forEach(function(sv) {
+      if (sv.s) { html += '<span class="psc-chip" onclick="pathGo(\'' + sv.s + '\')">' + escapeHtml(sv.t) + '</span>'; }
+      else { html += '<span class="psc-chip" onclick="pathSvc(\'' + sv.g + '\')">' + escapeHtml(sv.t) + '</span>'; }
+    });
+    html += '</div>';
+    // databases row
+    html += '<div class="psc-row"><span class="psc-label">数据库支撑</span>';
+    p.dbs.forEach(function(db) {
+      html += '<span class="psc-chip db ' + db.st + '">' + escapeHtml(db.t) + '<span class="dbn">' + escapeHtml(db.n) + '</span></span>';
+    });
+    html += '</div>';
+    // columns row
+    html += '<div class="psc-row"><span class="psc-label">栏目内容</span>';
+    p.cols.forEach(function(c) {
+      html += '<span class="psc-chip" onclick="pathGo(\'' + c.s + '\')">' + escapeHtml(c.t) + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '<div class="path-footer-note">数据库图例：<b>绿色=已上线</b> · 黄色=建设中 · 灰色=规划中 · 点击服务/栏目芯片直达对应板块</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+
 function svcCardHtml(c, ally) {
   var h = '<div class="svc-card">';
   if (c.tag) h += '<span class="svc-tag ' + c.tag + '">' + c.tagTx + '</span>';
