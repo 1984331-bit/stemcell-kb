@@ -13105,7 +13105,7 @@ function renderOriginals() {
 
   // Description
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CGT双轨制产业化路径、虚拟细胞AI平台等行业趋势深度分析）、<b>政策解读</b>（818号令、14项专项备案指引等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、PREVENT-TAHA8 III期阳性结果等学术热点评论）和<b>文献综述</b>（iPSC临床全景、VX-880功能性治愈T1DM等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
+  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CGT双轨制产业化路径、虚拟细胞AI平台等行业趋势深度分析）、<b>政策解读</b>（818号令、14项专项备案指引等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、PREVENT-TAHA8 III期阳性结果等学术热点评论）、<b>前沿研究</b>（AI赋能细胞治疗等前沿方向）和<b>文献综述</b>（iPSC临床全景、VX-880功能性治愈T1DM等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
   html += '</div>';
 
   // Category cards
@@ -13115,6 +13115,7 @@ function renderOriginals() {
     {id:'产业分析', name:'产业分析', color:'#66BB6A'},
     {id:'政策解读', name:'政策解读', color:'#42A5F5'},
     {id:'学术评论', name:'学术评论', color:'#AB47BC'},
+    {id:'前沿研究', name:'前沿研究', color:'#E53935'},
     {id:'文献综述', name:'文献综述', color:'#26C6DA'}
   ];
   var articleCatCounts = {};
@@ -13123,7 +13124,7 @@ function renderOriginals() {
     articleCatCounts[a.tag]++;
   });
 
-  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px;">';
+  html += '<div class="reg-cat-row" style="grid-template-columns:repeat(7,1fr);margin-bottom:16px;">';
   articleCats.forEach(function(c) {
     var count = c.id === 'all' ? ORIGINAL_ARTICLES.length : (articleCatCounts[c.id] || 0);
     html += '<div class="reg-cat-card" style="border-left-color:' + c.color + ';cursor:pointer;' + (currentArticleCat === c.id ? 'background:rgba(0,229,255,0.06);' : '') + '" onclick="switchArticleCat(\'' + c.id + '\')">';
@@ -13540,41 +13541,6 @@ function renderBooks() {
   html += '<div class="report-intro-text">本栏目汇总国内外细胞治疗与再生医学领域的在线学习课程和培训项目，按主办方类型分为<b>大学在线课程</b>（Coursera、MITx、Harvard HMX、Stanford等名校系统课程）和<b>行业协会培训</b>（ISCT、中科院、中国细胞生物学学会、Miltenyi等专业机构实操培训）。涵盖基础入门、制造工艺、监管法规、基因治疗、临床转化等方向。</div>';
   html += '</div>';
 
-  // === Learning path roadmap (7-stage growth map) ===
-  var stageCounts = {};
-  LEARNING_COURSES.forEach(function(c) { if (c.stage) { stageCounts[c.stage] = (stageCounts[c.stage] || 0) + 1; } });
-  html += '<div class="path-map">';
-  html += '<div class="path-map-title">CGT从业者成长路线图</div>';
-  html += '<div class="path-map-sub">从基础知识到复合型人才七阶段 · 点击阶段查看对应课程</div>';
-  html += '<div class="path-track">';
-  LEARNING_PATH.forEach(function(p) {
-    var cnt = stageCounts[p.n] || 0;
-    var isActive = (currentCourseStage === p.n);
-    if (p.goal) {
-      html += '<div class="path-node goal">';
-      html += '<div class="pn-num">' + p.n + '</div>';
-      html += '<div class="pn-title">' + escapeHtml(p.t) + '</div>';
-      html += '<div class="pn-desc">' + escapeHtml(p.d) + '</div>';
-      html += '<div class="pn-count">目标</div>';
-      html += '</div>';
-    } else {
-      html += '<div class="path-node' + (isActive ? ' active' : '') + '" onclick="switchCourseStage(' + p.n + ')">';
-      html += '<div class="pn-num">' + p.n + '</div>';
-      html += '<div class="pn-title">' + escapeHtml(p.t) + '</div>';
-      html += '<div class="pn-desc">' + escapeHtml(p.d) + '</div>';
-      html += '<div class="pn-count' + (cnt === 0 ? ' empty' : '') + '">' + (cnt > 0 ? cnt + ' 门课' : '建设中') + '</div>';
-      html += '</div>';
-    }
-  });
-  html += '</div>';
-  html += '</div>';
-  // Stage empty hint (for stages without courses yet)
-  var activeStage = null;
-  LEARNING_PATH.forEach(function(p) { if (p.n === currentCourseStage) activeStage = p; });
-  if (activeStage && (stageCounts[activeStage.n] || 0) === 0) {
-    html += '<div class="path-hint-card">「<b>' + escapeHtml(activeStage.t) + '</b>」阶段课程正在建设中。现阶段推荐前往 <b>' + escapeHtml(activeStage.linkTx || '相关板块') + '</b> 获取该阶段内容。<br><span class="phc-btn" onclick="event.stopPropagation();switchCourseStage(0);switchSection(\'' + (activeStage.link || 'report') + '\')">' + escapeHtml(activeStage.linkTx || '前往') + '</span></div>';
-  }
-
   // Course category cards
   var courseCats = [
     {id:'all', name:'全部课程', color:'var(--primary)'},
@@ -13599,12 +13565,8 @@ function renderBooks() {
   });
   html += '</div>';
 
-  // Course cards (filtered by category + growth stage)
-  var filteredCourses = LEARNING_COURSES.filter(function(c) {
-    if (currentCourseCat !== 'all' && c.courseCat !== currentCourseCat) return false;
-    if (currentCourseStage && c.stage !== currentCourseStage) return false;
-    return true;
-  });
+  // Course cards (filtered)
+  var filteredCourses = currentCourseCat === 'all' ? LEARNING_COURSES : LEARNING_COURSES.filter(function(c) { return c.courseCat === currentCourseCat; });
   filteredCourses.forEach(function(c) {
     var catColor = c.courseCat === '大学课程' ? '#42A5F5' : '#FFB74D';
     html += '<div class="course-card" onclick="window.open(\'' + (c.url || '#') + '\',\'_blank\')">';
