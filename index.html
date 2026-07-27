@@ -3538,7 +3538,7 @@ body { padding-bottom: 60px; }
 .path-hero { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; margin-bottom: 16px; text-align: center; }
 .path-hero-kick { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--primary); background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 20px; padding: 4px 14px; margin-bottom: 10px; }
 .path-hero-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
-.path-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 640px; margin: 0 auto; text-align: justify; text-indent: 2em; text-align-last: center; }
+.path-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 640px; margin: 0 auto; text-align: center; }
 .path-stage-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: border-color 0.2s ease; }
 .path-stage-card:hover { border-color: rgba(0,229,255,0.35); }
 .path-stage-card.goal { border-color: rgba(255,183,77,0.4); background: linear-gradient(135deg, rgba(255,183,77,0.06), var(--card-bg)); }
@@ -3548,7 +3548,7 @@ body { padding-bottom: 60px; }
 .psc-title { font-size: 16px; font-weight: 700; color: var(--text); }
 .psc-en { font-size: 9px; letter-spacing: 2px; color: var(--text-light); margin-top: 2px; }
 .psc-content { font-size: 12px; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; text-align: justify; text-indent: 2em; }
-.psc-objective { font-size: 12px; color: var(--text); line-height: 1.7; margin: 8px 0 10px; padding: 8px 12px; background: rgba(0,229,255,0.06); border-left: 3px solid var(--primary); border-radius: 4px; text-align: justify; text-indent: 2em; text-align-last: center; }
+.psc-objective { font-size: 12px; color: var(--text); line-height: 1.7; margin: 8px 0 10px; padding: 8px 12px; background: rgba(0,229,255,0.06); border-left: 3px solid var(--primary); border-radius: 4px; }
 .path-stage-card.goal .psc-objective { border-left-color: #FFB74D; background: rgba(255,183,77,0.06); }
 .psc-subjects-head { font-size: 11px; color: var(--primary); font-weight: 700; margin: 10px 0 6px; display: flex; align-items: center; gap: 6px; }
 .path-stage-card.goal .psc-subjects-head { color: #FFB74D; }
@@ -5317,9 +5317,9 @@ body { padding-bottom: 60px; }
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
       企业
     </div>
-    <div class="info-tab" data-kb="ai-review" onclick="navToKb('ai-review')">
+    <div class="info-tab" data-kb="services" onclick="navToKb('services')">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      AI<span class="hot-tag">HOT</span>
+      服务<span class="hot-tag">AI+</span>
     </div>
   </div>
 </div>
@@ -10127,8 +10127,8 @@ function renderHub() {
   // Originals entry
   html += '<div class="report-entry" style="border-color:rgba(171,71,188,0.25);" onclick="switchSection(\'originals\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#CE93D8;">' + svgIcon('quote', 16) + '<span>原创文章·大咖观点</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(206,147,216,0.7);">平台原创·行业大咖评论·院士专家观点</div>';
+  html += '<div class="report-entry-title" style="color:#CE93D8;">' + svgIcon('quote', 16) + '<span>专栏文章·大咖观点</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(206,147,216,0.7);">行业大咖评论·院士专家观点</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -10243,13 +10243,26 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
+  // AI poster banner entry 4: 生物医药领域全景图谱
+  html += '<div class="ai-poster-banner" onclick="svcView=\'home\';switchSection(\'services\')">';
+  html += '<div class="ai-poster-banner-bg"></div>';
+  html += '<div class="ai-poster-banner-content">';
+  html += '<div class="ai-poster-banner-orb">' + svgIcon('globe', 24) + '</div>';
+  html += '<div class="ai-poster-banner-text">';
+  html += '<div class="ai-poster-banner-title">AI赋能·生物医药领域全景图谱</div>';
+  html += '<div class="ai-poster-banner-desc">靶点分布 · 管线格局 · 政策地图 · 资本热度 · 人才图谱</div>';
+  html += '</div>';
+  html += '<div class="ai-poster-banner-arrow">' + svgIcon('chevron-right', 20) + '</div>';
+  html += '</div>';
+  html += '</div>';
+
   // Lab & Blueprint section divider (moved above hot-tags)
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('beaker', 16) + ' 实验室·蓝图</div><div class="sd-line"></div></div>';
 
   // Lab entry
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card green" onclick="switchSection(\'lab\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('beaker', 18) + '</div><div class="hsc-title">在建实验室</div></div><div class="hsc-desc">建设进度 · 平台设备 · 可服务方向 · 合作入口</div></div>';
-  html += '<div class="hub-split-card purple" onclick="switchSection(\'blueprint\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('target', 18) + '</div><div class="hsc-title">发展蓝图</div></div><div class="hsc-desc">平台定位·发展路线·阶段目标·核心优势</div></div>';
+  html += '<div class="hub-split-card purple" onclick="switchSection(\'blueprint\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('target', 18) + '</div><div class="hsc-title">发展蓝图</div></div><div class="hsc-desc">平台定位·发展路线·阶段目标</div></div>';
   html += '</div>';
 
   // 热门检索·快捷入口 (moved to bottom)
@@ -10414,7 +10427,7 @@ var PATH_STAGES = [
     ],
     svcs:[{t:'CMC法规雷达订阅', g:'cmc'}, {t:'IND申报CTD资料AI辅助', g:'ct'}, {t:'验证体系AI辅助包', g:'qc'}, {t:'QMS四级文件体系搭建', g:'qc'}, {t:'可比性研究方案支持', g:'cmc'}],
     dbs:[{t:'法规政策库', st:'live', n:'55份'}, {t:'CMC法规差异库', st:'build', n:'建设中'}],
-    cols:[{t:'监管政策', s:'regulations'}, {t:'原创文章', s:'originals'}] },
+    cols:[{t:'监管政策', s:'regulations'}, {t:'专栏文章', s:'originals'}] },
   { n:5, t:'综合学习', en:'INTEGRATION',
     goal:'干细胞全流程综合知识学习——整合药理学、毒理学、免疫学等多学科知识，形成跨学科的系统视野。',
     subjects:[
@@ -10430,7 +10443,7 @@ var PATH_STAGES = [
     ],
     svcs:[{t:'医学撰写AI辅助', g:'ct'}, {t:'统计学循证支持', g:'ct'}, {t:'PQR年度报告AI代写', g:'qc'}],
     dbs:[{t:'联盟服务能力库', st:'build', n:'建设中'}, {t:'服务案例库', st:'plan', n:'规划中'}],
-    cols:[{t:'原创文章', s:'originals'}, {t:'专家观点', s:'originals'}] },
+    cols:[{t:'专栏文章', s:'originals'}, {t:'专家观点', s:'originals'}] },
   { n:6, t:'干细胞药物研发全流程', en:'FULL-PROCESS',
     goal:'能熟练掌握干细胞药物研发全流程——从产品概述、研发现状、工艺开发、质量管理、临床前到临床研究。',
     subjects:[
@@ -12364,28 +12377,6 @@ function renderBlueprint() {
   html += '</div>';
   html += '</div>';
 
-  // Core Advantages — content empty for now
-  html += '<div class="opencgt-block">';
-  html += '<div class="opencgt-block-title">' + svgIcon('star', 18) + ' 核心优势</div>';
-  html += '<div class="bp-advantage-grid">';
-  html += '<div class="bp-advantage-card">';
-  html += '<div class="bp-advantage-icon">' + svgIcon('doc', 22) + '</div>';
-  html += '<div class="bp-advantage-title">内容壁垒</div>';
-  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
-  html += '</div>';
-  html += '<div class="bp-advantage-card">';
-  html += '<div class="bp-advantage-icon">' + svgIcon('cell', 22) + '</div>';
-  html += '<div class="bp-advantage-title">技术壁垒</div>';
-  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
-  html += '</div>';
-  html += '<div class="bp-advantage-card">';
-  html += '<div class="bp-advantage-icon">' + svgIcon('users', 22) + '</div>';
-  html += '<div class="bp-advantage-title">学术壁垒</div>';
-  html += '<div class="bp-advantage-desc"><span class="bp-advantage-placeholder">待完善……</span></div>';
-  html += '</div>';
-  html += '</div>';
-  html += '</div>';
-
   // Data Metrics — only UV, subscriptions, community size
   html += '<div class="opencgt-block">';
   html += '<div class="opencgt-block-title">' + svgIcon('chart', 18) + ' 关键指标</div>';
@@ -13095,7 +13086,7 @@ function renderOriginals() {
 
   // Tab switcher (3 tabs)
   html += '<div class="report-tabs">';
-  html += '<button class="report-tab' + (currentOriginalTab === 'articles' ? ' active' : '') + '" data-tab="articles" onclick="switchOriginalTab(\'articles\')">' + svgIcon('pen', 14) + ' 原创文章</button>';
+  html += '<button class="report-tab' + (currentOriginalTab === 'articles' ? ' active' : '') + '" data-tab="articles" onclick="switchOriginalTab(\'articles\')">' + svgIcon('pen', 14) + ' 专栏文章</button>';
   html += '<button class="report-tab' + (currentOriginalTab === 'reprints' ? ' active' : '') + '" data-tab="reprints" onclick="switchOriginalTab(\'reprints\')">' + svgIcon('copy', 14) + ' 转载文章</button>';
   html += '<button class="report-tab' + (currentOriginalTab === 'experts' ? ' active' : '') + '" data-tab="experts" onclick="switchOriginalTab(\'experts\')">' + svgIcon('mic', 14) + ' 大咖观点</button>';
   html += '</div>';
@@ -13105,7 +13096,7 @@ function renderOriginals() {
 
   // Description
   html += '<div class="report-intro">';
-  html += '<div class="report-intro-text">本栏目发布平台原创深度文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CGT双轨制产业化路径、虚拟细胞AI平台等行业趋势深度分析）、<b>政策解读</b>（818号令、14项专项备案指引等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、PREVENT-TAHA8 III期阳性结果等学术热点评论）、<b>前沿研究</b>（AI赋能细胞治疗等前沿方向）和<b>文献综述</b>（iPSC临床全景、VX-880功能性治愈T1DM等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
+  html += '<div class="report-intro-text">本栏目发布平台深度专栏文章，涵盖<b>专著连载</b>（干细胞临床应用手册核心章节精选）、<b>产业分析</b>（CGT双轨制产业化路径、虚拟细胞AI平台等行业趋势深度分析）、<b>政策解读</b>（818号令、14项专项备案指引等监管法规逐条解读）、<b>学术评论</b>（ISCT新标准、PREVENT-TAHA8 III期阳性结果等学术热点评论）、<b>前沿研究</b>（AI赋能细胞治疗等前沿方向）和<b>文献综述</b>（iPSC临床全景、VX-880功能性治愈T1DM等前沿文献系统梳理）。所有文章均基于公开文献与公开数据，仅供学术交流参考。</div>';
   html += '</div>';
 
   // Category cards
@@ -13317,7 +13308,7 @@ function showOriginalArticle(idx) {
   html += '<span>' + svgIcon('tag', 11) + ' ' + escapeHtml(a.tag) + '</span>';
   html += '</div>';
   html += '<div class="article-modal-body">' + (a.content || '<p style="color:var(--text-light);">该文章详细内容正在编辑中，敬请期待。</p>') + '</div>';
-  html += '<div class="article-modal-note">本平台原创文章仅供学术交流参考，文章内容基于公开文献与公开数据，不代表任何临床建议。具体临床应用请遵循专业医疗人员指导与现行法规。</div>';
+  html += '<div class="article-modal-note">本平台专栏文章仅供学术交流参考，文章内容基于公开文献与公开数据，不代表任何临床建议。具体临床应用请遵循专业医疗人员指导与现行法规。</div>';
   modal.innerHTML = html;
   var overlay = document.getElementById('articleModalOverlay');
   overlay.classList.add('show');
@@ -13365,7 +13356,7 @@ const LEARNING_PATH = [
   {n:3, t:'岗位技能', en:'JOB SKILLS', d:'研发 / CMC制造 / QA·QC / 临床运营 / 注册申报'},
   {n:4, t:'法规合规', en:'REGULATORY', d:'GMP/GLP/GCP · 818号令 · IND与eCTD'},
   {n:5, t:'综合贯通', en:'INTEGRATION', d:'全流程串联 · 跨学科协作 · 项目管理'},
-  {n:6, t:'前沿进阶', en:'FRONTIER', d:'AI+CGT · 新基因编辑 · 下一代细胞疗法', link:'originals', linkTx:'前往原创文章板块'},
+  {n:6, t:'前沿进阶', en:'FRONTIER', d:'AI+CGT · 新基因编辑 · 下一代细胞疗法', link:'originals', linkTx:'前往专栏文章板块'},
   {n:7, t:'复合型人才', en:'T-SHAPED', d:'技术 + 法规 + 产业 三维贯通（目标态）', goal:true}
 ];
 const LEARNING_COURSES = [
@@ -16241,7 +16232,7 @@ function renderRegulations() {
     html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(regFilter) + '</span>';
   }
   html += '</div>';
-  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。</b></div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全球细胞与基因治疗监管政策文件汇总，涵盖中国NMPA/卫健委、美国FDA、欧盟EMA、日本PMDA及行业标准。点击下方分类卡片筛选。<b>网站暂不提供原文下载，了解具体内容点击来源链接。需要完整数据包，请联系网站作者。</b></div></div>';
 
   // Category counts
   var catCounts = {};
