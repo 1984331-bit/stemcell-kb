@@ -10243,8 +10243,8 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
-  // AI poster banner entry 4: 生物医药领域全景图谱
-  html += '<div class="ai-poster-banner" onclick="svcView=\'home\';switchSection(\'services\')">';
+  // AI poster banner entry 4: 生物医药领域全景图谱（复用原AI栏目内容）
+  html += '<div class="ai-poster-banner" onclick="switchSection(\'ai-review\')">';
   html += '<div class="ai-poster-banner-bg"></div>';
   html += '<div class="ai-poster-banner-content">';
   html += '<div class="ai-poster-banner-orb">' + svgIcon('globe', 24) + '</div>';
@@ -10681,7 +10681,7 @@ function renderAIDashboard() {
   var content = document.getElementById('content');
   var html = '';
 
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">AI数据看板</span></div>';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">AI赋能·生物医药领域全景图谱</span></div>';
 
   html += '<div class="ai-dash-section" id="aiDashSection">';
 
