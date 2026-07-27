@@ -3538,7 +3538,7 @@ body { padding-bottom: 60px; }
 .path-hero { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; margin-bottom: 16px; text-align: center; }
 .path-hero-kick { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--primary); background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 20px; padding: 4px 14px; margin-bottom: 10px; }
 .path-hero-title { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
-.path-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 640px; margin: 0 auto; text-align: justify; text-align-last: center; }
+.path-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 640px; margin: 0 auto; text-align: justify; text-indent: 2em; text-align-last: center; }
 .path-stage-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: border-color 0.2s ease; }
 .path-stage-card:hover { border-color: rgba(0,229,255,0.35); }
 .path-stage-card.goal { border-color: rgba(255,183,77,0.4); background: linear-gradient(135deg, rgba(255,183,77,0.06), var(--card-bg)); }
@@ -3548,6 +3548,15 @@ body { padding-bottom: 60px; }
 .psc-title { font-size: 16px; font-weight: 700; color: var(--text); }
 .psc-en { font-size: 9px; letter-spacing: 2px; color: var(--text-light); margin-top: 2px; }
 .psc-content { font-size: 12px; color: var(--text-light); line-height: 1.7; margin-bottom: 10px; text-align: justify; text-indent: 2em; }
+.psc-objective { font-size: 12px; color: var(--text); line-height: 1.7; margin: 8px 0 10px; padding: 8px 12px; background: rgba(0,229,255,0.06); border-left: 3px solid var(--primary); border-radius: 4px; text-align: justify; text-indent: 2em; text-align-last: center; }
+.path-stage-card.goal .psc-objective { border-left-color: #FFB74D; background: rgba(255,183,77,0.06); }
+.psc-subjects-head { font-size: 11px; color: var(--primary); font-weight: 700; margin: 10px 0 6px; display: flex; align-items: center; gap: 6px; }
+.path-stage-card.goal .psc-subjects-head { color: #FFB74D; }
+.psc-subjects-count { font-size: 10px; color: var(--text-light); font-weight: 400; }
+.psc-subjects-list { list-style: decimal; padding-left: 22px; margin: 0 0 10px; font-size: 11px; color: var(--text-light); line-height: 1.65; }
+.psc-subjects-list li { margin-bottom: 3px; padding-left: 2px; }
+.psc-subjects-list li b { color: var(--text); font-weight: 600; }
+.psc-subjects-more { color: var(--text-light); font-size: 10px; margin-left: 4px; }
 .psc-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 7px; }
 .psc-label { font-size: 11px; color: var(--primary); font-weight: 700; flex-shrink: 0; margin-right: 2px; }
 .path-stage-card.goal .psc-label { color: #FFB74D; }
@@ -10330,41 +10339,135 @@ var SVC_DB_LIST = [
 ];
 // === Growth Roadmap Page (AI赋能·CGT从业者成长路线图) ===
 var PATH_STAGES = [
-  { n:1, t:'基础知识', en:'FOUNDATIONS',
-    content:'细胞生物学、分子生物学、免疫学、干细胞生物学、基因编辑技术原理——搭建CGT从业的学科地基。',
+  { n:1, t:'掌握基础知识', en:'FOUNDATIONS',
+    goal:'选定一门课程并系统学习，掌握课程中细胞相关的内容，积累行业背景知识。',
+    subjects:[
+      {b:'细胞生物学', d:'了解细胞的结构、功能、生命周期和细胞间的相互作用。'},
+      {b:'分子生物学', d:'掌握DNA、RNA和蛋白质的结构与功能，以及它们在细胞中的相互作用。'},
+      {b:'遗传学', d:'学习遗传信息的传递、表达和调控机制。'},
+      {b:'免疫学', d:'理解免疫系统的结构、功能和免疫应答过程。'},
+      {b:'干细胞生物学', d:'熟悉干细胞的特性、分类和在组织修复与再生中的应用。'},
+      {b:'基因编辑技术', d:'了解CRISPR-Cas9、TALENs等基因编辑工具的原理和应用。'},
+      {b:'细胞工程', d:'掌握细胞操作技术，如细胞培养、细胞融合和细胞分选。'},
+      {b:'组织工程', d:'了解如何利用生物材料和细胞构建功能性组织。'},
+      {b:'生物制药', d:'学习生物药物的开发流程，包括药物设计、筛选、优化和生产。'},
+      {b:'细胞培养技术', d:'学习细胞系的建立、细胞培养条件的优化和细胞扩增技术。'},
+      {b:'生物伦理和法规', d:'了解与细胞治疗相关的伦理问题和法律法规。'},
+      {b:'临床研究设计', d:'学习如何设计临床试验，包括试验设计、患者招募、数据收集和结果分析。'},
+      {b:'生物统计和数据分析', d:'掌握生物数据分析方法，包括实验设计、统计分析和数据解释。'},
+      {b:'生物安全和风险评估', d:'了解生物实验中的安全规程和风险评估方法。'},
+      {b:'生物技术设备和仪器操作', d:'熟悉实验室常用的设备和仪器，如共聚焦显微镜、PCR仪、流式细胞仪等。'},
+      {b:'生物信息学', d:'掌握生物数据的收集、管理和分析技能，包括基因组学、转录组学和蛋白质组学数据分析。'},
+      {b:'再生医学', d:'了解再生医学的原理和技术，以及它们在细胞治疗中的应用。'},
+      {b:'免疫细胞治疗', d:'学习CAR-T、TCR-T、NK细胞治疗等免疫细胞疗法的原理和应用。'},
+      {b:'基因治疗', d:'了解基因治疗的原理、载体系统和临床应用。'},
+      {b:'商业和市场知识', d:'了解细胞治疗产品的市场趋势、商业模式和商业化策略。'}
+    ],
     svcs:[{t:'研究热点订阅', g:'res'}, {t:'开题/立项循证报告', g:'res'}, {t:'公共数据挖掘', g:'res'}],
     dbs:[{t:'临床试验文献库', st:'live', n:'3,062篇'}, {t:'文献摘要库', st:'live', n:'2,849篇'}],
-    cols:[{t:'学习课程 · 基础知识4门', s:'books'}, {t:'行业书籍 · 原创专著', s:'books'}, {t:'临床文献库', s:'literature'}] },
-  { n:2, t:'行业认知', en:'LANDSCAPE',
-    content:'行业格局与里程碑事件、代表产品、产业链上中下游全景、监管框架概览与商业模式——建立产业敏感度。',
+    cols:[{t:'行业书籍', s:'books'}, {t:'学习中心', s:'books'}] },
+  { n:2, t:'了解行业背景', en:'LANDSCAPE',
+    goal:'研究干细胞治疗的历史、现状与未来趋势，了解行业商业模式与监管政策，建立产业敏感度。',
+    subjects:[
+      {b:'历史与趋势', d:'研究干细胞治疗的历史、现状和未来趋势。'},
+      {b:'伦理与里程碑', d:'研究干细胞治疗的伦理，包括重要发现、关键科学家和里程碑事件。'},
+      {b:'行业格局', d:'获取关于干细胞治疗行业的整体认识，包括市场规模、增长预测和主要参与者。'},
+      {b:'应用领域', d:'探索干细胞治疗在不同医疗领域的应用，如心脏病、糖尿病、神经退行性疾病、癌症等。'},
+      {b:'驱动与挑战', d:'阅读行业分析报告，了解市场趋势、主要驱动因素和潜在挑战。'},
+      {b:'监管政策', d:'研究不同国家和地区对干细胞治疗的监管政策和法规。'},
+      {b:'成功案例', d:'学习行业内成功案例，包括已上市的干细胞产品和正在进行的临床试验。'},
+      {b:'技术与商业挑战', d:'了解干细胞治疗面临的技术、伦理和商业化挑战。'},
+      {b:'领先机构', d:'识别行业内的领先公司和研究机构，了解它们的产品线和研究方向。'}
+    ],
     svcs:[{t:'竞品临床动态监测', g:'ct'}, {t:'开题/立项循证报告', g:'res'}],
     dbs:[{t:'获批产品库', st:'live', n:'79款'}, {t:'法规政策库', st:'live', n:'55份'}, {t:'竞品管线库', st:'plan', n:'规划中'}],
-    cols:[{t:'行业报告', s:'report'}, {t:'获批产品', s:'products'}, {t:'转载文章 · 行业报道', s:'originals'}, {t:'企业名录', s:'companies'}] },
-  { n:3, t:'岗位技能', en:'JOB SKILLS',
-    content:'研发、CMC制造、QA/QC、临床运营、注册申报五大岗位线的专业技能——protocol执行、验证确认、监查核查、申报组织，样样有章法。',
+    cols:[{t:'行业报告', s:'report'}, {t:'获批产品', s:'products'}] },
+  { n:3, t:'专业技能培养', en:'JOB SKILLS',
+    goal:'通过本平台查证文献、熟悉行业各部门专业技能要求——研发、质量、注册、生产、市场、销售、财务、供应链、行政、IT各岗位的职责边界与协作流程。',
+    subjects:[
+      {b:'研发部', d:'负责细胞治疗产品的工艺开发、技术文档编写及指导生产，确保产品从研发到生产的顺利转化。'},
+      {b:'质量保证部门 QA', d:'确保医药产品符合质量标准以及执行GMP标准，进行GMP现场监督和质量设备验证管理，维护产品质量，负责公司质量体系建设。'},
+      {b:'质量检验部门 QC', d:'监控和检测产品或服务的质量，确保其符合既定的标准和规范；制定和执行质量控制计划，对生产出的产品进行检测、记录与报告检验结果。'},
+      {b:'注册部', d:'负责医药产品的合规管理，确保产品符合监管要求，完成产品注册流程。'},
+      {b:'生产部门', d:'GMP车间建设、运营等。管理生产流程，维护设备和公用系统，优化生产效率与产品质量。'},
+      {b:'市场部', d:'进行市场调研，推广产品，建设品牌，提升市场竞争力。'},
+      {b:'销售部', d:'负责产品销售，管理客户关系，制定销售策略，实现销售目标。'},
+      {b:'财务部', d:'管理公司财务，包括资金、预算和日常出纳，优化资金使用，提升财务效率。'},
+      {b:'供应链', d:'负责采购、库存和物料管理，确保物料供应，优化物流流程。'},
+      {b:'行政部', d:'提供人力资源、行政和日常事务支持，维护良好的工作环境和行政流程。'},
+      {b:'信息技术部', d:'建设、维护和升级信息系统，确保信息安全与数据管理。'}
+    ],
     svcs:[{t:'实验方案循证对比', g:'res'}, {t:'工艺循证情报报告', g:'cmc'}, {t:'放行标准与验证方案包', g:'qc'}, {t:'方案循证设计报告', g:'ct'}],
     dbs:[{t:'试验设计要素库', st:'build', n:'建设中'}, {t:'质控标准库', st:'build', n:'建设中'}, {t:'工艺参数库', st:'plan', n:'规划中'}, {t:'检测方法库', st:'plan', n:'规划中'}],
-    cols:[{t:'学习课程 · 岗位技能8门', s:'books'}, {t:'产业服务 · 联盟实验平台', s:'services'}] },
-  { n:4, t:'法规合规', en:'REGULATORY',
-    content:'GMP/GLP/GCP体系、818号令与14项备案指引、IND申报与eCTD、中美欧监管差异——合规是CGT的生命线。',
+    cols:[{t:'产业服务', s:'services'}, {t:'学习中心', s:'books'}] },
+  { n:4, t:'理解法规要求', en:'REGULATORY',
+    goal:'了解与细胞治疗相关的法律法规和伦理问题，学习如何在研究和开发中遵守伦理准则和法规要求。',
+    subjects:[
+      {b:'法规基础', d:'全球细胞治疗相关法律法规以及伦理指导原则全貌。'},
+      {b:'细胞治疗法规', d:'了解与细胞治疗相关的法律法规和伦理问题。'},
+      {b:'伦理合规', d:'学习如何在研究和开发中遵守伦理准则和法规要求。'},
+      {b:'治疗相关法规', d:'熟悉干细胞研究和治疗相关的法律法规、伦理指导原则。'},
+      {b:'国际学会标准', d:'研究国际细胞研究学会（ISSCR）发布的指南和标准。'},
+      {b:'欧美法规', d:'了解欧美日韩等国家关于细胞治疗的法规和指导原则。'},
+      {b:'地区法规', d:'熟悉所在国家或地区的具体法规，包括但不限于细胞研究、临床试验和商业化应用。'},
+      {b:'全流程法规', d:'了解干细胞研究全流程中涉及的法律法规。'}
+    ],
     svcs:[{t:'CMC法规雷达订阅', g:'cmc'}, {t:'IND申报CTD资料AI辅助', g:'ct'}, {t:'验证体系AI辅助包', g:'qc'}, {t:'QMS四级文件体系搭建', g:'qc'}, {t:'可比性研究方案支持', g:'cmc'}],
     dbs:[{t:'法规政策库', st:'live', n:'55份'}, {t:'CMC法规差异库', st:'build', n:'建设中'}],
-    cols:[{t:'监管政策', s:'regulations'}, {t:'学习课程 · 法规合规11门', s:'books'}, {t:'原创文章 · 818号令解读', s:'originals'}] },
-  { n:5, t:'综合贯通', en:'INTEGRATION',
-    content:'全流程串联、跨学科协作、项目管理与团队协作——从单点技能到全链条视野。',
+    cols:[{t:'监管政策', s:'regulations'}, {t:'原创文章', s:'originals'}] },
+  { n:5, t:'综合学习', en:'INTEGRATION',
+    goal:'干细胞全流程综合知识学习——整合药理学、毒理学、免疫学等多学科知识，形成跨学科的系统视野。',
+    subjects:[
+      {b:'多学科整合', d:'干细胞治疗是一个多学科交叉的领域，需要药理学、毒理学和免疫学等多方面的知识；学习如何将不同学科的知识整合，解决实际问题。'},
+      {b:'专业媒体订阅', d:'订阅和定期阅读专业媒体、期刊和博客，如《Cell Stem Cell》、《Regenerative Medicine》等。'},
+      {b:'行业活动参与', d:'参加在线研讨会、网络会议和行业大会，这些活动通常会分享最新的研究成果和行业见解。'},
+      {b:'学术期刊关注', d:'关注行业领军期刊的社交媒体账号，及时阅读行业最新动态。'},
+      {b:'专家社交圈', d:'阅读行业专家推送的社交媒体账号，掌握一手观点。'},
+      {b:'行业内人脉', d:'与行业内的专家人士建立联系，这将有助于获取行业的最新信息和行业见解。'},
+      {b:'跨学科协作', d:'学习跨学科合作的基本技能，提高自己与不同领域专家合作的能力。'},
+      {b:'持续学习', d:'培养参与研讨会、学术会议和在线课程的方式，不断更新知识技能。'},
+      {b:'专业认证', d:'考虑获取相关的专业认证或资格证书，以提高专业知识和业务竞争力。'}
+    ],
     svcs:[{t:'医学撰写AI辅助', g:'ct'}, {t:'统计学循证支持', g:'ct'}, {t:'PQR年度报告AI代写', g:'qc'}],
     dbs:[{t:'联盟服务能力库', st:'build', n:'建设中'}, {t:'服务案例库', st:'plan', n:'规划中'}],
-    cols:[{t:'Open CGT联盟 · 共创计划', s:'opencgt'}, {t:'学习课程 · 综合贯通3门', s:'books'}] },
-  { n:6, t:'前沿进阶', en:'FRONTIER',
-    content:'AI+CGT、新一代基因编辑、体内CAR-T、通用型细胞疗法——站在产业变革的最前沿。',
+    cols:[{t:'原创文章', s:'originals'}, {t:'专家观点', s:'originals'}] },
+  { n:6, t:'干细胞药物研发全流程', en:'FULL-PROCESS',
+    goal:'能熟练掌握干细胞药物研发全流程——从产品概述、研发现状、工艺开发、质量管理、临床前到临床研究。',
+    subjects:[
+      {b:'治疗概述及作用机制', d:'干细胞治疗概述及作用机制。'},
+      {b:'产品简介与历史', d:'干细胞产品的简介、功能、优势及历史研究。'},
+      {b:'产品研发现状', d:'干细胞产品管理及作用机制 / 干细胞产品发展的历程及产业化优势 / 干细胞在医疗领域的用途 / 国内外研发进展 / 管线及布局 / 发展前景。'},
+      {b:'工艺开发与优化（CMC）', d:'干细胞产品的工艺研究及关键影响因素 / 干细胞产品工艺及生产转化 / 稳定性研究等。'},
+      {b:'质量管理规范', d:'工艺研究 / 质量研究 / 产品NVO申报问题与思考 / 合规化考量 / 产品全生命周期质量管理。'},
+      {b:'临床前有效性与安全性', d:'有效性 / 安全性。'},
+      {b:'临床研究设计', d:'临床试验设计考虑及依据。'}
+    ],
     svcs:[{t:'文献库定制及综述报告', g:'res'}, {t:'专利初检与转化对接', g:'res'}, {t:'研究热点订阅', g:'res'}],
-    dbs:[{t:'文献摘要库', st:'live', n:'2,849篇'}, {t:'基金项目库', st:'plan', n:'规划中'}, {t:'期刊情报库', st:'plan', n:'规划中'}],
-    cols:[{t:'原创文章 · AI赋能细胞治疗', s:'originals'}, {t:'编辑精选 · 前沿解读', s:'picks'}, {t:'前沿研究 · 行业报告', s:'report'}] },
+    dbs:[{t:'文献摘要库', st:'live', n:'2,849篇'}, {t:'试验设计要素库', st:'build', n:'建设中'}, {t:'质控标准库', st:'build', n:'建设中'}],
+    cols:[{t:'前沿研究', s:'report'}, {t:'编辑精选', s:'picks'}] },
   { n:7, t:'复合型人才', en:'T-SHAPED', goal:true,
-    content:'技术 + 法规 + 产业三维贯通——从平台使用者，成长为行业共建者。',
+    goal:'技术 + 法规 + 产业 三维贯通——从平台使用者成长为行业共建者。',
+    subjects:[
+      {b:'市场规模与趋势', d:'国内外市场规模和发展趋势。'},
+      {b:'三类产品原理', d:'免疫细胞、干细胞、基因修饰治疗：原理、分类和代表性产品。'},
+      {b:'创新模式与竞争', d:'细胞治疗产品的创新模式和竞争策略。'},
+      {b:'常见工艺', d:'细胞产品常见工艺。'},
+      {b:'工艺特点与难点', d:'细胞治疗产品的生产工艺特点和难点。'},
+      {b:'工艺优化技术', d:'生产工艺优化方法和技术。'},
+      {b:'标准化制作', d:'工艺实践和标准化制作。'},
+      {b:'合规生产流程', d:'符合监管要求的生产流程的建立。'},
+      {b:'质量控制方法', d:'细胞治疗产品的质量控制-方法建立，标准制定。'},
+      {b:'QbD开发策略', d:'基于QbD的细胞治疗产品的开发与质量控制策略。'},
+      {b:'GMP法规', d:'细胞治疗产品的生产质量管理-GMP法规。'},
+      {b:'平台合规化', d:'掌握细胞研发平台、生产平台等合规化建立。'},
+      {b:'质量体系建设', d:'掌握质量保证、质量控制等体系建立。'},
+      {b:'GMP体系建设', d:'掌握GMP质量体系建设、厂房和实验室设计与构建。'},
+      {b:'药物生产规范', d:'熟练掌握药品生产质量管理规范以及相关法律法规。'},
+      {b:'申报流程', d:'熟悉细胞药物申报相关流程、法规、指导和原则等。'}
+    ],
     svcs:[{t:'加入共创联盟 · 共建知识库', g:'', s:'opencgt'}],
     dbs:[{t:'专家库', st:'plan', n:'规划中'}],
-    cols:[{t:'共创联盟计划', s:'opencgt'}, {t:'团队与联系', s:'team'}] }
+    cols:[{t:'Open CGT联盟', s:'opencgt'}, {t:'团队与联系', s:'team'}] }
 ];
 function pathSvc(g) { switchSection('services'); svcOpenGroup(g); }
 function pathGo(s) { switchSection(s); }
@@ -10380,29 +10483,40 @@ function renderPath() {
   PATH_STAGES.forEach(function(p) {
     html += '<div class="path-stage-card' + (p.goal ? ' goal' : '') + '">';
     html += '<div class="psc-head"><div class="psc-num">' + p.n + '</div><div><div class="psc-title">' + escapeHtml(p.t) + '</div><div class="psc-en">' + p.en + '</div></div></div>';
-    html += '<div class="psc-content">' + escapeHtml(p.content) + '</div>';
-    // services row
+    // 学习目标
+    html += '<div class="psc-objective">学习目标：' + escapeHtml(p.goal) + '</div>';
+    // 学习科目
+    if (p.subjects && p.subjects.length) {
+      html += '<div class="psc-subjects-head">学习科目 <span class="psc-subjects-count">（共 ' + p.subjects.length + ' 条）</span></div>';
+      html += '<ol class="psc-subjects-list">';
+      p.subjects.forEach(function(sj) {
+        html += '<li><b>' + escapeHtml(sj.b) + '</b>：' + escapeHtml(sj.d) + '</li>';
+      });
+      html += '</ol>';
+    }
+    // 平台服务
     html += '<div class="psc-row"><span class="psc-label">平台服务</span>';
     p.svcs.forEach(function(sv) {
       if (sv.s) { html += '<span class="psc-chip" onclick="pathGo(\'' + sv.s + '\')">' + escapeHtml(sv.t) + '</span>'; }
       else { html += '<span class="psc-chip" onclick="pathSvc(\'' + sv.g + '\')">' + escapeHtml(sv.t) + '</span>'; }
     });
     html += '</div>';
-    // databases row
+    // 数据库
     html += '<div class="psc-row"><span class="psc-label">数据库支撑</span>';
     p.dbs.forEach(function(db) {
       html += '<span class="psc-chip db ' + db.st + '">' + escapeHtml(db.t) + '<span class="dbn">' + escapeHtml(db.n) + '</span></span>';
     });
     html += '</div>';
-    // columns row
+    // 栏目内容（只展示前2个 + 省略号）
     html += '<div class="psc-row"><span class="psc-label">栏目内容</span>';
     p.cols.forEach(function(c) {
       html += '<span class="psc-chip" onclick="pathGo(\'' + c.s + '\')">' + escapeHtml(c.t) + '</span>';
     });
+    html += '<span class="psc-chip" style="cursor:default;background:transparent;border-color:transparent;color:var(--text-light);">……</span>';
     html += '</div>';
     html += '</div>';
   });
-  html += '<div class="path-footer-note">数据库图例：<b>绿色=已上线</b> · 黄色=建设中 · 灰色=规划中 · 点击服务/栏目芯片直达对应板块</div>';
+  html += '<div class="path-footer-note">数据库图例：<b>绿色=已上线</b> · 黄色=建设中 · 灰色=规划中 · 点击芯片直达对应板块</div>';
   content.innerHTML = html;
   updateFloatButtons();
 }
