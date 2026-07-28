@@ -10280,7 +10280,6 @@ function renderHub() {
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>
-  html += '<div class="hub-split-card " style="border-left-color:#AB47BC;" onclick="switchSection(\'ipsc-qc\')"><div class="hsc-head"><div class="hsc-icon" style="color:#CE93D8;">' + svgIcon('flask', 18) + '</div><div class="hsc-title">iPSC放行标准数据库</div></div><div class="hsc-desc">全球指南·' + IPSC_QC_DATA.length + '项检测项目·中外对比·持续更新</div></div>';
   html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
   html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台功能</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';

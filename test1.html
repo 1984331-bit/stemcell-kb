@@ -8062,9 +8062,7 @@ function buildHash(state) {
   if (s === 'opencgt') return '#opencgt';
   if (s === 'lab') return '#lab';
   if (s === 'blueprint') return '#blueprint';
-  if (s === 'path') return '#path';
-  if (s === 'ipsc-qc') return '#ipsc-qc';
-  if (s === 'services') {
+  if (s === 'path') return '#path';  if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
   }
@@ -8096,9 +8094,7 @@ function parseHash() {
   if (hash.indexOf('#services/') === 0) return { section: 'services', svcView: hash.slice(10) };
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
-  if (hash === '#path') return { section: 'path' };
-  if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
-  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
+  if (hash === '#path') return { section: 'path' };  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
   if (hash === '#prod') return { section: 'products' };
@@ -8506,8 +8502,6 @@ function renderContent() {
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
   if (currentSection === 'services') { renderServices(); return; }
   if (currentSection === 'path') { renderPath(); return; }
-  if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
-
   const filtered = getFilteredData();
 
   if (!searchQuery && !currentFilter.system) {

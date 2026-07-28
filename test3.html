@@ -8062,9 +8062,7 @@ function buildHash(state) {
   if (s === 'opencgt') return '#opencgt';
   if (s === 'lab') return '#lab';
   if (s === 'blueprint') return '#blueprint';
-  if (s === 'path') return '#path';
-  if (s === 'ipsc-qc') return '#ipsc-qc';
-  if (s === 'services') {
+  if (s === 'path') return '#path';  if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
   }
@@ -8096,9 +8094,7 @@ function parseHash() {
   if (hash.indexOf('#services/') === 0) return { section: 'services', svcView: hash.slice(10) };
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
-  if (hash === '#path') return { section: 'path' };
-  if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
-  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
+  if (hash === '#path') return { section: 'path' };  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
   if (hash === '#prod') return { section: 'products' };
@@ -8506,8 +8502,6 @@ function renderContent() {
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
   if (currentSection === 'services') { renderServices(); return; }
   if (currentSection === 'path') { renderPath(); return; }
-  if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
-
   const filtered = getFilteredData();
 
   if (!searchQuery && !currentFilter.system) {
@@ -10280,7 +10274,6 @@ function renderHub() {
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
   html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>
-  html += '<div class="hub-split-card " style="border-left-color:#AB47BC;" onclick="switchSection(\'ipsc-qc\')"><div class="hsc-head"><div class="hsc-icon" style="color:#CE93D8;">' + svgIcon('flask', 18) + '</div><div class="hsc-title">iPSC放行标准数据库</div></div><div class="hsc-desc">全球指南·' + IPSC_QC_DATA.length + '项检测项目·中外对比·持续更新</div></div>';
   html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
   html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台功能</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
@@ -10644,43 +10637,6 @@ function renderPath() {
   updateFloatButtons();
 }
 
-function renderIPSCQC() {
-  var content = document.getElementById('content');
-  var cats = {};
-  IPSC_QC_DATA.forEach(function(d) { if (!cats[d.cat]) cats[d.cat] = []; cats[d.cat].push(d); });
-  var catOrder = ['身份/多能性','纯度','安全性','效力/功能','稳定性','综合'];
-  var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">iPSC放行标准数据库</span></div>';
-  html += '<div class="ipsc-qc-hero">';
-  html += '<div class="ipsc-qc-hero-title">iPSC放行标准数据库</div>';
-  html += '<div class="ipsc-qc-hero-sub">基于全球指南（CSSCR/GAiT/ISSCR/ICH/FDA/EMA/EP/USP）的结构化放行检测项目清单，共收录<b style="color:var(--primary);">' + IPSC_QC_DATA.length + '</b>项检测项目。数据持续更新。<b style="color:var(--primary);">全国尚无统一的iPSC放行行业标准，本数据库汇总全球主流指南以供参考。</b></div>';
-  html += '</div>';
-  var allSrc = ['CSSCR','GAiT','ISSCR','ICH','FDA','EMA','中国药典','USP','EP','QAR 2026','日本MHLW','EBiSC'];
-  html += '<div class="ipsc-qc-src-row">';
-  allSrc.forEach(function(s) { html += '<span class="ipsc-qc-src">' + s + '</span>'; });
-  html += '</div>';
-  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:12px;text-align:center;">分类说明：<b>身份/多能性</b>=细胞身份鉴定 · <b>纯度</b>=外源因子控制 · <b>安全性</b>=基因/致瘤风险评估 · <b>效力/功能</b>=产品功能验证 · <b>稳定性</b>=批次一致与工艺稳健</div>';
-  html += '<div style="font-size:11px;color:rgba(0,229,255,0.7);text-align:center;margin-bottom:16px;line-height:1.6;">💡 构建中，v0.1版骨架。如需完整数据包（含protocol参数、阈值来源原文、历史版本对照表），请联系网站作者。</div>';
-  catOrder.forEach(function(c) {
-    if (!cats[c]) return;
-    html += '<div class="ipsc-qc-cat"><div class="ipsc-qc-cat-title">' + c + '（' + cats[c].length + '项）</div><div class="ipsc-qc-grid">';
-    cats[c].forEach(function(d) {
-      html += '<div class="ipsc-qc-card"><div class="iqc-head"><div class="iqc-name">' + escapeHtml(d.t) + '</div><div class="iqc-en">' + escapeHtml(d.en) + '</div></div>';
-      html += '<div class="iqc-body">';
-      html += '<div class="iqc-row"><span class="iqc-label">标志物</span><span class="iqc-val">' + escapeHtml(d.markers) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">方法</span><span class="iqc-val">' + escapeHtml(d.method) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">标准</span><span class="iqc-val">' + escapeHtml(d.spec) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">适用阶段</span><span class="iqc-val">' + escapeHtml(d.stage) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">来源</span><span class="iqc-val">' + escapeHtml(d.src) + '</span></div>';
-      if (d.note) { html += '<div class="iqc-note">' + escapeHtml(d.note) + '</div>'; }
-      html += '</div></div>';
-    });
-    html += '</div></div>';
-  });
-  html += '<div class="ipsc-qc-footer">数据库持续更新中·欢迎联系网站作者提供补充/修正·计划收录：日本PMDA指南、韩国MFDS指南、已上市iPSC产品放行标准</div>';
-  content.innerHTML = html;
-  updateFloatButtons();
-}
 
 function svcCardHtml(c, ally) {
   var h = '<div class="svc-card">';
