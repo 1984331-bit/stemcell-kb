@@ -3534,6 +3534,34 @@ body { padding-bottom: 60px; }
 .path-hint-card b { color: var(--primary); }
 .path-hint-card .phc-btn { display: inline-block; margin-top: 8px; padding: 5px 14px; border-radius: 8px; background: rgba(0,229,255,0.12); color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid rgba(0,229,255,0.35); }
 
+}
+
+/* iPSC QC Database page */
+.ipsc-qc-hero { text-align: center; padding: 30px 20px 10px; }
+.ipsc-qc-hero-kick { font-size: 10px; letter-spacing: 4px; color: var(--text-light); text-transform: uppercase; }
+.ipsc-qc-hero-title { font-size: 22px; font-weight: 700; color: var(--text); margin: 6px 0 8px; }
+.ipsc-qc-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 600px; margin: 0 auto; }
+.ipsc-qc-stats { display: flex; justify-content: center; gap: 24px; margin: 18px 0; flex-wrap: wrap; }
+.ipsc-qc-stat { text-align: center; }
+.ipsc-qc-stat-num { font-size: 24px; font-weight: 700; color: var(--primary); }
+.ipsc-qc-stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.ipsc-qc-cat { margin-bottom: 18px; }
+.ipsc-qc-cat-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; padding-left: 10px; border-left: 3px solid var(--primary); }
+.ipsc-qc-cat-desc { font-size: 11px; color: var(--text-light); margin-bottom: 10px; padding-left: 13px; }
+.ipsc-qc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.ipsc-qc-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+.ipsc-qc-card-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.ipsc-qc-card-method { font-size: 11px; color: var(--text-light); margin-bottom: 3px; }
+.ipsc-qc-card-threshold { font-size: 11px; color: #4DB6AC; }
+.ipsc-qc-card-source { font-size: 10px; color: var(--primary); margin-top: 3px; opacity: 0.7; }
+.ipsc-qc-card.imp { border-left-color: #FFB74D; }
+.ipsc-qc-card.essential { border-left-color: #EF5350; }
+.ipsc-qc-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-light); line-height: 1.6; }
+.ipsc-qc-footer a { color: var(--primary); }
+.ipsc-qc-sources { font-size: 11px; color: var(--text-light); margin: 12px 0 20px; padding: 10px; background: rgba(0,229,255,0.04); border-radius: 8px; line-height: 1.7; }
+.ipsc-qc-sources b { color: var(--text); }
+@media (max-width: 768px) { .ipsc-qc-grid { grid-template-columns: 1fr; } }
+
 /* Contact floating button - uniform style with nav bar tabs */
 .float-contact { position: fixed; top: 94px; right: 14px; z-index: 99; display: flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-light); cursor: pointer; background: rgba(18,28,42,0.9); border: 1px solid var(--border); transition: color 0.2s, background 0.2s; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .float-contact:hover { color: #fff; background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.3); }
@@ -8041,6 +8069,7 @@ function buildHash(state) {
   if (s === 'lab') return '#lab';
   if (s === 'blueprint') return '#blueprint';
   if (s === 'path') return '#path';
+  if (s === 'ipsc-qc') return '#ipsc-qc';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -8074,6 +8103,7 @@ function parseHash() {
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
   if (hash === '#path') return { section: 'path' };
+  if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8482,6 +8512,7 @@ function renderContent() {
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
   if (currentSection === 'services') { renderServices(); return; }
   if (currentSection === 'path') { renderPath(); return; }
+  if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
 
   const filtered = getFilteredData();
 
@@ -10340,7 +10371,7 @@ function renderHub() {
 var SVC_GROUPS = [
   { k: 'res', t: '基础科研', en: 'RESEARCH', ic: 'book', d: '开题立项循证 · 基金标书证据包 · 研究热点订阅 · 公共数据挖掘 · 论文润色选刊 · 实验方案对比 · 专利转化对接 · 文献库定制及综述报告，含 Open CGT 联盟实验平台交付（拉伊卜六大平台）' },
   { k: 'cmc', t: '生产工艺', en: 'CMC', ic: 'beaker', d: '工艺循证情报报告 · 中美欧 CMC 法规雷达订阅 · 工艺变更可比性研究支持' },
-  { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写 · 验证体系 AI 辅助包 · QMS 四级文件体系搭建 AI 辅助' },
+  { k: 'qc', t: '质量控制', en: 'QC / QA', ic: 'shield', d: '放行标准与方法学验证方案包 · 快速微生物检测选型 · PQR 年度报告 AI 代写 · 验证体系 AI 辅助包 · QMS 四级文件体系搭建 AI 辅助 · iPSC放行标准数据库' },
   { k: 'ct', t: '临床试验', en: 'CLINICAL', ic: 'layers', d: '方案循证设计报告 · PV 文献监测 · 患者-试验匹配 · 医学撰写 AI 辅助 · 竞品动态监测 · 统计学循证支持 · IND 申报 CTD 资料 AI 辅助' }
 ];
 var svcView = 'home';
@@ -10367,7 +10398,8 @@ var SVC_CARDS = {
     { ic:'target', t:'快速微生物检测选型', d:'短货架期产品（自体 CAR-T 等）的快速无菌/支原体方法对比、验证路径与中美欧法规接受度证据。', m:['交付物：选型对比表 + 验证路径图','客户：细胞制备企业 QA','周期：1-2 周'], p:'¥5千-1万 / 次' },
     { ic:'doc', t:'PQR 年度报告 AI 代写', d:'企业提供批次数据，AI 起草年度产品质量回顾（PQR）框架与趋势分析初稿，QA 审定即可用。', m:['交付物：PQR 报告初稿 + 趋势图','客户：中小企业 QA','周期：1 周'], p:'按次计费' },
     { tag:'new', tagTx:'新', ic:'check', t:'验证体系 AI 辅助包', d:'设备确认（IQ/OQ/PQ）、工艺验证、清洁验证的方案模板与再验证周期评估：AI 起草 URS 与验证方案框架，GMP 专家终审；覆盖验证主计划（VMP）编制、周期性/变更性再验证触发评估，对齐 GMP 第七章确认与验证要求。', m:['交付物：验证方案模板包 + VMP 框架 + 再验证评估清单','客户：设备验证工程师 · QA · 新建实验室','周期：2-3 周'], p:'¥1-2 万 / 套' },
-    { tag:'new', tagTx:'新', ic:'shield', t:'QMS四级文件体系搭建 AI辅助', d:'质量手册、标准管理规程（SMP）、标准操作规程（SOP）、记录表单四级文件体系的模板搭建与文件架构设计：AI 起草框架初稿，QA 专家审定修正；覆盖变更控制、偏差管理、CAPA、内审、供应商管理、培训管理、文件管理等全部 GMP 核心模块。', m:['交付物：四级文件模板包 + 文件编码体系 + 内审检查表','客户：QA 经理 · 新建质量体系的企业','周期：3-4 周'], p:'¥2-3 万 / 套' }
+    { tag:'new', tagTx:'新', ic:'shield', t:'QMS四级文件体系搭建 AI辅助', d:'质量手册、标准管理规程（SMP）、标准操作规程（SOP）、记录表单四级文件体系的模板搭建与文件架构设计：AI 起草框架初稿，QA 专家审定修正；覆盖变更控制、偏差管理、CAPA、内审、供应商管理、培训管理、文件管理等全部 GMP 核心模块。', m:['交付物：四级文件模板包 + 文件编码体系 + 内审检查表','客户：QA 经理 · 新建质量体系的企业','周期：3-4 周'], p:'¥2-3 万 / 套' },
+    { tag:'new', tagTx:'新', ic:'flask', t:'iPSC放行标准数据库', d:'全球iPSC放行检测项目的结构化汇编（20+项），覆盖身份/多能性、纯度、安全性、效力、稳定性五大维度，来源包括CSSCR、GAiT、ISSCR、ICH、FDA、EMA、中国药典、USP、EP等12+国际指南标准。', m:['数据量：20+ 检测项目 · 6 大类别 · 12+ 指南来源','应用场景：IND放行标准起草 · 方法学验证 · 中外对比','更新频率：持续追踪新指南/新标准'], p:'免费开放查询 · 可点击查看' }
   ],
   ct: [
     { tag:'flag', tagTx:'旗舰', ic:'layers', t:'方案循证设计报告', d:'同适应症全球试验设计要素分析：入排标准分布、剂量递增方案（3+3 / BOIN）、给药途径与次数、主要/次要终点选择、随访时长，全部出自 3,062 篇文献库，条条可溯源。', m:['交付物：50-80 页设计要素分析报告','客户：申办方医学部 · IND 前 Biotech','周期：2-3 周'], p:'¥2-5 万 / 份' },
@@ -10626,6 +10658,13 @@ function renderServices() {
     html += '<div class="svc-grid">';
     SVC_CARDS[g.k].forEach(function(c) { html += svcCardHtml(c, false); });
     html += '</div>';
+    // iPSC放行标准数据库入口（QC组专属）
+    if (g.k === 'qc') {
+      html += '<div style="text-align:center;margin-top:20px;padding:14px;background:rgba(171,71,188,0.06);border:1px dashed rgba(171,71,188,0.3);border-radius:10px;cursor:pointer;" onclick="switchSection(\'ipsc-qc\')">';
+      html += '<div style="font-size:13px;font-weight:600;color:#CE93D8;">' + svgIcon('flask', 16) + ' iPSC放行标准数据库</div>';
+      html += '<div style="font-size:11px;color:var(--text-light);margin-top:4px;">全球20+项检测项目 · 12+指南来源 · 免费开放查询 → 点击进入</div>';
+      html += '</div>';
+    }
     if (g.k === 'res') {
       html += '<div class="svc-sub-h center"><h3>Open CGT联盟实验平台交付</h3><span class="en">Open CGT Alliance Wet-Lab Platform Delivery</span></div>';
       html += '<div class="svc-ally">以上循证服务解决「做什么、怎么做」；以下实验服务解决「谁来动手」。<b>知识库统一接单与质控，联盟成员实验室交付</b>——首个成员：<b>江西拉伊卜生物技术有限公司</b>（南昌，六大实验平台，AAA 级信用企业，合作单位覆盖协和、湘雅、中山、复旦、川大等数十家院校）。方案设计 → 实验执行 → 数据分析 → 论文转化，一站完成。</div>';
@@ -16579,6 +16618,75 @@ function togglePicksDropdown(btn) {
 function closePicksDropdown() {
   var lists = document.querySelectorAll('.pick-dropdown-list.open');
   lists.forEach(function(l) { l.classList.remove('open'); });
+}
+
+// === iPSC放行标准数据库 ===
+var IPSC_QC_DATA = [
+  {cat:"身份/多能性",desc:"确认iPSC细胞身份与多能性状态的核心检测项",stem:"essential",items:[
+    {name:"多能性标志物流式检测",method:"流式细胞术检测OCT3/4、TRA-1-60、SSEA4等标志物双阳性率",threshold:"阳性率≥90%（OCT3/4+TRA-1-60+SSEA4）",source:"CSSCR 2025 / GAiT 2024"},
+    {name:"碱性磷酸酶活性",method:"AP染色（组织化学法）",threshold:">80%集落阳性",source:"ISSCR 2023 / CSSCR 2025"},
+    {name:"三胚层分化能力（体外）",method:"EB形成法或单层定向分化+胚层标志物qPCR",threshold:"三个胚层标志物均阳性（SOX17/TUBB3/MSX1等）",source:"GAiT 2024 / ISSCR 2023"},
+    {name:"核型分析（G显带）",method:"G显带核型分析，≥20个中期分裂相",threshold:"正常二倍体核型（≥90%细胞正常）",source:"ICH Q5D / CSSCR 2025 / FDA建议"},
+    {name:"全基因组测序（WGS）",method:"NGS全基因组测序，CNV分析",threshold:"未检测到致病性CNV；大片段变异<5%",source:"FDA 2025建议 / GAiT 2024推荐"}
+  ]},
+  {cat:"纯度",desc:"确保终产品中不含非目标细胞或污染物的检测项",stem:"essential",items:[
+    {name:"残留未分化iPSC",method:"流式（SSEA5/lin28）或qPCR（LIN28A/NANOG）",threshold:"残留未分化细胞<0.1%（SSEA5+细胞<0.1%）",source:"GAiT 2024 / ISSCR 2023"},
+    {name:"基质细胞残留",method:"流式（CD90/PDGFRα）或qPCR",threshold:"<1%",source:"CSSCR 2025"},
+    {name:"支原体检测",method:"qPCR或培养法（《中国药典》3301）",threshold:"阴性",source:"《中国药典》2025 / EP 2.6.7"},
+    {name:"内毒素检测",method:"LAL法或rFC法（《中国药典》1143）",threshold:"<5 EU/mL（注射）/<0.5 EU/mL（鞘内）",source:"《中国药典》2025 / USP ⟨85⟩"},
+    {name:"无菌检查",method:"薄膜过滤法或直接接种法（《中国药典》1101）",threshold:"14天无菌阴性",source:"《中国药典》2025"}
+  ]},
+  {cat:"安全性",desc:"评估致瘤性、遗传稳定性与微生物安全性的关键检测",stem:"essential",items:[
+    {name:"致瘤性（体外/体内）",method:"软琼脂集落形成+免疫缺陷小鼠皮下注射（≥5×10^6细胞/只，26周）",threshold:"软琼脂集落<5个/10^5细胞；体内无肿瘤形成",source:"ICH Q5D / FDA建议 / GAiT 2024"},
+    {name:"载体残留（整合拷贝数）",method:"ddPCR或qPCR",threshold:"残留重编程载体DNA<100 copies/μg gDNA",source:"GAiT 2024 / CSSCR 2025"},
+    {name:"表观遗传异常（甲基化）",method:"全基因组亚硫酸盐测序或RRBS",threshold:"差异甲基化区域（DMR）≤5%对照",source:"QAR 2026 / GAiT 2024推荐"},
+    {name:"病毒污染物检测",method:"qPCR（HIV-1/2、HTLV-1、HBV、HCV、EBV、CMV、B19）、体外VSV/3T3培养、电镜",threshold:"阴性",source:"ICH Q5A(R2) / FDA / 《中国药典》3302"},
+    {name:"分化后终末产品残留iPSC",method:"流式（TRA-1-60/SSEA5）或致瘤性试验",threshold:"<0.01%（或基于风险的灵敏度限）",source:"GAiT 2024 / FDA 2025建议"}
+  ]},
+  {cat:"效力/功能",desc:"验证分化后细胞的生物学功能",stem:"essential",items:[
+    {name:"定向分化效率",method:"流式或qPCR检测目标细胞标志物（根据终产品类型定制）",threshold:"≥80%（具体靶标依据终产品定义）",source:"GAiT 2024 / 个案审评"},
+    {name:"功能检测",method:"根据终产品类型定制（如心肌细胞搏动频率/膜片钳、神经元电生理）",threshold:"达到预设功能指标（参考非临床POC数据）",source:"GAiT 2024 / CSSCR 2025"}
+  ]},
+  {cat:"稳定性",desc:"评估传代/冻存/批次间的质量一致性",stem:"quality",items:[
+    {name:"传代稳定性",method:"P5-P20每5代检测核型+多能性+分化能力",threshold:"核型正常+多能性≥90%+分化能力不受影响",source:"CSSCR 2025 / GAiT 2024"},
+    {name:"冻存复苏存活率",method:"台盼蓝拒染法或流式（PI/7-AAD）",threshold:"存活率≥70%（复苏后2h）",source:"GAiT 2024 / 行业共识"},
+    {name:"批次一致性",method:"连续3批检测身份/纯度/效力关键指标，CV分析",threshold:"关键CQA的CV≤20%",source:"ICH Q5D / GAiT 2024"}
+  ]},
+  {cat:"综合/特殊",desc:"更高等级的推荐检测或特定场景检测",stem:"imp",items:[
+    {name:"iPSC HLA分型",method:"SBT或ssDNA珠法",threshold:"高分辨率HLA-A/-B/-C/-DRB1分型",source:"日本MHLW指南；日本iPSC Haplobank覆盖40%人口"},
+    {name:"线粒体DNA完整性",method:"NGS线粒体基因组测序",threshold:"无致病性mtDNA突变",source:"QAR 2026推荐"},
+    {name:"重组酶活性残留",method:"qPCR检测Cre/Flp残留DNA",threshold:"<100 copies/μg",source:"GAiT 2024 (if applicable)"}
+  ]}
+];
+function renderIPSCQC() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">iPSC放行标准数据库</span></div>';
+  html += '<div class="ipsc-qc-hero">';
+  html += '<div class="ipsc-qc-hero-kick">STANDARDS DATABASE</div>';
+  html += '<div class="ipsc-qc-hero-title">iPSC放行标准数据库</div>';
+  html += '<div class="ipsc-qc-hero-sub">全球iPSC放行检测项目的结构化汇编，覆盖身份/多能性·纯度·安全性·效力·稳定性五大维度。来源包括CSSCR、GAiT、ISSCR、ICH、FDA、EMA、中国药典、USP、EP、QAR 2026、日本MHLW及EBiSC等指南与标准。</div>';
+  html += '</div>';
+  html += '<div class="ipsc-qc-stats"><div class="ipsc-qc-stat"><div class="ipsc-qc-stat-num">' + IPSC_QC_DATA.reduce(function(a,c){ return a + c.items.length; },0) + '</div><div class="ipsc-qc-stat-label">检测项目</div></div><div class="ipsc-qc-stat"><div class="ipsc-qc-stat-num">' + IPSC_QC_DATA.length + '</div><div class="ipsc-qc-stat-label">类别</div></div><div class="ipsc-qc-stat"><div class="ipsc-qc-stat-num">12+</div><div class="ipsc-qc-stat-label">指南/标准来源</div></div></div>';
+  IPSC_QC_DATA.forEach(function(cat){
+    html += '<div class="ipsc-qc-cat">';
+    html += '<div class="ipsc-qc-cat-title">' + cat.cat + ' <span style="font-size:11px;color:var(--text-light);font-weight:400;">' + (cat.stem==='essential'?'基础必备':(cat.stem==='imp'?'推荐':'进阶质量')) + '</span></div>';
+    html += '<div class="ipsc-qc-cat-desc">' + cat.desc + '</div>';
+    html += '<div class="ipsc-qc-grid">';
+    cat.items.forEach(function(item){
+      html += '<div class="ipsc-qc-card ' + cat.stem + '">';
+      html += '<div class="ipsc-qc-card-name">' + item.name + '</div>';
+      html += '<div class="ipsc-qc-card-method">' + item.method + '</div>';
+      html += '<div class="ipsc-qc-card-threshold">阈值: ' + item.threshold + '</div>';
+      html += '<div class="ipsc-qc-card-source">来源: ' + item.source + '</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  html += '<div class="ipsc-qc-footer">以上为公开指南与文献的结构化汇编，供研究和IND准备参考。具体放行标准需与CDE/监管机构个案沟通确定。持续更新中。</div>';
+  html += '<div class="ipsc-qc-sources"><b>主要指南来源</b>: CSSCR (中国干细胞学会) 临床级iPSC推荐标准 · GAiT (全球iPSC治疗联盟) 标准 · ISSCR 指南 · ICH Q5D · FDA 建议 · EMA 框架 · 《中国药典》2025 · USP ⟨85-1043⟩ · EP 2.6.7 · QAR 2026 (Stem Cell Reports) · 日本MHLW指南 · EBiSC操作规范</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
 }
 
 // Init — restore state from URL hash on page load/refresh
