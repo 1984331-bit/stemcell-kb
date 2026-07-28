@@ -5192,6 +5192,8 @@ body { padding-bottom: 60px; }
 .svc-lightbox img{max-width:92vw;max-height:92vh;border-radius:8px}
 .svc-db-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .svc-db{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.svc-db.clickable{cursor:pointer;transition:border-color 0.2s,transform 0.15s}
+.svc-db.clickable:hover{border-color:var(--primary);transform:translateY(-2px)}
 .svc-st{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:var(--text-light);margin-bottom:4px}
 .svc-st i{width:6px;height:6px;border-radius:50%;display:inline-block}
 .svc-st.live i{background:#66BB6A}
@@ -10434,10 +10436,13 @@ var ALLY_CARDS = [
   { ic:'mic', t:'E7 科研培训与成果转化', d:'国自然申请、SCI 写作、CRISPR/外泌体等 30+ 讲座课题（可定制）；院企联合课题、专利转让与价值评估、SCI 论文全程协助。', m:['交付：拉伊卜生物 + 我方课程板块','周期：按项目'], p:'平台统一询价' }
 ];
 var SVC_DB_LIST = [
-  { st:'live', stTx:'已上线', t:'临床试验文献库', d:'3,062 篇 · 三库合一' },
+  { st:'live', stTx:'已上线', t:'MSC 文献库', d:'745 篇 · 间充质基质细胞', url:"switchLiteratureDB('MSC');switchSection('literature')" },
+  { st:'live', stTx:'已上线', t:'CAR-T 文献库', d:'1,265 篇 · 6 大疾病领域', url:"switchLiteratureDB('CART');switchSection('literature')" },
+  { st:'live', stTx:'已上线', t:'基因治疗文献库', d:'1,052 篇 · 9 大疾病领域', url:"switchLiteratureDB('GT');switchSection('literature')" },
+  { st:'live', stTx:'已上线', t:'iPSC放行标准数据库', d:'20+ 检测项目 · 6 大类别', url:"switchSection('ipsc-qc')" },
   { st:'live', stTx:'已上线', t:'文献摘要库', d:'2,849 篇全文摘要' },
-  { st:'live', stTx:'已上线', t:'法规政策库', d:'55 份 · 持续监测' },
-  { st:'live', stTx:'已上线', t:'获批产品库', d:'79 款全球产品' },
+  { st:'live', stTx:'已上线', t:'法规政策库', d:'65 份 · 持续监测', url:"switchSection('regulations')" },
+  { st:'live', stTx:'已上线', t:'获批产品库', d:'79 款全球产品', url:"switchSection('products')" },
   { st:'build', stTx:'建设中', t:'试验设计要素库', d:'剂量·终点·入排结构化' },
   { st:'build', stTx:'建设中', t:'CMC 法规差异库', d:'中美欧条款级对照' },
   { st:'build', stTx:'建设中', t:'产业术语库', d:'300+ 条白话词典' },
@@ -10730,10 +10735,14 @@ function renderServices() {
   // 数据底座
   html += '<div class="svc-sec">';
   html += '<div class="svc-sec-h"><h2>数据底座</h2><span class="en">DATA FOUNDATION</span></div>';
-  html += '<div class="svc-sec-d">服务背后的数据库资产。绿色已上线，黄色建设中，灰色规划中——持续扩容，服务能力随之升级。</div>';
+  html += '<div class="svc-sec-d">服务背后的数据库资产。绿色已上线（点击直达），黄色建设中，灰色规划中——持续扩容，服务能力随之升级。</div>';
   html += '<div class="svc-db-grid">';
   SVC_DB_LIST.forEach(function(db) {
-    html += '<div class="svc-db"><span class="svc-st ' + db.st + '"><i></i>' + db.stTx + '</span><b>' + db.t + '</b><span>' + db.d + '</span></div>';
+    if (db.url) {
+      html += '<div class="svc-db clickable" onclick="' + db.url + '"><span class="svc-st ' + db.st + '"><i></i>' + db.stTx + '</span><b>' + db.t + '</b><span>' + db.d + '</span></div>';
+    } else {
+      html += '<div class="svc-db"><span class="svc-st ' + db.st + '"><i></i>' + db.stTx + '</span><b>' + db.t + '</b><span>' + db.d + '</span></div>';
+    }
   });
   html += '</div></div>';
 
