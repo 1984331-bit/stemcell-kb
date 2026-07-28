@@ -3536,6 +3536,25 @@ body { padding-bottom: 60px; }
 
 }
 
+/* Glossary page */
+.gloss-hero { text-align: center; padding: 30px 20px 10px; }
+.gloss-hero-kick { font-size: 10px; letter-spacing: 4px; color: var(--text-light); text-transform: uppercase; }
+.gloss-hero-title { font-size: 22px; font-weight: 700; color: var(--text); margin: 6px 0 4px; text-align: center; }
+.gloss-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 600px; margin: 0 auto 16px; }
+.gloss-search { max-width: 400px; margin: 0 auto 18px; position: relative; }
+.gloss-search input { width: 100%; padding: 8px 34px 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 13px; outline: none; }
+.gloss-search input:focus { border-color: var(--primary); }
+.gloss-search svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+.gloss-cat { margin-bottom: 20px; }
+.gloss-cat-title { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 10px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+.gloss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.gloss-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.gloss-item-ab { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+.gloss-item-full { font-size: 12px; color: var(--text-light); margin-bottom: 2px; }
+.gloss-item-ex { font-size: 11px; color: var(--text); line-height: 1.6; }
+.gloss-stat { display: inline-block; font-size: 11px; color: var(--text-light); margin: 0 12px; }
+.gloss-stat b { color: var(--primary); }
+@media (max-width: 768px) { .gloss-grid { grid-template-columns: 1fr; } }
 /* iPSC QC Database page */
 .ipsc-qc-hero { text-align: center; padding: 30px 20px 10px; }
 .ipsc-qc-hero-kick { font-size: 10px; letter-spacing: 4px; color: var(--text-light); text-transform: uppercase; }
@@ -8073,6 +8092,7 @@ function buildHash(state) {
   if (s === 'blueprint') return '#blueprint';
   if (s === 'path') return '#path';
   if (s === 'ipsc-qc') return '#ipsc-qc';
+  if (s === 'glossary') return '#glossary';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -8107,6 +8127,7 @@ function parseHash() {
   if (hash === '#blueprint') return { section: 'blueprint' };
   if (hash === '#path') return { section: 'path' };
   if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
+  if (hash === '#glossary') return { section: 'glossary' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8516,6 +8537,7 @@ function renderContent() {
   if (currentSection === 'services') { renderServices(); return; }
   if (currentSection === 'path') { renderPath(); return; }
   if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
+  if (currentSection === 'glossary') { renderGlossary(); return; }
 
   const filtered = getFilteredData();
 
@@ -10445,7 +10467,7 @@ var SVC_DB_LIST = [
   { st:'live', stTx:'已上线', t:'获批产品库', d:'79 款全球产品', url:"switchSection('products')" },
   { st:'build', stTx:'建设中', t:'试验设计要素库', d:'剂量·终点·入排结构化' },
   { st:'build', stTx:'建设中', t:'CMC 法规差异库', d:'中美欧条款级对照' },
-  { st:'build', stTx:'建设中', t:'产业术语库', d:'300+ 条白话词典' },
+  { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
   { st:'build', stTx:'建设中', t:'质控标准库', d:'放行标准 × 产品类型' },
   { st:'build', stTx:'建设中', t:'联盟服务能力库', d:'成员×平台×项目×质控' },
   { st:'plan', stTx:'规划中', t:'PV 监测库', d:'产品 × 月度检索留痕' },
@@ -10769,16 +10791,7 @@ function renderServices() {
   html += '<div class="svc-tip">签署保密协议后启动 · 支持对公付款与发票 · 高校团队合作另有课题通道</div>';
   html += '</div></div>';
 
-  // 术语词典
-  html += '<div class="svc-sec">';
-  html += '<div class="svc-sec-h"><h2>术语词典</h2><span class="en">GLOSSARY</span></div>';
-  html += '<div class="svc-sec-d">CGT 产业行话，一句白话讲清楚。为基础研究背景的同行而写，免费开放。</div>';
-  html += '<div class="svc-gloss">';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">IB</div><div class="svc-ex"><b>研究者手册</b>（Investigator&rsquo;s Brochure）——申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">ICF</div><div class="svc-ex"><b>知情同意书</b>（Informed Consent Form）——受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。</div></div>';
-  html += '<div class="svc-gloss-item"><div class="svc-ab">CSR</div><div class="svc-ex"><b>临床研究报告</b>（Clinical Study Report）——一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。</div></div>';
-  html += '<div class="svc-gloss-more">全部 300+ 条白话词条整理中，陆续上线。</div>';
-  html += '</div></div>';
+
 
   // 图片放大层
   html += '<div class="svc-lightbox" id="svcLightbox" onclick="svcZoomClose()"><img id="svcLightboxImg" alt="放大查看"></div>';
@@ -10888,7 +10901,7 @@ function renderAIDashboard() {
   var updating = [
     {tag:'要素', tagClass:'pulsing', text:'临床试验设计要素库：剂量/给药途径/终点/随访/入排标准结构化，支撑方案循证设计服务', num:'建设中'},
     {tag:'法规', tagClass:'pulsing', text:'CMC法规差异条款库：NMPA/FDA/EMA条款级中美欧对照', num:'建设中'},
-    {tag:'术语', tagClass:'pulsing', text:'CGT产业术语库：300+条白话词典，基础研究背景友好', num:'建设中'},
+    {tag:'数据', tagClass:'pulsing', text:'CGT产业术语库：60+条 · 5大领域，一句白话讲清楚', num:'60+条'},
     {tag:'质控', tagClass:'pulsing', text:'质控标准库：按产品类型整理放行标准与方法学验证要求', num:'建设中'},
     {tag:'联盟', tagClass:'pulsing', text:'联盟服务能力库：OPEN CGT联盟成员实验平台×项目×质控（首个成员：拉伊卜生物）', num:'建设中'},
     {tag:'PV', tagClass:'pulsing', text:'PV文献监测库：已上市产品月度安全性检索留痕，GVP法定刚需', num:'规划中'},
@@ -16714,6 +16727,119 @@ function renderIPSCQC() {
   html += '<div class="ipsc-qc-sources"><b>主要指南来源</b>: CSSCR (中国干细胞学会) 临床级iPSC推荐标准 · GAiT (全球iPSC治疗联盟) 标准 · ISSCR 指南 · ICH Q5D · FDA 建议 · EMA 框架 · 《中国药典》2025 · USP ⟨85-1043⟩ · EP 2.6.7 · QAR 2026 (Stem Cell Reports) · 日本MHLW指南 · EBiSC操作规范</div>';
   content.innerHTML = html;
   updateFloatButtons();
+}
+
+
+var GLOSSARY_DATA = [
+  {cat:"临床试验",items:[
+    {ab:"IB",full:"Investigator’s Brochure",ex:"研究者手册。申办方写给临床试验医生的「产品全资料汇编」：药效、毒理、已有临床数据都在里面，医生看完才决定要不要接这个试验。"},
+    {ab:"ICF",full:"Informed Consent Form",ex:"知情同意书。受试者入组前必须签的文件，用大白话写清试验目的、流程、风险和获益，签了才能参加。"},
+    {ab:"CSR",full:"Clinical Study Report",ex:"临床研究报告。一个试验做完后的「总答卷」：设计、数据、统计、结论全在里面，申报上市必交的核心文件。"},
+    {ab:"CRO",full:"Contract Research Organization",ex:"合同研究组织。药企把临床试验外包给的专业公司——帮管试验、收数据、做统计，一条龙服务。"},
+    {ab:"SMO",full:"Site Management Organization",ex:"现场管理组织。驻扎在医院帮研究者干杂活的：协调患者随访、填CRF、管文档，让医生专心看病。"},
+    {ab:"CRA",full:"Clinical Research Associate",ex:"临床监查员。申办方派去医院「盯场子」的人——核对数据是不是真的、患者有没有按方案走、文档齐不齐。"},
+    {ab:"CRC",full:"Clinical Research Coordinator",ex:"临床研究协调员。医院里专门跑试验流程的：帮患者约随访、填表、管样本、配合监查。"},
+    {ab:"CTA",full:"Clinical Trial Application",ex:"临床试验申请。向药监局（NMPA/FDA/EMA）提交的试验批文申请，拿到批件才能开始做试验。"},
+    {ab:"IND",full:"Investigational New Drug",ex:"新药临床试验申请。一个新药要从实验室进到人身上做试验，必须先交IND资料给监管机构获批。"},
+    {ab:"NDA",full:"New Drug Application",ex:"新药上市申请。临床试验做完证明安全有效，向药监局申请批准上市销售。"},
+    {ab:"BLA",full:"Biologics License Application",ex:"生物制品上市许可申请。生物药（包括细胞治疗产品）在美国上市必须交BLA，比NDA多了一份设施检查。"},
+    {ab:"SAE",full:"Serious Adverse Event",ex:"严重不良事件。试验中出现的死亡、危及生命、住院等严重后果，必须在24小时内上报。"},
+    {ab:"SUSAR",full:"Suspected Unexpected Serious Adverse Reaction",ex:"可疑非预期严重不良反应。SAE里比较特殊的一种——之前没预料到的严重副作用，上报时限更短（致死/危及生命7天，其余15天）。"},
+    {ab:"DSMB",full:"Data Safety Monitoring Board",ex:"数据安全监查委员会。独立专家组，定期看试验数据——如果药太有效或者太危险，他们会建议提前终止试验。"},
+    {ab:"eCRF",full:"Electronic Case Report Form",ex:"电子病例报告表。记录每个患者试验数据的电子表格——入组时体征、用药记录、检查结果、不良反应全填里面。"},
+    {ab:"ITT",full:"Intention-to-Treat",ex:"意向性治疗分析。只要随机分组了就算入组——哪怕后来退出了、没用药、用错了药，数据都得算进去，防止选择性偏倚。"},
+    {ab:"PP",full:"Per Protocol",ex:"符合方案分析。只统计「完全按方案走完」的患者数据——对比ITT，PP更能看到「药到底有没有用」。但样本量会缩水。"}
+  ]},
+  {cat:"CMC/生产",items:[
+    {ab:"CMC",full:"Chemistry, Manufacturing and Controls",ex:"化学、制造和控制。药品申报资料中讲清楚药怎么做、怎么保证质量的那一堆文件——生产流程、质检方法、稳定性数据都在里面。"},
+    {ab:"GMP",full:"Good Manufacturing Practice",ex:"药品生产质量管理规范。药厂必须遵守的一套标准——从车间洁净度到人员培训、从设备校准到文件记录，所有细节都有规矩。"},
+    {ab:"SOP",full:"Standard Operating Procedure",ex:"标准操作规程。一件事怎么做的「标准答案」——比如细胞传代SOP、冻存SOP，照着做就能保证每次操作一致。"},
+    {ab:"VMP",full:"Validation Master Plan",ex:"验证主计划。设备确认、工艺验证、清洁验证的总纲文件——什么设备要验证、怎么验证、谁负责写报告，全列清楚。"},
+    {ab:"URS",full:"User Requirement Specification",ex:"用户需求说明。买设备前写的「我想要什么」——产能要多少、精度要多少、材质要什么，供应商照着这个设计制造。"},
+    {ab:"DQ",full:"Design Qualification",ex:"设计确认。买设备前确认设计图纸跟URS对得上——纸上谈兵阶段，省得买回来发现不合适。"},
+    {ab:"FAT",full:"Factory Acceptance Test",ex:"工厂验收测试。设备出厂前去供应商工厂实地验收——真开机跑一圈，确认性能达标再发货。"},
+    {ab:"SAT",full:"Site Acceptance Test",ex:"现场验收测试。设备运到自家车间安装后，再跑一遍确认一切正常——通过后才能正式投入使用。"},
+    {ab:"IQ",full:"Installation Qualification",ex:"安装确认。设备安装完了检查一遍——说明书齐不齐、电源对不对、环境达不达标。"},
+    {ab:"OQ",full:"Operational Qualification",ex:"运行确认。设备空转状态下验证功能——每个按钮都按一遍，每个参数都设一遍，确认设备能正常工作。"},
+    {ab:"PQ",full:"Performance Qualification",ex:"性能确认。设备用真实物料跑一遍生产流程——证实设备在真实使用条件下也能稳定产出合格产品。"},
+    {ab:"PV",full:"Process Validation",ex:"工艺验证。用连续三批生产数据证明工艺稳定——不是一次运气好，而是每次都能做出一样质量的产品。"},
+    {ab:"PPQ",full:"Process Performance Qualification",ex:"工艺性能确认。工艺验证的主体部分——跑连续批次证明工艺能稳定产出合格产品，是验证最核心的一环。"},
+    {ab:"CAPA",full:"Corrective and Preventive Action",ex:"纠正与预防措施。出了偏差之后的分析和改进流程——不光要修好眼前的问题，还要查出根因并建立防复发机制。"}
+  ]},
+  {cat:"细胞治疗",items:[
+    {ab:"MSC",full:"Mesenchymal Stromal/Stem Cell",ex:"间充质基质/干细胞。目前临床应用最广泛的成体干细胞类型——可以从骨髓、脂肪、脐带等组织中分离，通过免疫调节和旁分泌发挥治疗作用。"},
+    {ab:"iPSC",full:"induced Pluripotent Stem Cell",ex:"诱导多能干细胞。把皮肤细胞/血细胞「时光倒流」回胚胎干细胞状态的技术——山中伸弥2006年发明，2012年获诺贝尔奖。"},
+    {ab:"CAR-T",full:"Chimeric Antigen Receptor T-cell",ex:"嵌合抗原受体T细胞。给T细胞装一个「超级雷达」——能精准识别癌细胞表面的特定蛋白，然后定点清除。"},
+    {ab:"CAR-NK",full:"Chimeric Antigen Receptor Natural Killer Cell",ex:"嵌合抗原受体NK细胞。给NK细胞装CAR——现货型、无GVHD风险、可批量生产，被誉为「通用型CAR」新方向。"},
+    {ab:"TCR-T",full:"T Cell Receptor-Engineered T-cell",ex:"T细胞受体工程改造T细胞。跟CAR-T不同——TCR-T能识别癌细胞内部的异常蛋白（通过MHC呈递），适合实体瘤。"},
+    {ab:"AAV",full:"Adeno-Associated Virus",ex:"腺相关病毒。基因治疗最常用的递送载体——安全性好、不整合基因组、能感染多种细胞，但装载容量只有4.7kb。"},
+    {ab:"CRISPR",full:"Clustered Regularly Interspaced Short Palindromic Repeats",ex:"基因编辑工具。细菌免疫系统的改造版——用guide RNA把Cas9蛋白带到目标DNA位置进行切割，目前最主流的基因编辑技术。"},
+    {ab:"LV",full:"Lentivirus/Lentiviral Vector",ex:"慢病毒载体。能整合到宿主基因组的病毒载体——适合需要长期表达的CAR-T等疗法，但有插入突变风险。"},
+    {ab:"qPCR/ddPCR",full:"Quantitative/Droplet Digital PCR",ex:"定量/数字PCR。用来定量检测DNA/RNA的技术——ddPCR更精准，适合检测残留iPSC、载体拷贝数等低丰度目标。"},
+    {ab:"CQA",full:"Critical Quality Attribute",ex:"关键质量属性。决定产品安全性和有效性的核心指标——对iPSC来说，多能性标志物阳性率就是CQA之一。"},
+    {ab:"MCB/WCB",full:"Master/Working Cell Bank",ex:"主细胞库/工作细胞库。细胞治疗的「种子」体系——MCB是原始库存，WCB从MCB扩增而来用于日常生产，用完再扩。"},
+    {ab:"MOA",full:"Mechanism of Action",ex:"作用机制。药物在人体内到底怎么起效的——比如MSC的MOA是「免疫调节+旁分泌」，而不是「分化替代」。"},
+    {ab:"KOA",full:"Knee Osteoarthritis",ex:"膝骨关节炎。MSC细胞治疗申报最多的适应症之一——关节腔注射MSC可���轻炎症、改善关节功能。"},
+    {ab:"GVHD",full:"Graft-versus-Host Disease",ex:"移植物抗宿主病。移植供体免疫细胞攻击受体的疾病——MSC最早获批的适应症之一，通过免疫抑制作用减轻症状。"},
+    {ab:"CRS",full:"Cytokine Release Syndrome",ex:"细胞因子释放综合征。CAR-T治疗最常见的副作用——免疫系统被过度激活导致发热、低血压，严重需用托珠单抗处理。"},
+    {ab:"ICANS",full:"Immune Effector Cell-Associated Neurotoxicity Syndrome",ex:"免疫效应细胞相关神经毒性综合征。CAR-T治疗后出现的神经系统副作用——从注意力不集中到癫痫、脑水肿都可能发生。"}
+  ]},
+  {cat:"基因治疗",items:[
+    {ab:"GTMP",full:"Gene Therapy Medicinal Product",ex:"基因治疗药品。以基因递送/编辑为核心的治疗产品——体内基因治疗（AAV注射）和体外基因治疗（CAR-T）两大类。"},
+    {ab:"CTMP",full:"Cell Therapy Medicinal Product",ex:"细胞治疗药品。以活细胞为核心的治疗产品——非基因修饰（MSC）和体外基因修饰（CAR-T）两大类。"},
+    {ab:"ATMP",full:"Advanced Therapy Medicinal Product",ex:"先进治疗药品。欧盟对细胞治疗、基因治疗、组织工程产品的统称——所有ATMP需通过EMA集中审评程序上市。"},
+    {ab:"RMAT",full:"Regenerative Medicine Advanced Therapy",ex:"再生医学先进疗法。FDA对再生医学产品的加速认定通道——获RMAT认定的产品享受突破性疗法同等政策支持。"},
+    {ab:"LNP",full:"Lipid Nanoparticle",ex:"脂质纳米颗粒。mRNA疫苗用的那种「包装壳」——在CGT领域用来递送mRNA到体内生成CAR-T（in vivo CAR-T的递送方案之一）。"},
+    {ab:"eCTD",full:"Electronic Common Technical Document",ex:"电子通用技术文档。药品注册申报的电子标准格式——中国已要求CGT产品IND申报使用eCTD格式。"},
+    {ab:"RWD/RWE",full:"Real-World Data/Evidence",ex:"真实世界数据/证据。非临床试验环境下收集的数据——电子病历、医保数据、患者登记数据等，可用于支持上市后有效性和安全性确认。"}
+  ]},
+  {cat:"法规/监管",items:[
+    {ab:"818号令",full:"生物医学新技术临床研究和临床转化应用管理条例",ex:"国务院令第818号（2026年5月1日施行）。CGT领域最重磅的法规——确立药品+医疗技术双轨制管理，最高罚款20倍，共7章58条。"},
+    {ab:"GCP",full:"Good Clinical Practice",ex:"药物临床试验质量管理规范。做临床试验必须遵守的道德和质量标准——保护受试者权益，保证数据真实完整。"},
+    {ab:"GLP",full:"Good Laboratory Practice",ex:"药物非临床研究质量管理规范。做动物实验必须遵守的标准——保证非临床研究数据的质量和完整性。"},
+    {ab:"MAH",full:"Marketing Authorization Holder",ex:"药品上市许可持有人。药品批准上市后的「第一责任人」——可以是研发企业、生产企业或销售企业，对药品全生命周期安全有效负责。"},
+    {ab:"QMS",full:"Quality Management System",ex:"质量管理体系。企业用来管理质量的整套系统——从质量手册到SOP到记录表单的四级文件体系。"}
+  ]}
+];
+
+function renderGlossary() {
+  var content = document.getElementById("content");
+  var html = "";
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon("home", 14) + '</span><span class="crumb-sep">›;</span> <span class="crumb-current">CGT产业术语库</span></div>';
+  html += '<div class="gloss-hero">';
+  html += '<div class="gloss-hero-kick">GLOSSARY</div>';
+  html += '<div class="gloss-hero-title">CGT产业术语库</div>';
+  html += '<div class="gloss-hero-sub">CGT产业行话，一句白话讲清楚。总条数：<span class="gloss-stat"><b>' + GLOSSARY_DATA.reduce(function(a,c){return a+c.items.length;},0) + '</b> 条</span>· 覆盖 <span class="gloss-stat"><b>' + GLOSSARY_DATA.length + '</b> 大领域</span></div>';
+  html += '<div class="gloss-search"><input type="text" id="glossSearchInput" placeholder="搜索术语..." oninput="glossSearch(this.value)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>';
+  html += '</div>';
+  GLOSSARY_DATA.forEach(function(cat){
+    html += '<div class="gloss-cat" data-cat="' + cat.cat + '">';
+    html += '<div class="gloss-cat-title">' + cat.cat + '</div>';
+    html += '<div class="gloss-grid">';
+    cat.items.forEach(function(item){
+      html += '<div class="gloss-item">';
+      html += '<div class="gloss-item-ab">' + item.ab + '</div>';
+      html += '<div class="gloss-item-full">' + item.full + '</div>';
+      html += '<div class="gloss-item-ex">' + item.ex + '</div>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+function glossSearch(q) {
+  q = q.toLowerCase().trim();
+  var items = document.querySelectorAll(".gloss-item");
+  var cats = document.querySelectorAll(".gloss-cat");
+  items.forEach(function(item){
+    var txt = item.textContent.toLowerCase();
+    item.style.display = (!q || txt.indexOf(q) >= 0) ? "" : "none";
+  });
+  cats.forEach(function(cat){
+    var vis = Array.from(cat.querySelectorAll(".gloss-item")).filter(function(el){return el.style.display !== "none";}).length;
+    cat.style.display = vis > 0 ? "" : "none";
+  });
 }
 
 // Init — restore state from URL hash on page load/refresh
