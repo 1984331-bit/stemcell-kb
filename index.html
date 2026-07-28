@@ -8116,6 +8116,7 @@ function buildHash(state) {
   if (s === 'path') return '#path';
   if (s === 'ipsc-qc') return '#ipsc-qc';
   if (s === 'glossary') return '#glossary';
+  if (s === 'fund-projects') return '#fund-projects';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -8151,6 +8152,7 @@ function parseHash() {
   if (hash === '#path') return { section: 'path' };
   if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
   if (hash === '#glossary') return { section: 'glossary' };
+  if (hash === '#fund-projects') return { section: 'fund-projects' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8561,6 +8563,7 @@ function renderContent() {
   if (currentSection === 'path') { renderPath(); return; }
   if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
   if (currentSection === 'glossary') { renderGlossary(); return; }
+  if (currentSection === 'fund-projects') { renderFundProjects(); return; }
 
   const filtered = getFilteredData();
 
@@ -10500,7 +10503,7 @@ var SVC_DB_LIST = [
   { st:'plan', stTx:'规划中', t:'竞品管线库', d:'企业 × 靶点 × 阶段' },
   { st:'plan', stTx:'规划中', t:'检测方法库', d:'方法学 × 验证要点' },
   { st:'plan', stTx:'规划中', t:'耗材设备库', d:'选型 × 文献证据' },
-  { st:'plan', stTx:'规划中', t:'基金项目库', d:'历年立项 × 关键词' },
+  { st:'live', stTx:'已上线', t:'NSFC基金项目库', d:'14 项 CGT 项目 · 3 大领域', url:"switchSection('fund-projects')" },
   { st:'plan', stTx:'规划中', t:'期刊情报库', d:'IF · 分区 · 审稿周期' },
   { st:'plan', stTx:'规划中', t:'专家库', d:'细分领域专家网络' },
   { st:'plan', stTx:'规划中', t:'服务案例库', d:'脱敏案例沉淀' }
@@ -16927,6 +16930,62 @@ function glossSearch(q) {
     cat.style.display = vis > 0 ? "" : "none";
   });
 }
+
+
+// === NSFC基金项目库 ===
+var NSFC_PROJECTS = [
+  {id:'82373842',cat:'抗癌/免疫细胞',t:'IFNα诱导型靶向B7-H3的第四代CAR-T细胞治疗新技术的研制及其在胶质母细胞瘤中的探索性临床研究',pi:'孙才兴',inst:'浙江省肿瘤医院',amt:73,yr:'2024-2027',type:'面上',typeTag:'mian'},
+  {id:'82470194',cat:'抗癌/免疫细胞',t:'免疫-胶质细胞互作诱发免疫效应细胞相关神经毒性综合征的机制和干预',pi:'黄亮',inst:'北京协和医院',amt:48.5,yr:'2025-2028',type:'面上',typeTag:'mian'},
+  {id:'82470239',cat:'抗癌/免疫细胞',t:'基于“尖端成像”的CAR-T亚细胞水平动态耗竭机制及改造研究',pi:'王兆飞',inst:'华中科技大学同济医院',amt:48.5,yr:'2025-2028',type:'面上',typeTag:'mian'},
+  {id:'82270238',cat:'抗癌/免疫细胞',t:'预测CAR-T细胞治疗疗效的可视化生物学标志物研究',pi:'王兆飞',inst:'华中科技大学同济医院',amt:52,yr:'2023-2026',type:'面上',typeTag:'mian'},
+  {id:'T2321004',cat:'干细胞/再生',t:'靶向产细胞外基质细胞的CAR-T疗法缓解慢性肾脏纤维化',pi:'易凡/唐伟',inst:'山东大学',amt:0,yr:'2025-2028',type:'重大项目',typeTag:'zd',amtTx:'重大项目'},
+  {id:'',cat:'抗癌/免疫细胞',t:'HVEM通过ZNF451抑制RNF213介导的CAR泛素降解增强CAR-T细胞抗实体瘤疗效的机制研究',pi:'孙世颖',inst:'徐州医科大学',amt:30,yr:'2024-2026',type:'青年',typeTag:'qing'},
+  {id:'82270044',cat:'抗癌/免疫细胞',t:'VISTA通过CD4+T细胞介导CAR-T治疗实体瘤的维度机制研究',pi:'张志平',inst:'徐州医科大学',amt:49,yr:'2025-2028',type:'面上',typeTag:'mian'},
+  {id:'',cat:'干细胞/再生',t:'中间型α地中海贫血表型异质性的分子机制及基因治疗研究',pi:'马燕琳',inst:'海南医科大学',amt:260,yr:'2024-2027',type:'区域联合重点',typeTag:'zd'},
+  {id:'',cat:'基因治疗',t:'肿瘤免疫治疗中的TCR-T细胞智能设计与构建',pi:'汪小我',inst:'清华大学',amt:1500,yr:'2025-2029',type:'重大项目',typeTag:'zd'},
+  {id:'82371083',cat:'基因治疗',t:'WTAP介导的m6A修饰在视网膜变性疾病中的作用及机制研究',pi:'朱献军',inst:'电子科技大学',amt:49,yr:'2024-2027',type:'面上',typeTag:'mian'},
+  {id:'82401100',cat:'基因治疗',t:'视网膜疾病致病机制及基因治疗策略研究',pi:'杨业明',inst:'电子科技大学',amt:49,yr:'2024-2028',type:'面上',typeTag:'mian'},
+  {id:'82100698',cat:'基因治疗',t:'视网膜变性疾病的分子机制研究',pi:'杨业明',inst:'电子科技大学',amt:30,yr:'2021-2024',type:'青年',typeTag:'qing'},
+  {id:'82322019',cat:'基因治疗',t:'老年性耳聋的发病机制',pi:'付小龙',inst:'北京理工大学',amt:200,yr:'2024-2026',type:'优青',typeTag:'mian'},
+  {id:'82271175',cat:'基因治疗',t:'RNA结合蛋白HuR介导的转录后调控在老年性耳聋中的作用机制研究',pi:'付小龙',inst:'北京理工大学',amt:56,yr:'2023-2026',type:'面上',typeTag:'mian'}
+];
+function renderFundProjects() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›;</span> <span class="crumb-current">NSFC基金项目库</span></div>';
+  html += '<div class="fp-hero">';
+  html += '<div class="fp-hero-kick">NSFC PROJECT DATABASE</div>';
+  html += '<div class="fp-hero-title">NSFC基金项目库</div>';
+  html += '<div class="fp-hero-sub">CGT相关国家自然科学基金项目结构化汇编，来源包括NSFC官网、kd.nsfc.cn、各高校公示。持续更新中。</div>';
+  var cats = {}, totalAmt = 0;
+  NSFC_PROJECTS.forEach(function(p){ if(p.amt>0)totalAmt+=p.amt; if(!cats[p.cat])cats[p.cat]=0; cats[p.cat]++; });
+  html += '<div class="fp-stats"><div class="fp-stat"><div class="fp-stat-num">' + NSFC_PROJECTS.length + '</div><div class="fp-stat-label">项目总数</div></div><div class="fp-stat"><div class="fp-stat-num">≈' + (totalAmt/10000).toFixed(1) + '亿</div><div class="fp-stat-label">总资助金额</div></div><div class="fp-stat"><div class="fp-stat-num">' + Object.keys(cats).length + '</div><div class="fp-stat-label">科研领域</div></div></div>';
+  html += '<div class="fp-search"><input type="text" id="fpSearchInput" placeholder="搜索项目名称/负责人/单位..." oninput="fpFilter(this.value)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>';
+  html += '<div class="fp-filters" id="fpFilters"><span class="fp-filter active" data-cat="all" onclick="fpFilterBy(&apos;all&apos;)">全部</span>';
+  Object.keys(cats).forEach(function(c){ html += '<span class="fp-filter" data-cat="' + c + '" onclick="fpFilterBy(' + c + ')">' + c + '(' + cats[c] + ')</span>'; });
+  html += '</div><div class="fp-list" id="fpList">';
+  NSFC_PROJECTS.forEach(function(p){
+    html += '<div class="fp-card" data-cat="' + p.cat + '">';
+    html += '<div class="fp-card-title">' + p.t + '</div>';
+    html += '<div class="fp-card-meta"><b>负责人：</b>' + p.pi + ' | <b>依托单位：</b>' + p.inst + ' | <b>资助金额：</b>' + (p.amtTx || (p.amt + '万元')) + ' | <b>起止时间：</b>' + p.yr + '</div>';
+    html += '<div><span class="fp-card-tag fp-tag-' + p.typeTag + '">' + p.type + '</span>' + (p.id ? '<span style="font-size:10px;color:var(--text-light);margin-left:6px;">批准号：' + p.id + '</span>' : '') + '</div>';
+    html += '</div>';
+  });
+  html += '</div><div style="text-align:center;padding:20px;font-size:11px;color:var(--text-light);">数据来源为公开信息汇编，仅供参考。持续更新中。</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+function fpFilterBy(cat) {
+  document.querySelectorAll('#fpFilters .fp-filter').forEach(function(el){ el.classList.toggle('active', el.dataset.cat === cat); });
+  document.querySelectorAll('#fpList .fp-card').forEach(function(el){ el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none'; });
+}
+function fpFilter(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('#fpList .fp-card').forEach(function(el){
+    el.style.display = (!q || el.textContent.toLowerCase().indexOf(q) >= 0) ? '' : 'none';
+  });
+}
+
 
 // Init — restore state from URL hash on page load/refresh
 (function() {
