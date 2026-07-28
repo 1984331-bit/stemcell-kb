@@ -10702,7 +10702,7 @@ function renderServices() {
   html += '<h2>预约一次免费需求评估</h2>';
   html += '<p>无论您是准备开题的研究生，还是筹备 IND 的企业团队——告诉我们您的方向，24 小时内回复：我们能交付什么、周期多久、报价多少。评估免费，不满意不签约。</p>';
   html += '<div class="svc-cta-row">';
-  html += '<a class="svc-btn pri" onclick="switchSection(\'team\')">' + svgIcon('phone', 16) + ' 联系咨询</a>';
+  html += '<a class="svc-btn pri" onclick="openContactModal()">' + svgIcon('phone', 16) + ' 联系咨询</a>';
   html += '<a class="svc-btn ghost" data-action="home" onclick="navTo(this)">返回首页</a>';
   html += '</div>';
   html += '<div class="svc-tip">签署保密协议后启动 · 支持对公付款与发票 · 高校团队合作另有课题通道</div>';
@@ -12459,7 +12459,9 @@ function showOpenCGTSubmitModal() {
   modal.style.cssText = 'background:var(--bg);border:1px solid var(--border);border-radius:16px;max-width:480px;width:100%;padding:24px;box-shadow:0 8px 40px rgba(0,229,255,0.15);max-height:80vh;overflow-y:auto;';
   modal.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(0,229,255,0.15);display:flex;align-items:center;justify-content:center;color:var(--primary);">' + svgIcon('lightbulb', 20) + '</div><div style="font-size:18px;font-weight:700;color:var(--primary);">加入我们·提交您的需求</div></div>' +
     '<div style="font-size:13px;color:var(--text-light);line-height:1.8;margin-bottom:16px;">Open CGT共创联盟计划正在建设中。完成后，你可以在此提交你的CGT相关想法，AI团队将为你规划实现路径。</div>' +
-    '<div style="font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;">提交功能即将上线，敬请期待。如需提前沟通，可通过平台声明中的联系方式与我们联系。</div>' +
+    '<div style="font-size:12px;color:var(--text-light);margin-bottom:12px;line-height:1.6;">提交功能即将上线，敬请期待。扫码加微信好友提前沟通：</div>' +
+    '<div style="text-align:center;margin-bottom:12px;"><img src="assets/contact_qr.jpg" style="width:180px;height:auto;border-radius:10px;border:2px solid var(--primary);background:#fff;padding:6px;" alt="微信二维码"/></div>' +
+    '<div style="text-align:center;font-size:12px;color:var(--primary);margin-bottom:14px;">扫码加好友 · 咨询 · 加入共创联盟</div>' +
     '<div style="text-align:center;"><button onclick="this.closest(\'div[style*=fixed]\').remove();" style="background:rgba(0,229,255,0.1);border:1px solid var(--primary);color:var(--primary);padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">我知道了</button></div>';
   overlay.appendChild(modal);
   document.body.appendChild(overlay);
@@ -12627,8 +12629,7 @@ function renderReport() {
   html += '<div class="report-intro">';
   html += '<div class="report-intro-title">' + svgIcon('chart', 18) + ' 关于本栏目</div>';
   html += '<div class="report-intro-text">本栏目基于<b>MSC Knowledge Hub</b>数据库，提供间充质基质细胞（MSC）及相关CGT领域的行业分析报告。数据<b>实时更新</b>，以<b>可视化图表</b>形式直观展示行业全貌——从临床试验分布、年度趋势到市场规模、融资动态、商业化进展，一站式洞察行业脉搏。';
-  html += ' 索取<b>完整报告</b>可联系网站作者。团队同时提供<b>CGT行业专属报告定制服务</b>，可根据需求定制特定赛道、区域或主题的深度分析报告，有需求可联系网站作者。</div>';
-  html += '<div class="report-intro-contact">联系方式：手机/微信 <b>15932929299</b> | QQ <b>401848919</b></div>';
+  html += ' 索取<b>完整报告</b>可联系网站作者。团队同时提供<b>CGT行业专属报告定制服务</b>，可根据需求定制特定赛道、区域或主题的深度分析报告。<b style="color:var(--primary);">可点击右上角联系咨询添加网站作者微信。</b></div>';
   html += '</div>';
   
   // Report tabs
@@ -13773,7 +13774,6 @@ function renderHealthProducts() {
   var content = document.getElementById('content');
   var html = '';
   html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">健康产品·编辑严选</span></div>';
-  html += '<div class="content-header"><h2>健康产品·编辑严选</h2><div class="desc">' + svgIcon('heart', 14) + ' 编辑团队亲测推荐 · 健康好物 · 品质保障</div></div>';
 
   // Disclaimer banner
   html += '<div class="health-disclaimer">';
@@ -13786,7 +13786,7 @@ function renderHealthProducts() {
     html += '<div class="health-placeholder">';
     html += '<div class="hp-icon-large">' + svgIcon('heart', 48) + '</div>';
     html += '<div class="hp-title">栏目建设中</div>';
-    html += '<div class="hp-desc">编辑团队正在精心筛选健康好物，敬请期待。<br>如需推荐产品或合作，请联系编辑团队。</div>';
+    html += '<div class="hp-desc">编辑团队正在精心筛选健康好物，敬请期待。<br>如需推荐产品或合作，<b style="color:var(--primary);">可点击右上角联系咨询添加网站作者微信。</b></div>';
     html += '</div>';
   } else {
     // Product grid
@@ -15213,7 +15213,7 @@ function renderInstProjects() {
   html += '</div></div>';
 
   // Description
-  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构已验证临床研究项目汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项已验证备案项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构。每条项目均附来源链接，可在原始出处验证。数据将持续更新，如有遗漏或错误请联系我们。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">全国细胞治疗备案机构已验证临床研究项目汇总，共收录<b style="color:var(--primary);">' + totalProj + '</b> 项已验证备案项目，来自<b style="color:var(--primary);">' + totalInst + '</b> 家备案机构。每条项目均附来源链接，可在原始出处验证。数据将持续更新，如有遗漏或错误<b style="color:var(--primary);">请点击右上角添加网站作者微信。</b></div></div>';
 
   // Filter buttons
   html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">';
@@ -16099,7 +16099,7 @@ function renderCompanies() {
   html += '<div class="report-intro">';
   html += '<div class="report-intro-title">' + svgIcon('building', 18) + ' 关于本栏目</div>';
   html += '<div class="report-intro-text">本栏目聚焦<b>细胞与基因治疗（CGT）产业链</b>上下游企业，覆盖药物研发、CRO/CDMO、设备耗材、检测服务、投融资等五大核心赛道，一站式呈现行业生态全景。数据持续更新中，点击下方分类卡片可按赛道筛选浏览。如需了解某家企业的详细信息，可点击企业卡片中的官网链接直接访问。</div>';
-  html += '<div class="report-intro-contact">' + svgIcon('plus', 14) + ' <b>企业入驻</b>：欢迎 CGT 领域企业在此展示，面向细胞治疗专业人士与投资者群体。请提供企业名称、所属分类、简介及核心产品信息，审核后上线。联系方式：手机/微信 <b>15932929299</b> | QQ <b>401848919</b></div>';
+  html += '<div class="report-intro-contact">' + svgIcon('plus', 14) + ' <b>企业入驻</b>：欢迎 CGT 领域企业在此展示，面向细胞治疗专业人士与投资者群体。请提供企业名称、所属分类、简介及核心产品信息，审核后上线。<b style="color:var(--primary);">可点击右上角联系咨询添加网站作者微信。</b></div>';
   html += '</div>';
 
   // Category cards
@@ -16160,7 +16160,7 @@ function filterCompanies(cat) {
 }
 
 function showOnboarding() {
-  alert('企业入驻请联系：\\n手机/微信：15932929299\\nQQ：401848919\\n\\n请提供企业名称、所属分类、简介及核心产品信息，我们将在审核后上线展示。');
+  alert('企业入驻请联系网站作者微信：点击右上角联系咨询即可扫码添加。');
 }
 
 var currentNewsTab = 'home';
