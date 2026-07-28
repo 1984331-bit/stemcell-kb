@@ -3555,28 +3555,6 @@ body { padding-bottom: 60px; }
 .contact-modal-close:hover { background: rgba(255,255,255,0.18); color: var(--text); }
 @media (max-width: 768px) { .float-contact { top: 82px; right: 10px; padding: 5px 8px; font-size: 12px; } .contact-modal-qr { width: 200px; height: auto; } }
 
-/* iPSC QC Database page */
-.ipsc-qc-hero { text-align: center; padding: 18px 10px; margin-bottom: 12px; border-bottom: 1px solid var(--border); }
-.ipsc-qc-hero-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.ipsc-qc-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; max-width: 600px; margin: 0 auto; }
-.ipsc-qc-src-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 14px; }
-.ipsc-qc-src { font-size: 9px; padding: 2px 8px; border-radius: 8px; background: rgba(0,229,255,0.07); color: var(--text-light); border: 1px solid var(--border); }
-.ipsc-qc-cat { margin-bottom: 14px; }
-.ipsc-qc-cat-title { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid rgba(0,229,255,0.2); }
-.ipsc-qc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
-.ipsc-qc-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: border-color 0.2s; }
-.ipsc-qc-card:hover { border-color: rgba(0,229,255,0.3); }
-.iqc-head { background: rgba(0,229,255,0.04); padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
-.iqc-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.iqc-en { font-size: 10px; color: var(--text-light); margin-top: 2px; }
-.iqc-body { padding: 8px 12px 10px; }
-.iqc-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 5px; font-size: 11px; }
-.iqc-label { flex-shrink: 0; min-width: 52px; color: var(--primary); font-weight: 600; }
-.iqc-val { color: var(--text-light); line-height: 1.45; }
-.iqc-note { margin-top: 6px; padding: 5px 8px; background: rgba(255,183,77,0.06); border-left: 2px solid rgba(255,183,77,0.4); border-radius: 3px; font-size: 10px; color: var(--text-light); line-height: 1.5; }
-.ipsc-qc-footer { text-align: center; font-size: 11px; color: var(--text-light); margin: 16px 0 8px; padding-top: 12px; border-top: 1px solid var(--border); line-height: 1.6; }
-@media (max-width: 768px) { .ipsc-qc-grid { grid-template-columns: 1fr; } }
-
 /* Growth roadmap full page (platform service view) */
 .path-hero { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; margin-bottom: 16px; text-align: center; }
 .path-hero-kick { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--primary); background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); border-radius: 20px; padding: 4px 14px; margin-bottom: 10px; }
@@ -8063,7 +8041,6 @@ function buildHash(state) {
   if (s === 'lab') return '#lab';
   if (s === 'blueprint') return '#blueprint';
   if (s === 'path') return '#path';
-  if (s === 'ipsc-qc') return '#ipsc-qc';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -8097,7 +8074,6 @@ function parseHash() {
   if (hash === '#lab') return { section: 'lab' };
   if (hash === '#blueprint') return { section: 'blueprint' };
   if (hash === '#path') return { section: 'path' };
-  if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8506,7 +8482,6 @@ function renderContent() {
   if (currentSection === 'blueprint') { renderBlueprint(); return; }
   if (currentSection === 'services') { renderServices(); return; }
   if (currentSection === 'path') { renderPath(); return; }
-  if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
 
   const filtered = getFilteredData();
 
@@ -10279,8 +10254,7 @@ function renderHub() {
 
   // 2×2 cards: 平台声明, 平台指南, 平台服务, 关于我们
   html += '<div class="hub-split-cards">';
-  html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>
-  html += '<div class="hub-split-card " style="border-left-color:#AB47BC;" onclick="switchSection(\'ipsc-qc\')"><div class="hsc-head"><div class="hsc-icon" style="color:#CE93D8;">' + svgIcon('flask', 18) + '</div><div class="hsc-title">iPSC放行标准数据库</div></div><div class="hsc-desc">全球指南·' + IPSC_QC_DATA.length + '项检测项目·中外对比·持续更新</div></div>';
+  html += '<div class="hub-split-card cyan" onclick="showDisclaimerModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('info', 18) + '</div><div class="hsc-title">平台声明</div></div><div class="hsc-desc">数据来源 · 适用人群 · 转载须知 · 免责提示</div></div>';
   html += '<div class="hub-split-card green" onclick="switchSection(\'guide\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('compass', 18) + '</div><div class="hsc-title">平台指南</div></div><div class="hsc-desc">研究人员 · 临床医生 · 产业从业者 · 投资者</div></div>';
   html += '<div class="hub-split-card orange" onclick="showPlatformServiceModal()"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('layers', 18) + '</div><div class="hsc-title">平台功能</div></div><div class="hsc-desc">数据查询 · 文献检索 · 政策追踪 · AI分析</div></div>';
   html += '<div class="hub-split-card purple" onclick="switchSection(\'team\')"><div class="hsc-head"><div class="hsc-icon">' + svgIcon('users', 18) + '</div><div class="hsc-title">关于我们</div></div><div class="hsc-desc">专家团队 · AI智能体覆盖CGT全产业链</div></div>';
@@ -10372,31 +10346,6 @@ var SVC_GROUPS = [
 var svcView = 'home';
 function svcOpenGroup(k) { saveNavState(); svcView = k; pushHistory(); renderServices(); window.scrollTo({ top: 0 }); }
 function svcBackHome() { saveNavState(); svcView = 'home'; pushHistory(); renderServices(); window.scrollTo({ top: 0 }); }
-
-// === iPSC 放行标准数据库 ===
-var IPSC_QC_DATA = [
-  {cat:'身份/多能性', t:'多能性标志物流式检测', en:'Pluripotency marker by flow cytometry', markers:'OCT3/4, TRA-1-60, SSEA-4, SSEA-5', method:'流式细胞术（CD3设门后分析）', spec:'≥90% 双阳性（OCT3/4+TRA-1-60）', stage:'MCB, WCB, EOPC', src:'GAiT, CSSCR, ISSCR, QAR 2026', note:'QAR 2026推荐OCT3/4+TRA-1-60+SSEA5组合作为最稳健标志物'},
-  {cat:'身份/多能性', t:'多能性基因qPCR定量', en:'Pluripotency gene qPCR', markers:'OCT4, NANOG, SOX2, DNMT3B', method:'实时荧光定量PCR', spec:'与参考iPSC系比较 Ct 值在 ±1.5 以内', stage:'MCB, WCB', src:'GAiT, EBiSC', note:'DNMT3B在非整合重编程iPSC中表达更稳定'},
-  {cat:'身份/多能性', t:'多能性标志物免疫荧光', en:'Pluripotency marker ICC', markers:'OCT4, NANOG, SOX2', method:'免疫荧光染色', spec:'核阳性率 ≥90%', stage:'MCB, WCB', src:'ISSCR, CSSCR', note:'OCT4和NANOG共定位核内'},
-  {cat:'身份/多能性', t:'三胚层分化（体外EB法）', en:'Trilineage differentiation (EB)', markers:'三胚层标志物（βIII-tubulin/AFP/SMA）', method:'类胚体形成+自发分化+qPCR/ICC', spec:'三个胚层标志物均可检测', stage:'MCB主库', src:'GAiT, ISSCR, CSSCR', note:'可替代体内畸胎瘤试验（3R原则）'},
-  {cat:'身份/多能性', t:'三胚层分化（体内畸胎瘤法）', en:'Teratoma assay (in vivo)', markers:'三胚层组织（外/中/内胚层）', method:'免疫缺陷小鼠皮下注射，8-12周', spec:'畸胎瘤含三胚层组织', stage:'MCB建立时（一次性）', src:'ISSCR（金标准）', note:'金标准但涉及动物实验，正被体外法替代'},
-  {cat:'纯度', t:'残留未分化细胞检测', en:'Residual undifferentiated cells', markers:'SSEA-5, TRA-1-60', method:'流式细胞术', spec:'SSEA-5+ 或 TRA-1-60+ <0.1%', stage:'EOPC, 终产品', src:'GAiT, CSSCR', note:'致瘤性风险的关键控制点'},
-  {cat:'纯度', t:'支原体检测', en:'Mycoplasma testing', markers:'支原体DNA/培养', method:'qPCR / 培养法（药典方法）', spec:'阴性', stage:'MCB, WCB, EOPC, 终产品', src:'中国药典, USP, EP', note:'药典法定方法+快速qPCR法并行'},
-  {cat:'纯度', t:'内毒素检测', en:'Endotoxin testing', markers:'LAL反应', method:'凝胶法/光度法（药典方法）', spec:'<5 EU/mL（注射用）', stage:'WCB, EOPC, 终产品', src:'中国药典, USP, EP', note:'注射途径标准为<5 EU/mL，局部途径放宽'},
-  {cat:'纯度', t:'无菌检测', en:'Sterility testing', markers:'需氧菌/厌氧菌/真菌', method:'薄膜过滤法（药典方法）', spec:'14天培养阴性', stage:'MCB, WCB, EOPC, 终产品', src:'中国药典, USP, EP', note:'短货架期产品可启用快速微生物检测替代'},
-  {cat:'纯度', t:'外源病毒因子检测', en:'Adventitious virus testing', markers:'多种病毒', method:'体外法（细胞培养）+ 体内法（动物）+ PCR', spec:'阴性', stage:'MCB（全面检测），WCB（PCR筛查）', src:'ICH Q5A, FDA, EMA', note:'MCB需做全面病毒检测，WCB做PCR筛查即可'},
-  {cat:'安全性', t:'核型分析（G显带）', en:'Karyotype (G-banding)', markers:'染色体数目与结构', method:'G显带核型分析，≥20个中期分裂相', spec:'正常核型 ≥90%（46XX/46XY）', stage:'MCB, WCB, 每10代', src:'ISSCR, CSSCR, GAiT', note:'iPSC在长期培养中易出现20号染色体扩增'},
-  {cat:'安全性', t:'致瘤性检测（软琼脂）', en:'Tumorigenicity (soft agar)', markers:'锚定非依赖性生长', method:'软琼脂集落形成试验', spec:'无集落形成', stage:'MCB, WCB', src:'ICH, GAiT', note:'iPSC本身应无锚定非依赖性生长能力'},
-  {cat:'安全性', t:'残留重编程载体DNA', en:'Residual reprogramming vector DNA', markers:'载体序列（如Cre, Epi质粒）', method:'qPCR（多拷贝数检测）', spec:'<100 copies/μg gDNA 或低于检测限', stage:'MCB, WCB', src:'GAiT, CSSCR, FDA', note:'非整合重编程方法（Epi/仙台病毒）此检测可简化'},
-  {cat:'安全性', t:'基因组完整性（SNP array/WGS）', en:'Genomic integrity (SNP array/WGS)', markers:'SNV, CNV, 染色体结构变异', method:'全基因组测序/SNP芯片', spec:'无已知致病性变异', stage:'MCB（一次性检测）', src:'GAiT, QAR 2026', note:'推荐MCB建立时做一次性全基因组分析'},
-  {cat:'安全性', t:'复制全能型载体检测（RCL/RCA）', en:'Replication-competent lentivirus/adenovirus', markers:'慢病毒/腺病毒复制标志', method:'细胞培养法+qPCR', spec:'阴性', stage:'WCB（如使用LV/Ad载体）', src:'FDA, EMA', note:'仅在使用病毒载体时需检测'},
-  {cat:'效力/功能', t:'定向分化效率', en:'Directed differentiation efficiency', markers:'目标细胞特异性标志物', method:'流式/ICC/qPCR', spec:'根据具体产品设定（一般≥50%目标细胞纯度）', stage:'WCB, EOPC, 终产品', src:'FDA, EMA, GAiT', note:'效力检测产品特异性强，需根据适应症定制'},
-  {cat:'效力/功能', t:'功能检测（产品特异性）', en:'Functional potency assay', markers:'具体功能指标（如胰岛素分泌/电生理/收缩力等）', method:'根据产品功能设计', spec:'与参考批次比较 ±2SD', stage:'EOPC, 终产品', src:'FDA, EMA, GAiT', note:'这是放行中最具挑战的检测项'},
-  {cat:'稳定性', t:'传代稳定性（长期培养）', en:'Passage stability', markers:'多能性+核型+分化能力', method:'每10代检测一次全套QC', spec:'与早期传代（P5-10）一致', stage:'每10代（MCB→WCB→EOPC各阶段）', src:'GAiT, ISSCR', note:'至少验证到最高传代数的10代之外'},
-  {cat:'稳定性', t:'冻存复苏存活率', en:'Post-thaw viability', markers:'台盼蓝排斥/7-AAD', method:'计数法/流式', spec:'≥70% 或 ≥80%（依据产品要求）', stage:'WCB, EOPC', src:'中国药典, USP', note:'冻存制剂的关键稳定性指标'},
-  {cat:'稳定性', t:'批次一致性', en:'Lot-to-lot consistency', markers:'多参数（身份+纯度+效力）', method:'多个批次平行检测+统计分析', spec:'在设定接受范围内', stage:'≥3个连续批次', src:'ICH, FDA', note:'IND申报时需至少3个批次的一致性数据'},
-  {cat:'综合', t:'iPSC HLA分型', en:'iPSC HLA typing', markers:'HLA-A, HLA-B, HLA-DR等高分辨率', method:'PCR-SBT / NGS', spec:'高分辨率HLA分型完成', stage:'MCB', src:'日本MHLW, GAiT', note:'日本已建成HLA单倍型库（HLA haplobank），覆盖40%日本人群'}
-];
 var SVC_CARDS = {
   res: [
     { tag:'flag', tagTx:'学术旗舰', ic:'book', t:'开题 / 立项循证报告', d:'指定研究方向的全球格局：发文趋势、主要团队、技术路线演进、临床转化证据（该方向已进入哪些临床试验、进展到几期）、研究空白点分析。', m:['交付物：20-30 页格局报告（附转化证据表）','客户：研究生开题 · 教师基金申请','周期：1-2 周'], p:'¥500-2000 / 份' },
@@ -10640,44 +10589,6 @@ function renderPath() {
     html += '</div>';
   });
   html += '<div class="path-footer-note">数据库图例：<b>绿色=已上线</b> · 黄色=建设中 · 灰色=规划中 · 点击芯片直达对应板块</div>';
-  content.innerHTML = html;
-  updateFloatButtons();
-}
-
-function renderIPSCQC() {
-  var content = document.getElementById('content');
-  var cats = {};
-  IPSC_QC_DATA.forEach(function(d) { if (!cats[d.cat]) cats[d.cat] = []; cats[d.cat].push(d); });
-  var catOrder = ['身份/多能性','纯度','安全性','效力/功能','稳定性','综合'];
-  var html = '';
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">iPSC放行标准数据库</span></div>';
-  html += '<div class="ipsc-qc-hero">';
-  html += '<div class="ipsc-qc-hero-title">iPSC放行标准数据库</div>';
-  html += '<div class="ipsc-qc-hero-sub">基于全球指南（CSSCR/GAiT/ISSCR/ICH/FDA/EMA/EP/USP）的结构化放行检测项目清单，共收录<b style="color:var(--primary);">' + IPSC_QC_DATA.length + '</b>项检测项目。数据持续更新。<b style="color:var(--primary);">全国尚无统一的iPSC放行行业标准，本数据库汇总全球主流指南以供参考。</b></div>';
-  html += '</div>';
-  var allSrc = ['CSSCR','GAiT','ISSCR','ICH','FDA','EMA','中国药典','USP','EP','QAR 2026','日本MHLW','EBiSC'];
-  html += '<div class="ipsc-qc-src-row">';
-  allSrc.forEach(function(s) { html += '<span class="ipsc-qc-src">' + s + '</span>'; });
-  html += '</div>';
-  html += '<div style="font-size:11px;color:var(--text-light);margin-bottom:12px;text-align:center;">分类说明：<b>身份/多能性</b>=细胞身份鉴定 · <b>纯度</b>=外源因子控制 · <b>安全性</b>=基因/致瘤风险评估 · <b>效力/功能</b>=产品功能验证 · <b>稳定性</b>=批次一致与工艺稳健</div>';
-  html += '<div style="font-size:11px;color:rgba(0,229,255,0.7);text-align:center;margin-bottom:16px;line-height:1.6;">💡 构建中，v0.1版骨架。如需完整数据包（含protocol参数、阈值来源原文、历史版本对照表），请联系网站作者。</div>';
-  catOrder.forEach(function(c) {
-    if (!cats[c]) return;
-    html += '<div class="ipsc-qc-cat"><div class="ipsc-qc-cat-title">' + c + '（' + cats[c].length + '项）</div><div class="ipsc-qc-grid">';
-    cats[c].forEach(function(d) {
-      html += '<div class="ipsc-qc-card"><div class="iqc-head"><div class="iqc-name">' + escapeHtml(d.t) + '</div><div class="iqc-en">' + escapeHtml(d.en) + '</div></div>';
-      html += '<div class="iqc-body">';
-      html += '<div class="iqc-row"><span class="iqc-label">标志物</span><span class="iqc-val">' + escapeHtml(d.markers) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">方法</span><span class="iqc-val">' + escapeHtml(d.method) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">标准</span><span class="iqc-val">' + escapeHtml(d.spec) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">适用阶段</span><span class="iqc-val">' + escapeHtml(d.stage) + '</span></div>';
-      html += '<div class="iqc-row"><span class="iqc-label">来源</span><span class="iqc-val">' + escapeHtml(d.src) + '</span></div>';
-      if (d.note) { html += '<div class="iqc-note">' + escapeHtml(d.note) + '</div>'; }
-      html += '</div></div>';
-    });
-    html += '</div></div>';
-  });
-  html += '<div class="ipsc-qc-footer">数据库持续更新中·欢迎联系网站作者提供补充/修正·计划收录：日本PMDA指南、韩国MFDS指南、已上市iPSC产品放行标准</div>';
   content.innerHTML = html;
   updateFloatButtons();
 }
