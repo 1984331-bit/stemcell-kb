@@ -8095,7 +8095,7 @@ function getCurrentState() {
     search: searchQuery,
     page: currentPage,
     sort: currentSort,
-    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
+    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'frontier',
     picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
     prodFilter: prodFilter,
     regFilter: regFilter,
@@ -8218,7 +8218,7 @@ function restoreState(state) {
     regFilter = 'all';
     instFilter = 'all';
     companyFilter = 'all';
-    if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'frontier';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
     if (typeof svcView !== 'undefined') svcView = 'home';
   } else {
@@ -8231,7 +8231,7 @@ function restoreState(state) {
     regFilter = state.regFilter || 'all';
     instFilter = state.instFilter || 'all';
     companyFilter = state.companyFilter || 'all';
-    if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'home';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'frontier';
     if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = (state.picksIssue !== undefined && state.picksIssue !== null) ? state.picksIssue : null;
     if (typeof svcView !== 'undefined') svcView = state.svcView || 'home';
   }
@@ -8278,7 +8278,7 @@ function saveNavState() {
     instFilter: instFilter,
     companyFilter: companyFilter,
     svcView: (typeof svcView !== 'undefined') ? svcView : 'home',
-    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
+    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'frontier',
     picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
     scrollY: window.scrollY || 0
   });
@@ -9825,7 +9825,7 @@ function switchSection(section) {
   regFilter = 'all';
   companyFilter = 'all';
   instFilter = 'all';
-  if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'home';
+  if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'frontier';
   if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
   if (typeof svcView !== 'undefined') svcView = 'home';
   document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
@@ -16367,7 +16367,7 @@ function showOnboarding() {
   alert('企业入驻请联系网站作者微信：点击右上角联系咨询即可扫码添加。');
 }
 
-var currentNewsTab = 'home';
+var currentNewsTab = 'frontier';
 var currentPicksIssue = null; // null=latest, number=issue index
 var currentPicksCat = 'all'; // 'all' | 'clinical' | 'basic' | 'case'
 
@@ -16399,9 +16399,9 @@ function renderNews() {
 
   // 六个子板块的数据
   var tabs = [
+    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,   color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破',         hint:'Cell/Nature 系列最新进展', subtitle:'MSC基础 · 化学重编程 · 类器官 · 基因编辑 · 来源：Cell/Nature/Science'},
     {id:'clinical',  label:'临床进展',     count: CLINICAL_PROGRESS.length,   color:'#C62828', desc:'临床试验 · 获批上市 · 临床突破/撤稿', hint:'最新数据', subtitle:'临床试验进展 · 获批上市 · 临床突破与撤稿警示'},
     {id:'industry',  label:'产业动态',     count: INDUSTRY_NEWS.length,       color:'#1565C0', desc:'产业合作 · 政策监管 · 行业活动',   hint:'最新动态', subtitle:'产业合作 · 政策监管 · 行业活动与趋势分析'},
-    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,   color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破',         hint:'Cell/Nature 系列最新进展', subtitle:'MSC基础 · 化学重编程 · 类器官 · 基因编辑 · 来源：Cell/Nature/Science'},
     {id:'report',    label:'行业报告',     count: INDUSTRY_REPORTS.length,    color:'#1565C0', desc:'市场研报 · 管线分析 · 白皮书', hint:'Frost & Sullivan / 动脉网',  subtitle:'市场研报 · 管线分析 · 产业白皮书 · 来源：Frost & Sullivan / 动脉网 / Citeline'},
     {id:'policy',    label:'地方政策',     count: LOCAL_POLICY.length,        color:'#E65100', desc:'省市细胞治疗产业政策',         hint:'点击查看原文',             subtitle:'深圳 · 北京 · 上海 · 广州 · 江苏 · 海南等地细胞治疗产业扶持政策'},
     {id:'funding',   label:'融资趋势',     count: FUNDING_TRENDS.length,      color:'#00838F', desc:'投融资事件 · 管线布局',         hint:'¥/$/最新轮次',             subtitle:'投融资事件 · MSC/CGT管线布局 · 美元/人民币轮次追踪'}
