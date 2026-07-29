@@ -9709,7 +9709,24 @@ const PICKS_IMAGES = {
 // === News data arrays (unified fields) ===
 
 // 快讯 — 链接指向官方公告/PubMed
-var NEWS_FLASH = [
+// === 临床进展 — 临床试验、获批上市、临床突破/撤稿 ===
+var CLINICAL_PROGRESS = [
+  {date:'2026-06-22', title:'全球首款实体瘤CAR-T在中国获批——科济药业舒瑞基奥仑赛注射液上市', tag:'获批上市', source:'NMPA/科济药业公告', url:'http://www.cb.com.cn/index/show/bzyc/cv/cv135286971647', desc:'科济药业自主研发的CLDN18.2靶向CAR-T产品"恺力美®"获NMPA批准上市，定价99万元/人份。用于治疗至少二线治疗失败的晚期胃/食管胃结合部腺癌。上海仁济医院、长海医院已开展首批临床应用。'},
+  {date:'2026-07-21', title:'同济医院完成全国首例NMPA批准的脐带干细胞治疗卵巢早衰临床输注', tag:'临床进展', source:'湖北日报 2026-07-21', url:'https://news.hubeidaily.net/pc/c_5778387.html', desc:'华中科技大学附属同济医院王世宣、栗妍团队完成国内首个获NMPA批准许可的脐带间充质干细胞治疗卵巢早衰临床试验。38岁患者输注后一个多月复查显示卵泡重新发育、激素水平改善。'},
+  {date:'2026-07-17', title:'中源协和VUM02注射液(脐带MSC)I/II期首例受试者完成给药——治疗SR-aGVHD', tag:'临床进展', source:'中源协和公告 2026-07-18', url:'https://finance.sina.cn/2026-07-18/detail-iniicyyn7299221.d.html', desc:'VUM02注射液(人脐带源间充质干细胞)用于激素治疗失败的II度至IV度急性移植物抗宿主病(SR-aGvHD)的I/II期临床试验I期多次给药首例受试者完成入组给药。登记号CTR20241694。'},
+  {date:'2026-07-21', title:'laromestrocel治疗衰老虚弱症2b期RCT达主要终点——6MWT显著改善63.4米', tag:'临床突破', source:'Cell Stem Cell 2026', url:'https://pubmed.ncbi.nlm.nih.gov/41747733/', desc:'Longeveron的BM-MSC疗法laromestrocel在148例70-85岁衰老虚弱症患者中，9个月时6MWT较安慰剂组增加63.4米(95%CI:17.1-109.6m, p=0.0077)，呈剂量和时间依赖性。NCT03169231。'},
+  {date:'2026-07-21', title:'FDA批准Ryoncil(remestemcel-L)直接启动DMD注册性III期试验', tag:'临床进展', source:'Mesoblast公告 2026-04-07', url:'https://investorsmedia.mesoblast.com/node/18446/html', desc:'FDA授予IND许可，跳过II期直接启动注册性试验。76例5-9岁DMD患儿，7次输注2x10^6 cells/kg，主要终点为9个月time-to-stand。'},
+  {date:'2026-07-14', title:'FDA批准Tregzi——全球首款调节性T细胞(Treg)疗法上市', tag:'获批上市', source:'FDA 2026-06-30', url:'https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-allogeneic-regulatory-t-cell-based-immunotherapy-hspc-and-t-cells-vldq-use-matched', desc:'Orca Bio的Tregzi(Orca-T)用于allo-HSCT后改善慢性GVHD-free生存期。Precision-T III期(n=187)：12个月cGFS 78% vs 38%(HR 0.26)，慢性GVHD 13% vs 44%。定价42.8万美元/剂。'},
+  {date:'2026-07-13', title:'中盛溯源基因修饰iMSC治疗间质性肺病完成全球首例临床输注', tag:'临床进展', source:'药研社', url:'https://www.pharnexcloud.com/zixun/hy_46118', desc:'上海市第六人民医院任涛教授团队完成全球首例基因修饰iPSC来源MSC(NCR101)治疗间质性肺病(ILD)输注。iPSC来源确保批次一致性，突破传统MSC变异性难题。'},
+  {date:'2026-07-12', title:'Longeveron公布laromestrocel治疗阿尔茨海默病2a期数据', tag:'临床数据', source:'AAIC 2026', url:'https://www.pharnexcloud.com/zixun/shiye/yfzczc_324584', desc:'同种异体BM-MSC疗法laromestrocel在轻度AD中的2a期数据分析被AAIC 2026接受。已获FDA RMAT认定和快速通道认定。'},
+  {date:'2026-07-08', title:'MEDIPOST脐带血MSC膝骨关节炎疗法美国III期完成首例给药', tag:'临床进展', source:'药研社', url:'https://www.pharnexcloud.com/zixun/shiye/lcyj_331549', desc:'MEDIPOST的脐带血MSC疗法(Cartistem升级)在美国完成III期临床试验首例受试者治疗。此前已在韩国、日本完成III期，积累大量真实世界数据。'},
+  {date:'2026-07-11', title:'【撤稿警示】PREVENT-TAHA8 III期研究已被BMJ于2026-03-31正式撤稿', tag:'撤稿警示', source:'BMJ 2026撤稿声明', url:'https://www.bmj.com/content/392/bmj.s579.short', desc:'原研究(PMID 40036897)报告BM-MSC透心内膜注射治疗AMI后心衰减少率60%，因数据可靠性与完整性存疑被撤稿。读者应避免引用此结论。'},
+  {date:'2026-07-09', title:'VX-880(iPSC衍生胰岛)12/12患者脱离胰岛素，功能性治愈T1DM', tag:'临床突破', source:'NEJM 2025', url:'https://pubmed.ncbi.nlm.nih.gov/40544428/', desc:'NEJM发表最新数据：12例T1DM患者全部HbA1c<7%，10/12完全脱离外源性胰岛素，随访中位时间18个月。Vertex宣布启动III期注册试验。'},
+  {date:'2026-07-08', title:'hUC-MSC(PLEB001)治疗SR-aGVHD多中心关键试验达主要终点', tag:'临床突破', source:'Stem Cell Res Ther 2026', url:'https://pubmed.ncbi.nlm.nih.gov/41877188/', desc:'28天ORR 68.3%，中位OS未达到，安全性良好。已完成NDA递交准备，有望成为国内首个获批的MSC药物。'},
+  {date:'2026-07-07', title:'Casgevy获FDA扩展适应症至≥2岁', tag:'政策监管', source:'FDA公告', url:'https://www.fda.gov/vaccines-blood-biologics/casgevy', desc:'SCD患者100% VOC-free，TDT患者88.9%脱离输血。安全性良好，无致癌性信号。'},
+  {date:'2026-07-06', title:'Ryoncil(remestemcel-L)真实世界数据更新：84%早期生存率', tag:'临床数据', source:'Mesoblast公告 2026.01', url:'https://investorsmedia.mesoblast.com/static-files/bfe812f8-d859-43a7-9539-f2135f792922', desc:'FDA批准后首批25例真实世界数据：21/25(84%)完成28天治疗并存活，与关键试验ORR 70%一致。'},
+  {date:'2026-07-14', title:'FDA批准Casgevy扩展适应症至≥2岁——首款用于2岁以上SCD的基因疗法', tag:'政策监管', source:'FDA官方公告', url:'https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapy-young-children-sickle-cell-disease', desc:'2026-07-01 FDA批准Casgevy(exagamglogene autotemcel)补充申请，用于治疗2岁及以上SCD/VOC或TDT患者。SCD 8/8可评估患者达到VF12，TDT 8/9达到12个月以上输血独立。'}
+];
   {date:'2026-07-23', title:'NMPA同日发布三份CGT重磅政策——30日审评通道+细胞/基因治疗药品归类标准', tag:'政策监管', source:'NMPA/CDE 2026-07-03', url:'https://www.nmpa.gov.cn/xxgk/zhqyj/zhqyjyp/20260703163821159.html', desc:'7月3日国家药监局连发三份文件：①《关于优化CGT药品审评审批有关事项的公告(征求意见稿)》——将符合条件的CGT药品纳入创新药临床试验30日审评通道(此前60个工作日)，重大变更补充申请审评时限由200降至130工作日；②《细胞治疗药品范围和归类技术指导原则(2026年版)》——明确CTMPs分为非基因修饰和体外基因修饰两大类；③《基因治疗药品范围和归类技术指导原则(2026年版)》——明确GTMPs分为非微生物载体类和微生物载体类。征求意见至8月3日。'},
   {date:'2026-07-21', title:'同济医院完成全国首例NMPA批准的脐带干细胞治疗卵巢早衰临床输注', tag:'临床进展', source:'湖北日报 2026-07-21', url:'https://news.hubeidaily.net/pc/c_5778387.html', desc:'华中科技大学附属同济医院王世宣、栗妍团队完成国内首个获NMPA批准许可的脐带间充质干细胞治疗卵巢早衰临床试验。38岁患者输注后一个多月复查显示卵泡重新发育、激素水平改善。相关基础研究发表于Nature Aging。'},
   {date:'2026-07-17', title:'中源协和VUM02注射液(脐带MSC)I/II期首例受试者完成给药——治疗SR-aGVHD', tag:'临床进展', source:'中源协和公告 2026-07-18', url:'https://finance.sina.cn/2026-07-18/detail-iniicyyn7299221.d.html', desc:'VUM02注射液(人脐带源间充质干细胞)用于激素治疗失败的II度至IV度急性移植物抗宿主病(SR-aGvHD)的I/II期临床试验I期多次给药首例受试者完成入组给药。注册分类：治疗用生物制品1类。登记号CTR20241694。'},
@@ -9727,14 +9744,15 @@ var NEWS_FLASH = [
   {date:'2026-07-08', title:'hUC-MSC(PLEB001)治疗SR-aGVHD多中心关键试验达主要终点', tag:'临床突破', source:'Stem Cell Res Ther 2026', url:'https://pubmed.ncbi.nlm.nih.gov/41877188/', desc:'28天ORR 68.3%，中位OS未达到，安全性良好。已完成NDA递交准备，有望成为国内首个获批的MSC药物。'},
   {date:'2026-07-07', title:'Casgevy获FDA扩展适应症至≥2岁', tag:'政策监管', source:'FDA公告', url:'https://www.fda.gov/vaccines-blood-biologics/casgevy', desc:'SCD患者100% VOC-free，TDT患者88.9%脱离输血。安全性良好，无致癌性信号。'},
   {date:'2026-07-06', title:'Ryoncil(remestemcel-L)真实世界数据更新：84%早期生存率', tag:'临床数据', source:'Mesoblast公告 2026.01', url:'https://investorsmedia.mesoblast.com/static-files/bfe812f8-d859-43a7-9539-f2135f792922', desc:'FDA批准后首批25例真实世界数据：21/25(84%)完成28天治疗并存活，与关键试验ORR 70%一致。'},
-  {date:'2026-07-14', title:'FDA批准Casgevy扩展适应症至≥2岁——首款用于2岁以上SCD的基因疗法', tag:'政策监管', source:'FDA官方公告', url:'https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapy-young-children-sickle-cell-disease', desc:'2026-07-01 FDA批准Casgevy(exagamglogene autotemcel)补充申请，用于治疗2岁及以上SCD/VOC或TDT患者。SCD 8/8可评估患者达到VF12(24个月无严重VOC)，TDT 8/9达到12个月以上输血独立。'},
-  {date:'2026-07-13', title:'哈佛医学院Nature发表无化疗干细胞移植"分子伪装"策略', tag:'前沿突破', source:'Nature 2026-07-08', url:'https://www.nature.com/articles/s41586-026-10737-8', desc:'Pietro Genovese团队通过单氨基酸"表位编辑"改造供体HSPC的KIT蛋白，使其对KIT单抗"隐身"而保留正常功能。体内验证编辑细胞逐步富集，达到治疗性嵌合率阈值，有望避免化疗/放疗预处理。'},
-  {date:'2026-07-10', title:'Science：合成WNT组织者细胞重塑人肾类器官有序空间结构', tag:'前沿突破', source:'Science 2026-07-02', url:'https://www.science.org/doi/10.1126/science.adu9122', desc:'USC Fausto/Glykofrydis/Lindström团队通过工程化"分泌Wnt的合成组织者"细胞，在类器官中重建WNT11-WNT9B信号边界，引导肾单位向信号源定向生长，结构接近天然肾脏。'},
-  {date:'2026-07-08', title:'Science：CRISPR激活rRNA转录(TAPIR)促进神经干细胞自我更新', tag:'前沿突破', source:'Science 2026-07-02', url:'https://www.science.org/doi/10.1126/science.aeh1348', desc:'LMU/Helmholtz Munich Stefan Stricker团队开发TAPIR（Targeted Activation of Protein Translation）方法，通过诱导47S rDNA转录提升rRNA水平，体内外均促进神经干细胞自我更新和增殖，并可部分修复Treacher-Collins综合征表型。'},
-  {date:'2026-07-24', title:'Scribe Therapeutics完成$1.29亿IPO，推进CRISPR心血管平台', tag:'资本市场', source:'Cell & Gene Therapy Review 2026-07-24', url:'https://www.cellgenetherapyreview.com/3972-News/627053-Scribe-secures-129M-IPO-to-advance-CRISPR-cardiovascular-platform/', desc:'Scribe Therapeutics（CRISPR基因编辑先驱Jennifer Doudna联合创立）登陆纳斯达克，募资$1.29亿。核心管线CRISPR碱基编辑疗法用于心血管疾病，已获FDA IND许可，即将启动I期临床。'},
-  {date:'2026-07-22', title:'Cellares与Papillon合作：自动化生产基因校正HSPC疗法', tag:'产业合作', source:'Cell & Gene Therapy Review 2026-07-22', url:'https://www.cellgenetherapyreview.com/3972-News/627000-Cellares-Papillon-partner-to-automate-manufacturing-of-gene-corrected-HSPC-therapy/', desc:'Cellares（自动化细胞制造平台）与Papillon Therapeutics合作，利用Cellares的Cell Shuttle™全自动化封闭生产平台，加速基因校正造血干细胞（HSPC）疗法的制造工艺开发和商业化。'},
-  {date:'2026-07-21', title:'Immitra Bio完成$295万融资，推进体内基因编辑平台', tag:'融资动态', source:'Cell & Gene Therapy Review 2026-07-21', url:'https://www.cellgenetherapyreview.com/3972-News/626990-Immitra-Bio-raises-2-95M-for-in-vivo-gene-editing/', desc:'Immitra Bio完成$295万种子轮融资，专注于开发体内基因编辑技术平台，旨在通过非病毒载体递送CRISPR系统，实现肝脏和免疫细胞的原位基因修饰。'},
-  {date:'2026-06-22', title:'全球首款实体瘤CAR-T在中国获批——科济药业舒瑞基奥仑赛注射液上市', tag:'获批上市', source:'NMPA/科济药业公告', url:'http://www.cb.com.cn/index/show/bzyc/cv/cv135286971647', desc:'科济药业自主研发的CLDN18.2靶向CAR-T产品"恺力美®"获NMPA批准上市，定价99万元/人份。用于治疗至少二线治疗失败的晚期胃/食管胃结合部腺癌。上海仁济医院、长海医院已开展首批临床应用。'}
+  {date:'2026-07-14', title:'FDA批准Casgevy扩展适应症至≥2岁——首款用于2岁以上SCD的基因疗法', tag:'政策监管', source:'FDA官方公告', url:'https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapy-young-children-sickle-cell-disease', desc:'2026-07-01 FDA批准Casgevy(exagamglogene autotemcel)补充申请，用于治疗2岁及以上SCD/VOC或TDT患者。SCD 8/8可评估患者达到VF12，TDT 8/9达到12个月以上输血独立。'}
+];
+// === 产业动态 — 产业合作、政策监管、行业活动 ===
+var INDUSTRY_NEWS = [
+  {date:'2026-07-23', title:'NMPA同日发布三份CGT重磅政策——30日审评通道+细胞/基因治疗药品归类标准', tag:'政策监管', source:'NMPA/CDE 2026-07-03', url:'https://www.nmpa.gov.cn/xxgk/zhqyj/zhqyjyp/20260703163821159.html', desc:'7月3日国家药监局连发三份文件：①CGT药品纳入创新药临床试验30日审评通道；②《细胞治疗药品范围和归类技术指导原则(2026年版)》；③《基因治疗药品范围和归类技术指导原则(2026年版)》。征求意见至8月3日。'},
+  {date:'2026-07-21', title:'武汉CGT产业全国排名第三——6个创新平台项目集中签约总金额超5亿元', tag:'产业动态', source:'武汉头条 2026-07-21', url:'https://www.toutiao.com/article/7664800213801992710/', desc:'湖北省CGT产业专场对接会在武汉光谷举行，6个创新平台项目集中签约总金额超5亿元。爱思唯尔CGT领域城市创新指数显示武汉排全国第3位、全球第24位。'},
+  {date:'2026-07-21', title:'NMPA发布CGT审评审批30日通道征求意见稿——审评周期压缩一半', tag:'政策监管', source:'国家药监局 2026-07-03', url:'https://finance.sina.com.cn/jjxw/2026-07-03/doc-inifpyyn5565486.shtml', desc:'将符合条件的CGT药品纳入创新药临床试验审评审批30日通道（此前60个工作日）。聚焦恶性肿瘤/罕见病/遗传性/免疫系统/神经退行性疾病。'},
+  {date:'2026-07-10', title:'CDE发布《细胞治疗药品范围和归类技术指导原则(2026年版)》', tag:'政策监管', source:'CDE通告(2026年第39号)', url:'https://www.cde.org.cn/main/news/viewInfoCommon/56c7aff3a0301d6d96d5e58efd2bfd44', desc:'明确CGT药品分类边界，厘清MSC、CAR-T、基因编辑等产品的注册管理路径，自发布之日起施行。'},
+  {date:'2026-07-22', title:'Cellares与Papillon合作：自动化生产基因校正HSPC疗法', tag:'产业合作', source:'Cell & Gene Therapy Review 2026-07-22', url:'https://www.cellgenetherapyreview.com/3972-News/627000-Cellares-Papillon-partner-to-automate-manufacturing-of-gene-corrected-HSPC-therapy/', desc:'Cellares（自动化细胞制造平台）与Papillon Therapeutics合作，利用Cell Shuttle™全自动化封闭生产平台，加速基因校正造血干细胞疗法的制造工艺开发和商业化。'}
 ];
 // 行业报告 — 链接指向报告原文
 var INDUSTRY_REPORTS = [
@@ -9764,6 +9782,9 @@ var FRONTIER_RESEARCH = [
   {date:'2022-03', title:'人多能干细胞回拨至8细胞胚胎样状态(8CLC)', tag:'重编程', source:'Nature 2022', url:'https://pubmed.ncbi.nlm.nih.gov/35314832/', desc:'Mazid/Esteban团队开发非转基因、快速且可控的化学重编程方法，首次将人PSC诱导为全能性8CLC，并证明可分化为胚胎和胚外谱系。'},
   {date:'2025-04', title:'MSC线粒体转移通过隧道纳米管修复ARDS血管内皮', tag:'MSC机制', source:'Stem Cell Res Ther 2025', url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC11912292', desc:'阐明MSC通过隧道纳米管(TNT)向ARDS肺血管内皮细胞转移线粒体，激活TCA循环和脂肪酸合成，促进血管再生。'},
   {date:'2022-02', title:'CD106+ MSC亚群具有独特免疫调节特性', tag:'MSC基础', source:'Stem Cell Res Ther 2022', url:'https://pubmed.ncbi.nlm.nih.gov/35123072/', desc:'单细胞RNA测序解析骨髓MSC亚群，CD106+亚群显著抑制CD3+ T细胞增殖并诱导Treg，为MSC效价检测提供新生物标志物。'},
+  {date:'2026-07', title:'哈佛医学院Nature发表无化疗干细胞移植"分子伪装"策略', tag:'基因编辑', source:'Nature 2026-07-08', url:'https://www.nature.com/articles/s41586-026-10737-8', desc:'Pietro Genovese团队通过单氨基酸"表位编辑"改造供体HSPC的KIT蛋白，使其对KIT单抗"隐身"而保留正常功能。体内验证编辑细胞逐步富集，达到治疗性嵌合率阈值，有望避免化疗/放疗预处理。'},
+  {date:'2026-07', title:'Science：合成WNT组织者细胞重塑人肾类器官有序空间结构', tag:'类器官', source:'Science 2026-07-02', url:'https://www.science.org/doi/10.1126/science.adu9122', desc:'USC团队通过工程化"分泌Wnt的合成组织者"细胞，在类器官中重建WNT11-WNT9B信号边界，引导肾单位向信号源定向生长，结构接近天然肾脏。'},
+  {date:'2026-07', title:'Science：CRISPR激活rRNA转录(TAPIR)促进神经干细胞自我更新', tag:'基因编辑', source:'Science 2026-07-02', url:'https://www.science.org/doi/10.1126/science.aeh1348', desc:'LMU/Helmholtz Munich团队开发TAPIR方法，通过诱导47S rDNA转录提升rRNA水平，体内外均促进神经干细胞自我更新和增殖。'},
   {date:'2026-02', title:'类脑器官技术路线图：从神经发育到疾病模型和药物筛选', tag:'类器官', source:'Nat Rev Neurosci 2026', url:'', desc:'整合类器官、微流控和单细胞组学的下一代脑类器官平台，实现个性化疾病建模和药物反应预测。'},
   {date:'2026-01', title:'iPSC衍生CAR-Macrophage实现实体瘤内高效渗透', tag:'免疫细胞', source:'Nat Biotechnol 2026', url:'', desc:'iPSC来源的CAR-巨噬细胞在多种实体瘤模型中展现优于CAR-T的肿瘤渗透能力和抗原依赖性吞噬活性。'},
   {date:'2026-07', title:'非基因毒性造血干细胞移植与体内选择：表位编辑策略', tag:'基因编辑', source:'Nature 2026-07-08', url:'https://www.nature.com/articles/s41586-026-10737-8', desc:'哈佛医学院Pietro Genovese团队利用腺嘌呤碱基编辑或引导编辑修改KIT胞外结构域单氨基酸，破坏KIT单抗结合而不影响SCF信号传导，实现供体HSPC"分子伪装"——体内KIT单抗处理下多克隆均衡富集，无克隆选择风险。'},
@@ -9798,6 +9819,8 @@ var FUNDING_TRENDS = [
   {date:'2026-05', title:'尧唐生物完成近5亿元C轮融资(国内体内基因编辑最大单笔)', tag:'近¥5亿', source:'中国医药报/医药观澜', url:'https://www.cnpharm.com/c/2026-07-14/1102245.shtml', desc:'正心谷资本领投，上海国投先导、闵金投、德岳投资等参投，老股东险峰淇云、远翼投资、天创资本加码。6条临床阶段管线(全球最多)，YOLT-201(ATTR)是首款进入注册临床的LNP介导体内基因编辑药物，YOLT-203(PH1)已在美进入确证性临床。'},
   {date:'2026-05', title:'中因科技获希玛医疗1.13亿元战略投资(港股眼科龙头入股内地眼科基因治疗)', tag:'¥1.13亿', source:'希玛医疗公告(03309.HK)/华盛通', url:'https://www.hstong.com/news/hk/detail/26052020353938125', desc:'希玛医疗(03309.HK)旗下香港(国际)眼科医疗认购新股+受让老股，合计出资1.12625亿元取得中因科技约10.23%股权(第二大股东)。核心产品ZVS101e(BCD基因替代)2025-12完成中国III期临床，计划2026年递交BLA、2027年获批，有望成为全球首个BCD治疗药物。'},
   {date:'2026-07', title:'湾岛细胞(范晓虎创业)完成¥1.4亿A轮融资，推进通用型CAR-T', tag:'¥1.4亿', source:'36氪', url:'https://www.163.com/dy/article/L1FLU02405118DFD.html', desc:'前传奇生物创始人范晓虎创办。松禾资本领投，东方富海跟投。聚焦低成本、高可及性"货架型"异体通用型CAR-T和体内CAR-T技术。'},
+  {date:'2026-07', title:'Scribe Therapeutics完成$1.29亿IPO，推进CRISPR心血管平台', tag:'$1.29亿', source:'Cell & Gene Therapy Review', url:'https://www.cellgenetherapyreview.com/3972-News/627053-Scribe-secures-129M-IPO-to-advance-CRISPR-cardiovascular-platform/', desc:'CRISPR基因编辑先驱Jennifer Doudna联合创立的Scribe Therapeutics登陆纳斯达克。核心管线CRISPR碱基编辑疗法用于心血管疾病，已获FDA IND许可。'},
+  {date:'2026-07', title:'Immitra Bio完成$295万种子轮融资，推进体内基因编辑平台', tag:'$295万', source:'Cell & Gene Therapy Review', url:'https://www.cellgenetherapyreview.com/3972-News/626990-Immitra-Bio-raises-2-95M-for-in-vivo-gene-editing/', desc:'专注于开发体内基因编辑技术平台，旨在通过非病毒载体递送CRISPR系统，实现肝脏和免疫细胞的原位基因修饰。'},
   {date:'2026-07', title:'Allotera Therapeutics(原Wugen)完成$3500万融资，加速现货型CAR-T', tag:'$3500万', source:'药研社', url:'https://www.pharnexcloud.com/zixun/shiye/yytrz_331704', desc:'累计融资$1.5亿。推进Sofi-cel全球关键性试验T-RRex(复发/难治性T-ALL/T-LBL)，聚焦T细胞恶性肿瘤现货型CAR-T。'},
   {date:'2026-07', title:'华夏英泰完成¥2亿+ C轮融资，加速STAR-T及In vivo细胞治疗', tag:'¥2亿+', source:'动脉网', url:'https://www.vbdata.cn/1519084329', desc:'正心谷资本领投，复旦科创跟投。重点推进通用型STAR-T核心产品YTS109注册临床和In vivo STAR-T技术平台。'},
   {date:'2026-06', title:'睿健医药 2.1亿C1轮 + 2.6亿C+轮融资，AI+化学诱导iPSC平台', tag:'¥4.7亿', source:'PharnexCloud', url:'https://www.pharnexcloud.com/zixun/shiye/yytrz_330206', desc:'NouvNeu001(iPSC来源多巴胺能神经前体细胞)获FDA快速通道+RMAT认定，美国II期临床2026年2月首例给药。'},
@@ -10288,7 +10311,7 @@ function renderHub() {
 
   html += '<div class="hub-cards">';
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 患者常见问题</div></div>';
-  html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
+  html += '<div class="hub-card teal" data-section="news" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('news', 18) + '</div><div class="hc-title">行业资讯精选</div></div><div class="hc-desc">临床进展 · 产业动态 · 前沿研究 · 行业报告 · 地方政策 · 融资趋势</div></div>';
   html += '<div class="hub-card green" data-section="literature" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('doc', 18) + '</div><div class="hc-title">临床试验数据</div></div><div class="hc-desc">3062篇 · MSC/CAR-T/基因治疗三库 · 证据分级</div></div>';
   html += '<div class="hub-card blue" data-section="products" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('pill', 18) + '</div><div class="hc-title">获批产品名录</div></div><div class="hc-desc">' + PRODUCTS.length + '款 · MSC · iPSC · CAR-T · 博鳌乐城</div></div>';
   html += '<div class="hub-card orange" data-section="regulations" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('shield', 18) + '</div><div class="hc-title">监管政策汇编</div></div><div class="hc-desc">' + REGULATIONS.length + '份 · 818令 · FDA · EMA · NMPA · ISCT</div></div>';
@@ -16375,34 +16398,41 @@ function switchNewsTab(tab) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   updateFloatButtons();
 }
+function showDailySample() {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);';
+  overlay.onclick = function(){ document.body.removeChild(overlay); };
+  var frame = document.createElement('iframe');
+  frame.src = 'assets/cgt_daily_sample.html';
+  frame.style.cssText = 'width:100%;max-width:420px;height:90vh;border:none;border-radius:12px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,0.5);';
+  overlay.appendChild(frame);
+  document.body.appendChild(overlay);
+}
 
 function renderNews() {
   var content = document.getElementById('content');
   var html = '';
 
-  var tabLabels = { home:'首页', flash:'快讯', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-link" data-section="news" onclick="navTo(this)">行业资讯精选</span>';
-  if (currentNewsTab !== 'home') {
-    html += '<span class="crumb-sep">›</span> <span class="crumb-current">' + escapeHtml(tabLabels[currentNewsTab]||currentNewsTab) + '</span>';
-  }
-  html += '</div>';
+  var tabLabels = { clinical:'临床进展', industry:'产业动态', frontier:'前沿基础研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">行业资讯精选</span></div>';
 
-  // 五个子板块的数据
+  // 六个子板块的数据
   var tabs = [
-    {id:'flash',     label:'快讯',       count: NEWS_FLASH.length,         color:'#2E7D32', desc:'行业动态 · 临床突破',       hint:'最近更新于今日', subtitle:'行业动态 · 临床突破 · 政策动态 · 编辑精选'},
-    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,  color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破',     hint:'Cell/Nature 系列最新进展', subtitle:'MSC基础 · 化学重编程 · 类器官 · 基因编辑 · 来源：Cell/Nature/Science'},
+    {id:'clinical',  label:'临床进展',     count: CLINICAL_PROGRESS.length,   color:'#C62828', desc:'临床试验 · 获批上市 · 临床突破/撤稿', hint:'最新数据', subtitle:'临床试验进展 · 获批上市 · 临床突破与撤稿警示'},
+    {id:'industry',  label:'产业动态',     count: INDUSTRY_NEWS.length,       color:'#1565C0', desc:'产业合作 · 政策监管 · 行业活动',   hint:'最新动态', subtitle:'产业合作 · 政策监管 · 行业活动与趋势分析'},
+    {id:'frontier',  label:'前沿基础研究', count: FRONTIER_RESEARCH.length,   color:'#7B1FA2', desc:'干细胞生物学 · 新技术突破',         hint:'Cell/Nature 系列最新进展', subtitle:'MSC基础 · 化学重编程 · 类器官 · 基因编辑 · 来源：Cell/Nature/Science'},
     {id:'report',    label:'行业报告',     count: INDUSTRY_REPORTS.length,    color:'#1565C0', desc:'市场研报 · 管线分析 · 白皮书', hint:'Frost & Sullivan / 动脉网',  subtitle:'市场研报 · 管线分析 · 产业白皮书 · 来源：Frost & Sullivan / 动脉网 / Citeline'},
     {id:'policy',    label:'地方政策',     count: LOCAL_POLICY.length,        color:'#E65100', desc:'省市细胞治疗产业政策',         hint:'点击查看原文',             subtitle:'深圳 · 北京 · 上海 · 广州 · 江苏 · 海南等地细胞治疗产业扶持政策'},
     {id:'funding',   label:'融资趋势',     count: FUNDING_TRENDS.length,      color:'#00838F', desc:'投融资事件 · 管线布局',         hint:'¥/$/最新轮次',             subtitle:'投融资事件 · MSC/CGT管线布局 · 美元/人民币轮次追踪'}
   ];
 
   // content-header (always shown)
-  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">间充质干细胞领域前沿研究、行业报告、地方政策与融资趋势的持续追踪。点击下方分类卡片筛选感兴趣的内容。</div></div>';
+  html += '<div class="content-header"><div class="desc" style="text-indent:2em;line-height:1.8;">细胞与基因治疗领域资讯持续追踪——临床进展、产业动态、前沿研究、行业报告、地方政策、融资趋势六大板块，新资讯自动归入对应分类。关注CGT行业最新资讯，可免费订阅<span style="color:#00E5FF;font-weight:600;cursor:pointer;" onclick="showDailySample()">CGT日报</span>，点击右上方联系网站作者获取。</div></div>';
 
   // Category cards — 6 in two rows (3 per row)
-  var totalCount = NEWS_FLASH.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
-  var tabShortLabels = { flash:'最新资讯', frontier:'前沿研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
-  var newsNewTabs = { flash: true, frontier: true }; // recently updated tabs
+  var totalCount = CLINICAL_PROGRESS.length + INDUSTRY_NEWS.length + FRONTIER_RESEARCH.length + INDUSTRY_REPORTS.length + LOCAL_POLICY.length + FUNDING_TRENDS.length;
+  var tabShortLabels = { clinical:'临床进展', industry:'产业动态', frontier:'前沿研究', report:'行业报告', policy:'地方政策', funding:'融资趋势' };
+  var newsNewTabs = { clinical: true, industry: true, frontier: true };
   html += '<div class="reg-cat-row" style="grid-template-columns:repeat(3,1fr);">';
   tabs.forEach(function(t) {
     var newBadge = newsNewTabs[t.id] ? '<span class="rcc-new-badge">NEW</span>' : '';
@@ -16421,7 +16451,8 @@ function renderNews() {
   if (currentNewsTab === 'home') {
     // 全部资讯（按日期排序）
     var allNews = [];
-    NEWS_FLASH.forEach(function(n){ allNews.push(Object.assign({_tab:'flash',_tabColor:'#2E7D32',_tabLabel:'快讯'},n)); });
+    CLINICAL_PROGRESS.forEach(function(n){ allNews.push(Object.assign({_tab:'clinical',_tabColor:'#C62828',_tabLabel:'临床'},n)); });
+    INDUSTRY_NEWS.forEach(function(n){ allNews.push(Object.assign({_tab:'industry',_tabColor:'#1565C0',_tabLabel:'产业'},n)); });
     FRONTIER_RESEARCH.forEach(function(n){ allNews.push(Object.assign({_tab:'frontier',_tabColor:'#7B1FA2',_tabLabel:'前沿'},n)); });
     INDUSTRY_REPORTS.forEach(function(n){ allNews.push(Object.assign({_tab:'report',_tabColor:'#1565C0',_tabLabel:'报告'},n)); });
     LOCAL_POLICY.forEach(function(n){ allNews.push(Object.assign({_tab:'policy',_tabColor:'#E65100',_tabLabel:'政策'},n)); });
@@ -16446,7 +16477,7 @@ function renderNews() {
   } else {
     // === 子板块：渲染列表 ===
     var currentTab = tabs.find(function(t){ return t.id === currentNewsTab; }) || tabs[0];
-    var dataMap = { flash: NEWS_FLASH, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
+    var dataMap = { clinical: CLINICAL_PROGRESS, industry: INDUSTRY_NEWS, frontier: FRONTIER_RESEARCH, report: INDUSTRY_REPORTS, policy: LOCAL_POLICY, funding: FUNDING_TRENDS };
     var items = dataMap[currentNewsTab] || [];
     var tc = currentTab.color;
 
