@@ -16381,12 +16381,33 @@ function switchNewsTab(tab) {
 }
 function showDailySample() {
   var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);';
-  overlay.onclick = function(){ document.body.removeChild(overlay); };
-  var frame = document.createElement('iframe');
-  frame.src = 'assets/cgt_daily_sample.html';
-  frame.style.cssText = 'width:100%;max-width:420px;height:90vh;border:none;border-radius:12px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,0.5);';
-  overlay.appendChild(frame);
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);';
+  overlay.onclick = function(e){ if(e.target===overlay) document.body.removeChild(overlay); };
+
+  var box = document.createElement('div');
+  box.style.cssText = 'position:relative;width:100%;max-width:360px;background:transparent;border-radius:12px;overflow:hidden;';
+
+  var closeBtn = document.createElement('button');
+  closeBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+  closeBtn.style.cssText = 'position:absolute;top:8px;right:8px;z-index:10;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+  closeBtn.onclick = function(){ document.body.removeChild(overlay); };
+  box.appendChild(closeBtn);
+
+  var label = document.createElement('div');
+  label.style.cssText = 'text-align:center;font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:6px;letter-spacing:1px;';
+  label.textContent = 'CGT日报 样例（可上下滑动查看）';
+  box.appendChild(label);
+
+  var imgWrap = document.createElement('div');
+  imgWrap.style.cssText = 'width:100%;max-height:75vh;overflow-y:auto;border-radius:10px;background:#fff;';
+  var img = document.createElement('img');
+  img.src = 'assets/cgt_daily_sample.png';
+  img.style.cssText = 'width:100%;height:auto;display:block;';
+  img.alt = 'CGT日报样例';
+  imgWrap.appendChild(img);
+  box.appendChild(imgWrap);
+
+  overlay.appendChild(box);
   document.body.appendChild(overlay);
 }
 
