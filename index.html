@@ -10252,7 +10252,7 @@ function renderHub() {
   html += '</div>';
   html += '</div>';
 
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('database', 16) + ' 数据库入口</div><div class="sd-line"></div></div>';
+  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('database', 16) + ' 基础数据库入库</div><div class="sd-line"></div></div>';
 
   html += '<div class="hub-cards">';
   html += '<div class="hub-card purple" data-section="intro" onclick="navTo(this)"><div class="hc-head"><div class="hc-icon">' + svgIcon('dna', 18) + '</div><div class="hc-title">认识细胞治疗</div></div><div class="hc-desc">什么是MSC · 能治哪些病 · 患者常见问题</div></div>';
@@ -10264,7 +10264,7 @@ function renderHub() {
   html += '</div>';
 
   // Global search section (divider only, functionality TBD)
-  html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库检索·功能开发中</div><div class="sd-line"></div></div>';
+  html += '<div class="section-divider" style="cursor:pointer;" onclick="switchSection(\'services\')"><div class="sd-line"></div><div class="sd-title">' + svgIcon('search', 16) + ' 全库数据底座·陆续更新中</div><div class="sd-line"></div></div>';
 
   html += '<div class="section-divider"><div class="sd-line"></div><div class="sd-title">' + svgIcon('book', 16) + ' 知识库栏目</div><div class="sd-line"></div></div>';
 
@@ -10317,8 +10317,8 @@ function renderHub() {
   // Health products entry (moved after companies)
   html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#EF5350;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(239,83,80,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
+  html += '<div class="report-entry-title" style="color:#ffffff;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
+  html += '<div class="report-entry-desc" style="color:rgba(255,255,255,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -13922,7 +13922,7 @@ function showBookDetail(idx) {
   if (b.url) {
     html += '<div style="margin-top:14px;text-align:center;"><a href="' + escapeHtml(b.url) + '" target="_blank" rel="noopener" class="book-modal-link">' + svgIcon('globe', 14) + ' 访问出版社官网 →</a></div>';
   }
-  html += '<div class="book-modal-note">本平台电子书供学习交流之用，请通过正规渠道购买正版书籍，需电子版交流学习请联系网站作者。</div>';
+  html += '<div class="book-modal-note">本平台电子书供学习交流之用，请通过正规渠道购买正版书籍，需电子版交流学习请点击右上角<span style="color:#00E5FF;font-weight:600;">联系网站作者</span>。</div>';
   modal.innerHTML = html;
   document.getElementById('bookModalOverlay').classList.add('show');
 }
