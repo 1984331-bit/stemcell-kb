@@ -3645,8 +3645,8 @@ body { padding-bottom: 60px; }
 .psc-subjects-head { font-size: 11px; color: var(--primary); font-weight: 700; margin: 10px 0 6px; display: flex; align-items: center; gap: 6px; }
 .path-stage-card.goal .psc-subjects-head { color: #FFB74D; }
 .psc-subjects-count { font-size: 10px; color: var(--text-light); font-weight: 400; }
-.psc-subjects-list { list-style: decimal; padding-left: 22px; margin: 0 0 10px; font-size: 11px; color: var(--text-light); line-height: 1.65; }
-.psc-subjects-list li { margin-bottom: 3px; padding-left: 2px; }
+.psc-subjects-list { list-style: decimal; padding-left: 0; margin: 0 0 10px; font-size: 11px; color: var(--text-light); line-height: 1.65; list-style-position: inside; }
+.psc-subjects-list li { margin-bottom: 3px; }
 .psc-subjects-list li b { color: var(--text); font-weight: 600; }
 .psc-subjects-more { color: var(--text-light); font-size: 10px; margin-left: 4px; }
 .psc-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 7px; }
@@ -3665,6 +3665,34 @@ body { padding-bottom: 60px; }
 .psc-chip .dbn { opacity: 0.75; font-size: 10px; margin-left: 3px; }
 .path-footer-note { text-align: center; font-size: 11px; color: var(--text-light); line-height: 1.7; margin: 14px 0 6px; }
 .path-footer-note b { color: var(--primary); }
+
+/* === NSFC基金项目库 === */
+.fp-hero { text-align: center; padding: 28px 16px 16px; }
+.fp-hero-kick { font-size: 10px; color: var(--primary); letter-spacing: 4px; font-weight: 700; margin-bottom: 6px; }
+.fp-hero-title { font-size: 22px; font-weight: 800; color: var(--text); }
+.fp-hero-sub { font-size: 12px; color: var(--text-light); line-height: 1.7; margin: 8px auto 14px; max-width: 600px; }
+.fp-stats { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+.fp-stat { background: var(--card-bg); border: 1px solid rgba(0,229,255,0.12); border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 90px; }
+.fp-stat-num { font-size: 22px; font-weight: 800; color: var(--primary); }
+.fp-stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.fp-search { position: relative; max-width: 400px; margin: 0 auto 12px; }
+.fp-search input { width: 100%; padding: 10px 36px 10px 14px; border-radius: 8px; border: 1px solid rgba(0,229,255,0.2); background: var(--surface-2); color: var(--text); font-size: 13px; outline: none; }
+.fp-search input:focus { border-color: var(--primary); }
+.fp-search svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+.fp-filters { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 14px; }
+.fp-filter { font-size: 11px; padding: 5px 12px; border-radius: 999px; background: var(--surface-2); color: var(--text-light); cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
+.fp-filter:hover { border-color: rgba(0,229,255,0.3); }
+.fp-filter.active { background: rgba(0,229,255,0.12); color: var(--primary); border-color: var(--primary); }
+.fp-list { display: flex; flex-direction: column; gap: 8px; }
+.fp-card { background: var(--card-bg); border: 1px solid rgba(0,229,255,0.08); border-radius: 10px; padding: 14px 16px; transition: border-color 0.15s; }
+.fp-card:hover { border-color: rgba(0,229,255,0.25); }
+.fp-card-title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.6; margin-bottom: 6px; }
+.fp-card-meta { font-size: 11px; color: var(--text-light); line-height: 1.6; margin-bottom: 4px; }
+.fp-card-meta b { color: var(--text-secondary); }
+.fp-card-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+.fp-tag-mian { background: rgba(0,229,255,0.1); color: var(--primary); }
+.fp-tag-qing { background: rgba(255,183,77,0.1); color: #FFB74D; }
+.fp-tag-young { background: rgba(129,199,132,0.1); color: #81C784; }
 
 /* Book cover grid */
 .book-grid {
@@ -8251,7 +8279,8 @@ function saveNavState() {
     companyFilter: companyFilter,
     svcView: (typeof svcView !== 'undefined') ? svcView : 'home',
     newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'home',
-    picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null
+    picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
+    scrollY: window.scrollY || 0
   });
   if (navHistory.length > 30) navHistory.shift();
   updateFloatButtons();
@@ -8277,7 +8306,8 @@ function goBack() {
     updateBottomNav(currentSection);
     updateLayout(currentSection);
     renderContent();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var savedY = prev.scrollY || 0;
+    window.scrollTo({ top: savedY, behavior: 'instant' });
     updateFloatButtons();
   } else if (history.length > 1) {
     history.back();
@@ -10649,7 +10679,7 @@ function renderPath() {
   html += '<div class="path-hero">';
   html += '<div class="path-hero-kick">AI赋能 · CGT CAREER ROADMAP</div>';
   html += '<div class="path-hero-title">CGT从业者成长路线图</div>';
-  html += '<div class="path-hero-sub">七个阶段，从基础知识到复合型人才。每一步，平台都有对应的AI服务、数据库与栏目内容为你托底——学什么、用什么、去哪儿看，一图讲清。</div>';
+  html += '<div class="path-hero-sub">七个阶段，从零基础一路走到复合型人才。每一步该学什么、用什么工具、去哪看资料，平台都给你配好了——一张图说清楚。</div>';
   html += '</div>';
   PATH_STAGES.forEach(function(p) {
     html += '<div class="path-stage-card' + (p.goal ? ' goal' : '') + '">';
