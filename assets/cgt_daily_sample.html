@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CGT行业资讯日报 | 2026年7月15日</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+  :root {
+    --bg: #0f1117;
+    --card-bg: #181b25;
+    --card-border: #252938;
+    --accent: #6c5ce7;
+    --accent2: #00cec9;
+    --accent3: #fd79a8;
+    --accent4: #ffeaa7;
+    --accent5: #55efc4;
+    --accent6: #74b9ff;
+    --accent7: #e17055;
+    --text: #e8e8f0;
+    --text-muted: #8890a4;
+    --tag-bg: rgba(108,92,231,0.15);
+    --gradient-hero: linear-gradient(135deg, #6c5ce7 0%, #00cec9 50%, #55efc4 100%);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans SC',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; overflow-x:hidden; }
+  .hero { position:relative; padding:40px 24px 30px; text-align:center; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-60%; left:-10%; width:120%; height:200%; background:var(--gradient-hero); opacity:0.12; animation:heroPulse 8s ease-in-out infinite; }
+  @keyframes heroPulse { 0%,100%{opacity:0.1;transform:scale(1)} 50%{opacity:0.18;transform:scale(1.05)} }
+  .hero-title { font-size:2rem; font-weight:700; letter-spacing:2px; position:relative; }
+  .hero-title span { background:var(--gradient-hero); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero-sub { font-size:0.95rem; color:var(--text-muted); margin-top:10px; position:relative; }
+  .hero-date { display:inline-block; margin-top:14px; padding:6px 20px; background:rgba(108,92,231,0.2); border:1px solid rgba(108,92,231,0.4); border-radius:20px; font-size:0.85rem; color:var(--accent); position:relative; }
+  .container { max-width:800px; margin:0 auto; padding:0 16px 60px; }
+  .section { margin-top:32px; }
+  .section-header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .section-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; }
+  .section-icon.s1 { background:linear-gradient(135deg,#6c5ce7,#a29bfe); }
+  .section-icon.s2 { background:linear-gradient(135deg,#00cec9,#55efc4); }
+  .section-icon.s3 { background:linear-gradient(135deg,#fd79a8,#e17055); }
+  .section-icon.s4 { background:linear-gradient(135deg,#ffeaa7,#f39c12); }
+  .section-icon.s5 { background:linear-gradient(135deg,#74b9ff,#0984e3); }
+  .section-icon.s6 { background:linear-gradient(135deg,#e17055,#d63031); }
+  .section-icon.s7 { background:linear-gradient(135deg,#55efc4,#00b894); }
+  .section-title { font-size:1.2rem; font-weight:700; }
+  .section-en { font-size:0.75rem; color:var(--text-muted); margin-left:4px; }
+  .card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:18px 20px; margin-bottom:14px; transition:transform 0.25s,box-shadow 0.25s; position:relative; overflow:hidden; }
+  .card:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+  .card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; border-radius:3px 0 0 3px; }
+  .card.c1::before { background:var(--accent); }
+  .card.c2::before { background:var(--accent2); }
+  .card.c3::before { background:var(--accent3); }
+  .card.c4::before { background:var(--accent4); }
+  .card.c5::before { background:var(--accent6); }
+  .card.c6::before { background:var(--accent7); }
+  .card.c7::before { background:var(--accent5); }
+  .card-tag { display:inline-block; padding:2px 10px; border-radius:6px; font-size:0.72rem; font-weight:500; margin-bottom:8px; }
+  .tag1 { background:rgba(108,92,231,0.15); color:#a29bfe; }
+  .tag2 { background:rgba(0,206,201,0.15); color:#55efc4; }
+  .tag3 { background:rgba(253,121,168,0.15); color:#fd79a8; }
+  .tag4 { background:rgba(255,234,167,0.15); color:#ffeaa7; }
+  .tag5 { background:rgba(116,185,255,0.15); color:#74b9ff; }
+  .tag6 { background:rgba(225,112,85,0.15); color:#e17055; }
+  .tag7 { background:rgba(85,239,196,0.15); color:#55efc4; }
+  .card-title { font-size:1rem; font-weight:600; margin-bottom:6px; line-height:1.5; }
+  .card-desc { font-size:0.82rem; color:var(--text-muted); line-height:1.6; margin-bottom:10px; }
+  .card-meta { font-size:0.75rem; color:var(--text-muted); display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  .card-meta .label { color:var(--accent); font-weight:500; }
+  .sources { margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06); }
+  .sources a { color:var(--accent); font-size:0.78rem; text-decoration:none; margin-right:12px; display:inline-block; }
+  .sources a:hover { text-decoration:underline; }
+  .sources a::before { content:'🔗 '; }
+  .doi-link { color:var(--accent2); }
+  .nct-link { color:var(--accent4); }
+  .footer { text-align:center; padding:40px 24px; font-size:0.75rem; color:var(--text-muted); }
+  .footer span { color:var(--accent); }
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .card { animation:fadeInUp 0.5s ease both; }
+  .card:nth-child(2){animation-delay:0.1s} .card:nth-child(3){animation-delay:0.2s} .card:nth-child(4){animation-delay:0.3s} .card:nth-child(5){animation-delay:0.4s}
+  @media(min-width:600px){
+    .hero-title{font-size:2.5rem} .hero-sub{font-size:1rem}
+  }
+  @media(max-width:400px){
+    .card{padding:14px 16px} .card-title{font-size:0.92rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-title"><span>CGT 行业资讯日报</span></div>
+  <div class="hero-sub">Cell & Gene Therapy Industry Daily · 细胞与基因治疗</div>
+  <div class="hero-date">2026年7月15日 · 星期三</div>
+</div>
+
+<div class="container">
+
+<!-- 板块1：行业媒体动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s1">📰</div>
+    <div><div class="section-title">行业媒体动态<span class="section-en">Industry Media</span></div></div>
+  </div>
+
+  <div class="card c1">
+    <div class="card-tag tag1">CGTLive</div>
+    <div class="card-title">Aspen Neuroscience 完成ASPIRO第3/4组给药，帕金森iPSC疗法推进至Phase 3</div>
+    <div class="card-desc">Aspen宣布其自体iPSC衍生疗法sasineprocel（ANPD001）完成ASPIRO 1/2a期试验Cohort 3和4给药，商业化冷冻保存制剂首次进入更广泛患者测试。12个月数据显示低剂量组开期时间增加2.1小时、MDS-UPDRS III评分降低15.5分。公司计划今年启动Phase 3。</div>
+    <div class="card-meta"><span class="label">NCT:</span>NCT06344026</div>
+    <div class="sources">
+      <a href="https://www.cgtlive.com/news" target="_blank">CGTLive News</a>
+      <a href="https://parkinsonhope.org/thaw-and-inject-cells-given-to-new-groups-in-parkinsons-trial" target="_blank">Parkinson's Hope</a>
+    </div>
+  </div>
+
+  <div class="card c1">
+    <div class="card-tag tag1">FierceBiotech</div>
+    <div class="card-title">Prime Medicine赢得与Beam专利仲裁，PM647 AATD基因编辑疗法获准继续开发</div>
+    <div class="card-desc">仲裁庭裁定Prime Medicine的先导编辑疗法PM647属于其合同权利范围，无需向Beam赔偿。PM647靶向SERPINA1基因PiZ突变纠正AATD，IND/CTA预计Q3 2026提交。Beam则强调裁决不影响其碱基编辑项目BEAM-302的临床领先地位。</div>
+    <div class="sources">
+      <a href="https://www.fiercebiotech.com/biotech/prime-wins-patent-fight-beam-can-continue-work-aatd-gene-editing-therapy" target="_blank">FierceBiotech</a>
+      <a href="https://www.techtimes.com/articles/320014/20260709/prime-editing-clears-ip-fight-sets-q3-filing-first-liver-targeted-aatd-drug.htm" target="_blank">TechTimes</a>
+    </div>
+  </div>
+
+  <div class="card c1">
+    <div class="card-tag tag1">Endpoints / BusinessWire</div>
+    <div class="card-title">Voyager VY1706首获FDA tau基因疗法IND，AAIC 2026公布NHP毒理学数据</div>
+    <div class="card-desc">Voyager的VY1706成为首个获FDA IND批准的靶向tau蛋白基因疗法。6个月GLP NHP数据显示单次IV给药耐受良好，关键脑区tau蛋白降低高达75%。临床试验预计H2 2026启动，用于早期阿尔茨海默病。数据于AAIC 2026（伦敦7月12-15日）Developing Topics海报展示。</div>
+    <div class="sources">
+      <a href="https://ir.voyagertherapeutics.com/news-releases/news-release-details/voyager-demonstrates-single-iv-dose-vy1706-well-tolerated" target="_blank">Voyager IR</a>
+      <a href="https://www.voyagertherapeutics.com/" target="_blank">Voyager官网</a>
+    </div>
+  </div>
+
+  <div class="card c1">
+    <div class="card-tag tag1">CGTLive / REGENXBIO</div>
+    <div class="card-title">REGENXBIO NAAVIGATE糖尿病视网膜病变基因疗法首例患者给药，获AbbVie $1亿里程碑</div>
+    <div class="card-desc">REGENXBIO宣布surabgene lomparvovec（sura-vec）用于非增殖性糖尿病视网膜病变的Phase 2b/3 NAAVIGATE试验首例患者完成给药，触发AbbVie $1亿里程碑付款。IIb期计划招募约135名受试者，主要终点为1年DRSS提升≥2级。</div>
+    <div class="sources">
+      <a href="https://www.cgtlive.com/news" target="_blank">CGTLive</a>
+      <a href="https://news.futunn.com/post/75250287/regenxbio-announces-first-patient-dosed-in-phase-iib-iii-naavigate" target="_blank">富途新闻</a>
+    </div>
+  </div>
+
+  <div class="card c1">
+    <div class="card-tag tag1">FierceBiotech</div>
+    <div class="card-title">Moderna公布首个体内CAR-T疗法mRNA-6007，锁定自身免疫疾病</div>
+    <div class="card-desc">Moderna在Science Day 2026公开mRNA-6007（代号"007"），利用CD7靶向LNP将CAR结构mRNA递送至体内T/NK细胞，瞬时表达CAR清除致病B细胞。非人灵长类验证外周B细胞快速清除。预计明年进入临床，先评估SLE等B细胞介导自身免疫病。消息推动股价单日涨约13%。</div>
+    <div class="sources">
+      <a href="https://www.fiercebiotech.com/biotech/moderna-enters-in-vivo-car-t-autoimmune-asset" target="_blank">FierceBiotech</a>
+      <a href="https://m.huxiu.com/article/4870698.html" target="_blank">虎嗅</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块2：学术期刊前沿 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s2">🔬</div>
+    <div><div class="section-title">学术期刊前沿<span class="section-en">Academic Highlights</span></div></div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-tag tag2">Nature · 2026-07-08</div>
+    <div class="card-title">表位编辑实现非基因毒性移植与体内选择</div>
+    <div class="card-desc">波士顿儿童医院Pietro Genovese/Gabriele Casirati团队在Nature发表，通过KIT细胞外结构域氨基酸变化（表位编辑）破坏治疗性单抗结合而不影响KIT功能，结合BCL11A红系增强子编辑促进胎儿血红蛋白表达，实现基因工程细胞的体内共选择达到镰状细胞病/β地中海贫血治疗阈值，避免化疗清淋。</div>
+    <div class="card-meta"><span class="label">通讯作者:</span>Pietro Genovese, Gabriele Casirati</div>
+    <div class="sources">
+      <a class="doi-link" href="https://doi.org/10.1038/s41586-026-xxxx" target="_blank">DOI链接</a>
+      <a href="https://www.nature.com/subjects/gene-therapy" target="_blank">Nature Gene Therapy</a>
+    </div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-tag tag2">Nature Biotechnology · 2026-07-10</div>
+    <div class="card-title">VLP胞嘧啶碱基编辑联合尿嘧啶DNA糖苷酶抑制实现高效体内编辑</div>
+    <div class="card-desc">Junjie Zhu/Lin Ding/Jia Chen团队在Nature Biotechnology报道，利用病毒样颗粒（VLP）递送胞嘧啶碱基编辑器，联合尿嘧啶DNA糖苷酶（UDG）抑制策略，显著提升体内碱基编辑效率，为非病毒递送基因编辑开辟新路径。</div>
+    <div class="card-meta"><span class="label">通讯作者:</span>Junjie Zhu, Lin Ding, Jia Chen</div>
+    <div class="sources">
+      <a class="doi-link" href="https://doi.org/10.1038/s41587-026-xxxx" target="_blank">DOI链接</a>
+      <a href="https://www.nature.com/subjects/gene-therapy" target="_blank">Nature Biotech</a>
+    </div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-tag tag2">Nature Biotechnology · 2026-07-08</div>
+    <div class="card-title">工程化AAV载体+类淋巴系统递送，体内高效靶向人类胶质前体细胞</div>
+    <div class="card-desc">Alexander Cona/Evan Newbold/Steven A. Goldman团队开发工程化AAV载体，通过类淋巴系统（glymphatic）脑内递送，实现体内高效靶向人类胶质前体细胞（hGPC），为少突胶质细胞/星形胶质细胞相关神经系统疾病基因治疗奠定基础。</div>
+    <div class="card-meta"><span class="label">通讯作者:</span>Steven A. Goldman</div>
+    <div class="sources">
+      <a class="doi-link" href="https://doi.org/10.1038/s41587-026-xxxx" target="_blank">DOI链接</a>
+      <a href="https://m.thepaper.cn/newsDetail_forward_33574430" target="_blank">澎湃新闻解读</a>
+    </div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-tag tag2">Nature · 2026-07-01</div>
+    <div class="card-title">GPNMB CAR-T对胶质母细胞瘤的双重肿瘤-髓系靶向治疗</div>
+    <div class="card-desc">加拿大麦克马斯特大学Sheila K. Singh团队设计多组学靶标发现平台，确定GPNMB为胶质母细胞瘤双室抗原。抗GPNMB CAR-T同时消耗GPNMB+肿瘤和免疫抑制髓细胞群，在原位PDX和同基因模型中实现长期疾病控制，提供靶向异源性实体瘤新策略。</div>
+    <div class="card-meta"><span class="label">通讯作者:</span>Sheila K. Singh</div>
+    <div class="sources">
+      <a class="doi-link" href="https://doi.org/10.1038/s41586-026-xxxx" target="_blank">DOI链接</a>
+      <a href="https://news.sciencenet.cn/htmlpaper/2026/7/202673111539818152388.shtm" target="_blank">科学网</a>
+    </div>
+  </div>
+
+  <div class="card c2">
+    <div class="card-tag tag2">Nature Biomedical Engineering · 2026-07-06</div>
+    <div class="card-title">重编程肿瘤机械感知，克服CAR-T治疗耐药性</div>
+    <div class="card-desc">南加州大学王英晓团队发现，在柔性基质上生长的癌细胞对CAR-T细胞毒性敏感性降低，表现出升高的细胞外ATP和持续钙离子活性。通过识别并重编程由机械柔性驱动的干细胞样癌细胞，可克服实体瘤中CAR-T耐药性。</div>
+    <div class="card-meta"><span class="label">通讯作者:</span>王英晓</div>
+    <div class="sources">
+      <a href="https://www.thepaper.cn/newsDetail_forward_33533409" target="_blank">澎湃新闻解读</a>
+      <a class="doi-link" href="https://doi.org/10.1038/s41551-026-xxxx" target="_blank">DOI链接</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块3：监管机构公告 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s3">⚖️</div>
+    <div><div class="section-title">监管机构公告<span class="section-en">Regulatory Updates</span></div></div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-tag tag3">NMPA</div>
+    <div class="card-title">NMPA三份文件齐发：CGT纳入30日审评通道 + CDE发布细胞/基因治疗归类指导原则</div>
+    <div class="card-desc">7月3日，NMPA发布《优化CGT药品审评审批征求意见稿》，将符合条件的CGT药品纳入30日IND审评通道（从60工作日压缩至30工作日），上市后重大变更补充申请从200工作日缩短至130工作日。同日CDE发布《细胞治疗药品范围和归类技术指导原则（2026版）》和《基因治疗药品范围和归类技术指导原则（2026版）》，明确in vivo CAR-T归类为基因治疗。</div>
+    <div class="sources">
+      <a href="http://www.asjk.net/show/331.html" target="_blank">asjk.net</a>
+      <a href="https://m.cnpharm.com/c/2026-07-03/1101684.shtml" target="_blank">中国食品药品网</a>
+      <a href="https://www.huxiu.com/article/4872853.html" target="_blank">虎嗅·In vivo CAR-T归类</a>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-tag tag3">国务院</div>
+    <div class="card-title">《国民健康"十五五"规划》正式印发：全链条支持CGT、新型抗体、AI赋能医药</div>
+    <div class="card-desc">7月13日国务院正式印发《国民健康"十五五"规划》，明确提出"全链条支持创新药和医疗器械发展应用"，加快细胞和基因治疗药物、新型抗体、新型疫苗、核酸药物研发应用，优化审评审批制度、健全医保支付保障机制。目标2030年人均预期寿命达80岁。</div>
+    <div class="sources">
+      <a href="https://xueqiu.com/8353550788/400034654" target="_blank">雪球·证券日报</a>
+      <a href="https://finance.sina.cn/tech/2026-07-14/detail-inihtrnk8563284.d.html" target="_blank">新浪财经</a>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-tag tag3">FDA</div>
+    <div class="card-title">FDA发布CGT CMC灵活性指南与基因治疗加速草案，支持利用已有知识减少冗余测试</div>
+    <div class="card-desc">FDA CBER正式发布《CGT产品CMC灵活性指南》，明确阶段适配GMP、风险基础可比性、跨产品利用先验知识等灵活处理方式。同时发布《基因治疗加速草案》，指导开发者利用公共信息和平台知识（含CMC/非临床/临床数据）简化监管提交，支持基因编辑疗法加速开发。</div>
+    <div class="sources">
+      <a href="https://www.fda.gov/news-events/press-announcements/fda-issues-draft-guidance-help-accelerate-cell-and-gene-therapies-patients" target="_blank">FDA官方公告</a>
+      <a href="https://chinamedglobal.com/blog/fda-cber-cgt-cmc-flexibility-bla-guidance-2026-guide" target="_blank">ChinaMedGlobal解读</a>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-tag tag3">818号令</div>
+    <div class="card-title">818号令双轨制实施两个月：卫健委技术审批+药监局药品审批并行框架落地</div>
+    <div class="card-desc">国务院第818号令《生物医学新技术临床研究和临床转化应用管理条例》自5月1日施行以来，确立"卫健委技术审批+药监局药品审批"双轨并行监管模式。各地医院争分夺秒准备备案材料，伦理审查、患者知情同意、细胞制备记录等环节必须经得起查。NMPA 7月3日征求意见稿是对818号令的进一步细化。</div>
+    <div class="sources">
+      <a href="https://paper.people.com.cn/rmrb/pc/attachement/202603/19/927618a7-7be4-4e14-832b-96b4e39f6c2e.pdf" target="_blank">人民日报·818号令全文</a>
+      <a href="https://www.toutiao.com/article/7658277858381185590" target="_blank">21世纪经济报道</a>
+    </div>
+  </div>
+
+  <div class="card c3">
+    <div class="card-tag tag3">FDA</div>
+    <div class="card-title">FDA批准Tregzi：首个同种异体调节性T细胞免疫疗法用于造血干细胞移植</div>
+    <div class="card-desc">FDA批准Tregzi（Precision-T）作为首个同种异体Treg细胞免疫疗法，基于Phase 3数据显示1年cGVHD-free生存率78%（对照38%），用于匹配供者HSCT后预防移植物抗宿主病。标志着Treg细胞疗法正式进入临床应用。</div>
+    <div class="sources">
+      <a href="https://www.cgtlive.com/news" target="_blank">CGTLive</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块4：临床试验进展 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s4">🧪</div>
+    <div><div class="section-title">临床试验进展<span class="section-en">Clinical Trials</span></div></div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-tag tag4">Phase 1/2a</div>
+    <div class="card-title">ASPIRO：sasineprocel帕金森iPSC疗法完成Cohort 3/4给药</div>
+    <div class="card-desc">Aspen Neuroscience自体iPSC衍生多巴胺神经元疗法sasineprocel（ANPD001）在ASPIRO试验中完成冷冻保存制剂的首批患者给药。15名患者已接受治疗，12个月数据：低剂量组开期+2.1h，MDS-UPDRS III降低15.5分，FDOPA PET显示细胞存活。Phase 3计划今年启动。</div>
+    <div class="card-meta"><span class="label">NCT:</span><a class="nct-link" href="https://clinicaltrials.gov/study/NCT06344026" target="_blank">NCT06344026</a> <span class="label">适应症:</span>帕金森病 <span class="label">阶段:</span>Phase 1/2a→3</div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-tag tag4">Phase 1/2</div>
+    <div class="card-title">Fate FT839：全球首创双CAR-T（CD19+CD38）自身免疫IND获批</div>
+    <div class="card-desc">Fate Therapeutics的iPSC衍生13点编辑现货型CAR-T FT839获FDA IND批准。该产品同时靶向CD19和CD38，覆盖B细胞、浆细胞、巨噬细胞和活化T细胞，用于多系统自身免疫病。Phase 1/2篮式试验设计免除清淋化疗，预计H2 2026入组。</div>
+    <div class="card-meta"><span class="label">适应症:</span>自身免疫疾病(多系统) <span class="label">阶段:</span>Phase 1/2</div>
+    <div class="sources">
+      <a href="https://www.vbdata.cn/intelDetail/1045831" target="_blank">动脉网</a>
+      <a href="https://www.clinicaltrialvanguard.com/news/fate-therapeutics-gets-fda-clearance-for-ft839-autoimmune-car-t-therapy/" target="_blank">CTV详细解读</a>
+    </div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-tag tag4">Phase 1</div>
+    <div class="card-title">启函QT-019C：通用型双靶点CAR-T获NMPA IND批准，治疗难治性SLE</div>
+    <div class="card-desc">启函生物QT-019C获NMPA批准开展I期临床试验，治疗难治性系统性红斑狼疮（rSLE）。此前5月已获FDA IND批准。公司in vivo CAR-T产品在IIT中49例r/r MM患者给药，前2例1月随访均实现CR，涵盖髓外病变及自体CAR-T失败高龄患者。</div>
+    <div class="card-meta"><span class="label">适应症:</span>难治性SLE <span class="label">阶段:</span>Phase I</div>
+    <div class="sources">
+      <a href="https://www.pharnexcloud.com/zixun/shiye/lcyj_331191" target="_blank">药融云</a>
+    </div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-tag tag4">Phase 2b/3</div>
+    <div class="card-title">NAAVIGATE：sura-vec糖尿病视网膜病变基因疗法首例给药</div>
+    <div class="card-desc">REGENXBIO surabgene lomparvovec（AAV基因疗法）用于非增殖性糖尿病视网膜病变的Phase 2b/3 NAAVIGATE试验首例患者完成给药。单次脉络膜上腔注射，剂量1.0×10¹² GC/眼。主要终点：1年DRSS提升≥2级。IIb期约招募135人。</div>
+    <div class="card-meta"><span class="label">适应症:</span>NPDR <span class="label">阶段:</span>Phase 2b/3</div>
+    <div class="sources">
+      <a href="https://news.futunn.com/post/75250287/regenxbio-announces-first-patient-dosed-in-phase-iib-iii-naavigate" target="_blank">富途</a>
+    </div>
+  </div>
+
+  <div class="card c4">
+    <div class="card-tag tag4">IND获批</div>
+    <div class="card-title">石药SYS6055：国内首款体内CAR-T产品获批临床</div>
+    <div class="card-desc">石药集团SYS6055注射液获NMPA批准开展临床试验，适应症为复发/难治侵袭性B细胞淋巴瘤。该产品为国内首款获批临床的体内CAR-T产品，通过慢病毒载体在体内直接生成靶向CD19的CAR-T细胞，无需体外改造。</div>
+    <div class="card-meta"><span class="label">适应症:</span>r/r B细胞淋巴瘤 <span class="label">阶段:</span>Phase I</div>
+    <div class="sources">
+      <a href="https://www.aastocks.com/sc/stocks/analysis/stock-aafn-con/01093/aafn/now.1499800/hk-stock-news" target="_blank">AAStocks</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块5：投融资动态 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s5">💰</div>
+    <div><div class="section-title">投融资动态<span class="section-en">Financing & Deals</span></div></div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-tag tag5">并购</div>
+    <div class="card-title">Vertex以$100亿收购Crinetics：史上最大并购，进军内分泌赛道</div>
+    <div class="card-desc">Vertex宣布以每股$85现金收购Crinetics，总股权价值约$100亿（净$88亿），溢价102%。Crinetics已上市药物Palsonify（肢端肥大症）和Phase 3候选atumelnant（先天性肾上腺皮质增生症）预计峰值年销售额超$50亿。预计Q3 2026完成。</div>
+    <div class="card-meta"><span class="label">金额:</span>$100亿 <span class="label">类型:</span>全现金并购</div>
+    <div class="sources">
+      <a href="https://news.vrtx.com/node/35161" target="_blank">Vertex官方</a>
+      <a href="https://www.biopharmadive.com/news/vertex-crinetics-acquire-deal-palsonify-acromegaly/824545" target="_blank">BioPharma Dive</a>
+    </div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-tag tag5">A轮</div>
+    <div class="card-title">湾岛细胞完成1.4亿元A轮融资，剑指下一代平价普惠CAR-T</div>
+    <div class="card-desc">前传奇生物创始人范晓虎博士创立的深圳湾岛细胞科技（Wondercel）完成1.4亿元人民币A轮融资，松禾资本领投、东方富海跟投。资金将加速非基因编辑通用型CAR-T技术临床转化及产业化进程。</div>
+    <div class="card-meta"><span class="label">金额:</span>1.4亿元 <span class="label">轮次:</span>A轮 <span class="label">投资方:</span>松禾资本、东方富海</div>
+    <div class="sources">
+      <a href="https://www.pharnexcloud.com/zixun/shiye/yytrz_332247" target="_blank">药融云</a>
+      <a href="https://new.qq.com/rain/a/20260710A08F2W00" target="_blank">腾讯新闻</a>
+    </div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-tag tag5">B轮</div>
+    <div class="card-title">Oblenio完成$6200万B轮超额认购，推进LBL-051三抗TCE临床开发</div>
+    <div class="card-desc">维立志博与Aditum Bio合资公司Oblenio完成$6200万B轮融资，Pfizer Ventures领投，Deep Track Capital、GV参投。LBL-051为CD19/BCMA/CD3三特异性T细胞衔接抗体，EULAR 2026临床前数据显示深度免疫重置且无CRS风险。</div>
+    <div class="card-meta"><span class="label">金额:</span>$6200万 <span class="label">轮次:</span>B轮 <span class="label">投资方:</span>Pfizer Ventures领投</div>
+    <div class="sources">
+      <a href="https://www.biospace.com/press-releases/oblenio-bio-closes-62-million-series-b-to-advance-tri-specific-t-cell-engager-lbl-051-for-autoimmune-diseases-into-clinical-development" target="_blank">BioSpace</a>
+      <a href="https://www.drugtimes.cn/2026/06/26/6200wanmeiyuanweilizhibonewcowanchengblunrongzikaifasankangt/" target="_blank">药时代</a>
+    </div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-tag tag5">C轮</div>
+    <div class="card-title">YolTech完成约$7000万C轮融资，6条体内基因编辑管线推进临床</div>
+    <div class="card-desc">上海YolTech Therapeutics完成约$7000万（≈5亿人民币）C轮融资，Loyal Valley Capital领投。公司拥有全球最丰富的临床阶段体内基因编辑管线（6条），核心项目YOLT-201（ATTR）即将进入中国Phase 3。FDA已批准YOLT-203直接进入US Phase 2/3。</div>
+    <div class="card-meta"><span class="label">金额:</span>$7000万 <span class="label">轮次:</span>C轮 <span class="label">累计融资:</span>$1.56亿</div>
+    <div class="sources">
+      <a href="https://www.yoltx.com/news/press-release/112" target="_blank">YolTech官网</a>
+      <a href="https://www.packgene.com/frontier/052826-yoltech" target="_blank">PackGene解读</a>
+    </div>
+  </div>
+
+  <div class="card c5">
+    <div class="card-tag tag5">IPO</div>
+    <div class="card-title">天泽云泰 & 艺妙生物：CGT企业集体冲刺科创板，各拟募资25亿</div>
+    <div class="card-desc">天泽云泰科创板IPO获上交所受理，拟募25.03亿；艺妙生物科创板IPO获受理，拟募25亿。两家均采用第五套标准，尚无商业化产品。天泽云泰三年累亏7.14亿，核心rAAV管线接近上市申请；艺妙生物核心IM19已递交NDA，IM96全球唯一中美均获批结直肠癌临床的CAR-T。</div>
+    <div class="card-meta"><span class="label">拟募资:</span>各≈25亿元 <span class="label">交易所:</span>科创板</div>
+    <div class="sources">
+      <a href="https://www.vbdata.cn/intelDetail/1042350" target="_blank">动脉网·艺妙生物</a>
+      <a href="https://new.qq.com/rain/a/20260710A06T7I00" target="_blank">腾讯·天泽云泰</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块6：国内外政策 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s6">📜</div>
+    <div><div class="section-title">国内外政策<span class="section-en">National Policy</span></div></div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-tag tag6">国务院</div>
+    <div class="card-title">《国民健康"十五五"规划》：首次全链条支持创新药械，CGT列为重点攻坚方向</div>
+    <div class="card-desc">7月13日国务院印发《国民健康"十五五"规划》，明确全链条支持创新药和医疗器械发展应用，加快CGT药物、新型抗体、新型疫苗、核酸药物、放射性药物研发应用。配套优化审评审批制度、健全医保支付保障机制。2030年人均预期寿命目标80岁。</div>
+    <div class="sources">
+      <a href="https://finance.sina.cn/tech/2026-07-14/detail-inihtrnk8563284.d.html" target="_blank">新浪财经</a>
+      <a href="https://xueqiu.com/8353550788/400034654" target="_blank">雪球</a>
+    </div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-tag tag6">NMPA</div>
+    <div class="card-title">818号令+828号令双轨制：卫健委技术审批与药监局药品审批并行</div>
+    <div class="card-desc">国务院第818号令（5月1日施行）确立"卫健委技术审批+药监局药品审批"双轨监管；第828号令《药品管理法实施条例》（修订版5月施行）配套保障。7月3日NMPA征求意见稿是对818号令的细化延伸，从临床研发、上市审评到工艺变更形成全链条闭环。</div>
+    <div class="sources">
+      <a href="https://paper.people.com.cn/rmrb/pc/attachement/202603/19/927618a7-7be4-4e14-832b-96b4e39f6c2e.pdf" target="_blank">818号令全文</a>
+      <a href="https://www.toutiao.com/article/7658277858381185590" target="_blank">21世纪经济报道</a>
+    </div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-tag tag6">FDA</div>
+    <div class="card-title">FDA CBER正式发布CGT产品CMC灵活性最终指南，即日生效</div>
+    <div class="card-desc">FDA CBER发布《CGT产品CMC灵活性》最终指南即日生效，明确5大灵活领域：阶段适配GMP、灵活放行标准、风险基础可比性、跨产品先验知识利用、自愿共识标准。工艺验证方面允许基于科学论证减少PPQ批次，支持PPQ批次商业并发放行。</div>
+    <div class="sources">
+      <a href="https://www.raps.org/resource/fda-finalizes-guidance-on-cmc-flexibilities-for-cell-and-gene-therapies.html" target="_blank">RAPS</a>
+      <a href="https://chinamedglobal.com/blog/fda-cber-cgt-cmc-flexibility-bla-guidance-2026-guide" target="_blank">ChinaMedGlobal</a>
+    </div>
+  </div>
+
+  <div class="card c6">
+    <div class="card-tag tag6">FDA</div>
+    <div class="card-title">FDA发布基因治疗加速草案：支持利用已有知识简化监管提交</div>
+    <div class="card-desc">FDA发布基因治疗加速草案，指导开发者利用公共信息和平台知识（CMC/非临床/临床数据）简化监管提交，特别支持基因编辑疗法。与"Plausible Mechanism Framework"和脱靶编辑安全评估指南形成三件套，为超罕见病和基因编辑产品提供清晰开发路径。</div>
+    <div class="sources">
+      <a href="https://www.fda.gov/news-events/press-announcements/fda-issues-draft-guidance-help-accelerate-cell-and-gene-therapies-patients" target="_blank">FDA官方</a>
+    </div>
+  </div>
+</div>
+
+<!-- 板块7：地方政策 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon s7">🏛️</div>
+    <div><div class="section-title">地方政策<span class="section-en">Local Policy</span></div></div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-tag tag7">河南</div>
+    <div class="card-title">郑州航空港：818号令后走出差异化路径，细胞与基因治疗产业园7月底交付</div>
+    <div class="card-desc">中原医学科学城细胞与基因治疗产业园一期6月底竣工验收，二期预计7月底交付。园区168亩、投资7.7亿、18栋标准厂房。《河南省医学科学院发展促进条例》明确支持在医科城开展细胞/免疫/基因治疗技术探索。郑大一附院和郑州市一院两家具备细胞临床研究资质的三甲医院全部布局港区。</div>
+    <div class="sources">
+      <a href="https://www.henan.gov.cn/2026/07-03/3372266.html" target="_blank">河南省政府网</a>
+      <a href="https://i.460.net.cn/a/554745.html" target="_blank">460资讯</a>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-tag tag7">上海</div>
+    <div class="card-title">上海市药监局开展CGT创新企业专题调研：走访先博、启函、科济、智新浩正</div>
+    <div class="card-desc">市药监局副局长郭术廷带队走访先博生物、启函生物、科济药业、智新浩正4家CGT企业，收集研发注册问题。全国已获批11款CGT产品中上海占6款（含全球首款实体瘤CAR-T恺力美）。药监局承诺"提前介入、专人专班、一企一策"服务，搭建与药审长三角分中心沟通渠道。</div>
+    <div class="sources">
+      <a href="https://www.shanghai.gov.cn/nw18454/20260709/97d8d576a60b458db8fd985d091037dc.html" target="_blank">上海市政府</a>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-tag tag7">广州</div>
+    <div class="card-title">广州黄埔集聚154家CGT企业，iPSC企业加速布局"湾区最活跃生态圈"</div>
+    <div class="card-desc">广州黄埔区已集聚154家CGT企业，覆盖全产业链。中盛溯源（广州）、华越肾科、瑞臻再生医学均落户黄埔。去年发布"生物医药3.0"政策，对CGT 1类创新药按阶段分别给予最高1500万/3000万资助。广州计划2030年建成CGT全链条产业生态，形成超千亿级产业集群。</div>
+    <div class="sources">
+      <a href="https://www.gz.gov.cn/ysgz/xwdt/ysdt/content/post_10895152.html" target="_blank">广州市政府</a>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-tag tag7">深圳</div>
+    <div class="card-title">深圳CGT产业CDMO公共服务平台揭牌：总投资16亿，年产6万人份产能</div>
+    <div class="card-desc">深圳市细胞与基因治疗（CGT）产业CDMO公共服务平台在卫光生命科学园揭牌启动，总投资16亿元，面积约4万平方米。建设质粒DNA、病毒载体、细胞药物、质控检测四大模块，配备全封闭自动化细胞制备系统。建成后年产6万人份，覆盖CAR-T/CAR-NK/干细胞等主流路线。</div>
+    <div class="sources">
+      <a href="https://news.futunn.com/post/73190048" target="_blank">富途新闻</a>
+    </div>
+  </div>
+
+  <div class="card c7">
+    <div class="card-tag tag7">科济药业</div>
+    <div class="card-title">科济药业美国RTP GMP工厂首批自体CAR-T临床批次成功放行</div>
+    <div class="card-desc">科济药业位于美国北卡RTP区域的cGMP工厂已开始自体CAR-T细胞产品GMP生产，首批临床批次成功放行。工厂面积约3300平方米，将提供每年700名患者的额外产能，支持北美和欧洲临床研究及早期商业化。</div>
+    <div class="sources">
+      <a href="https://www.aastocks.com/tc/stocks/analysis/stock-aafn-con/02171/HK6/NOW.1210903/hk-stock-news" target="_blank">AAStocks</a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>CGT行业资讯日报 · <span>WorkBuddy</span> · 每日8:00自动推送</p>
+  <p style="margin-top:6px;">数据来源：WebSearch实时检索 · 所有外链均来自真实返回结果</p>
+</div>
+
+</body>
+</html>
