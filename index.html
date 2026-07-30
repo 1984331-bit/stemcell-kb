@@ -10534,7 +10534,6 @@ var SVC_DB_LIST = [
   { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
   { st:'live', stTx:'已上线', t:'试验设计要素库', d:'10 条示范 · MSC/CAR-T/GT', url:"switchSection('trial-design')" },
   { st:'build', stTx:'建设中', t:'CMC 法规差异库', d:'中美欧条款级对照' },
-  { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
   { st:'build', stTx:'建设中', t:'质控标准库', d:'放行标准 × 产品类型' },
   { st:'build', stTx:'建设中', t:'联盟服务能力库', d:'成员×平台×项目×质控' },
   { st:'plan', stTx:'规划中', t:'PV 监测库', d:'产品 × 月度检索留痕' },
@@ -16903,7 +16902,7 @@ var TRIAL_DESIGN_DATA = [
   {pmid:'40036897(撤稿)', title:'PREVENT-TAHA8 BM-MSC治疗AMI后心衰(已撤稿)', nct:'NCT02744456', cell:'自体BM-MSC', dose:'未明确', route:'透心内膜注射', freq:'单次', phase:'III', n:241, indication:'急性心肌梗死后心力衰竭', priEnd:'心衰全因死亡率+再住院复合终点', secEnd:'LVEF、生活质量', fu:'随访中', result:'原报告心衰减少率60%; 2026-03被BMJ撤稿', safety:'⚠️因数据可靠性与完整性存疑已撤稿', control:'假手术对照', country:'美国', sponsor:'已撤稿', url:'https://www.bmj.com/content/392/bmj.s579.short'},
   {pmid:'N/A(PHENOS)', title:'hESC-RPE(OpRegen)治疗地理萎缩(GA)', nct:'NCT02286089', cell:'hESC来源视网膜色素上皮(RPE)', dose:'5×10^4 ~ 2×10^5 cells', route:'视网膜下注射', freq:'单次', phase:'I/II', n:24, indication:'年龄相关性黄斑变性(AMD)地图样萎缩', priEnd:'安全性及移植存活', secEnd:'最佳矫正视力(BCVA)、阅读速度', fu:'36个月', result:'低剂量组6例1年视力提高21字母; Cell Stem Cell 2025发表', safety:'无RPE异常增殖或肿瘤形成', control:'单臂', country:'美国', sponsor:'Lineage Cell Therapeutics', url:'https://pubmed.ncbi.nlm.nih.gov/22281388/'},
   {pmid:'N/A(Sumitomo)', title:'Amchepri(iPSC多巴胺神经元)治疗帕金森病', nct:'UMIN登记中', cell:'同种异体iPSC来源多巴胺能神经前体细胞', dose:'约500万细胞/侧', route:'立体定向脑内移植', freq:'双侧单次', phase:'II(条件批准)', n:'完成给药例数不详', indication:'帕金森病(中晚期)', priEnd:'安全性(致瘤性、异位组织形成)和MDS-UPDRS Part III', secEnd:'UPDRS总分、左旋多巴等效剂量减少、18F-DOPA PET', fu:'2年以上', result:'2026-02获日本PMDA条件期限批准', safety:'全球首个获批iPSC神经细胞疗法', control:'单臂', country:'日本', sponsor:'Sumitomo Pharma', url:''},
-  {pmid:'N/A(Nature 2026)', title:'非基因毒性HSPC移植：表位编辑分子伪装策略', nct:'临床前', cell:'基因编辑HSPC(KIT表位编辑)', dose:'不适用(临床前)', route:'不适用(临床前)', freq:'不适用', phase:'临床前', n:'动物实验', indication:'造血干细胞移植', priEnd:'编辑细胞体内嵌合率', secEnd:'移植后的血液重建、多谱系分化', fu:'动物模型', result:'体内多克隆均衡富集; KIT单抗处理下编辑细胞达治疗性嵌合率', safety:'无化疗/放疗预处理; 避免传统移植毒性', control:'对照(未编辑)，动物模型', country:'美国', sponsor:'Boston Children\''s Hospital/Harvard', url:'https://www.nature.com/articles/s41586-026-10737-8'}
+  {pmid:'N/A(Nature 2026)', title:'非基因毒性HSPC移植：表位编辑分子伪装策略', nct:'临床前', cell:'基因编辑HSPC(KIT表位编辑)', dose:'不适用(临床前)', route:'不适用(临床前)', freq:'不适用', phase:'临床前', n:'动物实验', indication:'造血干细胞移植', priEnd:'编辑细胞体内嵌合率', secEnd:'移植后的血液重建、多谱系分化', fu:'动物模型', result:'体内多克隆均衡富集; KIT单抗处理下编辑细胞达治疗性嵌合率', safety:'无化疗/放疗预处理; 避免传统移植毒性', control:'对照(未编辑)，动物模型', country:'美国', sponsor:'Boston Children\u2019s Hospital/Harvard', url:'https://www.nature.com/articles/s41586-026-10737-8'}
 ];
 function renderTrialDesign() {
   var content = document.getElementById('content');
