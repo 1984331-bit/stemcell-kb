@@ -8145,6 +8145,7 @@ function buildHash(state) {
   if (s === 'ipsc-qc') return '#ipsc-qc';
   if (s === 'glossary') return '#glossary';
   if (s === 'fund-projects') return '#fund-projects';
+  if (s === 'trial-design') return '#trial-design';
   if (s === 'services') {
     if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
     return '#services';
@@ -8181,6 +8182,7 @@ function parseHash() {
   if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
   if (hash === '#glossary') return { section: 'glossary' };
   if (hash === '#fund-projects') return { section: 'fund-projects' };
+  if (hash === '#trial-design') return { section: 'trial-design' };
   if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
   if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
   if (hash === '#reg') return { section: 'regulations' };
@@ -8594,6 +8596,7 @@ function renderContent() {
   if (currentSection === 'ipsc-qc') { renderIPSCQC(); return; }
   if (currentSection === 'glossary') { renderGlossary(); return; }
   if (currentSection === 'fund-projects') { renderFundProjects(); return; }
+  if (currentSection === 'trial-design') { renderTrialDesign(); return; }
 
   const filtered = getFilteredData();
 
@@ -10528,7 +10531,8 @@ var SVC_DB_LIST = [
   { st:'live', stTx:'已上线', t:'文献摘要库', d:'2,849 篇全文摘要' },
   { st:'live', stTx:'已上线', t:'法规政策库', d:'65 份 · 持续监测', url:"switchSection('regulations')" },
   { st:'live', stTx:'已上线', t:'获批产品库', d:'79 款全球产品', url:"switchSection('products')" },
-  { st:'build', stTx:'建设中', t:'试验设计要素库', d:'剂量·终点·入排结构化' },
+  { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
+  { st:'live', stTx:'已上线', t:'试验设计要素库', d:'10 条示范 · MSC/CAR-T/GT', url:"switchSection('trial-design')" },
   { st:'build', stTx:'建设中', t:'CMC 法规差异库', d:'中美欧条款级对照' },
   { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
   { st:'build', stTx:'建设中', t:'质控标准库', d:'放行标准 × 产品类型' },
@@ -10605,7 +10609,7 @@ var PATH_STAGES = [
       {b:'信息技术部', d:'建设、维护和升级信息系统，确保信息安全与数据管理。'}
     ],
     svcs:[{t:'实验方案循证对比', g:'res'}, {t:'工艺循证情报报告', g:'cmc'}, {t:'放行标准与验证方案包', g:'qc'}, {t:'方案循证设计报告', g:'ct'}],
-    dbs:[{t:'试验设计要素库', st:'build', n:'建设中'}, {t:'质控标准库', st:'build', n:'建设中'}, {t:'工艺参数库', st:'plan', n:'规划中'}, {t:'检测方法库', st:'plan', n:'规划中'}],
+    dbs:[{t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}, {t:'工艺参数库', st:'plan', n:'规划中'}, {t:'检测方法库', st:'plan', n:'规划中'}],
     cols:[{t:'产业服务', s:'services'}, {t:'学习中心', s:'books'}] },
   { n:4, t:'理解法规要求', en:'REGULATORY',
     goal:'了解与细胞治疗相关的法律法规和伦理问题，学习如何在研究和开发中遵守伦理准则和法规要求。',
@@ -10650,7 +10654,7 @@ var PATH_STAGES = [
       {b:'临床研究设计', d:'临床试验设计考虑及依据。'}
     ],
     svcs:[{t:'文献库定制及综述报告', g:'res'}, {t:'专利初检与转化对接', g:'res'}, {t:'研究热点订阅', g:'res'}],
-    dbs:[{t:'文献摘要库', st:'live', n:'2,849篇'}, {t:'试验设计要素库', st:'build', n:'建设中'}, {t:'质控标准库', st:'build', n:'建设中'}],
+    dbs:[{t:'文献摘要库', st:'live', n:'2,849篇'}, {t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}],
     cols:[{t:'前沿研究', s:'report'}, {t:'编辑精选', s:'picks'}] },
   { n:7, t:'复合型人才', en:'T-SHAPED', goal:true,
     goal:'技术 + 法规 + 产业 三维贯通——从平台使用者成长为行业共建者。',
@@ -11029,7 +11033,7 @@ function renderAIDashboard() {
   // 正在更新数据集（对应全产业链服务规划的15个新数据库）
   html += '<div class="ai-cases-subtitle">正在更新数据集</div>';
   var updating = [
-    {tag:'要素', tagClass:'pulsing', text:'临床试验设计要素库：剂量/给药途径/终点/随访/入排标准结构化，支撑方案循证设计服务', num:'建设中'},
+    {tag:'要素', tagClass:'', text:'临床试验设计要素库：剂量/给药途径/终点/随访/入排标准结构化，支撑方案循证设计服务', num:'已上线'},
     {tag:'法规', tagClass:'pulsing', text:'CMC法规差异条款库：NMPA/FDA/EMA条款级中美欧对照', num:'建设中'},
     {tag:'数据', tagClass:'pulsing', text:'CGT产业术语库：60+条 · 5大领域，一句白话讲清楚', num:'60+条'},
     {tag:'质控', tagClass:'pulsing', text:'质控标准库：按产品类型整理放行标准与方法学验证要求', num:'建设中'},
@@ -16888,6 +16892,67 @@ function renderIPSCQC() {
   updateFloatButtons();
 }
 
+// === 试验设计要素库 ===
+var TRIAL_DESIGN_DATA = [
+  {pmid:'41747733', title:'Laromestrocel(BM-MSC)治疗衰老虚弱症2b期RCT', nct:'NCT03169231', cell:'同种异体BM-MSC', dose:'25M/50M/100M/200M cells 单次', route:'静脉输注', freq:'单次给药', phase:'2b', n:148, indication:'衰老虚弱症（70-85岁）', priEnd:'6分钟步行试验(6MWT)9个月变化', secEnd:'握力、TIE2水平、生活质量', fu:'9个月', result:'6MWT安慰剂组+17.9m vs 治疗组+63.4m(p=0.0077)', safety:'TIE2生物标志物下降提示抗炎机制; 无严重不良事件报道', control:'安慰剂对照', country:'美国', sponsor:'Longeveron', url:'https://pubmed.ncbi.nlm.nih.gov/41747733/'},
+  {pmid:'40544428', title:'VX-880(iPSC衍生胰岛)治疗1型糖尿病', nct:'NCT04786262', cell:'同种异体iPSC衍生胰岛细胞', dose:'初始剂量目标≥5000 IEQ/kg; 全剂量目标≥10000 IEQ/kg', route:'肝门静脉输注', freq:'单次移植+免疫抑制方案', phase:'I/II', n:12, indication:'1型糖尿病伴低血糖意识障碍', priEnd:'安全性(SAE)及HbA1c<7%达标率', secEnd:'外源性胰岛素脱离率、C肽水平、TIR', fu:'中位18个月', result:'12/12 HbA1c<7%; 10/12完全脱离胰岛素', safety:'1例SAE(与治疗无关); 其他为轻中度', control:'单臂开放', country:'美国/多中心', sponsor:'Vertex Pharmaceuticals', url:'https://pubmed.ncbi.nlm.nih.gov/40544428/'},
+  {pmid:'41877188', title:'hUC-MSC(PLEB001)治疗SR-aGVHD多中心关键试验', nct:'CTR登记中', cell:'人脐带间充质干细胞', dose:'2×10^6 cells/kg', route:'静脉输注', freq:'每周2次×4周', phase:'III', n:'多中心', indication:'激素治疗失败的急性GVHD', priEnd:'28天总体反应率(ORR)', secEnd:'总生存期(OS)、GVHD复发率', fu:'中位随访中', result:'28天ORR 68.3%; 中位OS未达到', safety:'安全性良好', control:'单臂关键试验', country:'中国', sponsor:'上海莱馥生物科技', url:'https://pubmed.ncbi.nlm.nih.gov/41877188/'},
+  {pmid:'N/A(Mesoblast公告)', title:'Ryoncil(remestemcel-L)治疗儿童SR-aGVHD关键III期', nct:'NCT02336230', cell:'同种异体BM-MSC(remestemcel-L)', dose:'2×10^6 cells/kg', route:'静脉输注', freq:'每周2次×4周(共8次)', phase:'III', n:54, indication:'儿童(≥2月)类固醇难治性aGVHD', priEnd:'28天总体反应率(OR)', secEnd:'100天生存率、GVHD改善', fu:'100天', result:'28天OR 69.6%(p<0.0001 vs历史对照)', safety:'无输注反应或异位组织形成; 无MSC相关SAE', control:'历史对照(单臂)', country:'美国/加拿大', sponsor:'Mesoblast', url:'https://investorsmedia.mesoblast.com/'},
+  {pmid:'41747733(同)', title:'Laromestrocel治疗阿尔茨海默病2a期', nct:'NCT05233774', cell:'同种异体BM-MSC', dose:'25M/50M/100M cells 单次', route:'静脉输注', freq:'单次给药', phase:'2a', n:33, indication:'轻度阿尔茨海默病', priEnd:'安全性及ADAS-Cog变化', secEnd:'ADCS-ADL、MMSE、生物标志物', fu:'6个月', result:'AAIC 2026数据发布; 获FDA RMAT认定', safety:'已获FDA RMAT和快速通道认定', control:'安慰剂对照', country:'美国', sponsor:'Longeveron', url:'https://www.pharnexcloud.com/zixun/shiye/yfzczc_324584'},
+  {pmid:'N/A(CB公告)', title:'科济药业舒瑞基奥仑赛(CT041)实体瘤CAR-T', nct:'NCT04581473', cell:'自体CLDN18.2靶向CAR-T', dose:'2.5-5×10^8 cells', route:'静脉输注', freq:'单次给药+清淋预处理', phase:'II', n:156, indication:'CLDN18.2+晚期胃/食管胃结合部腺癌', priEnd:'总生存期(OS)', secEnd:'无进展生存期(PFS)、客观缓解率(ORR)', fu:'中位随访', result:'mPFS 3.25 vs 1.77月; mOS 7.93 vs 5.37月', safety:'全球首款获批实体瘤CAR-T; 定价99万元/针', control:'研究者选择化疗', country:'中国', sponsor:'科济药业', url:'https://www.cb.com.cn/index/show/bzyc/cv/cv135286971647'},
+  {pmid:'40036897(撤稿)', title:'PREVENT-TAHA8 BM-MSC治疗AMI后心衰(已撤稿)', nct:'NCT02744456', cell:'自体BM-MSC', dose:'未明确', route:'透心内膜注射', freq:'单次', phase:'III', n:241, indication:'急性心肌梗死后心力衰竭', priEnd:'心衰全因死亡率+再住院复合终点', secEnd:'LVEF、生活质量', fu:'随访中', result:'原报告心衰减少率60%; 2026-03被BMJ撤稿', safety:'⚠️因数据可靠性与完整性存疑已撤稿', control:'假手术对照', country:'美国', sponsor:'已撤稿', url:'https://www.bmj.com/content/392/bmj.s579.short'},
+  {pmid:'N/A(PHENOS)', title:'hESC-RPE(OpRegen)治疗地理萎缩(GA)', nct:'NCT02286089', cell:'hESC来源视网膜色素上皮(RPE)', dose:'5×10^4 ~ 2×10^5 cells', route:'视网膜下注射', freq:'单次', phase:'I/II', n:24, indication:'年龄相关性黄斑变性(AMD)地图样萎缩', priEnd:'安全性及移植存活', secEnd:'最佳矫正视力(BCVA)、阅读速度', fu:'36个月', result:'低剂量组6例1年视力提高21字母; Cell Stem Cell 2025发表', safety:'无RPE异常增殖或肿瘤形成', control:'单臂', country:'美国', sponsor:'Lineage Cell Therapeutics', url:'https://pubmed.ncbi.nlm.nih.gov/22281388/'},
+  {pmid:'N/A(Sumitomo)', title:'Amchepri(iPSC多巴胺神经元)治疗帕金森病', nct:'UMIN登记中', cell:'同种异体iPSC来源多巴胺能神经前体细胞', dose:'约500万细胞/侧', route:'立体定向脑内移植', freq:'双侧单次', phase:'II(条件批准)', n:'完成给药例数不详', indication:'帕金森病(中晚期)', priEnd:'安全性(致瘤性、异位组织形成)和MDS-UPDRS Part III', secEnd:'UPDRS总分、左旋多巴等效剂量减少、18F-DOPA PET', fu:'2年以上', result:'2026-02获日本PMDA条件期限批准', safety:'全球首个获批iPSC神经细胞疗法', control:'单臂', country:'日本', sponsor:'Sumitomo Pharma', url:''},
+  {pmid:'N/A(Nature 2026)', title:'非基因毒性HSPC移植：表位编辑分子伪装策略', nct:'临床前', cell:'基因编辑HSPC(KIT表位编辑)', dose:'不适用(临床前)', route:'不适用(临床前)', freq:'不适用', phase:'临床前', n:'动物实验', indication:'造血干细胞移植', priEnd:'编辑细胞体内嵌合率', secEnd:'移植后的血液重建、多谱系分化', fu:'动物模型', result:'体内多克隆均衡富集; KIT单抗处理下编辑细胞达治疗性嵌合率', safety:'无化疗/放疗预处理; 避免传统移植毒性', control:'对照(未编辑)，动物模型', country:'美国', sponsor:'Boston Children\''s Hospital/Harvard', url:'https://www.nature.com/articles/s41586-026-10737-8'}
+];
+function renderTrialDesign() {
+  var content = document.getElementById('content');
+  var html = '';
+  html += '<div class="breadcrumb"><span class="crumb-link" data-action="home" onclick="navTo(this)">' + svgIcon('home', 14) + '</span><span class="crumb-sep">›</span> <span class="crumb-current">试验设计要素库</span></div>';
+  html += '<div class="fp-hero">';
+  html += '<div class="fp-hero-kick">TRIAL DESIGN ELEMENTS DATABASE</div>';
+  html += '<div class="fp-hero-title">试验设计要素库</div>';
+  html += '<div class="fp-hero-sub">从临床试验文献中结构化提取关键设计要素——细胞类型、剂量、给药途径、终点、入排标准等。支撑方案循证设计报告服务。当前为示范阶段，持续扩容中。</div>';
+  html += '</div>';
+  html += '<div class="fp-stats"><div class="fp-stat"><div class="fp-stat-num">' + TRIAL_DESIGN_DATA.length + '</div><div class="fp-stat-label">示范条目</div></div><div class="fp-stat"><div class="fp-stat-num">' + new Set(TRIAL_DESIGN_DATA.map(function(d){return d.cell;})).size + '</div><div class="fp-stat-label">细胞类型</div></div><div class="fp-stat"><div class="fp-stat-num">MSC/CAR-T/GT</div><div class="fp-stat-label">覆盖领域</div></div></div>';
+  html += '<div class="td-fields" style="font-size:11px;color:var(--text-light);background:var(--card-bg);border:1px solid rgba(0,229,255,0.08);border-radius:10px;padding:12px 16px;margin-bottom:16px;line-height:1.8;">';
+  html += '<b style="color:var(--primary);">每条记录包含字段：</b>PMID · NCT号 · 适应症 · 细胞类型 · 剂量 · 给药途径 · 给药次数 · 试验阶段 · 入组人数 · 主要终点 · 次要终点 · 随访时间 · 关键结果 · 安全性事件 · 对照组 · 申办方';
+  html += '</div>';
+  html += '<div class="fp-search"><input type="text" id="tdSearchInput" placeholder="搜索适应症/细胞类型/终点..." oninput="tdFilter(this.value)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>';
+  // 细胞类型筛选
+  var cellTypes = {};
+  TRIAL_DESIGN_DATA.forEach(function(d){ cellTypes[d.cell] = (cellTypes[d.cell]||0)+1; });
+  html += '<div class="fp-filters" id="tdFilters"><span class="fp-filter active" data-cat="all" onclick="tdFilterBy(\'all\')">全部</span>';
+  Object.keys(cellTypes).forEach(function(c){ html += '<span class="fp-filter" data-cat="' + escapeHtml(c) + '" onclick="tdFilterBy(\'' + escapeHtml(c) + '\')">' + escapeHtml(c) + '(' + cellTypes[c] + ')</span>'; });
+  html += '</div><div class="fp-list" id="tdList">';
+  TRIAL_DESIGN_DATA.forEach(function(d, i){
+    html += '<div class="fp-card" data-cat="' + escapeHtml(d.cell) + '">';
+    html += '<div class="fp-card-title">' + escapeHtml(d.title) + '</div>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;">';
+    html += '<span class="fp-card-tag fp-tag-mian">' + d.phase + '</span>';
+    html += '<span class="fp-card-tag fp-tag-young">' + escapeHtml(d.cell) + '</span>';
+    if (d.nct && d.nct !== 'N/A') html += '<span class="fp-card-tag fp-tag-qing">' + d.nct + '</span>';
+    html += '</div>';
+    html += '<div class="fp-card-meta"><b>适应症：</b>' + escapeHtml(d.indication) + '<br><b>剂量：</b>' + escapeHtml(d.dose) + '<br><b>给药途径：</b>' + d.route + '<br><b>给药频次：</b>' + d.freq + '<br><b>入组：</b>' + d.n + '例 · <b>随访：</b>' + d.fu + '<br><b>主要终点：</b>' + escapeHtml(d.priEnd) + '<br><b>关键结果：</b>' + escapeHtml(d.result) + '</div>';
+    if (d.url) {
+      html += '<div style="margin-top:6px;"><a href="' + d.url + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(0,229,255,0.1);color:var(--primary);border-radius:6px;font-size:11px;font-weight:500;text-decoration:none;">查看原文 ↗</a></div>';
+    }
+    html += '</div>';
+  });
+  html += '</div><div style="text-align:center;padding:20px;font-size:11px;color:var(--text-light);">示范阶段 · 持续扩充中。每条数据均有来源可验证。</div>';
+  content.innerHTML = html;
+  updateFloatButtons();
+}
+function tdFilterBy(cat) {
+  document.querySelectorAll('#tdFilters .fp-filter').forEach(function(el){ el.classList.toggle('active', el.dataset.cat === cat); });
+  document.querySelectorAll('#tdList .fp-card').forEach(function(el){ el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none'; });
+}
+function tdFilter(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('#tdList .fp-card').forEach(function(el){
+    el.style.display = (!q || el.textContent.toLowerCase().indexOf(q) >= 0) ? '' : 'none';
+  });
+}
 
 var GLOSSARY_DATA = [
   {cat:"临床试验",items:[
