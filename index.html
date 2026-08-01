@@ -9086,6 +9086,231 @@ const GT_DATA = [
   {"pmid": "39835736", "nct": "", "title": "A Korean Patient With Leber Congenital Amaurosis and a Homozygous RPE65 Variant Originating From a Paternal Uniparental Isodisomy.", "title_cn": "", "system": "视网膜疾病", "indication": "视网膜疾病", "doi": "", "journal": "Molecular genetics & genomic medicine", "authors": "", "institution": "", "type": "案例报道", "year": "2025", "evidence_level": "C", "evidence_note": "", "audit_status": "已入库", "audit_note": "2026-08-01 用户终审通过（AI初审：）"}
 ];
 
+// === 多数据库切换（MSC / CAR-T / 基因治疗） ===
+var currentDB = 'MSC';
+try { var savedDB = localStorage.getItem('cgt_kb_db'); if (savedDB === 'CART' || savedDB === 'GT' || savedDB === 'MSC') currentDB = savedDB; } catch(err) {}
+function getActiveData() { return currentDB === 'CART' ? CART_DATA : (currentDB === 'GT' ? GT_DATA : ALL_DATA); }
+
+const PAGE_SIZE = 20;
+let currentPage = 1;
+let currentFilter = { system: null, indication: null };
+let searchQuery = '';
+let currentSort = 'date'; // 'evidence' or 'date'
+let navHistory = [];
+let currentSection = 'hub';
+var totalSystemsGlobal = new Set(ALL_DATA.map(function(d){return d.system;})).size;
+
+// === Browser History API integration ===
+function getCurrentState() {
+  return {
+    section: currentSection,
+    filter: { system: currentFilter.system, indication: currentFilter.indication },
+    search: searchQuery,
+    page: currentPage,
+    sort: currentSort,
+    newsTab: (typeof currentNewsTab !== 'undefined') ? currentNewsTab : 'frontier',
+    picksIssue: (typeof currentPicksIssue !== 'undefined') ? currentPicksIssue : null,
+    prodFilter: prodFilter,
+    regFilter: regFilter,
+    instFilter: instFilter,
+    companyFilter: companyFilter,
+    svcView: (typeof svcView !== 'undefined') ? svcView : 'home'
+  };
+}
+
+function buildHash(state) {
+  var s = state.section || 'hub';
+  if (s === 'literature') {
+    if (state.search) return '#lit/q/' + encodeURIComponent(state.search);
+    if (state.filter && state.filter.system) {
+      if (state.filter.indication) return '#lit/s/' + encodeURIComponent(state.filter.system) + '/i/' + encodeURIComponent(state.filter.indication);
+      return '#lit/s/' + encodeURIComponent(state.filter.system);
+    }
+    return '#lit';
+  }
+  if (s === 'news' && state.newsTab && state.newsTab !== 'home') return '#news/' + state.newsTab;
+  if (s === 'news') return '#news';
+  if (s === 'regulations') return '#reg';
+  if (s === 'products') return '#prod';
+  if (s === 'picks') {
+    if (state.picksIssue !== null && state.picksIssue !== undefined) return '#picks/' + state.picksIssue;
+    return '#picks';
+  }
+  if (s === 'intro') return '#intro';
+  if (s === 'institutions') {
+    if (state.instFilter && state.instFilter !== 'all') return '#inst/' + encodeURIComponent(state.instFilter);
+    return '#inst';
+  }
+  if (s === 'inst_projects') return '#inst/projects';
+  if (s === 'inst_recruiting') return '#inst/recruiting';
+  if (s === 'report') return '#report';
+  if (s === 'originals') return '#originals';
+  if (s === 'books') return '#books';
+  if (s === 'health') return '#health';
+  if (s === 'ai') return '#ai';
+  if (s === 'ai-review') return '#ai-review';
+  if (s === 'guide') return '#guide';
+  if (s === 'team') return '#team';
+  if (s === 'opencgt') return '#opencgt';
+  if (s === 'lab') return '#lab';
+  if (s === 'blueprint') return '#blueprint';
+  if (s === 'path') return '#path';
+  if (s === 'ipsc-qc') return '#ipsc-qc';
+  if (s === 'glossary') return '#glossary';
+  if (s === 'fund-projects') return '#fund-projects';
+  if (s === 'trial-design') return '#trial-design';
+  if (s === 'services') {
+    if (state.svcView && state.svcView !== 'home') return '#services/' + state.svcView;
+    return '#services';
+  }
+  if (s === 'companies') {
+    if (state.companyFilter && state.companyFilter !== 'all') return '#companies/' + state.companyFilter;
+    return '#companies';
+  }
+  return '#hub';
+}
+
+function parseHash() {
+  var hash = window.location.hash;
+  if (!hash || hash === '#hub') return { section: 'hub' };
+  if (hash === '#intro') return { section: 'intro' };
+  if (hash === '#inst') return { section: 'institutions', instFilter: 'all' };
+  if (hash === '#inst/projects') return { section: 'inst_projects' };
+  if (hash === '#inst/recruiting') return { section: 'inst_recruiting' };
+  if (hash.indexOf('#inst/') === 0) return { section: 'institutions', instFilter: decodeURIComponent(hash.slice(6)) };
+  if (hash === '#report') return { section: 'report' };
+  if (hash === '#originals') return { section: 'originals' };
+  if (hash === '#books') return { section: 'books' };
+  if (hash === '#health') return { section: 'health' };
+  if (hash === '#ai') return { section: 'ai' };
+  if (hash === '#ai-review') return { section: 'ai-review' };
+  if (hash === '#guide') return { section: 'guide' };
+  if (hash === '#team') return { section: 'team' };
+  if (hash === '#opencgt') return { section: 'opencgt' };
+  if (hash === '#services') return { section: 'services', svcView: 'home' };
+  if (hash.indexOf('#services/') === 0) return { section: 'services', svcView: hash.slice(10) };
+  if (hash === '#lab') return { section: 'lab' };
+  if (hash === '#blueprint') return { section: 'blueprint' };
+  if (hash === '#path') return { section: 'path' };
+  if (hash === '#ipsc-qc') return { section: 'ipsc-qc' };
+  if (hash === '#glossary') return { section: 'glossary' };
+  if (hash === '#fund-projects') return { section: 'fund-projects' };
+  if (hash === '#trial-design') return { section: 'trial-design' };
+  if (hash === '#companies') return { section: 'companies', companyFilter: 'all' };
+  if (hash.indexOf('#companies/') === 0) return { section: 'companies', companyFilter: hash.slice(11) };
+  if (hash === '#reg') return { section: 'regulations' };
+  if (hash === '#prod') return { section: 'products' };
+  if (hash === '#picks') return { section: 'picks', picksIssue: null };
+  if (hash.indexOf('#picks/') === 0) return { section: 'picks', picksIssue: parseInt(hash.slice(7)) };
+  if (hash === '#lit') return { section: 'literature' };
+  if (hash.indexOf('#lit/q/') === 0) return { section: 'literature', search: decodeURIComponent(hash.slice(6)) };
+  if (hash.indexOf('#lit/s/') === 0) {
+    var rest = hash.slice(6);
+    var parts = rest.split('/i/');
+    var sys = decodeURIComponent(parts[0]);
+    if (parts[1]) return { section: 'literature', filter: { system: sys, indication: decodeURIComponent(parts[1]) } };
+    return { section: 'literature', filter: { system: sys, indication: null } };
+  }
+  if (hash.indexOf('#news/') === 0) return { section: 'news', newsTab: hash.slice(6) };
+  if (hash === '#news') return { section: 'news', newsTab: 'home' };
+  return { section: 'hub' };
+}
+
+function pushHistory() {
+  var state = getCurrentState();
+  var hash = buildHash(state);
+  history.pushState(state, '', hash);
+}
+
+function restoreState(state) {
+  if (!state) {
+    currentSection = 'hub';
+    currentFilter = { system: null, indication: null };
+    searchQuery = '';
+    currentPage = 1;
+    currentSort = 'date';
+    prodFilter = 'all';
+    regFilter = 'all';
+    instFilter = 'all';
+    companyFilter = 'all';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = 'frontier';
+    if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = null;
+    if (typeof svcView !== 'undefined') svcView = 'home';
+  } else {
+    currentSection = state.section || 'hub';
+    currentFilter = state.filter || { system: null, indication: null };
+    searchQuery = state.search || '';
+    currentPage = state.page || 1;
+    currentSort = state.sort || 'date';
+    prodFilter = state.prodFilter || 'all';
+    regFilter = state.regFilter || 'all';
+    instFilter = state.instFilter || 'all';
+    companyFilter = state.companyFilter || 'all';
+    if (typeof currentNewsTab !== 'undefined') currentNewsTab = state.newsTab || 'frontier';
+    if (typeof currentPicksIssue !== 'undefined') currentPicksIssue = (state.picksIssue !== undefined && state.picksIssue !== null) ? state.picksIssue : null;
+    if (typeof svcView !== 'undefined') svcView = state.svcView || 'home';
+  }
+  var si = document.getElementById('searchInput');
+  if (si) si.value = searchQuery;
+  // Update sidebar tree
+  document.querySelectorAll('.ind-item').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.sys-header').forEach(function(el) { el.classList.remove('active', 'expanded'); });
+  document.querySelectorAll('.ind-list').forEach(function(el) { el.style.display = 'none'; });
+  if (currentFilter.system) {
+    document.querySelectorAll('.sys-block').forEach(function(block) {
+      if (block.dataset.system === currentFilter.system) {
+        var header = block.querySelector('.sys-header');
+        var list = block.querySelector('.ind-list');
+        list.style.display = 'block';
+        header.classList.add('expanded', 'active');
+        if (currentFilter.indication) {
+          block.querySelectorAll('.ind-item').forEach(function(el) {
+            if (el.dataset.indication === currentFilter.indication) el.classList.add('active');
+          });
+        }
+      }
+    });
+  }
+  updateBottomNav(currentSection);
+  updateLayout(currentSection);
+  // Handle picks — renderEditorPicks handles issue selection internally
+  renderContent();
+}
+
+window.addEventListener('popstate', function(event) {
+  restoreState(event.state);
+});
+
+function updateFloatButtons() {
+  var fb = document.getElementById('floatBack');
+  if (fb) {
+    // Show back button if there's nav history OR we're not on the hub page
+    if (navHistory.length > 0 || currentSection !== 'hub') {
+      fb.classList.remove('hidden');
+    } else {
+      fb.classList.add('hidden');
+    }
+  }
+  updateFloatTop();
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateFloatTop() {
+  var ft = document.getElementById('floatTop');
+  if (ft) {
+    if (window.scrollY > 300) {
+      ft.classList.remove('hidden');
+    } else {
+      ft.classList.add('hidden');
+    }
+  }
+}
+
+window.addEventListener('scroll', updateFloatTop, { passive: true });
+
 var sidebarOriginalHtml = null;
 function switchLiteratureDB(db) {
   if (db === currentDB) return;
