@@ -10684,6 +10684,144 @@ var FUNDING_TRENDS = [{date:'2026-07-22', title:'元码智药完成数千万元P
 ];
 
 // === Section navigation ===
+function toggleSystem(headerEl) {
+  var indList = headerEl.nextElementSibling;
+  var isOpen = indList.style.display !== 'none' && headerEl.classList.contains('expanded');
+  var sysName = headerEl.querySelector('.sys-name') ? headerEl.querySelector('.sys-name').textContent : '';
+
+  if (isOpen) {
+    // Already open — collapse only
+    indList.style.display = 'none';
+    headerEl.classList.remove('expanded', 'active');
+  } else {
+    // Collapse all others first
+    document.querySelectorAll('.sys-header').forEach(function(el) {
+      el.classList.remove('expanded', 'active');
+      if (el.nextElementSibling) el.nextElementSibling.style.display = 'none';
+    });
+    // Expand this one
+    indList.style.display = 'block';
+    headerEl.classList.add('expanded', 'active');
+    // Also navigate to this system's papers for immediate visual feedback
+    if (sysName) {
+      saveNavState();
+      currentFilter = { system: sysName, indication: null };
+      searchQuery = '';
+      var si = document.getElementById('searchInput');
+      if (si) si.value = '';
+      currentPage = 1;
+      pushHistory();
+      renderContent();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+}
+
+function selectIndication(sysName, indName) {
+  saveNavState();
+  currentFilter = { system: sysName, indication: indName };
+  searchQuery = '';
+  var si = document.getElementById('searchInput');
+  if (si) si.value = '';
+  currentPage = 1;
+  document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active', 'expanded'));
+  document.querySelectorAll('.ind-list').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.sys-block').forEach(block => {
+    if (block.dataset.system === sysName) {
+      var header = block.querySelector('.sys-header');
+      var list = block.querySelector('.ind-list');
+      list.style.display = 'block';
+      header.classList.add('expanded', 'active');
+      block.querySelectorAll('.ind-item').forEach(el => {
+        if (el.dataset.indication === indName) el.classList.add('active');
+      });
+    }
+  });
+  pushHistory();
+  renderContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+}function getSortedData(data) {
+  var arr = [...data];
+  if (currentSort === 'evidence') {
+    var levelOrder = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'N/A': 4, '': 4};
+    arr.sort(function(a, b) {
+      var la = levelOrder[a.evidence_level || ''] ?? 4;
+      var lb = levelOrder[b.evidence_level || ''] ?? 4;
+      if (la !== lb) return la - lb;
+      return (b.year || '').localeCompare(a.year || '');
+    });
+  } else {
+    arr.sort(function(a, b) {
+      return (b.year || '').localeCompare(a.year || '');
+    });
+  }
+  return arr;
+}
+
+function goBack() {
+  if (navHistory.length > 0) {
+    var prev = navHistory.pop();
+    currentSection = prev.section || 'hub';
+    currentFilter = prev.filter || { system: null, indication: null };
+    searchQuery = prev.search || '';
+    currentPage = prev.page || 1;
+    currentSort = prev.sort || 'date';
+    if (typeof prev.prodFilter !== 'undefined') prodFilter = prev.prodFilter;
+    if (typeof prev.regFilter !== 'undefined') regFilter = prev.regFilter;
+    if (typeof prev.instFilter !== 'undefined') instFilter = prev.instFilter;
+    if (typeof prev.companyFilter !== 'undefined') companyFilter = prev.companyFilter;
+    if (typeof prev.newsTab !== 'undefined') currentNewsTab = prev.newsTab;
+    if (typeof prev.picksIssue !== 'undefined') currentPicksIssue = prev.picksIssue;
+    if (typeof prev.svcView !== 'undefined' && typeof svcView !== 'undefined') svcView = prev.svcView;
+    var si = document.getElementById('searchInput');
+    if (si) si.value = searchQuery;
+    updateBottomNav(currentSection);
+    updateLayout(currentSection);
+    renderContent();
+    var savedY = prev.scrollY || 0;
+    window.scrollTo({ top: savedY, behavior: 'instant' });
+    updateFloatButtons();
+  } else if (history.length > 1) {
+    history.back();
+  }
+}
+
+function handleSearch() {
+  var si = document.getElementById('searchInput');
+  var newQuery = si ? si.value.trim().toLowerCase() : '';
+  if (newQuery !== searchQuery) {
+    saveNavState();
+    currentSection = 'literature';
+    searchQuery = newQuery;
+    currentFilter = { system: null, indication: null };
+    document.querySelectorAll('.ind-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.sys-header').forEach(el => el.classList.remove('active'));
+    currentPage = 1;
+    updateBottomNav('literature');
+    updateLayout('literature');
+    pushHistory();
+    renderContent();
+  }
+}
+
+function navTo(el) {
+  var action = el.dataset.action;
+  var section = el.dataset.section;
+  var system = el.dataset.system;
+  if (action === 'home') { goHome(); return; }
+  if (action === 'sys') { quickSelect(system); return; }
+  if (section) { switchSection(section); }
+}
+
+function toggleSort(mode) {
+  currentSort = mode;
+  currentPage = 1;
+  pushHistory();
+  renderContent();
+}
+
 function switchSection(section) {
   if (currentSection !== section) saveNavState();
   currentSection = section;
