@@ -3730,7 +3730,7 @@ body { padding-bottom: 60px; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 12px 8px;
+  padding: 36px 8px 12px;
   border: none !important;
   background: linear-gradient(135deg, #004D40, #00695C, #00897B) !important;
   position: relative;
@@ -5323,6 +5323,12 @@ body { padding-bottom: 60px; }
   .svc-hero-sub{font-size:13px}
 }
 
+
+.book-cover-topstrip { position:absolute; top:0; left:0; right:0; padding:4px 8px; font-size:10px; font-weight:600; color:#fff; letter-spacing:1px; text-align:left; }
+.book-cover-author { font-size:11px; color:rgba(255,255,255,0.88); line-height:1.4; margin-top:4px; }
+.book-cover-publisher { font-size:10px; color:rgba(255,255,255,0.7); line-height:1.4; margin-top:auto; padding-top:8px; border-top:1px solid rgba(255,255,255,0.2); width:85%; }
+.book-cover-year { font-size:11px; color:rgba(255,255,255,0.9); margin-top:2px; font-weight:600; }
+.book-cover-text { max-width:90%; word-break:break-word; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="china-geo.js"></script>
@@ -50992,21 +50998,39 @@ var currentExpertCat = 'all';
 
 function renderBookCover(b) {
   if (b.coverType === 'image' && b.cover) {
-    return '<div class="book-cover-img"><img src="' + b.cover + '" alt="' + escapeHtml(b.title) + '" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'cover-error\')" /></div>';
+    return '<div class="book-cover-img"><img src="' + b.cover + '" alt="' + escapeHtml(b.title) + '" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'cover-error\')" /></div>';
   }
-  var colorMap = {
+  // 颜色映射：接受 CSS 颜色字符串（hex/rgb）或预设名称
+  var namedMap = {
     teal: 'linear-gradient(135deg, #004D40, #00695C, #00897B)',
     blue: 'linear-gradient(135deg, #0D47A1, #1565C0, #1976D2)',
     green: 'linear-gradient(135deg, #1B5E20, #2E7D32, #388E3C)',
-    purple: 'linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2)'
+    purple: 'linear-gradient(135deg, #4A148C, #6A1B9A, #7B1FA2)',
+    brown: 'linear-gradient(135deg, #4E342E, #6D4C41, #8D6E63)',
+    slate: 'linear-gradient(135deg, #263238, #37474F, #546E7A)',
+    orange: 'linear-gradient(135deg, #BF360C, #E64A19, #F57C00)'
   };
-  var bg = colorMap[b.coverColor] || colorMap.teal;
+  var bg;
+  var c = (b.coverColor || '').toLowerCase();
+  if (namedMap[c]) bg = namedMap[c];
+  else if (c && c.charAt(0) === '#') bg = 'linear-gradient(135deg, ' + c + ', ' + c + '22, ' + c + ')';
+  else bg = namedMap.teal;
   var isOriginal = b.cat === '原创专著';
-  var iconSvg = isOriginal ? svgIcon('cell', 28) : svgIcon('book', 28);
+  var titleHtml = escapeHtml(b.title);
+  var authorHtml = b.author ? '<div class="book-cover-author">' + escapeHtml(b.author.split(/[（(]/)[0].split(/,|，/)[0].trim()) + '</div>' : '';
+  var publisherHtml = (b.publisher && !isOriginal) ? '<div class="book-cover-publisher">' + escapeHtml(b.publisher) + '</div>' : '';
+  var catLabel = ({'学术专著':'学术专著','产业参考':'产业参考','原创专著':'平台原创','临床指南':'临床指南'})[b.cat] || b.cat || '';
+  var catBg = {'学术专著':'#42A5F5','产业参考':'#66BB6A','原创专著':'#FFB74D','临床指南':'#8D6E63'}[b.cat] || '#777';
+  var iconSvg = isOriginal ? svgIcon('cell', 32) : svgIcon('book', 32);
+  var yearHtml = b.year ? '<div class="book-cover-year">' + escapeHtml(String(b.year)) + '</div>' : '';
   return '<div class="book-cover-img book-cover-custom" style="background:' + bg + ';">' +
+    '<div class="book-cover-topstrip" style="background:' + catBg + ';">' + escapeHtml(catLabel) + '</div>' +
     '<div class="book-cover-icon">' + iconSvg + '</div>' +
-    '<div class="book-cover-text">' + escapeHtml(b.title.substring(0, 14)) + '</div>' +
+    '<div class="book-cover-text">' + titleHtml + '</div>' +
+    authorHtml +
+    publisherHtml +
     (isOriginal ? '<div class="book-cover-badge">原创</div>' : '') +
+    yearHtml +
     '</div>';
 }
 
@@ -53667,8 +53691,10 @@ function switchNewsTab(tab) {
   updateFloatButtons();
 }
 function showDailySample() {
+  var wl = document.getElementById('welcomeOverlay');
+  if (wl) wl.style.display = 'none';
   var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:10001;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);';
   overlay.onclick = function(e){ if(e.target===overlay) closeDailySample(overlay); };
 
   var box = document.createElement('div');
@@ -53686,7 +53712,7 @@ function showDailySample() {
   box.appendChild(label);
 
   var imgWrap = document.createElement('div');
-  imgWrap.style.cssText = 'width:100%;max-height:75vh;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:10px;background:#fff;';
+  imgWrap.style.cssText = 'width:100%;max-height:75vh;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;border-radius:10px;background:#fff;';
   var img = document.createElement('img');
   img.src = 'assets/cgt_daily_sample.png';
   img.style.cssText = 'width:100%;height:auto;display:block;pointer-events:none;';
