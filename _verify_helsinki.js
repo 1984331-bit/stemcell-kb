@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm');
+let html=fs.readFileSync('index.html','utf8');
+const ctx={console}; vm.createContext(ctx);
+const m=html.match(/const REGULATIONS\s*=\s*(\[[\s\S]*?\]);/);
+const a=vm.runInContext(m[1],ctx);
+console.log('REGULATIONS 总条数:', a.length);
+const byCat={};
+a.forEach(r=>{ const c=r.category||'无'; byCat[c]=(byCat[c]||0)+1; });
+console.log('分类统计:', JSON.stringify(byCat));
+const hk=a.filter(r=>/赫尔辛基/.test(r.title||''));
+console.log('赫尔辛基条目:', hk.length);
+hk.forEach(r=>console.log(' -', r.title, '| category=', r.category, '| url=', (r.url||'').slice(0,80)));
