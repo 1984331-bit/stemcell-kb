@@ -75642,17 +75642,17 @@ function renderPipeline() {
 
   // 筛选器（技术类型）
   html += '<div class="fp-filters" id="plModalityFilters">';
-  html += '<span class="fp-filter active" data-mo="all" onclick="plFilterModality(\'all\')">全部</span>';
+  html += '<span class="fp-filter active" data-mo="all" onclick="plFilterModality(this.dataset.mo)">全部</span>';
   Object.keys(modalityMap).forEach(function(m) {
-    html += '<span class="fp-filter" data-mo="' + m + '" onclick="plFilterModality(\' + m + \')">' + m + '</span>';
+    html += '<span class="fp-filter" data-mo="' + m + '" onclick="plFilterModality(this.dataset.mo)">' + m + '</span>';
   });
   html += '</div>';
 
   // 阶段筛选器
   html += '<div class="fp-filters" id="plPhaseFilters">';
-  html += '<span class="fp-filter active" data-ph="all" onclick="plFilterPhase(\'all\')">全部阶段</span>';
+  html += '<span class="fp-filter active" data-ph="all" onclick="plFilterPhase(this.dataset.ph)">全部阶段</span>';
   Object.keys(phaseMap).forEach(function(p) {
-    html += '<span class="fp-filter" data-ph="' + p + '" onclick="plFilterPhase(\' + p + \')">' + p + '</span>';
+    html += '<span class="fp-filter" data-ph="' + p + '" onclick="plFilterPhase(this.dataset.ph)">' + p + '</span>';
   });
   html += '</div>';
 
