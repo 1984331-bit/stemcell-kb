@@ -11,7 +11,7 @@ const { chromium } = require('C:/Users/YSJ/AppData/Roaming/npm/node_modules/@pla
   const errors1 = [];
   page1.on('pageerror', e => errors1.push('pageerror: ' + e.message));
   page1.on('console', m => { if (m.type() === 'error') errors1.push('console: ' + m.text()); });
-  await page1.goto('http://localhost:8765/index.html', { waitUntil: 'networkidle' });
+  await page1.goto('https://1984331-bit.github.io/stemcell-kb/', { waitUntil: 'networkidle' });
   await page1.waitForTimeout(2000);
 
   const slides = await page1.locator('.wh-slide').count();
@@ -24,7 +24,7 @@ const { chromium } = require('C:/Users/YSJ/AppData/Roaming/npm/node_modules/@pla
   const errors2 = [];
   page2.on('pageerror', e => errors2.push('pageerror: ' + e.message));
   page2.on('console', m => { if (m.type() === 'error') errors2.push('console: ' + m.text()); });
-  await page2.goto('http://localhost:8765/index.html', { waitUntil: 'networkidle' });
+  await page2.goto('https://1984331-bit.github.io/stemcell-kb/', { waitUntil: 'networkidle' });
   await page2.waitForTimeout(1500);
   // 切到 news，再切 clinical tab
   await page2.evaluate(() => { try { switchSection('news'); } catch (e) {} });
@@ -51,7 +51,7 @@ const { chromium } = require('C:/Users/YSJ/AppData/Roaming/npm/node_modules/@pla
   const errors3 = [];
   page3.on('pageerror', e => errors3.push('pageerror: ' + e.message));
   page3.on('console', m => { if (m.type() === 'error') errors3.push('console: ' + m.text()); });
-  await page3.goto('http://localhost:8765/index.html', { waitUntil: 'networkidle' });
+  await page3.goto('https://1984331-bit.github.io/stemcell-kb/', { waitUntil: 'networkidle' });
   await page3.waitForTimeout(1500);
   await page3.evaluate(() => { try { switchSection('products'); } catch (e) {} });
   await page3.waitForTimeout(1200);

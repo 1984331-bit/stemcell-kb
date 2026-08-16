@@ -1,0 +1,30 @@
+/* 补充验证 v3：books 页 courses/conferences tab */
+const { chromium } = require('C:/Users/YSJ/AppData/Roaming/npm/node_modules/@playwright/cli/node_modules/playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const errors = [];
+  page.on('pageerror', e => errors.push('PAGEERROR: ' + e.message));
+  page.on('console', msg => { if (msg.type() === 'error') errors.push('CONSOLE: ' + msg.text()); });
+  await page.goto('http://localhost:8765/index.html', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(1200);
+  await page.evaluate(() => switchSection('books'));
+  await page.waitForTimeout(1200);
+  await page.evaluate(() => { try { switchBookTab('courses'); } catch(e) {} });
+  await page.waitForTimeout(1000);
+  let t = await page.evaluate(() => document.body.innerText);
+  console.log('courses tab: 明眸计划=' + (t.indexOf('明眸计划') >= 0));
+  await page.evaluate(() => { try { switchBookTab('conferences'); } catch(e) {} });
+  await page.waitForTimeout(1000);
+  t = await page.evaluate(() => document.body.innerText);
+  console.log('conferences tab: ICGT 2026=' + (t.indexOf('ICGT 2026') >= 0));
+  await page.evaluate(() => { try { switchBookTab('books'); } catch(e) {} });
+  await page.waitForTimeout(1000);
+  t = await page.evaluate(() => document.body.innerText);
+  console.log('books tab 渲染正常: ' + (t.indexOf('行业书籍') >= 0));
+  await browser.close();
+  console.log('JS 错误数: ' + errors.length);
+  errors.forEach(e => console.log(e));
+  console.log(errors.length === 0 ? '=== books 页验证通过 ===' : '=== books 页验证失败 ===');
+  process.exit(errors.length === 0 ? 0 : 1);
+})();
