@@ -4897,133 +4897,131 @@ body { padding-bottom: 60px; }
 
 /* === Welcome Modal === */
 .welcome-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(5,10,20,0.88);
-  backdrop-filter: blur(6px);
+  position: fixed; inset: 0;
+  background: #070b12;
   z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
-  padding: 20px;
   overflow-y: auto;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 .welcome-overlay.show { opacity: 1; visibility: visible; }
-.welcome-card {
-  background: linear-gradient(145deg, #0E1828, #131F30);
-  border: 1px solid rgba(0,229,255,0.2);
-  border-radius: 16px;
-  max-width: 680px; width: 100%;
-  max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 0 60px rgba(0,229,255,0.12), 0 20px 60px rgba(0,0,0,0.5);
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
+.we-helix { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.we-veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 62% 46% at 50% 30%, transparent 0%, rgba(7,11,18,0.55) 72%),
+    linear-gradient(180deg, rgba(7,11,18,0.25) 0%, rgba(7,11,18,0.62) 100%);
 }
-.welcome-overlay.show .welcome-card { transform: translateY(0) scale(1); }
-.welcome-card::-webkit-scrollbar { width: 6px; }
-.welcome-card::-webkit-scrollbar-track { background: transparent; }
-.welcome-card::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.2); border-radius: 3px; }
-.wc-header {
-  text-align: center;
-  padding: 32px 24px 16px;
-  border-bottom: 1px solid var(--divider);
+.we-wrap {
+  position: relative; z-index: 2; pointer-events: none;
+  max-width: 1080px; margin: 0 auto;
+  padding: 22px 48px 42px;
+  min-height: 100%;
+  display: flex; flex-direction: column;
 }
-.wc-logo {
-  width: 64px; height: 64px; margin: 0 auto 12px;
+.we-topbar { display: flex; align-items: center; justify-content: space-between; }
+.we-brand { display: flex; align-items: center; gap: 12px; }
+.we-brand-name { font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #e8eef4; }
+.we-brand-name small { display: block; font-size: 9.5px; font-weight: 400; letter-spacing: 2.5px; color: rgba(232,238,244,0.45); margin-top: 1px; }
+.we-top-right { display: flex; align-items: center; gap: 18px; }
+.we-live { font-size: 10.5px; letter-spacing: 1.5px; color: #64FFDA; display: flex; align-items: center; gap: 7px; }
+.we-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #64FFDA; box-shadow: 0 0 8px #64FFDA; animation: wePulse 2s infinite; }
+@keyframes wePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.we-top-enter {
+  pointer-events: auto;
+  font-size: 12.5px; letter-spacing: 1.5px; padding: 9px 22px;
+  border: 1px solid rgba(100,255,218,0.35); border-radius: 999px;
+  color: #c9f5e9; background: transparent; cursor: pointer;
+  transition: all 0.25s;
 }
-.wc-title {
-  font-size: 24px; font-weight: 700; color: var(--text);
-  letter-spacing: 1px;
+.we-top-enter:hover { background: rgba(100,255,218,0.12); border-color: rgba(100,255,218,0.7); }
+.we-hero { text-align: center; padding-top: 6vh; }
+.we-kicker {
+  font-size: 11.5px; letter-spacing: 5px; color: rgba(100,255,218,0.75);
+  font-weight: 500; margin-bottom: 24px;
+  animation: weRise 0.9s cubic-bezier(0.22,1,0.36,1) both;
 }
-.wc-subtitle {
-  font-size: 13px; color: var(--text-light);
-  margin-top: 4px; letter-spacing: 0.5px;
+.we-kicker .dot { margin: 0 10px; opacity: 0.4; }
+.we-title {
+  font-size: clamp(34px, 5.6vw, 66px);
+  font-weight: 300; letter-spacing: 6px; line-height: 1.3;
+  background: linear-gradient(105deg, #7fd4ff 0%, #4FC3F7 30%, #64FFDA 72%, #a4f7c8 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: weRise 0.9s 0.12s cubic-bezier(0.22,1,0.36,1) both;
 }
-.wc-stats {
-  display: flex; justify-content: center; gap: 24px;
-  margin-top: 14px;
+.we-sub {
+  margin-top: 20px; font-size: 13.5px; font-weight: 300;
+  color: rgba(232,238,244,0.6); letter-spacing: 1.2px; line-height: 2;
+  animation: weRise 0.9s 0.24s cubic-bezier(0.22,1,0.36,1) both;
 }
-.wc-stat { text-align: center; }
-.wc-stat-num { font-size: 20px; font-weight: 700; color: var(--primary); }
-.wc-stat-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
-.wc-body { padding: 20px 24px; }
-.wc-intro {
-  font-size: 13px; color: var(--text-light); line-height: 1.7;
-  text-align: center; margin-bottom: 20px;
+.we-sub .sep { margin: 0 8px; color: rgba(100,255,218,0.4); }
+@keyframes weRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+.we-stats {
+  width: 100%; max-width: 860px; margin: 4.5vh auto 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(232,238,244,0.08);
+  border-bottom: 1px solid rgba(232,238,244,0.08);
+  animation: weRise 0.9s 0.36s cubic-bezier(0.22,1,0.36,1) both;
 }
-.wc-section-title {
-  font-size: 14px; font-weight: 600; color: var(--primary);
-  margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+.we-stat { padding: 24px 10px 20px; text-align: center; position: relative; }
+.we-stat + .we-stat::before { content: ''; position: absolute; left: 0; top: 28%; height: 44%; width: 1px; background: rgba(232,238,244,0.08); }
+.we-stat-num { font-size: 32px; font-weight: 200; letter-spacing: 1px; color: #e8eef4; }
+.we-stat-label { margin-top: 6px; font-size: 10.5px; letter-spacing: 3px; color: rgba(232,238,244,0.42); }
+.we-aud {
+  width: 100%; margin: 4vh auto 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  animation: weRise 0.9s 0.48s cubic-bezier(0.22,1,0.36,1) both;
 }
-.wc-section-title::before {
-  content: ''; width: 3px; height: 14px; background: var(--primary);
-  border-radius: 2px;
+.we-aud-card {
+  pointer-events: auto;
+  border: 1px solid rgba(232,238,244,0.08); border-radius: 14px;
+  padding: 18px 18px 16px;
+  background: linear-gradient(165deg, rgba(255,255,255,0.028), rgba(255,255,255,0.006));
+  cursor: pointer; text-align: left;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s;
 }
-.wc-user-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+.we-aud-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100,255,218,0.35);
+  background: linear-gradient(165deg, rgba(100,255,218,0.055), rgba(255,255,255,0.01));
 }
-.wc-user-card {
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 14px;
-  transition: border-color 0.2s;
+.we-aud-tag { font-size: 9.5px; letter-spacing: 2.5px; color: rgba(100,255,218,0.65); margin-bottom: 10px; }
+.we-aud-name { font-size: 15.5px; font-weight: 600; letter-spacing: 1.5px; color: #e8eef4; }
+.we-aud-desc { margin-top: 8px; font-size: 11px; line-height: 1.8; color: rgba(232,238,244,0.5); }
+.we-aud-go { margin-top: 12px; font-size: 10.5px; letter-spacing: 2px; color: rgba(100,255,218,0.85); }
+.we-aud-go::after { content: ' \2192'; }
+.we-cta { text-align: center; margin-top: auto; padding-top: 4vh; animation: weRise 0.9s 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+.we-enter-main {
+  pointer-events: auto;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 15px; font-weight: 600; letter-spacing: 3px;
+  padding: 15px 56px; border-radius: 999px; border: none; cursor: pointer;
+  background: linear-gradient(120deg, #37b6e8, #2dd4a7);
+  color: #06121a;
+  box-shadow: 0 8px 34px rgba(45,212,167,0.22);
+  transition: transform 0.25s, box-shadow 0.25s;
 }
-.wc-user-card:hover { border-color: rgba(0,229,255,0.3); }
-.wc-user-head {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+.we-enter-main:hover { transform: translateY(-2px); box-shadow: 0 12px 44px rgba(45,212,167,0.34); }
+.we-skip-line { margin-top: 18px; font-size: 11.5px; color: rgba(232,238,244,0.4); }
+.we-skip-line label { pointer-events: auto; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.we-skip-line input { accent-color: #2dd4a7; cursor: pointer; }
+.we-disclaimer { margin-top: 22px; font-size: 10px; line-height: 1.9; color: rgba(232,238,244,0.28); letter-spacing: 0.5px; }
+@media (max-width: 860px) {
+  .we-wrap { padding: 18px 22px 36px; }
+  .we-title { letter-spacing: 3px; }
+  .we-kicker { letter-spacing: 3px; }
+  .we-stats { grid-template-columns: repeat(2, 1fr); }
+  .we-stat:nth-child(3)::before { display: none; }
+  .we-aud { grid-template-columns: repeat(2, 1fr); }
 }
-.wc-user-icon {
-  width: 28px; height: 28px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.wc-user-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.wc-user-desc { font-size: 11px; color: var(--text-light); line-height: 1.6; }
-.wc-user-features { font-size: 11px; color: var(--primary); margin-top: 4px; line-height: 1.5; }
-.wc-disclaimer {
-  margin-top: 16px; padding: 10px 14px;
-  background: rgba(229,57,53,0.06);
-  border: 1px solid rgba(229,57,53,0.15);
-  border-radius: 8px;
-  font-size: 11px; color: #EF5350; line-height: 1.6;
-}
-.wc-footer {
-  padding: 16px 24px 24px;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-}
-.wc-enter-btn {
-  background: linear-gradient(135deg, #00B8D4, #00E5FF);
-  color: #0A0F1A;
-  border: none; border-radius: 10px;
-  padding: 12px 48px;
-  font-size: 15px; font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  letter-spacing: 1px;
-}
-.wc-enter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,229,255,0.3);
-}
-.wc-enter-btn:active { transform: translateY(0); }
-.wc-skip {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12px; color: var(--text-light); cursor: pointer;
-  user-select: none;
-}
-.wc-skip input { cursor: pointer; accent-color: var(--primary); }
-.wc-hint { font-size: 11px; color: var(--text-light); opacity: 0.6; }
-@media (max-width: 600px) {
-  .welcome-card { max-height: 92vh; border-radius: 12px; }
-  .wc-header { padding: 24px 16px 12px; }
-  .wc-title { font-size: 20px; }
-  .wc-stats { gap: 16px; }
-  .wc-stat-num { font-size: 17px; }
-  .wc-body { padding: 16px; }
-  .wc-user-grid { grid-template-columns: 1fr; gap: 8px; }
-  .wc-footer { padding: 12px 16px 20px; }
-  .wc-enter-btn { padding: 11px 36px; font-size: 14px; }
+@media (max-width: 520px) {
+  .we-title { font-size: 29px; letter-spacing: 2px; white-space: nowrap; }
+  .we-kicker { font-size: 10px; letter-spacing: 2px; }
+  .we-aud { grid-template-columns: 1fr; }
+  .we-live { display: none; }
+  .we-brand-name { font-size: 13px; }
+  .we-top-enter { padding: 8px 16px; font-size: 11.5px; }
 }
 
 /* === Report intro & tabs === */
@@ -5348,87 +5346,136 @@ body { padding-bottom: 60px; }
 </head>
 <body>
 
-<!-- Welcome Modal -->
+<!-- Welcome Entry -->
 <div class="welcome-overlay" id="welcomeOverlay" onclick="closeWelcome(event)">
-  <div class="welcome-card" onclick="event.stopPropagation()">
-    <div class="wc-header">
-      <svg class="wc-logo" viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="28" stroke="#64FFDA" stroke-width="2.5"/>
-        <circle cx="26" cy="26" r="10" fill="#00E5FF" opacity="0.6"/>
-        <circle cx="44" cy="40" r="5" fill="#00B8D4" opacity="0.5"/>
-        <circle cx="42" cy="18" r="3" fill="#64FFDA"/>
-        <circle cx="16" cy="40" r="3" fill="#64FFDA"/>
-      </svg>
-      <div class="wc-title">细胞与基因治疗知识库</div>
-      <div class="wc-subtitle">CGT Knowledge Hub</div>
-      <div class="wc-stats">
-        <div class="wc-stat"><div class="wc-stat-num" id="wc-stat-lit">--</div><div class="wc-stat-label">临床文献</div></div>
-        <div class="wc-stat"><div class="wc-stat-num" id="wc-stat-reg">--</div><div class="wc-stat-label">监管政策</div></div>
-        <div class="wc-stat"><div class="wc-stat-num" id="wc-stat-prod">--</div><div class="wc-stat-label">获批产品</div></div>
-        <div class="wc-stat"><div class="wc-stat-num" id="wc-stat-sys">--</div><div class="wc-stat-label">疾病系统</div></div>
+  <canvas class="we-helix" id="weHelix"></canvas>
+  <div class="we-veil"></div>
+  <div class="we-wrap">
+    <div class="we-topbar">
+      <div class="we-brand">
+        <svg viewBox="0 0 32 32" width="30" height="30"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="1.6"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg>
+        <div class="we-brand-name">细胞与基因治疗知识库<small>CGT KNOWLEDGE HUB</small></div>
+      </div>
+      <div class="we-top-right">
+        <span class="we-live">DAILY UPDATED</span>
+        <button class="we-top-enter" onclick="closeWelcome()">进入网站</button>
       </div>
     </div>
-    <div class="wc-body">
-      <div class="wc-intro">本平台聚焦细胞与基因治疗（CGT）领域，整合全球公开发表的学术文献、监管政策动态、获批产品追踪及行业深度分析，每日更新维护，致力于为科研与产业提供权威、系统的信息参考。</div>
-      
-      <div class="wc-section-title">面向用户与核心功能</div>
-      <div class="wc-user-grid">
-        <div class="wc-user-card">
-          <div class="wc-user-head">
-            <div class="wc-user-icon" style="background:rgba(0,229,255,0.15);">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4l4 7v7H5v-7l4-7z"/><path d="M9 14h6"/></svg>
-            </div>
-            <div class="wc-user-name">研究人员</div>
-          </div>
-          <div class="wc-user-desc">检索MSC临床试验文献，按疾病系统/适应症精准筛选</div>
-          <div class="wc-user-features">文献库 / 编辑精选 / 数据分析·行业报告</div>
-        </div>
-        <div class="wc-user-card">
-          <div class="wc-user-head">
-            <div class="wc-user-icon" style="background:rgba(93,202,165,0.15);">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#5DCAA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-            </div>
-            <div class="wc-user-name">临床医生</div>
-          </div>
-          <div class="wc-user-desc">查阅临床试验数据、证据等级、剂量方案与安全性</div>
-          <div class="wc-user-features">文献库 / 监管政策 / 获批产品</div>
-        </div>
-        <div class="wc-user-card">
-          <div class="wc-user-head">
-            <div class="wc-user-icon" style="background:rgba(239,159,39,0.15);">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#EF9F27" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l4 4-7 7-4-4z"/><path d="M14 7l5 5c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-5-5"/></svg>
-            </div>
-            <div class="wc-user-name">产业从业者</div>
-          </div>
-          <div class="wc-user-desc">追踪全球细胞治疗产品获批进展与监管动态</div>
-          <div class="wc-user-features">获批产品 / 监管政策 / 行业资讯</div>
-        </div>
-        <div class="wc-user-card">
-          <div class="wc-user-head">
-            <div class="wc-user-icon" style="background:rgba(175,169,236,0.15);">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#AFA9EC" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
-            </div>
-            <div class="wc-user-name">投资者</div>
-          </div>
-          <div class="wc-user-desc">把握行业趋势、企业动态与投融资信息</div>
-          <div class="wc-user-features">数据分析·行业报告 / 企业巡览 / 行业资讯</div>
-        </div>
+    <div class="we-hero">
+      <div class="we-kicker">CELL<span class="dot">·</span>GENE THERAPY<span class="dot">·</span>EVIDENCE BASED</div>
+      <div class="we-title">细胞与基因治疗知识库</div>
+      <div class="we-sub">文献 <span class="sep">·</span> 监管 <span class="sep">·</span> 产品 <span class="sep">·</span> 临床 <span class="sep">·</span> 产业全链条，每日更新维护</div>
+    </div>
+    <div class="we-stats">
+      <div class="we-stat"><div class="we-stat-num" id="wc-stat-lit">--</div><div class="we-stat-label">临床文献</div></div>
+      <div class="we-stat"><div class="we-stat-num" id="wc-stat-reg">--</div><div class="we-stat-label">监管政策</div></div>
+      <div class="we-stat"><div class="we-stat-num" id="wc-stat-prod">--</div><div class="we-stat-label">获批产品</div></div>
+      <div class="we-stat"><div class="we-stat-num" id="wc-stat-sys">--</div><div class="we-stat-label">疾病系统</div></div>
+    </div>
+    <div class="we-aud">
+      <div class="we-aud-card" onclick="closeWelcome();switchSection('literature')">
+        <div class="we-aud-tag">RESEARCH</div>
+        <div class="we-aud-name">研究人员</div>
+        <div class="we-aud-desc">检索 MSC / CAR-T / 基因治疗临床试验文献，按疾病系统与适应症精准筛选</div>
+        <div class="we-aud-go">文献库 · 编辑精选</div>
       </div>
-
-      <div class="wc-disclaimer">
-        <b>免责声明：</b>本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供科研与行业交流参考，不构成任何医疗建议或诊疗方案。如有健康问题请咨询专业医疗机构。
+      <div class="we-aud-card" onclick="closeWelcome();switchSection('literature')">
+        <div class="we-aud-tag">CLINICAL</div>
+        <div class="we-aud-name">临床医生</div>
+        <div class="we-aud-desc">查阅临床试验数据、证据等级、剂量方案与安全性信息</div>
+        <div class="we-aud-go">文献库 · 获批产品</div>
+      </div>
+      <div class="we-aud-card" onclick="closeWelcome();switchSection('products')">
+        <div class="we-aud-tag">INDUSTRY</div>
+        <div class="we-aud-name">产业从业者</div>
+        <div class="we-aud-desc">追踪全球 CGT 产品获批进展、监管动态与行业资讯</div>
+        <div class="we-aud-go">获批产品 · 监管政策</div>
+      </div>
+      <div class="we-aud-card" onclick="closeWelcome();switchSection('news')">
+        <div class="we-aud-tag">INSIGHT</div>
+        <div class="we-aud-name">投资者</div>
+        <div class="we-aud-desc">把握行业趋势、企业动态、投融资与量化分析</div>
+        <div class="we-aud-go">行业报告 · 融资趋势</div>
       </div>
     </div>
-    <div class="wc-footer">
-      <button class="wc-enter-btn" onclick="closeWelcome()">进入网站</button>
-      <label class="wc-skip">
-        <input type="checkbox" id="skipWelcome">
-        <span>不再显示此页面</span>
-      </label>
-      <div class="wc-hint">点击页面空白处也可进入</div>
+    <div class="we-cta">
+      <button class="we-enter-main" onclick="closeWelcome()">进入网站</button>
+      <div class="we-skip-line">
+        <label><input type="checkbox" id="skipWelcome"> 不再显示此页面</label>
+        <span style="margin-left:16px;opacity:0.55;">点击空白处也可进入</span>
+      </div>
+      <div class="we-disclaimer">
+        本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供科研与行业交流参考，不构成任何医疗建议或诊疗方案。<br>
+        如有健康问题请咨询专业医疗机构。
+      </div>
     </div>
   </div>
 </div>
+<script>
+(function () {
+  var cv = document.getElementById('weHelix');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var W, H, t = 0;
+  var N = 46;
+  function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var cx = W / 2, cy = H * 0.30;
+    var spanX = Math.min(W * 0.42, 620);
+    var amp = Math.min(H * 0.075, 60);
+    t += 0.008;
+    var i, p, x, ph, y1, y2;
+    for (i = 0; i < N; i++) {
+      p = i / (N - 1);
+      x = cx - spanX + p * spanX * 2;
+      ph = p * Math.PI * 3.2 + t;
+      if (i % 4 === 0) {
+        y1 = cy + Math.sin(ph) * amp;
+        y2 = cy + Math.sin(ph + Math.PI) * amp;
+        ctx.strokeStyle = 'rgba(120,180,220,0.10)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2); ctx.stroke();
+      }
+    }
+    var off, k;
+    for (k = 0; k < 2; k++) {
+      off = k === 0 ? 0 : Math.PI;
+      ctx.beginPath();
+      for (i = 0; i < N; i++) {
+        p = i / (N - 1);
+        x = cx - spanX + p * spanX * 2;
+        y1 = cy + Math.sin(p * Math.PI * 3.2 + t + off) * amp;
+        if (i === 0) ctx.moveTo(x, y1); else ctx.lineTo(x, y1);
+      }
+      ctx.strokeStyle = off === 0 ? 'rgba(79,195,247,0.28)' : 'rgba(100,255,218,0.24)';
+      ctx.lineWidth = 1.2; ctx.stroke();
+    }
+    for (i = 0; i < N; i += 2) {
+      p = i / (N - 1);
+      x = cx - spanX + p * spanX * 2;
+      ph = p * Math.PI * 3.2 + t;
+      for (k = 0; k < 2; k++) {
+        off = k === 0 ? 0 : Math.PI;
+        y1 = cy + Math.sin(ph + off) * amp;
+        var depth = (Math.cos(ph + off) + 1) / 2;
+        var r = 1.6 + depth * 2.6;
+        ctx.beginPath(); ctx.arc(x, y1, r, 0, Math.PI * 2);
+        ctx.fillStyle = off === 0 ? 'rgba(79,195,247,' + (0.25 + depth * 0.6) + ')' : 'rgba(100,255,218,' + (0.25 + depth * 0.6) + ')';
+        ctx.fill();
+      }
+    }
+    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 90);
+    g.addColorStop(0, 'rgba(232,238,244,0.10)');
+    g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(cx, cy, 90, 0, Math.PI * 2); ctx.fill();
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 <div class="header">
   <div class="header-inner">
