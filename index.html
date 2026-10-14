@@ -4895,135 +4895,6 @@ body { padding-bottom: 60px; }
 
 /* Weekly highlight tags - keep brand colors, no change needed */
 
-/* === Welcome Modal === */
-.welcome-overlay {
-  position: fixed; inset: 0;
-  background: #070b12;
-  z-index: 10000;
-  overflow-y: auto;
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-.welcome-overlay.show { opacity: 1; visibility: visible; }
-.we-helix { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.we-veil {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 62% 46% at 50% 30%, transparent 0%, rgba(7,11,18,0.55) 72%),
-    linear-gradient(180deg, rgba(7,11,18,0.25) 0%, rgba(7,11,18,0.62) 100%);
-}
-.we-wrap {
-  position: relative; z-index: 2; pointer-events: none;
-  max-width: 1080px; margin: 0 auto;
-  padding: 22px 48px 42px;
-  min-height: 100%;
-  display: flex; flex-direction: column;
-}
-.we-topbar { display: flex; align-items: center; justify-content: space-between; }
-.we-brand { display: flex; align-items: center; gap: 12px; }
-.we-brand-name { font-size: 15px; font-weight: 600; letter-spacing: 1px; color: #e8eef4; }
-.we-brand-name small { display: block; font-size: 9.5px; font-weight: 400; letter-spacing: 2.5px; color: rgba(232,238,244,0.45); margin-top: 1px; }
-.we-top-right { display: flex; align-items: center; gap: 18px; }
-.we-live { font-size: 10.5px; letter-spacing: 1.5px; color: #64FFDA; display: flex; align-items: center; gap: 7px; }
-.we-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #64FFDA; box-shadow: 0 0 8px #64FFDA; animation: wePulse 2s infinite; }
-@keyframes wePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
-.we-top-enter {
-  pointer-events: auto;
-  font-size: 12.5px; letter-spacing: 1.5px; padding: 9px 22px;
-  border: 1px solid rgba(100,255,218,0.35); border-radius: 999px;
-  color: #c9f5e9; background: transparent; cursor: pointer;
-  transition: all 0.25s;
-}
-.we-top-enter:hover { background: rgba(100,255,218,0.12); border-color: rgba(100,255,218,0.7); }
-.we-hero { text-align: center; padding-top: 6vh; }
-.we-kicker {
-  font-size: 11.5px; letter-spacing: 5px; color: rgba(100,255,218,0.75);
-  font-weight: 500; margin-bottom: 24px;
-  animation: weRise 0.9s cubic-bezier(0.22,1,0.36,1) both;
-}
-.we-kicker .dot { margin: 0 10px; opacity: 0.4; }
-.we-title {
-  font-size: clamp(34px, 5.6vw, 66px);
-  font-weight: 300; letter-spacing: 6px; line-height: 1.3;
-  background: linear-gradient(105deg, #7fd4ff 0%, #4FC3F7 30%, #64FFDA 72%, #a4f7c8 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
-  animation: weRise 0.9s 0.12s cubic-bezier(0.22,1,0.36,1) both;
-}
-.we-sub {
-  margin-top: 20px; font-size: 13.5px; font-weight: 300;
-  color: rgba(232,238,244,0.6); letter-spacing: 1.2px; line-height: 2;
-  animation: weRise 0.9s 0.24s cubic-bezier(0.22,1,0.36,1) both;
-}
-.we-sub .sep { margin: 0 8px; color: rgba(100,255,218,0.4); }
-@keyframes weRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-.we-stats {
-  width: 100%; max-width: 860px; margin: 4.5vh auto 0;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid rgba(232,238,244,0.08);
-  border-bottom: 1px solid rgba(232,238,244,0.08);
-  animation: weRise 0.9s 0.36s cubic-bezier(0.22,1,0.36,1) both;
-}
-.we-stat { padding: 24px 10px 20px; text-align: center; position: relative; }
-.we-stat + .we-stat::before { content: ''; position: absolute; left: 0; top: 28%; height: 44%; width: 1px; background: rgba(232,238,244,0.08); }
-.we-stat-num { font-size: 32px; font-weight: 200; letter-spacing: 1px; color: #e8eef4; }
-.we-stat-label { margin-top: 6px; font-size: 10.5px; letter-spacing: 3px; color: rgba(232,238,244,0.42); }
-.we-aud {
-  width: 100%; margin: 4vh auto 0;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
-  animation: weRise 0.9s 0.48s cubic-bezier(0.22,1,0.36,1) both;
-}
-.we-aud-card {
-  pointer-events: auto;
-  border: 1px solid rgba(232,238,244,0.08); border-radius: 14px;
-  padding: 18px 18px 16px;
-  background: linear-gradient(165deg, rgba(255,255,255,0.028), rgba(255,255,255,0.006));
-  cursor: pointer; text-align: left;
-  transition: transform 0.3s, border-color 0.3s, background 0.3s;
-}
-.we-aud-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(100,255,218,0.35);
-  background: linear-gradient(165deg, rgba(100,255,218,0.055), rgba(255,255,255,0.01));
-}
-.we-aud-tag { font-size: 9.5px; letter-spacing: 2.5px; color: rgba(100,255,218,0.65); margin-bottom: 10px; }
-.we-aud-name { font-size: 15.5px; font-weight: 600; letter-spacing: 1.5px; color: #e8eef4; }
-.we-aud-desc { margin-top: 8px; font-size: 11px; line-height: 1.8; color: rgba(232,238,244,0.5); }
-.we-aud-go { margin-top: 12px; font-size: 10.5px; letter-spacing: 2px; color: rgba(100,255,218,0.85); }
-.we-aud-go::after { content: ' \2192'; }
-.we-cta { text-align: center; margin-top: auto; padding-top: 4vh; animation: weRise 0.9s 0.6s cubic-bezier(0.22,1,0.36,1) both; }
-.we-enter-main {
-  pointer-events: auto;
-  display: inline-flex; align-items: center; gap: 12px;
-  font-size: 15px; font-weight: 600; letter-spacing: 3px;
-  padding: 15px 56px; border-radius: 999px; border: none; cursor: pointer;
-  background: linear-gradient(120deg, #37b6e8, #2dd4a7);
-  color: #06121a;
-  box-shadow: 0 8px 34px rgba(45,212,167,0.22);
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.we-enter-main:hover { transform: translateY(-2px); box-shadow: 0 12px 44px rgba(45,212,167,0.34); }
-.we-skip-line { margin-top: 18px; font-size: 11.5px; color: rgba(232,238,244,0.4); }
-.we-skip-line label { pointer-events: auto; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-.we-skip-line input { accent-color: #2dd4a7; cursor: pointer; }
-.we-disclaimer { margin-top: 22px; font-size: 10px; line-height: 1.9; color: rgba(232,238,244,0.28); letter-spacing: 0.5px; }
-@media (max-width: 860px) {
-  .we-wrap { padding: 18px 22px 36px; }
-  .we-title { letter-spacing: 3px; }
-  .we-kicker { letter-spacing: 3px; }
-  .we-stats { grid-template-columns: repeat(2, 1fr); }
-  .we-stat:nth-child(3)::before { display: none; }
-  .we-aud { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .we-title { font-size: 29px; letter-spacing: 2px; white-space: nowrap; }
-  .we-kicker { font-size: 10px; letter-spacing: 2px; }
-  .we-aud { grid-template-columns: 1fr; }
-  .we-live { display: none; }
-  .we-brand-name { font-size: 13px; }
-  .we-top-enter { padding: 8px 16px; font-size: 11.5px; }
-}
-
 /* === Report intro & tabs === */
 .report-intro {
   background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(100,255,218,0.03));
@@ -5340,146 +5211,101 @@ body { padding-bottom: 60px; }
 .book-cover-publisher { font-size:10px; color:rgba(255,255,255,0.7); line-height:1.4; margin-top:auto; padding-top:8px; border-top:1px solid rgba(255,255,255,0.2); width:85%; }
 .book-cover-year { font-size:11px; color:rgba(255,255,255,0.9); margin-top:2px; font-weight:600; }
 .book-cover-text { max-width:90%; word-break:break-word; }
+
+/* === 风格C·学术期刊浅色主题 Override (2026-10-13 首页与入口统一) === */
+:root {
+  --primary: #B3001B; --primary-light: #C8102E; --primary-dark: #8A0015;
+  --accent: rgba(179,0,27,0.06);
+  --bg: #F7F7F5; --card-bg: #FFFFFF; --card-solid: #FFFFFF;
+  --text: #1A1A1A; --text-light: #555555;
+  --border: #E0E0E0; --shadow: 0 1px 3px rgba(0,0,0,0.06); --glow: none;
+  --surface-1: #F0F0EC; --surface-2: #FAFAF8;
+  --edu-bg: rgba(179,0,27,0.05); --edu-border: rgba(179,0,27,0.18); --edu-text: #8A0015; --edu-accent: #B3001B;
+  --warn-bg: rgba(230,81,0,0.08); --warn-border: rgba(230,81,0,0.22); --warn-text: #B34700;
+  --highlight-bg: rgba(179,0,27,0.04); --highlight-border: rgba(179,0,27,0.16);
+  --track-bg: #E6E6E1; --divider: #E8E8E3;
+}
+body { background-image: none; }
+.header { background: #FFFFFF; color: #1A1A1A; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-bottom: 3px solid #B3001B; }
+.header h1 { background: transparent; font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif; }
+.header h1 .header-title-block span:first-child { color: #B3001B; font-size: 19px; letter-spacing: 1px; }
+.header .subtitle { font-size: 11px; letter-spacing: 2.5px; color: #777; opacity: 1; font-family: Georgia, "Times New Roman", serif; }
+.header-nav { background: #F4F4F0; border: 1px solid #E4E4DE; }
+.header-nav .bn-item { color: #555; }
+.header-nav .bn-item:hover { color: #1A1A1A; background: rgba(0,0,0,0.05); }
+.header-nav .bn-item.active { color: #B3001B; background: rgba(179,0,27,0.08); text-shadow: none; }
+.info-bar { background: #FFFFFF; border-bottom: 1px solid #E0E0E0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.info-tab { color: #555; }
+.info-tab:hover { background: rgba(0,0,0,0.05); color: #1A1A1A; }
+.info-tab.active { color: #B3001B; background: rgba(179,0,27,0.07); }
+.info-panel { color: #555; }
+.info-panel .ip-text b { color: #B3001B; }
+.info-panel .ip-tag { background: rgba(179,0,27,0.06); color: #B3001B; border: 1px solid rgba(179,0,27,0.18); }
+.sidebar { background: #FFFFFF; }
+.sys-header:hover { background: rgba(179,0,27,0.06); }
+.sys-header.active { background: rgba(179,0,27,0.09); color: var(--primary); text-shadow: none; }
+.sys-count { background: rgba(179,0,27,0.07); }
+.sys-header.active .sys-count { background: rgba(179,0,27,0.14); }
+.ind-item:hover { background: rgba(179,0,27,0.05); color: var(--primary); }
+.ind-item.active { background: rgba(179,0,27,0.09); color: var(--primary); }
+.ind-count { background: rgba(0,0,0,0.05); }
+.ind-item.active .ind-count { background: rgba(179,0,27,0.14); color: #B3001B; }
+.section-divider .sd-title { color: #B3001B; letter-spacing: 2px; }
+.hub-card { background: #FFFFFF; border-color: #E2E2DC; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+.hub-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.07); border-color: #B3001B; }
+.hub-card .hc-icon { box-shadow: none !important; }
+.hub-card .hc-title { font-size: 15px; }
+.hub-card .hc-desc { font-size: 12px; opacity: 1; }
+.hub-card.green { background: #F2F7F4; border-color: #C9DED3; }
+.hub-card.green .hc-title { color: #0F6E56; } .hub-card.green .hc-desc { color: #4E7A67; }
+.hub-card.orange { background: #FBF5EA; border-color: #E8D9BC; }
+.hub-card.orange .hc-title { color: #9A5F0D; } .hub-card.orange .hc-desc { color: #8A6D35; }
+.hub-card.blue { background: #F0F5FA; border-color: #C6D8E8; }
+.hub-card.blue .hc-title { color: #185FA5; } .hub-card.blue .hc-desc { color: #4E6E8A; }
+.hub-card.purple { background: #F4F3FA; border-color: #D3D0E8; }
+.hub-card.purple .hc-title { color: #534AB7; } .hub-card.purple .hc-desc { color: #6E6A96; }
+.hub-card.rose { background: #FBF1F3; border-color: #E8C6CE; }
+.hub-card.rose .hc-title { color: #C62852; } .hub-card.rose .hc-desc { color: #96535F; }
+.hub-card.teal { background: #EFF7F8; border-color: #C2DEE2; }
+.hub-card.teal .hc-title { color: #00758A; } .hub-card.teal .hc-desc { color: #4E7A82; }
+.hub-card.amber { background: #FBF3EB; border-color: #E8D3BC; }
+.hub-card.amber .hc-title { color: #B34700; } .hub-card.amber .hc-desc { color: #8A6235; }
+.hub-news { background: #FFFFFF; }
+.hn-item:hover { background: rgba(179,0,27,0.04); }
+.report-entry { background: #FFFFFF; border-color: #E2E2DC; }
+.report-entry:hover { border-color: #B3001B; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+.report-entry.amber { background: #FDF6EF; border-color: #EAD9C4; }
+.report-entry.amber:hover { border-color: #B34700; box-shadow: 0 2px 10px rgba(179,71,0,0.10); }
+.report-entry.amber .report-entry-title, .report-entry.amber .report-entry-title svg { color: #B34700; }
+.report-entry.amber .report-entry-desc { color: #8A6D4F; }
+.report-entry.amber .report-entry-right svg { color: #B34700; }
+.hub-split-card { background: #FFFFFF; border-color: #E2E2DC; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+.hub-split-card .hsc-icon { box-shadow: none !important; }
+.hub-split-card.cyan { background: #EFF7F8; border-color: #C2DEE2; }
+.hub-split-card.cyan .hsc-title { color: #00758A; } .hub-split-card.cyan .hsc-desc { color: #4E7A82; }
+.hub-split-card.purple { background: #F4F3FA; border-color: #D3D0E8; }
+.hub-split-card.purple .hsc-title { color: #534AB7; } .hub-split-card.purple .hsc-desc { color: #6E6A96; }
+.hub-split-card.green { background: #F2F7F4; border-color: #C9DED3; }
+.hub-split-card.green .hsc-title { color: #2E7D32; } .hub-split-card.green .hsc-desc { color: #55825A; }
+.hub-split-card.orange { background: #FBF3EB; border-color: #E8D3BC; }
+.hub-split-card.orange .hsc-title { color: #B34700; } .hub-split-card.orange .hsc-desc { color: #8A6235; }
+.opencgt-cta { border-color: rgba(179,0,27,0.25); background: #FFFFFF; }
+.opencgt-cta:hover { box-shadow: 0 4px 20px rgba(179,0,27,0.12); }
+.opencgt-cta-bg { background: linear-gradient(135deg, rgba(179,0,27,0.05) 0%, rgba(11,37,69,0.04) 100%); }
+.opencgt-cta-bg::before { background-image: linear-gradient(rgba(179,0,27,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(179,0,27,0.04) 1px, transparent 1px); }
+.opencgt-cta-bg::after { background: none; }
+.float-btn { background: rgba(255,255,255,0.94); color: #B3001B; border: 1px solid rgba(179,0,27,0.25); box-shadow: 0 2px 8px rgba(0,0,0,0.08); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.float-btn:hover { background: rgba(179,0,27,0.08); border-color: rgba(179,0,27,0.5); box-shadow: 0 2px 12px rgba(179,0,27,0.15); }
+.float-contact { background: rgba(255,255,255,0.94); backdrop-filter: none; -webkit-backdrop-filter: none; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="china-geo.js"></script>
 </head>
 <body>
 
-<!-- Welcome Entry -->
-<div class="welcome-overlay" id="welcomeOverlay" onclick="closeWelcome(event)">
-  <canvas class="we-helix" id="weHelix"></canvas>
-  <div class="we-veil"></div>
-  <div class="we-wrap">
-    <div class="we-topbar">
-      <div class="we-brand">
-        <svg viewBox="0 0 32 32" width="30" height="30"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="1.6"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg>
-        <div class="we-brand-name">细胞与基因治疗知识库<small>CGT KNOWLEDGE HUB</small></div>
-      </div>
-      <div class="we-top-right">
-        <span class="we-live">DAILY UPDATED</span>
-        <button class="we-top-enter" onclick="closeWelcome()">进入网站</button>
-      </div>
-    </div>
-    <div class="we-hero">
-      <div class="we-kicker">CELL<span class="dot">·</span>GENE THERAPY<span class="dot">·</span>EVIDENCE BASED</div>
-      <div class="we-title">细胞与基因治疗知识库</div>
-      <div class="we-sub">文献 <span class="sep">·</span> 监管 <span class="sep">·</span> 产品 <span class="sep">·</span> 临床 <span class="sep">·</span> 产业全链条，每日更新维护</div>
-    </div>
-    <div class="we-stats">
-      <div class="we-stat"><div class="we-stat-num" id="wc-stat-lit">--</div><div class="we-stat-label">临床文献</div></div>
-      <div class="we-stat"><div class="we-stat-num" id="wc-stat-reg">--</div><div class="we-stat-label">监管政策</div></div>
-      <div class="we-stat"><div class="we-stat-num" id="wc-stat-prod">--</div><div class="we-stat-label">获批产品</div></div>
-      <div class="we-stat"><div class="we-stat-num" id="wc-stat-sys">--</div><div class="we-stat-label">疾病系统</div></div>
-    </div>
-    <div class="we-aud">
-      <div class="we-aud-card" onclick="closeWelcome();switchSection('literature')">
-        <div class="we-aud-tag">RESEARCH</div>
-        <div class="we-aud-name">研究人员</div>
-        <div class="we-aud-desc">检索 MSC / CAR-T / 基因治疗临床试验文献，按疾病系统与适应症精准筛选</div>
-        <div class="we-aud-go">文献库 · 编辑精选</div>
-      </div>
-      <div class="we-aud-card" onclick="closeWelcome();switchSection('literature')">
-        <div class="we-aud-tag">CLINICAL</div>
-        <div class="we-aud-name">临床医生</div>
-        <div class="we-aud-desc">查阅临床试验数据、证据等级、剂量方案与安全性信息</div>
-        <div class="we-aud-go">文献库 · 获批产品</div>
-      </div>
-      <div class="we-aud-card" onclick="closeWelcome();switchSection('products')">
-        <div class="we-aud-tag">INDUSTRY</div>
-        <div class="we-aud-name">产业从业者</div>
-        <div class="we-aud-desc">追踪全球 CGT 产品获批进展、监管动态与行业资讯</div>
-        <div class="we-aud-go">获批产品 · 监管政策</div>
-      </div>
-      <div class="we-aud-card" onclick="closeWelcome();switchSection('news')">
-        <div class="we-aud-tag">INSIGHT</div>
-        <div class="we-aud-name">投资者</div>
-        <div class="we-aud-desc">把握行业趋势、企业动态、投融资与量化分析</div>
-        <div class="we-aud-go">行业报告 · 融资趋势</div>
-      </div>
-    </div>
-    <div class="we-cta">
-      <button class="we-enter-main" onclick="closeWelcome()">进入网站</button>
-      <div class="we-skip-line">
-        <label><input type="checkbox" id="skipWelcome"> 不再显示此页面</label>
-        <span style="margin-left:16px;opacity:0.55;">点击空白处也可进入</span>
-      </div>
-      <div class="we-disclaimer">
-        本平台数据来源于公开发表的学术文献、监管机构公告及行业媒体报道，仅供科研与行业交流参考，不构成任何医疗建议或诊疗方案。<br>
-        如有健康问题请咨询专业医疗机构。
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-(function () {
-  var cv = document.getElementById('weHelix');
-  if (!cv) return;
-  var ctx = cv.getContext('2d');
-  var W, H, t = 0;
-  var N = 46;
-  function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    var cx = W / 2, cy = H * 0.30;
-    var spanX = Math.min(W * 0.42, 620);
-    var amp = Math.min(H * 0.075, 60);
-    t += 0.008;
-    var i, p, x, ph, y1, y2;
-    for (i = 0; i < N; i++) {
-      p = i / (N - 1);
-      x = cx - spanX + p * spanX * 2;
-      ph = p * Math.PI * 3.2 + t;
-      if (i % 4 === 0) {
-        y1 = cy + Math.sin(ph) * amp;
-        y2 = cy + Math.sin(ph + Math.PI) * amp;
-        ctx.strokeStyle = 'rgba(120,180,220,0.10)';
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2); ctx.stroke();
-      }
-    }
-    var off, k;
-    for (k = 0; k < 2; k++) {
-      off = k === 0 ? 0 : Math.PI;
-      ctx.beginPath();
-      for (i = 0; i < N; i++) {
-        p = i / (N - 1);
-        x = cx - spanX + p * spanX * 2;
-        y1 = cy + Math.sin(p * Math.PI * 3.2 + t + off) * amp;
-        if (i === 0) ctx.moveTo(x, y1); else ctx.lineTo(x, y1);
-      }
-      ctx.strokeStyle = off === 0 ? 'rgba(79,195,247,0.28)' : 'rgba(100,255,218,0.24)';
-      ctx.lineWidth = 1.2; ctx.stroke();
-    }
-    for (i = 0; i < N; i += 2) {
-      p = i / (N - 1);
-      x = cx - spanX + p * spanX * 2;
-      ph = p * Math.PI * 3.2 + t;
-      for (k = 0; k < 2; k++) {
-        off = k === 0 ? 0 : Math.PI;
-        y1 = cy + Math.sin(ph + off) * amp;
-        var depth = (Math.cos(ph + off) + 1) / 2;
-        var r = 1.6 + depth * 2.6;
-        ctx.beginPath(); ctx.arc(x, y1, r, 0, Math.PI * 2);
-        ctx.fillStyle = off === 0 ? 'rgba(79,195,247,' + (0.25 + depth * 0.6) + ')' : 'rgba(100,255,218,' + (0.25 + depth * 0.6) + ')';
-        ctx.fill();
-      }
-    }
-    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 90);
-    g.addColorStop(0, 'rgba(232,238,244,0.10)');
-    g.addColorStop(1, 'transparent');
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(cx, cy, 90, 0, Math.PI * 2); ctx.fill();
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
-
 <div class="header">
   <div class="header-inner">
-    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#64FFDA" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#00E5FF" opacity="0.75"/><circle cx="22" cy="20" r="2.5" fill="#00B8D4" opacity="0.6"/><circle cx="21" cy="9" r="1.5" fill="#64FFDA"/><circle cx="8" cy="20" r="1.5" fill="#64FFDA"/></svg><div class="header-title-block"><span>细胞与基因治疗知识库</span><span class="subtitle">CGT Knowledge Hub</span></div></h1>
+    <h1 data-action="home" onclick="navTo(this)"><svg viewBox="0 0 32 32" width="28" height="28" style="vertical-align:middle;margin-right:6px;flex-shrink:0"><circle cx="16" cy="16" r="14" fill="none" stroke="#B3001B" stroke-width="2"/><circle cx="13" cy="13" r="5" fill="#B3001B" opacity="0.8"/><circle cx="22" cy="20" r="2.5" fill="#0B2545" opacity="0.65"/><circle cx="21" cy="9" r="1.5" fill="#C8102E"/><circle cx="8" cy="20" r="1.5" fill="#C8102E"/></svg><div class="header-title-block"><span>细胞与基因治疗知识库</span><span class="subtitle">CGT Knowledge Hub</span></div></h1>
     <nav class="header-nav">
       <button class="bn-item" id="nav-intro" onclick="switchSection('intro')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="bn-label">科普</span></button>
       <button class="bn-item" id="nav-news" onclick="switchSection('news')"><span class="bn-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="bn-label">资讯</span></button>
@@ -5639,35 +5465,6 @@ function initWhCarousel() {
   whRestartAutoPlay();
 }
 
-// === Welcome Modal ===
-function closeWelcome(e) {
-  if (e && e.target !== document.getElementById('welcomeOverlay')) return;
-  var skip = document.getElementById('skipWelcome');
-  if (skip && skip.checked) {
-    try { localStorage.setItem('msc_kb_skip_welcome', '1'); } catch(err) {}
-  }
-  var overlay = document.getElementById('welcomeOverlay');
-  overlay.classList.remove('show');
-  setTimeout(function() { overlay.style.display = 'none'; }, 350);
-}
-function initWelcome() {
-  var overlay = document.getElementById('welcomeOverlay');
-  if (!overlay) return;
-  var skip = false;
-  try { skip = localStorage.getItem('msc_kb_skip_welcome') === '1'; } catch(err) {}
-  if (!skip) {
-    overlay.style.display = 'flex';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() { overlay.classList.add('show'); });
-    });
-  } else {
-    overlay.style.display = 'none';
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closeWelcome();
-  });
-}
-initWelcome();
 
 const ALL_DATA = [
  {
@@ -66811,8 +66608,71 @@ const CART_DATA = [
   "audit_status": "NEW",
   "audit_note": "2026-10-13 L1日更入库",
   "abstract": "This is a case report of a 6-year-old girl with relapsed B cell acute lymphoblastic leukemia in which adoptive cell therapy was applied successfully to treat refractory human parvovirus (HPV) B19 infection. Allogenic chimeric antigen receptor (CAR) T-cell therapy (bispecific CD19/CD22) was bridged to hematopoietic stem cell transplantation (HSCT) using a haploidentical paternal donor. However, HPV B19 DNAemia progressed and transfusion-related graft versus host disease occurred. After finding a third-party related donor with a better HLA match, haploidentical HPV B19-seropositive CD45RA"
+ },
+ {
+  "pmid": "36723414",
+  "nct": "",
+  "title": "Haploidentical gamma delta T Cells Induce Complete Remission in Chemorefractory B-cell Non-Hodgkin Lymphoma.",
+  "title_cn": "单倍体相合γδ T细胞诱导化疗难治性B细胞非霍奇金淋巴瘤完全缓解。",
+  "system": "血液肿瘤-B系",
+  "indication": "Richter转化的难治性B细胞非霍奇金淋巴瘤",
+  "doi": "10.1097/CJI.0000000000000450",
+  "journal": "Journal of immunotherapy (Hagerstown, Md. : 1997)",
+  "authors": "Bold A, Gaertner J, Bott A, Mordstein V, Schaefer-Eckart K et al.",
+  "institution": "",
+  "type": "案例报道",
+  "year": "2023",
+  "evidence_level": "C",
+  "evidence_note": "单例临床病例报告",
+  "target": "γδ TCR（非基因修饰）",
+  "product": "Haploidentical γδ T cells (allogeneic)",
+  "audit_status": "NEW",
+  "audit_note": "10-14 L1 入库·异体γδ T细胞克服CAR-T制备周期与效应细胞数量受限问题",
+  "abstract": "The transformation of chronic lymphocytic leukemia to an aggressive lymphoma, called Richter transformation, is often accompanied by resistance to chemotherapy and high mortality. Thus, novel therapeutic strategies are required for the successful treatment of these patients. One possibility is cellular immunotherapy with chimeric antigen receptor T cells. However, the time delay until cells are available and the limited number of effector cells due to the impaired immune system of these patients potentially compromises the efficacy of this approach. Another promising attempt might be the therapy with γδ T cells. Once activated, they exhibit various antitumor effects against several types of malignancies. Furthermore, they can be safely used in an allogeneic setting and can be multiplied in vitro. We report a patient with chemorefractory B-cell non-Hodgkin lymphoma after Richter transformation who achieved a complete remission following haploidentical γδ T-cell transfer."
+ },
+ {
+  "pmid": "37857711",
+  "nct": "",
+  "title": "The PD-1- and LAG-3-targeting bispecific molecule tebotelimab in solid tumors and hematologic cancers: a phase 1 trial.",
+  "title_cn": "靶向PD-1与LAG-3的双特异性分子tebotelimab治疗实体瘤与血液肿瘤的I期临床试验。",
+  "system": "实体瘤",
+  "indication": "晚期实体瘤与血液系统恶性肿瘤",
+  "doi": "10.1038/s41591-023-02593-0",
+  "journal": "Nature medicine",
+  "authors": "Luke JJ, Patel MR, Blumenschein GR, Hamilton E, Chmielowski B et al.",
+  "institution": "",
+  "type": "临床试验",
+  "year": "2023",
+  "evidence_level": "B",
+  "evidence_note": "I期剂量递增+队列扩展（n=269单药 / n=84联合）",
+  "target": "PD-1 × LAG-3",
+  "product": "Tebotelimab (MGD013)",
+  "audit_status": "NEW",
+  "audit_note": "10-14 L1 入库·双特异性免疫衔接分子接续治疗类，按归属口径入 CART 库",
+  "abstract": "Tebotelimab, a bispecific PD-1×LAG-3 DART molecule that blocks both PD-1 and LAG-3, was investigated for clinical safety and activity in a phase 1 dose-escalation and cohort-expansion clinical trial in patients with solid tumors or hematologic malignancies and disease progression on previous treatment. Primary endpoints were safety and maximum tolerated dose of tebotelimab when administered as a single agent (n = 269) or in combination with the anti-HER2 antibody margetuximab (n = 84). Secondary endpoints included anti-tumor activity. In patients with advanced cancer treated with tebotelimab monotherapy, 68% (184/269) experienced treatment-related adverse events (TRAEs; 22% were grade ≥3). No maximum tolerated dose was defined; the recommended phase 2 dose (RP2D) was 600 mg once every 2 weeks. Objective responses were observed in several tumor types."
+ },
+ {
+  "pmid": "32692850",
+  "nct": "NCT03022045",
+  "title": "Phase 2 study of pembrolizumab for measurable residual disease in adults with acute lymphoblastic leukemia.",
+  "title_cn": "帕博利珠单抗治疗成人急性淋巴细胞白血病可测量残留病灶的II期研究。",
+  "system": "血液肿瘤-B系",
+  "indication": "急性淋巴细胞白血病（B/T系）可测量残留病灶（MRD）",
+  "doi": "10.1182/bloodadvances.2020002403",
+  "journal": "Blood advances",
+  "authors": "Cassaday RD, Garcia KA, Fromm JR, Percival MM, Turtle CJ et al.",
+  "institution": "",
+  "type": "临床试验",
+  "year": "2020",
+  "evidence_level": "B",
+  "evidence_note": "II期单臂（MRD 阳性 ALL）",
+  "target": "PD-1",
+  "product": "Pembrolizumab (Keytruda)",
+  "audit_status": "NEW",
+  "audit_note": "10-14 L1 入库·CD19 靶向免疫治疗不适用（T系ALL）场景的替代策略",
+  "abstract": "The presence of measurable residual disease (MRD) in acute lymphoblastic leukemia (ALL) confers a poor prognosis. CD19-targeted immunotherapy is effective against MRD but is logistically challenging, potentially toxic, and not applicable to T-cell ALL. We thus hypothesized that inhibition of PD-1 with pembrolizumab could also be effective for MRD, but without lineage restriction. The primary objective of this phase 2 study was to evaluate the efficacy of pembrolizumab in patients with ALL and MRD. Key eligibility criteria included adults with B- or T-cell ALL and MRD detectable by multiparameter flow cytometry or quantitative polymerase chain reaction from bone marrow aspirate (BMA) despite chemotherapy (plus ABL kinase inhibitor if Philadelphia chromosome positive). Pembrolizumab 200 mg IV every 3 weeks was administered until progression, unacceptable toxicity, or for up to 2 years. The study enrolled 12 patients; the primary endpoint was not met, although a subset of patients achieved MRD clearance."
  }
-];
+ ];
 
 const GT_DATA = [
  {
@@ -95586,20 +95446,6 @@ let navHistory = [];
 let currentSection = 'hub';
 var totalSystemsGlobal = new Set(ALL_DATA.map(function(d){return d.system;})).size;
 
-// === 动态更新首页欢迎卡统计数字（2026-08-06 修复硬编码问题）===
-(function updateWelcomeStats() {
-  var elLit = document.getElementById('wc-stat-lit');
-  var elReg = document.getElementById('wc-stat-reg');
-  var elProd = document.getElementById('wc-stat-prod');
-  var elSys = document.getElementById('wc-stat-sys');
-  if (elLit) elLit.textContent = (ALL_DATA.length + CART_DATA.length + GT_DATA.length) + '+';
-  if (elSys) elSys.textContent = totalSystemsGlobal;
-  // REGULATIONS 和 PRODUCTS 在后面定义，延迟更新
-  setTimeout(function() {
-    if (elReg && typeof REGULATIONS !== 'undefined') elReg.textContent = REGULATIONS.length;
-    if (elProd && typeof PRODUCTS !== 'undefined') elProd.textContent = PRODUCTS.length;
-  }, 0);
-})();
 
 // === Browser History API integration ===
 function getCurrentState() {
@@ -97004,7 +96850,15 @@ const REGULATIONS = [
 {category:'技术指南', title:'CDE 公开征求《重组腺相关病毒产品质量研究和质量标准问答文件（征求意见稿）》意见——衔接 rAAV 系列指导原则，明确关键质量研究和质量标准技术要求', issuer:'国家药品监督管理局药品审评中心', date:'2026-10-10', source:'CDE 官网（官方）', url:'https://www.cde.org.cn/main/news/viewInfoCommon/5c80632934edd0afba1f56e5b993e1f8', desc:'2026-10-10 CDE 发布征求意见通知：为规范和指导重组腺相关病毒（rAAV）产品药学研究、衔接现有系列指导原则并进一步明确关键质量研究和质量标准技术要求，中心组织起草该问答文件，征求意见时限为自发布之日起 1 个月，同步提供文稿、起草说明与意见反馈表。rAAV 是当前体内基因治疗最主流的递送载体，质量研究口径统一将直接影响申报资料准备。'},
 {category:'技术指南', title:'CDE 公开征求《移植物抗宿主病治疗药物临床试验技术指导原则（征求意见稿）》意见——为 GVHD 创新药物临床试验研发提供技术参考', issuer:'国家药品监督管理局药品审评中心', date:'2026-10-08', source:'CDE 官网（官方）', url:'https://www.cde.org.cn/main/news/viewInfoCommon/cafef32a8ca8977f2bb8a1e2aa91a817', desc:'2026-10-08 CDE 发布征求意见通知：为满足移植物抗宿主病（GVHD）创新药物研发需要，药审中心起草该指导原则，面向社会公开征集意见，时限为自发布之日起 1 个月，配套提供指导原则文稿、意见反馈表及起草说明。GVHD 是异基因造血干细胞移植的主要并发症，也是间充质干细胞（MSC）等细胞治疗产品最重要的适应症方向之一。'},
  { title: '“十五五”国家重点研发计划“创新药品与医疗器械监管科学”重点专项 2026 年度项目申报指南（征求意见稿）——新型疫苗与细胞基因治疗产品质量控制与效力评价入列', category: '规范性文件', issuer: '国家药品监督管理局（主责）· 国家科技管理信息系统公共服务平台', date: '2026-09-30', desc: '指南方向涉及先进过程分析/连续制造、数据完整性与电子数据可靠性、新型疫苗与细胞基因治疗产品的质量控制与效力评价、真实世界证据与 AI 辅助审评等。征求意见期 2026-09-30 至 10-08，反馈邮箱 kgskjc@nmpa.gov.cn。该专项资助方向通常 3-5 年内转化为检查要点、技术指导原则或行业标准。', url: 'https://ist.cpu.edu.cn/info/1073/26271.htm' },
- { title: '《生物医学新技术临床研究备案完成项目基本信息（第11批）》——9 项新备案，十一批累计 126 项', category: '规范性文件', issuer: '中国生物技术发展中心（国家卫健委直属）', date: '2026-09-30', desc: '2026-09-22 至 09-30 共 9 项完成备案：1 项平移存量、8 项增量。涵盖间充质干细胞（骨缺损、孤独症谱系障碍）、脐带 MSC（肝衰竭）、代谢增强型自体 CD19 CAR-T（自身免疫性溶血性贫血 I 期）、HSC 基因改造、mRNA 个性化疫苗等。可平移存量总数约 142 项，尚有约 44 项未完成平移。', url: 'https://m.thepaper.cn/newsDetail_forward_34208962' }
+ { title: '《生物医学新技术临床研究备案完成项目基本信息（第11批）》——9 项新备案，十一批累计 126 项', category: '规范性文件', issuer: '中国生物技术发展中心（国家卫健委直属）', date: '2026-09-30', desc: '2026-09-22 至 09-30 共 9 项完成备案：1 项平移存量、8 项增量。涵盖间充质干细胞（骨缺损、孤独症谱系障碍）、脐带 MSC（肝衰竭）、代谢增强型自体 CD19 CAR-T（自身免疫性溶血性贫血 I 期）、HSC 基因改造、mRNA 个性化疫苗等。可平移存量总数约 142 项，尚有约 44 项未完成平移。', url: 'https://m.thepaper.cn/newsDetail_forward_34208962' },
+ {
+ category:'规范性文件',
+ title:'《生物医学新技术临床研究备案完成项目清单（第12批）》——10 天新增 13 项，CAR-T/NK/新抗原疫苗等全谱系推进',
+ date:'2026-10-10',
+ issuer:'中国生物技术发展中心',
+ source:'中国生物技术发展中心（官方，新浪财经转载全文）',
+ url:'https://finance.sina.com.cn/roll/2026-10-12/doc-iniuxrzr8550783.shtml',
+ desc:'2026-10-10 中国生物技术发展中心公布第12批（覆盖 2026-10-01 至 10-10）生物医学新技术临床研究备案完成项目清单，共 13 项完成备案，备案号自 MR-N-11-2026-000127 起连续排列。本轮亮点：① 药明巨诺 JWCAR239 治疗 R/R B 细胞非霍奇金淋巴瘤；② 盈凯赛威 YK1101（MAGE-A4 靶向）治疗 HLA-A*11:01 阳性晚期实体瘤 I 期；③ 科济生物 CT0596 CAR-T 治疗浆细胞白血病；④ 赛比曼 C-CAR031（GPC3 装甲型 CAR-T）治疗 GPC3+ 晚期/转移性鳞状细胞肺癌 I 期；⑤ 恩凯细胞 NK010 治疗难治/复发再生障碍性贫血；⑥ 合源生物 HY001N 治疗复发或难治性神经系统自身免疫性疾病；⑦ 北科生物人脐带 MSC 联合康复治疗儿童脑性瘫痪；⑧ 瑞金医院抗原呈递细胞 APC（RT201）治疗急性髓系白血病；⑨ 浙大一院 IL-5 CAR-T 治疗难治/复发高嗜酸性粒细胞增多综合征；⑩ Trop2 接头蛋白偶联 NK 细胞联合化疗治疗晚期难治性 NSCLC；另有新抗原疫苗（华西医院，食管鳞癌维持治疗 II/III 期）、闭环植入式脊髓刺激系统、脑脊髓接口系统等非细胞类新技术。'}
 ];
 
 // === Section data: Approved Products ===
@@ -97341,7 +97195,14 @@ var CLINICAL_PROGRESS = [
  { date:'2026-10-09', title:'邦耀生物 BRL-303（TyU19）异体通用型 CAR-T 获系统性硬化症 IND，并成中国首个纳入 CDE「关爱计划-延伸」的 CAR-T 产品', tag:'临床进展', source:'医药魔方 / VCBeat', url:'https://bydrug.pharmcube.com/news/detail/f4982635556411b2b62b084c4dbadb29', desc:'2026-09-10 获 CDE 临床试验默示许可（复发/难治系统性硬化症 SSc），2026-10-08 正式纳入 CDE「关爱计划-延伸」试点项目。基于 TyUCell 异体平台，以 CD19 为靶点清除异常活化 B 细胞；此前于 2024 年发表 Cell 论文（全球首个异体 CD19 CAR-T 治疗系统性自身免疫病），已获 SLE IND 并开展 I 期剂量递增。' },
  { date:'2026-09-08', title:'Intellia 体内 CRISPR 疗法 Lonvo-z（lonvoguran ziclumeran）BLA 获 FDA 受理并优先审评——若获批将为全球首款体内 CRISPR 基因编辑疗法', tag:'临床进展', source:'CGTLive / Intellia IR', url:'https://cgtlive.com/view/lonvo-z-advances-toward-approval-first-in-vivo-crispr-therapy-hereditary-angioedema', desc:'靶向灭活 KLKB1 基因、经 mRNA-LNP 单次给药永久降低血浆激肽释放酶。III 期 HAELO 试验（80 例 1/2 型 HAE）中，lonvo-z 组月发作率较安慰剂降低 87%（0.26 vs 2.10，P<0.0001），6 个月评估期内 62% 患者完全无发作且无需长期预防治疗（安慰剂组 11%）。FDA 设定的 PDUFA 目标日期为 2027-03-10。' },
 {date:'2026-10-11', title:'我武生物「人脐带间充质干细胞二型注射液」获临床试验批准——适应症脓毒症和（或）脓毒性休克，国内外尚无同适应症 MSC 药物获批', tag:'临床进展', source:'东方财富网 / 南方财经网', url:'https://finance.eastmoney.com/a/202610113892065260.html', desc:'2026-10-11 我武生物公告，其间接控股子公司浙江我武干细胞科技有限公司收到国家药监局下发的《药物临床试验批准通知书》，由该公司提交的「人脐带间充质干细胞二型注射液」药物临床试验申请获得批准。该药物注册分类为治疗用生物制品一类，适应症为脓毒症和（或）脓毒性休克。公告指出，目前国内外尚无同适应症的间充质干细胞药物获批上市，产品后续仍需完成 I、II、III 期临床试验及上市许可申请方可上市。'},
- { title: '茂行生物 MT027（B7-H3 通用型 CAR-T）获 FDA 许可开展肺癌/乳腺癌脑转移瘤 II 期临床——全球首款该适应症', date: '2026-10-12', desc: '茂行生物（T-MAXIMUM）自主研发的靶向 B7-H3 通用型（异体）CAR-T 产品 MT027 获 FDA 许可开展第二项 II 期临床研究，用于 B7-H3 阳性晚期实体瘤脑转移患者。此前已获 FDA 批准开展复发性胶质母细胞瘤 II 期，并获孤儿药资格（ODD）与快速通道资格（FTD）。MT027 采用全非病毒基因编辑工艺。', url: 'https://en.yna.co.kr/view/RPR20261012008000353' }
+ { title: '茂行生物 MT027（B7-H3 通用型 CAR-T）获 FDA 许可开展肺癌/乳腺癌脑转移瘤 II 期临床——全球首款该适应症', date: '2026-10-12', desc: '茂行生物（T-MAXIMUM）自主研发的靶向 B7-H3 通用型（异体）CAR-T 产品 MT027 获 FDA 许可开展第二项 II 期临床研究，用于 B7-H3 阳性晚期实体瘤脑转移患者。此前已获 FDA 批准开展复发性胶质母细胞瘤 II 期，并获孤儿药资格（ODD）与快速通道资格（FTD）。MT027 采用全非病毒基因编辑工艺。', url: 'https://en.yna.co.kr/view/RPR20261012008000353' },
+ {
+ date:'2026-10-10',
+ title:'第12批生物医学新技术临床研究备案公布：CT0596 CAR-T 治浆细胞白血病、C-CAR031 GPC3 装甲型 CAR-T 治鳞状细胞肺癌等 13 项获批开展',
+ tag:'临床进展',
+ source:'中国生物技术发展中心 / 新浪财经',
+ url:'https://finance.sina.com.cn/roll/2026-10-12/doc-iniuxrzr8550783.shtml',
+ desc:'2026-10-10 中国生物技术发展中心公布第12批备案清单（2026-10-01 至 10-10，共 13 项）。细胞治疗方向代表性项目：科济生物 CT0596 CAR-T 细胞注射液治疗浆细胞白血病（中国医学科学院血液病医院）；赛比曼生物靶向 GPC3 装甲型自体 CAR-T（C-CAR031）治疗 GPC3+ 晚期/转移性鳞状细胞肺癌 I 期（浙大一院）；药明巨诺 JWCAR239 治疗 R/R B-NHL（北京肿瘤医院）；恩凯细胞 NK010 治疗难治/复发再生障碍性贫血；瑞金医院 RT201 抗原呈递细胞治疗 AML。本轮备案延续 818 号令「技术轨道」下 IIT 研究的密集落地态势，累计备案项目数继续攀升。'}
 ];
 // === 产业动态 — 产业合作、政策监管、行业活动 ===
 var INDUSTRY_NEWS = [
@@ -98289,7 +98150,7 @@ function renderHub() {
   var mon = new Date(now); mon.setDate(now.getDate() - dow + 1);
   var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
   var dateStr = (mon.getMonth()+1) + '.' + mon.getDate() + ' - ' + (sun.getMonth()+1) + '.' + sun.getDate();
-  var highlights = [{type:'opencgt', tag:'共创', text:'<div style="font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;">Open CGT共创联盟计划</div><div style="font-size:14px;opacity:0.92;font-weight:400;">AI驱动的细胞与基因治疗共创平台</div>', action:'switchSection(\'opencgt\')', bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},{type:'clinical', tag:'全球首款', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">茂行生物 MT027（B7-H3 通用型 CAR-T）获 FDA 许可开展肺癌/乳腺癌脑转移瘤 II 期——全球首款该适应症异体 CAR-T</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">2026-10-12 茂行生物（T-MAXIMUM）宣布 MT027 获 FDA 许可启动 II 期临床，用于 B7-H3 阳性晚期实体瘤脑转移患者，为其第二项 FDA II 期（此前已获复发性胶质母细胞瘤 II 期许可，并获孤儿药 ODD 与快速通道 FTD）· MT027 采用全非病毒基因编辑工艺，为通用型（异体）设计 · 至此形成覆盖原发性与转移性颅内实体瘤的双适应症布局</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1200&q=80)'},{type:'clinical', tag:'FDA 完全批准', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">Afami-cel（Tecelra）转 FDA 完全批准并扩龄至 12 岁——美国首个获批用于青少年的实体瘤工程化 T 细胞疗法</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">FDA 将滑膜肉瘤细胞疗法 afamitresgene autoleucel 由 2024-08 加速批准转为完全批准，并将适应症扩展至 12 岁及以上青少年（需 HLA-A*02:01/02/03/06 阳性且 MAGE-A4 表达、既往接受化疗）· 基于 SPEARHEAD-1 队列 1-3 共 137 例：ORR 43.8%、CR 3.6%、中位 DOR 5.3 个月 · 为美国首个获批用于青少年实体瘤的工程化 T 细胞疗法</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1200&q=80)'},{type:'clinical', tag:'中国里程碑', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">邦耀生物 BRL-303（TyU19）异体通用型 CAR-T 获系统性硬化症 IND，成中国首个纳入 CDE「关爱计划-延伸」的 CAR-T 产品</div><div style="font-size:13px;opacity:0.92;font-weight:400;">2026-09-10 获 CDE 临床试验默示许可（复发/难治系统性硬化症 SSc），2026-10-08 正式纳入 CDE「关爱计划-延伸」试点项目 · 基于 TyUCell 异体平台，以 CD19 为靶点清除异常活化 B 细胞 · 2024 年成果发表于 Cell（全球首个异体 CD19 CAR-T 治疗系统性自身免疫病），已获 SLE IND 并开展 I 期剂量递增</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1200&q=80)'},{type:'clinical', tag:'AI设计CAR-T', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">AI 设计的 IL-18 装甲型 CAR-T 首例给药：GB-5267 攻卵巢癌，无需淋巴清除</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">2026-10-01 Roswell Park 与 Generate Biomedicines 宣布 GB-5267 首例患者给药，启动首次人体 I 期（NCT07489287） · 靶向 MUC16（逾 80% 卵巢肿瘤过表达）的自体 IL-18 装甲型 CAR-T，CAR 架构由 AI 按效力/增殖/持久性三要素计算设计 · 静脉 + 腹腔双路径给药，且不进行淋巴清除化疗，规避清除性化疗副作用 · 由 Roswell Park 妇科肿瘤科主任 Emese Zsiros 主持</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1200&q=80)'},{type:'policy', tag:'监管细化', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">CDE 就 rAAV 产品质量研究与质量标准公开征求意见，同步起草 GVHD 治疗药物临床试验指导原则</div><div style="font-size:13px;opacity:0.92;font-weight:400;">2026-10-10 CDE 发布《重组腺相关病毒产品质量研究和质量标准问答文件（征求意见稿）》，衔接 rAAV 系列指导原则、进一步明确关键质量研究与质量标准技术要求，意见反馈期 1 个月 · 2026-10-08 另发布《移植物抗宿主病治疗药物临床试验技术指导原则（征求意见稿）》，为 GVHD 创新药物临床试验研发提供技术参考 · GVHD 是异基因造血干细胞移植的主要并发症，也是 MSC 等细胞治疗产品的重要适应症方向</div>', action:'switchSection(\'policy\')', bg:'url(https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80)'},{type:'clinical', tag:'中国里程碑', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">全球首个齿龈间充质干细胞治疗 1 型糖尿病随机双盲安慰剂对照 I 期完成</div><div style="font-size:13px;opacity:0.92;font-weight:400;">中山大学附属第三医院陈燕铭团队与上海交大郑颂国团队牵头，成果 2026-10-01 被《Signal Transduction and Targeted Therapy》（IF 81.2）接收 · 18 例 T1DM 患者 1:1 随机，每 3 周一次共 4 次 GMS Cs 静脉输注 + 48 周随访 · GMSC 组 C 肽较基线明显升高、55.6%（5/9）残余 β 细胞功能改善、日胰岛素需求下降，1 例在首次治疗后停用外源性胰岛素 · 揭示 GMSC 可能通过诱导 CD8⁺ 效应 T 细胞耗竭减轻胰岛自身免疫损伤</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=80)'}];
+  var highlights = [{type:'opencgt', tag:'共创', text:'<div style="font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;">Open CGT共创联盟计划</div><div style="font-size:14px;opacity:0.92;font-weight:400;">AI驱动的细胞与基因治疗共创平台</div>', action:'switchSection(\'opencgt\')', bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},{type:'clinical', tag:'全球首款', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">茂行生物 MT027（B7-H3 通用型 CAR-T）获 FDA 许可开展肺癌/乳腺癌脑转移瘤 II 期——全球首款该适应症异体 CAR-T</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">2026-10-12 茂行生物（T-MAXIMUM）宣布 MT027 获 FDA 许可启动 II 期临床，用于 B7-H3 阳性晚期实体瘤脑转移患者，为其第二项 FDA II 期（此前已获复发性胶质母细胞瘤 II 期许可，并获孤儿药 ODD 与快速通道 FTD）· MT027 采用全非病毒基因编辑工艺，为通用型（异体）设计 · 至此形成覆盖原发性与转移性颅内实体瘤的双适应症布局</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1200&q=80)'},{type:'clinical', tag:'FDA 完全批准', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">Afami-cel（Tecelra）转 FDA 完全批准并扩龄至 12 岁——美国首个获批用于青少年的实体瘤工程化 T 细胞疗法</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">FDA 将滑膜肉瘤细胞疗法 afamitresgene autoleucel 由 2024-08 加速批准转为完全批准，并将适应症扩展至 12 岁及以上青少年（需 HLA-A*02:01/02/03/06 阳性且 MAGE-A4 表达、既往接受化疗）· 基于 SPEARHEAD-1 队列 1-3 共 137 例：ORR 43.8%、CR 3.6%、中位 DOR 5.3 个月 · 为美国首个获批用于青少年实体瘤的工程化 T 细胞疗法</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1200&q=80)'},{type:'clinical', tag:'监管落地', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">第12批生物医学新技术临床研究备案公布——10天新增13项，CAR-T/NK/新抗原疫苗全谱系推进</div><div style="font-size:13px;opacity:0.92;font-weight:400;">2026-10-10 中国生物技术发展中心公布第12批备案清单（2026-10-01 至 10-10，共13项）· 科济生物 CT0596 CAR-T 治疗浆细胞白血病、赛比曼 C-CAR031 GPC3 装甲型 CAR-T 治疗晚期鳞状细胞肺癌 I 期、药明巨诺 JWCAR239 治疗 R/R B-NHL、恩凯细胞 NK010 治疗再生障碍性贫血、瑞金医院 RT201 抗原呈递细胞治疗 AML 等 · 818号令「技术轨道」下 IIT 研究密集落地</div>', action:'switchSection(\'policy\')', bg:'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80)'},{type:'clinical', tag:'AI设计CAR-T', text:'<div style=\"font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;\">AI 设计的 IL-18 装甲型 CAR-T 首例给药：GB-5267 攻卵巢癌，无需淋巴清除</div><div style=\"font-size:13px;opacity:0.92;font-weight:400;\">2026-10-01 Roswell Park 与 Generate Biomedicines 宣布 GB-5267 首例患者给药，启动首次人体 I 期（NCT07489287） · 靶向 MUC16（逾 80% 卵巢肿瘤过表达）的自体 IL-18 装甲型 CAR-T，CAR 架构由 AI 按效力/增殖/持久性三要素计算设计 · 静脉 + 腹腔双路径给药，且不进行淋巴清除化疗，规避清除性化疗副作用 · 由 Roswell Park 妇科肿瘤科主任 Emese Zsiros 主持</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=1200&q=80)'},{type:'policy', tag:'监管细化', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">CDE 就 rAAV 产品质量研究与质量标准公开征求意见，同步起草 GVHD 治疗药物临床试验指导原则</div><div style="font-size:13px;opacity:0.92;font-weight:400;">2026-10-10 CDE 发布《重组腺相关病毒产品质量研究和质量标准问答文件（征求意见稿）》，衔接 rAAV 系列指导原则、进一步明确关键质量研究与质量标准技术要求，意见反馈期 1 个月 · 2026-10-08 另发布《移植物抗宿主病治疗药物临床试验技术指导原则（征求意见稿）》，为 GVHD 创新药物临床试验研发提供技术参考 · GVHD 是异基因造血干细胞移植的主要并发症，也是 MSC 等细胞治疗产品的重要适应症方向</div>', action:'switchSection(\'policy\')', bg:'url(https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1200&q=80)'},{type:'clinical', tag:'中国里程碑', text:'<div style="font-size:20px;font-weight:700;line-height:1.35;margin-bottom:6px;">全球首个齿龈间充质干细胞治疗 1 型糖尿病随机双盲安慰剂对照 I 期完成</div><div style="font-size:13px;opacity:0.92;font-weight:400;">中山大学附属第三医院陈燕铭团队与上海交大郑颂国团队牵头，成果 2026-10-01 被《Signal Transduction and Targeted Therapy》（IF 81.2）接收 · 18 例 T1DM 患者 1:1 随机，每 3 周一次共 4 次 GMS Cs 静脉输注 + 48 周随访 · GMSC 组 C 肽较基线明显升高、55.6%（5/9）残余 β 细胞功能改善、日胰岛素需求下降，1 例在首次治疗后停用外源性胰岛素 · 揭示 GMSC 可能通过诱导 CD8⁺ 效应 T 细胞耗竭减轻胰岛自身免疫损伤</div>', action:'switchSection(\'news\')', bg:'url(https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=80)'}];
   html += '<div class="weekly-highlights">';
   html += '<div class="wh-carousel" id="whCarousel">';
   html += '<div class="wh-title-overlay">本周热点</div>';
@@ -98340,8 +98201,8 @@ function renderHub() {
   // Originals entry
   html += '<div class="report-entry" style="border-color:rgba(171,71,188,0.25);" onclick="switchSection(\'originals\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#CE93D8;">' + svgIcon('quote', 16) + '<span>专栏文章·大咖观点</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(206,147,216,0.7);">行业大咖评论·院士专家观点</div>';
+  html += '<div class="report-entry-title" style="color:#7B1FA2;">' + svgIcon('quote', 16) + '<span>专栏文章·大咖观点</span></div>';
+  html += '<div class="report-entry-desc" style="color:#9575A3;">行业大咖评论·院士专家观点</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -98349,8 +98210,8 @@ function renderHub() {
   // Books & courses entry (moved after originals)
   html += '<div class="report-entry" style="border-color:rgba(0,150,136,0.25);" onclick="switchSection(\'books\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#4DB6AC;">' + svgIcon('book', 16) + '<span>行业书籍·培训课程</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(77,182,172,0.7);">学术专著·产业参考·原创专著·培训课程</div>';
+  html += '<div class="report-entry-title" style="color:#00796B;">' + svgIcon('book', 16) + '<span>行业书籍·培训课程</span></div>';
+  html += '<div class="report-entry-desc" style="color:#5B8A84;">学术专著·产业参考·原创专著·培训课程</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -98377,8 +98238,8 @@ function renderHub() {
   // Health products entry (moved after companies)
   html += '<div class="report-entry" style="border-color:rgba(229,57,53,0.2);" onclick="switchSection(\'health\')">';
   html += '<div class="report-entry-left">';
-  html += '<div class="report-entry-title" style="color:#ffffff;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
-  html += '<div class="report-entry-desc" style="color:rgba(255,255,255,0.7);">编辑团队亲测推荐·健康好物·品质保障</div>';
+  html += '<div class="report-entry-title" style="color:#C62828;">' + svgIcon('heart', 16) + '<span>健康产品·编辑严选</span></div>';
+  html += '<div class="report-entry-desc" style="color:#A85A5A;">编辑团队亲测推荐·健康好物·品质保障</div>';
   html += '</div>';
   html += '<div class="report-entry-right">' + svgIcon('chevron-right', 16) + '</div>';
   html += '</div>';
@@ -98546,11 +98407,11 @@ var ALLY_CARDS = [
 ];
 var SVC_DB_LIST = [
   { st:'live', stTx:'已上线', t:'MSC 文献库', d:'1,834 篇', url:"switchLiteratureDB('MSC');switchSection('literature')" },
-  { st:'live', stTx:'已上线', t:'CAR-T 文献库', d:'1,344 篇', url:"switchLiteratureDB('CART');switchSection('literature')" },
+  { st:'live', stTx:'已上线', t:'CAR-T 文献库', d:'1,347 篇', url:"switchLiteratureDB('CART');switchSection('literature')" },
   { st:'live', stTx:'已上线', t:'基因治疗文献库', d:'1,428 篇', url:"switchLiteratureDB('GT');switchSection('literature')" },
   { st:'live', stTx:'已上线', t:'iPSC放行标准数据库', d:'20+ 检测项目 · 6 大类别', url:"switchSection('ipsc-qc')" },
-  { st:'live', stTx:'已上线', t:'文献摘要库', d:'4,606 篇 · 含全文摘要 4,274 篇' },
-  { st:'live', stTx:'已上线', t:'法规政策库', d:'165 份 · 持续监测', url:"switchSection('regulations')" },
+  { st:'live', stTx:'已上线', t:'文献摘要库', d:'4,609 篇 · 含全文摘要 4,277 篇' },
+  { st:'live', stTx:'已上线', t:'法规政策库', d:'166 份 · 持续监测', url:"switchSection('regulations')" },
   { st:'live', stTx:'已上线', t:'获批产品库', d:'92 款全球产品', url:"switchSection('products')" },
   { st:'live', stTx:'已上线', t:'产业术语库', d:'60+ 条白话词典 · 5 大领域', url:"switchSection('glossary')" },
   { st:'live', stTx:'已上线', t:'试验设计要素库', d:'10 条示范 · MSC/CAR-T/GT', url:"switchSection('trial-design')" },
@@ -98595,7 +98456,7 @@ var PATH_STAGES = [
       {b:'商业和市场知识', d:'了解细胞治疗产品的市场趋势、商业模式和商业化策略。'}
     ],
     svcs:[{t:'研究热点订阅', g:'res'}, {t:'开题/立项循证报告', g:'res'}, {t:'公共数据挖掘', g:'res'}],
-    dbs:[{t:'临床试验文献库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length) + '篇'}, {t:'文献摘要库', st:'live', n:'4,606篇'}],
+    dbs:[{t:'临床试验文献库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length) + '篇'}, {t:'文献摘要库', st:'live', n:'4,609篇'}],
     cols:[{t:'行业书籍', s:'books'}, {t:'学习中心', s:'books'}] },
   { n:2, t:'了解行业背景', en:'LANDSCAPE',
     goal:'研究干细胞治疗的历史、现状与未来趋势，了解行业商业模式与监管政策，建立产业敏感度。',
@@ -98674,7 +98535,7 @@ var PATH_STAGES = [
       {b:'临床研究设计', d:'临床试验设计考虑及依据。'}
     ],
     svcs:[{t:'文献库定制及综述报告', g:'res'}, {t:'专利初检与转化对接', g:'res'}, {t:'研究热点订阅', g:'res'}],
-    dbs:[{t:'文献摘要库', st:'live', n:'4,606篇'}, {t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}],
+    dbs:[{t:'文献摘要库', st:'live', n:'4,609篇'}, {t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}],
     cols:[{t:'前沿研究', s:'report'}, {t:'编辑精选', s:'picks'}] },
   { n:7, t:'复合型人才', en:'T-SHAPED', goal:true,
     goal:'技术 + 法规 + 产业 三维贯通——从平台使用者成长为行业共建者。',
@@ -99041,7 +98902,7 @@ function renderAIDashboard() {
     {tag:'文献', tagClass:'cyan', text:'MSC/CAR-T/基因治疗三库临床文献自动分类入库：MSC覆盖' + totalSystemsGlobal + '个系统，CAR-T 6大疾病领域，基因治疗9大疾病领域', num: totalLitAll + '篇'},
     {tag:'政策', tagClass:'amber', text:'818号令全文逐条解读，全国备案机构实时追踪，中美欧监管动态同步更新', num: REGULATIONS.length + '份'},
     {tag:'产品', tagClass:'green', text:'全球获批细胞与基因治疗产品信息整合，覆盖FDA/EMA/NMPA获批品种', num: PRODUCTS.length + '款'},
-    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'4,606篇'},
+    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'4,609篇'},
     {tag:'企业', tagClass:'green', text:'CGT产业链企业入驻展示，覆盖CDMO/CRO/研发/生产全环节', num: COMPANIES.length + '家'},
     {tag:'会议', tagClass:'amber', text:'ASGCT/EULAR/ASCO等国际会议动态追踪，前沿数据同步更新', num: CONFERENCE_EVENTS.length + '场'},
     {tag:'日报', tagClass:'purple', text:'CGT行业日报每日自动推送，累计350+期AI对话生成', num:'350+期'},
@@ -104739,8 +104600,6 @@ function switchNewsTab(tab) {
   updateFloatButtons();
 }
 function showDailySample() {
-  var wl = document.getElementById('welcomeOverlay');
-  if (wl) wl.style.display = 'none';
   var overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:10001;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);';
   overlay.onclick = function(e){ if(e.target===overlay) closeDailySample(overlay); };
