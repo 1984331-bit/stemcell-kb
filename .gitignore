@@ -2,3 +2,4 @@
 *.img
 assets/test_cover.img
 assets/t.webp
+_tmp_*.js
