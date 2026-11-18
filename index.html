@@ -8682,7 +8682,7 @@ var PATH_STAGES = [
       {b:'商业和市场知识', d:'了解细胞治疗产品的市场趋势、商业模式和商业化策略。'}
     ],
     svcs:[{t:'研究热点订阅', g:'res'}, {t:'开题/立项循证报告', g:'res'}, {t:'公共数据挖掘', g:'res'}],
-    dbs:[{t:'临床试验文献库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length) + '篇'}, {t:'文献摘要库', st:'live', n:'6665篇'}],
+    dbs:[{t:'临床试验文献库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length) + '篇'}, {t:'文献摘要库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length).toLocaleString() + '篇'}],
     cols:[{t:'行业书籍', s:'books'}, {t:'学习中心', s:'books'}] },
   { n:2, t:'了解行业背景', en:'LANDSCAPE',
     goal:'研究干细胞治疗的历史、现状与未来趋势，了解行业商业模式与监管政策，建立产业敏感度。',
@@ -8761,7 +8761,7 @@ var PATH_STAGES = [
       {b:'临床研究设计', d:'临床试验设计考虑及依据。'}
     ],
     svcs:[{t:'文献库定制及综述报告', g:'res'}, {t:'专利初检与转化对接', g:'res'}, {t:'研究热点订阅', g:'res'}],
-    dbs:[{t:'文献摘要库', st:'live', n:'6665篇'}, {t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}],
+    dbs:[{t:'文献摘要库', st:'live', n:(ALL_DATA.length + CART_DATA.length + GT_DATA.length).toLocaleString() + '篇'}, {t:'试验设计要素库', st:'live', n:'10条示范'}, {t:'质控标准库', st:'build', n:'建设中'}],
     cols:[{t:'前沿研究', s:'report'}, {t:'编辑精选', s:'picks'}] },
   { n:7, t:'复合型人才', en:'T-SHAPED', goal:true,
     goal:'技术 + 法规 + 产业 三维贯通——从平台使用者成长为行业共建者。',
@@ -9128,7 +9128,7 @@ function renderAIDashboard() {
     {tag:'文献', tagClass:'cyan', text:'MSC/CAR-T/基因治疗三库临床文献自动分类入库：MSC覆盖' + totalSystemsGlobal + '个系统，CAR-T 6大疾病领域，基因治疗9大疾病领域', num: totalLitAll + '篇'},
     {tag:'政策', tagClass:'amber', text:'818号令全文逐条解读，全国备案机构实时追踪，中美欧监管动态同步更新', num: REGULATIONS.length + '份'},
     {tag:'产品', tagClass:'green', text:'全球获批细胞与基因治疗产品信息整合，覆盖FDA/EMA/NMPA获批品种', num: PRODUCTS.length + '款'},
-    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:'6,665篇'},
+    {tag:'摘要', tagClass:'cyan', text:'PubMed摘要自动抓取与结构化处理，覆盖MSC/CAR-T/基因治疗领域', num:(ALL_DATA.length + CART_DATA.length + GT_DATA.length).toLocaleString() + '篇'},
     {tag:'企业', tagClass:'green', text:'CGT产业链企业入驻展示，覆盖CDMO/CRO/研发/生产全环节', num: COMPANIES.length + '家'},
     {tag:'会议', tagClass:'amber', text:'ASGCT/EULAR/ASCO等国际会议动态追踪，前沿数据同步更新', num: CONFERENCE_EVENTS.length + '场'},
     {tag:'日报', tagClass:'purple', text:'CGT行业日报每日自动推送，累计350+期AI对话生成', num:'350+期'},
