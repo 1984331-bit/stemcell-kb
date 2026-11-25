@@ -5414,6 +5414,153 @@ body { background-image: none; }
 .float-btn { background: rgba(255,255,255,0.94); color: #B3001B; border: 1px solid rgba(179,0,27,0.25); box-shadow: 0 2px 8px rgba(0,0,0,0.08); backdrop-filter: none; -webkit-backdrop-filter: none; }
 .float-btn:hover { background: rgba(179,0,27,0.08); border-color: rgba(179,0,27,0.5); box-shadow: 0 2px 12px rgba(179,0,27,0.15); }
 .float-contact { background: rgba(255,255,255,0.94); backdrop-filter: none; -webkit-backdrop-filter: none; }
+
+
+/* === G 版皮肤 · 2026-11-25 落地（默认关闭，body.g-skin 生效） === */
+body.g-skin{
+  --g-surface:#FFFFFF;--g-panel:#FBF9F8;--g-panel2:#F5F4F2;--g-panel3:#F1EFED;
+  --g-ink:#161513;--g-ink2:#45403B;--g-mute:#66605A;
+  --g-hair:#E4E1DD;--g-line:#D4CFCA;--g-btn:#312D2A;--g-btn-ink:#FFFFFF;
+  --g-brand:#C74634;--g-link:#006B8F;--g-accent:#7A5A12;
+  --g-band:#D6E5E5;--g-deep:#211E1C;--g-deep-ink:#FFFFFF;
+  --primary:var(--g-brand);--bg:var(--g-surface);--card-bg:var(--g-panel);
+  --card-solid:var(--g-panel);--text:var(--g-ink);--text-light:var(--g-mute);
+  --border:var(--g-hair);--divider:var(--g-hair);--shadow:none;--radius:0px;
+}
+body.g-skin[data-g-theme="dark"]{
+  --g-surface:#12141D;--g-panel:#181B26;--g-panel2:#1E2130;--g-panel3:#252940;
+  --g-ink:#EFF1F8;--g-ink2:#CDD2E6;--g-mute:#A9B0CC;
+  --g-hair:#343952;--g-line:#454C6B;--g-btn:#E7C474;--g-btn-ink:#12141D;
+  --g-brand:#EE8878;--g-link:#79D6EC;--g-accent:#E7C474;
+  --g-band:#1B3A3A;--g-deep:#0B0D14;--g-deep-ink:#EFF1F8;
+}
+body.g-skin{background:var(--g-surface)!important;background-image:none!important;color:var(--g-ink)!important}
+body.g-skin .header,body.g-skin .info-bar,body.g-skin .sidebar,body.g-skin .header-nav,
+body.g-skin .hub-card,body.g-skin .hub-news,body.g-skin .report-entry,
+body.g-skin .hub-split-card,body.g-skin .opencgt-cta,body.g-skin .float-btn,
+body.g-skin .float-contact,body.g-skin .info-panel{
+  background:var(--g-panel)!important;color:var(--g-ink)!important;
+  border-color:var(--g-hair)!important;box-shadow:none!important;border-radius:0!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body.g-skin .header{border-bottom:3px solid var(--g-brand)!important}
+body.g-skin .header .subtitle{color:var(--g-mute)!important;font-size:12px!important;letter-spacing:1px!important}
+body.g-skin .header h1 .header-title-block span:first-child{color:var(--g-brand)!important}
+body.g-skin .header-nav .bn-item,body.g-skin .info-tab,body.g-skin .info-panel{color:var(--g-mute)!important}
+body.g-skin .header-nav .bn-item.active,body.g-skin .info-tab.active,
+body.g-skin .sys-header.active,body.g-skin .ind-item.active,
+body.g-skin .section-divider .sd-title,body.g-skin .info-panel .ip-text b{
+  color:var(--g-brand)!important;background:transparent!important;text-shadow:none!important;
+}
+body.g-skin .sys-count,body.g-skin .ind-count,body.g-skin .info-panel .ip-tag{
+  background:var(--g-panel3)!important;color:var(--g-ink2)!important;border-color:var(--g-hair)!important;
+}
+body.g-skin .hub-card.green,body.g-skin .hub-card.orange,body.g-skin .hub-card.blue,
+body.g-skin .hub-card.purple,body.g-skin .hub-card.rose,body.g-skin .hub-card.teal,
+body.g-skin .hub-card.amber,body.g-skin .hub-split-card.cyan,body.g-skin .hub-split-card.purple,
+body.g-skin .hub-split-card.green,body.g-skin .hub-split-card.orange,
+body.g-skin .report-entry.amber{
+  background:var(--g-panel2)!important;border-color:var(--g-hair)!important;box-shadow:none!important;
+}
+body.g-skin .hub-card .hc-title,body.g-skin .hub-split-card .hsc-title,
+body.g-skin .report-entry-title{color:var(--g-ink)!important;font-size:15px!important}
+body.g-skin .hub-card .hc-desc,body.g-skin .hub-split-card .hsc-desc,
+body.g-skin .report-entry-desc{color:var(--g-mute)!important;font-size:13px!important}
+body.g-skin .hub-card:hover,body.g-skin .report-entry:hover,body.g-skin .hub-split-card:hover{
+  border-color:var(--g-accent)!important;box-shadow:none!important;
+}
+body.g-skin .opencgt-cta-bg{background:var(--g-band)!important}
+body.g-skin .opencgt-cta-bg::before,body.g-skin .opencgt-cta-bg::after{background-image:none!important}
+body.g-skin .section-divider .sd-line{border-color:var(--g-hair)!important;background:var(--g-hair)!important}
+body.g-skin a{color:var(--g-link)!important}
+body.g-skin .paper,body.g-skin .paper-card{background:var(--g-panel)!important;border-color:var(--g-hair)!important}
+body.g-skin .g-guide{display:block}
+.g-guide{display:none;margin:30px 0 8px;border-top:3px solid var(--g-btn,#312D2A);
+  background:var(--g-panel2,#F5F4F2);padding:22px 24px}
+.g-guide-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.g-guide-kicker{font-family:ui-monospace,Consolas,monospace;font-size:12px;letter-spacing:2px;
+  color:var(--g-accent,#7A5A12)}
+.g-guide-title{font-family:Georgia,"Songti SC",serif;font-size:22px;color:var(--g-ink,#161513)}
+.g-guide-lead{font-size:13px;color:var(--g-mute,#66605A);margin-top:8px;line-height:1.8}
+.g-guide-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.g-guide-gt{font-family:ui-monospace,Consolas,monospace;font-size:12px;letter-spacing:1.5px;
+  color:var(--g-mute,#66605A);padding-bottom:8px;border-bottom:1px solid var(--g-hair,#E4E1DD)}
+.g-guide-item{display:block;padding:10px 2px;border-bottom:1px solid var(--g-hair,#E4E1DD);
+  cursor:pointer;transition:background .18s}
+.g-guide-item:hover{background:var(--g-panel3,#F1EFED)}
+.g-guide-item b{display:block;font-size:14px;font-weight:500;color:var(--g-ink,#161513)}
+.g-guide-item span{display:block;font-size:12.5px;color:var(--g-mute,#66605A);margin-top:3px;line-height:1.6}
+.g-guide-note{font-size:12.5px;color:var(--g-mute,#66605A);margin-top:18px;line-height:1.8;
+  padding-left:10px;border-left:2px solid var(--g-hair,#E4E1DD)}
+@media(max-width:860px){
+  .g-guide{padding:16px 14px}
+  .g-guide-groups{grid-template-columns:1fr}
+  .g-guide-title{font-size:19px}
+}
+.g-skin-switch{position:fixed;left:14px;bottom:14px;z-index:10001;display:flex;gap:6px}
+.g-skin-switch button{font-family:inherit;font-size:12px;padding:7px 11px;cursor:pointer;
+  background:#FFFFFF;color:#312D2A;border:1px solid #D4CFCA;border-radius:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.g-skin-switch button:hover{border-color:#7A5A12}
+.g-skin-switch button.on{background:#312D2A;color:#FFFFFF;border-color:#312D2A}
+body.g-skin[data-g-theme="dark"] .g-skin-switch button{
+  background:#181B26;color:#EFF1F8;border-color:#454C6B}
+body.g-skin[data-g-theme="dark"] .g-skin-switch button.on{
+  background:#E7C474;color:#12141D;border-color:#E7C474}
+#gThemeBtn{display:none}
+body.g-skin #gThemeBtn{display:inline-block}
+
+
+
+/* === G 皮肤可读性加固 · 2026-11-25 === */
+/* 补齐 :root 遗留的浅色专用变量，浅色/夜间共用同一套 --g-* 阶梯 */
+body.g-skin{
+  --surface-1:var(--g-panel2);--surface-2:var(--g-panel);
+  --track-bg:var(--g-panel3);--glow:none;
+  --primary-light:var(--g-brand);--primary-dark:var(--g-brand);
+  --accent:rgba(199,70,52,0.08);
+  --highlight-bg:rgba(199,70,52,0.10);--highlight-border:rgba(199,70,52,0.32);
+  --edu-bg:rgba(199,70,52,0.10);--edu-border:rgba(199,70,52,0.30);--edu-text:var(--g-brand);
+  --warn-bg:rgba(122,90,18,0.12);--warn-border:rgba(122,90,18,0.35);--warn-text:var(--g-accent);
+}
+/* 云服务登录/用户控件：夜间显式兜底，避免任何遗留浅底造成浅字 */
+body.g-skin .wbc-user{
+  background:var(--g-panel2)!important;color:var(--g-ink)!important;
+  border-color:var(--g-line)!important;
+}
+body.g-skin .wbc-user:hover{border-color:var(--g-brand)!important}
+body.g-skin .wbc-user-menu{
+  background:var(--g-panel)!important;border-color:var(--g-line)!important;
+}
+body.g-skin .wbc-user-menu div{color:var(--g-ink)!important}
+body.g-skin .wbc-user-menu div:hover{
+  background:var(--g-panel2)!important;color:var(--g-brand)!important;
+}
+body.g-skin .wbc-input,body.g-skin .wbc-oauth{
+  background:var(--g-panel2)!important;color:var(--g-ink)!important;
+  border-color:var(--g-line)!important;
+}
+/* 首页适应症热度标签云：彩色胶囊 → 中性阶梯 + hairline 热度分级 */
+body.g-skin .hub-tag{
+  border-radius:0!important;animation:none!important;
+  background:var(--g-panel2)!important;color:var(--g-ink)!important;
+  border:1px solid var(--g-hair)!important;font-size:12px!important;
+  padding:4px 9px!important;box-shadow:none!important;
+  transition:border-color .18s ease;
+}
+body.g-skin .hub-tag.t1{border-left:3px solid var(--g-brand)!important;font-weight:600}
+body.g-skin .hub-tag.t2{border-left:2px solid var(--g-accent)!important}
+body.g-skin .hub-tag.t3{border-left:1px solid var(--g-line)!important}
+body.g-skin .hub-tag.t4{border-left:1px solid var(--g-hair)!important;background:transparent!important}
+body.g-skin .hub-tag:hover{
+  animation:none!important;transform:none!important;filter:none!important;
+  border-color:var(--g-brand)!important;box-shadow:none!important;
+}
+body.g-skin .hub-tag .ht-count{
+  font-size:12px!important;font-weight:600;opacity:1!important;
+  color:var(--g-mute)!important;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="china-geo.js"></script>
@@ -8604,6 +8751,23 @@ function renderHub() {
   html += '<div class="hub-tags-cloud" id="hotTagsCloud"></div>';
   html += '</div>';
 
+  html += '<div class="g-guide"><div class="g-guide-head"><span class="g-guide-kicker">G · SITE MAP</span><span class="g-guide-title">按你的目的进入</span></div><div class="g-guide-lead">原站 29 个注册栏目一个没删，按读者任务收敛为 9 个一级入口；点击走站内原有导航。</div><div class="g-guide-groups">';
+  html += '<div class="g-guide-group"><div class="g-guide-gt">Ⅰ 阅读与入门</div>';
+  html += '<div class="g-guide-item" data-section="hub" onclick="navTo(this)"><b>知识库总览</b><span>全站内容地图与常用入口</span></div>';
+  html += '<div class="g-guide-item" data-section="news" onclick="navTo(this)"><b>每日速递</b><span>六频道资讯、深度解读与专栏</span></div>';
+  html += '<div class="g-guide-item" data-section="intro" onclick="navTo(this)"><b>科普与学习</b><span>认识细胞治疗、患者常见问题</span></div>';
+  html += '</div>';
+  html += '<div class="g-guide-group"><div class="g-guide-gt">Ⅱ 证据与数据</div>';
+  html += '<div class="g-guide-item" data-section="literature" onclick="navTo(this)"><b>文献与证据</b><span>三库文献与疾病系统检索</span></div>';
+  html += '<div class="g-guide-item" data-section="regulations" onclick="navTo(this)"><b>监管与产品</b><span>监管政策汇编与获批产品名录</span></div>';
+  html += '<div class="g-guide-item" data-section="ipsc-qc" onclick="navTo(this)"><b>工艺与质控</b><span>iPSC 放行标准数据库</span></div>';
+  html += '<div class="g-guide-item" data-section="services" onclick="navTo(this)"><b>数据服务</b><span>产业服务与数据库总目录</span></div>';
+  html += '</div>';
+  html += '<div class="g-guide-group"><div class="g-guide-gt">Ⅲ 平台与工具</div>';
+  html += '<div class="g-guide-item" data-section="opencgt" onclick="navTo(this)"><b>Open CGT</b><span>共创联盟、团队与实验室平台</span></div>';
+  html += '<div class="g-guide-item" data-section="ai" onclick="navTo(this)"><b>AI 全景</b><span>AI 赋能生物医药全景图谱</span></div>';
+  html += '</div></div>';
+  html += '<div class="g-guide-note">9 个入口全部指向真站已有栏目，不改变任何栏目结构与数据；工艺与质控对应站内 iPSC 放行标准数据库。</div></div>';
   content.innerHTML = html;
   updateFloatButtons();
   initWhCarousel();
@@ -16710,5 +16874,35 @@ function wbcToast(msg, isErr) {
   </div>
 </footer>
 
+<script>
+(function(){
+  var KS='cgt-g-skin', KT='cgt-g-theme';
+  var box=document.createElement('div');
+  box.className='g-skin-switch';
+  box.innerHTML='<button type="button" id="gSkinBtn">G 版皮肤</button><button type="button" id="gThemeBtn">夜间</button>';
+  document.body.appendChild(box);
+  function applySkin(on){
+    document.body.classList.toggle('g-skin',on);
+    var b=document.getElementById('gSkinBtn');
+    if(b){b.classList.toggle('on',on);b.textContent=on?'退出 G 版':'G 版皮肤';}
+    try{localStorage.setItem(KS,on?'1':'0');}catch(e){}
+  }
+  function applyTheme(t){
+    document.body.setAttribute('data-g-theme',t);
+    var b=document.getElementById('gThemeBtn');
+    if(b){b.classList.toggle('on',t==='dark');b.textContent=t==='dark'?'浅色':'夜间';}
+    try{localStorage.setItem(KT,t);}catch(e){}
+  }
+  var s='0',t='light';
+  try{s=localStorage.getItem(KS)||'0';t=localStorage.getItem(KT)||'light';}catch(e){}
+  applySkin(s==='1');applyTheme(t);
+  document.getElementById('gSkinBtn').addEventListener('click',function(){
+    applySkin(!document.body.classList.contains('g-skin'));
+  });
+  document.getElementById('gThemeBtn').addEventListener('click',function(){
+    applyTheme(document.body.getAttribute('data-g-theme')==='dark'?'light':'dark');
+  });
+})();
+</script>
 </body>
 </html>
